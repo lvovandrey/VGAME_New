@@ -70,7 +70,7 @@ namespace VanyaGame.Media
         ///ПЛОХАЯ РЕАЛИЗАЦИЯ!!!!!
         private void MediaPlayer_Stopped(object sender, Vlc.DotNet.Core.VlcMediaPlayerStoppedEventArgs e)
         {
-            Ended();
+          //  Ended();
         }
 
         public override void Stop()
@@ -78,7 +78,7 @@ namespace VanyaGame.Media
             if (Source == "") return;
             ((VlcWrap)Body).vlcPlayer.MediaPlayer.Stop();
             ((VlcWrap)Body).vlcPlayer.MediaPlayer.Stopped -= MediaPlayer_Stopped;
-            Source = null;
+            Source = "";
         }
 
 
