@@ -1,0 +1,32 @@
+﻿<Window x:Class="VanyaGame.ZDebug.WindowTest"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VanyaGame.ZDebug"
+        xmlns:interface ="clr-namespace:VanyaGame.Interface"
+        xmlns:numbers ="clr-namespace:VanyaGame.GameNumber.Units"
+        mc:Ignorable="d"
+        Title="WindowTest" Height="600" Width="800">
+    <Grid x:Name="GridMain" >
+        <interface:VlcWrap x:Name="vlc1" Margin="0,0,261,297" ></interface:VlcWrap>
+            <MediaElement x:Name="MediaElement1"  HorizontalAlignment="Left" Height="56" VerticalAlignment="Top" Width="70" LoadedBehavior="Manual" UnloadedBehavior="Manual" Margin="714,9,0,0" RenderTransformOrigin="0.5,0.5">
+            <MediaElement.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </MediaElement.RenderTransform>
+        </MediaElement>
+        <TextBox x:Name="TxtUri" Text="https://www.youtube.com/watch?v=fl3mKgqAn88"
+                 HorizontalAlignment="Left" Height="23" Margin="10,379,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="580"/>
+        <TextBox x:Name="TxtLink" HorizontalAlignment="Left" Height="20" Margin="10,422,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="580"/>
+        <Button Content="GetLink" HorizontalAlignment="Left" Margin="617,379,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_3"/>
+        <Button Content="Play" HorizontalAlignment="Left" Margin="617,422,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button Content="Play2" HorizontalAlignment="Left" Margin="707,422,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click2"/>
+
+
+    </Grid>
+</Window>

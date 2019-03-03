@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="VanyaGame.PrevMenuNS.PrevMenuItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             xmlns:local="clr-namespace:VanyaGame" HorizontalAlignment="Center" VerticalAlignment="Center">
+    <UserControl.Resources>
+        <Cursor x:Key="HandPushCursor">Images/HandPush.cur</Cursor>
+    </UserControl.Resources>
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" >
+        <Image Name="Img" Margin="10"  Source="Images/BtnStop.png" Width="400" Height="225"  HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Stretch="Fill" Cursor="{StaticResource HandPushCursor}" 
+               MouseDown="Img_MouseDown" MouseUp="Img_MouseUp" MouseLeave="Img_MouseLeave" >
+            <Image.Triggers>
+                <EventTrigger RoutedEvent="Image.PreviewMouseDown">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard TargetProperty="Opacity" TargetName="Img">
+                                <DoubleAnimation  To="0.1"
+                             
+                             Duration="0:0:0.3" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Image.MouseEnter">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard TargetProperty="Opacity" TargetName="Img">
+                                <DoubleAnimation  To="0.6"
+                             Duration="0:0:0.3" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Image.MouseLeave">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard TargetProperty="Opacity" TargetName="Img">
+                                <DoubleAnimation To="1"
+                             Duration="0:0:0.3" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Image.Triggers>
+            <Image.Effect>
+                <DropShadowEffect BlurRadius="14" ShadowDepth="9"/>
+            </Image.Effect>
+
+        </Image>
+    </Grid>
+</UserControl>

@@ -1,0 +1,146 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	x:Class="Slider.SliderBeauty1"
+	x:Name="UserControl"
+	d:DesignWidth="226.667" d:DesignHeight="40.667">
+	<UserControl.Resources>
+		<ControlTemplate x:Key="ThumbControlTemplate1" TargetType="{x:Type Thumb}">
+			<Grid>
+				<Ellipse x:Name="Ellipse" Stroke="{DynamicResource NormalBorderBrush}" StrokeThickness="1">
+					<Ellipse.Fill>
+						<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+							<GradientStop Color="#EEE" Offset="0.0"/>
+							<GradientStop Color="#FF4CA800" Offset="1.0"/>
+						</LinearGradientBrush>
+					</Ellipse.Fill>
+				</Ellipse>
+				<Ellipse HorizontalAlignment="Center" Height="8" Margin="0" StrokeThickness="1" VerticalAlignment="Center" Width="8">
+					<Ellipse.Fill>
+						<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+							<GradientStop Color="#EEE" Offset="0.748"/>
+							<GradientStop Color="#FF26A800"/>
+						</LinearGradientBrush>
+					</Ellipse.Fill>
+				</Ellipse>
+			</Grid>
+			<ControlTemplate.Triggers>
+				<Trigger Property="IsMouseOver" Value="True">
+					<Setter Property="Fill" Value="{DynamicResource MouseOverBrush}" TargetName="Ellipse"/>
+				</Trigger>
+				<Trigger Property="IsEnabled" Value="false">
+					<Setter Property="Fill" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="Ellipse"/>
+				</Trigger>
+			</ControlTemplate.Triggers>
+		</ControlTemplate>
+	
+	
+		<Style x:Key="BorderStyle1" TargetType="{x:Type Border}">
+			<Setter Property="BorderBrush">
+				<Setter.Value>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF934900" Offset="1"/>
+						<GradientStop Color="#FFF0BF8F" Offset="0"/>
+					</LinearGradientBrush>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+			<Setter Property="RenderTransform">
+				<Setter.Value>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform AngleX="0"/>
+						<RotateTransform/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="Background">
+				<Setter.Value>
+					<LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+						<GradientStop Color="White" Offset="1"/>
+						<GradientStop Color="#FFECB075" Offset="0"/>
+					</LinearGradientBrush>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="CornerRadius" Value="5"/>
+			<Setter Property="BorderThickness" Value="1,3,3,1"/>
+		</Style>
+		<!--Простая полоса ползунка (SimpleSlider)
+	Аналогично полосе прокрутки (ScrollBar), в данном шаблоне используется дорожка (Track) для компоновки перетаскиваемого ползунка (Thumb) с кнопками повторения "Вверх" и "Вниз".
+	В нем используются элементы управления SimpleSliderThumb и SimpleScrollRepeatButtonStyle для кнопок повторения "Страница вверх" и "Страница вниз" -->
+		<Style x:Key="SliderStyle2" TargetType="{x:Type Slider}">
+			<Setter Property="Background" Value="{DynamicResource LightBrush}"/>
+			<Setter Property="BorderBrush" Value="{DynamicResource NormalBorderBrush}"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type Slider}">
+						<Grid x:Name="GridRoot">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}"/>
+								<RowDefinition Height="Auto"/>
+							</Grid.RowDefinitions>
+						
+						<!-- Элемент управления TickBar отображает шкалу для полосы ползунка (Slider) -->
+							<TickBar Visibility="Collapsed" x:Name="TopTick" Height="4" SnapsToDevicePixels="True" Placement="Top" Fill="{DynamicResource GlyphBrush}"/>
+							<Border Grid.Row="1" Margin="0,10" x:Name="Border" Height="Auto" Style="{DynamicResource BorderStyle1}"/>
+						
+						<!-- На дорожке (Track) расположены кнопки повторения и ползунок -->
+							<Track Grid.Row="1" x:Name="PART_Track">
+								<Track.Thumb>
+									<Thumb x:Name="thumb" Style="{DynamicResource SimpleSliderThumb}" Width="40" Height="40"/>
+								</Track.Thumb>
+								<Track.IncreaseRepeatButton>
+									<RepeatButton Style="{DynamicResource SimpleScrollRepeatButtonStyle}" Command="Slider.IncreaseLarge"/>
+								</Track.IncreaseRepeatButton>
+								<Track.DecreaseRepeatButton>
+									<RepeatButton Style="{DynamicResource SimpleScrollRepeatButtonStyle}" Command="Slider.DecreaseLarge"/>
+								</Track.DecreaseRepeatButton>
+							</Track>
+						
+							<TickBar Visibility="Collapsed" Grid.Row="2" x:Name="BottomTick" Height="4" SnapsToDevicePixels="True" Placement="Bottom" Fill="{TemplateBinding Foreground}"/>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="TickPlacement" Value="TopLeft">
+								<Setter Property="Visibility" Value="Visible" TargetName="TopTick"/>
+								<Setter Property="Value" Value="5"/>
+								<Setter Property="Template" TargetName="thumb" Value="{DynamicResource ThumbControlTemplate1}"/>
+							</Trigger>
+							<Trigger Property="TickPlacement" Value="BottomRight">
+								<Setter Property="Visibility" Value="Visible" TargetName="BottomTick"/>
+							</Trigger>
+							<Trigger Property="TickPlacement" Value="Both">
+								<Setter Property="Visibility" Value="Visible" TargetName="TopTick"/>
+								<Setter Property="Visibility" Value="Visible" TargetName="BottomTick"/>
+							</Trigger>
+							<Trigger Property="IsEnabled" Value="false">
+								<Setter Property="Background" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="Border"/>
+								<Setter Property="BorderBrush" Value="{DynamicResource DisabledBorderBrush}" TargetName="Border"/>
+							</Trigger>
+						
+						<!-- По умолчанию ползунок является горизонтальным (Horizontal); для создания вертикального (Vertical) ползунка используется поворот -->
+							<Trigger Property="Orientation" Value="Vertical">
+								<Setter Property="LayoutTransform" TargetName="GridRoot">
+									<Setter.Value>
+										<RotateTransform Angle="-90"/>
+									</Setter.Value>
+								</Setter>
+							<!-- Дорожка (Track) поворачивается в зависимости от ориентации, поэтому ее нужно явным образом возвращать в прежнее положение -->
+								<Setter TargetName="PART_Track" Property="Orientation" Value="Horizontal"/>
+							</Trigger>
+						
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</UserControl.Resources>
+
+	<Grid x:Name="LayoutRoot">
+		<Slider Style="{DynamicResource SliderStyle2}"/>
+	</Grid>
+</UserControl>

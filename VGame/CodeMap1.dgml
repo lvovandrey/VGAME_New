@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph DataVirtualized="True" Layout="Sugiyama" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="(@1 @2 Type=TSubLevel Member=LoadSubLevelFromDir)" Category="CodeSchema_Method" Bounds="14.8077601991464,59.1869076639891,151.82,25.96" CodeSchemaProperty_IsPublic="True" CommonLabel="LoadSubLevelFromDir" DelayedCrossGroupLinksState="Fetched" FunctionTypeFlags="Метод" Label="LoadSubLevelFromDir" Language="{B5E9BD34-6D3E-4B5D-925E-8A43B79820B4}" SourceLocation="(Assembly=&quot;file:///C:/Облако Mail.ru/Программирование VS/Vanja/VanyaGame 5/VanyaGame/LevelsStruct/TSubLevel.cs&quot; StartLineNumber=73 StartCharacterOffset=8 EndLineNumber=73 EndCharacterOffset=8)" />
+    <Node Id="(@1 @2 Type=TSubLevel Member=Start)" Category="CodeSchema_Method" Bounds="-225.237509976913,3.52208620821887,60.7866666666667,25.96" CodeSchemaProperty_IsPublic="True" DelayedCrossGroupLinksState="Fetched" Label="Start" />
+    <Node Id="(@1 @7 @8 Member=(Name=LoadBackGround OverloadingParameters=[@5]))" Category="CodeSchema_Method" Bounds="-385.735978114575,42.0969689072724,126.43,25.96" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsStatic="True" CommonLabel="LoadBackGround" DelayedCrossGroupLinksState="Fetched" FunctionTypeFlags="Метод" Label="LoadBackGround" Language="{B5E9BD34-6D3E-4B5D-925E-8A43B79820B4}" SourceLocation="(Assembly=&quot;file:///c:/Облако Mail.ru/Программирование VS/Vanja/VanyaGame 5/VanyaGame/TGame.cs&quot; StartLineNumber=78 StartCharacterOffset=0 EndLineNumber=78 EndCharacterOffset=0)" UseManualLocation="True">
+      <Category Ref="CallStackEntry" />
+      <Category Ref="CodeSchema_SourceLocation" />
+    </Node>
+    <Node Id="(@1 @7 Type=TSomeLevelBehaviour Member=(Name=LevelEnded OverloadingParameters=[(@1 @2 @3)]))" Category="CodeSchema_Method" Bounds="-264.268784639249,-220.613483402514,96.1266666666667,25.96" CodeSchemaProperty_IsPublic="True" CommonLabel="LevelEnded" DelayedCrossGroupLinksState="Fetched" FunctionTypeFlags="Метод" Label="LevelEnded" Language="{B5E9BD34-6D3E-4B5D-925E-8A43B79820B4}" SourceLocation="(Assembly=&quot;file:///c:/Облако Mail.ru/Программирование VS/Vanja/VanyaGame 5/VanyaGame/TBehaviour.cs&quot; StartLineNumber=241 StartCharacterOffset=0 EndLineNumber=241 EndCharacterOffset=0)" UseManualLocation="True">
+      <Category Ref="CallStackEntry" />
+      <Category Ref="CodeSchema_SourceLocation" />
+    </Node>
+    <Node Id="@10" Category="CodeSchema_Method" Bounds="2.23036890928472,3.22680763420733,89.36,25.96" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CommonLabel="TSubLevel" DelayedCrossGroupLinksState="Fetched" FunctionTypeFlags="Конструктор" Label="TSubLevel" Language="{B5E9BD34-6D3E-4B5D-925E-8A43B79820B4}" SourceLocation="(Assembly=&quot;file:///C:/Облако Mail.ru/Программирование VS/Vanja/VanyaGame 5/VanyaGame/LevelsStruct/TSubLevel.cs&quot; StartLineNumber=62 StartCharacterOffset=8 EndLineNumber=62 EndCharacterOffset=8)" />
+    <Node Id="@11" Category="CodeSchema_Method" Bounds="-72.5601737055692,-108.693383373714,69.1433333333333,25.96" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CommonLabel="TLevel" DelayedCrossGroupLinksState="Fetched" FunctionTypeFlags="Конструктор" Label="TLevel" Language="{B5E9BD34-6D3E-4B5D-925E-8A43B79820B4}" SourceLocation="(Assembly=&quot;file:///C:/Облако Mail.ru/Программирование VS/Vanja/VanyaGame 5/VanyaGame/LevelsStruct/TGameLevel.cs&quot; StartLineNumber=68 StartCharacterOffset=8 EndLineNumber=68 EndCharacterOffset=8)" UseManualLocation="True" />
+    <Node Id="@12" Category="CodeSchema_Method" Bounds="-67.9334152863649,-52.7332833737145,156.913333333333,25.96" CodeSchemaProperty_IsPublic="True" CommonLabel="LoadSubLevelsFromDir" DelayedCrossGroupLinksState="Fetched" FunctionTypeFlags="Метод" Label="LoadSubLevelsFromDir" Language="{B5E9BD34-6D3E-4B5D-925E-8A43B79820B4}" SourceLocation="(Assembly=&quot;file:///C:/Облако Mail.ru/Программирование VS/Vanja/VanyaGame 5/VanyaGame/LevelsStruct/TGameLevel.cs&quot; StartLineNumber=47 StartCharacterOffset=8 EndLineNumber=47 EndCharacterOffset=8)" />
+    <Node Id="@13" Category="CodeSchema_Method" Bounds="-224.170175400327,-164.653383402515,87.6833333333333,25.96" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsStatic="True" CommonLabel="NextLevel" DelayedCrossGroupLinksState="Fetched" FunctionTypeFlags="Метод" Label="NextLevel" Language="{B5E9BD34-6D3E-4B5D-925E-8A43B79820B4}" SourceLocation="(Assembly=&quot;file:///c:/Облако Mail.ru/Программирование VS/Vanja/VanyaGame 5/VanyaGame/TGame.cs&quot; StartLineNumber=88 StartCharacterOffset=0 EndLineNumber=88 EndCharacterOffset=0)">
+      <Category Ref="CallStackEntry" />
+      <Category Ref="CodeSchema_SourceLocation" />
+    </Node>
+    <Node Id="@14" Category="CodeSchema_Method" Bounds="-205.833515283683,-52.437904857136,107.9,25.96" CodeSchemaProperty_IsPublic="True" CommonLabel="NextSubLevel" DelayedCrossGroupLinksState="Fetched" FunctionTypeFlags="Метод" Label="NextSubLevel" Language="{B5E9BD34-6D3E-4B5D-925E-8A43B79820B4}" SourceLocation="(Assembly=&quot;file:///C:/Облако Mail.ru/Программирование VS/Vanja/VanyaGame 5/VanyaGame/LevelsStruct/TGameLevel.cs&quot; StartLineNumber=120 StartCharacterOffset=0 EndLineNumber=120 EndCharacterOffset=0)" UseManualLocation="True">
+      <Category Ref="CallStackEntry" />
+      <Category Ref="CodeSchema_SourceLocation" />
+    </Node>
+    <Node Id="@15" Category="CodeSchema_Method" Bounds="-138.142017975484,-220.613583373714,60.7866666666667,25.96" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsStatic="True" CommonLabel="Start" DelayedCrossGroupLinksState="Fetched" FunctionTypeFlags="Метод" Label="Start" Language="{B5E9BD34-6D3E-4B5D-925E-8A43B79820B4}" SourceLocation="(Assembly=&quot;file:///c:/Облако Mail.ru/Программирование VS/Vanja/VanyaGame 5/VanyaGame/TGame.cs&quot; StartLineNumber=98 StartCharacterOffset=8 EndLineNumber=98 EndCharacterOffset=8)" />
+    <Node Id="@16" Category="CodeSchema_Method" Bounds="-226.386594029789,-108.693283402514,60.7866666666667,25.96" CodeSchemaProperty_IsPublic="True" CommonLabel="Start" DelayedCrossGroupLinksState="Fetched" FunctionTypeFlags="Метод" Label="Start" Language="{B5E9BD34-6D3E-4B5D-925E-8A43B79820B4}" SourceLocation="(Assembly=&quot;file:///C:/Облако Mail.ru/Программирование VS/Vanja/VanyaGame 5/VanyaGame/LevelsStruct/TGameLevel.cs&quot; StartLineNumber=106 StartCharacterOffset=0 EndLineNumber=106 EndCharacterOffset=0)" UseManualLocation="True">
+      <Category Ref="CallStackEntry" />
+      <Category Ref="CodeSchema_SourceLocation" />
+    </Node>
+    <Node Id="@6" Category="CodeSchema_Method" Bounds="-361.096948615214,-52.7331834025144,125.263333333333,25.96" CodeSchemaProperty_IsPublic="True" CommonLabel="LoadBackground" DelayedCrossGroupLinksState="Fetched" FunctionTypeFlags="Метод" Label="LoadBackground" Language="{B5E9BD34-6D3E-4B5D-925E-8A43B79820B4}" SourceLocation="(Assembly=&quot;file:///C:/Облако Mail.ru/Программирование VS/Vanja/VanyaGame 5/VanyaGame/LevelsStruct/TGameLevel.cs&quot; StartLineNumber=94 StartCharacterOffset=0 EndLineNumber=94 EndCharacterOffset=0)" UseManualLocation="True">
+      <Category Ref="CallStackEntry" />
+      <Category Ref="CodeSchema_SourceLocation" />
+    </Node>
+    <Node Id="@9" Category="CodeSchema_Method" Bounds="-106.486742068738,-164.653483373714,93.8033333333333,25.96" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsStatic="True" CommonLabel="LoadLevels" DelayedCrossGroupLinksState="Fetched" FunctionTypeFlags="Метод" Label="LoadLevels" Language="{B5E9BD34-6D3E-4B5D-925E-8A43B79820B4}" SourceLocation="(Assembly=&quot;file:///c:/Облако Mail.ru/Программирование VS/Vanja/VanyaGame 5/VanyaGame/TGame.cs&quot; StartLineNumber=48 StartCharacterOffset=8 EndLineNumber=48 EndCharacterOffset=8)" />
+  </Nodes>
+  <Links>
+    <Link Source="(@1 @7 Type=TSomeLevelBehaviour Member=(Name=LevelEnded OverloadingParameters=[(@1 @2 @3)]))" Target="@13" Category="CodeSchema_Calls" Bounds="-207.8809332884,-194.654647609393,14.3764043858736,22.4235464015773" Weight="1">
+      <Category Ref="CallStackDirectCall" />
+    </Link>
+    <Link Source="@10" Target="(@1 @2 Type=TSubLevel Member=LoadSubLevelFromDir)" Category="CodeSchema_Calls" Bounds="57.0349095104255,29.1856523906069,17.9546662842827,22.9156580104234" Weight="1" />
+    <Link Source="@11" Target="@12" Category="CodeSchema_Calls" Bounds="-26.729152665445,-82.7345476093931,20.1042937818946,23.1987154830334" Weight="1" />
+    <Link Source="@12" Target="@10" Category="CodeSchema_Calls" Bounds="18.9486570882071,-26.7744476093931,14.5832291640013,22.4524401890316" Weight="1" />
+    <Link Source="@13" Target="@16" Category="CodeSchema_Calls" Bounds="-189.935797988798,-138.694547609393,5.97520033017412,21.3336125279892" Weight="1">
+      <Category Ref="CallStackDirectCall" />
+    </Link>
+    <Link Source="@14" Target="(@1 @2 Type=TSubLevel Member=Start)" Category="CodeSchema_Calls" Bounds="-179.357559938727,-26.478983999295,17.5196611312595,22.8569402476538" Weight="1" />
+    <Link Source="@15" Target="@13" Category="CodeSchema_Calls" Bounds="-156.362916122206,-194.654747609393,31.7821263375854,24.5047775024699" Weight="1" />
+    <Link Source="@15" Target="@9" Category="CodeSchema_Calls" Bounds="-96.574262255348,-194.654747609393,19.9497541957163,23.1787640717509" Weight="1" />
+    <Link Source="@16" Target="@14" Category="CodeSchema_Calls" Bounds="-185.82103750253,-82.7344476093931,18.2012990054068,23.2130409894956" Weight="1">
+      <Category Ref="CallStackDirectCall" />
+    </Link>
+    <Link Source="@16" Target="@6" Category="CodeSchema_Calls" Bounds="-266.803215065794,-82.7344476093931,47.0361116876188,25.6864926964478" Weight="1">
+      <Category Ref="CallStackDirectCall" />
+    </Link>
+    <Link Source="@6" Target="(@1 @7 @8 Member=(Name=LoadBackGround OverloadingParameters=[@5]))" Category="CodeSchema_Calls" Bounds="-317.015372929639,-26.7731852722168,15.2574327395131,60.1464596200447" Weight="1" />
+    <Link Source="@9" Target="@11" Category="CodeSchema_Calls" Bounds="-54.5706314104552,-138.694647609393,8.34043849469774,21.6040569472584" Weight="1" />
+  </Links>
+  <Categories>
+    <Category Id="CallStackDirectCall" Label="Прямой вызов стека вызовов" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Прямой вызов стека вызовов" OutgoingActionLabel="Прямой вызов стека вызовов" />
+    <Category Id="CallStackEntry" Label="Запись стека вызовов" CanBeDataDriven="True" IsProviderRoot="False" NavigationActionLabel="Запись стека вызовов" />
+    <Category Id="CodeSchema_Calls" Label="Вызовы" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Вызывается" OutgoingActionLabel="Вызовы" />
+    <Category Id="CodeSchema_Member" Label="Член" CanBeDataDriven="True" DefaultAction="Microsoft.Contains" Icon="CodeSchema_Field" NavigationActionLabel="Члены" />
+    <Category Id="CodeSchema_Method" Label="Метод" BasedOn="CodeSchema_Member" CanBeDataDriven="True" DefaultAction="Link:Forward:CodeSchema_Calls" Icon="CodeSchema_Method" NavigationActionLabel="Методы" />
+    <Category Id="CodeSchema_SourceLocation" Label="Расположение исходного кода" Icon="File" />
+  </Categories>
+  <Properties>
+    <Property Id="Bounds" DataType="System.Windows.Rect" />
+    <Property Id="CanBeDataDriven" Label="CanBeDataDriven" Description="CanBeDataDriven" DataType="System.Boolean" />
+    <Property Id="CanLinkedNodesBeDataDriven" Label="CanLinkedNodesBeDataDriven" Description="CanLinkedNodesBeDataDriven" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_IsConstructor" Label="Является конструктором" Description="Флаг, указывающий, что метод является конструктором" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_IsPublic" Label="Является Public" Description="Флаг, указывающий на область видимости Public" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_IsStatic" Label="Является статическим" Description="Флаг, указывающий, что член является статическим" DataType="System.Boolean" />
+    <Property Id="CommonLabel" DataType="System.String" />
+    <Property Id="DataVirtualized" Label="Виртуализированные данные" Description="При значении true граф может содержать узлы и связи, которые представляют данные для виртуализированных узлов и связей (то есть которые не были фактически созданы в графе)." DataType="System.Boolean" />
+    <Property Id="DefaultAction" Label="DefaultAction" Description="DefaultAction" DataType="System.String" />
+    <Property Id="DelayedCrossGroupLinksState" Label="Состояние отложенных связей между группами" Description="Unspecified, если не указано состояние отложенных связей между группами. NotFetched, если отложенные связи между группами в данном узле еще не переданы в граф. Fetched, если все отложенные связи между группами уже переданы." DataType="Microsoft.VisualStudio.GraphModel.DelayedDataState" />
+    <Property Id="Expression" DataType="System.String" />
+    <Property Id="FunctionTypeFlags" Label="FunctionTypeFlags" Description="FunctionTypeFlags" DataType="System.String" />
+    <Property Id="GroupLabel" DataType="System.String" />
+    <Property Id="Icon" Label="Значок" Description="Значок" DataType="System.String" />
+    <Property Id="IncomingActionLabel" Label="IncomingActionLabel" Description="IncomingActionLabel" DataType="System.String" />
+    <Property Id="IsEnabled" DataType="System.Boolean" />
+    <Property Id="IsProviderRoot" Label="IsProviderRoot" Description="IsProviderRoot" DataType="System.Boolean" />
+    <Property Id="Label" Label="Метка" Description="Отображаемая метка аннотируемого объекта" DataType="System.String" />
+    <Property Id="Language" Label="Язык" Description="Язык" DataType="System.String" />
+    <Property Id="Layout" DataType="System.String" />
+    <Property Id="NavigationActionLabel" Label="NavigationActionLabel" Description="NavigationActionLabel" DataType="System.String" />
+    <Property Id="OutgoingActionLabel" Label="OutgoingActionLabel" Description="OutgoingActionLabel" DataType="System.String" />
+    <Property Id="SourceLocation" Label="Номер начальной строки" DataType="Microsoft.VisualStudio.GraphModel.CodeSchema.SourceLocation" />
+    <Property Id="TargetType" DataType="System.Type" />
+    <Property Id="UseManualLocation" DataType="System.Boolean" />
+    <Property Id="Value" DataType="System.String" />
+    <Property Id="ValueLabel" DataType="System.String" />
+    <Property Id="Visibility" Label="Visibility" Description="Defines whether a node in the graph is visible or not" DataType="System.Windows.Visibility" />
+    <Property Id="Weight" Label="Толщина" Description="Толщина" DataType="System.Double" />
+  </Properties>
+  <QualifiedNames>
+    <Name Id="Assembly" Label="Сборка" ValueType="Uri" />
+    <Name Id="Member" Label="Член" ValueType="System.Object" />
+    <Name Id="Name" Label="Имя" ValueType="System.String" />
+    <Name Id="Namespace" Label="Пространство имен" ValueType="System.String" />
+    <Name Id="OverloadingParameters" Label="Параметр" ValueType="Microsoft.VisualStudio.GraphModel.GraphNodeIdCollection" Formatter="NameValueNoEscape" />
+    <Name Id="ParentType" Label="Родительский тип" ValueType="System.Object" />
+    <Name Id="Type" Label="Тип" ValueType="System.Object" />
+  </QualifiedNames>
+  <IdentifierAliases>
+    <Alias n="1" Uri="Assembly=$(d730ac7c-d52d-41f7-a929-12e635094ac3.OutputPathUri)" />
+    <Alias n="2" Id="Namespace=VanyaGame.LevelsStruct" />
+    <Alias n="3" Id="Type=TLevel" />
+    <Alias n="4" Uri="Assembly=$(FxReferenceAssembliesUri)/.NETFramework/v4.5/mscorlib.dll" />
+    <Alias n="5" Id="(@4 Namespace=System Type=String)" />
+    <Alias n="6" Id="(@1 @2 @3 Member=(Name=LoadBackground OverloadingParameters=[@5]))" />
+    <Alias n="7" Id="Namespace=VanyaGame" />
+    <Alias n="8" Id="Type=Game" />
+    <Alias n="9" Id="(@1 @7 @8 Member=(Name=LoadLevels OverloadingParameters=[@5]))" />
+    <Alias n="10" Id="(@1 @2 Type=TSubLevel Member=(Name=.ctor OverloadingParameters=[(@1 @7 Type=ISomeSubLevelBehaviour),(@1 @2 @3),@5,(@1 @2 Type=(Name=TObjToShowCreate ParentType=TSubLevel))]))" />
+    <Alias n="11" Id="(@1 @2 @3 Member=(Name=.ctor OverloadingParameters=[(@1 @7 Type=ISomeLevelBehaviour),@5,@5,@5,@5,@5]))" />
+    <Alias n="12" Id="(@1 @2 @3 Member=LoadSubLevelsFromDir)" />
+    <Alias n="13" Id="(@1 @7 @8 Member=NextLevel)" />
+    <Alias n="14" Id="(@1 @2 @3 Member=NextSubLevel)" />
+    <Alias n="15" Id="(@1 @7 @8 Member=Start)" />
+    <Alias n="16" Id="(@1 @2 @3 Member=Start)" />
+  </IdentifierAliases>
+  <Styles>
+    <Style TargetType="Link" GroupLabel="Current Call Stack Link" ValueLabel="True" Visibility="Hidden">
+      <Condition Expression="HasCategory('CurrentCallStackCall')" />
+      <Setter Property="Stroke" Value="#FFD93701" />
+      <Setter Property="Weight" Value="1" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Call Stack Indirect Link" ValueLabel="True" Visibility="Hidden">
+      <Condition Expression="HasCategory('CallStackIndirectCall')" />
+      <Setter Property="Stroke" Value="#FFB8B8B8" />
+      <Setter Property="StrokeDashArray" Value="4 1" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Call Stack Direct Link" ValueLabel="True" Visibility="Hidden">
+      <Condition Expression="HasCategory('CallStackDirectCall')" />
+      <Setter Property="Stroke" Value="#FFB8B8B8" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="External And Current" ValueLabel="True" Visibility="Hidden">
+      <Condition Expression="HasCategory('ExternalCallStackEntry') And HasCategory('CurrentCallStackEntry')" />
+      <Setter Property="Background" Value="#FFFFF8F0" />
+      <Setter Property="Stroke" Value="#FFCE5100" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Текущий узел стека вызовов" ValueLabel="Да">
+      <Condition Expression="HasCategory('CurrentCallStackEntry') And !HasCategory('QueryResult')" />
+      <Setter Property="Background" Value="#FFFFE3C6" />
+      <Setter Property="Stroke" Value="#FFD93701" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Запись внешнего стека вызовов" ValueLabel="Да">
+      <Condition Expression="HasCategory('ExternalCallStackEntry')" />
+      <Setter Property="Background" Value="#FFF7F7F7" />
+      <Setter Property="StrokeDashArray" Value="1 3" />
+      <Setter Property="Foreground" Value="#FFA5A5A5" />
+      <Setter Property="Stroke" Value="#FFA5A5A5" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Результаты" ValueLabel="Да">
+      <Condition Expression="HasCategory('QueryResult')" />
+      <Setter Property="Background" Value="#FFBCFFBE" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Сборка" ValueLabel="Имеет категорию">
+      <Condition Expression="HasCategory('CodeSchema_Assembly')" />
+      <Setter Property="Background" Value="#FF094167" />
+      <Setter Property="Stroke" Value="#FF094167" />
+      <Setter Property="Icon" Value="CodeSchema_Assembly" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Пространство имен" ValueLabel="Имеет категорию">
+      <Condition Expression="HasCategory('CodeSchema_Namespace')" />
+      <Setter Property="Background" Value="#FF0E619A" />
+      <Setter Property="Stroke" Value="#FF0E619A" />
+      <Setter Property="Icon" Value="CodeSchema_Namespace" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Интерфейс" ValueLabel="Имеет категорию">
+      <Condition Expression="HasCategory('CodeSchema_Interface')" />
+      <Setter Property="Background" Value="#FF1382CE" />
+      <Setter Property="Stroke" Value="#FF1382CE" />
+      <Setter Property="Icon" Value="CodeSchema_Interface" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Структура" ValueLabel="Имеет категорию">
+      <Condition Expression="HasCategory('CodeSchema_Struct')" />
+      <Setter Property="Background" Value="#FF1382CE" />
+      <Setter Property="Stroke" Value="#FF1382CE" />
+      <Setter Property="Icon" Value="CodeSchema_Struct" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Перечисление" ValueLabel="Имеет категорию">
+      <Condition Expression="HasCategory('CodeSchema_Enum')" />
+      <Setter Property="Background" Value="#FF1382CE" />
+      <Setter Property="Stroke" Value="#FF1382CE" />
+      <Setter Property="Icon" Value="CodeSchema_Enum" />
+      <Setter Property="LayoutSettings" Value="List" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Делегат" ValueLabel="Имеет категорию">
+      <Condition Expression="HasCategory('CodeSchema_Delegate')" />
+      <Setter Property="Background" Value="#FF1382CE" />
+      <Setter Property="Stroke" Value="#FF1382CE" />
+      <Setter Property="Icon" Value="CodeSchema_Delegate" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Класс" ValueLabel="Имеет категорию">
+      <Condition Expression="HasCategory('CodeSchema_Type')" />
+      <Setter Property="Background" Value="#FF1382CE" />
+      <Setter Property="Stroke" Value="#FF1382CE" />
+      <Setter Property="Icon" Value="CodeSchema_Class" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Свойство" ValueLabel="Имеет категорию">
+      <Condition Expression="HasCategory('CodeSchema_Property')" />
+      <Setter Property="Background" Value="#FFE0E0E0" />
+      <Setter Property="Stroke" Value="#FFE0E0E0" />
+      <Setter Property="Icon" Value="CodeSchema_Property" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Метод" ValueLabel="Имеет категорию">
+      <Condition Expression="HasCategory('CodeSchema_Method') Or HasCategory('CodeSchema_CallStackUnresolvedMethod')" />
+      <Setter Property="Background" Value="#FFE0E0E0" />
+      <Setter Property="Stroke" Value="#FFE0E0E0" />
+      <Setter Property="Icon" Value="CodeSchema_Method" />
+      <Setter Property="LayoutSettings" Value="List" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Событие" ValueLabel="Имеет категорию">
+      <Condition Expression="HasCategory('CodeSchema_Event')" />
+      <Setter Property="Background" Value="#FFE0E0E0" />
+      <Setter Property="Stroke" Value="#FFE0E0E0" />
+      <Setter Property="Icon" Value="CodeSchema_Event" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Поле" ValueLabel="Имеет категорию">
+      <Condition Expression="HasCategory('CodeSchema_Field')" />
+      <Setter Property="Background" Value="#FFE0E0E0" />
+      <Setter Property="Stroke" Value="#FFE0E0E0" />
+      <Setter Property="Icon" Value="CodeSchema_Field" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Out Parameter" ValueLabel="True">
+      <Condition Expression="CodeSchemaProperty_IsOut = 'True'" />
+      <Setter Property="Icon" Value="CodeSchema_OutParameter" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Parameter" ValueLabel="True">
+      <Condition Expression="HasCategory('CodeSchema_Parameter')" />
+      <Setter Property="Icon" Value="CodeSchema_Parameter" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Local Variable" ValueLabel="True">
+      <Condition Expression="HasCategory('CodeSchema_LocalExpression')" />
+      <Setter Property="Icon" Value="CodeSchema_LocalExpression" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Внешние" ValueLabel="Имеет категорию">
+      <Condition Expression="HasCategory('Externals')" />
+      <Setter Property="Background" Value="#FF424242" />
+      <Setter Property="Stroke" Value="#FF424242" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Inherits From" ValueLabel="True" Visibility="Hidden">
+      <Condition Expression="HasCategory('InheritsFrom') And Target.HasCategory('CodeSchema_Class')" />
+      <Setter Property="TargetDecorator" Value="OpenArrow" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Implements" ValueLabel="True" Visibility="Hidden">
+      <Condition Expression="HasCategory('Implements') And Target.HasCategory('CodeSchema_Interface')" />
+      <Setter Property="TargetDecorator" Value="OpenArrow" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Field Read" ValueLabel="True" Visibility="Hidden">
+      <Condition Expression="Target.HasCategory('CodeSchema_Field') And HasCategory('CodeSchema_FieldRead')" />
+      <Setter Property="StrokeDashArray" Value="2 2" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Comment Link" ValueLabel="True" Visibility="Hidden">
+      <Condition Expression="Source.HasCategory('Comment')" />
+      <Setter Property="Stroke" Value="#FFE5C365" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Cursor Location Changed" ValueLabel="Да" Visibility="Hidden">
+      <Condition Expression="IsCursorLocation" />
+      <Setter Property="IndicatorWest" Value="WestIndicator" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Disabled Breakpoint Location Changed" ValueLabel="Да" Visibility="Hidden">
+      <Condition Expression="DisabledBreakpointCount" />
+      <Setter Property="IndicatorWest" Value="WestIndicator" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Enabled Breakpoint Location Changed" ValueLabel="Да" Visibility="Hidden">
+      <Condition Expression="EnabledBreakpointCount" />
+      <Setter Property="IndicatorWest" Value="WestIndicator" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Instruction Pointer Location Changed" ValueLabel="Да" Visibility="Hidden">
+      <Condition Expression="IsInstructionPointerLocation" />
+      <Setter Property="IndicatorWest" Value="WestIndicator" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Current Callstack Changed" ValueLabel="Да" Visibility="Hidden">
+      <Condition Expression="IsCurrentCallstackFrame" />
+      <Setter Property="IndicatorWest" Value="WestIndicator" />
+    </Style>
+  </Styles>
+  <Paths>
+    <Path Id="d730ac7c-d52d-41f7-a929-12e635094ac3.OutputPathUri" Value="file:///C:/Облако Mail.ru/Программирование VS/Vanja/VanyaGame 5/VanyaGame/bin/Debug/VanyaGame.exe" />
+    <Path Id="FxReferenceAssembliesUri" Value="file:///C:/Program Files/Reference Assemblies/Microsoft/Framework" />
+  </Paths>
+</DirectedGraph>
