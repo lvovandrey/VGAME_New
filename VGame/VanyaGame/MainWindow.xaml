@@ -73,7 +73,7 @@
                     <MediaElement x:Name="MediaElementVideo" HorizontalAlignment="Center" VerticalAlignment="Center" LoadedBehavior="Manual" Stretch="Fill" Opacity="0.1" KeyDown="MediaElementVideo_KeyDown"  />
                     <GameNumber:BeautyButtonNumber x:Name="StartButton" HorizontalAlignment="Center" VerticalAlignment="Center" Height="250" Visibility="Visible" Margin="95,219,647,243"/>
                     <Button Name="VIDEOTEST" Content="VideoTest" Width ="200" Height="30" HorizontalAlignment="Left" Click="VIDEOTEST_Click"/>
-                    <Interface:VlcWrap x:Name="Vlc" Width="300" Height="200"/>
+                    <Interface:VlcWrap x:Name="Vlc" Opacity="0.82" Margin="0,0,0,84" Visibility="Hidden" />
 
                     <Label x:Name="Label1_Copy" Content="/////////////////////////////" Visibility="Visible" HorizontalAlignment="Left" Margin="13,74,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FFFF0909" Panel.ZIndex="2" Opacity="0" RenderTransformOrigin="0.391,1.851">
                         <Label.Effect>

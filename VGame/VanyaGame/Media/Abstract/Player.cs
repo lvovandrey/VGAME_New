@@ -36,6 +36,9 @@ namespace VanyaGame.Media.Abstract
         public abstract void Pause();
         public abstract void Play();
         public abstract void Stop();
+
+        public abstract void Show();
+        public abstract void Hide();
         #endregion
 
         #region events

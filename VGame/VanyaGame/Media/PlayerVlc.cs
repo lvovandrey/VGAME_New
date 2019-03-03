@@ -82,5 +82,14 @@ namespace VanyaGame.Media
         }
 
 
+        public override void Show()
+        {
+            Body.Visibility = Visibility.Visible;
+        }
+        public override void Hide()
+        {
+            Body.Visibility = Visibility.Hidden;
+        }
+
     }
 }

@@ -287,13 +287,13 @@ namespace VanyaGame.Media
             //base.LoadMediaFilesFromDir(Dir, "mkv");
             base.LoadMediaFilesFromDir(Dir);
         }
-        public void ShowVideoPlayer()
+        public virtual void ShowVideoPlayer()
         {
-            TDrawEffects.BlurShow(this.player.Body, 0.5);
+            player.Show();
         }
-        public void HideVideoPlayer()
+        public virtual void HideVideoPlayer()
         {
-            TDrawEffects.BlurHide(this.player.Body, 0.5);
+            player.Hide();
         }
 
         public void PlayBtnClick()
