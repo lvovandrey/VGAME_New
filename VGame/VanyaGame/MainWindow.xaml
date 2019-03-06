@@ -27,28 +27,12 @@
 
     <Grid x:Name="BaseGrid"  Background="#FFC9C9C9" >
         <Button Panel.ZIndex="5000"  x:Name="DB_button" Content="Показать БД" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="300,300,0,0" Width="100" Height="50" Click="DB_button_Click" Visibility="Collapsed"/>
-
-        <!--<FishFolder:FishElement HorizontalAlignment="Left" VerticalAlignment="Top"  Panel.ZIndex="1000" RenderTransformOrigin="0.5,0.5">
-            <FishFolder:FishElement.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleY="1" ScaleX="1"/>
-                    <SkewTransform AngleY="0" AngleX="0"/>
-                    <RotateTransform Angle="0"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </FishFolder:FishElement.RenderTransform>
-        </FishFolder:FishElement>-->
         <Grid>
-
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-
-
-
             <Grid Grid.Row="0" Panel.ZIndex="1">
-
                 <Image x:Name="PrevImg" Source="Images/backBegin.jpg"  VerticalAlignment="Center" HorizontalAlignment="Center" Width="800" Opacity="0" RenderTransformOrigin="0.5,0.5" >
                     <Image.Effect>
                         <DropShadowEffect ShadowDepth="21" Opacity="0.685" Color="#FF030038" BlurRadius="23"/>
