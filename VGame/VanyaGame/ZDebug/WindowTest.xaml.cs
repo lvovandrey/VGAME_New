@@ -116,5 +116,15 @@ namespace VanyaGame.ZDebug
 
           //  MediaElement1.Play();
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            vlc1.Visibility = System.Windows.Visibility.Hidden;
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            vlc1.Visibility = System.Windows.Visibility.Visible;
+        }
     }
 }

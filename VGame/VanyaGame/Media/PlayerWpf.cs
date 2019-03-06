@@ -80,5 +80,13 @@ namespace VanyaGame.Media
             Source = "";
         }
 
+        public override void Show()
+        {
+            TDrawEffects.BlurShow(Body, 0.5);
+        }
+        public override void Hide()
+        {
+            TDrawEffects.BlurHide(Body, 0.5);
+        }
     }
 }
