@@ -39,14 +39,13 @@ namespace VanyaGame.Media
             player.Ended += OnMediaEnded;
 
             volume = new Volume();
-            volume.level = 50;
             volume.PropertyChanged += volume_PropertyChanged;
+            volume.level = 50;
 
             MediaGUI = new MediaControllers();
             timer = new Time();
-            timer.timeInSec = 0;
             timer.PropertyChanged += timer_PropertyChanged;
-
+            timer.timeInSec = 0;
         }
 
         void timer_PropertyChanged(object sender, PropertyChangedEventArgs e)

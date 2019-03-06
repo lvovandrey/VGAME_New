@@ -25,7 +25,20 @@ namespace VanyaGame.Media
                 MessageBox.Show("Ошибка инициализации компонента VLCPlayer (видеопроигрвыателя)", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
-        public override double Volume { get; set; }
+        public override double Volume
+        {
+            get
+            {
+                double v1 = ((double)((VlcWrap)Body).vlcPlayer.MediaPlayer.Audio.Volume) / 100;
+                double v = Math.Pow(v1, 3.33333333333);
+                return v;
+            }
+            set
+            {
+                double v = Math.Pow(value, 0.3);
+                ((VlcWrap)Body).vlcPlayer.MediaPlayer.Audio.Volume = (int)(v*100);
+            }
+        }
 
 
         public override TimeSpan Position

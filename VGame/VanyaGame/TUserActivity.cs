@@ -114,14 +114,12 @@ namespace VanyaGame
 
             if (e.Key == Key.Up)
             {
-                Game.Owner.VideoVolumeSlider.Value += 10;
-                Game.Video.MediaGUI.UIMediaShowAndHideFull();
+                RaiseVolume(10);
                 e.Handled = true;
             }
             if (e.Key == Key.Down)
             {
-                Game.Owner.VideoVolumeSlider.Value -= 10;
-                Game.Video.MediaGUI.UIMediaShowAndHideFull();
+                RaiseVolume(-10);
                 e.Handled = true;
             }
 
@@ -129,7 +127,19 @@ namespace VanyaGame
         }
 
 
-
+        private void RaiseVolume(double VolumeLevelAddition)
+        {
+            if (Game.Video.IsPlaying || Game.Video.IsPaused)
+            {
+                Game.Owner.VideoVolumeSlider.Value += VolumeLevelAddition;
+                Game.Video.MediaGUI.UIMediaShowAndHideFull();
+            }
+            else
+            {
+                Game.Owner.MusicVolumeSlider.Value += VolumeLevelAddition;
+                Game.Music.MediaGUI.UIMediaShowAndHideFull();            
+            }
+        }
 
         public void BtnNextLevel_Click(object sender, RoutedEventArgs e)
         {
