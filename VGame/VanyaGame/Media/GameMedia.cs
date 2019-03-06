@@ -119,7 +119,7 @@ namespace VanyaGame.Media
             {
                 if (timer_ != null) timer_.Start(OnTimerTick);
 
-                player.Play();
+                player.UnPaused();
                 IsPaused = false;
 
                 if (onStateChangeEvent != null) onStateChangeEvent();
@@ -162,6 +162,7 @@ namespace VanyaGame.Media
                 if (timer_ != null) timer_.Stop();
                 if (onStateChangeEvent != null) onStateChangeEvent();
             }
+
         }
         public void Stop()
         {

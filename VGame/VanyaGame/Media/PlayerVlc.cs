@@ -59,9 +59,15 @@ namespace VanyaGame.Media
             ((VlcWrap)Body).vlcPlayer.MediaPlayer.Pause();
         }
 
-        public override void Play()
+        public override void UnPaused()
         {
             if (Source == "") return;
+            ((VlcWrap)Body).vlcPlayer.MediaPlayer.Play();
+        }
+
+        public override void Play()
+        {
+            if (Source == "") return;            
             ((VlcWrap)Body).vlcPlayer.MediaPlayer.Play(new Uri(Source));
             ((VlcWrap)Body).vlcPlayer.MediaPlayer.Stopped += MediaPlayer_Stopped;
         }

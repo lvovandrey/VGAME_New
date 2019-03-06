@@ -75,7 +75,8 @@ namespace VanyaGame
             if (e.Key == Key.Escape) { Environment.Exit(0); }
             if (e.Key == Key.Space)
             {
-                Game.Video.Pause();
+                if(Game.Video.IsPaused) Game.Video.Play();
+                else Game.Video.Pause();
                 Game.Video.MediaGUI.UIMediaShowAndHideFull();
                 TDrawEffects.PushUI_MouseDown((FrameworkElement)Game.Owner.PlayImgButton);
             }

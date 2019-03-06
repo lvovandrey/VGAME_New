@@ -58,6 +58,12 @@ namespace VanyaGame.Media
             ((MediaElement)Body).Pause();
         }
 
+        public override void UnPaused()
+        {
+            if (Source == "") return;
+            ((MediaElement)Body).Play();
+        }
+
         public override void Play()
         {
             if (Source == "") return;

@@ -34,6 +34,7 @@ namespace VanyaGame.Media.Abstract
         //IPlayer impl
         public abstract void BeginAnimation(DependencyProperty property, AnimationTimeline animation);
         public abstract void Pause();
+        public abstract void UnPaused();
         public abstract void Play();
         public abstract void Stop();
 
