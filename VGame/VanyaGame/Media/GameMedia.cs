@@ -56,7 +56,9 @@ namespace VanyaGame.Media
 
         void volume_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-         //   this.player.BeginAnimation(MediaElement.VolumeProperty, null);
+
+            //   this.player.BeginAnimation(MediaElement.VolumeProperty, null);
+
             this.player.Volume = (volume.level) / 100;
 
         }

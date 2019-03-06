@@ -43,6 +43,9 @@ namespace VanyaGame.Media
                 ((VlcWrap)Body).vlcPlayer.MediaPlayer.Time = (long)(Math.Round(value.TotalMilliseconds));
             }
         }
+
+        public override TimeSpan Duration { get { return TimeSpan.FromMilliseconds(((VlcWrap)Body).vlcPlayer.MediaPlayer.Length); } }
+
         public override string Source { get; set; }
         public override FrameworkElement Body { get; set; }
 

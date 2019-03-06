@@ -26,9 +26,15 @@ namespace VanyaGame.Media
             Body = body;
         }
 
-        public override double Volume { get ; set ; }
+        public override double Volume
+        {
+            get { return ((MediaElement)Body).Volume; }
+            set {
+                ((MediaElement)Body).BeginAnimation(MediaElement.VolumeProperty, null);
+                ((MediaElement)Body).Volume = value;
+            }
+        }
         public override TimeSpan Position {
-            //get ; set ;
             get
             {
                 
@@ -42,6 +48,9 @@ namespace VanyaGame.Media
                 ((MediaElement)Body).Position = value;
             }
         }
+
+        public override TimeSpan Duration { get { return ((MediaElement)Body).NaturalDuration.TimeSpan; } }
+
         public override string Source { get ; set ; }
         public override FrameworkElement Body { get ; set ; }
 

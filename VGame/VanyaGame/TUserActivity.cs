@@ -72,6 +72,7 @@ namespace VanyaGame
         }
         public void MyWindow_PreviewKeyDown(object sender, KeyEventArgs e)
         {
+            
             if (e.Key == Key.Escape) { Environment.Exit(0); }
             if (e.Key == Key.Space)
             {
@@ -79,17 +80,20 @@ namespace VanyaGame
                 else Game.Video.Pause();
                 Game.Video.MediaGUI.UIMediaShowAndHideFull();
                 TDrawEffects.PushUI_MouseDown((FrameworkElement)Game.Owner.PlayImgButton);
+                e.Handled = true;
             }
             if (e.Key == Key.Enter)
             {
                 Game.Video.Play();
                 Game.Video.MediaGUI.UIMediaShowAndHideFull();
                 TDrawEffects.PushUI_MouseDown((FrameworkElement)Game.Owner.PlayImgButton);
+                e.Handled = true;
             }
             if (e.Key == Key.F)
             {
                 if (Game.Video.IsPlaying)
-                    Game.Video.player.Position = TimeSpan.FromMilliseconds(Game.Video.player.Position.TotalMilliseconds - 5);
+                    Game.Video.player.Position = TimeSpan.FromMilliseconds(Game.Video.player.Duration.TotalMilliseconds - 500);
+                e.Handled = true;
             }
 
 
@@ -98,23 +102,27 @@ namespace VanyaGame
                 Game.Video.Rewind(new TimeSpan(0, 0, 5), true);
                 Game.Video.MediaGUI.UIMediaShowAndHideFull();
                 TDrawEffects.PushUI_MouseDown((FrameworkElement)Game.Owner.BackImgButton);
+                e.Handled = true;
             }
             if (e.Key == Key.Right)
             {
                 Game.Video.Rewind(new TimeSpan(0, 0, 5), false);
                 Game.Video.MediaGUI.UIMediaShowAndHideFull();
                 TDrawEffects.PushUI_MouseDown((FrameworkElement)Game.Owner.NextImgButton);
+                e.Handled = true;
             }
 
             if (e.Key == Key.Up)
             {
                 Game.Owner.VideoVolumeSlider.Value += 10;
                 Game.Video.MediaGUI.UIMediaShowAndHideFull();
+                e.Handled = true;
             }
             if (e.Key == Key.Down)
             {
                 Game.Owner.VideoVolumeSlider.Value -= 10;
                 Game.Video.MediaGUI.UIMediaShowAndHideFull();
+                e.Handled = true;
             }
 
             UserDoSomething(null, null, e);

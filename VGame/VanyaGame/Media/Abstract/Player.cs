@@ -28,7 +28,9 @@ namespace VanyaGame.Media.Abstract
         public abstract TimeSpan Position { get; set; }
         public abstract string Source { get; set; }
         public abstract FrameworkElement Body { get; set; }
-        #endregion       
+        public abstract TimeSpan Duration { get; }
+
+        #endregion
 
         #region methods
         //IPlayer impl
