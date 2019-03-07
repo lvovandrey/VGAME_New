@@ -31,6 +31,15 @@ namespace VanyaGame.Media
         {
             UICollection.Add(UI);
         }
+
+        /// <summary>
+        /// Очищаем коллекцию элементов медиа-проигрывателем управления
+        /// </summary>
+        public void Clear()
+        {
+            UICollection.Clear();
+        }
+
         /// <summary>
         /// Показывает все элементы пользовательского интерфейса для управления медиа-проигрывателем (из коллекции MediaUI)
         /// </summary>

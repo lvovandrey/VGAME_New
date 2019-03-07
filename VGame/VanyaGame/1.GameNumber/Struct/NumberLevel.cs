@@ -83,7 +83,7 @@ namespace VanyaGame.GameNumber.Struct
         {
             Game.Sound.LoadMediaFilesFromDir(Game.Sets.MainDir + Sets.Directory + Sets.SoundDir + @"\");
             Game.Music.LoadMediaFilesFromDir(Game.Sets.MainDir + Sets.Directory + Sets.MusicDir + @"\");
-            Game.Video.LoadMediaFilesFromDir(Game.Sets.MainDir + Sets.Directory + Sets.VideoDir + @"\");
+            Game.CurVideo.LoadMediaFilesFromDir(Game.Sets.MainDir + Sets.Directory + Sets.VideoDir + @"\");
         }
 
         /// <summary>

@@ -353,12 +353,17 @@ namespace VanyaGame
                     if (attr != null)
                       Game.Msg(attr.Value);
                 }
-                
 
                 
+
                 // обходим все дочерние узлы элемента user
                 foreach (XmlNode childnode in xnode.ChildNodes)
                 {
+                    Scenes[i].Sets.GetComponent<InnerVideoSets>().VideoFileType = VideoType.unknown;
+                    Scenes[i].Sets.GetComponent<InnerVideoSets>().VideoFileName = "";
+                    Scenes[i].Sets.GetComponent<InnerVideoSets>().VideoTimeBegin = TimeSpan.FromMilliseconds(0);
+                    Scenes[i].Sets.GetComponent<InnerVideoSets>().VideoTimeEnd = TimeSpan.FromMilliseconds(0);
+
                     if (Scenes.Count >= (i+1))
                     {
                         if (Scenes[i].Sets.GetComponent<InnerVideoSets>() == null) continue;
@@ -367,6 +372,20 @@ namespace VanyaGame
                         {
                             Game.Msg("filename: " + childnode.InnerText);
                             Scenes[i].Sets.GetComponent<InnerVideoSets>().VideoFileName = childnode.InnerText;
+                        }
+                        // если узел - filetype
+                        if (childnode.Name == "filetype")
+                        {
+                            VideoType type = VideoType.unknown;
+                            Game.Msg("filetype: " + childnode.InnerText);
+                            switch (childnode.InnerText)
+                            {
+                                case "local":   type = VideoType.local; break;
+                                case "net":     type = VideoType.net; break;
+                                case "youtube": type = VideoType.youtube; break;
+                                case "ipcam":   type = VideoType.ipcam; break;
+                            }
+                            Scenes[i].Sets.GetComponent<InnerVideoSets>().VideoFileType = type;
                         }
                         // если узел - company
                         if (childnode.Name == "filenumber")

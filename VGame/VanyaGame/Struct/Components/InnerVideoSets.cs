@@ -3,6 +3,8 @@ using VanyaGame.Abstract;
 
 namespace VanyaGame.Struct.Components
 {
+    public enum VideoType {local, net, youtube, ipcam, unknown}
+
     /// <summary>
     /// Инкапсулирует информацию и методы связанные с наличием в сцене (или уровне) прикрепленного видео
     /// </summary>
@@ -11,7 +13,8 @@ namespace VanyaGame.Struct.Components
         #region constructors
         public InnerVideoSets(string name, IComponentContainer container) : base(name, container)
         {
-
+            VideoFileName = "";
+            VideoFileType = VideoType.unknown;
         }
         #endregion
 
@@ -23,7 +26,12 @@ namespace VanyaGame.Struct.Components
         /// Имя видеофайла
         /// </summary>
         public string VideoFileName { get; set; }
-        
+
+        /// <summary>
+        /// Тип видеофайла
+        /// </summary>
+        public VideoType VideoFileType { get; set; }
+
         /// <summary>
         /// Номер отрезка (видеофайла)
         /// </summary>

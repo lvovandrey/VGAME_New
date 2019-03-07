@@ -38,7 +38,9 @@ namespace VanyaGame
         public static Level Level;
         public static GameSound Sound;
         public static GameMusic Music;
-        public static GameVideo Video;
+        public static GameVideo CurVideo;
+        public static GameVideo VideoVlc;
+        public static GameVideo VideoWpf;
         public static  MainWindow Owner;
         public static bool IsPlaying = false;
         public static TDrawEffects DrawEffects = new TDrawEffects();
@@ -116,6 +118,32 @@ namespace VanyaGame
                 Levels.Enqueue(NewLevel);
             }
         }
+
+        public static void VideoPlayerSet(GameVideo gameVideo)
+        {
+            if (CurVideo == null) return;
+            if (CurVideo.IsPlaying || CurVideo.IsPaused) {
+                MessageBox.Show("Cannt change videoplayer while it play");
+                return; }
+            gameVideo.MediaGUI.Clear();
+
+
+            gameVideo.MediaGUI.Add(Owner.BackImgButton);
+            gameVideo.MediaGUI.Add(Owner.NextImgButton);
+            gameVideo.MediaGUI.Add(Owner.VideoVolumeSlider);
+            gameVideo.MediaGUI.Add(Owner.VideoTimeSlider);
+            gameVideo.MediaGUI.Add(Owner.PlayImgButton);
+
+            gameVideo.SliderTimer = Owner.VideoTimeSlider;
+            gameVideo.PlayBtn = Owner.PlayImgButton;
+            Game.Owner.VideoVolumeSlider.DataContext = gameVideo.volume;
+            Game.Owner.VideoTimeSlider.DataContext = gameVideo.timer;
+            
+            CurVideo = gameVideo;
+            CurVideo.MediaGUI.UIMediaHide();
+            Game.Msg("VideoPlayer change");
+        }
+
         public static void Create(MainWindow WND_Owner)
         {
             Owner = WND_Owner;
@@ -128,41 +156,29 @@ namespace VanyaGame
             
             Sound = new GameSound(ref Snd);
             Music = new GameMusic(ref Msc);
-            if (Sets.VideoPlayer == "vlc")
-            {
-                Player Vdo = new PlayerVlc("PlayerVideo", mediaContainer, Owner.Vlc);
-                Video = new GameVideo(ref Vdo);
-            }
-            if (Sets.VideoPlayer == "wpf")
-            {
-                Player Vdo = new PlayerWpf("PlayerVideo", mediaContainer, Owner.MediaElementVideo);
-                Video = new GameVideo(ref Vdo);
-            }
-            
 
-            Video.MediaGUI.Add(Owner.BackImgButton);
-            Video.MediaGUI.Add(Owner.NextImgButton);
-            Video.MediaGUI.Add(Owner.VideoVolumeSlider);
-            Video.MediaGUI.Add(Owner.VideoTimeSlider);
-            Video.MediaGUI.Add(Owner.PlayImgButton);
+            Player Vdovlc = new PlayerVlc("PlayerVideoVlc", mediaContainer, Owner.Vlc);
+            VideoVlc = new GameVideo(ref Vdovlc);
 
-            Video.SliderTimer = Owner.VideoTimeSlider;
-            Video.PlayBtn = Owner.PlayImgButton;
+            Player Vdowpf = new PlayerWpf("PlayerVideoWpf", mediaContainer, Owner.MediaElementVideo);
+            VideoWpf = new GameVideo(ref Vdowpf);
+
+            CurVideo = new GameVideo(ref Vdowpf);
 
 
             Music.MediaGUI.Add(Owner.MusicVolumeSlider);
-
-            
-            Game.Owner.VideoVolumeSlider.DataContext = Video.volume;
             Game.Owner.MusicVolumeSlider.DataContext = Music.volume;
-
-          //  Game.Owner.LabelTimer.DataContext = Video.timer;
-            Game.Owner.VideoTimeSlider.DataContext = Video.timer;
-           
-
-            Video.MediaGUI.UIMediaHide();
             Music.MediaGUI.UIMediaHide();
-            
+
+            if (Sets.VideoPlayer == "vlc")
+            {
+                VideoPlayerSet(VideoVlc);
+            }
+            if (Sets.VideoPlayer == "wpf")
+            {
+                VideoPlayerSet(VideoWpf);
+            }
+
         }
 
         

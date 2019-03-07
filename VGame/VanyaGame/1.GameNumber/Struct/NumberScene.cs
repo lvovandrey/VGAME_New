@@ -148,7 +148,7 @@ namespace VanyaGame.GameNumber.Struct
 
             Game.Music.Play();
             Game.Music.MediaGUI.UIMediaShow();
-            Game.Video.MediaGUI.UIMediaHide();
+            Game.CurVideo.MediaGUI.UIMediaHide();
             
             //TDrawEffects.SlowDifferVolume(Game.Music.player, 1, 4, (sender, e) => { });
             //Game.Music.player.Volume = 0;
@@ -176,28 +176,28 @@ namespace VanyaGame.GameNumber.Struct
 
             //});
 
-            Game.Video.ShowVideoPlayer();
+            Game.CurVideo.ShowVideoPlayer();
             Game.Music.MediaGUI.UIMediaHide();
             ToolsTimer.Delay(() =>
             {
-                Game.Video.MediaGUI.UIMediaShow();
+                Game.CurVideo.MediaGUI.UIMediaShow();
 
             }, new TimeSpan(0, 0, 1));
 
             string MediaName = SL.Sets.GetComponent<InnerVideoSets>().VideoFileName;
 
 
-            Game.Video.Play(MediaName, SL.Sets.GetComponent<InnerVideoSets>().VideoTimeBegin, SL.Sets.GetComponent<InnerVideoSets>().VideoTimeEnd);
+            Game.CurVideo.Play(MediaName, SL.Sets.GetComponent<InnerVideoSets>().VideoTimeBegin, SL.Sets.GetComponent<InnerVideoSets>().VideoTimeEnd);
             Game.Owner.VideoTimeSlider.Maximum = SL.Sets.GetComponent<InnerVideoSets>().VideoTimeEnd.TotalSeconds;
             Game.Owner.VideoTimeSlider.Minimum = SL.Sets.GetComponent<InnerVideoSets>().VideoTimeBegin.TotalSeconds;
 
-            Game.Video.ClearOnEndedEvent();
-            Game.Video.OnEnded += ((NumberLevel)Level).NextScene;
-            Game.Video.OnEnded += () =>
+            Game.CurVideo.ClearOnEndedEvent();
+            Game.CurVideo.OnEnded += ((NumberLevel)Level).NextScene;
+            Game.CurVideo.OnEnded += () =>
             {
-                Game.Video.ClearOnEndedEvent();
-                Game.Video.HideVideoPlayer();
-                Game.Video.MediaGUI.UIMediaHide();
+                Game.CurVideo.ClearOnEndedEvent();
+                Game.CurVideo.HideVideoPlayer();
+                Game.CurVideo.MediaGUI.UIMediaHide();
             };
             
 
