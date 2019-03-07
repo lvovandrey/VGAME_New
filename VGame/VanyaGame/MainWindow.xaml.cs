@@ -216,7 +216,9 @@ namespace VanyaGame
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //            Vlc.vlcPlayer.MediaPlayer.Position += 0.1f;
-            L1.Content = Vlc.vlcPlayer.MediaPlayer.Time.ToString(); //Vlc.vlcPlayer.MediaPlayer.Position.ToString();
+           // L1.Content = Vlc.vlcPlayer.MediaPlayer.Time.ToString(); //Vlc.vlcPlayer.MediaPlayer.Position.ToString();
+            L1.Content= TimeSpan.FromMilliseconds(Vlc.vlcPlayer.MediaPlayer.Length).ToString();
+            L1.Content = Vlc.vlcPlayer.MediaPlayer.Audio.Volume;
         }
     }
 

@@ -27,35 +27,19 @@
 
     <Grid x:Name="BaseGrid"  Background="#FFC9C9C9" >
         <Button Panel.ZIndex="5000"  x:Name="DB_button" Content="Показать БД" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="300,300,0,0" Width="100" Height="50" Click="DB_button_Click" Visibility="Collapsed"/>
-
-        <!--<FishFolder:FishElement HorizontalAlignment="Left" VerticalAlignment="Top"  Panel.ZIndex="1000" RenderTransformOrigin="0.5,0.5">
-            <FishFolder:FishElement.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleY="1" ScaleX="1"/>
-                    <SkewTransform AngleY="0" AngleX="0"/>
-                    <RotateTransform Angle="0"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </FishFolder:FishElement.RenderTransform>
-        </FishFolder:FishElement>-->
         <Grid>
-
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-
-
-
             <Grid Grid.Row="0" Panel.ZIndex="1">
-
                 <Image x:Name="PrevImg" Source="Images/backBegin.jpg"  VerticalAlignment="Center" HorizontalAlignment="Center" Width="800" Opacity="0" RenderTransformOrigin="0.5,0.5" >
                     <Image.Effect>
                         <DropShadowEffect ShadowDepth="21" Opacity="0.685" Color="#FF030038" BlurRadius="23"/>
                     </Image.Effect>
                 </Image>
                 <Button x:Name="BtnNextLevel" Visibility="Hidden"  Content="NEXT LEVEL"  HorizontalAlignment="Center" Height="59"  VerticalAlignment="Center" Width="164" Click="BtnNextLevel_Click" Canvas.Left="410" Canvas.Top="208"/>
-                <TextBox Panel.ZIndex="15" x:Name="TxtBlock" Opacity="0.5" ScrollViewer.VerticalScrollBarVisibility="Visible" HorizontalAlignment="Right" Height="685" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="239" Canvas.Left="743" Canvas.Top="10" Visibility="Visible"/>
+                <TextBox Panel.ZIndex="15" x:Name="TxtBlock" Opacity="0.0" ScrollViewer.VerticalScrollBarVisibility="Visible" HorizontalAlignment="Right" Height="685" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="239" Canvas.Left="743" Canvas.Top="10" Visibility="Visible"/>
                 <Label  HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FFFF0909">
                     <Label.Effect>
                         <DropShadowEffect Color="#FFB9FF00" BlurRadius="2" ShadowDepth="3"/>
@@ -65,15 +49,17 @@
                 <MediaElement x:Name="MediaElementSound" HorizontalAlignment="Left" Height="35" Margin="448,519,0,0" VerticalAlignment="Top" Width="35" LoadedBehavior="Manual"/>
                 <MediaElement x:Name="MediaElementMusic" HorizontalAlignment="Left" Height="38" Margin="359,519,0,0" VerticalAlignment="Top" Width="41" LoadedBehavior="Manual" MediaEnded="MediaElementMusic_MediaEnded" Volume="0.1"/>
                 <Grid x:Name="GridVideo" VerticalAlignment="Stretch"  HorizontalAlignment="Stretch" >
-                    <Label x:Name="Label1" Content="Нажмите Esc для выхода из игры&#xA;Нажмите Q для перехода к следующему заданию&#xA;Нажмите R для перехода к следующему уровню&#xA;Нажмите F для пропуска видео" Visibility="Visible" HorizontalAlignment="Left" Margin="10,-1,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FFFF0909" Panel.ZIndex="2" Opacity="0.5">
+                    <Label x:Name="Label1" 
+                           Content="Нажмите Esc для выхода из игры&#xA;Нажмите Q для перехода к следующему заданию&#xA;Нажмите R для перехода к следующему уровню&#xA;Нажмите F для пропуска видео" 
+                           Visibility="Visible" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FFFF0909" Panel.ZIndex="2" Opacity="0.5">
                         <Label.Effect>
                             <DropShadowEffect Color="#FFB9FF00" BlurRadius="1" ShadowDepth="1"/>
                         </Label.Effect>
                     </Label>
                     <MediaElement x:Name="MediaElementVideo" HorizontalAlignment="Center" VerticalAlignment="Center" LoadedBehavior="Manual" Stretch="Fill" Opacity="0.1" KeyDown="MediaElementVideo_KeyDown"  />
-                    <GameNumber:BeautyButtonNumber x:Name="StartButton" HorizontalAlignment="Center" VerticalAlignment="Center" Height="250" Visibility="Visible" Margin="95,219,647,243"/>
+                    <GameNumber:BeautyButtonNumber x:Name="StartButton" HorizontalAlignment="Center" VerticalAlignment="Center" Height="250" Visibility="Visible" />
                     <Button Name="VIDEOTEST" Content="VideoTest" Width ="200" Height="30" HorizontalAlignment="Left" Click="VIDEOTEST_Click"/>
-                    <Interface:VlcWrap x:Name="Vlc" Width="300" Height="200"/>
+                    <Interface:VlcWrap x:Name="Vlc" Margin="0,70,0,100" Visibility="Hidden"/>
 
                     <Label x:Name="Label1_Copy" Content="/////////////////////////////" Visibility="Visible" HorizontalAlignment="Left" Margin="13,74,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FFFF0909" Panel.ZIndex="2" Opacity="0" RenderTransformOrigin="0.391,1.851">
                         <Label.Effect>
@@ -100,7 +86,7 @@
 
             <Slider Cursor="{DynamicResource PushCursor}" x:Name="MusicVolumeSlider" HorizontalAlignment="Left" Height="50" 
             	Value="{Binding level, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-            	Margin="12,64,0,0" VerticalAlignment="Top" Width="245"  
+            	Margin="10,10,0,0" VerticalAlignment="Top" Width="245"  
             	MouseLeave="MusicVolumeSlider_MouseLeave" MouseEnter="MusicVolumeSlider_MouseEnter" Opacity="0.5"
             	Maximum="100"  Panel.ZIndex="10"
             	Style="{DynamicResource SliderStyle1}" >
@@ -127,7 +113,7 @@
 
                 <Slider Cursor="{DynamicResource PushCursor}"  Grid.ColumnSpan="3" Grid.Row="0" Grid.Column="0" x:Name="VideoVolumeSlider" HorizontalAlignment="Left" Height="50" 
                     Value="{Binding level, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                    Margin="12,64,0,0" VerticalAlignment="Bottom" Width="245"  
+                    Margin="10,10,0,0" VerticalAlignment="Top" Width="245"  
                     MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave"                        
                     Opacity="0.5"
                     Maximum="100"  Panel.ZIndex="10"
@@ -150,6 +136,10 @@
                     </Slider.Effect>
                 </Slider>
 
+                <Grid x:Name="GridVlcBlackBackgrnd" Visibility="{Binding ElementName=Vlc, Path=Visibility}" Panel.ZIndex="-10" 
+                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Background="Black"/>
+                <Grid x:Name="GridVlcBlackBackgrnd2" Visibility="{Binding ElementName=Vlc, Path=Visibility}" Panel.ZIndex="-10" 
+                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Background="Black"/>
 
                 <Image Cursor="{DynamicResource PushCursor}" Grid.Row="2" x:Name="BackImgButton" Grid.Column="0" Height="64" Source="Images/prev.png"  HorizontalAlignment="Right"  
                   VerticalAlignment="Bottom"                     Opacity="1" Margin="23"

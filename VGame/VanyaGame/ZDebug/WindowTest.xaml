@@ -10,7 +10,7 @@
         Title="WindowTest" Height="600" Width="800">
     <Grid x:Name="GridMain" >
         <interface:VlcWrap x:Name="vlc1" Margin="0,0,261,297" ></interface:VlcWrap>
-            <MediaElement x:Name="MediaElement1"  HorizontalAlignment="Left" Height="56" VerticalAlignment="Top" Width="70" LoadedBehavior="Manual" UnloadedBehavior="Manual" Margin="714,9,0,0" RenderTransformOrigin="0.5,0.5">
+        <MediaElement x:Name="MediaElement1"  HorizontalAlignment="Left" Height="56" VerticalAlignment="Top" Width="70" LoadedBehavior="Manual" UnloadedBehavior="Manual" Margin="714,9,0,0" RenderTransformOrigin="0.5,0.5">
             <MediaElement.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleY="-1"/>
@@ -26,6 +26,8 @@
         <Button Content="GetLink" HorizontalAlignment="Left" Margin="617,379,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_3"/>
         <Button Content="Play" HorizontalAlignment="Left" Margin="617,422,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
         <Button Content="Play2" HorizontalAlignment="Left" Margin="707,422,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click2"/>
+        <Button  Content="Hide" HorizontalAlignment="Left" Margin="617,240,0,0" VerticalAlignment="Top" Width="75" Height="19" Click="Button_Click_1"/>
+        <Button  Content="Show" HorizontalAlignment="Left" Margin="617,264,0,0" VerticalAlignment="Top" Width="75" Height="19" Click="Button_Click_2" />
 
 
     </Grid>

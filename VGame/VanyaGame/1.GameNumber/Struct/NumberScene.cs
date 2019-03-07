@@ -151,7 +151,7 @@ namespace VanyaGame.GameNumber.Struct
             Game.Video.MediaGUI.UIMediaHide();
             
             //TDrawEffects.SlowDifferVolume(Game.Music.player, 1, 4, (sender, e) => { });
-            Game.Music.player.Volume = 0;
+            //Game.Music.player.Volume = 0;
 
             Game.Owner.StackPanelGame.Children.Clear();
 
@@ -170,7 +170,7 @@ namespace VanyaGame.GameNumber.Struct
             Game.Owner.StackPanelGame.Children.Clear();
            // TDrawEffects.SlowDifferVolume(Game.Music.player, 0, 2, (sender, e) =>
            // {
-                Game.Music.player.Volume = 0;
+              //  Game.Music.player.Volume = 0;
                 Game.Music.Pause();
                 Game.Owner.StackPanelGame.Children.Clear();
 

@@ -39,14 +39,13 @@ namespace VanyaGame.Media
             player.Ended += OnMediaEnded;
 
             volume = new Volume();
-            volume.level = 50;
             volume.PropertyChanged += volume_PropertyChanged;
+            volume.level = 50;
 
             MediaGUI = new MediaControllers();
             timer = new Time();
-            timer.timeInSec = 0;
             timer.PropertyChanged += timer_PropertyChanged;
-
+            timer.timeInSec = 0;
         }
 
         void timer_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -56,7 +55,9 @@ namespace VanyaGame.Media
 
         void volume_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-         //   this.player.BeginAnimation(MediaElement.VolumeProperty, null);
+
+            //   this.player.BeginAnimation(MediaElement.VolumeProperty, null);
+
             this.player.Volume = (volume.level) / 100;
 
         }
@@ -119,7 +120,7 @@ namespace VanyaGame.Media
             {
                 if (timer_ != null) timer_.Start(OnTimerTick);
 
-                player.Play();
+                player.UnPaused();
                 IsPaused = false;
 
                 if (onStateChangeEvent != null) onStateChangeEvent();
@@ -162,6 +163,7 @@ namespace VanyaGame.Media
                 if (timer_ != null) timer_.Stop();
                 if (onStateChangeEvent != null) onStateChangeEvent();
             }
+
         }
         public void Stop()
         {
@@ -287,13 +289,13 @@ namespace VanyaGame.Media
             //base.LoadMediaFilesFromDir(Dir, "mkv");
             base.LoadMediaFilesFromDir(Dir);
         }
-        public void ShowVideoPlayer()
+        public virtual void ShowVideoPlayer()
         {
-            TDrawEffects.BlurShow(this.player.Body, 0.5);
+            player.Show();
         }
-        public void HideVideoPlayer()
+        public virtual void HideVideoPlayer()
         {
-            TDrawEffects.BlurHide(this.player.Body, 0.5);
+            player.Hide();
         }
 
         public void PlayBtnClick()
