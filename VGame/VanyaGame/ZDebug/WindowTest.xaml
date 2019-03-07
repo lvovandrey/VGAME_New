@@ -28,6 +28,7 @@
         <Button Content="Play2" HorizontalAlignment="Left" Margin="707,422,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click2"/>
         <Button  Content="Hide" HorizontalAlignment="Left" Margin="617,240,0,0" VerticalAlignment="Top" Width="75" Height="19" Click="Button_Click_1"/>
         <Button  Content="Show" HorizontalAlignment="Left" Margin="617,264,0,0" VerticalAlignment="Top" Width="75" Height="19" Click="Button_Click_2" />
+        <Button Content="Play3" HorizontalAlignment="Left" Margin="617,466,0,0" VerticalAlignment="Top" Width="75"  Height="20" Click="Button_Click_4"/>
 
 
     </Grid>
