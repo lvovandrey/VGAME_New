@@ -358,10 +358,11 @@ namespace VanyaGame
                     foreach (XmlNode childnode in xnode.ChildNodes)
                         switch (childnode.Name)
                         {
-                            case "description": Level.Sets.Description = childnode.InnerText; break;
-                            case "name"       : Level.Sets.Name = childnode.InnerText; break;
-                            case "preview"    : Level.Sets.PreviewType = childnode.InnerText; break;
-                            case "background" : Level.Sets.BackgroundType = childnode.InnerText; break;
+                            case "description"      : Level.Sets.Description = childnode.InnerText; break;
+                            case "name"             : Level.Sets.Name = childnode.InnerText; break;
+                            case "preview"          : Level.Sets.PreviewType = childnode.InnerText; break;
+                            case "background"       : Level.Sets.BackgroundType = childnode.InnerText; break;
+                            case "basevideofilename": Level.Sets.BaseVideoFilename = childnode.InnerText; break;
                         }
 
 

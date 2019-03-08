@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
+using System.Windows.Media.Imaging;
 using VanyaGame.Struct;
 
 namespace VanyaGame.PrevMenuNS
@@ -19,17 +20,32 @@ namespace VanyaGame.PrevMenuNS
         {
             InitializeComponent();
         }
+
+
+
         public PrevMenuItem(string ImgFilename) : this()
         {
-            System.Drawing.Bitmap myBitmap = new System.Drawing.Bitmap(@ImgFilename);
-            Img.Source = Imaging.CreateBitmapSourceFromBitmap(myBitmap);
-            filename = ImgFilename;
+            LoadImage(ImgFilename);
         }
-        public PrevMenuItem(string ImgFilename, Level level) : this(ImgFilename)
+        public PrevMenuItem(string ImgFilename,string ImgType) : this()
+        {
+            if (ImgType == "youtube")
+                Img.Source = new BitmapImage(new Uri(@ImgFilename));
+            else
+                LoadImage(ImgFilename);
+        }
+        public PrevMenuItem(string ImgFilename, Level level, string imgType) : this(ImgFilename,imgType)
         {
             Level = level;
             Text.Text = level.Sets.Description;
             TextToolTip.Text = level.Sets.Description;
+        }
+
+        private void LoadImage(string ImgFilename)
+        {
+            System.Drawing.Bitmap myBitmap = new System.Drawing.Bitmap(@ImgFilename);
+            Img.Source = Imaging.CreateBitmapSourceFromBitmap(myBitmap);
+            filename = ImgFilename;
         }
 
         private void Img_MouseDown(object sender, MouseButtonEventArgs e)

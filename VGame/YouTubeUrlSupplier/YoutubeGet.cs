@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,6 +51,16 @@ namespace YouTubeUrlSupplier
         public static string GetResolution(string url)
         {
             return "";
+        }
+
+        /// <summary>
+        /// Return direct url to image video from Youtube
+        /// </summary>
+        /// <param name="url">Link (string) from Youtube, like "https://www.youtube.com/watch?v=ХХХХХХХХХ" or embed version</param>
+        /// <returns>Direct link to image</returns>
+        public static string GetImage(string url)
+        {
+            return string.Format(CultureInfo.InvariantCulture, "http://i3.ytimg.com/vi/{0}/hqdefault.jpg", YouTubeDownloader.GetVideoIdFromUrl(url));
         }
 
 

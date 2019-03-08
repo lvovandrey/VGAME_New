@@ -266,8 +266,21 @@ namespace VanyaGame
                 foreach (Level Level in Game.Levels)
                 {
                     Level.GetComponent<Loader>().LoadSets();
-                    string filename = Game.Sets.MainDir + Level.Sets.Directory + Level.Sets.InterfaceDir + @"\preview.jpg";
-                    PrevMenuNS.PrevMenuItem NewItem = new PrevMenuNS.PrevMenuItem(filename, Level);
+                    string filename = Game.Sets.MainDir + @"\default.jpg";
+                    if (Level.Sets.PreviewType == "local")
+                        filename = Game.Sets.MainDir + Level.Sets.Directory + Level.Sets.InterfaceDir + @"\preview.jpg";
+
+                    if (Level.Sets.PreviewType == "youtube")
+                    {
+                        try { filename = YouTubeUrlSupplier.YoutubeGet.GetImage(Level.Sets.BaseVideoFilename); }
+                        catch { filename = Game.Sets.MainDir + @"\default.jpg"; Level.Sets.PreviewType = "local"; }
+                    }
+
+                    PrevMenuItem NewItem = new PrevMenuNS.PrevMenuItem(filename, Level, Level.Sets.PreviewType);
+
+                    //filename = @"https://static.tildacdn.com/tild3962-3039-4264-b037-646235363430/ES2018_900615_2.jpg";
+                    //NewItem.Img.Source = new BitmapImage( new Uri(@filename));
+
                     Owner.PreviewMenu.AddItem(NewItem, ItemClick);
                 }
             }, TimeSpan.FromSeconds(1.5));
