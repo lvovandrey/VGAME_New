@@ -123,6 +123,17 @@
                     </Slider.Effect>
                 </Slider>
 
+                <Label Visibility="Hidden" Content="Ждите..." Grid.Row="2" Grid.Column="2" x:Name="LabelWait" HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" FontSize="36" Panel.ZIndex="1000" MinWidth="3"  >
+                    <Label.Foreground>
+                        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                            <GradientStop Color="White" Offset="1"/>
+                            <GradientStop Color="WhiteSmoke" Offset="0.009"/>
+                            <GradientStop Color="#FFFEFEFE" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Label.Foreground>
+                </Label>
+
                 <Slider Cursor="{DynamicResource PushCursor}" Grid.Row="2" Grid.Column="2" x:Name="VideoTimeSlider"
             	Value="{Binding timeInSec, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
             	Style="{DynamicResource SliderStyle_Video}"
@@ -178,6 +189,26 @@
                         <DropShadowEffect x:Name="DropShadowNext" BlurRadius="15" ShadowDepth="2" Color="#9A000000"/>
                     </Image.Effect>
                 </Image>
+
+                <TextBlock Name="TextVideoDescription" Grid.Row="0" Grid.Column="2" Visibility="{Binding ElementName=VideoTimeSlider, Path=Visibility}" 
+                           Opacity="{Binding ElementName=VideoTimeSlider,Path=Opacity}" VerticalAlignment="Top" Height="50"
+                    Text="Текст по умолчанию длинный очень очень длинный длинный длинный длинный длинный длинный длинный длинный длинный длинный длинный" FontFamily="Arial"
+                           FontSize="18" Margin="200,28,0,0"  TextWrapping="Wrap" TextTrimming="CharacterEllipsis">
+                    <TextBlock.Foreground>
+                        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                            <GradientStop Color="White" Offset="1"/>
+                            <GradientStop Color="WhiteSmoke" Offset="0.009"/>
+                            <GradientStop Color="#FFFEFEFE" Offset="1"/>
+                        </LinearGradientBrush>
+                    </TextBlock.Foreground>
+                    <TextBlock.ToolTip>
+                        <ToolTip>
+                            <TextBlock Name="TextToolTip" Text="Подсказка" FontSize="12"></TextBlock>
+                        </ToolTip>
+                    </TextBlock.ToolTip>
+                </TextBlock>
+
+
                 <Button Content="MediaElement" HorizontalAlignment="Left" Margin="0,310,0,0" Grid.Row="1" VerticalAlignment="Top" Width="200" Click="Button_Click" Grid.ColumnSpan="2" Height="35"/>
                 <Label x:Name="L1" Content="Label" HorizontalAlignment="Left" Margin="10,282,0,0" Grid.Row="1" VerticalAlignment="Top" Width="218" Grid.ColumnSpan="3"/>
 

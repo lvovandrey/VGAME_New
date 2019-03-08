@@ -301,6 +301,7 @@ namespace VanyaGame
         public string VideoPlayer;
         public string InterfaceDir;
         public string InterfaceDirCurVersion;
+        public string DefaultVideo = @"\default.wmv";
 
         public int LevelsCount; //Количество уровней
         public TGameSets(string _MainDir = @"\VanjaGame"):base()
