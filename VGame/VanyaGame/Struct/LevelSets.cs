@@ -36,5 +36,10 @@ namespace VanyaGame.Struct
         {
             Level = level;
         }
+
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string PreviewType { get; set; }
+        public string BackgroundType { get; set; }
     }
 }

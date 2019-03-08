@@ -265,6 +265,7 @@ namespace VanyaGame
                 });
                 foreach (Level Level in Game.Levels)
                 {
+                    Level.GetComponent<Loader>().LoadSets();
                     string filename = Game.Sets.MainDir + Level.Sets.Directory + Level.Sets.InterfaceDir + @"\preview.jpg";
                     PrevMenuNS.PrevMenuItem NewItem = new PrevMenuNS.PrevMenuItem(filename, Level);
                     Owner.PreviewMenu.AddItem(NewItem, ItemClick);

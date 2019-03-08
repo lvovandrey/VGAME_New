@@ -28,6 +28,8 @@ namespace VanyaGame.PrevMenuNS
         public PrevMenuItem(string ImgFilename, Level level) : this(ImgFilename)
         {
             Level = level;
+            Text.Text = level.Sets.Description;
+            TextToolTip.Text = level.Sets.Description;
         }
 
         private void Img_MouseDown(object sender, MouseButtonEventArgs e)

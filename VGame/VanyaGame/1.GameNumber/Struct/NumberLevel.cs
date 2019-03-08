@@ -45,6 +45,7 @@ namespace VanyaGame.GameNumber.Struct
         /// </summary>
         private void CreateEmptyScenes()
         {
+            Scenes.Clear();
             string filenameXML = Game.Sets.MainDir + this.Sets.Directory + @"\LevelSets.xml";
 
             string dir = Game.Sets.MainDir + this.Sets.Directory + @"\";
