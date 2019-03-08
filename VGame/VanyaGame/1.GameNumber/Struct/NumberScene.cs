@@ -183,6 +183,8 @@ namespace VanyaGame.GameNumber.Struct
                 case VideoType.youtube: Game.VideoPlayerSet(Game.VideoVlc); break;
             }
 
+            Game.Owner.TextVideoDescription.Text = Level.Sets.Description;
+
             Game.CurVideo.ShowVideoPlayer();
             Game.Music.MediaGUI.UIMediaHide();
             Game.Owner.LabelWait.Visibility = System.Windows.Visibility.Visible;
@@ -213,6 +215,7 @@ namespace VanyaGame.GameNumber.Struct
                     Game.CurVideo.HideVideoPlayer();
                     Game.CurVideo.MediaGUI.UIMediaHide();
                     Game.Owner.LabelWait.Visibility = System.Windows.Visibility.Hidden;
+                    Game.Owner.TextVideoDescription.Text = "Ничего...";
                 };
             }, TimeSpan.FromSeconds(1.3));
 

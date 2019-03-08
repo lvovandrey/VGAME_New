@@ -50,7 +50,7 @@
                 <MediaElement x:Name="MediaElementMusic" HorizontalAlignment="Left" Height="38" Margin="359,519,0,0" VerticalAlignment="Top" Width="41" LoadedBehavior="Manual" MediaEnded="MediaElementMusic_MediaEnded" Volume="0.1"/>
                 <Grid x:Name="GridVideo" VerticalAlignment="Stretch"  HorizontalAlignment="Stretch" >
                     <Label x:Name="Label1" 
-                           Content="Нажмите Esc для выхода из игры&#xA;Нажмите Q для перехода к следующему заданию&#xA;Нажмите R для перехода к следующему уровню&#xA;Нажмите F для пропуска видео" 
+                           Content="Нажмите Esc для выхода из игры&#xA;Нажмите F для пропуска видео" 
                            Visibility="Visible" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FFFF0909" Panel.ZIndex="2" Opacity="0.5">
                         <Label.Effect>
                             <DropShadowEffect Color="#FFB9FF00" BlurRadius="1" ShadowDepth="1"/>
@@ -191,9 +191,9 @@
                 </Image>
 
                 <TextBlock Name="TextVideoDescription" Grid.Row="0" Grid.Column="2" Visibility="{Binding ElementName=VideoTimeSlider, Path=Visibility}" 
-                           Opacity="{Binding ElementName=VideoTimeSlider,Path=Opacity}" VerticalAlignment="Top" Height="50"
+                           Opacity="{Binding ElementName=VideoTimeSlider,Path=Opacity}" VerticalAlignment="Top" Height="51"
                     Text="Текст по умолчанию длинный очень очень длинный длинный длинный длинный длинный длинный длинный длинный длинный длинный длинный" FontFamily="Arial"
-                           FontSize="18" Margin="200,28,0,0"  TextWrapping="Wrap" TextTrimming="CharacterEllipsis">
+                           FontSize="22" Margin="200,23,200,0"  TextWrapping="Wrap" TextTrimming="CharacterEllipsis" TextAlignment="Center">
                     <TextBlock.Foreground>
                         <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                             <GradientStop Color="White" Offset="1"/>
@@ -207,6 +207,7 @@
                         </ToolTip>
                     </TextBlock.ToolTip>
                 </TextBlock>
+                
 
 
                 <Button Content="MediaElement" HorizontalAlignment="Left" Margin="0,310,0,0" Grid.Row="1" VerticalAlignment="Top" Width="200" Click="Button_Click" Grid.ColumnSpan="2" Height="35"/>

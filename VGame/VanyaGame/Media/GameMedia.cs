@@ -101,7 +101,7 @@ namespace VanyaGame.Media
                         {
                             string s = YouTubeUrlSupplier.YoutubeGet.GetVideoDirectURL(@MediaName);
                             if (s != null)
-                                S = YouTubeUrlSupplier.YoutubeGet.GetVideoDirectURL(@MediaName);
+                                S = s;
                             else throw new Exception();
                             break;
                         }
