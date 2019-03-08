@@ -359,10 +359,10 @@ namespace VanyaGame
                 // обходим все дочерние узлы элемента user
                 foreach (XmlNode childnode in xnode.ChildNodes)
                 {
-                    Scenes[i].Sets.GetComponent<InnerVideoSets>().VideoFileType = VideoType.unknown;
-                    Scenes[i].Sets.GetComponent<InnerVideoSets>().VideoFileName = "";
-                    Scenes[i].Sets.GetComponent<InnerVideoSets>().VideoTimeBegin = TimeSpan.FromMilliseconds(0);
-                    Scenes[i].Sets.GetComponent<InnerVideoSets>().VideoTimeEnd = TimeSpan.FromMilliseconds(0);
+                    //Scenes[i].Sets.GetComponent<InnerVideoSets>().VideoFileType = VideoType.unknown;
+                    //Scenes[i].Sets.GetComponent<InnerVideoSets>().VideoFileName = "";
+                    //Scenes[i].Sets.GetComponent<InnerVideoSets>().VideoTimeBegin = TimeSpan.FromMilliseconds(0);
+                    //Scenes[i].Sets.GetComponent<InnerVideoSets>().VideoTimeEnd = TimeSpan.FromMilliseconds(0);
 
                     if (Scenes.Count >= (i+1))
                     {
