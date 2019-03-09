@@ -277,10 +277,6 @@ namespace VanyaGame
                     }
 
                     PrevMenuItem NewItem = new PrevMenuNS.PrevMenuItem(filename, Level, Level.Sets.PreviewType);
-
-                    //filename = @"https://static.tildacdn.com/tild3962-3039-4264-b037-646235363430/ES2018_900615_2.jpg";
-                    //NewItem.Img.Source = new BitmapImage( new Uri(@filename));
-
                     Owner.PreviewMenu.AddItem(NewItem, ItemClick);
                 }
             }, TimeSpan.FromSeconds(1.5));

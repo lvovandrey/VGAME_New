@@ -29,7 +29,7 @@ namespace VanyaGame.GameNumber.Interface
 
         private void Img_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            this.Img.Source = new BitmapImage(new Uri("pack://application:,,,/1.GameNumber/Images/btn_start3.png"));
+            this.Img.Source = new BitmapImage(new Uri("pack://application:,,,/1.GameNumber/Images/btn_start2.png"));
             var uri = new Uri("pack://application:,,,/1.GameNumber/Images/HandPushDown.cur");
             var stream = Application.GetResourceStream(uri).Stream;
             var cursor = new Cursor(stream);
@@ -59,6 +59,7 @@ namespace VanyaGame.GameNumber.Interface
             Storyboard s = (Storyboard)TryFindResource("AnimationHide");
             s.Begin();  // Start animation}
         }
+
 
         private void Img_MouseEnter(object sender, MouseEventArgs e)
         {
