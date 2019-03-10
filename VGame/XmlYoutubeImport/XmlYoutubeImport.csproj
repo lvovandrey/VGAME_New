@@ -104,7 +104,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ApplicationViewModel.cs" />
     <Compile Include="Command.cs" />
+    <Compile Include="Model\SceneData.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\SceneDataVM.cs" />
+    <Compile Include="Model\VideoData.cs" />
+    <Compile Include="ViewModel\VideoDataVM.cs" />
     <Compile Include="Test.cs" />
     <Compile Include="VideoPartsControl.xaml.cs">
       <DependentUpon>VideoPartsControl.xaml</DependentUpon>
@@ -170,5 +176,6 @@
   <ItemGroup>
     <Content Include="resourses\default.wmv" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
