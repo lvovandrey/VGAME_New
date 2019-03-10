@@ -17,7 +17,7 @@
                         <Image Width="100" Height="75" Source="{Binding Path=ImagePath}" />
                         <TextBlock FontSize="16" Text="{Binding Path=Title}" HorizontalAlignment="Center" />
                         <TextBlock FontSize="16" Text="{Binding Path=TimeBegin}" HorizontalAlignment="Center" />
-                        <TextBlock FontSize="16" Text="{Binding Path=TimeEnd}" HorizontalAlignment="Center" />
+                        <TextBlock FontSize="16" Text="{Binding  Path=TimeEnd}" HorizontalAlignment="Center" />
 
                     </StackPanel>
                 </DataTemplate>

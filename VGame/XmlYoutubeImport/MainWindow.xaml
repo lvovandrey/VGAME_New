@@ -25,9 +25,12 @@
                     </Grid.RowDefinitions>
                         <local:VideoPlayer/>
                     <local:VideoPartsControl x:Name="list" Grid.Column="1" Grid.RowSpan="3" />
-                    <TextBox Name="texxx" Height="23" Grid.Column="2" TextWrapping="Wrap" Text="{Binding ElementName=list, Path=TEST.Begin, UpdateSourceTrigger=PropertyChanged}" Width="120" Margin="11,10,130,148"/>
-                    <TextBox Name="texxx2" Height="23" Grid.Column="2" TextWrapping="Wrap" Text="{Binding ElementName=list, Path=TEST.End, UpdateSourceTrigger=PropertyChanged}" Width="120" Margin="11,10,130,148"/>
-                    <TextBox Name="texxx3" Height="23" Grid.Column="2" TextWrapping="Wrap" Text="{Binding ElementName=list, Path=TEST.End, UpdateSourceTrigger=PropertyChanged}" Width="120" Margin="11,10,130,148"/>
+                    
+                    
+                    
+                    <TextBox Name="TimeBegin" Height="23" Grid.Column="2" TextWrapping="Wrap" Text="{Binding ElementName=list, Path=TEST.Begin, UpdateSourceTrigger=PropertyChanged}" Width="120" Margin="11,10,130,148" Background="#FFF07979"/>
+                    <TextBox Name="TimeEnd" Height="23" Grid.Column="2" TextWrapping="Wrap" Text="{Binding ElementName=list, Path=TEST.End, UpdateSourceTrigger=PropertyChanged}" Width="120" Margin="37,49,156,108" Background="#FFE46E6E" RenderTransformOrigin="0.467,-1.261"/>
+                    <TextBox Name="ID" Height="23" Grid.Column="2" TextWrapping="Wrap" Text="{Binding  Path=SelectedSceneData.Num, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="120" Margin="37,90,156,67" Background="#FFF17979"/>
 
 
                 </Grid>

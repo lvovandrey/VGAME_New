@@ -56,9 +56,11 @@ namespace XmlYoutubeImport
             InitializeComponent();
             TEST = new SceneData { Begin = TimeSpan.FromSeconds(10) };
 
+            DataContext = Global.VideoData;
+
             SceneVideos = new ObservableCollection<SceneVideo>
         {
-            new SceneVideo() {ImagePath= @"C:\vlctmp.png", Id = 1, TimeEnd = TimeSpan.FromSeconds(123) },
+            new SceneVideo() {ImagePath= @"C:\vlctmp.png", Id = 1, TimeEnd = TimeSpan.FromSeconds(123) , TimeBegin = TimeSpan.FromSeconds(1443)},
             new SceneVideo(),
             new SceneVideo(),
             new SceneVideo()
@@ -72,8 +74,10 @@ namespace XmlYoutubeImport
         {
             SceneVideo p = (SceneVideo)phonesList.SelectedItem;
 
-           // Global.VideoData.selectedSceneData.Begin = p.TimeEnd;
-            TEST.Begin = p.TimeEnd;
+            // Global.VideoData.selectedSceneData.Begin = p.TimeEnd;
+            Global.VideoData.SelectedSceneData.End = p.TimeEnd;
+            Global.VideoData.SelectedSceneData.Begin = p.TimeBegin;
+            Global.VideoData.SelectedSceneData.Num = p.Id;
         }
     }
 }
