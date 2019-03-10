@@ -9,21 +9,21 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="200" >
     <Grid >
-        <!--<ListBox Background="BlueViolet" x:Name="phonesList" --><!--SelectionChanged="phonesList_SelectionChanged"--><!-->
+        <ListBox Background="BlueViolet" x:Name="phonesList" ItemsSource="{Binding SceneDatas, UpdateSourceTrigger=PropertyChanged}" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="5">
                         
-                        <Image Width="100" Height="75" Source="{Binding Path=ImagePath}" />
-                        <TextBlock FontSize="16" Text="{Binding Path=Title}" HorizontalAlignment="Center" />
-                        <TextBlock FontSize="16" Text="{Binding Path=TimeBegin}" HorizontalAlignment="Center" />
-                        <TextBlock FontSize="16" Text="{Binding  Path=TimeEnd}" HorizontalAlignment="Center" />
+                        <!--<Image Width="100" Height="75" Source="{Binding Path=ImagePath}" />-->
+                        <TextBlock FontSize="16"  Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" />
+                        <!--<TextBlock FontSize="16" Text="{Binding Path=TimeBegin}" HorizontalAlignment="Center" />
+                        <TextBlock FontSize="16" Text="{Binding  Path=TimeEnd}" HorizontalAlignment="Center" />-->
 
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-           
-            --><!--<ListBoxItem>
+ 
+        <!--<ListBoxItem>
                 <StackPanel Margin="5">
                     <TextBlock FontSize="16" Text="Заголовок" HorizontalAlignment="Center" />
                     <Image Name="Img" Width="100" Height="75" Source="C:\vlctmp.png" />
@@ -32,13 +32,14 @@
 
                 </StackPanel>
             </ListBoxItem>-->
-            <!--<ListBoxItem>
+        </ListBox>
+        <!--<ListBoxItem>
                 <StackPanel Margin="5">
                     <Image Width="100" Height="75" Source="/ico/icon.png" />
                     <TextBlock FontSize="16" Text="Заголовок" HorizontalAlignment="Center" />
                     <TextBlock FontSize="16" Text="Компания" HorizontalAlignment="Center" />
                 </StackPanel>
-            </ListBoxItem>--><!--
-        </ListBox>-->
+            </ListBoxItem>-->
+        
     </Grid>
 </UserControl>

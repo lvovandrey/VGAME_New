@@ -18,14 +18,7 @@ using System.Windows.Shapes;
 namespace XmlYoutubeImport
 {
 
-    public class SceneVideo
-        {
-            public int Id { get; set; }
-            public TimeSpan TimeBegin { get; set; } // производитель
-            public TimeSpan TimeEnd { get; set; }
-            public string ImagePath { get; set; }// путь к изображению скриншота
 
-    }
     /// <summary>
     /// Логика взаимодействия для VideoPartsControl.xaml
     /// </summary>

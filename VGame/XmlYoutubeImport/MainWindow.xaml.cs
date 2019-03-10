@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using XmlYoutubeImport.Model;
+using XmlYoutubeImport.ViewModel;
 
 namespace XmlYoutubeImport
 {
@@ -37,6 +39,12 @@ namespace XmlYoutubeImport
         {
 
             InitializeComponent();
+            //List<VideoData> videoDatas = new List<VideoData>();
+            //videoDatas.Add(new VideoData() {Title="Заголовок1" });
+            //videoDatas.Add(new VideoData() { Title = "Заголовок2" });
+            //videoDatas.Add(new VideoData() { Title = "Заголовок3" });
+
+          //  MainViewModel M = new MainViewModel();
 
             //Global.VideoData = new VideoDataContext();
             //DataContext = Global.VideoData;

@@ -13,40 +13,40 @@ namespace XmlYoutubeImport.ViewModel
 
     public class SceneDataVM : INotifyPropertyChanged
     {
-        //private SceneData sceneData;
+        private SceneData sceneData;
 
-        //private TimeSpan begin;
-        //public TimeSpan Begin
-        //{
-        //    get { return begin; }
-        //    set
-        //    {
-        //        begin = value;
-        //        OnPropertyChanged("Begin");
-        //    }
-        //}
+        private TimeSpan begin;
+        public TimeSpan Begin
+        {
+            get { return begin; }
+            set
+            {
+                begin = value;
+                OnPropertyChanged("Begin");
+            }
+        }
 
-        //private TimeSpan end;
-        //public TimeSpan End
-        //{
-        //    get { return end; }
-        //    set
-        //    {
-        //        end = value;
-        //        OnPropertyChanged("End");
-        //    }
-        //}
+        private TimeSpan end;
+        public TimeSpan End
+        {
+            get { return end; }
+            set
+            {
+                end = value;
+                OnPropertyChanged("End");
+            }
+        }
 
-        //int num;
-        //public int Num
-        //{
-        //    get { return num; }
-        //    set
-        //    {
-        //        num = value;
-        //        OnPropertyChanged("Num");
-        //    }
-        //}
+        int num;
+        public int Num
+        {
+            get { return num; }
+            set
+            {
+                num = value;
+                OnPropertyChanged("Num");
+            }
+        }
         #region mvvm
         public event PropertyChangedEventHandler PropertyChanged;
 

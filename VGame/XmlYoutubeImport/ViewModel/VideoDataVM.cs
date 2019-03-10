@@ -15,32 +15,32 @@ namespace XmlYoutubeImport.ViewModel
         public VideoDataVM(VideoData _videoData)
         { videoData = _videoData; }
 
-        //private ObservableCollection<SceneDataVM> sceneDatas;
-        //public ObservableCollection<SceneDataVM> SceneDatas
-        //{
-        //    get { return sceneDatas; }
-        //    set
-        //    {
-        //        sceneDatas = value;
-        //        OnPropertyChanged("SceneDatas");
-        //    }
-        //}
+        private ObservableCollection<SceneDataVM> sceneDatas;
+        public ObservableCollection<SceneDataVM> SceneDatas
+        {
+            get { return sceneDatas; }
+            set
+            {
+                sceneDatas = value;
+                OnPropertyChanged("SceneDatas");
+            }
+        }
 
 
-        //public SceneDataVM selectedSceneData;
-        //public SceneDataVM SelectedSceneData
-        //{
-        //    get { return selectedSceneData; }
-        //    set
-        //    {
-        //        selectedSceneData = value;
-        //        OnPropertyChanged("SelectedSceneData");
-        //    }
-        //}
+        public SceneDataVM selectedSceneData;
+        public SceneDataVM SelectedSceneData
+        {
+            get { return selectedSceneData; }
+            set
+            {
+                selectedSceneData = value;
+                OnPropertyChanged("SelectedSceneData");
+            }
+        }
 
         public string Title
         {
-            get { return videoData.Title; }
+            get { return  videoData.Title; }
             set
             {
                 videoData.Title = value;
