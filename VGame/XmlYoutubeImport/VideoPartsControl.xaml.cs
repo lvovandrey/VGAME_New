@@ -39,45 +39,45 @@ namespace XmlYoutubeImport
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private SceneData test;
-        public SceneData TEST
-        {
-            get { return test; }
-            set
-            {
-                test = value;
-                OnPropertyChanged("test");
-            }
-        }
+        //private SceneData test;
+        //public SceneData TEST
+        //{
+        //    get { return test; }
+        //    set
+        //    {
+        //        test = value;
+        //        OnPropertyChanged("test");
+        //    }
+        //}
 
 
         public VideoPartsControl()
         {
             InitializeComponent();
-            TEST = new SceneData { Begin = TimeSpan.FromSeconds(10) };
+        //    TEST = new SceneData { Begin = TimeSpan.FromSeconds(10) };
 
-            DataContext = Global.VideoData;
+        //    DataContext = Global.VideoData;
 
-            SceneVideos = new ObservableCollection<SceneVideo>
-        {
-            new SceneVideo() {ImagePath= @"C:\vlctmp.png", Id = 1, TimeEnd = TimeSpan.FromSeconds(123) , TimeBegin = TimeSpan.FromSeconds(1443)},
-            new SceneVideo(),
-            new SceneVideo(),
-            new SceneVideo()
-        };
-            phonesList.ItemsSource = SceneVideos;
-        }
+        //    SceneVideos = new ObservableCollection<SceneVideo>
+        //{
+        //    new SceneVideo() {ImagePath= @"C:\vlctmp.png", Id = 1, TimeEnd = TimeSpan.FromSeconds(123) , TimeBegin = TimeSpan.FromSeconds(1443)},
+        //    new SceneVideo(),
+        //    new SceneVideo(),
+        //    new SceneVideo()
+        //};
+        //    phonesList.ItemsSource = SceneVideos;
+        //}
 
-        public ObservableCollection<SceneVideo> SceneVideos { get; set; }
+        //public ObservableCollection<SceneVideo> SceneVideos { get; set; }
 
-        private void phonesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            SceneVideo p = (SceneVideo)phonesList.SelectedItem;
+         void phonesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+            { }
+        //    SceneVideo p = (SceneVideo)phonesList.SelectedItem;
 
-            // Global.VideoData.selectedSceneData.Begin = p.TimeEnd;
-            Global.VideoData.SelectedSceneData.End = p.TimeEnd;
-            Global.VideoData.SelectedSceneData.Begin = p.TimeBegin;
-            Global.VideoData.SelectedSceneData.Num = p.Id;
+        //    // Global.VideoData.selectedSceneData.Begin = p.TimeEnd;
+        //    Global.VideoData.SelectedSceneData.End = p.TimeEnd;
+        //    Global.VideoData.SelectedSceneData.Begin = p.TimeBegin;
+        //    Global.VideoData.SelectedSceneData.Num = p.Id;
         }
     }
 }

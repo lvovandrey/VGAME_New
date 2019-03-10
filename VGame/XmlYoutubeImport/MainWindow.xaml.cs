@@ -23,7 +23,7 @@ namespace XmlYoutubeImport
 
     public static class Global
     {
-        public static VideoDataContext VideoData;
+    //    public static VideoDataContext VideoData;
     }
 
     /// <summary>
@@ -38,11 +38,11 @@ namespace XmlYoutubeImport
 
             InitializeComponent();
 
-            Global.VideoData = new VideoDataContext();
-            DataContext = Global.VideoData;
+            //Global.VideoData = new VideoDataContext();
+            //DataContext = Global.VideoData;
 
-            Global.VideoData.Title = "Пустой заголовок";
-            Global.VideoData.SelectedSceneData = new SceneData();
+            //Global.VideoData.Title = "Пустой заголовок";
+            //Global.VideoData.SelectedSceneData = new SceneData();
 
 
         }

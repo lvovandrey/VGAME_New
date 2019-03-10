@@ -5,12 +5,21 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using XmlYoutubeImport.Model;
 
 namespace XmlYoutubeImport.ViewModel
 {
-    class MainViewModel:INotifyPropertyChanged
+    public class MainViewModel : INotifyPropertyChanged
     {
-        ObservableCollection<VideoDataVM> VideoDataList { get; set; }
+        public ObservableCollection<VideoDataVM> VideoDataList { get; set; }
+
+        public MainViewModel()
+        { }
+        public MainViewModel(List<VideoData> videoDatas)
+        {
+            VideoDataList = new ObservableCollection<VideoDataVM>(videoDatas.Select(vd => new VideoDataVM(vd)));
+        }
+
         #region mvvm
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="200" >
     <Grid >
-        <ListBox Background="BlueViolet" x:Name="phonesList" SelectionChanged="phonesList_SelectionChanged">
+        <!--<ListBox Background="BlueViolet" x:Name="phonesList" --><!--SelectionChanged="phonesList_SelectionChanged"--><!-->
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="5">
@@ -23,7 +23,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
            
-            <!--<ListBoxItem>
+            --><!--<ListBoxItem>
                 <StackPanel Margin="5">
                     <TextBlock FontSize="16" Text="Заголовок" HorizontalAlignment="Center" />
                     <Image Name="Img" Width="100" Height="75" Source="C:\vlctmp.png" />
@@ -38,7 +38,7 @@
                     <TextBlock FontSize="16" Text="Заголовок" HorizontalAlignment="Center" />
                     <TextBlock FontSize="16" Text="Компания" HorizontalAlignment="Center" />
                 </StackPanel>
-            </ListBoxItem>-->
-        </ListBox>
+            </ListBoxItem>--><!--
+        </ListBox>-->
     </Grid>
 </UserControl>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,9 @@ using XmlYoutubeImport.Model;
 
 namespace XmlYoutubeImport.ViewModel
 {
-    public class SceneDataVM //: INotifyPropertyChanged
+
+
+    public class SceneDataVM : INotifyPropertyChanged
     {
         //private SceneData sceneData;
 
@@ -44,14 +47,14 @@ namespace XmlYoutubeImport.ViewModel
         //        OnPropertyChanged("Num");
         //    }
         //}
-        //#region mvvm
-        //public event PropertyChangedEventHandler PropertyChanged;
+        #region mvvm
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        //protected virtual void OnPropertyChanged(string propertyName)
-        //{
-        //    PropertyChangedEventHandler handler = PropertyChanged;
-        //    if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        //}
-        //#endregion
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
     }
 }
