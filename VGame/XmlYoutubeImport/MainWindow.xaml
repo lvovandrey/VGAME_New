@@ -4,9 +4,39 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:XmlYoutubeImport"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:osb="clr-namespace:Xceed.Wpf.Toolkit.Obselete;assembly=WPFToolkit.Extended"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="800">
+
     <Grid>
-        
+        <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+            <TabItem Header="Сплиттер">
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                        <local:VideoPlayer/>
+                    <local:VideoPartsControl x:Name="list" Grid.Column="1" Grid.RowSpan="3" />
+                    <TextBox Name="texxx" Height="23" Grid.Column="2" TextWrapping="Wrap" Text="{Binding ElementName=list, Path=TEST.Begin, UpdateSourceTrigger=PropertyChanged}" Width="120" Margin="11,10,130,148"/>
+                    <TextBox Name="texxx2" Height="23" Grid.Column="2" TextWrapping="Wrap" Text="{Binding ElementName=list, Path=TEST.End, UpdateSourceTrigger=PropertyChanged}" Width="120" Margin="11,10,130,148"/>
+                    <TextBox Name="texxx3" Height="23" Grid.Column="2" TextWrapping="Wrap" Text="{Binding ElementName=list, Path=TEST.End, UpdateSourceTrigger=PropertyChanged}" Width="120" Margin="11,10,130,148"/>
+
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Браузер">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+
+        </TabControl>
+
     </Grid>
 </Window>
