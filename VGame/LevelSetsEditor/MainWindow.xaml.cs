@@ -24,10 +24,8 @@ namespace LevelSetsEditor
         public MainWindow()
         {
             InitializeComponent();
-            LevelSetVM levelSet = new LevelSetVM(new Model.LevelSet() {
-                Name = nameof(levelSet.Name)
-            });
-            DataContext = levelSet;
+
+           // DataContext = levelSet;
 
         }
     }

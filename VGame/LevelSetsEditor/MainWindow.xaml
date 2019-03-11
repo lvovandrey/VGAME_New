@@ -7,19 +7,35 @@
         xmlns:vm ="clr-namespace:LevelSetsEditor.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" >
-    <!--<Window.DataContext>
-        <vm:>
-    </Window.DataContext>-->
+    <Window.DataContext>
+        <vm:LevelSetVM/>
+    </Window.DataContext>
     <Grid>
-        <ListBox ItemsSource="{Binding Test, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" 
+        <ListBox ItemsSource="{Binding SceneSets, UpdateSourceTrigger=PropertyChanged}" 
+                 SelectedItem ="{Binding SelectedSceneSetVM }" 
+                HorizontalAlignment="Left" 
                  Height="403" Margin="10,10,0,0" VerticalAlignment="Top" Width="219">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Label Content="{Binding }"></Label>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="{Binding UnitsCount, UpdateSourceTrigger=PropertyChanged}"></Label>
+                        <Label Content="{Binding VideoSegment.TimeBegin, UpdateSourceTrigger=PropertyChanged}"></Label>
+                        <Label Content="{Binding VideoSegment.TimeEnd, UpdateSourceTrigger=PropertyChanged}"></Label>
+                        <Label Content="{Binding VideoSegment.Source, UpdateSourceTrigger=PropertyChanged}"></Label>
+                    </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
         <Label Content="{Binding Name}" HorizontalAlignment="Left" Margin="267,22,0,0" VerticalAlignment="Top"/>
+        <GroupBox Header="Выбранный элемент" HorizontalAlignment="Left" Height="201" Margin="380,22,0,0" VerticalAlignment="Top" Width="223"
+                  DataContext="{Binding SelectedSceneSetVM}">
+            <StackPanel Orientation="Vertical"   >
+                <TextBox Text="{Binding UnitsCount}"></TextBox>
+                <TextBox Text="{Binding VideoSegment.TimeBegin}"></TextBox>
+                <TextBox Text="{Binding VideoSegment.TimeEnd}"></TextBox>
+                <TextBox Text="{Binding VideoSegment.Source}"></TextBox>
+            </StackPanel>
+        </GroupBox>
 
     </Grid>
 </Window>

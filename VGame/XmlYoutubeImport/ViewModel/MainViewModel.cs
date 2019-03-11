@@ -13,10 +13,10 @@ namespace XmlYoutubeImport.ViewModel
     {
         public VideoDataVM VideoData
         {
-            get { return V; }
+            get { return null; }
             set
             {
-                title = value;
+                title = "123";
                 OnPropertyChanged("Title");
             }
         }

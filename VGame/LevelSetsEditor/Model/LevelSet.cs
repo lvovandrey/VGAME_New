@@ -23,17 +23,7 @@ namespace LevelSetsEditor.Model
 			}
 		}
 
-		public ObservableCollection<SceneSet> SceneSets
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-			set
-			{
-				throw new NotImplementedException();
-			}
-		}
+		public List<SceneSet> SceneSets { get; set; }
 
         public string Name { get; set; }
 
