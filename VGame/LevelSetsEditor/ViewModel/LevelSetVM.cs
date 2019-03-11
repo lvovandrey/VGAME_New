@@ -34,6 +34,7 @@ namespace LevelSetsEditor.ViewModel
                 });
                 SceneSets.Add(sceneSetVM);
             }
+            VideoInfo
         }
 
 
@@ -58,6 +59,16 @@ namespace LevelSetsEditor.ViewModel
         public string Name
         {
             get { return LevelSet.Name; }
+            set
+            {
+                LevelSet.Name = value;
+                OnPropertyChanged("Name");
+            }
+        }
+
+        public VideoInfoVM VideoInfoVM
+        {
+            get { return videoInfoVM; }
             set
             {
                 LevelSet.Name = value;

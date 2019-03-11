@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows;
 
 namespace LevelSetsEditor.Model
 {
@@ -13,28 +14,10 @@ namespace LevelSetsEditor.Model
 
     public class Preview
 	{
-		public Uri Source
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-			set
-			{
-				throw new NotImplementedException();
-			}
-		}
+		public Uri Source { get; set; }
 
-		public PreviewType Type
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-			set
-			{
-				throw new NotImplementedException();
-			}
-		}
-	}
+		public PreviewType Type { get; set; }
+        
+        public Size Size { get; set; }
+    }
 }

@@ -12,6 +12,7 @@
         <Collapsed>False</Collapsed>
         <Member type="Property">VideoInfo VideoInfo { get; set; }</Member>
         <Member type="Property">public ObservableCollection&lt;SceneSet&gt; SceneSets { get; set; }</Member>
+        <Member type="Property">public string Name { get; set; }</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">

@@ -27,10 +27,19 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <Label Content="{Binding Name}" HorizontalAlignment="Left" Margin="267,22,0,0" VerticalAlignment="Top"/>
-        <GroupBox Header="Выбранный элемент" HorizontalAlignment="Left" Height="201" Margin="380,22,0,0" VerticalAlignment="Top" Width="223"
+        <GroupBox Header="Выбранный элемент" HorizontalAlignment="Left" Height="201" Margin="234,51,0,0" VerticalAlignment="Top" Width="223"
                   DataContext="{Binding SelectedSceneSetVM}">
-            <StackPanel Orientation="Vertical"   >
+            <StackPanel Orientation="Vertical" RenderTransformOrigin="0.492,0.534"   >
                 <TextBox Text="{Binding UnitsCount}"></TextBox>
+                <TextBox Text="{Binding VideoSegment.TimeBegin}"></TextBox>
+                <TextBox Text="{Binding VideoSegment.TimeEnd}"></TextBox>
+                <TextBox Text="{Binding VideoSegment.Source}"></TextBox>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Header="Инфо о видео" HorizontalAlignment="Left" Height="223"  VerticalAlignment="Top" Width="260"
+                  DataContext="{Binding VideoInfoVM}" RenderTransformOrigin="0.269,1.604" Margin="495,51,0,0">
+            <StackPanel Orientation="Vertical"   >
+                <TextBox Text="{Binding Title}"></TextBox>
                 <TextBox Text="{Binding VideoSegment.TimeBegin}"></TextBox>
                 <TextBox Text="{Binding VideoSegment.TimeEnd}"></TextBox>
                 <TextBox Text="{Binding VideoSegment.Source}"></TextBox>
