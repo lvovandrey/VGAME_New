@@ -34,7 +34,22 @@ namespace LevelSetsEditor.ViewModel
                 });
                 SceneSets.Add(sceneSetVM);
             }
-            VideoInfo
+
+            videoInfoVM = new VideoInfoVM(new VideoInfo()
+            {
+                Title = "Айболит - серия 1",
+                Duration = TimeSpan.FromSeconds(356),
+                Description = "Мультфильм про доктора Айболита. СССР",
+                Preview = new Preview()
+                {
+                    Size = new System.Windows.Size(480,360),
+                    Type = PreviewType.youtube,
+                    Source = new Uri(@"https://img.youtube.com/vi/dDRqhwHdpe8/hqdefault.jpg")
+                },
+                Resolution = new System.Windows.Size(720, 480),
+                Source = new Uri(@"https://www.youtube.com/watch?v=dDRqhwHdpe8"),
+                Type = VideoType.youtube
+            });
         }
 
 
@@ -66,13 +81,14 @@ namespace LevelSetsEditor.ViewModel
             }
         }
 
+        private VideoInfoVM videoInfoVM;
         public VideoInfoVM VideoInfoVM
         {
             get { return videoInfoVM; }
             set
             {
-                LevelSet.Name = value;
-                OnPropertyChanged("Name");
+                videoInfoVM = value;
+                OnPropertyChanged("VideoInfoVM");
             }
         }
 
