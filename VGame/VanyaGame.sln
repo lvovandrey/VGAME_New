@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YouTubeUrlSupplier", "YouTu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlYoutubeImport", "XmlYoutubeImport\XmlYoutubeImport.csproj", "{E35297F8-7B76-4B4D-9643-799B90F014A8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LevelSetsEditor", "LevelSetsEditor\LevelSetsEditor.csproj", "{2864248F-4BDE-4CB3-A552-9BCBE66C6F1D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,14 @@ Global
 		{E35297F8-7B76-4B4D-9643-799B90F014A8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E35297F8-7B76-4B4D-9643-799B90F014A8}.Release|x64.ActiveCfg = Release|Any CPU
 		{E35297F8-7B76-4B4D-9643-799B90F014A8}.Release|x64.Build.0 = Release|Any CPU
+		{2864248F-4BDE-4CB3-A552-9BCBE66C6F1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2864248F-4BDE-4CB3-A552-9BCBE66C6F1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2864248F-4BDE-4CB3-A552-9BCBE66C6F1D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2864248F-4BDE-4CB3-A552-9BCBE66C6F1D}.Debug|x64.Build.0 = Debug|Any CPU
+		{2864248F-4BDE-4CB3-A552-9BCBE66C6F1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2864248F-4BDE-4CB3-A552-9BCBE66C6F1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2864248F-4BDE-4CB3-A552-9BCBE66C6F1D}.Release|x64.ActiveCfg = Release|Any CPU
+		{2864248F-4BDE-4CB3-A552-9BCBE66C6F1D}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
