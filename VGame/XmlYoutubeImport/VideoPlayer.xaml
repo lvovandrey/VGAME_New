@@ -6,8 +6,7 @@
              xmlns:local="clr-namespace:XmlYoutubeImport"
              xmlns:wpf="clr-namespace:Vlc.DotNet.Wpf;assembly=Vlc.DotNet.Wpf"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-             xmlns:osb="clr-namespace:Xceed.Wpf.Toolkit.Obselete;assembly=WPFToolkit.Extended"
-                
+            
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="300" BorderBrush="Black" Margin="2,2,2,3">
     <Grid>

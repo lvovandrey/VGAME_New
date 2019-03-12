@@ -55,11 +55,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\WebBrowserModel.cs" />
     <Compile Include="ViewModel\LevelSetVM.cs" />
     <Compile Include="ViewModel\PreviewVM.cs" />
     <Compile Include="ViewModel\SceneSetVM.cs" />
     <Compile Include="ViewModel\VideoInfoVM.cs" />
     <Compile Include="ViewModel\VideoSegmentVM.cs" />
+    <Compile Include="ViewModel\WebBrowserVM.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

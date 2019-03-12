@@ -10,52 +10,77 @@
     <Window.DataContext>
         <vm:LevelSetVM/>
     </Window.DataContext>
-    <Grid>
-        <ListBox ItemsSource="{Binding SceneSets, UpdateSourceTrigger=PropertyChanged}" 
+    <TabControl >
+        <TabItem Header="TabItem">
+
+
+            <Grid>
+                <ListBox ItemsSource="{Binding SceneSets, UpdateSourceTrigger=PropertyChanged}" 
                  SelectedItem ="{Binding SelectedSceneSetVM }" 
                 HorizontalAlignment="Left" 
                  Height="403" Margin="10,10,0,0" VerticalAlignment="Top" Width="219">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="{Binding UnitsCount, UpdateSourceTrigger=PropertyChanged}"></Label>
-                        <Label Content="{Binding VideoSegment.TimeBegin, UpdateSourceTrigger=PropertyChanged}"></Label>
-                        <Label Content="{Binding VideoSegment.TimeEnd, UpdateSourceTrigger=PropertyChanged}"></Label>
-                        <Label Content="{Binding VideoSegment.Source, UpdateSourceTrigger=PropertyChanged}"></Label>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <Label Content="{Binding Name}" HorizontalAlignment="Left" Margin="267,22,0,0" VerticalAlignment="Top"/>
-        <GroupBox Header="Выбранный элемент" HorizontalAlignment="Left" Height="201" Margin="234,53,0,0" VerticalAlignment="Top" Width="223"
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="{Binding UnitsCount, UpdateSourceTrigger=PropertyChanged}"></Label>
+                                <Label Content="{Binding VideoSegment.TimeBegin, UpdateSourceTrigger=PropertyChanged}"></Label>
+                                <Label Content="{Binding VideoSegment.TimeEnd, UpdateSourceTrigger=PropertyChanged}"></Label>
+                                <Label Content="{Binding VideoSegment.Source, UpdateSourceTrigger=PropertyChanged}"></Label>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Label Content="{Binding Name}" HorizontalAlignment="Left" Margin="267,22,0,0" VerticalAlignment="Top"/>
+                <GroupBox Header="Выбранный элемент" HorizontalAlignment="Left" Height="201" Margin="234,53,0,0" VerticalAlignment="Top" Width="223"
                   DataContext="{Binding SelectedSceneSetVM}">
-            <StackPanel Orientation="Vertical" RenderTransformOrigin="0.492,0.534"   >
-                <TextBox Text="{Binding UnitsCount}"></TextBox>
-                <TextBox Text="{Binding VideoSegment.TimeBegin}"></TextBox>
-                <TextBox Text="{Binding VideoSegment.TimeEnd}"></TextBox>
-                <TextBox Text="{Binding VideoSegment.Source}"></TextBox>
-            </StackPanel>
-        </GroupBox>
-        <GroupBox Header="Инфо о видео" HorizontalAlignment="Left" Height="668"  VerticalAlignment="Top" Width="605"
+                    <StackPanel Orientation="Vertical" RenderTransformOrigin="0.492,0.534"   >
+                        <TextBox Text="{Binding UnitsCount}"></TextBox>
+                        <TextBox Text="{Binding VideoSegment.TimeBegin}"></TextBox>
+                        <TextBox Text="{Binding VideoSegment.TimeEnd}"></TextBox>
+                        <TextBox Text="{Binding VideoSegment.Source}"></TextBox>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Инфо о видео" HorizontalAlignment="Left" Height="668"  VerticalAlignment="Top" Width="605"
                   DataContext="{Binding VideoInfoVM}" RenderTransformOrigin="0.269,1.604" Margin="462,22,0,0">
-            <StackPanel Orientation="Vertical"   >
-                <TextBox Text="{Binding Title}"></TextBox>
-                <TextBox Text="{Binding Duration}"></TextBox>
-                <TextBox Text="{Binding Description}"></TextBox>
-                <TextBox Text="{Binding Source}"/>
-                <TextBox Text="{Binding StringFormat= Тип видео {0}, Path=Type}"/>
+                    <StackPanel Orientation="Vertical"   >
+                        <TextBox Text="{Binding Title}"></TextBox>
+                        <TextBox Text="{Binding Duration}"></TextBox>
+                        <TextBox Text="{Binding Description}"></TextBox>
+                        <TextBox Text="{Binding Source}"/>
+                        <TextBox Text="{Binding StringFormat= Тип видео {0}, Path=Type}"/>
 
 
-                <TextBox Text="{Binding Resolution}" Margin="0,0,0,100"></TextBox>
-                
-                <Image Source="{Binding Preview.Source}" Height="{Binding Preview.Size.Height}" Width="{Binding Preview.Size.Width}"/>
-                <TextBox Text ="{Binding StringFormat= Тип превью {0}, Path= Preview.Type }" />
+                        <TextBox Text="{Binding Resolution}" Margin="0,0,0,100"></TextBox>
 
-                <TextBox Text ="{Binding StringFormat= Размер превью {0}, Path= Preview.Size }" />
-                <TextBox Text ="{Binding  Path= Preview.Source }" />
-            
-            </StackPanel>
-        </GroupBox>
+                        <Image Source="{Binding Preview.Source}" Height="{Binding Preview.Size.Height}" Width="{Binding Preview.Size.Width}"/>
+                        <TextBox Text ="{Binding StringFormat= Тип превью {0}, Path= Preview.Type }" />
 
-    </Grid>
+                        <TextBox Text ="{Binding StringFormat= Размер превью {0}, Path= Preview.Size }" />
+                        <TextBox Text ="{Binding  Path= Preview.Source }" />
+
+                    </StackPanel>
+                </GroupBox>
+
+
+
+
+            </Grid>
+        </TabItem>
+        <TabItem Header="Браузер">
+            <DockPanel>
+                <Grid DockPanel.Dock="Top">
+                    <Grid.DataContext>
+                        <vm:WebBrowserVM/>
+                    </Grid.DataContext>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="150"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Text="{Binding CurURL, UpdateSourceTrigger=PropertyChanged}" ></TextBox>
+
+                </Grid>
+                <Grid Background="DarkOrange" Margin="5"/>
+            </DockPanel>
+        </TabItem>
+    </TabControl>
 </Window>

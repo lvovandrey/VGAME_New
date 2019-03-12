@@ -24,7 +24,7 @@ namespace LevelSetsEditor
         public MainWindow()
         {
             InitializeComponent();
-
+            //WebBrowserVM Browser = new WebBrowserVM(new Model.WebBrowserModel());
            // DataContext = levelSet;
 
         }
