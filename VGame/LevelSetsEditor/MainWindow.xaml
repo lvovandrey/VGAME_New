@@ -11,8 +11,8 @@
     <Window.DataContext>
         <vm:LevelSetVM/>
     </Window.DataContext>
-    <TabControl >
-        <TabItem Header="TabItem">
+    <TabControl Name="TabControlMain" >
+        <TabItem Name="TabItemEditor" Header="Редактор">
 
 
             <Grid>
@@ -72,14 +72,16 @@
                 <Grid Name="GridBrowser" DockPanel.Dock="Top">
 
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="50"/>
                         <ColumnDefinition Width="150"/>
 
                     </Grid.ColumnDefinitions>
-                    <TextBox Name="TextURL" Text="{Binding Address, ElementName=Browser, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" ></TextBox>
-                    <Button Content="Browser" Grid.Column="1" Click="Button_Click"/>
-                    <Button Content="Refresh" Grid.Column="2" />
+                    <Button Content="JOIN" Margin="5" Grid.Column="0" Click="Button_Click_2" />
+                    <TextBox Name="TextURL"  Grid.Column="1" Text="{Binding Address, ElementName=Browser, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Margin="5" FontSize="16" KeyDown="TextURL_KeyDown" />
+                    <Button Content="GO!" Margin="5" Grid.Column="2" Click="Button_Click"/>
+                    <Button Content="Youtube" Margin="5" Grid.Column="3" Click="Button_Click_1" />
 
                 </Grid>
 

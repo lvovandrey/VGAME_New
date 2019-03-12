@@ -42,5 +42,19 @@ namespace LevelSetsEditor
             WebBrowserVM.CurURL = TextURL.Text;
         }
 
+        private void TextURL_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter) WebBrowserVM.CurURL = TextURL.Text;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            WebBrowserVM.CurURL = "Youtube.com";
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            TabItemEditor.Focus();
+        }
     }
 }
