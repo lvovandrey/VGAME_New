@@ -75,14 +75,18 @@
                         <ColumnDefinition Width="50"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="50"/>
                         <ColumnDefinition Width="150"/>
 
                     </Grid.ColumnDefinitions>
                     <Button Content="JOIN" Margin="5" Grid.Column="0" Click="Button_Click_2" />
                     <TextBox Name="TextURL"  Grid.Column="1" Text="{Binding Address, ElementName=Browser, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Margin="5" FontSize="16" KeyDown="TextURL_KeyDown" />
                     <Button Content="GO!" Margin="5" Grid.Column="2" Click="Button_Click"/>
-                    <Button Content="Youtube" Margin="5" Grid.Column="3" Click="Button_Click_1" />
+                    <Button Content="Youtube" Margin="5" Grid.Column="5" Click="Button_Click_1" />
 
+                    <Button Content="&lt;" Command="{Binding WebBrowser.BackCommand, ElementName=Browser}" Margin="5" Grid.Column="3" />
+                    <Button Content="&gt;" Command="{Binding WebBrowser.ForwardCommand, ElementName=Browser}" Margin="5" Grid.Column="4" />
                 </Grid>
 
                 <Grid Background="DarkOrange" Margin="5">
