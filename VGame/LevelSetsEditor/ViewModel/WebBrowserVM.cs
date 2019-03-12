@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace LevelSetsEditor.ViewModel
 {
@@ -28,6 +29,19 @@ namespace LevelSetsEditor.ViewModel
             {
                 WebBrowserModel.CurURL = value;
                 OnPropertyChanged("CurURL");
+            }
+        }
+
+        public WebBrowser Body
+        {
+            get
+            {
+                return WebBrowserModel.Body;
+            }
+            set
+            {
+                WebBrowserModel.Body = value;
+                OnPropertyChanged("Body");
             }
         }
 
