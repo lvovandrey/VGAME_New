@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CefSharp;
+using CefSharp.Wpf;
 
 namespace LevelSetsEditor
 {
@@ -21,12 +23,24 @@ namespace LevelSetsEditor
     /// </summary>
     public partial class MainWindow : Window
     {
+        WebBrowserVM WebBrowserVM;
         public MainWindow()
         {
+            CefSettings settings = new CefSettings();
+            settings.CachePath = @"C:\CEFcookies"; // Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\CEF";
+            CefSharp.Cef.Initialize(settings);
+
             InitializeComponent();
             //WebBrowserVM Browser = new WebBrowserVM(new Model.WebBrowserModel());
-           // DataContext = levelSet;
-
+            WebBrowserVM = new WebBrowserVM(Browser);
+            GridBrowser.DataContext = WebBrowserVM;
+           
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            WebBrowserVM.CurURL = TextURL.Text;
+        }
+
     }
 }

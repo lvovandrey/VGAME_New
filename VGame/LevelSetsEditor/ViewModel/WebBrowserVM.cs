@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CefSharp.Wpf;
 
 namespace LevelSetsEditor.ViewModel
 {
@@ -12,10 +13,13 @@ namespace LevelSetsEditor.ViewModel
     public class WebBrowserVM : INotifyPropertyChanged
     {
         WebBrowserModel WebBrowserModel;
+        ChromiumWebBrowser browser;
 
-        public WebBrowserVM()
+        public WebBrowserVM(ChromiumWebBrowser _browser)
         {
             WebBrowserModel = new WebBrowserModel();
+            browser = _browser;
+      //      browser.U
         }
 
         public string CurURL
@@ -27,9 +31,24 @@ namespace LevelSetsEditor.ViewModel
             set
             {
                 WebBrowserModel.CurURL = value;
+                browser.Address = value;
                 OnPropertyChanged("CurURL");
             }
         }
+
+        public ChromiumWebBrowser Browser
+        {
+            get
+            {
+                return browser;
+            }
+            set
+            {
+                Browser = value;
+                OnPropertyChanged("Browser");
+            }
+        }
+
 
         #region mvvm
         public event PropertyChangedEventHandler PropertyChanged;
