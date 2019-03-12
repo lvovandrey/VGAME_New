@@ -15,7 +15,8 @@ namespace YouTubeUrlSupplier
     /// <summary>
     /// Use this class to get youtube video urls
     /// </summary>
-    public static class YouTubeDownloader {
+    public static class YouTubeDownloader
+    {
 
         //private static readonly string[] elValue = {
         //    "",
@@ -24,7 +25,8 @@ namespace YouTubeUrlSupplier
         //    "vevo",
         //};
 
-        public static IList<VideoQuality> GetYouTubeVideoUrls(string videoUrl) {
+        public static IList<VideoQuality> GetYouTubeVideoUrls(string videoUrl)
+        {
             var list = new List<VideoQuality>();
 
             var id = YouTubeDownloader.GetVideoIdFromUrl(videoUrl);
@@ -46,14 +48,18 @@ namespace YouTubeUrlSupplier
             infoText = webClient.DownloadString(infoUrl);
 
             ageGateContent = infoText.Contains("player-age-gate-content");
-            if (ageGateContent) {
+            if (ageGateContent)
+            {
                 infoUrl = string.Format(CultureInfo.InvariantCulture, "https://www.youtube.com/embed/{0}", longId);
                 infoText = webClient.DownloadString(infoUrl);
                 stsValue = Regex.Match(infoText, @"""sts"":([0-9]+?),").Groups[1].Value;
             }
-            if (ageGateContent && !string.IsNullOrEmpty(stsValue)) {
+            if (ageGateContent && !string.IsNullOrEmpty(stsValue))
+            {
                 infoUrl = string.Format(CultureInfo.InvariantCulture, "https://www.youtube.com/get_video_info?video_id={0}&eurl=https://youtube.googleapis.com/v/{1}&sts={2}", longId, id, stsValue);
-            } else {
+            }
+            else
+            {
                 infoUrl = string.Format(CultureInfo.InvariantCulture, "http://www.youtube.com/get_video_info?&video_id={0}&el=detailpage&ps=default&eurl=&gl=US&hl=en", longId);
             }
             infoText = webClient.DownloadString(infoUrl);
@@ -62,27 +68,33 @@ namespace YouTubeUrlSupplier
 
 #if DEBUG
             Dictionary<String, String> testInfoValues = new Dictionary<string, string>();
-            foreach (String key in infoValues) {
+            foreach (String key in infoValues)
+            {
                 testInfoValues.Add(key, infoValues[key]);
             }
 #endif
 
             String offerButtonText;
             offerButtonText = infoValues["ypc_offer_button_text"];
-            if (offerButtonText == null) {
+            if (offerButtonText == null)
+            {
                 offerButtonText = String.Empty;
-            } else {
+            }
+            else
+            {
                 offerButtonText = ", Pay " + offerButtonText;
             }
 
             status = infoValues["status"];
-            if (status != null && status == "fail") {
+            if (status != null && status == "fail")
+            {
                 var errorcode = infoValues["errorcode"];
                 var errordetail = infoValues["errordetail"];
                 var reason = infoValues["reason"];
                 bool boolDetail = false;
                 int intErrorCode = int.Parse(errorcode, CultureInfo.InvariantCulture);
-                if (errordetail != null) {
+                if (errordetail != null)
+                {
                     int detail = int.Parse(errordetail, CultureInfo.InvariantCulture);
                     boolDetail = detail == 0 ? false : true;
                 }
@@ -96,38 +108,46 @@ namespace YouTubeUrlSupplier
             var regex = new Regex(@"player-(.+?).js");
             Match match = regex.Match(html);
             string playerVersion;
-            if (match.Length>3)
+            if (match.Length > 3)
                 playerVersion = regex.Match(html).Result("$1");
             else
                 playerVersion = @"vfl6PEqvQ\\/ www - player.css\";
 
-            foreach (var item in videos) {
-                if (String.IsNullOrEmpty(item)) {
+            foreach (var item in videos)
+            {
+                if (String.IsNullOrEmpty(item))
+                {
                     throw new ArgumentException("Cannot download \"" + title + "\"" + offerButtonText);
                 }
-                try {
+                try
+                {
                     var data = HttpUtility.ParseQueryString(item);
                     var fallback_host = data["fallback_host"];
                     String server = String.Empty;
-                    if (!String.IsNullOrEmpty(fallback_host)) {
+                    if (!String.IsNullOrEmpty(fallback_host))
+                    {
                         server = Uri.UnescapeDataString(fallback_host);
                     }
                     var signature = data["sig"] ?? data["signature"] ?? data["s"];   // Hans: Added "s" for encrypted signatures
                     var url = Uri.UnescapeDataString(data["url"]) + "&fallback_host=" + server;
 
-                    if (!string.IsNullOrEmpty(signature) && data["s"] == null) {
+                    if (!string.IsNullOrEmpty(signature) && data["s"] == null)
+                    {
                         url += "&signature=" + signature;
                     }
 
                     // If the download-URL contains encrypted signature
-                    if (data["s"] != null) {
+                    if (data["s"] != null)
+                    {
 
                         string decryptedSignature;
-                        try {
+                        try
+                        {
                             // Decrypt the signature
                             decryptedSignature = Decipherer.DecipherWithVersion(signature.ToString(), playerVersion);
                         }
-                        catch (Exception e) {
+                        catch (Exception e)
+                        {
                             //string ex = e.Message;
                             throw new DownloaderException("Signature decipher problem", e);
                         }
@@ -146,21 +166,25 @@ namespace YouTubeUrlSupplier
                     videoItem.Length = long.Parse(videoDuration, CultureInfo.InvariantCulture);
                     list.Add(videoItem);
                 }
-                catch (Exception) {
+                catch (Exception)
+                {
                     //string ex = e.Message;
-                  //  throw;
+                    //  throw;
 
                 }
             }
             return list;
         }
 
-        private static long GetSize(string videoUrl) {
+        private static long GetSize(string videoUrl)
+        {
             long bytesLength;
             var infos = HttpUtility.ParseQueryString(videoUrl);
             string size = infos["clen"];
-            if (!string.IsNullOrEmpty(size)) {
-                if (long.TryParse(size, out bytesLength)) {
+            if (!string.IsNullOrEmpty(size))
+            {
+                if (long.TryParse(size, out bytesLength))
+                {
                     return bytesLength;
                 }
             }
@@ -179,14 +203,17 @@ namespace YouTubeUrlSupplier
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
-        public static string GetVideoIdFromUrl(string url) {
+        public static string GetVideoIdFromUrl(string url)
+        {
             url = url.Substring(url.IndexOf("?", StringComparison.Ordinal) + 1);
             char[] delimiters = { '&', '#' };
             string[] props = url.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
 
             string videoid = string.Empty;
-            foreach (string prop in props) {
-                if (prop.StartsWith("v=", StringComparison.Ordinal)) {
+            foreach (string prop in props)
+            {
+                if (prop.StartsWith("v=", StringComparison.Ordinal))
+                {
                     videoid = prop.Substring(prop.IndexOf("v=", StringComparison.Ordinal) + 2);
                 }
             }
@@ -199,19 +226,182 @@ namespace YouTubeUrlSupplier
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
-        public static string GetLongVideoIdFromUrl(string url) {
+        public static string GetLongVideoIdFromUrl(string url)
+        {
             url = url.Substring(url.IndexOf("?", StringComparison.Ordinal) + 1);
             char[] delimiters = { '#' };
             string[] props = url.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
 
             string videoid = string.Empty;
-            foreach (string prop in props) {
-                if (prop.StartsWith("v=", StringComparison.Ordinal)) {
+            foreach (string prop in props)
+            {
+                if (prop.StartsWith("v=", StringComparison.Ordinal))
+                {
                     videoid = prop.Substring(prop.IndexOf("v=", StringComparison.Ordinal) + 2);
                 }
             }
 
             return videoid;
+        }
+
+        public static TimeSpan GetYouTubeVideoDuration(string videoUrl)
+        {
+            var list = new List<VideoQuality>();
+
+            var id = YouTubeDownloader.GetVideoIdFromUrl(videoUrl);
+            var longId = YouTubeDownloader.GetLongVideoIdFromUrl(videoUrl);
+
+            string stsValue = null;
+            bool ageGateContent = false;
+            string status;
+            string title;
+            string videoDuration;
+            string infoUrl;
+            string infoText;
+
+            WebClient webClient = new WebClient();
+            webClient.Proxy = Helper.InitialProxy();
+
+            infoUrl = string.Format(CultureInfo.InvariantCulture, "https://www.youtube.com/watch?v={0}&gl=US&hl=en&has_verified=1&bpctr=9999999999", longId);
+            infoText = webClient.DownloadString(infoUrl);
+
+            ageGateContent = infoText.Contains("player-age-gate-content");
+            if (ageGateContent)
+            {
+                infoUrl = string.Format(CultureInfo.InvariantCulture, "https://www.youtube.com/embed/{0}", longId);
+                infoText = webClient.DownloadString(infoUrl);
+                stsValue = Regex.Match(infoText, @"""sts"":([0-9]+?),").Groups[1].Value;
+            }
+            if (ageGateContent && !string.IsNullOrEmpty(stsValue))
+            {
+                infoUrl = string.Format(CultureInfo.InvariantCulture, "https://www.youtube.com/get_video_info?video_id={0}&eurl=https://youtube.googleapis.com/v/{1}&sts={2}", longId, id, stsValue);
+            }
+            else
+            {
+                infoUrl = string.Format(CultureInfo.InvariantCulture, "http://www.youtube.com/get_video_info?&video_id={0}&el=detailpage&ps=default&eurl=&gl=US&hl=en", longId);
+            }
+            infoText = webClient.DownloadString(infoUrl);
+            webClient.Dispose();
+            var infoValues = HttpUtility.ParseQueryString(infoText);
+
+#if DEBUG
+            Dictionary<String, String> testInfoValues = new Dictionary<string, string>();
+            foreach (String key in infoValues)
+            {
+                testInfoValues.Add(key, infoValues[key]);
+            }
+#endif
+
+            String offerButtonText;
+            offerButtonText = infoValues["ypc_offer_button_text"];
+            if (offerButtonText == null)
+            {
+                offerButtonText = String.Empty;
+            }
+            else
+            {
+                offerButtonText = ", Pay " + offerButtonText;
+            }
+
+            status = infoValues["status"];
+            if (status != null && status == "fail")
+            {
+                var errorcode = infoValues["errorcode"];
+                var errordetail = infoValues["errordetail"];
+                var reason = infoValues["reason"];
+                bool boolDetail = false;
+                int intErrorCode = int.Parse(errorcode, CultureInfo.InvariantCulture);
+                if (errordetail != null)
+                {
+                    int detail = int.Parse(errordetail, CultureInfo.InvariantCulture);
+                    boolDetail = detail == 0 ? false : true;
+                }
+                throw new DownloaderException(reason, intErrorCode, boolDetail);
+            }
+            title = infoValues["title"];
+            videoDuration = infoValues["length_seconds"];
+
+            return TimeSpan.FromSeconds(double.Parse(videoDuration));
+        }
+
+        public static string GetYouTubeVideoTitle(string videoUrl)
+        {
+            var list = new List<VideoQuality>();
+
+            var id = YouTubeDownloader.GetVideoIdFromUrl(videoUrl);
+            var longId = YouTubeDownloader.GetLongVideoIdFromUrl(videoUrl);
+
+            string stsValue = null;
+            bool ageGateContent = false;
+            string status;
+            string title;
+            string videoDuration;
+            string infoUrl;
+            string infoText;
+
+            WebClient webClient = new WebClient();
+            webClient.Proxy = Helper.InitialProxy();
+
+            infoUrl = string.Format(CultureInfo.InvariantCulture, "https://www.youtube.com/watch?v={0}&gl=US&hl=en&has_verified=1&bpctr=9999999999", longId);
+            infoText = webClient.DownloadString(infoUrl);
+
+            ageGateContent = infoText.Contains("player-age-gate-content");
+            if (ageGateContent)
+            {
+                infoUrl = string.Format(CultureInfo.InvariantCulture, "https://www.youtube.com/embed/{0}", longId);
+                infoText = webClient.DownloadString(infoUrl);
+                stsValue = Regex.Match(infoText, @"""sts"":([0-9]+?),").Groups[1].Value;
+            }
+            if (ageGateContent && !string.IsNullOrEmpty(stsValue))
+            {
+                infoUrl = string.Format(CultureInfo.InvariantCulture, "https://www.youtube.com/get_video_info?video_id={0}&eurl=https://youtube.googleapis.com/v/{1}&sts={2}", longId, id, stsValue);
+            }
+            else
+            {
+                infoUrl = string.Format(CultureInfo.InvariantCulture, "http://www.youtube.com/get_video_info?&video_id={0}&el=detailpage&ps=default&eurl=&gl=US&hl=en", longId);
+            }
+            infoText = webClient.DownloadString(infoUrl);
+            webClient.Dispose();
+            var infoValues = HttpUtility.ParseQueryString(infoText);
+
+#if DEBUG
+            Dictionary<String, String> testInfoValues = new Dictionary<string, string>();
+            foreach (String key in infoValues)
+            {
+                testInfoValues.Add(key, infoValues[key]);
+            }
+#endif
+
+            String offerButtonText;
+            offerButtonText = infoValues["ypc_offer_button_text"];
+            if (offerButtonText == null)
+            {
+                offerButtonText = String.Empty;
+            }
+            else
+            {
+                offerButtonText = ", Pay " + offerButtonText;
+            }
+
+            status = infoValues["status"];
+            if (status != null && status == "fail")
+            {
+                var errorcode = infoValues["errorcode"];
+                var errordetail = infoValues["errordetail"];
+                var reason = infoValues["reason"];
+                bool boolDetail = false;
+                int intErrorCode = int.Parse(errorcode, CultureInfo.InvariantCulture);
+                if (errordetail != null)
+                {
+                    int detail = int.Parse(errordetail, CultureInfo.InvariantCulture);
+                    boolDetail = detail == 0 ? false : true;
+                }
+                throw new DownloaderException(reason, intErrorCode, boolDetail);
+            }
+            title = infoValues["title"];
+            videoDuration = infoValues["length_seconds"];
+
+            return title;
         }
     }
 }
