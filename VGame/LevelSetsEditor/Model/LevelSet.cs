@@ -9,24 +9,17 @@ namespace LevelSetsEditor.Model
 	{
         public LevelSet()
         {
-            Test = new List<int>() {1,2,3 };
+           
         }
         public VideoInfo VideoInfo
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-			set
-			{
-				throw new NotImplementedException();
-			}
-		}
+		{ get; set; }
 
 		public List<SceneSet> SceneSets { get; set; }
 
         public string Name { get; set; }
 
-        public List<int> Test { get; set; }
+        public void SegregateScenes()
+        {
+        }
     }
 }

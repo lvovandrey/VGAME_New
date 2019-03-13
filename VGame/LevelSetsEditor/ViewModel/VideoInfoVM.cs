@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Drawing;
 
 namespace LevelSetsEditor.ViewModel
 {
@@ -58,7 +59,7 @@ namespace LevelSetsEditor.ViewModel
             }
         }
 
-        public Size Resolution
+        public System.Drawing.Size Resolution
         {
             get
             {
@@ -81,6 +82,19 @@ namespace LevelSetsEditor.ViewModel
             {
                 VideoInfo.Source = value;
                 OnPropertyChanged("Source");
+            }
+        }
+
+        public string Address
+        {
+            get
+            {
+                return VideoInfo.Address;
+            }
+            set
+            {
+                VideoInfo.Address = value;
+                OnPropertyChanged("Address");
             }
         }
 

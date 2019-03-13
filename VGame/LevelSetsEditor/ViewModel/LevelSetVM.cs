@@ -18,7 +18,7 @@ namespace LevelSetsEditor.ViewModel
         {
             this.LevelSet = new LevelSet() { Name = nameof(LevelSet.Name) };
 
-            Test = new ObservableCollection<int>(LevelSet.Test);
+        
             SceneSets = new ObservableCollection<SceneSetVM>();
             for (int i = 1; i <= 3; i++)
             {
@@ -42,11 +42,11 @@ namespace LevelSetsEditor.ViewModel
                 Description = "Мультфильм про доктора Айболита. СССР",
                 Preview = new Preview()
                 {
-                    Size = new System.Windows.Size(480,360),
+                    Size = new System.Drawing.Size(480,360),
                     Type = PreviewType.youtube,
                     Source = new Uri(@"https://img.youtube.com/vi/dDRqhwHdpe8/hqdefault.jpg")
                 },
-                Resolution = new System.Windows.Size(720, 480),
+                Resolution = new System.Drawing.Size(720, 480),
                 Source = new Uri(@"https://www.youtube.com/watch?v=dDRqhwHdpe8"),
                 Type = VideoType.youtube
             });
@@ -56,7 +56,6 @@ namespace LevelSetsEditor.ViewModel
         public LevelSetVM(LevelSet levelSet)
         {
             this.LevelSet = levelSet;
-            Test = new ObservableCollection<int>(levelSet.Test);
 
         }
 
@@ -92,8 +91,35 @@ namespace LevelSetsEditor.ViewModel
             }
         }
 
-        public ObservableCollection<int> Test { get; set; }
+
+
         public ObservableCollection<SceneSetVM> SceneSets { get; set; }
+
+        // команда добавления нового объекта
+        private RelayCommand autoSegregateVideoToScenes;
+        public RelayCommand AutoSegregateVideoToScenes
+        {
+            get
+            {
+                return autoSegregateVideoToScenes ??
+                  (autoSegregateVideoToScenes = new RelayCommand(obj =>
+                  {
+                      int i = 555;
+                      SceneSetVM sceneSetVM = new SceneSetVM(new Model.SceneSet()
+                      {
+                          UnitsCount = 153 * i,
+                          VideoSegment = new VideoSegment()
+                          {
+                              TimeBegin = TimeSpan.FromSeconds(i * 66),
+                              TimeEnd = TimeSpan.FromSeconds(i * 88),
+                              Source = new Uri("C:/test.avi")
+                          }
+                      });
+                      SceneSets.Add(sceneSetVM);
+                  }));
+            }
+        }
+
 
         #region mvvm
         public event PropertyChangedEventHandler PropertyChanged;

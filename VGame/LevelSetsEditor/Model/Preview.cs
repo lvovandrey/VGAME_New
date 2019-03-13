@@ -15,9 +15,11 @@ namespace LevelSetsEditor.Model
     public class Preview
 	{
 		public Uri Source { get; set; }
+        
+        public Uri[] MultiplePrevSources { get; set; }
 
 		public PreviewType Type { get; set; }
         
-        public Size Size { get; set; }
+        public System.Drawing.Size Size { get; set; }
     }
 }

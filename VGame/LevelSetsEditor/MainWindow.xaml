@@ -6,16 +6,18 @@
         xmlns:local="clr-namespace:LevelSetsEditor"
         xmlns:vm ="clr-namespace:LevelSetsEditor.ViewModel"
         xmlns:chromium ="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+        xmlns:propview ="clr-namespace:LevelSetsEditor.View"
         mc:Ignorable="d"
         Title="MainWindow" Height="850" Width="1200" >
     <Window.DataContext>
-        <vm:LevelSetVM/>
+        <vm:LevelSetVM x:Name="LevelSetVMDataContext"/>
     </Window.DataContext>
     <TabControl Name="TabControlMain" >
         <TabItem Name="TabItemEditor" Header="Редактор">
-
+        
 
             <Grid>
+                <Button Content="Button" HorizontalAlignment="Left" Margin="305,346,0,0" VerticalAlignment="Top" Width="75"  Command="{Binding Path=AddCommand}"/>
                 <ListBox ItemsSource="{Binding SceneSets, UpdateSourceTrigger=PropertyChanged}" 
                  SelectedItem ="{Binding SelectedSceneSetVM }" 
                 HorizontalAlignment="Left" 
@@ -41,18 +43,17 @@
                         <TextBox Text="{Binding VideoSegment.Source}"></TextBox>
                     </StackPanel>
                 </GroupBox>
-                <GroupBox Header="Инфо о видео" HorizontalAlignment="Left" Height="668"  VerticalAlignment="Top" Width="605"
+                <GroupBox Header="Инфо о видео" x:Name="VideoInfoGroupBox" HorizontalAlignment="Left" Height="668"  VerticalAlignment="Top" Width="605"
                   DataContext="{Binding VideoInfoVM}" RenderTransformOrigin="0.269,1.604" Margin="462,22,0,0">
                     <StackPanel Orientation="Vertical"   >
-                        <TextBox Text="{Binding Title}"></TextBox>
-                        <TextBox Text="{Binding Duration}"></TextBox>
-                        <TextBox Text="{Binding Description}"></TextBox>
-                        <TextBox Text="{Binding Source}"/>
-                        <TextBox Text="{Binding StringFormat= Тип видео {0}, Path=Type}"/>
+                        <propview:PropertyViewer  DataContext="{Binding Title}" Tag="Название"/>
+                        <propview:PropertyViewer  DataContext="{Binding Description}" Tag="Описание"/>
+                        <propview:PropertyViewer  DataContext="{Binding Durarion}" Tag="Длительность"/>
+                        <propview:PropertyViewer  DataContext="{Binding Source}" Tag="Источник"/>
+                        <propview:PropertyViewer  DataContext="{Binding Type}" Tag="Тип видео"/>
+                        <propview:PropertyViewer  DataContext="{Binding Resolution}" Tag="Разрешение" Margin="0,0,0,50"/>
 
-
-                        <TextBox Text="{Binding Resolution}" Margin="0,0,0,100"></TextBox>
-
+                        
                         <Image Source="{Binding Preview.Source}" Height="{Binding Preview.Size.Height}" Width="{Binding Preview.Size.Width}"/>
                         <TextBox Text ="{Binding StringFormat= Тип превью {0}, Path= Preview.Type }" />
 
@@ -61,6 +62,7 @@
 
                     </StackPanel>
                 </GroupBox>
+                
 
 
 

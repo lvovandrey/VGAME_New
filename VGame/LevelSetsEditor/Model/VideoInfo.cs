@@ -14,9 +14,11 @@ namespace LevelSetsEditor.Model
 
         public string Description { get; set; }
 
-        public Size Resolution { get; set; }
+        public System.Drawing.Size Resolution { get; set; }
 
         public Uri Source { get; set; }
+
+        public string Address { get; set; }
 
         public VideoType Type { get; set; }
 

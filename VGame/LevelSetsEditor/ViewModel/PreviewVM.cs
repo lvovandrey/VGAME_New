@@ -17,7 +17,7 @@ namespace LevelSetsEditor.ViewModel
             Preview = preview;
         }
 
-        public Size Size
+        public System.Drawing.Size Size
         {
             get
             {
@@ -40,6 +40,19 @@ namespace LevelSetsEditor.ViewModel
             {
                 Preview.Source = value;
                 OnPropertyChanged("Source");
+            }
+        }
+
+        public Uri[] MultiplePrevSources
+        {
+            get
+            {
+                return Preview.MultiplePrevSources;
+            }
+            set
+            {
+                Preview.MultiplePrevSources = value;
+                OnPropertyChanged("MultiplePrevSources");
             }
         }
 

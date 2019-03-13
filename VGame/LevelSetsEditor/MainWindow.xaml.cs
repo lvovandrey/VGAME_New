@@ -13,8 +13,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Drawing;
 using CefSharp;
 using CefSharp.Wpf;
+using YouTubeUrlSupplier;
 
 namespace LevelSetsEditor
 {
@@ -55,6 +57,31 @@ namespace LevelSetsEditor
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             TabItemEditor.Focus();
+            YoutubeVidInfo vidInfo = new YoutubeVidInfo(TextURL.Text);
+
+            LevelSetVMDataContext.VideoInfoVM.Source = new Uri(vidInfo.DirectURL);
+            LevelSetVMDataContext.VideoInfoVM.Address = TextURL.Text;
+            LevelSetVMDataContext.VideoInfoVM.Description = vidInfo.Title;
+            LevelSetVMDataContext.VideoInfoVM.Duration = vidInfo.Duration;
+            LevelSetVMDataContext.VideoInfoVM.Resolution = vidInfo.Resolution;
+            LevelSetVMDataContext.VideoInfoVM.Title = vidInfo.Title;
+            LevelSetVMDataContext.VideoInfoVM.Type = Model.VideoType.youtube;
+          //  LevelSetVMDataContext.SceneSets.
+
+            LevelSetVMDataContext.VideoInfoVM.Preview.Source = new Uri(vidInfo.ImageUrl);
+            LevelSetVMDataContext.VideoInfoVM.Preview.Size = new System.Drawing.Size(320, 180);
+            LevelSetVMDataContext.VideoInfoVM.Preview.Type = Model.PreviewType.youtube;
+            for (int i = 0; i < 3; i++)
+               LevelSetVMDataContext.VideoInfoVM.Preview.MultiplePrevSources[i] = new Uri(vidInfo.PrevImagesUrl[i]);
+
+            //  YouTubeUrlSupplier.YoutubeGet.
+            //  YoutubeVidInfo VidInfo = new YoutubeVidInfo
         }
+
+        private void AutoSegregateVideoToScenes(LevelSetVM LSet)
+        {
+        }
+
+
     }
 }

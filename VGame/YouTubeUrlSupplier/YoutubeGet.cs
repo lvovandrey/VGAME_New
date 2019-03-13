@@ -1,48 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Windows;
+
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace YouTubeUrlSupplier
 {
-    public class YoutubeVidInfo
-    {
-        string DirectURL;
-        string Title;
-        TimeSpan Duration;
-        Size Resolution;
-        string ImageUrl;
-        string[] PrevImagesUrl;
+   
 
-        public YoutubeVidInfo(string url)
-        {
-            DirectURL="";
-            Title="";
-            Duration=TimeSpan.FromMilliseconds(0);
-            Resolution = new Size(0, 0);
-            ImageUrl="";
-            PrevImagesUrl= new string[]{"","","" };
-            try
-            {
-                IList<VideoQuality> list = null;
-                list = YouTubeDownloader.GetYouTubeVideoUrls(url);
-                DirectURL = list.First().DownloadUrl;
-                Title = list.First().VideoTitle;
-                Duration = TimeSpan.FromSeconds(list.First().Length);
-                Resolution = list.First().Dimension;
-                ImageUrl = YoutubeGet.GetImage(url);
-                PrevImagesUrl = YoutubeGet.GetPrevImages(url);
-            }
-            catch
-            {
-                MessageBox.Show("Error creating YoutubeVideoInfo object. ");
-            }
-        }
-    }
     public static class YoutubeGet
     {
         /// <summary>
