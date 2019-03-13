@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolPlayer", "ToolPlayer\To
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YouTubeUrlSupplier", "YouTubeUrlSupplier\YouTubeUrlSupplier.csproj", "{1A46315E-9DD7-4E1C-A598-AD315C8FBC12}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlYoutubeImport", "XmlYoutubeImport\XmlYoutubeImport.csproj", "{E35297F8-7B76-4B4D-9643-799B90F014A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LevelSetsEditor", "LevelSetsEditor\LevelSetsEditor.csproj", "{2864248F-4BDE-4CB3-A552-9BCBE66C6F1D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +45,22 @@ Global
 		{1A46315E-9DD7-4E1C-A598-AD315C8FBC12}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1A46315E-9DD7-4E1C-A598-AD315C8FBC12}.Release|x64.ActiveCfg = Release|Any CPU
 		{1A46315E-9DD7-4E1C-A598-AD315C8FBC12}.Release|x64.Build.0 = Release|Any CPU
+		{E35297F8-7B76-4B4D-9643-799B90F014A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E35297F8-7B76-4B4D-9643-799B90F014A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E35297F8-7B76-4B4D-9643-799B90F014A8}.Debug|x64.ActiveCfg = Debug|x64
+		{E35297F8-7B76-4B4D-9643-799B90F014A8}.Debug|x64.Build.0 = Debug|x64
+		{E35297F8-7B76-4B4D-9643-799B90F014A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E35297F8-7B76-4B4D-9643-799B90F014A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E35297F8-7B76-4B4D-9643-799B90F014A8}.Release|x64.ActiveCfg = Release|Any CPU
+		{E35297F8-7B76-4B4D-9643-799B90F014A8}.Release|x64.Build.0 = Release|Any CPU
+		{2864248F-4BDE-4CB3-A552-9BCBE66C6F1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2864248F-4BDE-4CB3-A552-9BCBE66C6F1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2864248F-4BDE-4CB3-A552-9BCBE66C6F1D}.Debug|x64.ActiveCfg = Debug|x64
+		{2864248F-4BDE-4CB3-A552-9BCBE66C6F1D}.Debug|x64.Build.0 = Debug|x64
+		{2864248F-4BDE-4CB3-A552-9BCBE66C6F1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2864248F-4BDE-4CB3-A552-9BCBE66C6F1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2864248F-4BDE-4CB3-A552-9BCBE66C6F1D}.Release|x64.ActiveCfg = Release|Any CPU
+		{2864248F-4BDE-4CB3-A552-9BCBE66C6F1D}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

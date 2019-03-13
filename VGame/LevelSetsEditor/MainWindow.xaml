@@ -1,0 +1,100 @@
+﻿<Window x:Class="LevelSetsEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LevelSetsEditor"
+        xmlns:vm ="clr-namespace:LevelSetsEditor.ViewModel"
+        xmlns:chromium ="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+        xmlns:propview ="clr-namespace:LevelSetsEditor.View"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="850" Width="1200" >
+    <Window.DataContext>
+        <vm:LevelSetVM x:Name="LevelSetVMDataContext"/>
+    </Window.DataContext>
+    <TabControl Name="TabControlMain" >
+        <TabItem Name="TabItemEditor" Header="Редактор">
+        
+
+            <Grid>
+                <Button Content="Button" HorizontalAlignment="Left" Margin="305,346,0,0" VerticalAlignment="Top" Width="75"  Command="{Binding Path=AutoSegregateVideoToScenes}"/>
+                <ListBox ItemsSource="{Binding SceneSets, UpdateSourceTrigger=PropertyChanged}" 
+                 SelectedItem ="{Binding SelectedSceneSetVM }" 
+                HorizontalAlignment="Left" 
+                 Height="403" Margin="10,10,0,0" VerticalAlignment="Top" Width="219">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="{Binding UnitsCount, UpdateSourceTrigger=PropertyChanged}"></Label>
+                                <Label Content="{Binding VideoSegment.TimeBegin, UpdateSourceTrigger=PropertyChanged}"></Label>
+                                <Label Content="{Binding VideoSegment.TimeEnd, UpdateSourceTrigger=PropertyChanged}"></Label>
+                                <Label Content="{Binding VideoSegment.Source, UpdateSourceTrigger=PropertyChanged}"></Label>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Label Content="{Binding Name}" HorizontalAlignment="Left" Margin="267,22,0,0" VerticalAlignment="Top"/>
+                <GroupBox Header="Выбранный элемент" HorizontalAlignment="Left" Height="201" Margin="234,53,0,0" VerticalAlignment="Top" Width="223"
+                  DataContext="{Binding SelectedSceneSetVM}">
+                    <StackPanel Orientation="Vertical" RenderTransformOrigin="0.492,0.534"   >
+                        <TextBox Text="{Binding UnitsCount}"></TextBox>
+                        <TextBox Text="{Binding VideoSegment.TimeBegin}"></TextBox>
+                        <TextBox Text="{Binding VideoSegment.TimeEnd}"></TextBox>
+                        <TextBox Text="{Binding VideoSegment.Source}"></TextBox>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Инфо о видео" x:Name="VideoInfoGroupBox" HorizontalAlignment="Left" Height="668"  VerticalAlignment="Top" Width="605"
+                  DataContext="{Binding VideoInfoVM}" RenderTransformOrigin="0.269,1.604" Margin="462,22,0,0">
+                    <StackPanel Orientation="Vertical"   >
+                        <propview:PropertyViewer  DataContext="{Binding Title}" Tag="Название"/>
+                        <propview:PropertyViewer  DataContext="{Binding Description}" Tag="Описание"/>
+                        <propview:PropertyViewer  DataContext="{Binding Duration}" Tag="Длительность"/>
+                        <propview:PropertyViewer  DataContext="{Binding Source}" Tag="Источник"/>
+                        <propview:PropertyViewer  DataContext="{Binding Type, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Tag="Тип видео"/>
+                        <propview:PropertyViewer  DataContext="{Binding Resolution}" Tag="Разрешение" Margin="0,0,0,50"/>
+
+                        
+                        <Image Source="{Binding Preview.Source}" Height="{Binding Preview.Size.Height}" Width="{Binding Preview.Size.Width}"/>
+                        <TextBox Text ="{Binding StringFormat= Тип превью {0}, Path= Preview.Type }" />
+
+                        <TextBox Text ="{Binding StringFormat= Размер превью {0}, Path= Preview.Size }" />
+                        <TextBox Text ="{Binding  Path= Preview.Source }" />
+
+                    </StackPanel>
+                </GroupBox>
+                
+
+
+
+
+            </Grid>
+        </TabItem>
+        <TabItem Header="Браузер">
+            <DockPanel>
+                <Grid Name="GridBrowser" DockPanel.Dock="Top">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="150"/>
+
+                    </Grid.ColumnDefinitions>
+                    <Button Content="JOIN" Margin="5" Grid.Column="0" Click="Button_Click_2" />
+                    <TextBox Name="TextURL"  Grid.Column="1" Text="{Binding Address, ElementName=Browser, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Margin="5" FontSize="16" KeyDown="TextURL_KeyDown" />
+                    <Button Content="GO!" Margin="5" Grid.Column="2" Click="Button_Click"/>
+                    <Button Content="Youtube" Margin="5" Grid.Column="5" Click="Button_Click_1" />
+
+                    <Button Content="&lt;" Command="{Binding WebBrowser.BackCommand, ElementName=Browser}" Margin="5" Grid.Column="3" />
+                    <Button Content="&gt;" Command="{Binding WebBrowser.ForwardCommand, ElementName=Browser}" Margin="5" Grid.Column="4" />
+                </Grid>
+
+                <Grid Background="DarkOrange" Margin="5">
+                    <chromium:ChromiumWebBrowser Name="Browser" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Address="https://music.yandex.ru/radio"/>
+                </Grid>
+            </DockPanel>
+        </TabItem>
+    </TabControl>
+</Window>

@@ -1,12 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Windows;
+
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+
 
 namespace YouTubeUrlSupplier
 {
+   
+
     public static class YoutubeGet
     {
         /// <summary>
@@ -30,7 +37,9 @@ namespace YouTubeUrlSupplier
         /// <returns>Video Title</returns>
         public static string GetTitle(string url)
         {
-            return "";
+
+            string t = YouTubeDownloader.GetYouTubeVideoTitle(url);
+            return t;
         }
 
         /// <summary>
@@ -40,7 +49,8 @@ namespace YouTubeUrlSupplier
         /// <returns>Video duration as timespan</returns>
         public static TimeSpan GetDuraion(string url)
         {
-            return TimeSpan.FromSeconds(0);
+            TimeSpan t = YouTubeDownloader.GetYouTubeVideoDuration(url);
+            return t;
         }
 
         /// <summary>
@@ -63,6 +73,18 @@ namespace YouTubeUrlSupplier
             return string.Format(CultureInfo.InvariantCulture, "http://i3.ytimg.com/vi/{0}/hqdefault.jpg", YouTubeDownloader.GetVideoIdFromUrl(url));
         }
 
+        /// <summary>
+        /// Return direct urls to images video preview from Youtube
+        /// </summary>
+        /// <param name="url">Link (string) from Youtube, like "https://www.youtube.com/watch?v=ХХХХХХХХХ" or embed version</param>
+        /// <returns>Direct link to image</returns>
+        public static string[] GetPrevImages(string url)
+        {
+            string[] Urls = new string[3];
+            for (int i = 0; i < 3; i++)
+                Urls[i] = string.Format(CultureInfo.InvariantCulture, "http://i3.ytimg.com/vi/{0}/1.jpg", YouTubeDownloader.GetVideoIdFromUrl(url));
+            return Urls;
+        }
 
 
     }

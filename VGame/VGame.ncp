@@ -1,0 +1,154 @@
+<Project>
+  <Name>VGame</Name>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>LevelSets</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>LevelSet</Name>
+        <Access>Public</Access>
+        <Location left="1053" top="236" />
+        <Size width="359" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">VideoInfo VideoInfo { get; set; }</Member>
+        <Member type="Property">public ObservableCollection&lt;SceneSet&gt; SceneSets { get; set; }</Member>
+        <Member type="Property">public string Name { get; set; }</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>SceneSet</Name>
+        <Access>Public</Access>
+        <Location left="828" top="573" />
+        <Size width="287" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public VideoSegment VideoSegment { get; set; }</Member>
+        <Member type="Property">public int UnitsCount { get; set; }</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>VideoInfo</Name>
+        <Access>Public</Access>
+        <Location left="362" top="278" />
+        <Size width="224" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public string Title { get; set; }</Member>
+        <Member type="Property">public TimeSpan Duration { get; set; }</Member>
+        <Member type="Property">public string Description { get; set; }</Member>
+        <Member type="Property">public Size Resolution { get; set; }</Member>
+        <Member type="Property">publicUri Source { get; set; }</Member>
+        <Member type="Property">public VideoType Type { get; set; }</Member>
+        <Member type="Property">public Preview Preview { get; set; }</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Preview</Name>
+        <Access>Public</Access>
+        <Location left="163" top="573" />
+        <Size width="217" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public Uri Source { get; set; }</Member>
+        <Member type="Property">public type PreviewType { get; set; }</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Enum">
+        <Name>VideoType</Name>
+        <Access>Public</Access>
+        <Location left="10" top="132" />
+        <Size width="162" height="163" />
+        <Collapsed>False</Collapsed>
+        <Value>local</Value>
+        <Value>youtube</Value>
+        <Value>rtsp</Value>
+        <Value>webcam</Value>
+        <Value>unknown</Value>
+        <Value>none</Value>
+      </Entity>
+      <Entity type="Enum">
+        <Name>PreviewType</Name>
+        <Access>Public</Access>
+        <Location left="10" top="304" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Value>local</Value>
+        <Value>youtube</Value>
+      </Entity>
+      <Entity type="Class">
+        <Name>VideoSegment</Name>
+        <Access>Public</Access>
+        <Location left="483" top="724" />
+        <Size width="243" height="128" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public TimeSpan TimeBegin { get; set; }</Member>
+        <Member type="Property">public TimeSpan TimeEnd { get; set; }</Member>
+        <Member type="Property">public Uri Source { get; set; }</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Association" first="0" second="1">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1028</X>
+          <Y>329</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>965</X>
+          <Y>548</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="0" second="2">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1028</X>
+          <Y>314</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>500</X>
+          <Y>230</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="2" second="3">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>311</X>
+          <Y>457</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>244</X>
+          <Y>548</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="1" second="6">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>803</X>
+          <Y>652</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>602</X>
+          <Y>652</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+</Project>
