@@ -50,7 +50,7 @@
                         <propview:PropertyViewer  DataContext="{Binding Description}" Tag="Описание"/>
                         <propview:PropertyViewer  DataContext="{Binding Duration}" Tag="Длительность"/>
                         <propview:PropertyViewer  DataContext="{Binding Source}" Tag="Источник"/>
-                        <propview:PropertyViewer  DataContext="{Binding Type, UpdateSourceTrigger=PropertyChanged}" Tag="Тип видео"/>
+                        <propview:PropertyViewer  DataContext="{Binding Type, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Tag="Тип видео"/>
                         <propview:PropertyViewer  DataContext="{Binding Resolution}" Tag="Разрешение" Margin="0,0,0,50"/>
 
                         

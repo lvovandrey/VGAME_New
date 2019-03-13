@@ -20,7 +20,11 @@ namespace LevelSetsEditor.Model
 
         public string SegregateScenes()
         {
+
+            TimeSpan Dur = VideoInfo.Duration;
+
             return "someShit";
+
         }
     }
 }
