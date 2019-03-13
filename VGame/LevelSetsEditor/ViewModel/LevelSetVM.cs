@@ -111,7 +111,7 @@ namespace LevelSetsEditor.ViewModel
                   (autoSegregateVideoToScenes = new RelayCommand(obj =>
                   {
                       MessageBox.Show(this.LevelSet.SegregateScenes());
-
+                      OnPropertyChanged("VideoInfoVM");
                      
                       //int i = 555;
                       //SceneSetVM sceneSetVM = new SceneSetVM(new Model.SceneSet()

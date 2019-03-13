@@ -22,7 +22,11 @@ namespace LevelSetsEditor.Model
         {
 
             TimeSpan Dur = VideoInfo.Duration;
+            int NumScenes =(int)Math.Ceiling(VideoInfo.Duration.TotalMinutes / 2);
 
+            Name = "OPPPS";
+            VideoInfo.Title = "JQJKJL";
+            //SceneSets.Add()
             return "someShit";
 
         }

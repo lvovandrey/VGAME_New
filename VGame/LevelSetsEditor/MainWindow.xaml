@@ -33,7 +33,7 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <Label Content="{Binding Name}" HorizontalAlignment="Left" Margin="267,22,0,0" VerticalAlignment="Top"/>
+                <Label Content="{Binding Path=Name}" HorizontalAlignment="Left" Margin="267,22,0,0" VerticalAlignment="Top"/>
                 <GroupBox Header="Выбранный элемент" HorizontalAlignment="Left" Height="201" Margin="234,53,0,0" VerticalAlignment="Top" Width="223"
                   DataContext="{Binding SelectedSceneSetVM}">
                     <StackPanel Orientation="Vertical" RenderTransformOrigin="0.492,0.534"   >
