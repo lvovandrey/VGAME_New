@@ -17,7 +17,7 @@
         
 
             <Grid>
-                <Button Content="Button" HorizontalAlignment="Left" Margin="305,346,0,0" VerticalAlignment="Top" Width="75"  Command="{Binding Path=AddCommand}"/>
+                <Button Content="Button" HorizontalAlignment="Left" Margin="305,346,0,0" VerticalAlignment="Top" Width="75"  Command="{Binding Path=AutoSegregateVideoToScenes}"/>
                 <ListBox ItemsSource="{Binding SceneSets, UpdateSourceTrigger=PropertyChanged}" 
                  SelectedItem ="{Binding SelectedSceneSetVM }" 
                 HorizontalAlignment="Left" 
@@ -48,9 +48,9 @@
                     <StackPanel Orientation="Vertical"   >
                         <propview:PropertyViewer  DataContext="{Binding Title}" Tag="Название"/>
                         <propview:PropertyViewer  DataContext="{Binding Description}" Tag="Описание"/>
-                        <propview:PropertyViewer  DataContext="{Binding Durarion}" Tag="Длительность"/>
+                        <propview:PropertyViewer  DataContext="{Binding Duration}" Tag="Длительность"/>
                         <propview:PropertyViewer  DataContext="{Binding Source}" Tag="Источник"/>
-                        <propview:PropertyViewer  DataContext="{Binding Type}" Tag="Тип видео"/>
+                        <propview:PropertyViewer  DataContext="{Binding Type, UpdateSourceTrigger=PropertyChanged}" Tag="Тип видео"/>
                         <propview:PropertyViewer  DataContext="{Binding Resolution}" Tag="Разрешение" Margin="0,0,0,50"/>
 
                         

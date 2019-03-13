@@ -18,8 +18,9 @@ namespace LevelSetsEditor.Model
 
         public string Name { get; set; }
 
-        public void SegregateScenes()
+        public string SegregateScenes()
         {
+            return "someShit";
         }
     }
 }

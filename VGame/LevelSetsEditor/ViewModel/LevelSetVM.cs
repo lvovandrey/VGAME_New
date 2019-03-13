@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using LevelSetsEditor.Model;
 
 namespace LevelSetsEditor.ViewModel
@@ -17,6 +18,7 @@ namespace LevelSetsEditor.ViewModel
         public LevelSetVM() // В этом конструкторе заполняем тестовыми данными свойства ойства...
         {
             this.LevelSet = new LevelSet() { Name = nameof(LevelSet.Name) };
+            LevelSet.VideoInfo = new VideoInfo();
 
         
             SceneSets = new ObservableCollection<SceneSetVM>();
@@ -35,21 +37,25 @@ namespace LevelSetsEditor.ViewModel
                 SceneSets.Add(sceneSetVM);
             }
 
-            videoInfoVM = new VideoInfoVM(new VideoInfo()
+            
+
+
+            LevelSet.VideoInfo.Title = "Айболит - серия 1";
+            LevelSet.VideoInfo.Duration = TimeSpan.FromSeconds(356);
+            LevelSet.VideoInfo.Description = "Мультфильм про доктора Айболита. СССР";
+            Preview Preview = new Preview()
             {
-                Title = "Айболит - серия 1",
-                Duration = TimeSpan.FromSeconds(356),
-                Description = "Мультфильм про доктора Айболита. СССР",
-                Preview = new Preview()
-                {
-                    Size = new System.Drawing.Size(480,360),
-                    Type = PreviewType.youtube,
-                    Source = new Uri(@"https://img.youtube.com/vi/dDRqhwHdpe8/hqdefault.jpg")
-                },
-                Resolution = new System.Drawing.Size(720, 480),
-                Source = new Uri(@"https://www.youtube.com/watch?v=dDRqhwHdpe8"),
-                Type = VideoType.youtube
-            });
+                Size = new System.Drawing.Size(480, 360),
+                Type = PreviewType.youtube,
+                Source = new Uri(@"https://img.youtube.com/vi/dDRqhwHdpe8/hqdefault.jpg")
+            };
+            LevelSet.VideoInfo.Preview = Preview;
+            LevelSet.VideoInfo.Resolution = new System.Drawing.Size(720, 480);
+            LevelSet.VideoInfo.Source = new Uri(@"https://www.youtube.com/watch?v=dDRqhwHdpe8");
+            LevelSet.VideoInfo.Type = VideoType.youtube;
+
+            videoInfoVM = new VideoInfoVM(LevelSet.VideoInfo);
+
         }
 
 
@@ -104,21 +110,27 @@ namespace LevelSetsEditor.ViewModel
                 return autoSegregateVideoToScenes ??
                   (autoSegregateVideoToScenes = new RelayCommand(obj =>
                   {
-                      int i = 555;
-                      SceneSetVM sceneSetVM = new SceneSetVM(new Model.SceneSet()
-                      {
-                          UnitsCount = 153 * i,
-                          VideoSegment = new VideoSegment()
-                          {
-                              TimeBegin = TimeSpan.FromSeconds(i * 66),
-                              TimeEnd = TimeSpan.FromSeconds(i * 88),
-                              Source = new Uri("C:/test.avi")
-                          }
-                      });
-                      SceneSets.Add(sceneSetVM);
+                      MessageBox.Show(this.LevelSet.SegregateScenes());
+
+                     
+                      //int i = 555;
+                      //SceneSetVM sceneSetVM = new SceneSetVM(new Model.SceneSet()
+                      //{
+                      //    UnitsCount = 153 * i,
+                      //    VideoSegment = new VideoSegment()
+                      //    {
+                      //        TimeBegin = TimeSpan.FromSeconds(i * 66),
+                      //        TimeEnd = TimeSpan.FromSeconds(i * 88),
+                      //        Source = new Uri("C:/test.avi")
+                      //    }
+                      //});
+                      //SceneSets.Add(sceneSetVM);
                   }));
             }
         }
+
+
+
 
 
         #region mvvm

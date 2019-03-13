@@ -6,7 +6,16 @@ namespace LevelSetsEditor.Model
 {
 	public class VideoSegment
 	{
-		public TimeSpan TimeBegin { get; set; }
+        TimeSpan timeBegin;
+		public TimeSpan TimeBegin
+        {
+            get
+            {
+                return timeBegin;
+            }
+            set
+            { timeBegin = value; }
+        }
 		public TimeSpan TimeEnd { get; set; }
 		public Uri Source { get; set; }
 	}

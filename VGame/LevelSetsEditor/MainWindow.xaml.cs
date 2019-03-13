@@ -57,7 +57,9 @@ namespace LevelSetsEditor
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             TabItemEditor.Focus();
+            
             YoutubeVidInfo vidInfo = new YoutubeVidInfo(TextURL.Text);
+            if (vidInfo.DirectURL == "") return;
 
             LevelSetVMDataContext.VideoInfoVM.Source = new Uri(vidInfo.DirectURL);
             LevelSetVMDataContext.VideoInfoVM.Address = TextURL.Text;
