@@ -1,54 +1,44 @@
-﻿using LevelSetsEditor.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Drawing;
+using LevelSetsEditor.Model;
 
 namespace LevelSetsEditor.ViewModel
 {
-    public class VideoInfoVM: INotifyPropertyChanged
+    public class MainVM: INotifyPropertyChanged
     {
-        VideoInfo _videoInfo;
-        public VideoInfoVM(VideoInfo videoInfo)
+        
+        public MainVM() // В этом конструкторе заполняем тестовыми данными свойства ойства...
         {
-            _videoInfo = videoInfo;
+            _levelSet = new LevelSet();
+            _levelSet.VideoInfo = new VideoInfo();
+
+            _videoInfoVM = new VideoInfoVM(_levelSet.VideoInfo);
         }
 
+        LevelSet _levelSet;
 
-
-        public string Title
-        {
-            get
-            {
-                return _videoInfo.Title;
-            }
-            set
-            {
-                _videoInfo.Title = value;
-                OnPropertyChanged("Title");
-            }
-        }
-
-
-
-        public string Address
+        VideoInfoVM _videoInfoVM;
+        public VideoInfoVM VideoInfoVM
         {
             get
             {
-                return _videoInfo.Address;
+                return _videoInfoVM;
             }
             set
             {
-                _videoInfo.Address = value;
-                OnPropertyChanged("Address");
+                _videoInfoVM = value;
+                OnPropertyChanged("VideoInfoVM");
             }
         }
 
-      
+
+
 
 
         #region mvvm
@@ -60,5 +50,6 @@ namespace LevelSetsEditor.ViewModel
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
+
     }
 }

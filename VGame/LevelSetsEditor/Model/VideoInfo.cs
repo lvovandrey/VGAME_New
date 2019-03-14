@@ -6,18 +6,22 @@ using System.Windows;
 
 namespace LevelSetsEditor.Model
 {
-    public enum VideoType {local, youtube, net}
 	public class VideoInfo: INotifyPropertyChanged
 	{
-		public string Title { get; set; }
-		
-		public TimeSpan Duration { get; set; }
+        string _title;
+        public string Title
+        {
+            get
+            {
+                return _title;
+            }
+            set
+            {
+                _title = value;
+                OnPropertyChanged("Title");
+            }
+        }
 
-        public string Description { get; set; }
-
-        public System.Drawing.Size Resolution { get; set; }
-
-        public Uri Source { get; set; }
 
         string _address;
         public string Address
@@ -33,9 +37,7 @@ namespace LevelSetsEditor.Model
             }
         }
 
-public VideoType Type { get; set; }
 
-        public Preview Preview { get; set; }
 
         #region mvvm
         public event PropertyChangedEventHandler PropertyChanged;

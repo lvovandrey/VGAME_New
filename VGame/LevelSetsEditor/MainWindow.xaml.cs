@@ -27,7 +27,9 @@ namespace LevelSetsEditor
     public partial class MainWindow : Window
     {
         WebBrowserVM WebBrowserVM;
-     //   LevelSetVM LevelSetVMDataContext;
+
+        MainVM MainVM;
+        //   LevelSetVM LevelSetVMDataContext;
         public MainWindow()
         {
             CefSettings settings = new CefSettings();
@@ -39,7 +41,13 @@ namespace LevelSetsEditor
             WebBrowserVM = new WebBrowserVM(Browser);
             GridBrowser.DataContext = WebBrowserVM;
 
-         //   LevelSetVMDataContext = new LevelSetVM();
+
+
+
+            MainVM = new MainVM();
+            DataContext = MainVM;
+
+
 
         }
 
@@ -65,38 +73,10 @@ namespace LevelSetsEditor
             YoutubeVidInfo vidInfo = new YoutubeVidInfo(TextURL.Text);
             if (vidInfo.DirectURL == "") return;
 
-            VideoInfo VI = new VideoInfo();
-            VideoInfoVM VIVM = new VideoInfoVM(VI);
-            string adress = TextURL.Text;
-
-            VIVM.Source = new Uri(vidInfo.DirectURL);
-            VIVM.Address = adress;
-            VIVM.Description = vidInfo.Title;
-            VIVM.Duration = vidInfo.Duration;
-            VIVM.Resolution = vidInfo.Resolution;
-            VIVM.Title = vidInfo.Title;
-            VIVM.Type = Model.VideoType.youtube;
-          //  LevelSetVMDataContext.SceneSets.
-
-            //VIVM.Preview = new Preview()
-            //VIVM.Preview.Source = new Uri(vidInfo.ImageUrl);
-            //VIVM.Preview.Size = new System.Drawing.Size(320, 180);
-            //VIVM.Preview.Type = Model.PreviewType.youtube;
-            //for (int i = 0; i < 3; i++)
-            //   VIVM.Preview.MultiplePrevSources[i] = new Uri(vidInfo.PrevImagesUrl[i]);
-
-            LevelSetVMDataContext.VideoInfoVM = VIVM;
-            //  YouTubeUrlSupplier.YoutubeGet.
-            //  YoutubeVidInfo VidInfo = new YoutubeVidInfo
-
-
-
-
+            MainVM.VideoInfoVM.Address = TextURL.Text;
+            MainVM.VideoInfoVM.Title = vidInfo.Title;
         }
 
-        private void AutoSegregateVideoToScenes(LevelSetVM LSet)
-        {
-        }
 
 
     }

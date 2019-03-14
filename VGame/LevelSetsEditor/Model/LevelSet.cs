@@ -1,34 +1,39 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Text;
 
 namespace LevelSetsEditor.Model
 {
-	public class LevelSet
+	public class LevelSet:INotifyPropertyChanged
 	{
         public LevelSet()
         {
            
         }
+        VideoInfo _videoInfo;
         public VideoInfo VideoInfo
-		{ get; set; }
-
-		public List<SceneSet> SceneSets { get; set; }
-
-        public string Name { get; set; }
-
-        public string SegregateScenes()
         {
-
-            TimeSpan Dur = VideoInfo.Duration;
-            int NumScenes =(int)Math.Ceiling(VideoInfo.Duration.TotalMinutes / 2);
-
-            Name = "OPPPS";
-            VideoInfo.Title = "JQJKJL";
-            //SceneSets.Add()
-            return "someShit";
-
+            get
+            {
+                return _videoInfo;
+            }
+            set
+            {
+                _videoInfo = value;
+                OnPropertyChanged("VideoInfo");
+            }
         }
+
+        #region mvvm
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
     }
 }

@@ -83,12 +83,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\WebBrowserModel.cs" />
-    <Compile Include="ViewModel\LevelSetVM.cs" />
-    <Compile Include="ViewModel\PreviewVM.cs" />
+    <Compile Include="ViewModel\MainVM.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
-    <Compile Include="ViewModel\SceneSetVM.cs" />
     <Compile Include="ViewModel\VideoInfoVM.cs" />
-    <Compile Include="ViewModel\VideoSegmentVM.cs" />
     <Compile Include="ViewModel\WebBrowserVM.cs" />
     <Compile Include="View\PropertyViewer.xaml.cs">
       <DependentUpon>PropertyViewer.xaml</DependentUpon>
@@ -112,10 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\LevelSet.cs" />
-    <Compile Include="Model\Preview.cs" />
-    <Compile Include="Model\SceneSet.cs" />
     <Compile Include="Model\VideoInfo.cs" />
-    <Compile Include="Model\VideoSegment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
