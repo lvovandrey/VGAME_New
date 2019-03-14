@@ -105,18 +105,20 @@ namespace LevelSetsEditor.ViewModel
             }
         }
 
-        public Preview Preview
-        {
-            get
-            {
-                return levelSet.VideoInfo.Preview;
-            }
-            set
-            {
-                levelSet.VideoInfo.Preview = value;
-                OnPropertyChanged("Preview");
-            }
-        }
+
+        //ПОчему закомментирован Preview: а зачем он нужен отсюда? чтобы внешние слои могли получить доступ к модели? Спасибо большое.... не стоит...
+        //public Preview Preview
+        //{
+        //    get
+        //    {
+        //        return levelSet.VideoInfo.Preview;
+        //    }
+        //    set
+        //    {
+        //        levelSet.VideoInfo.Preview = value;
+        //        OnPropertyChanged("Preview");
+        //    }
+        //}
 
         public Uri Preview_Source
         {

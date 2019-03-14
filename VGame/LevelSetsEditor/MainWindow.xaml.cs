@@ -80,7 +80,8 @@ namespace LevelSetsEditor
             LevelSetVMDataContext.VideoInfoVM.Resolution = vidInfo.Resolution;
             LevelSetVMDataContext.VideoInfoVM.Title = vidInfo.Title;
             LevelSetVMDataContext.VideoInfoVM.Type = Model.VideoType.youtube;
-          //  LevelSetVMDataContext.SceneSets.
+        //    LevelSetVMDataContext.VideoInfoVM.Preview.
+            //  LevelSetVMDataContext.SceneSets.
 
             LevelSetVMDataContext.VideoInfoVM.Preview_Source = new Uri(vidInfo.ImageUrl);
             LevelSetVMDataContext.VideoInfoVM.Preview_Size = new System.Drawing.Size(320, 180);
