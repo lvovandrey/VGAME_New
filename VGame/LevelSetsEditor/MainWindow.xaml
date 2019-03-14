@@ -49,12 +49,13 @@
                         <propview:PropertyViewer  DataContext="{Binding Title}" Tag="Название"/>
                         <propview:PropertyViewer  DataContext="{Binding Description}" Tag="Описание"/>
                         <propview:PropertyViewer  DataContext="{Binding Duration}" Tag="Длительность"/>
-                        <propview:PropertyViewer  DataContext="{Binding Source}" Tag="Источник"/>
-                        <propview:PropertyViewer  DataContext="{Binding Type, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Tag="Тип видео"/>
+                        <propview:PropertyViewer  DataContext="{Binding Address, Mode=TwoWay}" Tag="Источник"/>
+                        <propview:PropertyViewer  DataContext="{Binding Source}" Tag="Прямая ссылка"/>
+                        <propview:PropertyViewer  DataContext="{Binding Type}" Tag="Тип видео"/>
                         <propview:PropertyViewer  DataContext="{Binding Resolution}" Tag="Разрешение" Margin="0,0,0,50"/>
 
                         
-                        <Image Source="{Binding Preview.Source}" Height="{Binding Preview.Size.Height}" Width="{Binding Preview.Size.Width}"/>
+                        <Image Source="{Binding Path=Preview.Source}" Height="{Binding Preview.Size.Height}" Width="{Binding Preview.Size.Width}"/>
                         <TextBox Text ="{Binding StringFormat= Тип превью {0}, Path= Preview.Type }" />
 
                         <TextBox Text ="{Binding StringFormat= Размер превью {0}, Path= Preview.Size }" />
@@ -92,7 +93,7 @@
                 </Grid>
 
                 <Grid Background="DarkOrange" Margin="5">
-                    <chromium:ChromiumWebBrowser Name="Browser" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Address="https://music.yandex.ru/radio"/>
+                    <chromium:ChromiumWebBrowser Name="Browser" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Address="https://www.youtube.com/watch?v=MTWdt5DB9k0"/>
                 </Grid>
             </DockPanel>
         </TabItem>

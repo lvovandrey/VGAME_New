@@ -111,18 +111,7 @@ namespace LevelSetsEditor.ViewModel
             }
         }
 
-        public Preview Preview
-        {
-            get
-            {
-                return VideoInfo.Preview;
-            }
-            set
-            {
-                VideoInfo.Preview = value;
-                OnPropertyChanged("Preview");
-            }
-        }
+
 
         #region mvvm
         public event PropertyChangedEventHandler PropertyChanged;

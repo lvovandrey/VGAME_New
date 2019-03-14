@@ -17,6 +17,7 @@ using System.Drawing;
 using CefSharp;
 using CefSharp.Wpf;
 using YouTubeUrlSupplier;
+using LevelSetsEditor.Model;
 
 namespace LevelSetsEditor
 {
@@ -26,6 +27,7 @@ namespace LevelSetsEditor
     public partial class MainWindow : Window
     {
         WebBrowserVM WebBrowserVM;
+     //   LevelSetVM LevelSetVMDataContext;
         public MainWindow()
         {
             CefSettings settings = new CefSettings();
@@ -36,7 +38,9 @@ namespace LevelSetsEditor
             //WebBrowserVM Browser = new WebBrowserVM(new Model.WebBrowserModel());
             WebBrowserVM = new WebBrowserVM(Browser);
             GridBrowser.DataContext = WebBrowserVM;
-           
+
+         //   LevelSetVMDataContext = new LevelSetVM();
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -61,23 +65,33 @@ namespace LevelSetsEditor
             YoutubeVidInfo vidInfo = new YoutubeVidInfo(TextURL.Text);
             if (vidInfo.DirectURL == "") return;
 
-            LevelSetVMDataContext.VideoInfoVM.Source = new Uri(vidInfo.DirectURL);
-            LevelSetVMDataContext.VideoInfoVM.Address = TextURL.Text;
-            LevelSetVMDataContext.VideoInfoVM.Description = vidInfo.Title;
-            LevelSetVMDataContext.VideoInfoVM.Duration = vidInfo.Duration;
-            LevelSetVMDataContext.VideoInfoVM.Resolution = vidInfo.Resolution;
-            LevelSetVMDataContext.VideoInfoVM.Title = vidInfo.Title;
-            LevelSetVMDataContext.VideoInfoVM.Type = Model.VideoType.youtube;
+            VideoInfo VI = new VideoInfo();
+            VideoInfoVM VIVM = new VideoInfoVM(VI);
+            string adress = TextURL.Text;
+
+            VIVM.Source = new Uri(vidInfo.DirectURL);
+            VIVM.Address = adress;
+            VIVM.Description = vidInfo.Title;
+            VIVM.Duration = vidInfo.Duration;
+            VIVM.Resolution = vidInfo.Resolution;
+            VIVM.Title = vidInfo.Title;
+            VIVM.Type = Model.VideoType.youtube;
           //  LevelSetVMDataContext.SceneSets.
 
-            LevelSetVMDataContext.VideoInfoVM.Preview.Source = new Uri(vidInfo.ImageUrl);
-            LevelSetVMDataContext.VideoInfoVM.Preview.Size = new System.Drawing.Size(320, 180);
-            LevelSetVMDataContext.VideoInfoVM.Preview.Type = Model.PreviewType.youtube;
-            for (int i = 0; i < 3; i++)
-               LevelSetVMDataContext.VideoInfoVM.Preview.MultiplePrevSources[i] = new Uri(vidInfo.PrevImagesUrl[i]);
+            //VIVM.Preview = new Preview()
+            //VIVM.Preview.Source = new Uri(vidInfo.ImageUrl);
+            //VIVM.Preview.Size = new System.Drawing.Size(320, 180);
+            //VIVM.Preview.Type = Model.PreviewType.youtube;
+            //for (int i = 0; i < 3; i++)
+            //   VIVM.Preview.MultiplePrevSources[i] = new Uri(vidInfo.PrevImagesUrl[i]);
 
+            LevelSetVMDataContext.VideoInfoVM = VIVM;
             //  YouTubeUrlSupplier.YoutubeGet.
             //  YoutubeVidInfo VidInfo = new YoutubeVidInfo
+
+
+
+
         }
 
         private void AutoSegregateVideoToScenes(LevelSetVM LSet)
