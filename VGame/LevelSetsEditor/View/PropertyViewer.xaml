@@ -12,7 +12,7 @@
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBox Text="{Binding Path=.}" Grid.Column="1" />
+            <TextBox Text="{Binding ElementName=This, Path=DataContext, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="1" />
             <Label Content="{Binding ElementName= This, Path=Tag}"/>
         </Grid>
     </Grid>

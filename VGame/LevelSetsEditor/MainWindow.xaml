@@ -46,12 +46,12 @@
                 <GroupBox Header="Инфо о видео" x:Name="VideoInfoGroupBox" HorizontalAlignment="Left" Height="668"  VerticalAlignment="Top" Width="605"
                   DataContext="{Binding VideoInfoVM}" RenderTransformOrigin="0.269,1.604" Margin="462,22,0,0">
                     <StackPanel Orientation="Vertical"   >
-                        <propview:PropertyViewer  DataContext="{Binding Title}" Tag="Название"/>
-                        <propview:PropertyViewer  DataContext="{Binding Description}" Tag="Описание"/>
-                        <propview:PropertyViewer  DataContext="{Binding Duration}" Tag="Длительность"/>
-                        <propview:PropertyViewer  DataContext="{Binding Source}" Tag="Источник"/>
-                        <propview:PropertyViewer  DataContext="{Binding Type, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Tag="Тип видео"/>
-                        <propview:PropertyViewer  DataContext="{Binding Resolution}" Tag="Разрешение" Margin="0,0,0,50"/>
+                        <propview:PropertyViewer  DataContext="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Название"/>
+                        <propview:PropertyViewer  DataContext="{Binding Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Описание"/>
+                        <propview:PropertyViewer  DataContext="{Binding Duration, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Длительность"/>
+                        <propview:PropertyViewer  DataContext="{Binding Source, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Источник"/>
+                        <propview:PropertyViewer  DataContext="{Binding Type,  UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Тип видео"/>
+                        <propview:PropertyViewer  DataContext="{Binding Resolution, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Разрешение" Margin="0,0,0,50"/>
 
                         
                         <Image Source="{Binding Preview.Source}" Height="{Binding Preview.Size.Height}" Width="{Binding Preview.Size.Width}"/>
