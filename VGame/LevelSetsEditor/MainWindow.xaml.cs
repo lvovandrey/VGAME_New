@@ -32,11 +32,23 @@ namespace LevelSetsEditor
             settings.CachePath = @"C:\CEFcookies"; // Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\CEF";
             CefSharp.Cef.Initialize(settings);
 
+
+            //LevelSetVMDataContext.LevelSet = new Model.LevelSet();
+
             InitializeComponent();
             //WebBrowserVM Browser = new WebBrowserVM(new Model.WebBrowserModel());
             WebBrowserVM = new WebBrowserVM(Browser);
             GridBrowser.DataContext = WebBrowserVM;
-           
+
+            
+            //LevelSetVMDataContext.LevelSet.SceneSets = new List<Model.SceneSet>();
+            //LevelSetVMDataContext.LevelSet.VideoInfo = new Model.VideoInfo();
+            //LevelSetVMDataContext.LevelSet.VideoInfo.Preview = new Model.Preview();
+
+
+
+
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -70,11 +82,11 @@ namespace LevelSetsEditor
             LevelSetVMDataContext.VideoInfoVM.Type = Model.VideoType.youtube;
           //  LevelSetVMDataContext.SceneSets.
 
-            LevelSetVMDataContext.VideoInfoVM.Preview.Source = new Uri(vidInfo.ImageUrl);
-            LevelSetVMDataContext.VideoInfoVM.Preview.Size = new System.Drawing.Size(320, 180);
-            LevelSetVMDataContext.VideoInfoVM.Preview.Type = Model.PreviewType.youtube;
+            LevelSetVMDataContext.VideoInfo.Preview.Source = new Uri(vidInfo.ImageUrl);
+            LevelSetVMDataContext.VideoInfo.Preview.Size = new System.Drawing.Size(320, 180);
+            LevelSetVMDataContext.VideoInfo.Preview.Type = Model.PreviewType.youtube;
             for (int i = 0; i < 3; i++)
-               LevelSetVMDataContext.VideoInfoVM.Preview.MultiplePrevSources[i] = new Uri(vidInfo.PrevImagesUrl[i]);
+               LevelSetVMDataContext.VideoInfo.Preview.MultiplePrevSources[i] = new Uri(vidInfo.PrevImagesUrl[i]);
 
             //  YouTubeUrlSupplier.YoutubeGet.
             //  YoutubeVidInfo VidInfo = new YoutubeVidInfo

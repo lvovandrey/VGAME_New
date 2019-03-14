@@ -9,7 +9,8 @@ namespace LevelSetsEditor.Model
 	{
         public LevelSet()
         {
-           
+            SceneSets = new List<SceneSet>();
+            VideoInfo = new VideoInfo();
         }
         public VideoInfo VideoInfo
 		{ get; set; }

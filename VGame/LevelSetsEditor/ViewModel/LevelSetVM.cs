@@ -12,122 +12,30 @@ namespace LevelSetsEditor.ViewModel
 {
     public class LevelSetVM: INotifyPropertyChanged
     {
-        public LevelSet LevelSet;
-        
+        private LevelSet LevelSet;
+        public VideoInfoVM VideoInfoVM { get; set; }
+
 
         public LevelSetVM() // В этом конструкторе заполняем тестовыми данными свойства ойства...
         {
-            this.LevelSet = new LevelSet() { Name = nameof(LevelSet.Name) };
-            LevelSet.VideoInfo = new VideoInfo();
-
-        
-            SceneSets = new ObservableCollection<SceneSetVM>();
-            for (int i = 1; i <= 3; i++)
-            {
-                SceneSetVM sceneSetVM = new SceneSetVM(new Model.SceneSet()
-                {
-                    UnitsCount = 153 * i,
-                    VideoSegment = new VideoSegment()
-                    {
-                        TimeBegin = TimeSpan.FromSeconds(i * 66),
-                        TimeEnd = TimeSpan.FromSeconds(i * 88),
-                        Source = new Uri("C:/test.avi")
-                    }
-                });
-                SceneSets.Add(sceneSetVM);
-            }
-
-            
-
-
-            LevelSet.VideoInfo.Title = "Айболит - серия 1";
-            LevelSet.VideoInfo.Duration = TimeSpan.FromSeconds(356);
-            LevelSet.VideoInfo.Description = "Мультфильм про доктора Айболита. СССР";
-            Preview Preview = new Preview()
-            {
-                Size = new System.Drawing.Size(480, 360),
-                Type = PreviewType.youtube,
-                Source = new Uri(@"https://img.youtube.com/vi/dDRqhwHdpe8/hqdefault.jpg")
-            };
-            LevelSet.VideoInfo.Preview = Preview;
-            LevelSet.VideoInfo.Resolution = new System.Drawing.Size(720, 480);
-            LevelSet.VideoInfo.Source = new Uri(@"https://www.youtube.com/watch?v=dDRqhwHdpe8");
-            LevelSet.VideoInfo.Type = VideoType.youtube;
-
-            videoInfoVM = new VideoInfoVM(LevelSet.VideoInfo);
-
+            LevelSet = new Model.LevelSet();
+            VideoInfoVM = new VideoInfoVM(LevelSet);
         }
 
 
-        public LevelSetVM(LevelSet levelSet)
+        public VideoInfo VideoInfo
         {
-            this.LevelSet = levelSet;
-
-        }
-
-        private SceneSetVM selectedSceneSetVM;
-        public SceneSetVM SelectedSceneSetVM
-        {
-            get { return selectedSceneSetVM; }
+            get { return LevelSet.VideoInfo; }
             set
             {
-                selectedSceneSetVM = value;
-                OnPropertyChanged("SelectedSceneSetVM");
-            }
-        }
-
-        public string Name
-        {
-            get { return LevelSet.Name; }
-            set
-            {
-                LevelSet.Name = value;
-                OnPropertyChanged("Name");
-            }
-        }
-
-        private VideoInfoVM videoInfoVM;
-        public VideoInfoVM VideoInfoVM
-        {
-            get { return videoInfoVM; }
-            set
-            {
-                videoInfoVM = value;
-                OnPropertyChanged("VideoInfoVM");
+                LevelSet.VideoInfo = value;
+                OnPropertyChanged("VideoInfo");
             }
         }
 
 
 
-        public ObservableCollection<SceneSetVM> SceneSets { get; set; }
 
-        // команда добавления нового объекта
-        private RelayCommand autoSegregateVideoToScenes;
-        public RelayCommand AutoSegregateVideoToScenes
-        {
-            get
-            {
-                return autoSegregateVideoToScenes ??
-                  (autoSegregateVideoToScenes = new RelayCommand(obj =>
-                  {
-                      MessageBox.Show(this.LevelSet.SegregateScenes());
-                      OnPropertyChanged("VideoInfoVM");
-                     
-                      //int i = 555;
-                      //SceneSetVM sceneSetVM = new SceneSetVM(new Model.SceneSet()
-                      //{
-                      //    UnitsCount = 153 * i,
-                      //    VideoSegment = new VideoSegment()
-                      //    {
-                      //        TimeBegin = TimeSpan.FromSeconds(i * 66),
-                      //        TimeEnd = TimeSpan.FromSeconds(i * 88),
-                      //        Source = new Uri("C:/test.avi")
-                      //    }
-                      //});
-                      //SceneSets.Add(sceneSetVM);
-                  }));
-            }
-        }
 
 
 

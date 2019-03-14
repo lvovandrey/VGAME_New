@@ -8,6 +8,8 @@ namespace LevelSetsEditor.Model
     public enum VideoType {local, youtube, net}
 	public class VideoInfo
 	{
+        public VideoInfo()
+        { Preview = new Preview(); }
 		public string Title { get; set; }
 		
 		public TimeSpan Duration { get; set; }
