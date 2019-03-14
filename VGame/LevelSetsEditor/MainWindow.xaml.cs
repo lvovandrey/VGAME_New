@@ -18,9 +18,37 @@ using CefSharp;
 using CefSharp.Wpf;
 using YouTubeUrlSupplier;
 using LevelSetsEditor.Model;
+using System.ComponentModel;
 
 namespace LevelSetsEditor
 {
+    public class Test:INotifyPropertyChanged
+    {
+        string _address;
+        public string Address
+        {
+            get
+            {
+                return _address;
+            }
+            set
+            {
+                _address = value;
+                OnPropertyChanged("Address");
+            }
+        }
+
+        #region mvvm
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
+    }
+
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
@@ -29,6 +57,12 @@ namespace LevelSetsEditor
         WebBrowserVM WebBrowserVM;
 
         MainVM MainVM;
+
+        Test test;
+
+        
+
+
         //   LevelSetVM LevelSetVMDataContext;
         public MainWindow()
         {
@@ -44,8 +78,12 @@ namespace LevelSetsEditor
 
 
 
-            MainVM = new MainVM();
-            DataContext = MainVM;
+            test = new Test();
+
+            test.Address = "АДРЕС ТЕСТА";
+            DataContext = test;
+            //  MainVM = new MainVM();
+            //DataContext = MainVM;
 
 
 

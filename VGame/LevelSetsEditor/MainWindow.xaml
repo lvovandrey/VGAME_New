@@ -17,11 +17,14 @@
             <Grid>
                
                 <GroupBox Header="Инфо о видео" x:Name="VideoInfoGroupBox" HorizontalAlignment="Left" Height="668"  VerticalAlignment="Top" Width="605"
-                  DataContext="{Binding VideoInfoVM}" RenderTransformOrigin="0.269,1.604" Margin="10,10,0,0">
+                   RenderTransformOrigin="0.269,1.604" Margin="10,10,0,0"><!--DataContext="{Binding VideoInfoVM}"-->
                     <StackPanel Orientation="Vertical"   >
-                        <propview:PropertyViewer  DataContext="{Binding Title}" Tag="Название"/>
-                        <propview:PropertyViewer  DataContext="{Binding Address, UpdateSourceTrigger=PropertyChanged}" Tag="Источник"/>
-                        <Label Content="{Binding Address, UpdateSourceTrigger=PropertyChanged}" Background="Chocolate"/>
+                        <!--<propview:PropertyViewer  DataContext="{Binding Title}" Tag="Название"/>
+                        
+                        <Label Content="{Binding Address, UpdateSourceTrigger=PropertyChanged}" Background="Chocolate"/>-->
+
+                        <propview:PropertyViewer  DataContext="{Binding Address, UpdateSourceTrigger=PropertyChanged,  Mode=TwoWay}" Tag="Источник"/>
+                        <propview:UserControl1 Tag="ДРУГОЙ"/>
                         <TextBox Text="{Binding Address, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                     </StackPanel>
                 </GroupBox>
