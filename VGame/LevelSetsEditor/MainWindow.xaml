@@ -44,7 +44,7 @@
                     </StackPanel>
                 </GroupBox>
                 <GroupBox Header="Инфо о видео" x:Name="VideoInfoGroupBox" HorizontalAlignment="Left" Height="668"  VerticalAlignment="Top" Width="605"
-                  DataContext="{Binding VideoInfo}" RenderTransformOrigin="0.269,1.604" Margin="462,22,0,0">
+                  DataContext="{Binding VideoInfoVM}" RenderTransformOrigin="0.269,1.604" Margin="462,22,0,0">
                     <StackPanel Orientation="Vertical"   >
                         <propview:PropertyViewer  DataContext="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Название"/>
                         <propview:PropertyViewer  DataContext="{Binding Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Описание"/>
@@ -54,13 +54,13 @@
                         <propview:PropertyViewer  DataContext="{Binding Resolution, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Разрешение" Margin="0,0,0,50"/>
 
 
-                        <Image DataContext="{Binding Preview, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Source="{Binding Source, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
-                               Height="200"    
-                               Width="150"/>
+                        <Image  Source="{Binding Preview_Source, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
+                               Height="{Binding Preview_Size.Height}"    
+                               Width="{Binding Preview_Size.Width}"/>
                         <TextBox Text ="{Binding StringFormat= Тип превью {0}, Path= Preview.Type }" />
 
-                        <TextBox Text ="{Binding StringFormat= Размер превью {0}, Path= Preview.Size, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-                        <TextBox Text ="{Binding  Path= Preview.Source , UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                        <TextBox Text ="{Binding Preview_Source, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                        <TextBox Text ="{Binding Path= Preview_Size, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
 
                     </StackPanel>
                 </GroupBox>

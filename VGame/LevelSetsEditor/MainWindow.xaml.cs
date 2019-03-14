@@ -82,13 +82,13 @@ namespace LevelSetsEditor
             LevelSetVMDataContext.VideoInfoVM.Type = Model.VideoType.youtube;
           //  LevelSetVMDataContext.SceneSets.
 
-            LevelSetVMDataContext.VideoInfo.Preview.Source = new Uri(vidInfo.ImageUrl);
-            LevelSetVMDataContext.VideoInfo.Preview.Size = new System.Drawing.Size(320, 180);
-            LevelSetVMDataContext.VideoInfo.Preview.Type = Model.PreviewType.youtube;
-            for (int i = 0; i < 3; i++)
-               LevelSetVMDataContext.VideoInfo.Preview.MultiplePrevSources[i] = new Uri(vidInfo.PrevImagesUrl[i]);
+            LevelSetVMDataContext.VideoInfoVM.Preview_Source = new Uri(vidInfo.ImageUrl);
+            LevelSetVMDataContext.VideoInfoVM.Preview_Size = new System.Drawing.Size(320, 180);
+            LevelSetVMDataContext.VideoInfoVM.Preview_Type = Model.PreviewType.youtube;
+            //for (int i = 0; i < 3; i++)
+            //   LevelSetVMDataContext.VideoInfo.Preview.MultiplePrevSources[i] = new Uri(vidInfo.PrevImagesUrl[i]);
 
-            //  YouTubeUrlSupplier.YoutubeGet.
+            ////  YouTubeUrlSupplier.YoutubeGet.
             //  YoutubeVidInfo VidInfo = new YoutubeVidInfo
         }
 
