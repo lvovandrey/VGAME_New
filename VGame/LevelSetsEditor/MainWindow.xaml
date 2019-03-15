@@ -43,7 +43,7 @@
                         <TextBox Text="{Binding VideoSegment.Source}"></TextBox>
                     </StackPanel>
                 </GroupBox>
-                <GroupBox Header="Инфо о видео" x:Name="VideoInfoGroupBox" HorizontalAlignment="Left" Height="668"  VerticalAlignment="Top" Width="605"
+                <GroupBox Header="Инфо о видео" x:Name="VideoInfoGroupBox" HorizontalAlignment="Left" Height="181"  VerticalAlignment="Top" Width="605"
                   DataContext="{Binding VideoInfoVM}" RenderTransformOrigin="0.269,1.604" Margin="462,22,0,0">
                     <StackPanel Orientation="Vertical"   >
                         <propview:PropertyViewer  DataContext="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Название"/>
@@ -54,17 +54,13 @@
                         <propview:PropertyViewer  DataContext="{Binding Resolution, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Разрешение" Margin="0,0,0,50"/>
 
 
-                        <Image  Source="{Binding Preview_Source, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
-                               Height="{Binding Preview_Size.Height}"    
-                               Width="{Binding Preview_Size.Width}"/>
-                        <TextBox Text ="{Binding StringFormat= Тип превью {0}, Path= Preview.Type }" />
-
-                        <TextBox Text ="{Binding Preview_Source, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-                        <TextBox Text ="{Binding Path= Preview_Size, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
 
                     </StackPanel>
                 </GroupBox>
                 
+                <GroupBox Header="Превью" x:Name="PreviewGroupBox" HorizontalAlignment="Left" Height="481"  VerticalAlignment="Top" Width="605" DataContext="{Binding VideoInfoVM}"  Margin="462,222,0,0">
+                    <propview:PreviewViewer DataContext="{Binding Path=VideoInfoVM}"></propview:PreviewViewer>
+                </GroupBox>
 
 
 

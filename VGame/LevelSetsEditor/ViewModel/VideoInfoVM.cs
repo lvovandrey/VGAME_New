@@ -8,9 +8,12 @@ namespace LevelSetsEditor.ViewModel
     {
         private LevelSet levelSet;
 
+        public PreviewVM previewVM;
+
         public VideoInfoVM(LevelSet levelSet)
         {
             this.levelSet = levelSet;
+            previewVM = new PreviewVM(levelSet.VideoInfo.Preview);
         }
 
 
@@ -106,19 +109,19 @@ namespace LevelSetsEditor.ViewModel
         }
 
 
-        //ПОчему закомментирован Preview: а зачем он нужен отсюда? чтобы внешние слои могли получить доступ к модели? Спасибо большое.... не стоит...
-        //public Preview Preview
-        //{
-        //    get
-        //    {
-        //        return levelSet.VideoInfo.Preview;
-        //    }
-        //    set
-        //    {
-        //        levelSet.VideoInfo.Preview = value;
-        //        OnPropertyChanged("Preview");
-        //    }
-        //}
+        //ПОчему закомментирован Preview: а зачем он нужен отсюда? чтобы внешние слои могли получить доступ к модели? Спасибо большое....не стоит...
+        public PreviewVM PreviewVM
+        {
+            get
+            {
+                return previewVM;
+            }
+            set
+            {
+                previewVM = value;
+                OnPropertyChanged("PreviewVM");
+            }
+        }
 
         public Uri Preview_Source
         {

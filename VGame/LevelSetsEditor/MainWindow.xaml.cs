@@ -83,9 +83,9 @@ namespace LevelSetsEditor
         //    LevelSetVMDataContext.VideoInfoVM.Preview.
             //  LevelSetVMDataContext.SceneSets.
 
-            LevelSetVMDataContext.VideoInfoVM.Preview_Source = new Uri(vidInfo.ImageUrl);
-            LevelSetVMDataContext.VideoInfoVM.Preview_Size = new System.Drawing.Size(320, 180);
-            LevelSetVMDataContext.VideoInfoVM.Preview_Type = Model.PreviewType.youtube;
+            LevelSetVMDataContext.VideoInfoVM.PreviewVM.Source = new Uri(vidInfo.ImageUrl);
+            LevelSetVMDataContext.VideoInfoVM.PreviewVM.Size = new System.Drawing.Size(320, 180);
+            LevelSetVMDataContext.VideoInfoVM.PreviewVM.Type = Model.PreviewType.youtube;
             //for (int i = 0; i < 3; i++)
             //   LevelSetVMDataContext.VideoInfo.Preview.MultiplePrevSources[i] = new Uri(vidInfo.PrevImagesUrl[i]);
 

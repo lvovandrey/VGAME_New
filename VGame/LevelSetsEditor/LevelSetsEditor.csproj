@@ -84,9 +84,13 @@
     </ApplicationDefinition>
     <Compile Include="Model\WebBrowserModel.cs" />
     <Compile Include="ViewModel\LevelSetVM.cs" />
+    <Compile Include="ViewModel\PreviewVM.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\VideoInfoVM.cs" />
     <Compile Include="ViewModel\WebBrowserVM.cs" />
+    <Compile Include="View\PreviewViewer.xaml.cs">
+      <DependentUpon>PreviewViewer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PropertyViewer.xaml.cs">
       <DependentUpon>PropertyViewer.xaml</DependentUpon>
     </Compile>
@@ -102,6 +106,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\PreviewViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\PropertyViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
