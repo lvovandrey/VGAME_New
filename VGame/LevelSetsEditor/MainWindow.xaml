@@ -57,9 +57,9 @@
 
                     </StackPanel>
                 </GroupBox>
-                
-                <GroupBox Header="Превью" x:Name="PreviewGroupBox" HorizontalAlignment="Left" Height="481"  VerticalAlignment="Top" Width="605" DataContext="{Binding VideoInfoVM}"  Margin="462,222,0,0">
-                    <propview:PreviewViewer DataContext="{Binding Path=VideoInfoVM}"></propview:PreviewViewer>
+
+                <GroupBox Header="Превью" x:Name="PreviewGroupBox" HorizontalAlignment="Left" Height="481" DataContext="{Binding Path=VideoInfoVM}" VerticalAlignment="Top" Width="605"  Margin="462,222,0,0">
+                    <propview:PreviewViewer DataContext="{Binding Path=PreviewVM}"></propview:PreviewViewer>
                 </GroupBox>
 
 

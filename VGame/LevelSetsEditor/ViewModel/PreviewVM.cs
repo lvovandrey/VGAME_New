@@ -32,6 +32,48 @@ namespace LevelSetsEditor.ViewModel
             }
         }
 
+        private int curnum = 0;
+
+        public Uri CurPreSources
+        {
+            get
+            {
+                Uri t = preview.MultiplePrevSources[curnum];
+                curnum++;
+                if (curnum > 2) curnum = 0;
+                if (RefreshPrev)
+                    Tools.ToolsTimer.Delay(() =>
+                    {
+                        OnPropertyChanged("CurPreSources");
+                    },TimeSpan.FromSeconds(0.4));
+                return t;
+            }
+            set
+            {
+                OnPropertyChanged("CurPreSources");
+            }
+        }
+
+        private bool refreshPrev = true;
+        public bool RefreshPrev
+        {
+            get
+            {
+                return refreshPrev;
+            }
+            set
+            {
+                if (value)
+                Tools.ToolsTimer.Delay(() =>
+                {
+                    OnPropertyChanged("CurPreSources");
+                }, TimeSpan.FromSeconds(0.4));
+
+                refreshPrev = value;
+                OnPropertyChanged("RefreshPrev");
+            }
+        }
+
         public Uri Source
         {
             get
@@ -69,12 +111,8 @@ namespace LevelSetsEditor.ViewModel
                         OpenFileDialog openFileDialog = new OpenFileDialog();
                         openFileDialog.Filter = "Файлы изображений (*.bmp, *.jpg, *.png)|*.bmp;*.jpg;*.png";
                         openFileDialog.Title = "Открыть свое изображение для превью видео";
-
                         if (openFileDialog.ShowDialog() == true)
-                        {
-                            string filename = openFileDialog.FileName;
-                            MessageBox.Show(filename);
-                        }
+                            Source = new Uri(@openFileDialog.FileName);
                     }));
             }
         }

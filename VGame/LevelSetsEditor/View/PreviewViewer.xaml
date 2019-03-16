@@ -8,20 +8,30 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <StackPanel Orientation="Vertical"   >
-            <Image  Source="{Binding Source, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
-                               Height="{Binding Height}"    
-                               Width="{Binding Width}"/>
-            <TextBox Text ="{Binding StringFormat= Тип превью {0}, Path= Type }" />
+            <Grid Height="{Binding Size.Height, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" MinHeight="200">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image  Source="{Binding Source, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"                                    
+                               Width="{Binding Size.Width, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" MaxHeight="350" MaxWidth="600"/>
 
-            <Grid>
+                <Image  Source="{Binding CurPreSources, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"                                    
+                               MaxHeight="350" MaxWidth="200" Grid.Column="1"/>
+
+            </Grid>
+            <CheckBox Content="Обновлять предпросмотр" HorizontalAlignment="Right" Margin="10,10,100,10" IsChecked="{Binding RefreshPrev, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                <local:PropertyViewer DataContext="{Binding Type, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Тип превью"/>
+
+                <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="30"/>
                 </Grid.ColumnDefinitions>
-                <TextBox Text ="{Binding Source, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                <local:PropertyViewer DataContext="{Binding Source, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Путь к изобр."/>
                 <Button Content="..." Grid.Column="1" Command="{Binding OpenPreviewFileCommand}"/>
-            </Grid>            
-            <TextBox Text ="{Binding Path= Size, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+            </Grid>
+            <local:PropertyViewer DataContext="{Binding Size, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Размер"/>
         </StackPanel>
     </Grid>
 </UserControl>
