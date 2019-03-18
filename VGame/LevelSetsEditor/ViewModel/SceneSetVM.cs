@@ -44,6 +44,33 @@ namespace LevelSetsEditor.ViewModel
             }
         }
 
+        public Uri VideoSegment_Source
+        {
+            get
+            {
+                return sceneSet.VideoSegment.Source;
+            }
+            set
+            {
+                sceneSet.VideoSegment.Source = value;
+                OnPropertyChanged("VideoSegment_Source");
+            }
+        }
+
+        public int UnitsCount
+        {
+            get
+            {
+                return sceneSet.UnitsCount;
+            }
+            set
+            {
+                sceneSet.UnitsCount = value;
+                OnPropertyChanged("UnitsCount");
+            }
+        }
+
+
 
         #region mvvm
         public event PropertyChangedEventHandler PropertyChanged;

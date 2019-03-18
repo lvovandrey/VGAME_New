@@ -117,6 +117,23 @@ namespace LevelSetsEditor
         {
         }
 
+        private void TextBox_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            TimeSpan dtime;
+            if (e.Delta > 0) dtime = TimeSpan.FromSeconds(1);
+            else dtime = TimeSpan.FromSeconds(-1);
 
+            object o = ((TextBox)sender).DataContext;
+
+            string text = ((TextBox)sender).Text;
+            TimeSpan time;
+            if (TimeSpan.TryParse(text, out time))
+            {
+                time += dtime;
+                ((TextBox)sender).Text = time.ToString();
+            }
+
+
+        }
     }
 }

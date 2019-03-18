@@ -26,6 +26,7 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
+                                
                                 <Label Content="{Binding VideoSegment_TimeBegin, UpdateSourceTrigger=PropertyChanged}" Background="DarkTurquoise"></Label>
                                 <Label Content="{Binding VideoSegment_TimeEnd, UpdateSourceTrigger=PropertyChanged}" Background="DarkTurquoise"></Label>
                             </StackPanel>
@@ -36,6 +37,8 @@
                   DataContext="{Binding SelectedSceneSetVM, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                     <StackPanel Orientation="Vertical" RenderTransformOrigin="0.492,0.534"   >
                         <TextBox Text="{Binding VideoSegment_TimeBegin, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></TextBox>
+                        <TextBox Text="{Binding VideoSegment_TimeEnd, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></TextBox>
+                        <TextBox Text="{Binding VideoSegment_TimeBegin, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" MouseWheel="TextBox_MouseWheel"></TextBox>
 
                     </StackPanel>
                 </GroupBox>
