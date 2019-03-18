@@ -17,6 +17,10 @@
         
 
             <Grid>
+                <TextBox Name="TextBoxTEST" Width="150" Height="30"  Margin="10,727,1023.059,33.588"/>
+                <propview:VideoPlayer MyString="{Binding Path=VideoInfoVM.Address, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                      MySource="{Binding Path=VideoInfoVM.Source, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                      x:Name="VideoPlayer"   Margin="10,449,761.059,87.588"/>
                 <Button Content="Button" HorizontalAlignment="Left" Margin="305,346,0,0" VerticalAlignment="Top" Width="75"  Command="{Binding Path=AutoSegregateVideoToScenes}"/>
 
                 <ListBox ItemsSource="{Binding Path=SceneSetVMs, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 

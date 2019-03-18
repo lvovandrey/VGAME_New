@@ -1,14 +1,15 @@
 ﻿<UserControl x:Class="LevelSetsEditor.View.VideoPlayer"
- xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:XmlYoutubeImport"
+             xmlns:local="clr-namespace:LevelSetsEditor"
              xmlns:wpf="clr-namespace:Vlc.DotNet.Wpf;assembly=Vlc.DotNet.Wpf"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
             
              mc:Ignorable="d" 
-             d:DesignHeight="150" d:DesignWidth="300" BorderBrush="Black" Margin="2,2,2,3">
+             d:DesignHeight="150" d:DesignWidth="300" BorderBrush="Black" Margin="2,2,2,3"
+             x:Name="ThisPlayer">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -16,7 +17,7 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="30"/>
-            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="130"/>
             <ColumnDefinition Width="30"/>
             <ColumnDefinition />
             <ColumnDefinition Width="80"/>
@@ -26,18 +27,26 @@
         <wpf:VlcControl Name="vlc" Grid.Row="0" Grid.ColumnSpan="6"/>
         <Slider Name="TimeSlider" HorizontalAlignment="Stretch" Grid.Row="1" Margin="3" Grid.Column="3"  VerticalAlignment="Stretch"/>
         <Button Name="PlayBtn" Grid.Row="1" Grid.Column="0" Margin="3" >
-            <Image Source="ico/play_pause.png"/>
+            <Image Source="/LevelSetsEditor;component/icons/play_pause.png"/>
         </Button>
-        <Button Name="SplitBtn" Grid.Row="1" Grid.Column="1" Margin="3" >
-            <Image Source="ico/icon.png"/>
+        <Button Name="SplitBtn" Grid.Row="1" Grid.Column="1" Margin="3" Width="30" HorizontalAlignment="Left" >
+            <Image Source="/LevelSetsEditor;component/icons/icon.png"/>
         </Button>
-        <Button Name="MuteBtn" Grid.Row="1" Grid.Column="2" Margin="3" Click="MuteBtn_Click" >
-            <Image Source="ico/mute.png"/>
+        
+        
+        <Label Name="LabelTEST" Content="{Binding MyString, ElementName=ThisPlayer}" 
+               Height="28" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" 
+               Background="AliceBlue" Width="100" Margin="0,0,0,0" VerticalAlignment="Top" />
+        
+        
+        
+            <Button Name="MuteBtn" Grid.Row="1" Grid.Column="2" Margin="3" >
+            <Image Source="/LevelSetsEditor;component/icons/mute.png"/>
         </Button>
         <xctk:TimeSpanUpDown  x:Name="TimeTextBox" Grid.Row="1" Grid.Column="4" 
                             TextAlignment="Center" VerticalAlignment="Center" 
                             BorderBrush="{x:Null}" Value="0:00:00"/>
-
+        
 
 
     </Grid>

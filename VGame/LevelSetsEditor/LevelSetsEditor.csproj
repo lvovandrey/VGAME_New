@@ -119,6 +119,7 @@
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\SceneSetVM.cs" />
     <Compile Include="ViewModel\VideoInfoVM.cs" />
+    <Compile Include="ViewModel\VideoPlayerVM.cs" />
     <Compile Include="ViewModel\WebBrowserVM.cs" />
     <Compile Include="View\PreviewViewer.xaml.cs">
       <DependentUpon>PreviewViewer.xaml</DependentUpon>
@@ -191,6 +192,15 @@
       <Project>{1a46315e-9dd7-4e1c-a598-ad315c8fbc12}</Project>
       <Name>YouTubeUrlSupplier</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\mute.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\play_pause.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

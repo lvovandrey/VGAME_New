@@ -14,6 +14,7 @@ namespace LevelSetsEditor.ViewModel
     {
         private LevelSet LevelSet;
         public VideoInfoVM VideoInfoVM { get; set; }
+        private VideoPlayerVM videoPlayerVM;
 
         private ObservableCollection<SceneSetVM> sceneSetVMs;
         private SceneSetVM selectedSceneSet;
@@ -23,6 +24,7 @@ namespace LevelSetsEditor.ViewModel
             LevelSet = new Model.LevelSet();
             VideoInfoVM = new VideoInfoVM(LevelSet);
             sceneSetVMs = new ObservableCollection<SceneSetVM>();
+            VideoPlayerVM = new VideoPlayerVM(this);
         }
 
         public ObservableCollection<SceneSetVM> SceneSetVMs
@@ -35,6 +37,12 @@ namespace LevelSetsEditor.ViewModel
         {
             get { return selectedSceneSet; }
             set { selectedSceneSet = value; OnPropertyChanged("SelectedSceneSetVM"); }
+        }
+
+        public VideoPlayerVM VideoPlayerVM
+        {
+            get { return videoPlayerVM; }
+            set { videoPlayerVM = value; OnPropertyChanged("VideoPlayerVM"); }
         }
 
         public VideoInfo VideoInfo
