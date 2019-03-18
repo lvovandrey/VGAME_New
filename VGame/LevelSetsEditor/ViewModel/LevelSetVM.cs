@@ -10,18 +10,32 @@ using LevelSetsEditor.Model;
 
 namespace LevelSetsEditor.ViewModel
 {
-    public class LevelSetVM: INotifyPropertyChanged
+    public class LevelSetVM : INotifyPropertyChanged
     {
         private LevelSet LevelSet;
         public VideoInfoVM VideoInfoVM { get; set; }
 
+        private ObservableCollection<SceneSetVM> sceneSetVMs;
+        private SceneSetVM selectedSceneSet;
 
         public LevelSetVM() // В этом конструкторе заполняем тестовыми данными свойства ойства...
         {
             LevelSet = new Model.LevelSet();
             VideoInfoVM = new VideoInfoVM(LevelSet);
+            sceneSetVMs = new ObservableCollection<SceneSetVM>();
         }
 
+        public ObservableCollection<SceneSetVM> SceneSetVMs
+        {
+            get { return sceneSetVMs; }
+            set { sceneSetVMs = value; OnPropertyChanged("SceneSetVMs"); }
+        }
+
+        public SceneSetVM SelectedSceneSetVM
+        {
+            get { return selectedSceneSet; }
+            set { selectedSceneSet = value; OnPropertyChanged("SelectedSceneSetVM"); }
+        }
 
         public VideoInfo VideoInfo
         {
@@ -34,7 +48,14 @@ namespace LevelSetsEditor.ViewModel
         }
 
 
-
+        public void SegregateScenes()
+        {
+            LevelSet.SegregateScenes();
+            sceneSetVMs.Clear();
+            foreach (SceneSet s in LevelSet.SceneSets)
+                sceneSetVMs.Add(new SceneSetVM(s));
+            
+        }
 
 
 

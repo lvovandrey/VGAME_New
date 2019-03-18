@@ -89,6 +89,26 @@ namespace LevelSetsEditor
             for (int i = 0; i < 3; i++)
                LevelSetVMDataContext.VideoInfo.Preview.MultiplePrevSources[i] = new Uri(vidInfo.PrevImagesUrl[i]);
 
+            LevelSetVMDataContext.SegregateScenes();
+
+
+
+            //Model.SceneSet ss = new Model.SceneSet();
+            //ss.VideoSegment = new Model.VideoSegment();
+            //ss.VideoSegment.TimeBegin = TimeSpan.FromSeconds(1111);
+            //LevelSetVMDataContext.SceneSetVMs.Add(new SceneSetVM(ss));
+
+            //Model.SceneSet ss2 = new Model.SceneSet();
+            //ss2.VideoSegment = new Model.VideoSegment();
+            //ss2.VideoSegment.TimeBegin = TimeSpan.FromSeconds(2222);
+            //LevelSetVMDataContext.SceneSetVMs.Add(new SceneSetVM(ss2));
+
+            //Model.SceneSet ss3 = new Model.SceneSet();
+            //ss3.VideoSegment = new Model.VideoSegment();
+            //ss3.VideoSegment.TimeBegin = TimeSpan.FromSeconds(3333);
+            //LevelSetVMDataContext.SceneSetVMs.Add(new SceneSetVM(ss3));
+
+
             ////  YouTubeUrlSupplier.YoutubeGet.
             //  YoutubeVidInfo VidInfo = new YoutubeVidInfo
         }

@@ -87,6 +87,7 @@
     <Compile Include="ViewModel\LevelSetVM.cs" />
     <Compile Include="ViewModel\PreviewVM.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="ViewModel\SceneSetVM.cs" />
     <Compile Include="ViewModel\VideoInfoVM.cs" />
     <Compile Include="ViewModel\WebBrowserVM.cs" />
     <Compile Include="View\PreviewViewer.xaml.cs">

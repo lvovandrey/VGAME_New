@@ -18,29 +18,25 @@
 
             <Grid>
                 <Button Content="Button" HorizontalAlignment="Left" Margin="305,346,0,0" VerticalAlignment="Top" Width="75"  Command="{Binding Path=AutoSegregateVideoToScenes}"/>
-                <ListBox ItemsSource="{Binding SceneSets, UpdateSourceTrigger=PropertyChanged}" 
-                 SelectedItem ="{Binding SelectedSceneSetVM }" 
-                HorizontalAlignment="Left" 
+
+                <ListBox ItemsSource="{Binding Path=SceneSetVMs, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+                SelectedItem="{Binding Path=SelectedSceneSetVM}"
+                         HorizontalAlignment="Left" 
                  Height="403" Margin="10,10,0,0" VerticalAlignment="Top" Width="219">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Label Content="{Binding UnitsCount, UpdateSourceTrigger=PropertyChanged}"></Label>
-                                <Label Content="{Binding VideoSegment.TimeBegin, UpdateSourceTrigger=PropertyChanged}"></Label>
-                                <Label Content="{Binding VideoSegment.TimeEnd, UpdateSourceTrigger=PropertyChanged}"></Label>
-                                <Label Content="{Binding VideoSegment.Source, UpdateSourceTrigger=PropertyChanged}"></Label>
+                                <Label Content="{Binding VideoSegment_TimeBegin, UpdateSourceTrigger=PropertyChanged}" Background="DarkTurquoise"></Label>
+                                <Label Content="{Binding VideoSegment_TimeEnd, UpdateSourceTrigger=PropertyChanged}" Background="DarkTurquoise"></Label>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <Label Content="{Binding Path=Name}" HorizontalAlignment="Left" Margin="267,22,0,0" VerticalAlignment="Top"/>
                 <GroupBox Header="Выбранный элемент" HorizontalAlignment="Left" Height="201" Margin="234,53,0,0" VerticalAlignment="Top" Width="223"
-                  DataContext="{Binding SelectedSceneSetVM}">
+                  DataContext="{Binding SelectedSceneSetVM, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                     <StackPanel Orientation="Vertical" RenderTransformOrigin="0.492,0.534"   >
-                        <TextBox Text="{Binding UnitsCount}"></TextBox>
-                        <TextBox Text="{Binding VideoSegment.TimeBegin}"></TextBox>
-                        <TextBox Text="{Binding VideoSegment.TimeEnd}"></TextBox>
-                        <TextBox Text="{Binding VideoSegment.Source}"></TextBox>
+                        <TextBox Text="{Binding VideoSegment_TimeBegin, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></TextBox>
+
                     </StackPanel>
                 </GroupBox>
                 <GroupBox Header="Инфо о видео" x:Name="VideoInfoGroupBox" HorizontalAlignment="Left" Height="181"  VerticalAlignment="Top" Width="605"
