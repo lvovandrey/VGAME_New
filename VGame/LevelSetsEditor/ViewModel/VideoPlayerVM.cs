@@ -14,14 +14,19 @@ namespace LevelSetsEditor.ViewModel
         public VideoPlayerVM(LevelSetVM _levelSetVM)
         {
             levelSetVM = _levelSetVM;
-            levelSetVM.PropertyChanged += LevelSetVM_PropertyChanged;
         }
 
-        private void LevelSetVM_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private TimeSpan curTime;
+        public TimeSpan CurTime
         {
-            if(e.PropertyName== "SelectedSceneSetVM")
+            get
             {
-          //     levelSetVM
+                return curTime;
+            }
+            set
+            {
+                curTime = value;
+                OnPropertyChanged("CurTime");
             }
         }
 

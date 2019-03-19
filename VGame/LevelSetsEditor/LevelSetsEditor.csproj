@@ -127,7 +127,8 @@
     <Compile Include="View\PropertyViewer.xaml.cs">
       <DependentUpon>PropertyViewer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\VideoPlayer.xaml.cs">
+    <Compile Include="View\VideoPlayerMVVM\Helper.cs" />
+    <Compile Include="View\VideoPlayerMVVM\VideoPlayer.xaml.cs">
       <DependentUpon>VideoPlayer.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
@@ -150,7 +151,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\VideoPlayer.xaml">
+    <Page Include="View\VideoPlayerMVVM\VideoPlayer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
