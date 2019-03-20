@@ -42,7 +42,8 @@ namespace PlayerVlcControl
 
         public double Position { get { return (double)GetValue(PositionProperty); } set { SetValue(PositionProperty, value); } }
         public TimeSpan Duration { get { return (TimeSpan)GetValue(DurationProperty); } set { SetValue(DurationProperty, value); } }
-        public TimeSpan CurTime { get { return (TimeSpan)GetValue(CurTimeProperty); } set { SetValue(CurTimeProperty, value); } }
+        public TimeSpan CurTime { get { return (TimeSpan)GetValue(CurTimeProperty); } 
+            set { SetValue(CurTimeProperty, value); } }
         public Uri Source { get { return (Uri)GetValue(SourceProperty); } set { SetValue(SourceProperty, value); } }
 
 
@@ -93,6 +94,7 @@ namespace PlayerVlcControl
 
             this.OnSourceChanged += VideoPlayer_OnPlayerSourceChanged;
             this.OnPositionChanged += Player_OnPositionChanged;
+            this.OnCurTimeChanged += Player_OnCurTimeChanged;
 
 
            timer = new System.Windows.Threading.DispatcherTimer();
@@ -102,11 +104,18 @@ namespace PlayerVlcControl
             timer.Start();
         }
 
+        private void Player_OnCurTimeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            vlc.MediaPlayer.Time = (long)Math.Round(CurTime.TotalMilliseconds);
+        }
+
         private void Player_OnPositionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if ((vlc.MediaPlayer.Video != null) && (!vlc.MediaPlayer.IsPlaying))
                 vlc.MediaPlayer.Time = (long)Math.Round(Position * Duration.TotalMilliseconds / 1000);
         }
+
+
 
         //И ДА ТАК-И ТУТ СОВСЕМ НЕ MVVM ДАЛЬШЕ. ЧЕСТНО ГОВОРЯ УСТАЛ Я ОТ НЕГО.
 
@@ -129,8 +138,8 @@ namespace PlayerVlcControl
         private void PlayBtn_Click_1(object sender, RoutedEventArgs e)
         {
             if (vlc.MediaPlayer.IsPlaying) vlc.MediaPlayer.Pause();
-            else vlc.MediaPlayer.Play();
-        }
+            else { vlc.MediaPlayer.Play(); timer.Stop(); }
+            }
 
         private void TimeSlider_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {

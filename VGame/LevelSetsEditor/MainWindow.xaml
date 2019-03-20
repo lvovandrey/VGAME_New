@@ -20,11 +20,11 @@
             
             <Grid>
                 <TextBox Name="TextBoxTEST" Width="150" Height="30"  Margin="10,727,1023.059,33.588"/>
-                <pl:Player Source="{Binding Path=VideoInfoVM.Source, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                <pl:Player Source="{Binding Path=VideoInfoVM.Source, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                           CurTime="{Binding Path=SelectedSceneSetVM.VideoSegment_TimeBegin, UpdateSourceTrigger=PropertyChanged}"
                                       x:Name="VideoPlayer"   Margin="10,449,761.059,87.588" />
-                <player:VideoPlayer Source="{Binding Path=VideoInfoVM.Source, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
-                                      x:Name="VideoPlayer2"   Margin="204,259,721.059,339.588"/>
                 <Button Content="Button" HorizontalAlignment="Left" Margin="305,346,0,0" VerticalAlignment="Top" Width="75"  Command="{Binding Path=AutoSegregateVideoToScenes}"/>
+                <Button Content="Button" HorizontalAlignment="Left" Margin="250,393,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_3"  />
 
                 <ListBox ItemsSource="{Binding Path=SceneSetVMs, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
                 SelectedItem="{Binding Path=SelectedSceneSetVM}"

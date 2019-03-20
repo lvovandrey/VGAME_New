@@ -136,5 +136,10 @@ namespace LevelSetsEditor
 
 
         }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            this.VideoPlayer.CurTime = LevelSetVMDataContext.SelectedSceneSetVM.VideoSegment_TimeBegin;
+        }
     }
 }

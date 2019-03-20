@@ -25,6 +25,18 @@ namespace LevelSetsEditor.ViewModel
             VideoInfoVM = new VideoInfoVM(LevelSet);
             sceneSetVMs = new ObservableCollection<SceneSetVM>();
             VideoPlayerVM = new VideoPlayerVM(this);
+            PropertyChanged += LevelSetVM_PropertyChanged;
+        }
+
+        private void LevelSetVM_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "SelectedSceneSetVM") // Надо бы как-то иначе это реализовать идиотизм какой-то...
+            {
+                selectedSceneSet.UnitsCount = selectedSceneSet.UnitsCount;
+                selectedSceneSet.VideoSegment_Source = selectedSceneSet.VideoSegment_Source;
+                selectedSceneSet.VideoSegment_TimeBegin = selectedSceneSet.VideoSegment_TimeBegin;
+                selectedSceneSet.VideoSegment_TimeEnd = selectedSceneSet.VideoSegment_TimeEnd;
+            }
         }
 
         public ObservableCollection<SceneSetVM> SceneSetVMs
@@ -36,7 +48,11 @@ namespace LevelSetsEditor.ViewModel
         public SceneSetVM SelectedSceneSetVM
         {
             get { return selectedSceneSet; }
-            set { selectedSceneSet = value; OnPropertyChanged("SelectedSceneSetVM"); }
+            set
+            {
+                selectedSceneSet = value;
+                OnPropertyChanged("SelectedSceneSetVM");
+            }
         }
 
         public VideoPlayerVM VideoPlayerVM
