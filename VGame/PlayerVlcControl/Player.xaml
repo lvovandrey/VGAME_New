@@ -42,7 +42,7 @@
         </Button>
         <TextBox  x:Name="TimeTextBox" Grid.Row="1" Grid.Column="4" 
                             TextAlignment="Center" VerticalAlignment="Center" MinHeight="10" 
-                            BorderBrush="{x:Null}" /> <!--Text="{Binding ElementName=ThisPlayer, Path=CurTime}"-->
+                            BorderBrush="{x:Null}" Text="{Binding ElementName=ThisPlayer, Path=CurTime}"/>
 
 
 

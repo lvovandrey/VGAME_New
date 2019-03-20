@@ -104,7 +104,7 @@ namespace PlayerVlcControl
 
         private void Player_OnPositionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            TimeTextBox.Text = this.Position.ToString();
+      //      TimeTextBox.Text = this.Position.ToString();
             vlc.MediaPlayer.Time = (long)Math.Round(Position * Duration.TotalMilliseconds / 1000);
         }
 
