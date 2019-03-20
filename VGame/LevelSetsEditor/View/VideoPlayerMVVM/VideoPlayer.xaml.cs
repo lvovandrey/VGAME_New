@@ -56,8 +56,8 @@ namespace LevelSetsEditor.View.VideoPlayerMVVM
 
         static void PositionPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (((VideoPlayer)d).OnDurationChanged != null)
-                ((VideoPlayer)d).OnDurationChanged(d, e);
+            if (((VideoPlayer)d).OnPositionChanged != null)
+                ((VideoPlayer)d).OnPositionChanged(d, e);
         }
 
         static void DurationPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -94,6 +94,7 @@ namespace LevelSetsEditor.View.VideoPlayerMVVM
             vlc.MediaPlayer.Play(new Uri(@"C:\1.wmv"));
 
             this.OnSourceChanged += VideoPlayer_OnPlayerSourceChanged;
+
 
 
 

@@ -106,7 +106,7 @@ namespace PlayerVlcControl
 
         private void Player_OnCurTimeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            vlc.MediaPlayer.Time = (long)Math.Round(CurTime.TotalMilliseconds);
+          //  vlc.MediaPlayer.Time = (long)Math.Round(CurTime.TotalMilliseconds);
         }
 
         private void Player_OnPositionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
