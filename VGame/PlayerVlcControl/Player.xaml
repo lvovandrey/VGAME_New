@@ -24,11 +24,11 @@
         </Grid.ColumnDefinitions>
         <wpf:VlcControl Name="vlc" Grid.Row="0" Grid.ColumnSpan="6"/>
         <Slider Name="TimeSlider" HorizontalAlignment="Stretch" Grid.Row="1" Margin="3" Grid.Column="3"  
-                VerticalAlignment="Stretch" Maximum="1000" Value="{Binding ElementName=ThisPlayer, Path=Position, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                VerticalAlignment="Stretch" Maximum="1000" Value="{Binding ElementName=ThisPlayer, Path=Position, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" PreviewMouseDown="TimeSlider_PreviewMouseDown" PreviewMouseUp="TimeSlider_PreviewMouseUp"/>
         <Button Name="PlayBtn" Grid.Row="1" Grid.Column="0" Margin="3" Click="PlayBtn_Click_1" >
             <Image Source="ico/play_pause.png"/>
         </Button>
-        <Button Name="SplitBtn" Grid.Row="1" Grid.Column="1" Margin="3" HorizontalAlignment="Left" Click="SplitBtn_Click" >
+        <Button Name="SplitBtn" Grid.Row="1" Grid.Column="1" Margin="3" HorizontalAlignment="Left" >
             <Image Source="ico/icon.png"/>
         </Button>
 

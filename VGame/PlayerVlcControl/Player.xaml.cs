@@ -78,7 +78,7 @@ namespace PlayerVlcControl
 
 
 
-
+        System.Windows.Threading.DispatcherTimer timer;
 
 
         public Player() : base()
@@ -95,18 +95,20 @@ namespace PlayerVlcControl
             this.OnPositionChanged += Player_OnPositionChanged;
 
 
-            System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
+           timer = new System.Windows.Threading.DispatcherTimer();
 
             timer.Tick += new EventHandler(timerTick);
-            timer.Interval = TimeSpan.FromSeconds(0.1);
+            timer.Interval = TimeSpan.FromSeconds(0.3);
             timer.Start();
         }
 
         private void Player_OnPositionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-      //      TimeTextBox.Text = this.Position.ToString();
-            vlc.MediaPlayer.Time = (long)Math.Round(Position * Duration.TotalMilliseconds / 1000);
+            if ((vlc.MediaPlayer.Video != null) && (!vlc.MediaPlayer.IsPlaying))
+                vlc.MediaPlayer.Time = (long)Math.Round(Position * Duration.TotalMilliseconds / 1000);
         }
+
+        //И ДА ТАК-И ТУТ СОВСЕМ НЕ MVVM ДАЛЬШЕ. ЧЕСТНО ГОВОРЯ УСТАЛ Я ОТ НЕГО.
 
         private void timerTick(object sender, EventArgs e)
         {
@@ -122,12 +124,7 @@ namespace PlayerVlcControl
         {
             MessageBox.Show(Source.ToString());
             vlc.MediaPlayer.Play(Source);
-
-
         }
-
-
-
 
         private void PlayBtn_Click_1(object sender, RoutedEventArgs e)
         {
@@ -135,9 +132,14 @@ namespace PlayerVlcControl
             else vlc.MediaPlayer.Play();
         }
 
-        private void SplitBtn_Click(object sender, RoutedEventArgs e)
+        private void TimeSlider_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
+            if (vlc.MediaPlayer.IsPlaying) { vlc.MediaPlayer.Pause(); timer.Stop(); }
+        }
 
+        private void TimeSlider_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (!vlc.MediaPlayer.IsPlaying) { vlc.MediaPlayer.Play(); timer.Start(); }
         }
     }
 }
