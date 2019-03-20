@@ -189,6 +189,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PlayerVlcControl\PlayerVlcControl.csproj">
+      <Project>{85318e84-8fd5-44ab-be3d-07b59dba10a8}</Project>
+      <Name>PlayerVlcControl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\YouTubeUrlSupplier\YouTubeUrlSupplier.csproj">
       <Project>{1a46315e-9dd7-4e1c-a598-ad315c8fbc12}</Project>
       <Name>YouTubeUrlSupplier</Name>

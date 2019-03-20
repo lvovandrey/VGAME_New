@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:LevelSetsEditor"
         xmlns:vm ="clr-namespace:LevelSetsEditor.ViewModel"
         xmlns:chromium ="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+           xmlns:pl ="clr-namespace:PlayerVlcControl;assembly=PlayerVlcControl"
         xmlns:propview ="clr-namespace:LevelSetsEditor.View"
         xmlns:player ="clr-namespace:LevelSetsEditor.View.VideoPlayerMVVM"
         mc:Ignorable="d"
@@ -15,18 +16,20 @@
     </Window.DataContext>
     <TabControl Name="TabControlMain" >
         <TabItem Name="TabItemEditor" Header="Редактор">
-        
 
+            
             <Grid>
                 <TextBox Name="TextBoxTEST" Width="150" Height="30"  Margin="10,727,1023.059,33.588"/>
+                <pl:Player Source="{Binding Path=VideoInfoVM.Source, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                      x:Name="VideoPlayer"   Margin="10,449,761.059,87.588" />
                 <player:VideoPlayer Source="{Binding Path=VideoInfoVM.Source, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
-                                      x:Name="VideoPlayer"   Margin="10,449,761.059,87.588"/>
+                                      x:Name="VideoPlayer2"   Margin="204,259,721.059,339.588"/>
                 <Button Content="Button" HorizontalAlignment="Left" Margin="305,346,0,0" VerticalAlignment="Top" Width="75"  Command="{Binding Path=AutoSegregateVideoToScenes}"/>
 
                 <ListBox ItemsSource="{Binding Path=SceneSetVMs, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
                 SelectedItem="{Binding Path=SelectedSceneSetVM}"
                          HorizontalAlignment="Left" 
-                 Height="403" Margin="10,10,0,0" VerticalAlignment="Top" Width="219">
+                 Height="403" Margin="10,10,0,0" VerticalAlignment="Top" Width="194">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">

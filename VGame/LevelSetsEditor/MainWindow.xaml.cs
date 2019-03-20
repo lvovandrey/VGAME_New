@@ -17,6 +17,7 @@ using System.Drawing;
 using CefSharp;
 using CefSharp.Wpf;
 using YouTubeUrlSupplier;
+using PlayerVlcControl;
 
 namespace LevelSetsEditor
 {
@@ -32,7 +33,7 @@ namespace LevelSetsEditor
             settings.CachePath = @"C:\CEFcookies"; // Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\CEF";
             CefSharp.Cef.Initialize(settings);
 
-
+            
             //LevelSetVMDataContext.LevelSet = new Model.LevelSet();
 
             InitializeComponent();
