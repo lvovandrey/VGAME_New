@@ -139,7 +139,8 @@ namespace LevelSetsEditor
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            this.VideoPlayer.CurTime = LevelSetVMDataContext.SelectedSceneSetVM.VideoSegment_TimeBegin;
+           
+            this.VideoPlayer.Position = 1000*LevelSetVMDataContext.SelectedSceneSetVM.VideoSegment_TimeBegin*;
         }
     }
 }

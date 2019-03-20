@@ -43,7 +43,7 @@ namespace PlayerVlcControl
         public double Position { get { return (double)GetValue(PositionProperty); } set { SetValue(PositionProperty, value); } }
         public TimeSpan Duration { get { return (TimeSpan)GetValue(DurationProperty); } set { SetValue(DurationProperty, value); } }
         public TimeSpan CurTime { get { return (TimeSpan)GetValue(CurTimeProperty); } 
-            set { SetValue(CurTimeProperty, value); } }
+           private set { SetValue(CurTimeProperty, value); } }
         public Uri Source { get { return (Uri)GetValue(SourceProperty); } set { SetValue(SourceProperty, value); } }
 
 
@@ -106,7 +106,7 @@ namespace PlayerVlcControl
 
         private void Player_OnCurTimeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-          //  vlc.MediaPlayer.Time = (long)Math.Round(CurTime.TotalMilliseconds);
+            
         }
 
         private void Player_OnPositionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
