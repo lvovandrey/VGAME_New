@@ -81,10 +81,7 @@ namespace LevelSetsEditor.ViewModel
             
         }
 
-
-
-
-
+        
 
         #region mvvm
         public event PropertyChangedEventHandler PropertyChanged;

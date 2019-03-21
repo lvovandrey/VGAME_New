@@ -4,9 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LevelSetsEditor"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:cmd="http://prismlibrary.com/"
         xmlns:vm ="clr-namespace:LevelSetsEditor.ViewModel"
         xmlns:chromium ="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
-           xmlns:pl ="clr-namespace:PlayerVlcControl;assembly=PlayerVlcControl"
+        xmlns:pl ="clr-namespace:PlayerVlcControl;assembly=PlayerVlcControl"
         xmlns:propview ="clr-namespace:LevelSetsEditor.View"
         xmlns:player ="clr-namespace:LevelSetsEditor.View.VideoPlayerMVVM"
         mc:Ignorable="d"
@@ -47,12 +49,12 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <GroupBox Header="Выбранный элемент" HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Top" 
+                <GroupBox Header="Выбранный элемент" HorizontalAlignment="Stretch" Grid.Column="1" VerticalAlignment="Stretch" 
                   DataContext="{Binding SelectedSceneSetVM, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                     <StackPanel Orientation="Vertical">
-                        <TextBox Text="{Binding VideoSegment_TimeBegin, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></TextBox>
-                        <TextBox Text="{Binding VideoSegment_TimeEnd, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></TextBox>
-                        <TextBox Text="{Binding VideoSegment_TimeBegin, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" MouseWheel="TextBox_MouseWheel"></TextBox>
+                        <propview:TimeWatcherView Tag="Начало" MinHeight="30" Background="#FFFFDDC5"/>
+                        <Label Content="Конец" Margin="0,30,0,0"/>
+                        <TextBox Text="{Binding VideoSegment_TimeEnd, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" FontSize="22"></TextBox>
                     </StackPanel>
                 </GroupBox>
                 <GroupBox Header="Инфо о видео" x:Name="VideoInfoGroupBox" 

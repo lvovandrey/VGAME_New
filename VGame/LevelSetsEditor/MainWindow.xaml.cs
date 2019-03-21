@@ -18,6 +18,7 @@ using CefSharp;
 using CefSharp.Wpf;
 using YouTubeUrlSupplier;
 using PlayerVlcControl;
+using System.IO;
 
 namespace LevelSetsEditor
 {
@@ -85,12 +86,14 @@ namespace LevelSetsEditor
             //  LevelSetVMDataContext.SceneSets.
 
             LevelSetVMDataContext.VideoInfoVM.PreviewVM.Source = new Uri(vidInfo.ImageUrl);
-            LevelSetVMDataContext.VideoInfoVM.PreviewVM.Size = new System.Drawing.Size(320, 180);
+            LevelSetVMDataContext.VideoInfoVM.PreviewVM.Size = new System.Drawing.Size(480, 360);
+
             LevelSetVMDataContext.VideoInfoVM.PreviewVM.Type = Model.PreviewType.youtube;
             for (int i = 0; i < 3; i++)
                LevelSetVMDataContext.VideoInfo.Preview.MultiplePrevSources[i] = new Uri(vidInfo.PrevImagesUrl[i]);
 
             LevelSetVMDataContext.SegregateScenes();
+
 
 
 
@@ -120,19 +123,19 @@ namespace LevelSetsEditor
 
         private void TextBox_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            TimeSpan dtime;
-            if (e.Delta > 0) dtime = TimeSpan.FromSeconds(1);
-            else dtime = TimeSpan.FromSeconds(-1);
+            //TimeSpan dtime;
+            //if (e.Delta > 0) dtime = TimeSpan.FromSeconds(1);
+            //else dtime = TimeSpan.FromSeconds(-1);
 
-            object o = ((TextBox)sender).DataContext;
+            //object o = ((TextBox)sender).DataContext;
 
-            string text = ((TextBox)sender).Text;
-            TimeSpan time;
-            if (TimeSpan.TryParse(text, out time))
-            {
-                time += dtime;
-                ((TextBox)sender).Text = time.ToString();
-            }
+            //string text = ((TextBox)sender).Text;
+            //TimeSpan time;
+            //if (TimeSpan.TryParse(text, out time))
+            //{
+            //    time += dtime;
+            //    ((TextBox)sender).Text = time.ToString();
+            //}
 
 
         }

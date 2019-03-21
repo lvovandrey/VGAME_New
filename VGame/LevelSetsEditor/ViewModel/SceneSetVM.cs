@@ -1,10 +1,12 @@
 ﻿using LevelSetsEditor.Model;
+using Prism.Commands;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace LevelSetsEditor.ViewModel
 {
@@ -71,6 +73,37 @@ namespace LevelSetsEditor.ViewModel
         }
 
 
+        private RelayCommand incTimeCommand;
+        public RelayCommand IncTimeCommand
+        {
+            get
+            {
+                return incTimeCommand ??
+                    (incTimeCommand = new RelayCommand(obj =>
+                    {
+                        VideoSegment_TimeBegin += TimeSpan.FromSeconds(1);
+                    }));
+            }
+        }
+
+//        private DelegateCommand<MouseWheelEventArgs> yourCommand;
+        public DelegateCommand<MouseWheelEventArgs> YourCommand
+        {
+            get
+            {
+                return new DelegateCommand<MouseWheelEventArgs>(args =>
+                {
+                    if (args.Delta > 0)
+                    {
+                        VideoSegment_TimeBegin += TimeSpan.FromSeconds(1);
+                    }
+                    if (args.Delta < 0)
+                    {
+                        VideoSegment_TimeBegin -= TimeSpan.FromSeconds(1);
+                    }
+                });
+            }
+        }
 
         #region mvvm
         public event PropertyChangedEventHandler PropertyChanged;
