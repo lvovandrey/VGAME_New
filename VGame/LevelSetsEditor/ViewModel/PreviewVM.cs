@@ -45,7 +45,7 @@ namespace LevelSetsEditor.ViewModel
                     Tools.ToolsTimer.Delay(() =>
                     {
                         OnPropertyChanged("CurPreSources");
-                    },TimeSpan.FromSeconds(0.4));
+                    },TimeSpan.FromSeconds(2));
                 return t;
             }
             set
@@ -67,7 +67,7 @@ namespace LevelSetsEditor.ViewModel
                 Tools.ToolsTimer.Delay(() =>
                 {
                     OnPropertyChanged("CurPreSources");
-                }, TimeSpan.FromSeconds(0.4));
+                }, TimeSpan.FromSeconds(2));
 
                 refreshPrev = value;
                 OnPropertyChanged("RefreshPrev");

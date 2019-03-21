@@ -117,7 +117,7 @@ namespace LevelSetsEditor.View.VideoPlayerMVVM
 
         private void VideoPlayer_OnPlayerSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            MessageBox.Show(Source.ToString());
+       //     MessageBox.Show(Source.ToString());
             vlc.MediaPlayer.Play(Source);
 
             

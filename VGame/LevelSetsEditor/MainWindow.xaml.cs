@@ -41,13 +41,13 @@ namespace LevelSetsEditor
             WebBrowserVM = new WebBrowserVM(Browser);
             GridBrowser.DataContext = WebBrowserVM;
 
-            
+
             //LevelSetVMDataContext.LevelSet.SceneSets = new List<Model.SceneSet>();
             //LevelSetVMDataContext.LevelSet.VideoInfo = new Model.VideoInfo();
             //LevelSetVMDataContext.LevelSet.VideoInfo.Preview = new Model.Preview();
 
 
-
+         //   Button_Click_2(null, null);
 
 
         }
@@ -139,8 +139,8 @@ namespace LevelSetsEditor
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-           
-            this.VideoPlayer.Position = 1000*LevelSetVMDataContext.SelectedSceneSetVM.VideoSegment_TimeBegin*;
+            
+            this.VideoPlayer.SetPosition( 1000*LevelSetVMDataContext.SelectedSceneSetVM.VideoSegment_TimeBegin.TotalSeconds/LevelSetVMDataContext.VideoInfoVM.Duration.TotalSeconds);
         }
     }
 }

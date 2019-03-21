@@ -19,39 +19,45 @@
 
             
             <Grid>
-                <TextBox Name="TextBoxTEST" Width="150" Height="30"  Margin="10,727,1023.059,33.588"/>
-                <pl:Player Source="{Binding Path=VideoInfoVM.Source, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                           CurTime="{Binding Path=SelectedSceneSetVM.VideoSegment_TimeBegin, UpdateSourceTrigger=PropertyChanged}"
-                                      x:Name="VideoPlayer"   Margin="10,449,761.059,87.588" />
-                <Button Content="Button" HorizontalAlignment="Left" Margin="305,346,0,0" VerticalAlignment="Top" Width="75"  Command="{Binding Path=AutoSegregateVideoToScenes}"/>
-                <Button Content="Button" HorizontalAlignment="Left" Margin="250,393,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_3"  />
-
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                
+                <TextBox Name="TextBoxTEST" Width="150" Height="30" />
+                <pl:Player x:Name="VideoPlayer" Source="{Binding Path=VideoInfoVM.Source, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Grid.Column="2" Grid.ColumnSpan="2"/>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Grid.Column="1" >
+                    <Button Content="SegregScene" Height="30" Width="75"  Command="{Binding Path=AutoSegregateVideoToScenes}" Margin="5" />
+                <Button Content="PutTime" Height="30" Width="75" Click="Button_Click_3" Margin="5"/>
+                </StackPanel>
                 <ListBox ItemsSource="{Binding Path=SceneSetVMs, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
-                SelectedItem="{Binding Path=SelectedSceneSetVM}"
-                         HorizontalAlignment="Left" 
-                 Height="403" Margin="10,10,0,0" VerticalAlignment="Top" Width="194">
+                SelectedItem="{Binding Path=SelectedSceneSetVM}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                
                                 <Label Content="{Binding VideoSegment_TimeBegin, UpdateSourceTrigger=PropertyChanged}" Background="DarkTurquoise"></Label>
                                 <Label Content="{Binding VideoSegment_TimeEnd, UpdateSourceTrigger=PropertyChanged}" Background="DarkTurquoise"></Label>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <GroupBox Header="Выбранный элемент" HorizontalAlignment="Left" Height="201" Margin="234,53,0,0" VerticalAlignment="Top" Width="223"
+                <GroupBox Header="Выбранный элемент" HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Top" 
                   DataContext="{Binding SelectedSceneSetVM, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
-                    <StackPanel Orientation="Vertical" RenderTransformOrigin="0.492,0.534"   >
+                    <StackPanel Orientation="Vertical">
                         <TextBox Text="{Binding VideoSegment_TimeBegin, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></TextBox>
                         <TextBox Text="{Binding VideoSegment_TimeEnd, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></TextBox>
                         <TextBox Text="{Binding VideoSegment_TimeBegin, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" MouseWheel="TextBox_MouseWheel"></TextBox>
-
                     </StackPanel>
                 </GroupBox>
-                <GroupBox Header="Инфо о видео" x:Name="VideoInfoGroupBox" HorizontalAlignment="Left" Height="181"  VerticalAlignment="Top" Width="605"
-                  DataContext="{Binding VideoInfoVM}" RenderTransformOrigin="0.269,1.604" Margin="462,22,0,0">
-                    <StackPanel Orientation="Vertical"   >
+                <GroupBox Header="Инфо о видео" x:Name="VideoInfoGroupBox" 
+                  DataContext="{Binding VideoInfoVM}" Grid.Column="2"  Grid.ColumnSpan="2" Grid.Row="1">
+                    <StackPanel Orientation="Vertical">
                         <propview:PropertyViewer  DataContext="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Название"/>
                         <propview:PropertyViewer  DataContext="{Binding Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Описание"/>
                         <propview:PropertyViewer  DataContext="{Binding Duration, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Длительность"/>
@@ -64,7 +70,7 @@
                     </StackPanel>
                 </GroupBox>
 
-                <GroupBox Header="Превью" x:Name="PreviewGroupBox" HorizontalAlignment="Left" Height="481" DataContext="{Binding Path=VideoInfoVM}" VerticalAlignment="Top" Width="605"  Margin="462,222,0,0">
+                <GroupBox Header="Превью" x:Name="PreviewGroupBox"  DataContext="{Binding Path=VideoInfoVM}" Grid.Row="1" Grid.ColumnSpan="2" >
                     <propview:PreviewViewer DataContext="{Binding Path=PreviewVM}"></propview:PreviewViewer>
                 </GroupBox>
 
@@ -96,7 +102,7 @@
                 </Grid>
 
                 <Grid Background="DarkOrange" Margin="5">
-                    <chromium:ChromiumWebBrowser Name="Browser" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Address="https://www.youtube.com/watch?v=cgxCNHYbcDc"/>
+                    <chromium:ChromiumWebBrowser Name="Browser" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Address="https://www.youtube.com/watch?v=Ljhp_GU3BNk"/>
                 </Grid>
             </DockPanel>
         </TabItem>

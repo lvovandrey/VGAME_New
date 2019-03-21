@@ -82,7 +82,7 @@ namespace YouTubeUrlSupplier
         {
             string[] Urls = new string[3];
             for (int i = 0; i < 3; i++)
-                Urls[i] = string.Format(CultureInfo.InvariantCulture, "http://i3.ytimg.com/vi/{0}/{1}.jpg", YouTubeDownloader.GetVideoIdFromUrl(url),(i+1).ToString());
+                Urls[i] = string.Format(CultureInfo.InvariantCulture, "http://i3.ytimg.com/vi/{0}/hq{1}.jpg", YouTubeDownloader.GetVideoIdFromUrl(url),(i+1).ToString());
             return Urls;
         }
 
