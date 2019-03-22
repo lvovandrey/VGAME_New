@@ -87,7 +87,7 @@ namespace LevelSetsEditor.ViewModel
         }
 
 //        private DelegateCommand<MouseWheelEventArgs> yourCommand;
-        public DelegateCommand<MouseWheelEventArgs> YourCommand
+        public DelegateCommand<MouseWheelEventArgs> WheelTimeBeginCommand
         {
             get
             {
@@ -104,6 +104,24 @@ namespace LevelSetsEditor.ViewModel
                 });
             }
         }
+        public DelegateCommand<MouseWheelEventArgs> WheelTimeEndCommand
+        {
+            get
+            {
+                return new DelegateCommand<MouseWheelEventArgs>(args =>
+                {
+                    if (args.Delta > 0)
+                    {
+                        VideoSegment_TimeEnd += TimeSpan.FromSeconds(1);
+                    }
+                    if (args.Delta < 0)
+                    {
+                        VideoSegment_TimeEnd -= TimeSpan.FromSeconds(1);
+                    }
+                });
+            }
+        }
+
 
         #region mvvm
         public event PropertyChangedEventHandler PropertyChanged;

@@ -11,19 +11,24 @@
     <Grid>
         <StackPanel >
             <Label Content="{Binding ElementName=ThisView, Path=Tag}"/>
-       
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
 
-            <TextBox Text="{Binding VideoSegment_TimeBegin, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" MinWidth="100"  TextAlignment="Center"  FontSize="22">
+
+            <TextBox Text="{Binding ElementName=ThisView, Path=DataContext, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" MinWidth="100"  TextAlignment="Center"  FontSize="22">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseWheel" >
-                    <!--<cmd:InvokeCommandAction Command="{Binding YourCommand}" />-->
+                            <cmd:InvokeCommandAction Command="{Binding ElementName=ThisView, Path=Command}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </TextBox>
-                <CheckBox Content="Watch" VerticalAlignment="Center" Margin="5" HorizontalAlignment="Right"></CheckBox>
-                <Button Content="GO!!!" HorizontalAlignment="Right" Margin="5"/>
-            </StackPanel>
+                <CheckBox Content="Watch" VerticalAlignment="Center" Margin="5" HorizontalAlignment="Right" Grid.Column="1"></CheckBox>
+                <Button Content="GO!!!" HorizontalAlignment="Right" Margin="5" Grid.Column="2"/>
+            </Grid>
         </StackPanel>
     </Grid>
 </UserControl>
