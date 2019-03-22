@@ -122,6 +122,24 @@ namespace LevelSetsEditor.ViewModel
             }
         }
 
+        
+        public DelegateCommand<MouseWheelEventArgs> WheelUnitsCommand
+        {
+            get
+            {
+                return new DelegateCommand<MouseWheelEventArgs>(args =>
+                {
+                    if (args.Delta > 0)
+                    {
+                        UnitsCount += 1;
+                    }
+                    if (args.Delta < 0)
+                    {
+                        UnitsCount -= 1;
+                    }
+                });
+            }
+        }
 
         #region mvvm
         public event PropertyChangedEventHandler PropertyChanged;

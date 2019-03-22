@@ -17,9 +17,12 @@
         <vm:LevelSetVM x:Name="LevelSetVMDataContext"/>
     </Window.DataContext>
     <TabControl Name="TabControlMain" >
-        <TabItem Name="TabItemEditor" Header="Редактор">
+        <TabItem Name="TabItemLevels" Header="Уровни">
+            <Grid></Grid>
+        </TabItem>
 
-            
+            <TabItem Name="TabItemEditor" Header="Редактор">
+           
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -31,24 +34,49 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                
-                <TextBox Name="TextBoxTEST" Width="150" Height="30" />
                 <pl:Player x:Name="VideoPlayer" Source="{Binding Path=VideoInfoVM.Source, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Grid.Column="2" Grid.ColumnSpan="2"/>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Grid.Column="1" >
                     <Button Content="SegregScene" Height="30" Width="75"  Command="{Binding Path=AutoSegregateVideoToScenes}" Margin="5" />
                 <Button Content="PutTime" Height="30" Width="75" Click="Button_Click_3" Margin="5"/>
                 </StackPanel>
+
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="*"/>
+
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Юнитов"/>
+                        <Label Content="Врем.нач." Grid.Column="1"/>
+                        <Label Content="Врем.кон." Grid.Column="2" />
+                        <Label Content="Название" Grid.Column="3" />
+                    </Grid>
                 <ListBox ItemsSource="{Binding Path=SceneSetVMs, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
                 SelectedItem="{Binding Path=SelectedSceneSetVM}">
-                    <ListBox.ItemTemplate>
+                <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Label Content="{Binding VideoSegment_TimeBegin, UpdateSourceTrigger=PropertyChanged}" Background="DarkTurquoise"></Label>
-                                <Label Content="{Binding VideoSegment_TimeEnd, UpdateSourceTrigger=PropertyChanged}" Background="DarkTurquoise"></Label>
-                            </StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="80"/>
+                                        <ColumnDefinition Width="80"/>
+                                        <ColumnDefinition Width="*"/>
+
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="{Binding UnitsCount, UpdateSourceTrigger=PropertyChanged}"  Grid.Column="0"/>
+                                    <Label Content="{Binding VideoSegment_TimeBegin, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
+                                    <Label Content="{Binding VideoSegment_TimeEnd, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" />
+                                    <Label Content="{Binding VideoSegment_Source, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Grid.Column="3" />
+
+                                </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
+                </StackPanel>    
+                    
                 <GroupBox x:Name="SelectedGroup" Header="Выбранный элемент" HorizontalAlignment="Stretch" Grid.Column="1" VerticalAlignment="Stretch" 
                   DataContext="{Binding SelectedSceneSetVM, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                     <StackPanel Orientation="Vertical">
@@ -56,14 +84,15 @@
                                                  Command="{Binding ElementName=SelectedGroup,Path=DataContext.WheelTimeBeginCommand}" Tag="Начало" />
                         <propview:TimeWatcherView DataContext="{Binding VideoSegment_TimeEnd, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  
                                                   Command="{Binding ElementName=SelectedGroup,Path=DataContext.WheelTimeEndCommand}" Tag="Конец" Margin="0,10,0,0"/>
-                        <Label Content="Конец" Margin="0,30,0,0"/>
-                        <TextBox Text="{Binding VideoSegment_TimeEnd, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" FontSize="22"></TextBox>
-                    </StackPanel>
+                        <propview:TimeWatcherView DataContext="{Binding UnitsCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  
+                                                  Command="{Binding ElementName=SelectedGroup,Path=DataContext.WheelUnitsCommand}" Tag="Юнитов" Margin="0,10,0,0"/>
+
+                         </StackPanel>
                 </GroupBox>
                 <GroupBox Header="Инфо о видео" x:Name="VideoInfoGroupBox" 
                   DataContext="{Binding VideoInfoVM}" Grid.Column="2"  Grid.ColumnSpan="2" Grid.Row="1">
                     <StackPanel Orientation="Vertical">
-                        <propview:PropertyViewer  DataContext="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Название"/>
+                        <propview:PropertyViewer x:Name="PropViewTitle" DataContext="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Название"/>
                         <propview:PropertyViewer  DataContext="{Binding Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Описание"/>
                         <propview:PropertyViewer  DataContext="{Binding Duration, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Длительность"/>
                         <propview:PropertyViewer  DataContext="{Binding Source, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Источник"/>
