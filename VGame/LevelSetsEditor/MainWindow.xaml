@@ -1,0 +1,112 @@
+﻿<Window x:Class="LevelSetsEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LevelSetsEditor"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:cmd="http://prismlibrary.com/"
+        xmlns:vm ="clr-namespace:LevelSetsEditor.ViewModel"
+        xmlns:chromium ="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+        xmlns:pl ="clr-namespace:PlayerVlcControl;assembly=PlayerVlcControl"
+        xmlns:propview ="clr-namespace:LevelSetsEditor.View"
+        xmlns:player ="clr-namespace:LevelSetsEditor.View.VideoPlayerMVVM"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="850" Width="1200" >
+    <Window.DataContext>
+        <vm:LevelSetVM x:Name="LevelSetVMDataContext"/>
+    </Window.DataContext>
+    <TabControl Name="TabControlMain" >
+        <TabItem Name="TabItemEditor" Header="Редактор">
+
+            
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                
+                <TextBox Name="TextBoxTEST" Width="150" Height="30" />
+                <pl:Player x:Name="VideoPlayer" Source="{Binding Path=VideoInfoVM.Source, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Grid.Column="2" Grid.ColumnSpan="2"/>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Grid.Column="1" >
+                    <Button Content="SegregScene" Height="30" Width="75"  Command="{Binding Path=AutoSegregateVideoToScenes}" Margin="5" />
+                <Button Content="PutTime" Height="30" Width="75" Click="Button_Click_3" Margin="5"/>
+                </StackPanel>
+                <ListBox ItemsSource="{Binding Path=SceneSetVMs, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+                SelectedItem="{Binding Path=SelectedSceneSetVM}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="{Binding VideoSegment_TimeBegin, UpdateSourceTrigger=PropertyChanged}" Background="DarkTurquoise"></Label>
+                                <Label Content="{Binding VideoSegment_TimeEnd, UpdateSourceTrigger=PropertyChanged}" Background="DarkTurquoise"></Label>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <GroupBox Header="Выбранный элемент" HorizontalAlignment="Stretch" Grid.Column="1" VerticalAlignment="Stretch" 
+                  DataContext="{Binding SelectedSceneSetVM, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                    <StackPanel Orientation="Vertical">
+                        <propview:TimeWatcherView Tag="Начало" MinHeight="30" Background="#FFFFDDC5"/>
+                        <Label Content="Конец" Margin="0,30,0,0"/>
+                        <TextBox Text="{Binding VideoSegment_TimeEnd, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" FontSize="22"></TextBox>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Инфо о видео" x:Name="VideoInfoGroupBox" 
+                  DataContext="{Binding VideoInfoVM}" Grid.Column="2"  Grid.ColumnSpan="2" Grid.Row="1">
+                    <StackPanel Orientation="Vertical">
+                        <propview:PropertyViewer  DataContext="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Название"/>
+                        <propview:PropertyViewer  DataContext="{Binding Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Описание"/>
+                        <propview:PropertyViewer  DataContext="{Binding Duration, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Длительность"/>
+                        <propview:PropertyViewer  DataContext="{Binding Source, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Источник"/>
+                        <propview:PropertyViewer  DataContext="{Binding Type,  UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Тип видео"/>
+                        <propview:PropertyViewer  DataContext="{Binding Resolution, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Разрешение" Margin="0,0,0,50"/>
+
+
+
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="Превью" x:Name="PreviewGroupBox"  DataContext="{Binding Path=VideoInfoVM}" Grid.Row="1" Grid.ColumnSpan="2" >
+                    <propview:PreviewViewer DataContext="{Binding Path=PreviewVM}"></propview:PreviewViewer>
+                </GroupBox>
+
+
+
+
+            </Grid>
+        </TabItem>
+        <TabItem Header="Браузер">
+            <DockPanel>
+                <Grid Name="GridBrowser" DockPanel.Dock="Top">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="150"/>
+
+                    </Grid.ColumnDefinitions>
+                    <Button Content="JOIN" Margin="5" Grid.Column="0" Click="Button_Click_2" />
+                    <TextBox Name="TextURL"  Grid.Column="1" Text="{Binding Address, ElementName=Browser, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Margin="5" FontSize="16" KeyDown="TextURL_KeyDown" />
+                    <Button Content="GO!" Margin="5" Grid.Column="2" Click="Button_Click"/>
+                    <Button Content="Youtube" Margin="5" Grid.Column="5" Click="Button_Click_1" />
+
+                    <Button Content="&lt;" Command="{Binding WebBrowser.BackCommand, ElementName=Browser}" Margin="5" Grid.Column="3" />
+                    <Button Content="&gt;" Command="{Binding WebBrowser.ForwardCommand, ElementName=Browser}" Margin="5" Grid.Column="4" />
+                </Grid>
+
+                <Grid Background="DarkOrange" Margin="5">
+                    <chromium:ChromiumWebBrowser Name="Browser" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Address="https://www.youtube.com/watch?v=Ljhp_GU3BNk"/>
+                </Grid>
+            </DockPanel>
+        </TabItem>
+    </TabControl>
+</Window>

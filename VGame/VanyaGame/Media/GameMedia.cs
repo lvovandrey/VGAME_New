@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using VanyaGame.Media.Abstract;
+using VanyaGame.Struct.Components;
 
 namespace VanyaGame.Media
 {
@@ -88,12 +89,35 @@ namespace VanyaGame.Media
             OnEnded = null;
         }
 
-        public void Play(string MediaName, TimeSpan TimeBegin, TimeSpan TimeEnd)
+        public void Play(string MediaName, TimeSpan TimeBegin, TimeSpan TimeEnd, VideoType videoType)
         {
-            string S = @Game.Sets.MainDir + @Game.Level.Sets.Directory + @Game.Level.Sets.VideoDir + @"\" + @MediaName;
+            string S = @Game.Sets.MainDir + @Game.Sets.DefaultVideo; ;
+            switch (videoType)
+            {
+                case VideoType.local:   S = @Game.Sets.MainDir + @Game.Level.Sets.Directory + @Game.Level.Sets.VideoDir + @"\" + @MediaName; break;
+                case VideoType.youtube:
+                    {
+                        try
+                        {
+                            string s = YouTubeUrlSupplier.YoutubeGet.GetVideoDirectURL(@MediaName);
+                            if (s != null)
+                                S = s;
+                            else throw new Exception();
+                            break;
+                        }
+                        catch
+                        {
+                            S = @Game.Sets.MainDir + @Game.Sets.DefaultVideo;
+                            TimeBegin = TimeSpan.FromSeconds(0);
+                            TimeEnd = TimeSpan.FromSeconds(5);
+                            break;
+                        }
+                    }
+                case VideoType.net:     S = @MediaName; break;
+                case VideoType.ipcam:   S = @MediaName; break;
+            }
             player.Source = S;
-            // player.Source = new Uri(@Media[MediaName]);
-
+           
             IsPlaying = true;
             timer_ = new MediaTimer(TimeBegin, TimeEnd);
             timer_.Start(OnTimerTick);

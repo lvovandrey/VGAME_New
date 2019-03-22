@@ -124,7 +124,17 @@ namespace VanyaGame.ZDebug
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
+
             vlc1.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            vlc1.vlcPlayer.MediaPlayer.VlcLibDirectory = new System.IO.DirectoryInfo(@Environment.CurrentDirectory + @"\Tools\vlcLib\");
+            // new System.IO.DirectoryInfo(@"c:\Program Files\VideoLAN\VLC\");
+            //new System.IO.DirectoryInfo(@"c:\vlcLib\");
+            vlc1.vlcPlayer.MediaPlayer.EndInit();
+            vlc1.vlcPlayer.MediaPlayer.Play(@"rtsp://root:root@192.168.0.15:554/axis-media/media.amp", @":network-caching=100" );
         }
     }
 }

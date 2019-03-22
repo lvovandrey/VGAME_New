@@ -327,67 +327,101 @@ namespace VanyaGame
         }
 
 
-        public static void LoadSetsFromXML(Level  Level, string filename)
+        public static void LoadSetsFromXML(Level Level, string filename)
         {
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load(filename);
             // получим корневой элемент
             XmlElement xRoot = xDoc.DocumentElement;
-             
+
             List<Scene> Scenes = new List<Scene>();
             //надо превратить нашу очередь в List
             foreach (KeyValuePair<string, Scene> SL in Level.Scenes)
-                {
-                    Scenes.Add(SL.Value);
-                }
+            {
+                Scenes.Add(SL.Value);
+            }
             int i = -1;
             // обход всех узлов в корневом элементе
             foreach (XmlNode xnode in xRoot)
             {
+
                 
-                i++;
                 // получаем атрибут name
                 if (xnode.Attributes.Count > 0)
                 {
                     XmlNode attr = xnode.Attributes.GetNamedItem("name");
                     if (attr != null)
-                      Game.Msg(attr.Value);
+                        Game.Msg(attr.Value);
                 }
-                
 
-                
-                // обходим все дочерние узлы элемента user
-                foreach (XmlNode childnode in xnode.ChildNodes)
+                if (xnode.Name == "sets")
+                    foreach (XmlNode childnode in xnode.ChildNodes)
+                        switch (childnode.Name)
+                        {
+                            case "description"      : Level.Sets.Description = childnode.InnerText; break;
+                            case "name"             : Level.Sets.Name = childnode.InnerText; break;
+                            case "preview"          : Level.Sets.PreviewType = childnode.InnerText; break;
+                            case "background"       : Level.Sets.BackgroundType = childnode.InnerText; break;
+                            case "basevideofilename": Level.Sets.BaseVideoFilename = childnode.InnerText; break;
+                        }
+
+
+
+
+                if (xnode.Name == "scene")
                 {
-                    if (Scenes.Count >= (i+1))
+                    i++;
+                    foreach (XmlNode childnode in xnode.ChildNodes)
                     {
-                        if (Scenes[i].Sets.GetComponent<InnerVideoSets>() == null) continue;
-                        // если узел - company
-                        if (childnode.Name == "filename")
+                        if (Scenes.Count >= (i + 1))
                         {
-                            Game.Msg("filename: " + childnode.InnerText);
-                            Scenes[i].Sets.GetComponent<InnerVideoSets>().VideoFileName = childnode.InnerText;
+                            if (Scenes[i].Sets.GetComponent<InnerVideoSets>() == null) continue;
+
+                            //Scenes[i].Sets.GetComponent<InnerVideoSets>().VideoFileType = VideoType.unknown;
+                            //Scenes[i].Sets.GetComponent<InnerVideoSets>().VideoFileName = "";
+                            //Scenes[i].Sets.GetComponent<InnerVideoSets>().VideoTimeBegin = TimeSpan.FromMilliseconds(0);
+                            //Scenes[i].Sets.GetComponent<InnerVideoSets>().VideoTimeEnd = TimeSpan.FromMilliseconds(0);
+                            // если узел - company
+                            if (childnode.Name == "filename")
+                            {
+                                Game.Msg("filename: " + childnode.InnerText);
+                                Scenes[i].Sets.GetComponent<InnerVideoSets>().VideoFileName = childnode.InnerText;
+                            }
+                            // если узел - filetype
+                            if (childnode.Name == "filetype")
+                            {
+                                VideoType type = VideoType.unknown;
+                                Game.Msg("filetype: " + childnode.InnerText);
+                                switch (childnode.InnerText)
+                                {
+                                    case "local": type = VideoType.local; break;
+                                    case "net": type = VideoType.net; break;
+                                    case "youtube": type = VideoType.youtube; break;
+                                    case "ipcam": type = VideoType.ipcam; break;
+                                }
+                                Scenes[i].Sets.GetComponent<InnerVideoSets>().VideoFileType = type;
+                            }
+                            // если узел - company
+                            if (childnode.Name == "filenumber")
+                            {
+                                Game.Msg("filenumber: " + childnode.InnerText);
+                                Scenes[i].Sets.GetComponent<InnerVideoSets>().VideoFileNumber = childnode.InnerText;
+                            }
+                            // если узел - company
+                            if (childnode.Name == "timeBegin")
+                            {
+                                Game.Msg("Beg: " + childnode.InnerText);
+                                Scenes[i].Sets.GetComponent<InnerVideoSets>().VideoTimeBegin = TimeSpan.Parse(childnode.InnerText);
+                            }
+                            // если узел - company
+                            if (childnode.Name == "timeEnd")
+                            {
+                                Game.Msg("end: " + childnode.InnerText);
+                                Scenes[i].Sets.GetComponent<InnerVideoSets>().VideoTimeEnd = TimeSpan.Parse(childnode.InnerText);
+                            }
                         }
-                        // если узел - company
-                        if (childnode.Name == "filenumber")
-                        {
-                            Game.Msg("filenumber: " + childnode.InnerText);
-                            Scenes[i].Sets.GetComponent<InnerVideoSets>().VideoFileNumber = childnode.InnerText;
-                        }
-                        // если узел - company
-                        if (childnode.Name == "timeBegin")
-                        {
-                            Game.Msg("Beg: " + childnode.InnerText);
-                            Scenes[i].Sets.GetComponent<InnerVideoSets>().VideoTimeBegin = TimeSpan.Parse(childnode.InnerText);
-                        }
-                        // если узел - company
-                        if (childnode.Name == "timeEnd")
-                        {
-                            Game.Msg("end: " + childnode.InnerText);
-                            Scenes[i].Sets.GetComponent<InnerVideoSets>().VideoTimeEnd = TimeSpan.Parse(childnode.InnerText);
-                        }
+
                     }
-                    
                 }
             }
         }

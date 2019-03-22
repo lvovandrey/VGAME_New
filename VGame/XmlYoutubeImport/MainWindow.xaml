@@ -1,0 +1,51 @@
+﻿<Window x:Class="XmlYoutubeImport.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:XmlYoutubeImport"
+        xmlns:ma ="clr-namespace:XmlYoutubeImport.Model"
+        xmlns:vm= "clr-namespace:XmlYoutubeImport.ViewModel"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:osb="clr-namespace:Xceed.Wpf.Toolkit.Obselete;assembly=WPFToolkit.Extended"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="800">
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
+
+            <Grid>
+        <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+            <TabItem Header="Сплиттер">
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                        <local:VideoPlayer/>
+                    <local:VideoPartsControl x:Name="list" Grid.Column="1" Grid.RowSpan="3" />
+
+                    <TextBox Grid.Column="2" Text="{Binding VideoData.Title, UpdateSourceTrigger=PropertyChanged}" Background="#FFBDACAC"/>
+                    <TextBox Grid.Column="2" Grid.Row="1" Text="{Binding VideoData.SceneDatas.Count, Mode=OneWay}" Background="#FFBDACAC" />
+
+                    <!--<TextBox Name="TimeBegin" Height="23" Grid.Column="2" TextWrapping="Wrap" Text="{Binding ElementName=list, Path=TEST.Begin, UpdateSourceTrigger=PropertyChanged}" Width="120" Margin="11,10,130,148" Background="#FFF07979"/>
+                    <TextBox Name="TimeEnd" Height="23" Grid.Column="2" TextWrapping="Wrap" Text="{Binding ElementName=list, Path=TEST.End, UpdateSourceTrigger=PropertyChanged}" Width="120" Margin="37,49,156,108" Background="#FFE46E6E" RenderTransformOrigin="0.467,-1.261"/>
+                    <TextBox Name="ID" Height="23" Grid.Column="2" TextWrapping="Wrap" Text="{Binding  Path=SelectedSceneData.Num, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="120" Margin="37,90,156,67" Background="#FFF17979"/>-->
+
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Браузер">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+
+        </TabControl>
+
+    </Grid>
+</Window>

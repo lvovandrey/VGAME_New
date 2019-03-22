@@ -90,19 +90,19 @@ namespace VanyaGame
 
         private void VolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-           // Label1.Content = Game.Music.player.Volume + " " + Game.Sound.player.Volume + " " + Game.Video.player.Volume;
+           // Label1.Content = Game.Music.player.Volume + " " + Game.Sound.player.Volume + " " + Game.CurVideo.player.Volume;
         }
 
         private void Image_MouseEnter(object sender, MouseEventArgs e)
         {
-            Game.Video.MediaGUI.UIMediaShowFull();
+            Game.CurVideo.MediaGUI.UIMediaShowFull();
 //            TDrawEffects.ShowUI_MouseEnter((FrameworkElement)sender);
         }
 
 
         private void Image_MouseLeave(object sender, MouseEventArgs e)
         {
-            Game.Video.MediaGUI.UIMediaHideNotFull();
+            Game.CurVideo.MediaGUI.UIMediaHideNotFull();
             ///TDrawEffects.HideUI_MouseDown((FrameworkElement)sender);
         }
 
@@ -114,30 +114,30 @@ namespace VanyaGame
 
         private void NextImgButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            Game.Video.Rewind(new TimeSpan(0, 0, 5), false);
+            Game.CurVideo.Rewind(new TimeSpan(0, 0, 5), false);
         }
 
         private void BackImgButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            Game.Video.Rewind(new TimeSpan(0, 0, 5), true);
+            Game.CurVideo.Rewind(new TimeSpan(0, 0, 5), true);
         }
 
 
 
         private void VideoTimeSlider_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
-            Game.Video.player.Position = new TimeSpan(0, 0, (int)VideoTimeSlider.Value);
-            Game.Video.Play();
+            Game.CurVideo.player.Position = new TimeSpan(0, 0, (int)VideoTimeSlider.Value);
+            Game.CurVideo.Play();
         }
 
         private void VideoTimeSlider_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            Game.Video.Pause();
+            Game.CurVideo.Pause();
         }
 
         private void PlayImgButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            Game.Video.PlayBtnClick();
+            Game.CurVideo.PlayBtnClick();
         }
 
         private void MyWindow_PreviewMouseMove(object sender, MouseEventArgs e)
@@ -208,17 +208,20 @@ namespace VanyaGame
 
         private void VIDEOTEST_Click(object sender, RoutedEventArgs e)
         {
-            Vlc.vlcPlayer.MediaPlayer.VlcLibDirectory = new System.IO.DirectoryInfo(@"c:\Program Files\VideoLAN\VLC\"); //@Environment.CurrentDirectory + @"\Tools\vlcLib\");
-            Vlc.vlcPlayer.MediaPlayer.EndInit();
-            Vlc.vlcPlayer.MediaPlayer.Play(new Uri(@"http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"));
+            Game.VideoPlayerSet(Game.VideoVlc);
+
+            //Vlc.vlcPlayer.MediaPlayer.VlcLibDirectory = new System.IO.DirectoryInfo(@"c:\Program Files\VideoLAN\VLC\"); //@Environment.CurrentDirectory + @"\Tools\vlcLib\");
+            //Vlc.vlcPlayer.MediaPlayer.EndInit();
+            //Vlc.vlcPlayer.MediaPlayer.Play(new Uri(@"http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"));
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //            Vlc.vlcPlayer.MediaPlayer.Position += 0.1f;
-           // L1.Content = Vlc.vlcPlayer.MediaPlayer.Time.ToString(); //Vlc.vlcPlayer.MediaPlayer.Position.ToString();
-            L1.Content= TimeSpan.FromMilliseconds(Vlc.vlcPlayer.MediaPlayer.Length).ToString();
-            L1.Content = Vlc.vlcPlayer.MediaPlayer.Audio.Volume;
+            // L1.Content = Vlc.vlcPlayer.MediaPlayer.Time.ToString(); //Vlc.vlcPlayer.MediaPlayer.Position.ToString();
+            //L1.Content= TimeSpan.FromMilliseconds(Vlc.vlcPlayer.MediaPlayer.Length).ToString();
+            //L1.Content = Vlc.vlcPlayer.MediaPlayer.Audio.Volume;
+            Game.VideoPlayerSet(Game.VideoWpf);
         }
     }
 

@@ -9,6 +9,10 @@
         <Cursor x:Key="HandPushCursor">Images/HandPush.cur</Cursor>
     </UserControl.Resources>
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
         <Image Name="Img" Margin="10"  Source="Images/BtnStop.png" Width="400" Height="225"  HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Stretch="Fill" Cursor="{StaticResource HandPushCursor}" 
                MouseDown="Img_MouseDown" MouseUp="Img_MouseUp" MouseLeave="Img_MouseLeave" >
             <Image.Triggers>
@@ -49,5 +53,18 @@
             </Image.Effect>
 
         </Image>
+
+        <TextBlock Name="Text" Grid.Row="1" Width="{Binding ElementName=Img, Path=Width}" VerticalAlignment="Stretch" 
+               Text="Текст по умолчанию длинный очень очень длинный длинный длинный длинный длинный длинный" FontFamily="Arial" FontSize="18" Margin="10,1,10,0"  TextWrapping="Wrap" TextTrimming="CharacterEllipsis">
+            <TextBlock.ToolTip>
+                <ToolTip>
+                    <TextBlock Name="TextToolTip" Text="Подсказка" FontSize="12"></TextBlock>
+                </ToolTip>
+            </TextBlock.ToolTip>
+            <TextBlock.Effect>
+                <DropShadowEffect BlurRadius="8" ShadowDepth="9" Color="#FF2A2F44" Opacity="0.6"/>
+            </TextBlock.Effect>
+            
+        </TextBlock>
     </Grid>
 </UserControl>

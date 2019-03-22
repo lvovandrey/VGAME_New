@@ -148,7 +148,7 @@ namespace VanyaGame.GameNumber.Struct
 
             Game.Music.Play();
             Game.Music.MediaGUI.UIMediaShow();
-            Game.Video.MediaGUI.UIMediaHide();
+            Game.CurVideo.MediaGUI.UIMediaHide();
             
             //TDrawEffects.SlowDifferVolume(Game.Music.player, 1, 4, (sender, e) => { });
             //Game.Music.player.Volume = 0;
@@ -176,30 +176,48 @@ namespace VanyaGame.GameNumber.Struct
 
             //});
 
-            Game.Video.ShowVideoPlayer();
+            VideoType videoType = SL.Sets.GetComponent<InnerVideoSets>().VideoFileType;
+            switch (videoType)
+            {
+                case VideoType.local: Game.VideoPlayerSet(Game.VideoWpf); break;
+                case VideoType.youtube: Game.VideoPlayerSet(Game.VideoVlc); break;
+            }
+
+            Game.Owner.TextVideoDescription.Text = Level.Sets.Description;
+
+            Game.CurVideo.ShowVideoPlayer();
             Game.Music.MediaGUI.UIMediaHide();
+            Game.Owner.LabelWait.Visibility = System.Windows.Visibility.Visible;
+            TDrawEffects.BlurShow(Game.Owner.LabelWait,0.2, 0, () => { });
             ToolsTimer.Delay(() =>
             {
-                Game.Video.MediaGUI.UIMediaShow();
+                Game.CurVideo.MediaGUI.UIMediaShow();
 
-            }, new TimeSpan(0, 0, 1));
-
-            string MediaName = SL.Sets.GetComponent<InnerVideoSets>().VideoFileName;
+            }, TimeSpan.FromSeconds(1));
 
 
-            Game.Video.Play(MediaName, SL.Sets.GetComponent<InnerVideoSets>().VideoTimeBegin, SL.Sets.GetComponent<InnerVideoSets>().VideoTimeEnd);
-            Game.Owner.VideoTimeSlider.Maximum = SL.Sets.GetComponent<InnerVideoSets>().VideoTimeEnd.TotalSeconds;
-            Game.Owner.VideoTimeSlider.Minimum = SL.Sets.GetComponent<InnerVideoSets>().VideoTimeBegin.TotalSeconds;
-
-            Game.Video.ClearOnEndedEvent();
-            Game.Video.OnEnded += ((NumberLevel)Level).NextScene;
-            Game.Video.OnEnded += () =>
+            ToolsTimer.Delay(() =>
             {
-                Game.Video.ClearOnEndedEvent();
-                Game.Video.HideVideoPlayer();
-                Game.Video.MediaGUI.UIMediaHide();
-            };
-            
+                string MediaName = SL.Sets.GetComponent<InnerVideoSets>().VideoFileName;
+
+
+                Game.CurVideo.Play(MediaName, SL.Sets.GetComponent<InnerVideoSets>().VideoTimeBegin, SL.Sets.GetComponent<InnerVideoSets>().VideoTimeEnd, SL.Sets.GetComponent<InnerVideoSets>().VideoFileType);
+                Game.Owner.VideoTimeSlider.Maximum = SL.Sets.GetComponent<InnerVideoSets>().VideoTimeEnd.TotalSeconds;
+                Game.Owner.VideoTimeSlider.Minimum = SL.Sets.GetComponent<InnerVideoSets>().VideoTimeBegin.TotalSeconds;
+
+                TDrawEffects.BlurHide(Game.Owner.LabelWait, 1, 0, () => { Game.Owner.LabelWait.Visibility = System.Windows.Visibility.Hidden; });
+               
+                Game.CurVideo.ClearOnEndedEvent();
+                Game.CurVideo.OnEnded += ((NumberLevel)Level).NextScene;
+                Game.CurVideo.OnEnded += () =>
+                {
+                    Game.CurVideo.ClearOnEndedEvent();
+                    Game.CurVideo.HideVideoPlayer();
+                    Game.CurVideo.MediaGUI.UIMediaHide();
+                    Game.Owner.LabelWait.Visibility = System.Windows.Visibility.Hidden;
+                    Game.Owner.TextVideoDescription.Text = "Ничего...";
+                };
+            }, TimeSpan.FromSeconds(1.3));
 
         }
 
