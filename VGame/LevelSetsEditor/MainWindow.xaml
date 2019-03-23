@@ -18,7 +18,7 @@
     </Window.DataContext>
     <TabControl Name="TabControlMain" >
         <TabItem Name="TabItemLevels" Header="Уровни">
-            <Grid></Grid>
+            <propview:LevelViewDB/>
         </TabItem>
 
             <TabItem Name="TabItemEditor" Header="Редактор">

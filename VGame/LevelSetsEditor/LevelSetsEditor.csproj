@@ -135,8 +135,17 @@
     <Compile Include="ViewModel\VideoInfoVM.cs" />
     <Compile Include="ViewModel\VideoPlayerVM.cs" />
     <Compile Include="ViewModel\WebBrowserVM.cs" />
+    <Compile Include="View\ImageView.xaml.cs">
+      <DependentUpon>ImageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LevelViewDB.xaml.cs">
+      <DependentUpon>LevelViewDB.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PreviewViewer.xaml.cs">
       <DependentUpon>PreviewViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PropertyViewerL.xaml.cs">
+      <DependentUpon>PropertyViewerL.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PropertyViewer.xaml.cs">
       <DependentUpon>PropertyViewer.xaml</DependentUpon>
@@ -160,9 +169,21 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\ImageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LevelViewDB.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\PreviewViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PropertyViewerL.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\PropertyViewer.xaml">
       <SubType>Designer</SubType>
@@ -229,6 +250,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icons\play_pause.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\testprev.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
