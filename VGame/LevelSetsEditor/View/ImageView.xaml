@@ -14,7 +14,10 @@
             <DropShadowEffect ShadowDepth="2" Opacity="0.5"/>
         </Grid.Effect>
         <Image MaxHeight="300" MaxWidth="500" Source="{Binding Path=PreviewVM.Source}" Stretch="Fill" x:Name="Image" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3" />
-        <Label Content="{Binding Title}" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="{Binding  ElementName=Image, Path=ActualWidth, Converter={StaticResource fontSizeConverter}}" BorderThickness="4,0,0,0" Background="#266E6E6E" Foreground="#FFBBBBBB">
+        <Label Content="{Binding Title}" HorizontalAlignment="Right" VerticalAlignment="Top" 
+               Margin="5"
+               FontSize="{Binding  ElementName=Image, Path=ActualWidth, Converter={StaticResource fontSizeConverter}}" 
+               BorderThickness="4,0,0,0" Background="#266E6E6E" Foreground="#FFBBBBBB">
             <Label.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#B6000000" Offset="0"/>
