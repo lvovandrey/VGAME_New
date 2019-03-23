@@ -10,6 +10,7 @@
         xmlns:chromium ="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
         xmlns:pl ="clr-namespace:PlayerVlcControl;assembly=PlayerVlcControl"
         xmlns:propview ="clr-namespace:LevelSetsEditor.View"
+        xmlns:lst ="clr-namespace:LevelSetsEditor.View.LevelsDBViews"
         xmlns:player ="clr-namespace:LevelSetsEditor.View.VideoPlayerMVVM"
         mc:Ignorable="d"
         Title="MainWindow" Height="850" Width="1200" >
@@ -18,7 +19,14 @@
     </Window.DataContext>
     <TabControl Name="TabControlMain" >
         <TabItem Name="TabItemLevels" Header="Уровни">
-            <propview:LevelViewDB/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <lst:ListLevelsViewDB></lst:ListLevelsViewDB>
+            <propview:LevelViewDB Grid.Column="1"/>
+            </Grid>
         </TabItem>
 
         <TabItem Name="TabItemEditor" Header="Редактор">
