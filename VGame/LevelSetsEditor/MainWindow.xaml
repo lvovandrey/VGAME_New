@@ -27,6 +27,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
+                    <ColumnDefinition Width="5"/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
@@ -34,11 +35,11 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <pl:Player x:Name="VideoPlayer" Source="{Binding Path=VideoInfoVM.Source, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Grid.Column="2" Grid.ColumnSpan="2"/>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Grid.Column="1" >
                     <Button Content="SegregScene" Height="30" Width="75"  Command="{Binding Path=AutoSegregateVideoToScenes}" Margin="5" />
                     <Button Content="PutTime" Height="30" Width="75" Click="Button_Click_3" Margin="5"/>
                 </StackPanel>
+
 
                 <StackPanel>
                     <Grid>
@@ -79,7 +80,7 @@
 
                 <GroupBox x:Name="SelectedGroup" Header="Выбранный элемент" HorizontalAlignment="Stretch" Grid.Column="1" VerticalAlignment="Stretch" 
                   DataContext="{Binding SelectedSceneSetVM, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
-                    <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Vertical" Height="373" Margin="0,0,0,-0.2" VerticalAlignment="Top">
                         <propview:TimeWatcherView DataContext="{Binding VideoSegment_TimeBegin, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                                  Command="{Binding ElementName=SelectedGroup,Path=DataContext.WheelTimeBeginCommand}" Tag="Начало" />
                         <propview:TimeWatcherView DataContext="{Binding VideoSegment_TimeEnd, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  
@@ -89,24 +90,40 @@
 
                     </StackPanel>
                 </GroupBox>
-                <GroupBox Header="Инфо о видео" x:Name="VideoInfoGroupBox" 
-                  DataContext="{Binding VideoInfoVM}" Grid.Column="2"  Grid.ColumnSpan="2" Grid.Row="1">
-                    <StackPanel Orientation="Vertical">
-                        <propview:PropertyViewer x:Name="PropViewTitle" DataContext="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Название"/>
-                        <propview:PropertyViewer  DataContext="{Binding Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Описание"/>
-                        <propview:PropertyViewer  DataContext="{Binding Duration, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Длительность"/>
-                        <propview:PropertyViewer  DataContext="{Binding Source, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Источник"/>
-                        <propview:PropertyViewer  DataContext="{Binding Type,  UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Тип видео"/>
-                        <propview:PropertyViewer  DataContext="{Binding Resolution, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Разрешение" Margin="0,0,0,50"/>
-
-
-
-                    </StackPanel>
-                </GroupBox>
 
                 <GroupBox Header="Превью" x:Name="PreviewGroupBox"  DataContext="{Binding Path=VideoInfoVM}" Grid.Row="1" Grid.ColumnSpan="2" >
                     <propview:PreviewViewer DataContext="{Binding Path=PreviewVM}"></propview:PreviewViewer>
                 </GroupBox>
+                
+                <GridSplitter Grid.Column ="2" Grid.RowSpan="2" Width="5"  HorizontalAlignment="Center" VerticalAlignment="Stretch" />
+
+
+                <Grid Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="49.6"/>
+                        <RowDefinition Height="176"/>
+                    </Grid.RowDefinitions>
+                    <pl:Player x:Name="VideoPlayer" Source="{Binding Path=VideoInfoVM.Source, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Margin="2,2,2.4,2.8" />
+                    <GridSplitter Grid.Row="1" Height="3"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,1.2,0.4,0.6" />
+                    <GroupBox Header="Инфо о видео" x:Name="VideoInfoGroupBox" 
+                  DataContext="{Binding VideoInfoVM}"   Grid.Row="2" Margin="0,0.4,0.4,0.2" Grid.RowSpan="2">
+                        <StackPanel Orientation="Vertical">
+                            <propview:PropertyViewer x:Name="PropViewTitle" DataContext="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Название"/>
+                            <propview:PropertyViewer  DataContext="{Binding Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Описание"/>
+                            <propview:PropertyViewer  DataContext="{Binding Duration, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Длительность"/>
+                            <propview:PropertyViewer  DataContext="{Binding Source, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Источник"/>
+                            <propview:PropertyViewer  DataContext="{Binding Type,  UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Тип видео"/>
+                            <propview:PropertyViewer  DataContext="{Binding Resolution, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Разрешение" Margin="0,0,0,50"/>
+
+
+
+                        </StackPanel>
+                    </GroupBox>
+                </Grid>
+
+ 
 
 
 

@@ -5,15 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LevelSetsEditor.View"
              mc:Ignorable="d" 
-             d:DesignHeight="38"  x:Name="This" Tag="Default tag" FontSize="11" >
+             d:DesignHeight="28"  x:Name="This" Tag="Default tag" FontSize="11" >
     <Grid>
-        <Grid x:Name="ThisGrid" Tag="Название" Margin="5" >
+        <Grid x:Name="ThisGrid" Tag="Название" Margin="1" >
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition x:Name="NamePropColumn" Width="100" />
                 <ColumnDefinition Width="*" MinWidth="100"/>
             </Grid.ColumnDefinitions>
-            <Label Content="{Binding ElementName=This, Path=DataContext, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" BorderThickness="1" >
+            <Label Content="{Binding ElementName=This, Path=DataContext, UpdateSourceTrigger=PropertyChanged}"  Grid.Column="1" BorderThickness="1" >
                 <Label.Background>
                     <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                         <GradientStop Color="#FFC3C3C3"/>

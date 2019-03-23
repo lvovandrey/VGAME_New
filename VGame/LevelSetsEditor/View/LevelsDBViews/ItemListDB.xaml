@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="LevelSetsEditor.View.LevelsDBViews.ItemListDB"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LevelSetsEditor.View.LevelsDBViews"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Height="90" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="140"/>
+            <ColumnDefinition Width="*"/>
+
+        </Grid.ColumnDefinitions>
+
+       
+        <Image Source="/LevelSetsEditor;component/icons/testprev.jpg" Stretch="Fill" Margin="5">
+            <Image.Effect>
+                <DropShadowEffect ShadowDepth="0"/>
+            </Image.Effect>
+        </Image>
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label Content="Очень очень хороший мультфильм про ананассс сс насс..." Grid.ColumnSpan="2" FontSize="22">
+                <Label.Effect>
+                    <DropShadowEffect ShadowDepth="2" BlurRadius="0" Color="#FFFFF700" Opacity="0.4" />
+                </Label.Effect>
+            </Label>
+            <Label Content="Количество сцен   5" Grid.Row="1" FontSize="16"/>
+            <Label Content="Длительность   0:06:34" Grid.Row="1" Grid.Column="1" FontSize="16"/>
+        </Grid>
+    </Grid>
+</UserControl>

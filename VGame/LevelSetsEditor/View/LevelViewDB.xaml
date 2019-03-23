@@ -22,49 +22,14 @@
                     <local:PropertyViewerL  DataContext="{Binding Duration, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Длительность"/>
                     <local:PropertyViewerL  DataContext="{Binding Source, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Источник"/>
                     <local:PropertyViewerL  DataContext="{Binding Type,  UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Тип видео"/>
-                    <local:PropertyViewerL  DataContext="{Binding Resolution, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Разрешение" Margin="0,0,0,50"/>
+                    <local:PropertyViewerL  DataContext="{Binding Resolution, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Разрешение" Margin="0,0,0,10"/>
 
 
 
                 </StackPanel>
             </GroupBox>
 
-            <StackPanel Grid.Row="1">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="50"/>
-                        <ColumnDefinition Width="80"/>
-                        <ColumnDefinition Width="80"/>
-                        <ColumnDefinition Width="*"/>
-
-                    </Grid.ColumnDefinitions>
-                    <Label Content="Юнитов"/>
-                    <Label Content="Врем.нач." Grid.Column="1"/>
-                    <Label Content="Врем.кон." Grid.Column="2" />
-                    <Label Content="Название" Grid.Column="3" />
-                </Grid>
-                <ListBox ItemsSource="{Binding Path=SceneSetVMs, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
-                SelectedItem="{Binding Path=SelectedSceneSetVM}" ScrollViewer.VerticalScrollBarVisibility="Visible" >
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50"/>
-                                    <ColumnDefinition Width="80"/>
-                                    <ColumnDefinition Width="80"/>
-                                    <ColumnDefinition Width="*"/>
-
-                                </Grid.ColumnDefinitions>
-                                <Label Content="{Binding UnitsCount, UpdateSourceTrigger=PropertyChanged}"  Grid.Column="0"/>
-                                <Label Content="{Binding VideoSegment_TimeBegin, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
-                                <Label Content="{Binding VideoSegment_TimeEnd, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" />
-                                <Label Content="{Binding VideoSegment_Source, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Grid.Column="3" />
-
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </StackPanel>
+            <local:ListScenesView></local:ListScenesView>
         </StackPanel>
     </Grid>
 </UserControl>

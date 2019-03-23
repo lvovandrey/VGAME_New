@@ -87,6 +87,8 @@ namespace LevelSetsEditor.ViewModel
             }
         }
 
+
+
         public System.Drawing.Size Size
         {
             get

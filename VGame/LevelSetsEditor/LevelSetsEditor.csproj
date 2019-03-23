@@ -138,8 +138,17 @@
     <Compile Include="View\ImageView.xaml.cs">
       <DependentUpon>ImageView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\LevelsDBViews\ItemListDB.xaml.cs">
+      <DependentUpon>ItemListDB.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LevelsDBViews\ListLevelsViewDB.xaml.cs">
+      <DependentUpon>ListLevelsViewDB.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\LevelViewDB.xaml.cs">
       <DependentUpon>LevelViewDB.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ListScenesView.xaml.cs">
+      <DependentUpon>ListScenesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PreviewViewer.xaml.cs">
       <DependentUpon>PreviewViewer.xaml</DependentUpon>
@@ -173,7 +182,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\LevelsDBViews\ItemListDB.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LevelsDBViews\ListLevelsViewDB.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\LevelViewDB.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ListScenesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
