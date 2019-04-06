@@ -16,7 +16,9 @@ namespace LevelSetsEditor.Model
             set
             { timeBegin = value; }
         }
-		public TimeSpan TimeEnd { get; set; }
+
+        public int Id { get; set; }
+        public TimeSpan TimeEnd { get; set; }
 		public Uri Source { get; set; }
 	}
 }

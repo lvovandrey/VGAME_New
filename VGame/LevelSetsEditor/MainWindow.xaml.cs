@@ -19,6 +19,8 @@ using CefSharp.Wpf;
 using YouTubeUrlSupplier;
 using PlayerVlcControl;
 using System.IO;
+using LevelSetsEditor.DB;
+using LevelSetsEditor.Model;
 
 namespace LevelSetsEditor
 {
@@ -144,6 +146,23 @@ namespace LevelSetsEditor
         {
             
             this.VideoPlayer.SetPosition( 1000*LevelSetVMDataContext.SelectedSceneSetVM.VideoSegment_TimeBegin.TotalSeconds/LevelSetVMDataContext.VideoInfoVM.Duration.TotalSeconds);
+        }
+
+        private void CreateBD()
+        {
+            using (LevelSetContext db = new LevelSetContext())
+            {
+                // создаем два объекта User
+                LevelSet level = new LevelSet();
+                level.Name = "Some Level name";
+                db.LevelSets.Add(level);
+                db.SaveChanges();
+            }
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            CreateBD();
         }
     }
 }

@@ -18,7 +18,10 @@ namespace LevelSetsEditor.Model
         {
             MultiplePrevSources = new Uri[3];
         }
-		public Uri Source { get; set; }
+
+        public int Id { get; set; }
+
+        public Uri Source { get; set; }
         
         public Uri[] MultiplePrevSources { get; set; }
 

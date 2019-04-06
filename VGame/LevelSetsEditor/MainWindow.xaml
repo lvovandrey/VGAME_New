@@ -138,6 +138,9 @@
 
             </Grid>
         </TabItem>
+        <TabItem Header="СОЗДАНИЕ БД">
+            <Button Content="Создать БД" Width="100" Height="100" Click="Button_Click_4"/>
+        </TabItem>
         <TabItem Header="Браузер">
             <DockPanel>
                 <Grid Name="GridBrowser" DockPanel.Dock="Top">

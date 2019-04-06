@@ -9,7 +9,9 @@ namespace LevelSetsEditor.Model
 	{
         public SceneSet()
         { VideoSegment = new VideoSegment(); }
-		public VideoSegment VideoSegment { get; set; }
+
+        public int Id { get; set; }
+        public VideoSegment VideoSegment { get; set; }
 		public int UnitsCount { get; set; }		
 	}
 }

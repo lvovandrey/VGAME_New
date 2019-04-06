@@ -12,6 +12,8 @@ namespace LevelSetsEditor.Model
             SceneSets = new List<SceneSet>();
             VideoInfo = new VideoInfo();
         }
+
+        public int Id { get; set; }
         public VideoInfo VideoInfo
 		{ get; set; }
 

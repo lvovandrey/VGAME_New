@@ -10,6 +10,9 @@ namespace LevelSetsEditor.Model
     {
         public WebBrowserModel()
         { CurURL = @"https://www.youtube.com/"; }
+
+        public int Id { get; set; }
+
         public string CurURL { get; set; }
     }
 }

@@ -10,7 +10,10 @@ namespace LevelSetsEditor.Model
 	{
         public VideoInfo()
         { Preview = new Preview(); }
-		public string Title { get; set; }
+
+        public int Id { get; set; }
+
+        public string Title { get; set; }
 		
 		public TimeSpan Duration { get; set; }
 
