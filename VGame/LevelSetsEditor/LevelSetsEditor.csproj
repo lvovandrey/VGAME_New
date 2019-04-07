@@ -152,11 +152,13 @@
     <Compile Include="Model\WebBrowserModel.cs" />
     <Compile Include="Tools\ToolsTimer.cs" />
     <Compile Include="ViewModel\LevelSetVM.cs" />
+    <Compile Include="ViewModel\LevelsFromDB.cs" />
     <Compile Include="ViewModel\PreviewVM.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\SceneSetVM.cs" />
     <Compile Include="ViewModel\VideoInfoVM.cs" />
     <Compile Include="ViewModel\VideoPlayerVM.cs" />
+    <Compile Include="ViewModel\ViewModel.cs" />
     <Compile Include="ViewModel\WebBrowserVM.cs" />
     <Compile Include="View\ImageView.xaml.cs">
       <DependentUpon>ImageView.xaml</DependentUpon>

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:LevelSetsEditor.View.LevelsDBViews"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Height="90" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}">
+    <Grid Height="90" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="140"/>
             <ColumnDefinition Width="*"/>
@@ -28,7 +28,7 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Label Content="Очень очень хороший мультфильм про ананассс сс насс..." Grid.ColumnSpan="2" FontSize="22">
+            <Label Content="{Binding Name}" Grid.ColumnSpan="2" FontSize="22">
                 <Label.Effect>
                     <DropShadowEffect ShadowDepth="2" BlurRadius="0" Color="#FFFFF700" Opacity="0.4" />
                 </Label.Effect>

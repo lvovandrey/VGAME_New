@@ -18,10 +18,20 @@ namespace LevelSetsEditor.ViewModel
 
         private ObservableCollection<SceneSetVM> sceneSetVMs;
         private SceneSetVM selectedSceneSet;
+        
 
         public LevelSetVM() // В этом конструкторе заполняем тестовыми данными свойства ойства...
         {
             LevelSet = new Model.LevelSet();
+            VideoInfoVM = new VideoInfoVM(LevelSet);
+            sceneSetVMs = new ObservableCollection<SceneSetVM>();
+            VideoPlayerVM = new VideoPlayerVM(this);
+            PropertyChanged += LevelSetVM_PropertyChanged;
+        }
+
+        public LevelSetVM(LevelSet levelSet) // В этом конструкторе заполняем тестовыми данными свойства ойства...
+        {
+            LevelSet = levelSet;
             VideoInfoVM = new VideoInfoVM(LevelSet);
             sceneSetVMs = new ObservableCollection<SceneSetVM>();
             VideoPlayerVM = new VideoPlayerVM(this);
@@ -68,6 +78,16 @@ namespace LevelSetsEditor.ViewModel
             {
                 LevelSet.VideoInfo = value;
                 OnPropertyChanged("VideoInfo");
+            }
+        }
+
+        public string Name
+        {
+            get { return LevelSet.Name; }
+            set
+            {
+                LevelSet.Name = value;
+                OnPropertyChanged("Name");
             }
         }
 

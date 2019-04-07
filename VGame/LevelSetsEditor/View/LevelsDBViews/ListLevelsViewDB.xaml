@@ -21,7 +21,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions> <!--ItemsSource="{Binding Path=SceneSetVMs, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"  
                 SelectedItem="{Binding Path=SelectedSceneSetVM}"-->
-        <ListBox Grid.Row="1" Grid.ColumnSpan="12" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" >
+        <ListBox ItemsSource="{Binding Path=LevelSetVMs, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Grid.Row="1" Grid.ColumnSpan="12" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <local:ItemListDB/>

@@ -38,6 +38,7 @@ namespace LevelSetsEditor.ViewModel
         {
             get
             {
+                if (preview.MultiplePrevSources.Count == 0) return null; 
                 Uri t = preview.MultiplePrevSources[curnum];
                 curnum++;
                 if (curnum > 2) curnum = 0;

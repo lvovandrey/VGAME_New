@@ -26,6 +26,7 @@ namespace LevelSetsEditor.Model
         {
             get
             {
+                if (SourceDb == null) SourceDb = "http://localhost/";
                 return new Uri(this.SourceDb);
             }
             set

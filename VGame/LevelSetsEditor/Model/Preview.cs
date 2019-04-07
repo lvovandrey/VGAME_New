@@ -18,7 +18,7 @@ namespace LevelSetsEditor.Model
     {
         public Preview()
         {
-            MultiplePrevSources = new Uri[3];
+            MultiplePrevSources = new List<Uri>();
         }
 
         public int Id { get; set; }
@@ -28,6 +28,7 @@ namespace LevelSetsEditor.Model
         {
             get
             {
+                if (SourceDb == null) SourceDb = "http://localhost/";
                 return new Uri(SourceDb);
             }
             set

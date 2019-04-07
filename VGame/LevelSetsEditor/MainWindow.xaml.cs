@@ -30,6 +30,7 @@ namespace LevelSetsEditor
     public partial class MainWindow : Window
     {
         WebBrowserVM WebBrowserVM;
+        LevelsFromDB LevelsFromDB;
         public MainWindow()
         {
             CefSettings settings = new CefSettings();
@@ -44,13 +45,15 @@ namespace LevelSetsEditor
             WebBrowserVM = new WebBrowserVM(Browser);
             GridBrowser.DataContext = WebBrowserVM;
 
+            LevelsFromDB = new LevelsFromDB();
+            TabItemLevels.DataContext = LevelsFromDB;
 
             //LevelSetVMDataContext.LevelSet.SceneSets = new List<Model.SceneSet>();
             //LevelSetVMDataContext.LevelSet.VideoInfo = new Model.VideoInfo();
             //LevelSetVMDataContext.LevelSet.VideoInfo.Preview = new Model.Preview();
 
 
-         //   Button_Click_2(null, null);
+            //   Button_Click_2(null, null);
 
 
         }
@@ -91,9 +94,11 @@ namespace LevelSetsEditor
             LevelSetVMDataContext.VideoInfoVM.PreviewVM.Size = new System.Drawing.Size(480, 360);
 
             LevelSetVMDataContext.VideoInfoVM.PreviewVM.Type = Model.PreviewType.youtube;
+            List<Uri> uris = new List<Uri>();
             for (int i = 0; i < 3; i++)
-               LevelSetVMDataContext.VideoInfo.Preview.MultiplePrevSources[i] = new Uri(vidInfo.PrevImagesUrl[i]);
+               uris.Add(new Uri(vidInfo.PrevImagesUrl[i]));
 
+            LevelSetVMDataContext.VideoInfo.Preview.MultiplePrevSources = uris;
             LevelSetVMDataContext.SegregateScenes();
 
 
@@ -150,14 +155,17 @@ namespace LevelSetsEditor
 
         private void CreateBD()
         {
-            using (LevelSetContext db = new LevelSetContext())
-            {
-                // создаем два объекта User
-                LevelSet level = new LevelSet();
-                level.Name = "Some Level name";
-                db.LevelSets.Add(level);
-                db.SaveChanges();
-            }
+
+            LevelsFromDB l = new LevelsFromDB();
+
+            //using (LevelSetContext db = new LevelSetContext())
+            //{
+            //    // создаем два объекта User
+            //    LevelSet level = new LevelSet();
+            //    level.Name = "Some Level name";
+            //    db.LevelSets.Add(level);
+            //    db.SaveChanges();
+            //}
         }
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
