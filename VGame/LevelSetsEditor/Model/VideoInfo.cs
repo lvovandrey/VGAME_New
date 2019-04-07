@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using System.Windows;
 
@@ -18,10 +19,31 @@ namespace LevelSetsEditor.Model
 		public TimeSpan Duration { get; set; }
 
         public string Description { get; set; }
+        [NotMapped]
+        public System.Drawing.Size Resolution
+        {
+            get { return new System.Drawing.Size(ResolutionWidth, ResolutionHeight); }
+            set { ResolutionWidth = value.Width; ResolutionHeight = value.Height; }
+        }
 
-        public System.Drawing.Size Resolution { get; set; }
+        public int ResolutionHeight { get; set; }
+        public int ResolutionWidth { get; set; }
 
-        public Uri Source { get; set; }
+
+        [NotMapped]
+        public Uri Source
+        {
+            get
+            {
+                return new Uri(SourceDb);
+            }
+            set
+            {
+                SourceDb = value.ToString();
+            }
+        }
+        [Column("Source")]
+        public string SourceDb { get; set; }
 
         public string Address { get; set; }
 

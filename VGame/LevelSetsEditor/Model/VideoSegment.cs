@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace LevelSetsEditor.Model
@@ -19,6 +20,21 @@ namespace LevelSetsEditor.Model
 
         public int Id { get; set; }
         public TimeSpan TimeEnd { get; set; }
-		public Uri Source { get; set; }
-	}
+
+        [NotMapped]
+        public Uri Source
+        {
+            get
+            {
+                return new Uri(this.SourceDb);
+            }
+            set
+            {
+                this.SourceDb = value.ToString();
+            }
+        }
+
+        [Column("Source")]
+        public string SourceDb { get; set; }
+    }
 }
