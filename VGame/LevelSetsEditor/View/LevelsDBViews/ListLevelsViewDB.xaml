@@ -19,8 +19,8 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-        </Grid.RowDefinitions> <!--ItemsSource="{Binding Path=SceneSetVMs, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"  
-                SelectedItem="{Binding Path=SelectedSceneSetVM}"-->
+        </Grid.RowDefinitions>
+        <Button Content="Add" Click="Button_Click"/>
         <ListBox ItemsSource="{Binding Path=LevelSetVMs, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Grid.Row="1" Grid.ColumnSpan="12" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" >
             <ListBox.ItemTemplate>
                 <DataTemplate>

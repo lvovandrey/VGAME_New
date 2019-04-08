@@ -14,25 +14,25 @@ namespace LevelSetsEditor.ViewModel
     {
         private ObservableCollection<LevelSetVM> levelSetVMs;
         private List<LevelSet> levelSets;
-
-        public LevelsFromDB() // В этом конструкторе заполняем тестовыми данными свойства ойства...
+        LevelSetContext db;
+        public LevelsFromDB(LevelSetContext db) // В этом конструкторе заполняем тестовыми данными свойства ойства...
         {
             levelSetVMs = new ObservableCollection<LevelSetVM>();
             levelSets = new List<LevelSet>();
-            using (LevelSetContext db = new LevelSetContext())
+
+            var LS = db.LevelSets;
+            foreach (LevelSet L in LS)
             {
-                var LS = db.LevelSets;
-                foreach(LevelSet L in LS)
-                {
-                    levelSets.Add(L);
-                }
-                foreach (LevelSet L in levelSets)
-                {
-                    LevelSetVM levelSetVM = new LevelSetVM(L);
-                    levelSetVMs.Add(levelSetVM);
-                }
+                levelSets.Add(L);
+            }
+            foreach (LevelSet L in levelSets)
+            {
+                LevelSetVM levelSetVM = new LevelSetVM(L);
+                levelSetVMs.Add(levelSetVM);
             }
         }
+
+        
 
         public ObservableCollection<LevelSetVM> LevelSetVMs
         {

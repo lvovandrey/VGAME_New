@@ -24,13 +24,15 @@ using LevelSetsEditor.Model;
 
 namespace LevelSetsEditor
 {
+    
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
         WebBrowserVM WebBrowserVM;
-        LevelsFromDB LevelsFromDB;
+        public MyViewModel ViewModel;
+        public static MainWindow mainWindow;
         public MainWindow()
         {
             CefSettings settings = new CefSettings();
@@ -44,9 +46,12 @@ namespace LevelSetsEditor
             //WebBrowserVM Browser = new WebBrowserVM(new Model.WebBrowserModel());
             WebBrowserVM = new WebBrowserVM(Browser);
             GridBrowser.DataContext = WebBrowserVM;
+            mainWindow = this;
 
-            LevelsFromDB = new LevelsFromDB();
-            TabItemLevels.DataContext = LevelsFromDB;
+            ViewModel = new MyViewModel();
+            ViewModel.OpenDb();
+            MyViewModel.LevelsFromDB = new LevelsFromDB(ViewModel.db);
+            TabItemLevels.DataContext = MyViewModel.LevelsFromDB;
 
             //LevelSetVMDataContext.LevelSet.SceneSets = new List<Model.SceneSet>();
             //LevelSetVMDataContext.LevelSet.VideoInfo = new Model.VideoInfo();
@@ -156,7 +161,7 @@ namespace LevelSetsEditor
         private void CreateBD()
         {
 
-            LevelsFromDB l = new LevelsFromDB();
+       //     LevelsFromDB l = new LevelsFromDB();
 
             //using (LevelSetContext db = new LevelSetContext())
             //{
@@ -171,6 +176,11 @@ namespace LevelSetsEditor
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
             CreateBD();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            ViewModel.CloseDb();
         }
     }
 }

@@ -24,5 +24,13 @@ namespace LevelSetsEditor.View.LevelsDBViews
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Model.LevelSet levelSet = new Model.LevelSet();
+            levelSet.Name = "Самая зайка любимочка!";
+            MainWindow.mainWindow.ViewModel.db.LevelSets.Add(levelSet);
+            MainWindow.mainWindow.ViewModel.db.SaveChanges();
+        }
     }
 }

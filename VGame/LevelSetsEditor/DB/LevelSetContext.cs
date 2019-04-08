@@ -9,7 +9,7 @@ using LevelSetsEditor.Model;
 namespace LevelSetsEditor.DB
 {
 
-    class LevelSetContext : DbContext
+    public class LevelSetContext : DbContext
     {
         public LevelSetContext()
             : base("DbConnection")

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LevelSetsEditor.DB;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,16 +8,21 @@ using System.Threading.Tasks;
 
 namespace LevelSetsEditor.ViewModel
 {
-    class ViewModel : INotifyPropertyChanged
+    public class MyViewModel : INotifyPropertyChanged
     {
         
-        public ViewModel()
+
+        public static LevelsFromDB LevelsFromDB { get; set; }
+        public LevelSetContext db;
+
+        public void OpenDb()
         {
-
+            db = new LevelSetContext();
         }
-
-        LevelSetVM LevelSetVM { get; set; }
-        LevelsFromDB LevelsFromDB { get; set; } 
+        public void CloseDb()
+        {
+            db.Dispose();
+        }
 
         #region mvvm
         public event PropertyChangedEventHandler PropertyChanged;

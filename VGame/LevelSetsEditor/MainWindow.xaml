@@ -13,7 +13,7 @@
         xmlns:lst ="clr-namespace:LevelSetsEditor.View.LevelsDBViews"
         xmlns:player ="clr-namespace:LevelSetsEditor.View.VideoPlayerMVVM"
         mc:Ignorable="d"
-        Title="MainWindow" Height="850" Width="1200" >
+        Title="MainWindow" Height="850" Width="1200" Closing="Window_Closing" >
     <Window.DataContext>
         <vm:LevelSetVM x:Name="LevelSetVMDataContext"/>
     </Window.DataContext>
