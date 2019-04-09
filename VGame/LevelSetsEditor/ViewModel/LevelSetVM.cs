@@ -13,6 +13,8 @@ namespace LevelSetsEditor.ViewModel
     public class LevelSetVM : INotifyPropertyChanged
     {
         private LevelSet LevelSet;
+        public LevelSet GetLevelSet() { return LevelSet; }
+        
         public VideoInfoVM VideoInfoVM { get; set; }
         private VideoPlayerVM videoPlayerVM;
 
@@ -20,14 +22,14 @@ namespace LevelSetsEditor.ViewModel
         private SceneSetVM selectedSceneSet;
         
 
-        public LevelSetVM() // В этом конструкторе заполняем тестовыми данными свойства ойства...
-        {
-            LevelSet = new Model.LevelSet();
-            VideoInfoVM = new VideoInfoVM(LevelSet);
-            sceneSetVMs = new ObservableCollection<SceneSetVM>();
-            VideoPlayerVM = new VideoPlayerVM(this);
-            PropertyChanged += LevelSetVM_PropertyChanged;
-        }
+        //public LevelSetVM() // В этом конструкторе заполняем тестовыми данными свойства ойства...
+        //{
+        //    LevelSet = new Model.LevelSet();
+        //    VideoInfoVM = new VideoInfoVM(LevelSet);
+        //    sceneSetVMs = new ObservableCollection<SceneSetVM>();
+        //    VideoPlayerVM = new VideoPlayerVM(this);
+        //    PropertyChanged += LevelSetVM_PropertyChanged;
+        //}
 
         public LevelSetVM(LevelSet levelSet) // В этом конструкторе заполняем тестовыми данными свойства ойства...
         {

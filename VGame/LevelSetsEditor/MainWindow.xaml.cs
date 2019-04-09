@@ -31,7 +31,7 @@ namespace LevelSetsEditor
     public partial class MainWindow : Window
     {
         WebBrowserVM WebBrowserVM;
-        public MyViewModel ViewModel;
+        public VM ViewModel;
         public static MainWindow mainWindow;
         public MainWindow()
         {
@@ -48,10 +48,11 @@ namespace LevelSetsEditor
             GridBrowser.DataContext = WebBrowserVM;
             mainWindow = this;
 
-            ViewModel = new MyViewModel();
-            ViewModel.OpenDb();
-            MyViewModel.LevelsFromDB = new LevelsFromDB(ViewModel.db);
-            TabItemLevels.DataContext = MyViewModel.LevelsFromDB;
+
+            ViewModel = new VM();
+            DataContext = ViewModel;
+            TabItemEditor = ViewModel.SelectedLevelSet
+
 
             //LevelSetVMDataContext.LevelSet.SceneSets = new List<Model.SceneSet>();
             //LevelSetVMDataContext.LevelSet.VideoInfo = new Model.VideoInfo();
