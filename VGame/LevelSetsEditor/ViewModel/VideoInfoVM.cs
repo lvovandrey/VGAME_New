@@ -12,6 +12,7 @@ namespace LevelSetsEditor.ViewModel
 
         public VideoInfoVM(LevelSet levelSet)
         {
+            if (levelSet == null) return;
             this.levelSet = levelSet;
             previewVM = new PreviewVM(levelSet.VideoInfo.Preview);
         }

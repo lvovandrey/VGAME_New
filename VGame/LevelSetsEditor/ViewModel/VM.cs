@@ -14,6 +14,21 @@ namespace LevelSetsEditor.ViewModel
     {
         private LevelSet selectedLevelSet;
         public ObservableCollection<LevelSet> LevelSets { get; set; }
+
+        private ObservableCollection<LevelSetVM> _LevelSetVMs;
+        public ObservableCollection<LevelSetVM> LevelSetVMs
+        {
+            get
+            {
+                LevelSetsVMsUpdate();
+                return this._LevelSetVMs;
+            }
+            set
+            {
+                this._LevelSetVMs = value;
+               // LevelSetsVMsUpdate();
+            }
+        }
         public LevelSetContext db;
 
         public VM() 
@@ -21,14 +36,31 @@ namespace LevelSetsEditor.ViewModel
             LevelSets = new ObservableCollection<LevelSet>();
             using (LevelSetContext context = new LevelSetContext())
             {
-                List<LevelSet> temp = context.LevelSets.ToList();
-                foreach (var item in temp)
+                //LevelSet A = new LevelSet();
+                //A.Name = "New __ " + (context.LevelSets.Count()+1).ToString(); ;
+                //context.LevelSets.Add(A);
+                //context.SaveChanges();
+
+                if (context.LevelSets.Count() > 0)
                 {
-                    LevelSets.Add(item);
+                    List<LevelSet> temp = context.LevelSets.ToList();
+                    foreach (var item in temp)
+                    {
+                        LevelSets.Add(item);
+                    }
                 }
+                
             }
         }
 
+        public void LevelSetsVMsUpdate()
+        {
+            _LevelSetVMs = new ObservableCollection<LevelSetVM>();
+            foreach (LevelSet levelSet in LevelSets)
+            {
+                _LevelSetVMs.Add(new LevelSetVM(levelSet));
+            }
+        }
 
         public LevelSetVM SelectedLevelSet
         {
@@ -39,6 +71,7 @@ namespace LevelSetsEditor.ViewModel
             set
             {
                 selectedLevelSet = value.GetLevelSet();
+                OnPropertyChanged("SelectedLevelSet");
             }
         }
 
@@ -58,7 +91,7 @@ namespace LevelSetsEditor.ViewModel
                       selectedLevelSet = ls;
                       using (LevelSetContext context = new LevelSetContext())
                       {
-                          context.LevelSets.Add(SelectedLevelSet);
+                          context.LevelSets.Add(selectedLevelSet);
                           context.SaveChanges();
                       }
                   }));

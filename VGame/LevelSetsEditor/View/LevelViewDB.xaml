@@ -6,16 +6,24 @@
              xmlns:local="clr-namespace:LevelSetsEditor.View"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="400" Background="White">
-    <Grid>
+    <Grid DataContext="{Binding SelectedLevelSet}">
         <StackPanel>
-            <GroupBox Header="Инфо о видео" x:Name="VideoInfoGroupBox" 
-                  DataContext="{Binding VideoInfoVM}" >
+            <Label   Content="{Binding Name}" Height="25" Background="Crimson"></Label>
+            <local:PropertyViewerL  DataContext="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag=""
+                                        Margin="-50,0,50,0">
+                <local:PropertyViewerL.FontSize>22</local:PropertyViewerL.FontSize>
+            </local:PropertyViewerL>
+            
+            <!--<GroupBox Header="Инфо о видео" x:Name="VideoInfoGroupBox" 
+                  DataContext="{Binding VideoInfoVMsdfsdfsdfsdfsdfaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa}" >
                 <StackPanel Orientation="Vertical">
                     <local:ImageView ></local:ImageView>
                     <local:PropertyViewerL  DataContext="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag=""
                                         Margin="-50,0,50,0">
                         <local:PropertyViewerL.FontSize>22</local:PropertyViewerL.FontSize>
                     </local:PropertyViewerL>
+
+
 
                     <local:PropertyViewerL  DataContext="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Название"/>
                     <local:PropertyViewerL  DataContext="{Binding Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Описание"/>
@@ -29,7 +37,7 @@
                 </StackPanel>
             </GroupBox>
 
-            <local:ListScenesView></local:ListScenesView>
+            <local:ListScenesView></local:ListScenesView>-->
         </StackPanel>
     </Grid>
 </UserControl>
