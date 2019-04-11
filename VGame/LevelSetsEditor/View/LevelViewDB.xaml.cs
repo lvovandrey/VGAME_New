@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LevelSetsEditor.DB;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,17 @@ namespace LevelSetsEditor.View
         public LevelViewDB()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            using (LevelSetContext context = new LevelSetContext())
+            {
+                //MainWindow.mainWindow.ViewModel.se
+                context.LevelSets = MainWindow.mainWindow.ViewModel.LevelSets;
+                context.LevelSets.First().Name = "111111";
+                context.SaveChanges();
+            }
         }
     }
 }

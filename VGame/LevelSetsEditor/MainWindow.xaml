@@ -21,15 +21,16 @@
         <TabItem Name="TabItemLevels" Header="Уровни">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="239*"/>
+                    <ColumnDefinition Width="352*"/>
+                    <ColumnDefinition Width="592*"/>
                 </Grid.ColumnDefinitions>
-                <lst:ListLevelsViewDB ></lst:ListLevelsViewDB>
-                <Button Content="123"  Height="80" Margin="100" VerticalAlignment="Top" HorizontalAlignment="Right" Background="Chocolate" Click="Button_Click_5"></Button>
-                <Label Name="LBL" Content="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Background="Chocolate"></Label>
+                <lst:ListLevelsViewDB Grid.ColumnSpan="2" Margin="0,0,0.059,-0.412" ></lst:ListLevelsViewDB>
+                <Button Content="123"  Height="80" Margin="0,100,100.059,0" VerticalAlignment="Top" HorizontalAlignment="Right" Background="Chocolate" Click="Button_Click_5" Grid.Column="1"></Button>
+                <TextBox Name="LBL" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Background="Chocolate" Grid.Column="1" Margin="0,0,0.059,0"></TextBox>
 
 
-                <propview:LevelViewDB Grid.Column="1"/>
+                <propview:LevelViewDB Grid.Column="1" Grid.ColumnSpan="2" Margin="352.059,0,0.059,-0.412"/>
             </Grid>
         </TabItem>
 
@@ -106,7 +107,7 @@
                 <GroupBox Header="Превью" x:Name="PreviewGroupBox"  DataContext="{Binding Path=VideoInfoVM}" Grid.Row="1" Grid.ColumnSpan="2" >
                     <propview:PreviewViewer DataContext="{Binding Path=PreviewVM}"></propview:PreviewViewer>
                 </GroupBox>
-                
+
                 <GridSplitter Grid.Column ="2" Grid.RowSpan="2" Width="5"  HorizontalAlignment="Center" VerticalAlignment="Stretch" />
 
 
@@ -137,7 +138,7 @@
                     </GroupBox>
                 </Grid>
 
- 
+
 
 
 
