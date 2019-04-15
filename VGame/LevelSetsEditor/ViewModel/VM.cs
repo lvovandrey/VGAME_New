@@ -26,6 +26,7 @@ namespace LevelSetsEditor.ViewModel
             set
             {
                 this._LevelSetVMs = value;
+                OnPropertyChanged("LevelSetVMs");
                // LevelSetsVMsUpdate();
             }
         }

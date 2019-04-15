@@ -15,10 +15,10 @@
                   DataContext="{Binding VideoInfoVM}" >
                 <StackPanel Orientation="Vertical">
                     <local:ImageView ></local:ImageView>
-                    <local:PropertyViewerL  DataContext="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag=""
+                    <local:PropertyViewer  DataContext="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag=""
                                         Margin="-50,0,50,0">
-                        <local:PropertyViewerL.FontSize>22</local:PropertyViewerL.FontSize>
-                    </local:PropertyViewerL>
+                        <local:PropertyViewer.FontSize>22</local:PropertyViewer.FontSize>
+                    </local:PropertyViewer>
 
 
 
