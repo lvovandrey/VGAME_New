@@ -36,6 +36,8 @@ namespace LevelSetsEditor.View
                 int X = int.Parse((MainWindow.mainWindow.ViewModel.LevelSetVMs.First().Name).ToString());
                 MainWindow.mainWindow.ViewModel.LevelSetVMs.First().Name = (X+1).ToString();
 
+                //КСТАТИ = почему когда я вношу изменения в SelectedItem они в моей модели нихера не транслируются? может в у меня опять 2 selectedItema???
+
                 context.LevelSets.First().Name = (X+1).ToString();
                 context.SaveChanges();
                 foreach(Model.LevelSet L in context.LevelSets)
