@@ -162,7 +162,7 @@ namespace LevelSetsEditor
         {
 
             ViewModel = new VM();
-            ViewModel.SelectedLevelSet = new LevelSetVM(ViewModel.LevelSets.First());
+            ViewModel.SelectedLevelSet = ViewModel.LevelSetVMs.First(); 
             DataContext = ViewModel;
             //   TabItemEditor.DataContext = ViewModel.SelectedLevelSet;
 
@@ -190,8 +190,17 @@ namespace LevelSetsEditor
 
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
-            LBL.DataContext = mainWindow.ViewModel.SelectedLevelSet;
+          
+            CreateBD();
+
+//            this.DataContext = ViewModel;
  //           LBL.Content = mainWindow.ViewModel.SelectedLevelSet.Name;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            CreateBD();
+            LBL.DataContext = mainWindow.ViewModel.LevelSetVMs.First();
         }
     }
 }

@@ -30,10 +30,17 @@ namespace LevelSetsEditor.View
         {
             using (LevelSetContext context = new LevelSetContext())
             {
+
                 //MainWindow.mainWindow.ViewModel.se
-                context.LevelSets = MainWindow.mainWindow.ViewModel.LevelSets;
-                context.LevelSets.First().Name = "111111";
+                //    context.LevelSets = MainWindow.mainWindow.ViewModel.LevelSets;
+                int X = int.Parse((MainWindow.mainWindow.ViewModel.LevelSetVMs.First().Name).ToString());
+                MainWindow.mainWindow.ViewModel.LevelSetVMs.First().Name = (X+1).ToString();
+                context.LevelSets.First().Name = (X+1).ToString();
                 context.SaveChanges();
+                foreach(Model.LevelSet L in context.LevelSets)
+                {
+               //     MessageBox.Show(L.Name);
+                }
             }
         }
     }

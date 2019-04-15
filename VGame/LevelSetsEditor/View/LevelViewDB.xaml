@@ -6,9 +6,9 @@
              xmlns:local="clr-namespace:LevelSetsEditor.View"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="400" Background="White">
-    <Grid DataContext="{Binding SelectedLevelSet}">
+    <Grid DataContext="{Binding SelectedLevelSet, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
         <StackPanel>
-            <TextBox   Text="{Binding Name,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="35" Background="Crimson"></TextBox>
+            <TextBox   Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="35" Background="Crimson"></TextBox>
             <Button   Content ="SAVE" Height="35" Click="Button_Click" />
 
             <GroupBox Header="Инфо о видео" x:Name="VideoInfoGroupBox" 

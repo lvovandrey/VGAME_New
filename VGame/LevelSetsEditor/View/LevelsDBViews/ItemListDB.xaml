@@ -28,7 +28,7 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Label Content="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2" FontSize="22">
+            <Label Content="{Binding Name, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.ColumnSpan="2" FontSize="22">
                 <Label.Effect>
                     <DropShadowEffect ShadowDepth="2" BlurRadius="0" Color="#FFFFF700" Opacity="0.4" />
                 </Label.Effect>

@@ -12,15 +12,15 @@ namespace LevelSetsEditor.ViewModel
 {
     public class VM : INotifyPropertyChanged
     {
-        private LevelSet selectedLevelSet;
-        public ObservableCollection<LevelSet> LevelSets { get; set; }
+        private LevelSet selectedLevelSet { get; set; }
+        private ObservableCollection<LevelSet> LevelSets { get; set; }
 
         private ObservableCollection<LevelSetVM> _LevelSetVMs;
         public ObservableCollection<LevelSetVM> LevelSetVMs
         {
             get
             {
-                LevelSetsVMsUpdate();
+         //       LevelSetsVMsUpdate();
                 return this._LevelSetVMs;
             }
             set
@@ -51,6 +51,7 @@ namespace LevelSetsEditor.ViewModel
                 }
                 
             }
+            LevelSetsVMsUpdate();
         }
 
         public void LevelSetsVMsUpdate()
