@@ -180,7 +180,7 @@ namespace LevelSetsEditor
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            CreateBD();
+            CreateBD(); LBL.DataContext = mainWindow.ViewModel.LevelSetVMs.First();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -192,9 +192,9 @@ namespace LevelSetsEditor
         {
           
             CreateBD();
-
-//            this.DataContext = ViewModel;
- //           LBL.Content = mainWindow.ViewModel.SelectedLevelSet.Name;
+            LBL.DataContext = mainWindow.ViewModel.LevelSetVMs.First();
+            //            this.DataContext = ViewModel;
+            //           LBL.Content = mainWindow.ViewModel.SelectedLevelSet.Name;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

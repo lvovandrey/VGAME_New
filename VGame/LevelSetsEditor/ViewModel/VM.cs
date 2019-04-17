@@ -64,25 +64,37 @@ namespace LevelSetsEditor.ViewModel
             }
         }
 
+        private LevelSetVM _SelectedLevelSet;
         public LevelSetVM SelectedLevelSet
         {
             get
-            {
-                return new LevelSetVM(selectedLevelSet);
-            }
+            { return _SelectedLevelSet; }
             set
             {
-                selectedLevelSet = value.GetLevelSet();
+                _SelectedLevelSet = value;
                 OnPropertyChanged("SelectedLevelSet");
-                using (LevelSetContext Context = new LevelSetContext())
-                {
-                    Context.SaveChanges();
-                    foreach (Model.LevelSet L in Context.LevelSets)
-                    {
-                    }
-                }
             }
+                    
         }
+        //{
+        //    get
+        //    {
+        //        return new LevelSetVM(selectedLevelSet);
+        //    }
+        //    set
+        //    {
+        //        selectedLevelSet = value.GetLevelSet();
+
+        //        OnPropertyChanged("SelectedLevelSet");
+        //        using (LevelSetContext Context = new LevelSetContext())
+        //        {
+        //            Context.SaveChanges();
+        //            foreach (Model.LevelSet L in Context.LevelSets)
+        //            {
+        //            }
+        //        }
+        //    }
+        //}
 
         // команда добавления нового объекта
         private RelayCommand addCommand;

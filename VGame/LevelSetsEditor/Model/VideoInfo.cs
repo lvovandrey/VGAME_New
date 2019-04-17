@@ -1,3 +1,4 @@
+using LevelSetsEditor.DB;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,7 +15,10 @@ namespace LevelSetsEditor.Model
 
         public int Id { get; set; }
 
-        public string Title { get; set; }
+        [NotMapped]
+        private string _title { get; set; }
+
+        public string Title { get { return _title; } set { _title = value; } }
 		
 		public TimeSpan Duration { get; set; }
 
