@@ -33,7 +33,7 @@
                     <DropShadowEffect ShadowDepth="2" BlurRadius="0" Color="#FFFFF700" Opacity="0.4" />
                 </Label.Effect>
             </Label>
-            <Label Content="Количество сцен   5" Grid.Row="1" FontSize="16"/>
+            <Label Content="{Binding VideoInfoVM_Title, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" FontSize="16"/>
             <Label Content="Длительность   0:06:34" Grid.Row="1" Grid.Column="1" FontSize="16"/>
         </Grid>
     </Grid>

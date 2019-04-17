@@ -74,6 +74,13 @@ namespace LevelSetsEditor.ViewModel
             {
                 selectedLevelSet = value.GetLevelSet();
                 OnPropertyChanged("SelectedLevelSet");
+                using (LevelSetContext Context = new LevelSetContext())
+                {
+                    Context.SaveChanges();
+                    foreach (Model.LevelSet L in Context.LevelSets)
+                    {
+                    }
+                }
             }
         }
 

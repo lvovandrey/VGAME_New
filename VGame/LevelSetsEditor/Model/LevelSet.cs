@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Text;
 
 namespace LevelSetsEditor.Model
 {
-	public class LevelSet
-	{
+	public class LevelSet : INotifyPropertyChanged
+    {
         public LevelSet()
         {
             SceneSets = new List<SceneSet>();
@@ -45,5 +46,16 @@ namespace LevelSetsEditor.Model
             //SceneSets.Add()
             return "someShit";
         }
+
+
+        #region mvvm
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
     }
 }

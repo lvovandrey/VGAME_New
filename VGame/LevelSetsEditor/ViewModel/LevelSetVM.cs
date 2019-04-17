@@ -93,6 +93,15 @@ namespace LevelSetsEditor.ViewModel
             }
         }
 
+        public string VideoInfoVM_Title
+        {
+            get { return LevelSet.VideoInfo.Title; }
+            set
+            {
+                LevelSet.VideoInfo.Title = value;
+                OnPropertyChanged("VideoInfoVM_Title");
+            }
+        }
 
         public void SegregateScenes()
         {
