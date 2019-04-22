@@ -16,14 +16,17 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height ="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Button Content="Add" Click="Button_Click"/>
-        <ListBox SelectedItem="{Binding SelectedLevelSet}" ItemsSource="{Binding Path=LevelSetVMs, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Grid.Row="1" Grid.ColumnSpan="12" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" SelectionChanged="ListBox_SelectionChanged" >
+        <Button Content="Add" Command="{Binding AddCommand}"/>
+        <Button Name="BTNTEST" Content="SAVE ALL" Command="{Binding SaveCommand}"  Grid.Column="2" />
+        <ListBox SelectedItem="{Binding SelectedLevelVM}" ItemsSource="{Binding Path=LevelVMs, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                 Grid.Row="1" Grid.ColumnSpan="12" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="False" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
+                    
                     <local:ItemListDB/>
                 </DataTemplate>
             </ListBox.ItemTemplate>

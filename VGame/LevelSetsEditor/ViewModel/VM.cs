@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,91 +13,88 @@ namespace LevelSetsEditor.ViewModel
 {
     public class VM : INotifyPropertyChanged
     {
-        private LevelSet selectedLevelSet { get; set; }
-        private ObservableCollection<LevelSet> LevelSets { get; set; }
 
-        private ObservableCollection<LevelSetVM> _LevelSetVMs;
-        public ObservableCollection<LevelSetVM> LevelSetVMs
+        Context context;
+
+
+        private ObservableCollection<Level> _levels { get; set; }
+        private ObservableCollection<LevelVM> _levelsvm { get; set; }
+
+        public ObservableCollection<LevelVM> LevelVMs
         {
             get
             {
-         //       LevelSetsVMsUpdate();
-                return this._LevelSetVMs;
-            }
-            set
-            {
-                this._LevelSetVMs = value;
-                OnPropertyChanged("LevelSetVMs");
-               // LevelSetsVMsUpdate();
+                _levelsvm = new ObservableCollection<LevelVM>(from l in _levels select new LevelVM(l));
+                return _levelsvm;
             }
         }
-        public LevelSetContext db;
+
+
+        private LevelVM _SelectedLevelVM;
+        public LevelVM SelectedLevelVM
+        {
+            get
+            { return _SelectedLevelVM; }
+            set
+            {
+                _SelectedLevelVM = value;
+                OnPropertyChanged("SelectedLevelVM");
+            }
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public Context db;
 
         public VM() 
         {
-            LevelSets = new ObservableCollection<LevelSet>();
-            using (LevelSetContext context = new LevelSetContext())
-            {
-                //LevelSet A = new LevelSet();
-                //A.Name = "New __ " + (context.LevelSets.Count()+1).ToString(); ;
-                //context.LevelSets.Add(A);
-                //context.SaveChanges();
 
-                if (context.LevelSets.Count() > 0)
+            context = new Context();
+
+            _levels = new ObservableCollection<Level>();
+            using (Context context = new Context())
+            {
+
+
+                var levels = context.Levels.Join(context.VideoInfos, // второй набор
+                p => p.VideoInfoId, // свойство-селектор объекта из первого набора
+                c => c.Id, // свойство-селектор объекта из второго набора
+                (p, c) => new // результат
                 {
-                    List<LevelSet> temp = context.LevelSets.ToList();
-                    foreach (var item in temp)
+                    levelId = p.Id,
+                    vidId = p.VideoInfoId,
+                    Name = p.Name,
+                    Title = c.Title,
+                });
+
+                foreach (var p in levels)
+                {
+                    Level l = new Level()
                     {
-                        LevelSets.Add(item);
-                    }
+                        Name = p.Name,
+                        Id = p.levelId,
+                        VideoInfoId = p.vidId,
+                        VideoInfo = new VideoInfo { Title = p.Title, Id = p.vidId }
+                    };
+                    _levels.Add(l);
                 }
-                
-            }
-            LevelSetsVMsUpdate();
-        }
 
-        public void LevelSetsVMsUpdate()
-        {
-            _LevelSetVMs = new ObservableCollection<LevelSetVM>();
-            foreach (LevelSet levelSet in LevelSets)
-            {
-                _LevelSetVMs.Add(new LevelSetVM(levelSet));
             }
         }
 
-        private LevelSetVM _SelectedLevelSet;
-        public LevelSetVM SelectedLevelSet
-        {
-            get
-            { return _SelectedLevelSet; }
-            set
-            {
-                _SelectedLevelSet = value;
-                OnPropertyChanged("SelectedLevelSet");
-            }
-                    
-        }
-        //{
-        //    get
-        //    {
-        //        return new LevelSetVM(selectedLevelSet);
-        //    }
-        //    set
-        //    {
-        //        selectedLevelSet = value.GetLevelSet();
 
-        //        OnPropertyChanged("SelectedLevelSet");
-        //        using (LevelSetContext Context = new LevelSetContext())
-        //        {
-        //            Context.SaveChanges();
-        //            foreach (Model.LevelSet L in Context.LevelSets)
-        //            {
-        //            }
-        //        }
-        //    }
-        //}
 
-        // команда добавления нового объекта
         private RelayCommand addCommand;
         public RelayCommand AddCommand
         {
@@ -105,16 +103,45 @@ namespace LevelSetsEditor.ViewModel
                 return addCommand ??
                   (addCommand = new RelayCommand(obj =>
                   {
-                      LevelSet ls = new LevelSet();
-                      ls.Name = "New Book";
-                      LevelSets.Insert(0, ls);
+                      Level l = new Level();
+                      l.Name = "New Book";
+                      l.VideoInfo = new VideoInfo() { Title = "dsdn" };
 
-                      selectedLevelSet = ls;
-                      using (LevelSetContext context = new LevelSetContext())
+                      _levels.Add(l);
+                        context.Levels.Add(l);
+                      context.SaveChanges();
+
+                      foreach (Level vl in context.Levels)
+                      { }
+
+                      OnPropertyChanged("LevelVMs");
+
+                  }));
+            }
+        }
+
+        private RelayCommand saveCommand;
+        public RelayCommand SaveCommand
+        {
+            get
+            {
+                return saveCommand ??
+                  (saveCommand = new RelayCommand(obj =>
+                  {
+                      context.SaveChanges();
+                      foreach (Level l in _levels)
                       {
-                          context.LevelSets.Add(selectedLevelSet);
-                          context.SaveChanges();
+                          context.Entry(l).State = EntityState.Modified;
+                          context.Entry(l.VideoInfo).State = EntityState.Modified;
                       }
+
+                      context.SaveChanges();
+                      foreach (Level vl in context.Levels)
+                      { }
+                      foreach (Level vl in _levels)
+                      { }
+                      OnPropertyChanged("LevelVMs");
+
                   }));
             }
         }

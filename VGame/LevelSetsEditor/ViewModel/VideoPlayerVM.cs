@@ -10,8 +10,8 @@ namespace LevelSetsEditor.ViewModel
 {
     public class VideoPlayerVM: INotifyPropertyChanged
     {
-        LevelSetVM levelSetVM;
-        public VideoPlayerVM(LevelSetVM _levelSetVM)
+        LevelVM levelSetVM;
+        public VideoPlayerVM(LevelVM _levelSetVM)
         {
             levelSetVM = _levelSetVM;
         }

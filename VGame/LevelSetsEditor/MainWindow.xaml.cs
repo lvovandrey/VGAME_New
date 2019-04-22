@@ -43,7 +43,7 @@ namespace LevelSetsEditor
             //ViewModel.SelectedLevelSet.LevelSet = new Model.LevelSet();
 
             InitializeComponent();
-            //WebBrowserVM Browser = new WebBrowserVM(new Model.WebBrowserModel());
+            
             WebBrowserVM = new WebBrowserVM(Browser);
             GridBrowser.DataContext = WebBrowserVM;
             mainWindow = this;
@@ -79,57 +79,57 @@ namespace LevelSetsEditor
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            TabItemEditor.Focus();
-            if (ViewModel.SelectedLevelSet == null) return;
+            ////TabItemEditor.Focus();
+            ////if (ViewModel.SelectedLevelSet == null) return;
 
-            YoutubeVidInfo vidInfo = new YoutubeVidInfo(TextURL.Text);
-            if (vidInfo.DirectURL == "") return;
+            ////YoutubeVidInfo vidInfo = new YoutubeVidInfo(TextURL.Text);
+            ////if (vidInfo.DirectURL == "") return;
 
-            ViewModel.SelectedLevelSet.VideoInfoVM.Source = new Uri(vidInfo.DirectURL);
-            ViewModel.SelectedLevelSet.VideoInfoVM.Address = TextURL.Text;
-            ViewModel.SelectedLevelSet.VideoInfoVM.Description = vidInfo.Title;
-            ViewModel.SelectedLevelSet.VideoInfoVM.Duration = vidInfo.Duration;
-            ViewModel.SelectedLevelSet.VideoInfoVM.Resolution = vidInfo.Resolution;
-            ViewModel.SelectedLevelSet.VideoInfoVM.Title = vidInfo.Title;
-            ViewModel.SelectedLevelSet.VideoInfoVM.Type = Model.VideoType.youtube;
-            //    ViewModel.SelectedLevelSet.VideoInfoVM.Preview.
-            //  ViewModel.SelectedLevelSet.SceneSets.
+            ////ViewModel.SelectedLevelSet.VideoInfoVM.Source = new Uri(vidInfo.DirectURL);
+            ////ViewModel.SelectedLevelSet.VideoInfoVM.Address = TextURL.Text;
+            ////ViewModel.SelectedLevelSet.VideoInfoVM.Description = vidInfo.Title;
+            ////ViewModel.SelectedLevelSet.VideoInfoVM.Duration = vidInfo.Duration;
+            ////ViewModel.SelectedLevelSet.VideoInfoVM.Resolution = vidInfo.Resolution;
+            ////ViewModel.SelectedLevelSet.VideoInfoVM.Title = vidInfo.Title;
+            ////ViewModel.SelectedLevelSet.VideoInfoVM.Type = Model.VideoType.youtube;
+            //////    ViewModel.SelectedLevelSet.VideoInfoVM.Preview.
+            //////  ViewModel.SelectedLevelSet.SceneSets.
 
-            ViewModel.SelectedLevelSet.VideoInfoVM.PreviewVM.Source = new Uri(vidInfo.ImageUrl);
-            ViewModel.SelectedLevelSet.VideoInfoVM.PreviewVM.Size = new System.Drawing.Size(480, 360);
+            ////ViewModel.SelectedLevelSet.VideoInfoVM.PreviewVM.Source = new Uri(vidInfo.ImageUrl);
+            ////ViewModel.SelectedLevelSet.VideoInfoVM.PreviewVM.Size = new System.Drawing.Size(480, 360);
 
-            ViewModel.SelectedLevelSet.VideoInfoVM.PreviewVM.Type = Model.PreviewType.youtube;
-            List<Uri> uris = new List<Uri>();
-            for (int i = 0; i < 3; i++)
-                uris.Add(new Uri(vidInfo.PrevImagesUrl[i]));
+            ////ViewModel.SelectedLevelSet.VideoInfoVM.PreviewVM.Type = Model.PreviewType.youtube;
+            ////List<Uri> uris = new List<Uri>();
+            ////for (int i = 0; i < 3; i++)
+            ////    uris.Add(new Uri(vidInfo.PrevImagesUrl[i]));
 
-            ViewModel.SelectedLevelSet.VideoInfo.Preview.MultiplePrevSources = uris;
-            ViewModel.SelectedLevelSet.SegregateScenes();
-
-
+            ////ViewModel.SelectedLevelSet.VideoInfo.Preview.MultiplePrevSources = uris;
+            ////ViewModel.SelectedLevelSet.SegregateScenes();
 
 
-            Model.SceneSet ss = new Model.SceneSet();
-            ss.VideoSegment = new Model.VideoSegment();
-            ss.VideoSegment.TimeBegin = TimeSpan.FromSeconds(1111);
-            ViewModel.SelectedLevelSet.SceneSetVMs.Add(new SceneSetVM(ss));
 
-            Model.SceneSet ss2 = new Model.SceneSet();
-            ss2.VideoSegment = new Model.VideoSegment();
-            ss2.VideoSegment.TimeBegin = TimeSpan.FromSeconds(2222);
-            ViewModel.SelectedLevelSet.SceneSetVMs.Add(new SceneSetVM(ss2));
 
-            Model.SceneSet ss3 = new Model.SceneSet();
-            ss3.VideoSegment = new Model.VideoSegment();
-            ss3.VideoSegment.TimeBegin = TimeSpan.FromSeconds(3333);
-            ViewModel.SelectedLevelSet.SceneSetVMs.Add(new SceneSetVM(ss3));
+            ////Model.SceneSet ss = new Model.SceneSet();
+            ////ss.VideoSegment = new Model.VideoSegment();
+            ////ss.VideoSegment.TimeBegin = TimeSpan.FromSeconds(1111);
+            ////ViewModel.SelectedLevelSet.SceneSetVMs.Add(new SceneSetVM(ss));
+
+            ////Model.SceneSet ss2 = new Model.SceneSet();
+            ////ss2.VideoSegment = new Model.VideoSegment();
+            ////ss2.VideoSegment.TimeBegin = TimeSpan.FromSeconds(2222);
+            ////ViewModel.SelectedLevelSet.SceneSetVMs.Add(new SceneSetVM(ss2));
+
+            ////Model.SceneSet ss3 = new Model.SceneSet();
+            ////ss3.VideoSegment = new Model.VideoSegment();
+            ////ss3.VideoSegment.TimeBegin = TimeSpan.FromSeconds(3333);
+            ////ViewModel.SelectedLevelSet.SceneSetVMs.Add(new SceneSetVM(ss3));
 
 
             //  YouTubeUrlSupplier.YoutubeGet.
            // YoutubeVidInfo VidInfo = new YoutubeVidInfo
         }
 
-        private void AutoSegregateVideoToScenes(LevelSetVM LSet)
+        private void AutoSegregateVideoToScenes(LevelVM LSet)
         {
         }
 
@@ -155,14 +155,14 @@ namespace LevelSetsEditor
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             
-            this.VideoPlayer.SetPosition( 1000*ViewModel.SelectedLevelSet.SelectedSceneSetVM.VideoSegment_TimeBegin.TotalSeconds/ ViewModel.SelectedLevelSet.VideoInfoVM.Duration.TotalSeconds);
+            ////////this.VideoPlayer.SetPosition( 1000*ViewModel.SelectedLevelSet.SelectedSceneSetVM.VideoSegment_TimeBegin.TotalSeconds/ ViewModel.SelectedLevelSet.VideoInfoVM.Duration.TotalSeconds);
         }
 
         private void CreateBD()
         {
 
             ViewModel = new VM();
-            ViewModel.SelectedLevelSet = ViewModel.LevelSetVMs.First(); 
+            // ViewModel.SelectedLevelVM = ViewModel.LevelVMs.First(); 
             DataContext = ViewModel;
             //   TabItemEditor.DataContext = ViewModel.SelectedLevelSet;
 
@@ -180,7 +180,7 @@ namespace LevelSetsEditor
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            CreateBD(); LBL.DataContext = mainWindow.ViewModel.LevelSetVMs.First();
+          //  CreateBD(); LBL.DataContext = mainWindow.ViewModel.LevelSetVMs.First();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -191,16 +191,16 @@ namespace LevelSetsEditor
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
           
-            CreateBD();
-            LBL.DataContext = mainWindow.ViewModel.LevelSetVMs.First();
-            //            this.DataContext = ViewModel;
+            //CreateBD();
+            //LBL.DataContext = mainWindow.ViewModel.LevelSetVMs.First();
+            ////            this.DataContext = ViewModel;
             //           LBL.Content = mainWindow.ViewModel.SelectedLevelSet.Name;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             CreateBD();
-            LBL.DataContext = mainWindow.ViewModel.LevelSetVMs.First();
+            ////////LBL.DataContext = mainWindow.ViewModel.LevelSetVMs.First();
         }
     }
 }

@@ -9,12 +9,14 @@ using LevelSetsEditor.Model;
 namespace LevelSetsEditor.DB
 {
 
-    public class LevelSetContext : DbContext
+    public class Context : DbContext
     {
-        public LevelSetContext()
+        public Context()
             : base("DbConnection")
         { }
 
-        public DbSet<LevelSet> LevelSets { get; set; }
+        public DbSet<Level> Levels { get; set; }
+        public DbSet<VideoInfo> VideoInfos { get; set; }
+
     }
 }

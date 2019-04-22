@@ -26,15 +26,13 @@
                     <ColumnDefinition Width="592*"/>
                 </Grid.ColumnDefinitions>
                 <lst:ListLevelsViewDB Grid.ColumnSpan="2" Margin="0,0,0.059,-0.412" ></lst:ListLevelsViewDB>
-                <Button Name="BTNTEST" Content="{Binding Name}"  Height="80" Margin="0,100,100,0" VerticalAlignment="Top" HorizontalAlignment="Right" Background="Chocolate" Click="Button_Click_5" Grid.Column="1" Width="221"></Button>
-                <TextBox Name="LBL" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Background="Chocolate" Grid.Column="1" Width="228"/>
+                
 
-
-                <propview:LevelViewDB Grid.Column="1" Grid.ColumnSpan="2" Margin="352.059,0,0.059,-0.412"/>
+                <propview:LevelViewDB DataContext="{Binding SelectedLevelVM}" Grid.Column="1" Grid.ColumnSpan="2" Margin="352.059,0,0.059,-0.412"/>
             </Grid>
         </TabItem>
 
-        <TabItem Name="TabItemEditor" Header="Редактор" DataContext="{Binding SelectedLevelSet}">
+        <!--<TabItem Name="TabItemEditor" Header="Редактор" DataContext="{Binding SelectedLevelSet}">
 
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -147,7 +145,7 @@
         </TabItem>
         <TabItem Header="СОЗДАНИЕ БД" >
             <Button Content="Создать БД" Width="100" Height="100" Click="Button_Click_4"/>
-        </TabItem>
+        </TabItem> -->
         <TabItem Header="Браузер">
             <DockPanel>
                 <Grid Name="GridBrowser" DockPanel.Dock="Top">
