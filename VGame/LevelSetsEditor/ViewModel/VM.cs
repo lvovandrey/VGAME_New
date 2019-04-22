@@ -107,11 +107,9 @@ namespace LevelSetsEditor.ViewModel
                       l.VideoInfo = new VideoInfo() { Title = (_levels.Count+1).ToString(), Id = l.Id };
                       l.VideoInfoId = l.VideoInfo.Id;
                       _levels.Add(l);
-
-
-                      //context.Levels.Add(l);
-                      //context.VideoInfos.Add(l.VideoInfo);
-                      //context.SaveChanges();
+                      context.Levels.Add(l);
+                    //  context.VideoInfos.Add(l.VideoInfo);
+                      context.SaveChanges();
 
                       foreach (Level vl in context.Levels)
                       { }
@@ -133,14 +131,13 @@ namespace LevelSetsEditor.ViewModel
                       foreach (Level vl in context.Levels)
                       { }
                       context.SaveChanges();
-                      foreach (Level l in _levels)
-                      {
-                          context.Levels.Add(l);
-                          context.Entry(l).State = EntityState.Modified;
-                          context.Entry(l.VideoInfo).State = EntityState.Modified;
-                      }
+                      //foreach (Level l in _levels)
+                      //{
+                      //    context.Entry(l).State = EntityState.Modified;
+                      //    context.Entry(l.VideoInfo).State = EntityState.Modified;
+                      //}
 
-                      context.SaveChanges();
+                      //context.SaveChanges();
                       
                       foreach (Level vl in _levels)
                       { }

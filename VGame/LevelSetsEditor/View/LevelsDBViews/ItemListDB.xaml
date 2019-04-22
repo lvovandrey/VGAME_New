@@ -5,15 +5,32 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LevelSetsEditor.View.LevelsDBViews"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Height="90" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" >
+             d:DesignHeight="450" d:DesignWidth="800" HorizontalAlignment="Stretch">
+    <Grid Height="90"  HorizontalAlignment="Stretch">
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="140"/>
             <ColumnDefinition Width="*"/>
 
         </Grid.ColumnDefinitions>
 
-       
+        <Grid Grid.ColumnSpan="3" Opacity="0.7">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <LinearGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                            <RotateTransform Angle="-40.236" CenterY="0.5" CenterX="0.5"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </LinearGradientBrush.RelativeTransform>
+                    <GradientStop Color="#FF697DA4" Offset="0"/>
+                    <GradientStop Color="#FF89ACF5" Offset="0.864"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+        </Grid>
+
         <Image Source="/LevelSetsEditor;component/icons/testprev.jpg" Stretch="Fill" Margin="5">
             <Image.Effect>
                 <DropShadowEffect ShadowDepth="0"/>

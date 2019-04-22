@@ -27,7 +27,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     
-                    <local:ItemListDB/>
+                    <local:ItemListDB HorizontalAlignment="Stretch"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
 
