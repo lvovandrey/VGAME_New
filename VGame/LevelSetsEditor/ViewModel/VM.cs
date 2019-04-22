@@ -103,13 +103,15 @@ namespace LevelSetsEditor.ViewModel
                 return addCommand ??
                   (addCommand = new RelayCommand(obj =>
                   {
-                      Level l = new Level();
-                      l.Name = "New Book";
-                      l.VideoInfo = new VideoInfo() { Title = "dsdn" };
-
+                      Level l = new Level() { Id = _levels.Count + 1, Name = "Level "+ (_levels.Count+1).ToString() };
+                      l.VideoInfo = new VideoInfo() { Title = (_levels.Count+1).ToString(), Id = l.Id };
+                      l.VideoInfoId = l.VideoInfo.Id;
                       _levels.Add(l);
-                        context.Levels.Add(l);
-                      context.SaveChanges();
+
+
+                      //context.Levels.Add(l);
+                      //context.VideoInfos.Add(l.VideoInfo);
+                      //context.SaveChanges();
 
                       foreach (Level vl in context.Levels)
                       { }
@@ -128,16 +130,18 @@ namespace LevelSetsEditor.ViewModel
                 return saveCommand ??
                   (saveCommand = new RelayCommand(obj =>
                   {
+                      foreach (Level vl in context.Levels)
+                      { }
                       context.SaveChanges();
                       foreach (Level l in _levels)
                       {
+                          context.Levels.Add(l);
                           context.Entry(l).State = EntityState.Modified;
                           context.Entry(l.VideoInfo).State = EntityState.Modified;
                       }
 
                       context.SaveChanges();
-                      foreach (Level vl in context.Levels)
-                      { }
+                      
                       foreach (Level vl in _levels)
                       { }
                       OnPropertyChanged("LevelVMs");
