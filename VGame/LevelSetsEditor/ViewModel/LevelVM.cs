@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,10 +40,11 @@ namespace LevelSetsEditor.ViewModel
                 return _VideoInfoVM;
             } // ЕСЛИ СЛОЖНАЯ ВЛОЖЕННАЯ СТРУКТУРА - то ее не присваиваем! А?
         }
+       
 
+        public int id { get { return _Level.Id; } }
 
-
-
+        public Level _level { get { return _Level; } }
 
 
 
@@ -53,7 +55,7 @@ namespace LevelSetsEditor.ViewModel
 
         //private ObservableCollection<SceneSetVM> sceneSetVMs;
         //private SceneSetVM selectedSceneSet;
-        
+
 
         ////public LevelSetVM() // В этом конструкторе заполняем тестовыми данными свойства ойства...
         ////{
@@ -136,10 +138,10 @@ namespace LevelSetsEditor.ViewModel
         //    sceneSetVMs.Clear();
         //    foreach (SceneSet s in LevelSet.SceneSets)
         //        sceneSetVMs.Add(new SceneSetVM(s));
-            
+
         //}
 
-        
+
 
         #region mvvm
         public event PropertyChangedEventHandler PropertyChanged;

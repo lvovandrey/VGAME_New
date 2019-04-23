@@ -57,15 +57,15 @@ namespace LevelSetsEditor.ViewModel
 
         public Context db;
 
-        public VM() 
+        public VM()
         {
 
-            context = new Context();
+            
 
             _levels = new ObservableCollection<Level>();
-            using (Context context = new Context())
+         //   using (Context context = new Context())
             {
-
+                context = new Context();
 
                 var levels = context.Levels.Join(context.VideoInfos, // второй набор
                 p => p.VideoInfoId, // свойство-селектор объекта из первого набора
@@ -108,10 +108,10 @@ namespace LevelSetsEditor.ViewModel
                       l.VideoInfoId = l.VideoInfo.Id;
                       _levels.Add(l);
                       context.Levels.Add(l);
-                    //  context.VideoInfos.Add(l.VideoInfo);
+                      context.VideoInfos.Add(l.VideoInfo);
                       context.SaveChanges();
 
-                      foreach (Level vl in context.Levels)
+                    //  foreach (Level vl in context.Levels)
                       { }
 
                       OnPropertyChanged("LevelVMs");
@@ -128,26 +128,52 @@ namespace LevelSetsEditor.ViewModel
                 return saveCommand ??
                   (saveCommand = new RelayCommand(obj =>
                   {
-                      foreach (Level vl in context.Levels)
-                      { }
-                      context.SaveChanges();
-                      //foreach (Level l in _levels)
-                      //{
-                      //    context.Entry(l).State = EntityState.Modified;
-                      //    context.Entry(l.VideoInfo).State = EntityState.Modified;
-                      //}
-
-                      //context.SaveChanges();
-                      
-                      foreach (Level vl in _levels)
-                      { }
-                      OnPropertyChanged("LevelVMs");
-
+                  //    using (Context context = new Context())
+                      {
+                          
+                          //foreach (Level l in _levels)
+                          //{
+                          //    context.Entry(l).State = EntityState.Modified;
+                          //    context.Entry(l.VideoInfo).State = EntityState.Modified;
+                          //}
+                          context.SaveChanges();
+                          //context.SaveChanges();
+                          OnPropertyChanged("LevelVMs");
+                      }
                   }));
             }
         }
 
+        private RelayCommand removeCommand;
+        public RelayCommand RemoveCommand
+        {
+            get
+            {
+                return removeCommand ??
+                  (removeCommand = new RelayCommand(obj =>
+                  {
+                      //    using (Context context = new Context())
+                      {
+                          if (SelectedLevelVM == null) return;
 
+                          Level level = SelectedLevelVM._level;
+                          context.Entry(level).State = EntityState.Deleted;
+                        //  context.Levels.Remove(level);
+                          //foreach (Level l in _levels)
+                          //{
+                          //    context.Entry(l).State = EntityState.Modified;
+                          //    context.Entry(l.VideoInfo).State = EntityState.Modified;
+                          //}
+                          context.SaveChanges();
+
+                          _levels.Remove(level);
+
+                          //context.SaveChanges();
+                          OnPropertyChanged("LevelVMs");
+                      }
+                  }));
+            }
+        }
 
         #region mvvm
         public event PropertyChangedEventHandler PropertyChanged;
