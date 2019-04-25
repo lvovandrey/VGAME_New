@@ -76,6 +76,7 @@ namespace LevelSetsEditor.ViewModel
                     vidId = p.VideoInfoId,
                     Name = p.Name,
                     Title = c.Title,
+                    Description = c.Description
                 });
 
                 foreach (var p in levels)
@@ -85,7 +86,7 @@ namespace LevelSetsEditor.ViewModel
                         Name = p.Name,
                         Id = p.levelId,
                         VideoInfoId = p.vidId,
-                        VideoInfo = new VideoInfo { Title = p.Title, Id = p.vidId }
+                        VideoInfo = new VideoInfo { Title = p.Title, Id = p.vidId,Description = p.Description }
                     };
                     _levels.Add(l);
                 }
@@ -111,8 +112,7 @@ namespace LevelSetsEditor.ViewModel
                       context.VideoInfos.Add(l.VideoInfo);
                       context.SaveChanges();
 
-                    //  foreach (Level vl in context.Levels)
-                      { }
+              
 
                       OnPropertyChanged("LevelVMs");
 
@@ -130,12 +130,12 @@ namespace LevelSetsEditor.ViewModel
                   {
                   //    using (Context context = new Context())
                       {
-                          
-                          //foreach (Level l in _levels)
-                          //{
-                          //    context.Entry(l).State = EntityState.Modified;
-                          //    context.Entry(l.VideoInfo).State = EntityState.Modified;
-                          //}
+
+                          foreach (Level l in _levels)
+                          {
+                              context.Entry(l).State = EntityState.Modified;
+                              context.Entry(l.VideoInfo).State = EntityState.Modified;
+                          }
                           context.SaveChanges();
                           //context.SaveChanges();
                           OnPropertyChanged("LevelVMs");
@@ -170,6 +170,7 @@ namespace LevelSetsEditor.ViewModel
 
                           //context.SaveChanges();
                           OnPropertyChanged("LevelVMs");
+                          SelectedLevelVM = LevelVMs.FirstOrDefault();
                       }
                   }));
             }

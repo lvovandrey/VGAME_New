@@ -19,7 +19,11 @@ namespace LevelSetsEditor.ViewModel
             set { _VideoInfo.Title = value; OnPropertyChanged("Title"); }
         }
 
-
+        public string Description
+        {
+            get { return _VideoInfo.Description; }
+            set { _VideoInfo.Description = value; OnPropertyChanged("Description"); }
+        }
 
 
         //private Level levelSet;
@@ -60,18 +64,7 @@ namespace LevelSetsEditor.ViewModel
         //    }
         //}
 
-        //public string Description
-        //{
-        //    get
-        //    {
-        //        return levelSet.VideoInfo.Description;
-        //    }
-        //    set
-        //    {
-        //        levelSet.VideoInfo.Description = value;
-        //        OnPropertyChanged("Description");
-        //    }
-        //}
+
 
         //public System.Drawing.Size Resolution
         //{

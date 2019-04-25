@@ -21,12 +21,12 @@
 
 
 
-                    <local:PropertyViewerL  DataContext="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Название"/>
-                    <!--<local:PropertyViewerL  DataContext="{Binding Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Описание"/>
-                    <local:PropertyViewerL  DataContext="{Binding Duration, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Длительность"/>
-                    <local:PropertyViewerL  DataContext="{Binding Source, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Источник"/>
-                    <local:PropertyViewerL  DataContext="{Binding Type,  UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Тип видео"/>
-                    <local:PropertyViewerL  DataContext="{Binding Resolution, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Разрешение" Margin="0,0,0,10"/>-->
+                    <local:PropertyViewer  DataContext="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Название"/>
+                    <local:PropertyViewer  DataContext="{Binding Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Описание"/>
+                    <local:PropertyViewer  DataContext="{Binding Duration, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Длительность"/>
+                    <local:PropertyViewer  DataContext="{Binding Source, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Источник"/>
+                    <local:PropertyViewer  DataContext="{Binding Type,  UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Тип видео"/>
+                    <local:PropertyViewer  DataContext="{Binding Resolution, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Разрешение" Margin="0,0,0,10"/>
 
 
 

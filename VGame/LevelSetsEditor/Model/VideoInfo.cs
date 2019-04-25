@@ -16,9 +16,13 @@ namespace LevelSetsEditor.Model
 
         [NotMapped]
         private string _Title { get; set; }
+        [NotMapped]
+        private string _Description { get; set; }
+
 
         public string Title { get { return _Title; } set { _Title = value; OnPropertyChanged("Title"); } }
-		
+
+        public string Description { get { return _Description; } set { _Description = value; OnPropertyChanged("Description"); } }
 
 
 
@@ -36,42 +40,41 @@ namespace LevelSetsEditor.Model
 
 
 
+        //public TimeSpan Duration { get; set; }
 
-		//public TimeSpan Duration { get; set; }
+        //     
+        //      [NotMapped]
+        //      public System.Drawing.Size Resolution
+        //      {
+        //          get { return new System.Drawing.Size(ResolutionWidth, ResolutionHeight); }
+        //          set { ResolutionWidth = value.Width; ResolutionHeight = value.Height; }
+        //      }
 
-  //      public string Description { get; set; }
-  //      [NotMapped]
-  //      public System.Drawing.Size Resolution
-  //      {
-  //          get { return new System.Drawing.Size(ResolutionWidth, ResolutionHeight); }
-  //          set { ResolutionWidth = value.Width; ResolutionHeight = value.Height; }
-  //      }
-
-  //      public int ResolutionHeight { get; set; }
-  //      public int ResolutionWidth { get; set; }
+        //      public int ResolutionHeight { get; set; }
+        //      public int ResolutionWidth { get; set; }
 
 
-  //      [NotMapped]
-  //      public Uri Source
-  //      {
-  //          get
-  //          {
-  //              if (SourceDb == null) SourceDb = "http://localhost/";
-  //              return new Uri(SourceDb);
-  //          }
-  //          set
-  //          {
-  //              SourceDb = value.ToString();
-  //          }
-  //      }
-  //      [Column("Source")]
-  //      public string SourceDb { get; set; }
+        //      [NotMapped]
+        //      public Uri Source
+        //      {
+        //          get
+        //          {
+        //              if (SourceDb == null) SourceDb = "http://localhost/";
+        //              return new Uri(SourceDb);
+        //          }
+        //          set
+        //          {
+        //              SourceDb = value.ToString();
+        //          }
+        //      }
+        //      [Column("Source")]
+        //      public string SourceDb { get; set; }
 
-  //      public string Address { get; set; }
+        //      public string Address { get; set; }
 
-  //      public VideoType Type { get; set; }
+        //      public VideoType Type { get; set; }
 
-  //      public Preview Preview { get; set; }
+        //      public Preview Preview { get; set; }
 
         //public VideoInfo()
         //{ Preview = new Preview(); }
