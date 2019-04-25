@@ -152,6 +152,7 @@
     <Compile Include="Model\WebBrowserModel.cs" />
     <Compile Include="Tools\ToolsTimer.cs" />
     <Compile Include="ViewModel\LevelVM.cs" />
+    <Compile Include="ViewModel\ListScenesViewModel.cs" />
     <Compile Include="ViewModel\VM.cs" />
     <Compile Include="ViewModel\PreviewVM.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />

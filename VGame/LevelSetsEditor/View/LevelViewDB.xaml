@@ -33,7 +33,7 @@
                 </StackPanel>
             </GroupBox>
 
-            <!--<local:ListScenesView></local:ListScenesView>-->
+            <local:ListScenesView></local:ListScenesView>
         </StackPanel>
     </Grid>
 </UserControl>

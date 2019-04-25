@@ -21,9 +21,11 @@ namespace LevelSetsEditor.Model
 
 
 
+        [NotMapped]
+        private ObservableCollection<SceneSet> _Scenes { get; set; }
 
+        public ObservableCollection<SceneSet> Scenes { get { return _Scenes; } set { _Scenes = value; OnPropertyChanged("Scenes"); } }
 
-        //public List<SceneSet> SceneSets { get; set; }
 
 
         public Level()
