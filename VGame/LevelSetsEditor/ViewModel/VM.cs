@@ -135,7 +135,8 @@ namespace LevelSetsEditor.ViewModel
                           {
                               context.Entry(l).State = EntityState.Modified;
                               context.Entry(l.VideoInfo).State = EntityState.Modified;
-                          }
+                          } 
+
                           context.SaveChanges();
                           //context.SaveChanges();
                           OnPropertyChanged("LevelVMs");
