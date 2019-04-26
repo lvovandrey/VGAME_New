@@ -94,17 +94,30 @@ namespace LevelSetsEditor.ViewModel
                 //    _levels.Add(l);
                 //}
 
-
-                IEnumerable<VideoInfo> VI = context.VideoInfoes.OfType<VideoInfo>().Where(n => n.Id < 1110);
-                List<VideoInfo> VList = VI.ToList();
-
                 // То же самое с помощью операции OfType
-                IEnumerable<Level> LLL = context.Levels.OfType<Level>().Where(n => n.Id < 1000);
+                IEnumerable<Level> LLL = context.Levels.OfType<Level>().Include(l=>l.VideoInfo).Where(l=>l.VideoInfoId == l.VideoInfo.Id);
                 foreach (Level l in LLL)
                 {
-                    l.VideoInfo = VList.Where(n => n.Id == l.VideoInfoId).FirstOrDefault();
+           //         l.VideoInfo = VList.Where(n => n.Id == l.VideoInfoId).FirstOrDefault();
                     _levels.Add(l);
                 }
+
+                //var levels2 = db.Levels.Include(p => p.VideoInfo).Where(n => n.Id < 1000);
+                //foreach (Level p in levels2)
+                //{
+                //    MessageBox.Show(p.Name + p.VideoInfo.Id.ToString());
+                //}
+
+                //////////////IEnumerable<VideoInfo> VI = context.VideoInfoes.OfType<VideoInfo>().Where(n => n.Id < 1000);
+                //////////////List<VideoInfo> VList = VI.ToList();
+
+                //////////////// То же самое с помощью операции OfType
+                //////////////IEnumerable<Level> LLL = context.Levels.OfType<Level>().Where(n => n.Id < 1000);
+                //////////////foreach (Level l in LLL)
+                //////////////{
+                //////////////    l.VideoInfo = VList.Where(n => n.Id == l.VideoInfoId).FirstOrDefault();
+                //////////////    _levels.Add(l);
+                //////////////}
 
             }
         }
