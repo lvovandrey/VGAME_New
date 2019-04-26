@@ -16,7 +16,7 @@ namespace LevelSetsEditor.DB
         { }
 
         public DbSet<Level> Levels { get; set; }
-        public DbSet<VideoInfo> VideoInfos { get; set; }
+        public DbSet<VideoInfo> VideoInfoes { get; set; }
 
     }
 }

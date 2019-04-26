@@ -25,6 +25,30 @@ namespace LevelSetsEditor.ViewModel
             set { _VideoInfo.Description = value; OnPropertyChanged("Description"); }
         }
 
+        public TimeSpan Duration
+        {
+            get { return _VideoInfo.Duration; }
+            set { _VideoInfo.Duration = value; OnPropertyChanged("Duration"); }
+        }
+
+        public string Address
+        {
+            get { return _VideoInfo.Address; }
+            set { _VideoInfo.Address = value; OnPropertyChanged("Address"); }
+        }
+
+        public VideoType Type
+        {
+            get { return _VideoInfo.Type; }
+            set { _VideoInfo.Type = value; OnPropertyChanged("Type"); }
+        }
+
+        public Uri Source
+        {
+            get { return _VideoInfo.Source; }
+            set { _VideoInfo.Source = value; OnPropertyChanged("Source"); }
+        }
+
 
         //private Level levelSet;
 
@@ -79,18 +103,7 @@ namespace LevelSetsEditor.ViewModel
         //    }
         //}
 
-        //public Uri Source
-        //{
-        //    get
-        //    {
-        //        return levelSet.VideoInfo.Source;
-        //    }
-        //    set
-        //    {
-        //        levelSet.VideoInfo.Source = value;
-        //        OnPropertyChanged("Source");
-        //    }
-        //}
+
 
         //public string Address
         //{
@@ -105,18 +118,7 @@ namespace LevelSetsEditor.ViewModel
         //    }
         //}
 
-        //public VideoType Type
-        //{
-        //    get
-        //    {
-        //        return levelSet.VideoInfo.Type;
-        //    }
-        //    set
-        //    {
-        //        levelSet.VideoInfo.Type = value;
-        //        OnPropertyChanged("Type");
-        //    }
-        //}
+
 
 
         ////ПОчему закомментирован Preview: а зачем он нужен отсюда? чтобы внешние слои могли получить доступ к модели? Спасибо большое....не стоит...

@@ -1,6 +1,7 @@
 ﻿using LevelSetsEditor.DB;
 using LevelSetsEditor.Model;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -8,6 +9,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace LevelSetsEditor.ViewModel
 {
@@ -60,34 +62,47 @@ namespace LevelSetsEditor.ViewModel
         public VM()
         {
 
-            
+
 
             _levels = new ObservableCollection<Level>();
-         //   using (Context context = new Context())
+            //   using (Context context = new Context())
             {
                 context = new Context();
 
-                var levels = context.Levels.Join(context.VideoInfos, // второй набор
-                p => p.VideoInfoId, // свойство-селектор объекта из первого набора
-                c => c.Id, // свойство-селектор объекта из второго набора
-                (p, c) => new // результат
-                {
-                    levelId = p.Id,
-                    vidId = p.VideoInfoId,
-                    Name = p.Name,
-                    Title = c.Title,
-                    Description = c.Description
-                });
+                //var levels = context.Levels.Join(context.VideoInfos, // второй набор
+                //p => p.VideoInfoId, // свойство-селектор объекта из первого набора
+                //c => c.Id, // свойство-селектор объекта из второго набора
+                //(p, c) => new // результат
+                //{
+                //    levelId = p.Id,
+                //    vidId = p.VideoInfoId,
+                //    Name = p.Name,
+                //    Title = c.Title,
+                //    Description = c.Description
+                //});
 
-                foreach (var p in levels)
+                //foreach (var p in levels)
+                //{
+                //    //Level l = 
+                //    Level l = new Level()
+                //    {
+                //        Name = p.Name,
+                //        Id = p.levelId,
+                //        VideoInfoId = p.vidId,
+                //        VideoInfo = new VideoInfo { Title = p.Title, Id = p.vidId, Description = p.Description }
+                //    };
+                //    _levels.Add(l);
+                //}
+
+
+                IEnumerable<VideoInfo> VI = context.VideoInfoes.OfType<VideoInfo>().Where(n => n.Id < 1110);
+                List<VideoInfo> VList = VI.ToList();
+
+                // То же самое с помощью операции OfType
+                IEnumerable<Level> LLL = context.Levels.OfType<Level>().Where(n => n.Id < 1000);
+                foreach (Level l in LLL)
                 {
-                    Level l = new Level()
-                    {
-                        Name = p.Name,
-                        Id = p.levelId,
-                        VideoInfoId = p.vidId,
-                        VideoInfo = new VideoInfo { Title = p.Title, Id = p.vidId,Description = p.Description }
-                    };
+                    l.VideoInfo = VList.Where(n => n.Id == l.VideoInfoId).FirstOrDefault();
                     _levels.Add(l);
                 }
 
@@ -109,7 +124,7 @@ namespace LevelSetsEditor.ViewModel
                       l.VideoInfoId = l.VideoInfo.Id;
                       _levels.Add(l);
                       context.Levels.Add(l);
-                      context.VideoInfos.Add(l.VideoInfo);
+                      context.VideoInfoes.Add(l.VideoInfo);
                       context.SaveChanges();
 
               
