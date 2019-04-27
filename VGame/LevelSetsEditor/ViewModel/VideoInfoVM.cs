@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
 using LevelSetsEditor.Model;
 
 namespace LevelSetsEditor.ViewModel
@@ -7,11 +8,23 @@ namespace LevelSetsEditor.ViewModel
     public class VideoInfoVM : INotifyPropertyChanged
     {
         private VideoInfo _VideoInfo;
+        private Preview _Preview { get { return _VideoInfo.Preview; } set { _VideoInfo.Preview = value; } }
+
+        private PreviewVM _PreviewVM { get; set; }
+        public PreviewVM PreviewVM { get { return _PreviewVM; } set { _PreviewVM = value; } }
+
 
         public VideoInfoVM(VideoInfo VideoInfo)
         {
             this._VideoInfo = VideoInfo;
+            _PreviewVM = new PreviewVM(_VideoInfo.Preview);
+
         }
+
+
+
+
+
 
         public string Title
         {
@@ -49,6 +62,11 @@ namespace LevelSetsEditor.ViewModel
             set { _VideoInfo.Source = value; OnPropertyChanged("Source"); }
         }
 
+        public Size Resolution
+        {
+            get { return _VideoInfo.Resolution; }
+            set { _VideoInfo.Resolution = value; OnPropertyChanged("Resolution"); }
+        }
 
         //private Level levelSet;
 

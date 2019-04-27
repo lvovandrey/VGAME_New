@@ -94,13 +94,13 @@ namespace LevelSetsEditor.ViewModel
                 //    _levels.Add(l);
                 //}
 
-                // То же самое с помощью операции OfType
-                IEnumerable<Level> LLL = context.Levels.OfType<Level>().Include(l=>l.VideoInfo).Where(l=>l.VideoInfoId == l.VideoInfo.Id);
-                foreach (Level l in LLL)
-                {
-           //         l.VideoInfo = VList.Where(n => n.Id == l.VideoInfoId).FirstOrDefault();
-                    _levels.Add(l);
-                }
+                ////////////// То же самое с помощью операции OfType
+                ////////////IEnumerable<Level> LLL = context.Levels.OfType<Level>().Include(l=>l.VideoInfo).Where(l=>l.VideoInfoId == l.VideoInfo.Id);
+                ////////////foreach (Level l in LLL)
+                ////////////{
+                ////////////    l.VideoInfo = VList.Where(n => n.Id == l.VideoInfoId).FirstOrDefault();
+                ////////////    _levels.Add(l);
+                ////////////}
 
                 //var levels2 = db.Levels.Include(p => p.VideoInfo).Where(n => n.Id < 1000);
                 //foreach (Level p in levels2)
@@ -108,16 +108,20 @@ namespace LevelSetsEditor.ViewModel
                 //    MessageBox.Show(p.Name + p.VideoInfo.Id.ToString());
                 //}
 
-                //////////////IEnumerable<VideoInfo> VI = context.VideoInfoes.OfType<VideoInfo>().Where(n => n.Id < 1000);
-                //////////////List<VideoInfo> VList = VI.ToList();
+                IEnumerable<VideoInfo> VI = context.VideoInfoes.OfType<VideoInfo>().Where(n => n.Id < 1000);
+                List<VideoInfo> VList = VI.ToList();
 
-                //////////////// То же самое с помощью операции OfType
-                //////////////IEnumerable<Level> LLL = context.Levels.OfType<Level>().Where(n => n.Id < 1000);
-                //////////////foreach (Level l in LLL)
-                //////////////{
-                //////////////    l.VideoInfo = VList.Where(n => n.Id == l.VideoInfoId).FirstOrDefault();
-                //////////////    _levels.Add(l);
-                //////////////}
+                IEnumerable<Preview> Pr = context.Previews.OfType<Preview>().Where(n => n.Id < 1000);
+                List<Preview> PList = Pr.ToList();
+
+                ////То же самое с помощью операции OfType
+                IEnumerable<Level> LLL = context.Levels.OfType<Level>().Where(n => n.Id < 1000);
+                foreach (Level l in LLL)
+                {
+                    l.VideoInfo = VList.Where(n => n.Id == l.VideoInfoId).FirstOrDefault();
+                    l.VideoInfo.Preview = PList.Where(n => n.Id == l.VideoInfo.PreviewId).FirstOrDefault();
+                    _levels.Add(l);
+                }
 
             }
         }
@@ -135,9 +139,13 @@ namespace LevelSetsEditor.ViewModel
                       Level l = new Level() { Id = _levels.Count + 1, Name = "Level "+ (_levels.Count+1).ToString() };
                       l.VideoInfo = new VideoInfo() { Title = (_levels.Count+1).ToString(), Id = l.Id };
                       l.VideoInfoId = l.VideoInfo.Id;
+                      l.VideoInfo.Preview = new Preview() { Source = new Uri(@"C:\Program Files\FuckWinActivator\wallpapers\1.jpg") , Id = l.VideoInfo.Id };
+                      l.VideoInfo.PreviewId = l.VideoInfo.Preview.Id;
+
                       _levels.Add(l);
                       context.Levels.Add(l);
                       context.VideoInfoes.Add(l.VideoInfo);
+                      context.Previews.Add(l.VideoInfo.Preview);
                       context.SaveChanges();
 
               
@@ -163,6 +171,7 @@ namespace LevelSetsEditor.ViewModel
                           {
                               context.Entry(l).State = EntityState.Modified;
                               context.Entry(l.VideoInfo).State = EntityState.Modified;
+                              context.Entry(l.VideoInfo.Preview).State = EntityState.Modified;
                           } 
 
                           context.SaveChanges();

@@ -12,97 +12,99 @@ namespace LevelSetsEditor.ViewModel
 {
     public class PreviewVM : INotifyPropertyChanged
     {
-        private Preview preview;
+        private Preview _Preview { get; set; }
 
         public PreviewVM(Preview _preview)
         {
-            this.preview = _preview;
+            this._Preview= _preview;
         }
 
-        public PreviewType Type
-        {
-            get
-            {
-                return preview.Type;
-            }
-            set
-            {
-                preview.Type = value;
-                OnPropertyChanged("Type");
-            }
-        }
-
-        private int curnum = 0;
-
-        public Uri CurPreSources
-        {
-            get
-            {
-                if (preview.MultiplePrevSources.Count == 0) return null; 
-                Uri t = preview.MultiplePrevSources[curnum];
-                curnum++;
-                if (curnum > 2) curnum = 0;
-                if (RefreshPrev)
-                    Tools.ToolsTimer.Delay(() =>
-                    {
-                        OnPropertyChanged("CurPreSources");
-                    },TimeSpan.FromSeconds(2));
-                return t;
-            }
-            set
-            {
-                OnPropertyChanged("CurPreSources");
-            }
-        }
-
-        private bool refreshPrev = true;
-        public bool RefreshPrev
-        {
-            get
-            {
-                return refreshPrev;
-            }
-            set
-            {
-                if (value)
-                Tools.ToolsTimer.Delay(() =>
-                {
-                    OnPropertyChanged("CurPreSources");
-                }, TimeSpan.FromSeconds(2));
-
-                refreshPrev = value;
-                OnPropertyChanged("RefreshPrev");
-            }
-        }
+       
 
         public Uri Source
         {
-            get
-            {
-                return preview.Source;
-            }
-            set
-            {
-                preview.Source = value;
-                OnPropertyChanged("Source");
-            }
+            get { return _Preview.Source; }
+            set { _Preview.Source = value; OnPropertyChanged("Source"); }
         }
 
 
 
-        public System.Drawing.Size Size
-        {
-            get
-            {
-                return preview.Size;
-            }
-            set
-            {
-                preview.Size = value;
-                OnPropertyChanged("Size");
-            }
-        }
 
+
+
+
+        #region old
+
+        //public PreviewType Type
+        //{
+        //    get
+        //    {
+        //        return preview.Type;
+        //    }
+        //    set
+        //    {
+        //        preview.Type = value;
+        //        OnPropertyChanged("Type");
+        //    }
+        //}
+
+        //private int curnum = 0;
+
+        //public Uri CurPreSources
+        //{
+        //    get
+        //    {
+        //        if (preview.MultiplePrevSources.Count == 0) return null;
+        //        Uri t = preview.MultiplePrevSources[curnum];
+        //        curnum++;
+        //        if (curnum > 2) curnum = 0;
+        //        if (RefreshPrev)
+        //            Tools.ToolsTimer.Delay(() =>
+        //            {
+        //                OnPropertyChanged("CurPreSources");
+        //            }, TimeSpan.FromSeconds(2));
+        //        return t;
+        //    }
+        //    set
+        //    {
+        //        OnPropertyChanged("CurPreSources");
+        //    }
+        //}
+
+        //private bool refreshPrev = true;
+        //public bool RefreshPrev
+        //{
+        //    get
+        //    {
+        //        return refreshPrev;
+        //    }
+        //    set
+        //    {
+        //        if (value)
+        //            Tools.ToolsTimer.Delay(() =>
+        //            {
+        //                OnPropertyChanged("CurPreSources");
+        //            }, TimeSpan.FromSeconds(2));
+
+        //        refreshPrev = value;
+        //        OnPropertyChanged("RefreshPrev");
+        //    }
+        //}
+
+
+        //public System.Drawing.Size Size
+        //{
+        //    get
+        //    {
+        //        return preview.Size;
+        //    }
+        //    set
+        //    {
+        //        preview.Size = value;
+        //        OnPropertyChanged("Size");
+        //    }
+        //}
+        #endregion
         private RelayCommand openPreviewFileCommand;
         public RelayCommand OpenPreviewFileCommand
         {
