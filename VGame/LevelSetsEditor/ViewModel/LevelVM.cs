@@ -40,7 +40,41 @@ namespace LevelSetsEditor.ViewModel
                 return _VideoInfoVM;
             } // ЕСЛИ СЛОЖНАЯ ВЛОЖЕННАЯ СТРУКТУРА - то ее не присваиваем! А?
         }
-       
+
+
+
+
+        private ObservableCollection<Scene> _scenes { get {return _Level.Scenes; } set { _Level.Scenes = value; } }
+        private ObservableCollection<SceneVM> _scenesvm { get; set; }
+
+        public ObservableCollection<SceneVM> SceneVMs
+        {
+            get
+            {
+                _scenesvm = new ObservableCollection<SceneVM>(from l in _scenes select new SceneVM(l));
+                return _scenesvm;
+            }
+        }
+
+
+        private SceneVM _SelectedSceneVM;
+        public SceneVM SelectedSceneVM
+        {
+            get
+            { return _SelectedSceneVM; }
+            set
+            {
+                _SelectedSceneVM = value;
+                OnPropertyChanged("SelectedSceneVM");
+            }
+
+        }
+
+
+
+
+
+
 
         public int id { get { return _Level.Id; } }
 
@@ -50,18 +84,28 @@ namespace LevelSetsEditor.ViewModel
 
 
 
+
+
+
+        //public ObservableCollection<SceneVM> SceneVMs
+        //{
+        //    get { return sceneVMs; }
+        //    set { sceneVMs = value; OnPropertyChanged("SceneVMs"); }
+        //}
+
+
         //public VideoInfoVM VideoInfoVM { get; set; }
         //private VideoPlayerVM videoPlayerVM;
 
-        //private ObservableCollection<SceneSetVM> sceneSetVMs;
-        //private SceneSetVM selectedSceneSet;
+        //private ObservableCollection<SceneVM> sceneVMs;
+        //private SceneVM selectedScene;
 
 
         ////public LevelSetVM() // В этом конструкторе заполняем тестовыми данными свойства ойства...
         ////{
         ////    LevelSet = new Model.LevelSet();
         ////    VideoInfoVM = new VideoInfoVM(LevelSet);
-        ////    sceneSetVMs = new ObservableCollection<SceneSetVM>();
+        ////    sceneVMs = new ObservableCollection<SceneVM>();
         ////    VideoPlayerVM = new VideoPlayerVM(this);
         ////    PropertyChanged += LevelSetVM_PropertyChanged;
         ////}
@@ -70,35 +114,31 @@ namespace LevelSetsEditor.ViewModel
         //{
         //    LevelSet = levelSet;
         //    VideoInfoVM = new VideoInfoVM(LevelSet);
-        //    sceneSetVMs = new ObservableCollection<SceneSetVM>();
+        //    sceneVMs = new ObservableCollection<SceneVM>();
         //    VideoPlayerVM = new VideoPlayerVM(this);
         //    PropertyChanged += LevelSetVM_PropertyChanged;
         //}
 
         //private void LevelSetVM_PropertyChanged(object sender, PropertyChangedEventArgs e)
         //{
-        //    if (e.PropertyName == "SelectedSceneSetVM") // Надо бы как-то иначе это реализовать идиотизм какой-то...
+        //    if (e.PropertyName == "SelectedSceneVM") // Надо бы как-то иначе это реализовать идиотизм какой-то...
         //    {
-        //        selectedSceneSet.UnitsCount = selectedSceneSet.UnitsCount;
-        //        selectedSceneSet.VideoSegment_Source = selectedSceneSet.VideoSegment_Source;
-        //        selectedSceneSet.VideoSegment_TimeBegin = selectedSceneSet.VideoSegment_TimeBegin;
-        //        selectedSceneSet.VideoSegment_TimeEnd = selectedSceneSet.VideoSegment_TimeEnd;
+        //        selectedScene.UnitsCount = selectedScene.UnitsCount;
+        //        selectedScene.VideoSegment_Source = selectedScene.VideoSegment_Source;
+        //        selectedScene.VideoSegment_TimeBegin = selectedScene.VideoSegment_TimeBegin;
+        //        selectedScene.VideoSegment_TimeEnd = selectedScene.VideoSegment_TimeEnd;
         //    }
         //}
 
-        //public ObservableCollection<SceneSetVM> SceneSetVMs
-        //{
-        //    get { return sceneSetVMs; }
-        //    set { sceneSetVMs = value; OnPropertyChanged("SceneSetVMs"); }
-        //}
 
-        //public SceneSetVM SelectedSceneSetVM
+
+        //public SceneVM SelectedSceneVM
         //{
-        //    get { return selectedSceneSet; }
+        //    get { return selectedScene; }
         //    set
         //    {
-        //        selectedSceneSet = value;
-        //        OnPropertyChanged("SelectedSceneSetVM");
+        //        selectedScene = value;
+        //        OnPropertyChanged("SelectedSceneVM");
         //    }
         //}
 
@@ -132,14 +172,10 @@ namespace LevelSetsEditor.ViewModel
 
 
 
-        //public void SegregateScenes()
-        //{
-        //    LevelSet.SegregateScenes();
-        //    sceneSetVMs.Clear();
-        //    foreach (SceneSet s in LevelSet.SceneSets)
-        //        sceneSetVMs.Add(new SceneSetVM(s));
-
-        //}
+        public void SegregateScenes()
+        {
+            _Level.SegregateScenes();
+        }
 
 
 

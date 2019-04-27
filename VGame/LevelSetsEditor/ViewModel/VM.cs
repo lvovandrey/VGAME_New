@@ -114,12 +114,30 @@ namespace LevelSetsEditor.ViewModel
                 IEnumerable<Preview> Pr = context.Previews.OfType<Preview>().Where(n => n.Id < 1000);
                 List<Preview> PList = Pr.ToList();
 
+                IEnumerable<Scene> Sc = context.Scenes.OfType<Scene>().Where(n => n.Id < 1000);
+                List<Scene> ScList = Sc.ToList();
+
+                IEnumerable<VideoSegment> Vss = context.VideoSegments.OfType<VideoSegment>().Where(n => n.Id < 1000);
+                List<VideoSegment> VssList = Vss.ToList();
+
                 ////То же самое с помощью операции OfType
                 IEnumerable<Level> LLL = context.Levels.OfType<Level>().Where(n => n.Id < 1000);
                 foreach (Level l in LLL)
                 {
                     l.VideoInfo = VList.Where(n => n.Id == l.VideoInfoId).FirstOrDefault();
                     l.VideoInfo.Preview = PList.Where(n => n.Id == l.VideoInfo.PreviewId).FirstOrDefault();
+
+                    foreach (Scene s in l.Scenes)
+                    {
+                        foreach (VideoSegment v in VssList)
+                        {
+                            if (s.VideoSegmentId == v.Id)
+                            {
+                                s.VideoSegment = v;
+                            }
+                        }
+                    }
+
                     _levels.Add(l);
                 }
 
@@ -136,11 +154,20 @@ namespace LevelSetsEditor.ViewModel
                 return addCommand ??
                   (addCommand = new RelayCommand(obj =>
                   {
+                      Random random = new Random();
                       Level l = new Level() { Id = _levels.Count + 1, Name = "Level "+ (_levels.Count+1).ToString() };
                       l.VideoInfo = new VideoInfo() { Title = (_levels.Count+1).ToString(), Id = l.Id };
                       l.VideoInfoId = l.VideoInfo.Id;
                       l.VideoInfo.Preview = new Preview() { Source = new Uri(@"C:\Program Files\FuckWinActivator\wallpapers\1.jpg") , Id = l.VideoInfo.Id };
                       l.VideoInfo.PreviewId = l.VideoInfo.Preview.Id;
+                      Scene s1 = new Scene() { UnitsCount = random.Next(1000) };
+                      s1.VideoSegment = new VideoSegment() { TimeBegin = TimeSpan.FromMinutes(random.Next(1000)) };
+                      Scene s2 = new Scene() { UnitsCount = random.Next(1000) };
+                      s2.VideoSegment = new VideoSegment() { TimeBegin = TimeSpan.FromMinutes(random.Next(1000)) };
+
+                      l.Scenes.Add(s1);
+                      l.Scenes.Add(s2);
+                     
 
                       _levels.Add(l);
                       context.Levels.Add(l);

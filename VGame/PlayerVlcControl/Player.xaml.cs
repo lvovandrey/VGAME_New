@@ -165,7 +165,8 @@ namespace PlayerVlcControl
 
         private void VideoPlayer_OnPlayerSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-         //   MessageBox.Show(Source.ToString());
+            //   MessageBox.Show(Source.ToString());
+            if (Source!=null)
             vlc.MediaPlayer.Play(Source);
         }
 

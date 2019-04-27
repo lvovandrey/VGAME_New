@@ -14,7 +14,7 @@
 
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.ColumnSpan="3" Opacity="0.7">
+        <Grid Grid.ColumnSpan="3" Opacity="0.7"  HorizontalAlignment="Stretch">
             <Grid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <LinearGradientBrush.RelativeTransform>
@@ -31,12 +31,12 @@
             </Grid.Background>
         </Grid>
 
-        <Image Source="/LevelSetsEditor;component/icons/testprev.jpg" Stretch="Fill" Margin="5">
+        <Image Source="{Binding VideoInfoVM.PreviewVM.Source, UpdateSourceTrigger=PropertyChanged}" Stretch="Fill" Margin="5">
             <Image.Effect>
                 <DropShadowEffect ShadowDepth="0"/>
             </Image.Effect>
         </Image>
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1"  HorizontalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -51,7 +51,7 @@
                 </Label.Effect>
             </Label>
             <Label Content="{Binding VideoInfoVM.Title, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" FontSize="16"/>
-            <Label Content="Длительность   0:06:34" Grid.Row="1" Grid.Column="1" FontSize="16"/>
+            <Label Content="{Binding VideoInfoVM.Duration, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" FontSize="16"/>
         </Grid>
     </Grid>
 </UserControl>

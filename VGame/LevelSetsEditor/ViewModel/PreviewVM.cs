@@ -27,10 +27,22 @@ namespace LevelSetsEditor.ViewModel
             set { _Preview.Source = value; OnPropertyChanged("Source"); }
         }
 
+        public System.Drawing.Size Size
+        {
+            get { return _Preview.Size; }
+            set { _Preview.Size = value; OnPropertyChanged("Size"); }
+        }
+        public PreviewType Type
+        {
+            get { return _Preview.Type; }
+            set { _Preview.Type = value; OnPropertyChanged("Type"); }
+        }
 
-
-
-
+        public List<Uri> MultiplePrevSources
+        {
+            get { return _Preview.MultiplePrevSources; }
+            set { _Preview.MultiplePrevSources = value; OnPropertyChanged("MultiplePrevSources"); }
+        }
 
 
         #region old

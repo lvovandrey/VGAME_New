@@ -32,7 +32,7 @@
             </Grid>
         </TabItem>
 
-        <!--<TabItem Name="TabItemEditor" Header="Редактор" DataContext="{Binding SelectedLevelSet}">
+        <TabItem Name="TabItemEditor" Header="Редактор" DataContext="{Binding SelectedLevelVM}">
 
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -66,8 +66,8 @@
                         <Label Content="Врем.кон." Grid.Column="2" />
                         <Label Content="Название" Grid.Column="3" />
                     </Grid>
-                    <ListBox ItemsSource="{Binding Path=SceneSetVMs, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
-                SelectedItem="{Binding Path=SelectedSceneSetVM}">
+                    <ListBox ItemsSource="{Binding Path=SceneVMs, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+                SelectedItem="{Binding Path=SelectedSceneVM}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
@@ -90,7 +90,7 @@
                 </StackPanel>
 
                 <GroupBox x:Name="SelectedGroup" Header="Выбранный элемент" HorizontalAlignment="Stretch" Grid.Column="1" VerticalAlignment="Stretch" 
-                  DataContext="{Binding SelectedSceneSetVM, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                  DataContext="{Binding SelectedSceneVM, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                     <StackPanel Orientation="Vertical" Height="373" Margin="0,0,0,-0.2" VerticalAlignment="Top">
                         <propview:TimeWatcherView DataContext="{Binding VideoSegment_TimeBegin, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                                 Command="{Binding ElementName=SelectedGroup,Path=DataContext.WheelTimeBeginCommand}" Tag="Начало" />
@@ -145,7 +145,7 @@
         </TabItem>
         <TabItem Header="СОЗДАНИЕ БД" >
             <Button Content="Создать БД" Width="100" Height="100" Click="Button_Click_4"/>
-        </TabItem> -->
+        </TabItem> 
         <TabItem Header="Браузер">
             <DockPanel>
                 <Grid Name="GridBrowser" DockPanel.Dock="Top">

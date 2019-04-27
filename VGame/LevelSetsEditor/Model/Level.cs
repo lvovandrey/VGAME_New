@@ -22,42 +22,40 @@ namespace LevelSetsEditor.Model
 
 
         [NotMapped]
-        private ObservableCollection<SceneSet> _Scenes { get; set; }
+        private ObservableCollection<Scene> _Scenes { get; set; }
 
-        public ObservableCollection<SceneSet> Scenes { get { return _Scenes; } set { _Scenes = value; OnPropertyChanged("Scenes"); } }
+        public ObservableCollection<Scene> Scenes { get { return _Scenes; } set { _Scenes = value; OnPropertyChanged("Scenes"); } }
 
 
 
         public Level()
         {
-            //SceneSets = new List<SceneSet>();
+            Scenes = new ObservableCollection<Scene>();
+            
             VideoInfo = new VideoInfo();
         }
 
-        //public string SegregateScenes()
-        //{
+        public string SegregateScenes()
+        {
 
-        //    TimeSpan Dur = VideoInfo.Duration;
-        //    int NumScenes =(int)Math.Ceiling(VideoInfo.Duration.TotalMinutes / 2);
-        //    SceneSets.Clear();
-        //    for (int i = 1; i <= NumScenes; i++)
-        //    {
-        //        SceneSet s = new SceneSet();
-        //        s.UnitsCount = i;
-        //        s.VideoSegment.TimeBegin = TimeSpan.FromSeconds((i - 1) * 120);
-        //        if (i < NumScenes)
-        //            s.VideoSegment.TimeEnd = TimeSpan.FromSeconds(i * 120);
-        //        else
-        //            s.VideoSegment.TimeEnd = VideoInfo.Duration - TimeSpan.FromSeconds(0.5);
-        //        s.VideoSegment.Source = VideoInfo.Source;
-        //        SceneSets.Add(s);
-        //    }
+            TimeSpan Dur = VideoInfo.Duration;
+            int NumScenes = (int)Math.Ceiling(VideoInfo.Duration.TotalMinutes / 2);
+            Scenes = new ObservableCollection<Scene>();
+            for (int i = 1; i <= NumScenes; i++)
+            {
+                Scene s = new Scene();
+                s.UnitsCount = i;
+                s.VideoSegment.TimeBegin = TimeSpan.FromSeconds((i - 1) * 120);
+                if (i < NumScenes)
+                    s.VideoSegment.TimeEnd = TimeSpan.FromSeconds(i * 120);
+                else
+                    s.VideoSegment.TimeEnd = VideoInfo.Duration - TimeSpan.FromSeconds(0.5);
+                s.VideoSegment.Source = VideoInfo.Source;
+                Scenes.Add(s);
+            }
 
-        //    Name = "OPPPS";
-        //    VideoInfo.Title = "JQJKJL";
-        //    //SceneSets.Add()
-        //    return "someShit";
-        //}
+            return "someShit";
+        }
 
 
         #region mvvm

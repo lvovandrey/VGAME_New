@@ -18,5 +18,8 @@ namespace LevelSetsEditor.DB
         public DbSet<Level> Levels { get; set; }
         public DbSet<VideoInfo> VideoInfoes { get; set; }
         public DbSet<Preview> Previews { get; set; }
+        public DbSet<Scene> Scenes { get; set; }
+        public DbSet<VideoSegment> VideoSegments { get; set; }
+
     }
 }

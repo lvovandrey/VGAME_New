@@ -156,7 +156,7 @@
     <Compile Include="ViewModel\VM.cs" />
     <Compile Include="ViewModel\PreviewVM.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
-    <Compile Include="ViewModel\SceneSetVM.cs" />
+    <Compile Include="ViewModel\SceneVM.cs" />
     <Compile Include="ViewModel\VideoInfoVM.cs" />
     <Compile Include="ViewModel\VideoPlayerVM.cs" />
     <Compile Include="ViewModel\WebBrowserVM.cs" />
@@ -247,7 +247,7 @@
   <ItemGroup>
     <Compile Include="Model\Level.cs" />
     <Compile Include="Model\Preview.cs" />
-    <Compile Include="Model\SceneSet.cs" />
+    <Compile Include="Model\Scene.cs" />
     <Compile Include="Model\VideoInfo.cs" />
     <Compile Include="Model\VideoSegment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

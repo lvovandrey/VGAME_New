@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,7 @@ namespace LevelSetsEditor.Model
         net
     }
 
-    public class Preview
+    public class Preview : INotifyPropertyChanged
     {
         public Preview()
         {
@@ -34,6 +35,7 @@ namespace LevelSetsEditor.Model
             set
             {
                 SourceDb = value.ToString();
+                OnPropertyChanged("Source");
             }
         }
         [Column("Source")]
@@ -50,21 +52,39 @@ namespace LevelSetsEditor.Model
             set
             {
                 MultiplePrevSourcesDB = new List<string>(from u in value select u.ToString());
+                OnPropertyChanged("MultiplePrevSources");
             }
         }
         public List<string> MultiplePrevSourcesDB { get; set; }
 
 
-        public PreviewType Type { get; set; }
-        
-     
+
+        public PreviewType Type { get { return _Type; } set { _Type = value; OnPropertyChanged("Type"); } }
+        private PreviewType _Type { get; set; }
+
+
         [NotMapped]
         public System.Drawing.Size Size
         {
-            get { return new System.Drawing.Size(SizeWidth, SizeHeight); }
-            set { SizeWidth = value.Width; SizeHeight = value.Height; }
+            get { return new System.Drawing.Size(Width, Height); }
+            set { Width = value.Width; Height = value.Height; OnPropertyChanged("Size"); }
         }
-        public int SizeHeight { get; set; }
-        public int SizeWidth { get; set; }
+        public int Height { get { return _Height; } set { _Height = value; OnPropertyChanged("Size"); } }
+        public int Width { get { return _Width; } set { _Width = value; OnPropertyChanged("Size"); } }
+        [NotMapped]
+        private int _Height { get; set; }
+        [NotMapped]
+        private int _Width { get; set; }
+
+
+        #region mvvm
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
     }
 }

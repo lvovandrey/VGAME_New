@@ -7,8 +7,13 @@ namespace LevelSetsEditor.Model
 {
 	public class VideoSegment
 	{
+
+
+        public int Id { get; set; }
+
+        [NotMapped]
         TimeSpan timeBegin;
-		public TimeSpan TimeBegin
+        public TimeSpan TimeBegin
         {
             get
             {
@@ -18,8 +23,17 @@ namespace LevelSetsEditor.Model
             { timeBegin = value; }
         }
 
-        public int Id { get; set; }
-        public TimeSpan TimeEnd { get; set; }
+        [NotMapped]
+        TimeSpan timeEnd;
+        public TimeSpan TimeEnd
+        {
+            get
+            {
+                return timeEnd;
+            }
+            set
+            { timeEnd = value; }
+        }
 
         [NotMapped]
         public Uri Source
