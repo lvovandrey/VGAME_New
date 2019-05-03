@@ -2,6 +2,7 @@
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -38,7 +39,7 @@ namespace LevelSetsEditor.ViewModel
             set { _Preview.Type = value; OnPropertyChanged("Type"); }
         }
 
-        public List<Uri> MultiplePrevSources
+        public ObservableCollection<Uri> MultiplePrevSources
         {
             get { return _Preview.MultiplePrevSources; }
             set { _Preview.MultiplePrevSources = value; OnPropertyChanged("MultiplePrevSources"); }
@@ -60,48 +61,48 @@ namespace LevelSetsEditor.ViewModel
         //    }
         //}
 
-        //private int curnum = 0;
+        private int curnum = 0;
 
-        //public Uri CurPreSources
-        //{
-        //    get
-        //    {
-        //        if (preview.MultiplePrevSources.Count == 0) return null;
-        //        Uri t = preview.MultiplePrevSources[curnum];
-        //        curnum++;
-        //        if (curnum > 2) curnum = 0;
-        //        if (RefreshPrev)
-        //            Tools.ToolsTimer.Delay(() =>
-        //            {
-        //                OnPropertyChanged("CurPreSources");
-        //            }, TimeSpan.FromSeconds(2));
-        //        return t;
-        //    }
-        //    set
-        //    {
-        //        OnPropertyChanged("CurPreSources");
-        //    }
-        //}
+        public Uri CurPreSources
+        {
+            get
+            {
+                if (_Preview.MultiplePrevSources.Count == 0) return null;
+                Uri t = _Preview.MultiplePrevSources[curnum];
+                curnum++;
+                if (curnum > 2) curnum = 0;
+                if (RefreshPrev)
+                    Tools.ToolsTimer.Delay(() =>
+                    {
+                        OnPropertyChanged("CurPreSources");
+                    }, TimeSpan.FromSeconds(2));
+                return t;
+            }
+            set
+            {
+                OnPropertyChanged("CurPreSources");
+            }
+        }
 
-        //private bool refreshPrev = true;
-        //public bool RefreshPrev
-        //{
-        //    get
-        //    {
-        //        return refreshPrev;
-        //    }
-        //    set
-        //    {
-        //        if (value)
-        //            Tools.ToolsTimer.Delay(() =>
-        //            {
-        //                OnPropertyChanged("CurPreSources");
-        //            }, TimeSpan.FromSeconds(2));
+        private bool refreshPrev = true;
+        public bool RefreshPrev
+        {
+            get
+            {
+                return refreshPrev;
+            }
+            set
+            {
+                if (value)
+                    Tools.ToolsTimer.Delay(() =>
+                    {
+                        OnPropertyChanged("CurPreSources");
+                    }, TimeSpan.FromSeconds(2));
 
-        //        refreshPrev = value;
-        //        OnPropertyChanged("RefreshPrev");
-        //    }
-        //}
+                refreshPrev = value;
+                OnPropertyChanged("RefreshPrev");
+            }
+        }
 
 
         //public System.Drawing.Size Size

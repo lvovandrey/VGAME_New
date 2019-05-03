@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace LevelSetsEditor.Model
     {
         public Preview()
         {
-            MultiplePrevSources = new List<Uri>();
+            MultiplePrevSources = new ObservableCollection<Uri>();
         }
 
         public int Id { get; set; }
@@ -42,20 +43,37 @@ namespace LevelSetsEditor.Model
         public string SourceDb { get; set; }
 
         [NotMapped]
-        public List<Uri> MultiplePrevSources
+        public ObservableCollection<Uri> MultiplePrevSources
         {
             get
             {
-                List<Uri> URIS = new List<Uri>(from u in MultiplePrevSourcesDB select new Uri(u));
+                ObservableCollection<Uri> URIS = new ObservableCollection<Uri>();
+
+                string[] separators = new string[] { "[stop]" };
+
+                string[] struris = MultiplePrevSourcesDB.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string s in struris)
+                    URIS.Add(new Uri(s));
                 return URIS;
             }
             set
             {
-                MultiplePrevSourcesDB = new List<string>(from u in value select u.ToString());
+                MultiplePrevSourcesDB = "";
+                foreach (Uri u in value)
+                    MultiplePrevSourcesDB += u.ToString() + "[stop]";
                 OnPropertyChanged("MultiplePrevSources");
             }
         }
-        public List<string> MultiplePrevSourcesDB { get; set; }
+
+
+        [NotMapped]
+        private string _MultiplePrevSourcesDB { get; set; }
+
+        public string MultiplePrevSourcesDB
+        {
+            get { return _MultiplePrevSourcesDB; }
+            set { _MultiplePrevSourcesDB = value; OnPropertyChanged("MultiplePrevSourcesDB"); }
+        }
 
 
 

@@ -21,6 +21,7 @@ using PlayerVlcControl;
 using System.IO;
 using LevelSetsEditor.DB;
 using LevelSetsEditor.Model;
+using System.Collections.ObjectModel;
 
 namespace LevelSetsEditor
 {
@@ -77,6 +78,32 @@ namespace LevelSetsEditor
             WebBrowserVM.CurURL = "Youtube.com";
         }
 
+
+        private void RefreshYoutubeVideoInfo(VideoInfoVM videoInfoVM)
+        {
+
+            if (videoInfoVM == null) return;
+            if (videoInfoVM.Title == null) return;
+            if (videoInfoVM.Type != Model.VideoType.youtube) return;
+            
+            YoutubeVidInfo vidInfo = new YoutubeVidInfo(videoInfoVM.Title);
+            if (vidInfo.DirectURL == "") return;
+
+            videoInfoVM.Source = new Uri(vidInfo.DirectURL);
+            videoInfoVM.Duration = vidInfo.Duration;
+            videoInfoVM.Resolution = vidInfo.Resolution;
+          
+            videoInfoVM.PreviewVM.Source = new Uri(vidInfo.ImageUrl);
+            videoInfoVM.PreviewVM.Size = new System.Drawing.Size(480, 360);
+
+            ViewModel.SelectedLevelVM.VideoInfoVM.PreviewVM.Type = Model.PreviewType.youtube;
+            ObservableCollection<Uri> uris = new ObservableCollection<Uri>();
+            for (int i = 0; i < 3; i++)
+                uris.Add(new Uri(vidInfo.PrevImagesUrl[i]));
+
+            ViewModel.SelectedLevelVM.VideoInfoVM.PreviewVM.MultiplePrevSources = uris;
+        }
+
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             TabItemEditor.Focus();
@@ -99,7 +126,7 @@ namespace LevelSetsEditor
             ViewModel.SelectedLevelVM.VideoInfoVM.PreviewVM.Size = new System.Drawing.Size(480, 360);
 
             ViewModel.SelectedLevelVM.VideoInfoVM.PreviewVM.Type = Model.PreviewType.youtube;
-            List<Uri> uris = new List<Uri>();
+            ObservableCollection<Uri> uris = new ObservableCollection<Uri>();
             for (int i = 0; i < 3; i++)
                 uris.Add(new Uri(vidInfo.PrevImagesUrl[i]));
 
