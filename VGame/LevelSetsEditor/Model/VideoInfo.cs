@@ -9,12 +9,13 @@ using System.Drawing;
 
 namespace LevelSetsEditor.Model
 {
-    public enum VideoType {local, youtube, net}
+    public enum VideoType {local, youtube, net, none}
     public class VideoInfo : INotifyPropertyChanged
     {
         public VideoInfo()
         {
             _Preview = new Preview();
+            this.Type = VideoType.none;
         }
 
 

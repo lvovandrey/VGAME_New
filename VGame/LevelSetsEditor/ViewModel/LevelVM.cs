@@ -44,7 +44,7 @@ namespace LevelSetsEditor.ViewModel
 
 
 
-        private ObservableCollection<Scene> _scenes { get {return _Level.Scenes; } set { _Level.Scenes = value; } }
+        private ObservableCollection<Scene> _scenes { get {return _Level.Scenes; } set { _Level.Scenes = value; OnPropertyChanged("SceneVMs"); } }
         private ObservableCollection<SceneVM> _scenesvm { get; set; }
 
         public ObservableCollection<SceneVM> SceneVMs
@@ -175,6 +175,8 @@ namespace LevelSetsEditor.ViewModel
         public void SegregateScenes()
         {
             _Level.SegregateScenes();
+            OnPropertyChanged("SceneVMs");
+
         }
 
 

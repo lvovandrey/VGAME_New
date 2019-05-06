@@ -132,28 +132,6 @@ namespace LevelSetsEditor
 
             ViewModel.SelectedLevelVM.VideoInfoVM.PreviewVM.MultiplePrevSources = uris;
             ViewModel.SelectedLevelVM.SegregateScenes();
-
-
-
-
-            Model.Scene ss = new Model.Scene();
-            ss.VideoSegment = new Model.VideoSegment();
-            ss.VideoSegment.TimeBegin = TimeSpan.FromSeconds(1111);
-            ViewModel.SelectedLevelVM.SceneVMs.Add(new SceneVM(ss));
-
-            Model.Scene ss2 = new Model.Scene();
-            ss2.VideoSegment = new Model.VideoSegment();
-            ss2.VideoSegment.TimeBegin = TimeSpan.FromSeconds(2222);
-            ViewModel.SelectedLevelVM.SceneVMs.Add(new SceneVM(ss2));
-
-            Model.Scene ss3 = new Model.Scene();
-            ss3.VideoSegment = new Model.VideoSegment();
-            ss3.VideoSegment.TimeBegin = TimeSpan.FromSeconds(3333);
-            ViewModel.SelectedLevelVM.SceneVMs.Add(new SceneVM(ss3));
-
-
-            //  YouTubeUrlSupplier.YoutubeGet.
-            // YoutubeVidInfo VidInfo = new YoutubeVidInfo
         }
 
         private void AutoSegregateVideoToScenes(LevelVM LSet)

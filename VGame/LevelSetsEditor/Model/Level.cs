@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using System.Windows;
+using YouTubeUrlSupplier;
 
 namespace LevelSetsEditor.Model
 {
@@ -55,6 +57,59 @@ namespace LevelSetsEditor.Model
             }
 
             return "someShit";
+        }
+
+        public void JoinYoutubeVideoInLevel(string YoutubeAddress)
+        {
+            MessageBoxResult Res = MessageBoxResult.None;
+            if (this.VideoInfo.Address == @"http://localhost/")
+                MessageBox.Show("Уровень не пуст, вы уверены что хотите его перезаписать?", "Перезапись уровня", MessageBoxButton.YesNo);
+            if (Res == MessageBoxResult.No) return;
+
+
+            YoutubeVidInfo vidInfo = new YoutubeVidInfo(YoutubeAddress);
+            if (vidInfo.DirectURL == "")
+            {
+                MessageBox.Show("Невозможно получить прямую ссылку на это видео", "Ошибка получения ссылки", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
+
+            this.VideoInfo.Source = new Uri(vidInfo.DirectURL);
+            this.VideoInfo.Address = YoutubeAddress;
+            this.VideoInfo.Description = vidInfo.Title;
+            this.VideoInfo.Duration = vidInfo.Duration;
+            this.VideoInfo.Resolution = vidInfo.Resolution;
+            this.VideoInfo.Title = vidInfo.Title;
+            this.VideoInfo.Type = VideoType.youtube;
+
+            OnPropertyChanged("VideoInfo");
+
+
+            this.VideoInfo.Preview.Source = new Uri(vidInfo.ImageUrl);
+            this.VideoInfo.Preview.Size = new System.Drawing.Size(480, 360);
+
+            this.VideoInfo.Preview.Type = PreviewType.youtube;
+            ObservableCollection<Uri> uris = new ObservableCollection<Uri>();
+            for (int i = 0; i < 3; i++)
+                uris.Add(new Uri(vidInfo.PrevImagesUrl[i]));
+
+            this.VideoInfo.Preview.MultiplePrevSources = uris;
+            this.SegregateScenes();
+        }
+
+        public void RefreshYoutubeLink()
+        {
+            if (this.VideoInfo.Type != VideoType.youtube) return;
+
+            YoutubeVidInfo vidInfo = new YoutubeVidInfo(VideoInfo.Address);
+            if (vidInfo.DirectURL == "")
+            {
+                MessageBox.Show("Невозможно получить прямую ссылку на это видео", "Ошибка получения ссылки", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
+
+            this.VideoInfo.Source = new Uri(vidInfo.DirectURL);
+            OnPropertyChanged("VideoInfo");
         }
 
 

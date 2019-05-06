@@ -61,52 +61,9 @@ namespace LevelSetsEditor.ViewModel
 
         public VM()
         {
-
-
-
             _levels = new ObservableCollection<Level>();
-            //   using (Context context = new Context())
             {
                 context = new Context();
-
-                //var levels = context.Levels.Join(context.VideoInfos, // второй набор
-                //p => p.VideoInfoId, // свойство-селектор объекта из первого набора
-                //c => c.Id, // свойство-селектор объекта из второго набора
-                //(p, c) => new // результат
-                //{
-                //    levelId = p.Id,
-                //    vidId = p.VideoInfoId,
-                //    Name = p.Name,
-                //    Title = c.Title,
-                //    Description = c.Description
-                //});
-
-                //foreach (var p in levels)
-                //{
-                //    //Level l = 
-                //    Level l = new Level()
-                //    {
-                //        Name = p.Name,
-                //        Id = p.levelId,
-                //        VideoInfoId = p.vidId,
-                //        VideoInfo = new VideoInfo { Title = p.Title, Id = p.vidId, Description = p.Description }
-                //    };
-                //    _levels.Add(l);
-                //}
-
-                ////////////// То же самое с помощью операции OfType
-                ////////////IEnumerable<Level> LLL = context.Levels.OfType<Level>().Include(l=>l.VideoInfo).Where(l=>l.VideoInfoId == l.VideoInfo.Id);
-                ////////////foreach (Level l in LLL)
-                ////////////{
-                ////////////    l.VideoInfo = VList.Where(n => n.Id == l.VideoInfoId).FirstOrDefault();
-                ////////////    _levels.Add(l);
-                ////////////}
-
-                //var levels2 = db.Levels.Include(p => p.VideoInfo).Where(n => n.Id < 1000);
-                //foreach (Level p in levels2)
-                //{
-                //    MessageBox.Show(p.Name + p.VideoInfo.Id.ToString());
-                //}
 
                 IEnumerable<VideoInfo> VI = context.VideoInfoes.OfType<VideoInfo>().Where(n => n.Id < 1000);
                 List<VideoInfo> VList = VI.ToList();
@@ -138,6 +95,7 @@ namespace LevelSetsEditor.ViewModel
                         }
                     }
 
+                    l.RefreshYoutubeLink();
                     _levels.Add(l);
                 }
 
@@ -145,6 +103,7 @@ namespace LevelSetsEditor.ViewModel
         }
 
 
+        
 
         private RelayCommand addCommand;
         public RelayCommand AddCommand
@@ -160,13 +119,7 @@ namespace LevelSetsEditor.ViewModel
                       l.VideoInfoId = l.VideoInfo.Id;
                       l.VideoInfo.Preview = new Preview() { Source = new Uri(@"C:\Program Files\FuckWinActivator\wallpapers\1.jpg") , Id = l.VideoInfo.Id };
                       l.VideoInfo.PreviewId = l.VideoInfo.Preview.Id;
-                      Scene s1 = new Scene() { UnitsCount = random.Next(1000) };
-                      s1.VideoSegment = new VideoSegment() { TimeBegin = TimeSpan.FromMinutes(random.Next(1000)) };
-                      Scene s2 = new Scene() { UnitsCount = random.Next(1000) };
-                      s2.VideoSegment = new VideoSegment() { TimeBegin = TimeSpan.FromMinutes(random.Next(1000)) };
 
-                      l.Scenes.Add(s1);
-                      l.Scenes.Add(s2);
                      
 
                       _levels.Add(l);
@@ -191,7 +144,6 @@ namespace LevelSetsEditor.ViewModel
                 return saveCommand ??
                   (saveCommand = new RelayCommand(obj =>
                   {
-                  //    using (Context context = new Context())
                       {
 
                           foreach (Level l in _levels)

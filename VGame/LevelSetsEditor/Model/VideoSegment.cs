@@ -20,7 +20,9 @@ namespace LevelSetsEditor.Model
                 return timeBegin;
             }
             set
-            { timeBegin = value; }
+            {
+                timeBegin = value;
+            }
         }
 
         [NotMapped]
@@ -32,7 +34,9 @@ namespace LevelSetsEditor.Model
                 return timeEnd;
             }
             set
-            { timeEnd = value; }
+            {
+                timeEnd = value;
+            }
         }
 
         [NotMapped]
