@@ -2,7 +2,6 @@
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -13,53 +12,25 @@ namespace LevelSetsEditor.ViewModel
 {
     public class PreviewVM : INotifyPropertyChanged
     {
-        private Preview _Preview { get; set; }
+        private Preview preview;
 
         public PreviewVM(Preview _preview)
         {
-            this._Preview= _preview;
+            this.preview = _preview;
         }
 
-       
-
-        public Uri Source
-        {
-            get { return _Preview.Source; }
-            set { _Preview.Source = value; OnPropertyChanged("Source"); }
-        }
-
-        public System.Drawing.Size Size
-        {
-            get { return _Preview.Size; }
-            set { _Preview.Size = value; OnPropertyChanged("Size"); }
-        }
         public PreviewType Type
         {
-            get { return _Preview.Type; }
-            set { _Preview.Type = value; OnPropertyChanged("Type"); }
+            get
+            {
+                return preview.Type;
+            }
+            set
+            {
+                preview.Type = value;
+                OnPropertyChanged("Type");
+            }
         }
-
-        public ObservableCollection<Uri> MultiplePrevSources
-        {
-            get { return _Preview.MultiplePrevSources; }
-            set { _Preview.MultiplePrevSources = value; OnPropertyChanged("MultiplePrevSources"); }
-        }
-
-
-        #region old
-
-        //public PreviewType Type
-        //{
-        //    get
-        //    {
-        //        return preview.Type;
-        //    }
-        //    set
-        //    {
-        //        preview.Type = value;
-        //        OnPropertyChanged("Type");
-        //    }
-        //}
 
         private int curnum = 0;
 
@@ -67,15 +38,15 @@ namespace LevelSetsEditor.ViewModel
         {
             get
             {
-                if (_Preview.MultiplePrevSources.Count == 0) return null;
-                Uri t = _Preview.MultiplePrevSources[curnum];
+                if (preview.MultiplePrevSources.Count == 0) return null; 
+                Uri t = preview.MultiplePrevSources[curnum];
                 curnum++;
                 if (curnum > 2) curnum = 0;
                 if (RefreshPrev)
                     Tools.ToolsTimer.Delay(() =>
                     {
                         OnPropertyChanged("CurPreSources");
-                    }, TimeSpan.FromSeconds(2));
+                    },TimeSpan.FromSeconds(2));
                 return t;
             }
             set
@@ -94,30 +65,44 @@ namespace LevelSetsEditor.ViewModel
             set
             {
                 if (value)
-                    Tools.ToolsTimer.Delay(() =>
-                    {
-                        OnPropertyChanged("CurPreSources");
-                    }, TimeSpan.FromSeconds(2));
+                Tools.ToolsTimer.Delay(() =>
+                {
+                    OnPropertyChanged("CurPreSources");
+                }, TimeSpan.FromSeconds(2));
 
                 refreshPrev = value;
                 OnPropertyChanged("RefreshPrev");
             }
         }
 
+        public Uri Source
+        {
+            get
+            {
+                return preview.Source;
+            }
+            set
+            {
+                preview.Source = value;
+                OnPropertyChanged("Source");
+            }
+        }
 
-        //public System.Drawing.Size Size
-        //{
-        //    get
-        //    {
-        //        return preview.Size;
-        //    }
-        //    set
-        //    {
-        //        preview.Size = value;
-        //        OnPropertyChanged("Size");
-        //    }
-        //}
-        #endregion
+
+
+        public System.Drawing.Size Size
+        {
+            get
+            {
+                return preview.Size;
+            }
+            set
+            {
+                preview.Size = value;
+                OnPropertyChanged("Size");
+            }
+        }
+
         private RelayCommand openPreviewFileCommand;
         public RelayCommand OpenPreviewFileCommand
         {

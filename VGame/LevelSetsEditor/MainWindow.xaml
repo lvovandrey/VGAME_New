@@ -13,23 +13,26 @@
         xmlns:lst ="clr-namespace:LevelSetsEditor.View.LevelsDBViews"
         xmlns:player ="clr-namespace:LevelSetsEditor.View.VideoPlayerMVVM"
         mc:Ignorable="d"
-        Title="MainWindow" Height="850" Width="1200" >
-    <Window.DataContext>
+        Title="MainWindow" Height="850" Width="1200" Closing="Window_Closing" Loaded="Window_Loaded" >
+    <!--<Window.DataContext>
         <vm:LevelSetVM x:Name="LevelSetVMDataContext"/>
-    </Window.DataContext>
+    </Window.DataContext>-->
     <TabControl Name="TabControlMain" >
         <TabItem Name="TabItemLevels" Header="Уровни">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="239*"/>
+                    <ColumnDefinition Width="352*"/>
+                    <ColumnDefinition Width="592*"/>
                 </Grid.ColumnDefinitions>
-                <lst:ListLevelsViewDB></lst:ListLevelsViewDB>
-            <propview:LevelViewDB Grid.Column="1"/>
+                <lst:ListLevelsViewDB Grid.ColumnSpan="2" Margin="0,0,0.059,-0.412" ></lst:ListLevelsViewDB>
+                
+
+                <propview:LevelViewDB DataContext="{Binding SelectedLevelVM}" Grid.Column="1" Grid.ColumnSpan="2" Margin="352.059,0,0.059,-0.412"/>
             </Grid>
         </TabItem>
 
-        <TabItem Name="TabItemEditor" Header="Редактор">
+        <TabItem Name="TabItemEditor" Header="Редактор" DataContext="{Binding SelectedLevelVM}">
 
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -63,8 +66,8 @@
                         <Label Content="Врем.кон." Grid.Column="2" />
                         <Label Content="Название" Grid.Column="3" />
                     </Grid>
-                    <ListBox ItemsSource="{Binding Path=SceneSetVMs, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
-                SelectedItem="{Binding Path=SelectedSceneSetVM}">
+                    <ListBox ItemsSource="{Binding Path=SceneVMs, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+                SelectedItem="{Binding Path=SelectedSceneVM}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
@@ -87,10 +90,10 @@
                 </StackPanel>
 
                 <GroupBox x:Name="SelectedGroup" Header="Выбранный элемент" HorizontalAlignment="Stretch" Grid.Column="1" VerticalAlignment="Stretch" 
-                  DataContext="{Binding SelectedSceneSetVM, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                  DataContext="{Binding SelectedSceneVM, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                     <StackPanel Orientation="Vertical" Height="373" Margin="0,0,0,-0.2" VerticalAlignment="Top">
                         <propview:TimeWatcherView DataContext="{Binding VideoSegment_TimeBegin, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
-                                                 Command="{Binding ElementName=SelectedGroup,Path=DataContext.WheelTimeBeginCommand}" Tag="Начало" />
+                                                Command="{Binding ElementName=SelectedGroup,Path=DataContext.WheelTimeBeginCommand}" Tag="Начало" />
                         <propview:TimeWatcherView DataContext="{Binding VideoSegment_TimeEnd, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  
                                                   Command="{Binding ElementName=SelectedGroup,Path=DataContext.WheelTimeEndCommand}" Tag="Конец" Margin="0,10,0,0"/>
                         <propview:TimeWatcherView DataContext="{Binding UnitsCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  
@@ -102,7 +105,7 @@
                 <GroupBox Header="Превью" x:Name="PreviewGroupBox"  DataContext="{Binding Path=VideoInfoVM}" Grid.Row="1" Grid.ColumnSpan="2" >
                     <propview:PreviewViewer DataContext="{Binding Path=PreviewVM}"></propview:PreviewViewer>
                 </GroupBox>
-                
+
                 <GridSplitter Grid.Column ="2" Grid.RowSpan="2" Width="5"  HorizontalAlignment="Center" VerticalAlignment="Stretch" />
 
 
@@ -113,7 +116,9 @@
                         <RowDefinition Height="49.6"/>
                         <RowDefinition Height="176"/>
                     </Grid.RowDefinitions>
-                    <pl:Player x:Name="VideoPlayer" Source="{Binding Path=VideoInfoVM.Source, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Margin="2,2,2.4,2.8" />
+                    <Label Content="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Background="Aqua" Height="20" VerticalAlignment="Top"/>
+
+                    <pl:Player x:Name="VideoPlayer" Source="{Binding Path=VideoInfoVM.Source, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Margin="22,22,22.4,22.8" />
                     <GridSplitter Grid.Row="1" Height="3"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,1.2,0.4,0.6" />
                     <GroupBox Header="Инфо о видео" x:Name="VideoInfoGroupBox" 
                   DataContext="{Binding VideoInfoVM}"   Grid.Row="2" Margin="0,0.4,0.4,0.2" Grid.RowSpan="2">
@@ -131,13 +136,16 @@
                     </GroupBox>
                 </Grid>
 
- 
+
 
 
 
 
             </Grid>
         </TabItem>
+        <TabItem Header="СОЗДАНИЕ БД" >
+            <Button Content="Создать БД" Width="100" Height="100" Click="Button_Click_4"/>
+        </TabItem> 
         <TabItem Header="Браузер">
             <DockPanel>
                 <Grid Name="GridBrowser" DockPanel.Dock="Top">

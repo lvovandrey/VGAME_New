@@ -6,23 +6,33 @@
              xmlns:local="clr-namespace:LevelSetsEditor.View"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="400" Background="White">
-    <Grid>
+    <Grid >          <!--DataContext="{Binding SelectedLevelSet, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"-->
         <StackPanel>
+            <TextBox   Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="35" Background="Crimson"></TextBox>
+
             <GroupBox Header="Инфо о видео" x:Name="VideoInfoGroupBox" 
                   DataContext="{Binding VideoInfoVM}" >
                 <StackPanel Orientation="Vertical">
                     <local:ImageView ></local:ImageView>
-                    <local:PropertyViewerL  DataContext="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag=""
+                    <local:PropertyViewer  DataContext="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag=""
                                         Margin="-50,0,50,0">
-                        <local:PropertyViewerL.FontSize>22</local:PropertyViewerL.FontSize>
-                    </local:PropertyViewerL>
+                        <local:PropertyViewer.FontSize>22</local:PropertyViewer.FontSize>
+                    </local:PropertyViewer>
 
-                    <local:PropertyViewerL  DataContext="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Название"/>
-                    <local:PropertyViewerL  DataContext="{Binding Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Описание"/>
-                    <local:PropertyViewerL  DataContext="{Binding Duration, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Длительность"/>
-                    <local:PropertyViewerL  DataContext="{Binding Source, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Источник"/>
-                    <local:PropertyViewerL  DataContext="{Binding Type,  UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Тип видео"/>
-                    <local:PropertyViewerL  DataContext="{Binding Resolution, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Разрешение" Margin="0,0,0,10"/>
+
+
+                    <local:PropertyViewer  DataContext="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Название"/>
+                    <local:PropertyViewer  DataContext="{Binding Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Описание"/>
+                    <local:PropertyViewer  DataContext="{Binding Address, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="URL-адрес"/>
+                    <local:PropertyViewer  DataContext="{Binding Duration, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Длительность"/>
+                    <local:PropertyViewer  DataContext="{Binding Source, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Источник"/>
+                    <local:PropertyViewer  DataContext="{Binding Type,  UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Тип видео"/>
+                    <local:PropertyViewer  DataContext="{Binding Resolution, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Разрешение" Margin="0,0,0,20"/>
+
+                    <local:PropertyViewer  DataContext="{Binding PreviewVM.Source,  UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Путь к превью" Margin="0,0,0,5"/>
+                    <Button Content="Выбрать изображение" Command="{Binding PreviewVM.OpenPreviewFileCommand}" Margin="80,0,80,20"/>
+
+ 
 
 
 
@@ -30,6 +40,7 @@
             </GroupBox>
 
             <local:ListScenesView></local:ListScenesView>
+            
         </StackPanel>
     </Grid>
 </UserControl>

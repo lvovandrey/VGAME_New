@@ -6,23 +6,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using LevelSetsEditor.DB;
 using LevelSetsEditor.Model;
 
 namespace LevelSetsEditor.ViewModel
 {
     public class LevelSetVM : INotifyPropertyChanged
     {
-        private LevelSet LevelSet;
-        public VideoInfoVM VideoInfoVM { get; set; }
+ 
+
+        private LevelSet _LevelSet;
+
+
+        private VideoInfoVM _VideoInfoVM { get; set; }
+        public VideoInfoVM VideoInfoVM { get { return _VideoInfoVM; }}
+
+
+
+
         private VideoPlayerVM videoPlayerVM;
 
         private ObservableCollection<SceneSetVM> sceneSetVMs;
         private SceneSetVM selectedSceneSet;
+        
 
-        public LevelSetVM() // В этом конструкторе заполняем тестовыми данными свойства ойства...
+        
+        public LevelSetVM(LevelSet levelSet) // В этом конструкторе заполняем тестовыми данными свойства ойства...
         {
-            LevelSet = new Model.LevelSet();
-            VideoInfoVM = new VideoInfoVM(LevelSet);
+            _LevelSet = levelSet;
+            _VideoInfoVM = new VideoInfoVM(_LevelSet);
             sceneSetVMs = new ObservableCollection<SceneSetVM>();
             VideoPlayerVM = new VideoPlayerVM(this);
             PropertyChanged += LevelSetVM_PropertyChanged;
@@ -61,22 +73,24 @@ namespace LevelSetsEditor.ViewModel
             set { videoPlayerVM = value; OnPropertyChanged("VideoPlayerVM"); }
         }
 
-        public VideoInfo VideoInfo
+ 
+        public string Name
         {
-            get { return LevelSet.VideoInfo; }
+            get { return _LevelSet.Name; }
             set
             {
-                LevelSet.VideoInfo = value;
-                OnPropertyChanged("VideoInfo");
+                _LevelSet.Name = value;
+                OnPropertyChanged("Name");
             }
         }
 
 
+
         public void SegregateScenes()
         {
-            LevelSet.SegregateScenes();
+            _LevelSet.SegregateScenes();
             sceneSetVMs.Clear();
-            foreach (SceneSet s in LevelSet.SceneSets)
+            foreach (SceneSet s in _LevelSet.SceneSets)
                 sceneSetVMs.Add(new SceneSetVM(s));
             
         }

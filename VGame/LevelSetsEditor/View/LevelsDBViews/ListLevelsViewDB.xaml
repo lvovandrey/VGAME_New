@@ -16,15 +16,19 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions> <!--ItemsSource="{Binding Path=SceneSetVMs, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"  
-                SelectedItem="{Binding Path=SelectedSceneSetVM}"-->
-        <ListBox Grid.Row="1" Grid.ColumnSpan="12" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" >
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height ="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Button Content="Add" Command="{Binding AddCommand}" Margin="3"/>
+        <Button Content="Remove" Command="{Binding RemoveCommand}" Grid.Column="1" Margin="3"/>
+        <Button Content="Save all" Command="{Binding SaveCommand}"  Grid.Column="2" Margin="3" />
+        <ListBox SelectedItem="{Binding SelectedLevelVM,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=LevelVMs, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                 Grid.Row="1" Grid.ColumnSpan="12" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="False" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <local:ItemListDB/>
+                    
+                    <local:ItemListDB HorizontalAlignment="Stretch"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
 

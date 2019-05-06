@@ -24,5 +24,6 @@ namespace LevelSetsEditor.View.LevelsDBViews
         {
             InitializeComponent();
         }
+
     }
 }

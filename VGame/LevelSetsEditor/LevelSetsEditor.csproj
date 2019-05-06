@@ -20,6 +20,21 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -142,12 +157,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DB\Context.cs" />
     <Compile Include="Model\WebBrowserModel.cs" />
     <Compile Include="Tools\ToolsTimer.cs" />
-    <Compile Include="ViewModel\LevelSetVM.cs" />
+    <Compile Include="ViewModel\LevelVM.cs" />
+    <Compile Include="ViewModel\ListScenesViewModel.cs" />
+    <Compile Include="ViewModel\VM.cs" />
     <Compile Include="ViewModel\PreviewVM.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
-    <Compile Include="ViewModel\SceneSetVM.cs" />
+    <Compile Include="ViewModel\SceneVM.cs" />
     <Compile Include="ViewModel\VideoInfoVM.cs" />
     <Compile Include="ViewModel\VideoPlayerVM.cs" />
     <Compile Include="ViewModel\WebBrowserVM.cs" />
@@ -236,9 +254,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\LevelSet.cs" />
+    <Compile Include="Model\Level.cs" />
     <Compile Include="Model\Preview.cs" />
-    <Compile Include="Model\SceneSet.cs" />
+    <Compile Include="Model\Scene.cs" />
     <Compile Include="Model\VideoInfo.cs" />
     <Compile Include="Model\VideoSegment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -292,7 +310,16 @@
     <Resource Include="icons\testprev.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DB\" />
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 и x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

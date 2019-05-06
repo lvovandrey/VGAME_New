@@ -10,13 +10,13 @@ using System.Windows.Input;
 
 namespace LevelSetsEditor.ViewModel
 {
-    public class SceneSetVM : INotifyPropertyChanged
+    public class SceneVM : INotifyPropertyChanged
     {
-        private SceneSet sceneSet;
+        private Scene scene;
 
-        public SceneSetVM(SceneSet _sceneSet)
+        public SceneVM(Scene _scene)
         {
-            this.sceneSet = _sceneSet;
+            this.scene = _scene;
         }
 
 
@@ -24,11 +24,11 @@ namespace LevelSetsEditor.ViewModel
         {
             get
             {
-                return sceneSet.VideoSegment.TimeBegin;
+                return scene.VideoSegment.TimeBegin;
             }
             set
             {
-                sceneSet.VideoSegment.TimeBegin = value;
+                scene.VideoSegment.TimeBegin = value;
                 OnPropertyChanged("VideoSegment_TimeBegin");
             }
         }
@@ -37,11 +37,11 @@ namespace LevelSetsEditor.ViewModel
         {
             get
             {
-                return sceneSet.VideoSegment.TimeEnd;
+                return scene.VideoSegment.TimeEnd;
             }
             set
             {
-                sceneSet.VideoSegment.TimeEnd = value;
+                scene.VideoSegment.TimeEnd = value;
                 OnPropertyChanged("VideoSegment_TimeEnd");
             }
         }
@@ -50,11 +50,11 @@ namespace LevelSetsEditor.ViewModel
         {
             get
             {
-                return sceneSet.VideoSegment.Source;
+                return scene.VideoSegment.Source;
             }
             set
             {
-                sceneSet.VideoSegment.Source = value;
+                scene.VideoSegment.Source = value;
                 OnPropertyChanged("VideoSegment_Source");
             }
         }
@@ -63,11 +63,11 @@ namespace LevelSetsEditor.ViewModel
         {
             get
             {
-                return sceneSet.UnitsCount;
+                return scene.UnitsCount;
             }
             set
             {
-                sceneSet.UnitsCount = value;
+                scene.UnitsCount = value;
                 OnPropertyChanged("UnitsCount");
             }
         }
