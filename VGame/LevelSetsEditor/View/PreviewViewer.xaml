@@ -7,23 +7,9 @@
              mc:Ignorable="d" 
              >
     <Grid>
-        <StackPanel Orientation="Vertical"   >
-            <Grid Height="{Binding Size.Height, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Image  Source="{Binding Source, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"                                    
-                               /> <!--Width="{Binding Size.Width, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"-->
-
-                <Image  Source="{Binding CurPreSources, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"                                    
-                               Grid.Column="1"/>
-
-            </Grid>
-            <CheckBox Content="Обновлять предпросмотр" HorizontalAlignment="Right" Margin="10,10,100,10" IsChecked="{Binding RefreshPrev, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                <local:PropertyViewer DataContext="{Binding Type, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Тип превью"/>
-
-                <Grid>
+        <StackPanel Orientation="Vertical"   >            
+            <local:PropertyViewer DataContext="{Binding Type, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Тип превью"/>
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="30"/>
@@ -32,6 +18,27 @@
                 <Button Content="..." Grid.Column="1" Command="{Binding OpenPreviewFileCommand}"/>
             </Grid>
             <local:PropertyViewer DataContext="{Binding Size, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Размер"/>
+            <Grid > <!--Height="{Binding Size.Height, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"-->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Image  Source="{Binding Source, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"                                    
+                              Grid.RowSpan="2" Grid.Row="0" Stretch="Fill"/> <!--Width="{Binding Size.Width, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"-->
+
+                <Image  Source="{Binding CurPreSources, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"                                    
+                               Grid.Column="1" Grid.Row="1" Stretch="Fill"/>
+
+                <CheckBox Grid.Row="0" Grid.Column="1"  Content="Обновлять" HorizontalAlignment="Right"  IsChecked="{Binding RefreshPrev, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Background="White" BorderThickness="1">
+
+                </CheckBox>
+
+            </Grid>
+            
         </StackPanel>
     </Grid>
 </UserControl>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Prism.Commands;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,15 @@ namespace LevelSetsEditor.View
     /// </summary>
     public partial class TimeWatcherView : UserControl
     {
+
+        public static readonly DependencyProperty CommandProperty = DependencyProperty.Register("Command",
+           typeof(DelegateCommand<MouseWheelEventArgs>), typeof(TimeWatcherView),
+           new FrameworkPropertyMetadata());
+
+        public DelegateCommand<MouseWheelEventArgs> Command {
+            get { return (DelegateCommand<MouseWheelEventArgs>)GetValue(CommandProperty); }
+            set { SetValue(CommandProperty, value); } }
+
         public TimeWatcherView()
         {
             InitializeComponent();

@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="LevelSetsEditor.View.ImageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LevelSetsEditor.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" MaxHeight="300" MaxWidth="500" >
+    <UserControl.Resources>
+        <local:FontSizeConverter x:Key="fontSizeConverter" />
+    </UserControl.Resources>
+    <Grid MaxHeight="300" MaxWidth="500" Background="#FF666666" >
+        <Grid.Effect>
+            <DropShadowEffect ShadowDepth="2" Opacity="0.5"/>
+        </Grid.Effect>
+        <Image MaxHeight="300" MaxWidth="500" Source="{Binding Path=PreviewVM.Source}" Stretch="Fill" x:Name="Image" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3" />
+        <Label Content="{Binding Title}" HorizontalAlignment="Right" VerticalAlignment="Top" 
+               Margin="5"
+               FontSize="{Binding  ElementName=Image, Path=ActualWidth, Converter={StaticResource fontSizeConverter}}" 
+               BorderThickness="4,0,0,0" Background="#266E6E6E" Foreground="#FFBBBBBB">
+            <Label.BorderBrush>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#B6000000" Offset="0"/>
+                    <GradientStop Color="#A9505050" Offset="1"/>
+                </LinearGradientBrush>
+            </Label.BorderBrush>
+            <Label.Effect>
+                <DropShadowEffect ShadowDepth="2" BlurRadius="10" RenderingBias="Quality" Direction="310"/>
+            </Label.Effect>
+        </Label>
+
+    </Grid>
+</UserControl>
