@@ -12,13 +12,14 @@ namespace LevelSetsEditor.ViewModel
 {
     public class SceneVM : INotifyPropertyChanged
     {
-        private Scene scene;
+        public Scene scene;
         private VideoPlayerVM videoPlayerVM;
+        public int SceneId { get { return scene.Id; } }
 
         public SceneVM(Scene _scene, VideoPlayerVM _videoPlayerVM)
         {
             this.scene = _scene;
-            videoPlayerVM = _videoPlayerVM;
+            videoPlayerVM = _videoPlayerVM;          
         }
 
 

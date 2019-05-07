@@ -87,6 +87,15 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Width="20" Content="+" Margin="5" Command="{Binding AddSceneCommand}"/>
+                        <Button Width="20" Content="-" Margin="5" Command="{Binding RemoveSceneCommand}"/>
+                        <Button Width="40" Content="Up" Margin="5" Command="{Binding UpSceneCommand}"/>
+                        <Button Width="40" Content="Down" Margin="5" Command="{Binding DownSceneCommand}"/>
+                        <Button Width="40" Content="Clear" Margin="5" Command="{Binding ClearScenesListCommand}"/>
+                        <Button Width="40" Content="Auto" Margin="5" Command="{Binding SegregateScenesCommand}"/>
+                    </StackPanel>
+                    
                 </StackPanel>
 
                 <GroupBox x:Name="SelectedGroup" Header="Выбранный элемент" HorizontalAlignment="Stretch" Grid.Column="1" VerticalAlignment="Stretch" 

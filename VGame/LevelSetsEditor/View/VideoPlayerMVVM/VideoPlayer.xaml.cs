@@ -124,6 +124,7 @@ namespace LevelSetsEditor.View.VideoPlayerMVVM
 
         private void VideoPlayer_OnPlayerSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
+            if (Source == null) return;
             vlc.MediaPlayer.Play(Source);
         }
 

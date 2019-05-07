@@ -53,7 +53,7 @@ namespace LevelSetsEditor.ViewModel
         {
             get
             {
-                _scenesvm = new ObservableCollection<SceneVM>(from l in _scenes select new SceneVM(l,_videoPlayerVM));
+                _scenesvm = new ObservableCollection<SceneVM>(from l in _scenes select new SceneVM(l, _videoPlayerVM));
                 return _scenesvm;
             }
         }
@@ -84,10 +84,97 @@ namespace LevelSetsEditor.ViewModel
 
 
 
+     
 
 
+        //SegregateScenesCommand
 
 
+        private RelayCommand addSceneCommand;
+        public RelayCommand AddSceneCommand
+        {
+            get
+            {
+                return addSceneCommand ??
+                  (addSceneCommand = new RelayCommand(obj =>
+                  {
+                      _Level.Scenes.Add(new Scene());
+                      OnPropertyChanged("SceneVMs");
+                  }));
+            }
+        }
+
+        private RelayCommand removeSceneCommand;
+        public RelayCommand RemoveSceneCommand
+        {
+            get
+            {
+                return removeSceneCommand ??
+                  (removeSceneCommand = new RelayCommand(obj =>
+                  {
+                      _Level.Scenes.Remove(SelectedSceneVM.scene);
+                      OnPropertyChanged("SceneVMs");
+                  }));
+            }
+        }
+
+
+        private RelayCommand downSceneCommand;
+        public RelayCommand DownSceneCommand
+        {
+            get
+            {
+                return downSceneCommand ??
+                  (downSceneCommand = new RelayCommand(obj =>
+                  {
+
+                  }));
+            }
+        }
+
+        private RelayCommand upSceneCommand;
+        public RelayCommand UpSceneCommand
+        {
+            get
+            {
+                return upSceneCommand ??
+                  (upSceneCommand = new RelayCommand(obj =>
+                  {
+
+                  }));
+            }
+        }
+
+        private RelayCommand clearScenesListCommand;
+        public RelayCommand ClearScenesListCommand
+        {
+            get
+            {
+                return clearScenesListCommand ??
+                  (clearScenesListCommand = new RelayCommand(obj =>
+                  {
+                      // if (SelectedSceneVM == null) return;
+                      if (MessageBox.Show("Точно стереть все сцены?", "Удаление всех сцен", MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.No) return;
+                      _Level.Scenes = new ObservableCollection<Scene>();
+                      OnPropertyChanged("SceneVMs");
+                  }));
+            }
+        }
+
+        private RelayCommand segregateScenesCommand;
+        public RelayCommand SegregateScenesCommand
+        {
+            get
+            {
+                return segregateScenesCommand ??
+                  (segregateScenesCommand = new RelayCommand(obj =>
+                  {
+                      if (MessageBox.Show("Точно заменить все сцены?", "Замена всех сцен", MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.No) return;
+                      SegregateScenes();
+                      OnPropertyChanged("SceneVMs");
+                  }));
+            }
+        }
 
         //public ObservableCollection<SceneVM> SceneVMs
         //{
