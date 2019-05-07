@@ -21,12 +21,13 @@ namespace LevelSetsEditor.ViewModel
 
         private ObservableCollection<Level> _levels { get; set; }
         private ObservableCollection<LevelVM> _levelsvm { get; set; }
+        private VideoPlayerVM _videoPlayerVM;
 
         public ObservableCollection<LevelVM> LevelVMs
         {
             get
             {
-                _levelsvm = new ObservableCollection<LevelVM>(from l in _levels select new LevelVM(l));
+                _levelsvm = new ObservableCollection<LevelVM>(from l in _levels select new LevelVM(l,_videoPlayerVM));
                 return _levelsvm;
             }
         }
@@ -59,8 +60,10 @@ namespace LevelSetsEditor.ViewModel
 
         public Context db;
 
-        public VM()
+        public VM(VideoPlayerVM videoPlayerVM)
         {
+            _videoPlayerVM = videoPlayerVM;
+
             _levels = new ObservableCollection<Level>();
             {
                 context = new Context();
@@ -83,7 +86,12 @@ namespace LevelSetsEditor.ViewModel
                 {
                     l.VideoInfo = VList.Where(n => n.Id == l.VideoInfoId).FirstOrDefault();
                     l.VideoInfo.Preview = PList.Where(n => n.Id == l.VideoInfo.PreviewId).FirstOrDefault();
-
+                    var newScenes = l.Scenes.OrderBy(i => i.Id);
+                    l.Scenes = new ObservableCollection<Scene>();
+                    foreach (Scene s in newScenes)
+                    {
+                        l.Scenes.Add(s);
+                    }
                     foreach (Scene s in l.Scenes)
                     {
                         foreach (VideoSegment v in VssList)

@@ -26,7 +26,9 @@
         </Grid.ColumnDefinitions>
         <wpf:VlcControl Name="vlc" Grid.Row="0" Grid.ColumnSpan="6"/>
         <Slider Name="TimeSlider" HorizontalAlignment="Stretch" Grid.Row="1" Margin="3" Grid.Column="3"  
-                VerticalAlignment="Stretch" Maximum="1000" Value="{Binding ElementName=ThisPlayer, Path=Position, UpdateSourceTrigger=PropertyChanged}"/>
+                VerticalAlignment="Stretch" Maximum="1000" Value="{Binding ElementName=ThisPlayer, Path=Position, UpdateSourceTrigger=PropertyChanged}" 
+                PreviewMouseDown="TimeSlider_PreviewMouseDown" 
+                PreviewMouseUp="TimeSlider_PreviewMouseUp" />
         <Button Name="PlayBtn" Grid.Row="1" Grid.Column="0" Margin="3" Click="PlayBtn_Click_1" >
             <Image Source="/LevelSetsEditor;component/icons/play_pause.png"/>
         </Button>
@@ -39,7 +41,7 @@
 
 
 
-        <Button Name="MuteBtn" Grid.Row="1" Grid.Column="2" Margin="3" >
+        <Button Name="MuteBtn" Grid.Row="1" Grid.Column="2" Margin="3" Click="MuteBtn_Click" >
             <Image Source="/LevelSetsEditor;component/icons/mute.png"/>
         </Button>
         <xctk:TimeSpanUpDown  x:Name="TimeTextBox" Grid.Row="1" Grid.Column="4" 

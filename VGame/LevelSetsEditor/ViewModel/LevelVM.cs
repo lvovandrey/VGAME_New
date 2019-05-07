@@ -15,12 +15,14 @@ namespace LevelSetsEditor.ViewModel
     {
         private Level _Level;
         private VideoInfo _VideoInfo { get { return _Level.VideoInfo; } set { _Level.VideoInfo = value; } }
+        private VideoPlayerVM _videoPlayerVM;
 
 
-        public LevelVM(Level level)
+        public LevelVM(Level level, VideoPlayerVM videoPlayerVM)
         {
             _Level = level;
             _VideoInfoVM = new VideoInfoVM(_Level.VideoInfo);  //ВОт как надо - надо опираться на единую модель и не создавать новые представления в геттерах!!!
+            _videoPlayerVM = videoPlayerVM;
         }
 
         public string Name
@@ -51,7 +53,7 @@ namespace LevelSetsEditor.ViewModel
         {
             get
             {
-                _scenesvm = new ObservableCollection<SceneVM>(from l in _scenes select new SceneVM(l));
+                _scenesvm = new ObservableCollection<SceneVM>(from l in _scenes select new SceneVM(l,_videoPlayerVM));
                 return _scenesvm;
             }
         }

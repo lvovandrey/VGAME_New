@@ -118,10 +118,10 @@
                     </Grid.RowDefinitions>
                     <Label Content="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Background="Aqua" Height="20" VerticalAlignment="Top"/>
 
-                    <pl:Player x:Name="VideoPlayer" Source="{Binding Path=VideoInfoVM.Source, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Margin="22,22,22.4,22.8" />
+                    <player:VideoPlayer x:Name="VideoPlayer" Source="{Binding Path=VideoInfoVM.Source, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Margin="22,22,22.4,22.8" />
                     <GridSplitter Grid.Row="1" Height="3"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,1.2,0.4,0.6" />
                     <GroupBox Header="Инфо о видео" x:Name="VideoInfoGroupBox" 
-                  DataContext="{Binding VideoInfoVM}"   Grid.Row="2" Margin="0,0.4,0.4,0.2" Grid.RowSpan="2">
+                         DataContext="{Binding VideoInfoVM}"   Grid.Row="2" Margin="0,0.4,0.4,0.2" Grid.RowSpan="2">
                         <StackPanel Orientation="Vertical">
                             <propview:PropertyViewer x:Name="PropViewTitle" DataContext="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Название"/>
                             <propview:PropertyViewer  DataContext="{Binding Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Описание"/>
@@ -129,18 +129,9 @@
                             <propview:PropertyViewer  DataContext="{Binding Source, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Источник"/>
                             <propview:PropertyViewer  DataContext="{Binding Type,  UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Тип видео"/>
                             <propview:PropertyViewer  DataContext="{Binding Resolution, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Разрешение" Margin="0,0,0,50"/>
-
-
-
                         </StackPanel>
                     </GroupBox>
                 </Grid>
-
-
-
-
-
-
             </Grid>
         </TabItem>
         <TabItem Header="СОЗДАНИЕ БД" >

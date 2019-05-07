@@ -166,7 +166,7 @@ namespace LevelSetsEditor
         private void CreateBD()
         {
 
-            ViewModel = new VM();
+            ViewModel = new VM(new VideoPlayerVM(VideoPlayer));
             // ViewModel.SelectedLevelVM = ViewModel.LevelVMs.First(); 
             DataContext = ViewModel;
             //   TabItemEditor.DataContext = ViewModel.SelectedLevelSet;

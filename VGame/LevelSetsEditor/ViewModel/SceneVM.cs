@@ -13,10 +13,12 @@ namespace LevelSetsEditor.ViewModel
     public class SceneVM : INotifyPropertyChanged
     {
         private Scene scene;
+        private VideoPlayerVM videoPlayerVM;
 
-        public SceneVM(Scene _scene)
+        public SceneVM(Scene _scene, VideoPlayerVM _videoPlayerVM)
         {
             this.scene = _scene;
+            videoPlayerVM = _videoPlayerVM;
         }
 
 
@@ -59,6 +61,13 @@ namespace LevelSetsEditor.ViewModel
             }
         }
 
+        private bool _TrackTime { get; set; }
+        public bool TrackTime
+        {
+            get { return _TrackTime; }
+            set { _TrackTime = value; OnPropertyChanged("TrackTime"); }
+        }
+
         public int UnitsCount
         {
             get
@@ -86,6 +95,10 @@ namespace LevelSetsEditor.ViewModel
             }
         }
 
+
+       
+
+
 //        private DelegateCommand<MouseWheelEventArgs> yourCommand;
         public DelegateCommand<MouseWheelEventArgs> WheelTimeBeginCommand
         {
@@ -101,6 +114,8 @@ namespace LevelSetsEditor.ViewModel
                     {
                         VideoSegment_TimeBegin -= TimeSpan.FromSeconds(1);
                     }
+
+                    videoPlayerVM.CurTime = VideoSegment_TimeBegin;
                 });
             }
         }
@@ -118,6 +133,7 @@ namespace LevelSetsEditor.ViewModel
                     {
                         VideoSegment_TimeEnd -= TimeSpan.FromSeconds(1);
                     }
+                    videoPlayerVM.CurTime = VideoSegment_TimeEnd;
                 });
             }
         }

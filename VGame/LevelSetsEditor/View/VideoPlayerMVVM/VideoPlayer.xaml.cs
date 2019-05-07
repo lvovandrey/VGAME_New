@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LevelSetsEditor.Tools;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,8 +44,8 @@ namespace LevelSetsEditor.View.VideoPlayerMVVM
             new FrameworkPropertyMetadata(new PropertyChangedCallback(SourcePropertyChangedCallback)));
 
         public double Position { get { return (double)GetValue(PositionProperty); } set { SetValue(PositionProperty, value); } }
-        public TimeSpan Duration { get { return (TimeSpan)GetValue(DurationProperty); } set { SetValue(DurationProperty, value); } }
-        public TimeSpan CurTime { get { return (TimeSpan)GetValue(CurTimeProperty); } set { SetValue(CurTimeProperty, value); } }
+        public TimeSpan Duration { get { return (TimeSpan)GetValue(DurationProperty); }  set {  SetValue(DurationProperty, value); } }
+        public TimeSpan CurTime { get { return (TimeSpan)GetValue(CurTimeProperty); } set {  SetValue(CurTimeProperty, value); } }
         public Uri Source { get { return (Uri)GetValue(SourceProperty); } set { SetValue(SourceProperty, value); } }
 
 
@@ -81,7 +82,7 @@ namespace LevelSetsEditor.View.VideoPlayerMVVM
 
 
 
-
+        System.Windows.Threading.DispatcherTimer timer;
 
         public VideoPlayer() : base()
         {
@@ -94,11 +95,12 @@ namespace LevelSetsEditor.View.VideoPlayerMVVM
             vlc.MediaPlayer.Play(new Uri(@"C:\1.wmv"));
 
             this.OnSourceChanged += VideoPlayer_OnPlayerSourceChanged;
+            this.OnPositionChanged += Player_OnPositionChanged;
+            this.OnCurTimeChanged += Player_OnCurTimeChanged;
 
 
 
-
-            System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
+            timer = new System.Windows.Threading.DispatcherTimer();
 
             timer.Tick += new EventHandler(timerTick);
             timer.Interval = TimeSpan.FromSeconds(0.01);
@@ -115,16 +117,28 @@ namespace LevelSetsEditor.View.VideoPlayerMVVM
             }
         }
 
-        private void VideoPlayer_OnPlayerSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        public void SetCurTime(TimeSpan time)
         {
-       //     MessageBox.Show(Source.ToString());
-            vlc.MediaPlayer.Play(Source);
-
-            
+            vlc.MediaPlayer.Time = (long)time.TotalMilliseconds;
         }
 
+        private void VideoPlayer_OnPlayerSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            vlc.MediaPlayer.Play(Source);
+        }
 
+        private void Player_OnPositionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if ((vlc.MediaPlayer.Video != null) && (!vlc.MediaPlayer.IsPlaying))
+            {
+                vlc.MediaPlayer.Time = (long)Math.Round(Position * Duration.TotalMilliseconds / 1000);
+            }
+        }
 
+        private void Player_OnCurTimeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+
+        }
         private void PlayBtn_Click_1(object sender, RoutedEventArgs e)
         {
             if (vlc.MediaPlayer.IsPlaying) vlc.MediaPlayer.Pause();
@@ -133,6 +147,64 @@ namespace LevelSetsEditor.View.VideoPlayerMVVM
 
         private void SplitBtn_Click(object sender, RoutedEventArgs e)
         {
+
+        }
+
+        private void MuteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (vlc.MediaPlayer.Audio.Volume != 0) vlc.MediaPlayer.Audio.Volume = 0;
+            else vlc.MediaPlayer.Audio.Volume = 50;
+        }
+
+
+        bool WasPlaing;
+
+        private void TimeSlider_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            WasPlaing = vlc.MediaPlayer.IsPlaying;
+            if (vlc.MediaPlayer.IsPlaying) { vlc.MediaPlayer.Pause(); timer.Stop(); }
+        }
+
+        private void TimeSlider_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (!vlc.MediaPlayer.IsPlaying)
+            {
+                if (WasPlaing)
+                {
+                    vlc.MediaPlayer.Play(); timer.Start();
+                }
+                else
+                {
+
+                }
+            }
+        }
+
+        public void SetPosition(double position)// ЧТО ЭТО ЗА ЖЕСТЬ?!!!!!!
+        {
+            timer.Stop();
+            if (vlc.MediaPlayer.IsPlaying)
+            {
+                vlc.MediaPlayer.Pause();
+                timer.Stop();
+
+                Position = position;
+                CurTime = TimeSpan.FromSeconds(Position / 1000 * Duration.TotalSeconds);
+                vlc.MediaPlayer.Time = (long)Math.Round(Position * Duration.TotalMilliseconds / 1000);
+
+                ToolsTimer.Delay(() => { vlc.MediaPlayer.Play(); }, TimeSpan.FromMilliseconds(1000));
+            }
+            else
+            {
+                timer.Stop();
+
+                Position = position;
+                CurTime = TimeSpan.FromSeconds(Position / 1000 * Duration.TotalSeconds);
+                vlc.MediaPlayer.Time = (long)Math.Round(Position * Duration.TotalMilliseconds / 1000);
+
+            }
+
+            ToolsTimer.Delay(() => { timer.Start(); }, TimeSpan.FromMilliseconds(1000));
 
         }
     }

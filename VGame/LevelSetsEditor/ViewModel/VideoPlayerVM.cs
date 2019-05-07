@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LevelSetsEditor.View.VideoPlayerMVVM;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -10,10 +11,10 @@ namespace LevelSetsEditor.ViewModel
 {
     public class VideoPlayerVM: INotifyPropertyChanged
     {
-        LevelVM levelSetVM;
-        public VideoPlayerVM(LevelVM _levelSetVM)
+        VideoPlayer videoPlayer;
+        public VideoPlayerVM( VideoPlayer _videoPlayer )
         {
-            levelSetVM = _levelSetVM;
+            videoPlayer = _videoPlayer;
         }
 
         private TimeSpan curTime;
@@ -26,6 +27,8 @@ namespace LevelSetsEditor.ViewModel
             set
             {
                 curTime = value;
+                videoPlayer.SetCurTime(value);
+                //videoPlayer.CurTime = curTime;
                 OnPropertyChanged("CurTime");
             }
         }
