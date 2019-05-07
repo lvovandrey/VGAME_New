@@ -26,8 +26,8 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </TextBox>
-                <CheckBox Content="Watch" VerticalAlignment="Center" Margin="5" HorizontalAlignment="Right" Grid.Column="1"></CheckBox>
-                <Button Content="GO!!!" HorizontalAlignment="Right" Margin="5" Grid.Column="2" Click="Button_Click" />
+                
+       
             </Grid>
         </StackPanel>
     </Grid>

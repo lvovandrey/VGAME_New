@@ -115,7 +115,7 @@ namespace LevelSetsEditor.ViewModel
                         VideoSegment_TimeBegin -= TimeSpan.FromSeconds(1);
                     }
 
-                    videoPlayerVM.CurTime = VideoSegment_TimeBegin;
+                    if(TrackTime) videoPlayerVM.CurTime = VideoSegment_TimeBegin;
                 });
             }
         }
@@ -133,7 +133,7 @@ namespace LevelSetsEditor.ViewModel
                     {
                         VideoSegment_TimeEnd -= TimeSpan.FromSeconds(1);
                     }
-                    videoPlayerVM.CurTime = VideoSegment_TimeEnd;
+                    if (TrackTime) videoPlayerVM.CurTime = VideoSegment_TimeEnd;
                 });
             }
         }

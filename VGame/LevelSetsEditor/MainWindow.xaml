@@ -98,7 +98,8 @@
                                                   Command="{Binding ElementName=SelectedGroup,Path=DataContext.WheelTimeEndCommand}" Tag="Конец" Margin="0,10,0,0"/>
                         <propview:TimeWatcherView DataContext="{Binding UnitsCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  
                                                   Command="{Binding ElementName=SelectedGroup,Path=DataContext.WheelUnitsCommand}" Tag="Юнитов" Margin="0,10,0,0"/>
-
+                        <CheckBox Content="Track" VerticalAlignment="Center" Margin="5" 
+                          IsChecked="{Binding TrackTime, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                     </StackPanel>
                 </GroupBox>
 
