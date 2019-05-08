@@ -8,7 +8,7 @@
              d:DesignHeight="800" d:DesignWidth="400" Background="White">
     <Grid >          <!--DataContext="{Binding SelectedLevelSet, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"-->
         <StackPanel>
-            <TextBox   Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="35" Background="Crimson"></TextBox>
+            <TextBox   Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="35" FontSize="22" HorizontalAlignment="Center"/>
 
             <GroupBox Header="Инфо о видео" x:Name="VideoInfoGroupBox" 
                   DataContext="{Binding VideoInfoVM}" >

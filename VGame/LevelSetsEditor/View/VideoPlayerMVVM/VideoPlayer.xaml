@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="30"/>
-            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="80"/>
             <ColumnDefinition Width="30"/>
             <ColumnDefinition />
             <ColumnDefinition Width="80"/>
@@ -32,21 +32,22 @@
         <Button Name="PlayBtn" Grid.Row="1" Grid.Column="0" Margin="3" Click="PlayBtn_Click_1" >
             <Image Source="/LevelSetsEditor;component/icons/play_pause.png"/>
         </Button>
-        <Button Name="SplitBtn" Grid.Row="1" Grid.Column="1" Margin="3" HorizontalAlignment="Left" Click="SplitBtn_Click" >
+        <!--<Button Name="SplitBtn" Grid.Row="1" Grid.Column="1" Margin="3" HorizontalAlignment="Left" Click="SplitBtn_Click" >
             <Image Source="/LevelSetsEditor;component/icons/icon.png"/>
-        </Button>
+        </Button>-->
+        <Slider Name="VolumeSlider" HorizontalAlignment="Stretch" Grid.Row="1" Margin="3" Grid.Column="1"  
+                VerticalAlignment="Stretch" Maximum="100" Value="{Binding ElementName=ThisPlayer, Path=Volume, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
 
 
-      
 
 
 
         <Button Name="MuteBtn" Grid.Row="1" Grid.Column="2" Margin="3" Click="MuteBtn_Click" >
             <Image Source="/LevelSetsEditor;component/icons/mute.png"/>
         </Button>
-        <xctk:TimeSpanUpDown  x:Name="TimeTextBox" Grid.Row="1" Grid.Column="4" 
+        <TextBox  x:Name="TimeTextBox" Grid.Row="1" Grid.Column="4" 
                             TextAlignment="Center" VerticalAlignment="Center" MinHeight="10" 
-                            BorderBrush="{x:Null}" Value="{Binding ElementName=ThisPlayer, Path=CurTime}"/>
+                            BorderBrush="{x:Null}" Text="{Binding ElementName=ThisPlayer, Path=CurTime, StringFormat=hh\\:mm\\:ss\\.ff }"/>
 
 
 

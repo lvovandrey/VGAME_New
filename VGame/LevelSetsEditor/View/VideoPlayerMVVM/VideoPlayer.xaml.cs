@@ -43,17 +43,30 @@ namespace LevelSetsEditor.View.VideoPlayerMVVM
             typeof(Uri), typeof(VideoPlayer),
             new FrameworkPropertyMetadata(new PropertyChangedCallback(SourcePropertyChangedCallback)));
 
+        public static readonly DependencyProperty VolumeProperty = DependencyProperty.Register("Volume",
+            typeof(double), typeof(VideoPlayer),
+            new FrameworkPropertyMetadata(new PropertyChangedCallback(VolumePropertyChangedCallback)));
+       
+
+        public double Volume { get { return (double)GetValue(VolumeProperty); } set { SetValue(VolumeProperty, value); } }
         public double Position { get { return (double)GetValue(PositionProperty); } set { SetValue(PositionProperty, value); } }
         public TimeSpan Duration { get { return (TimeSpan)GetValue(DurationProperty); }  set {  SetValue(DurationProperty, value); } }
         public TimeSpan CurTime { get { return (TimeSpan)GetValue(CurTimeProperty); } set {  SetValue(CurTimeProperty, value); } }
         public Uri Source { get { return (Uri)GetValue(SourceProperty); } set { SetValue(SourceProperty, value); } }
 
-
+        public event PropertyChanged OnVolumeChanged;
         public event PropertyChanged OnPositionChanged;
         public event PropertyChanged OnDurationChanged;
         public event PropertyChanged OnCurTimeChanged;
         public event PropertyChanged OnSourceChanged;
 
+
+
+        static void VolumePropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (((VideoPlayer)d).OnVolumeChanged != null)
+                ((VideoPlayer)d).OnVolumeChanged(d, e);
+        }
 
         static void PositionPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -97,7 +110,7 @@ namespace LevelSetsEditor.View.VideoPlayerMVVM
             this.OnSourceChanged += VideoPlayer_OnPlayerSourceChanged;
             this.OnPositionChanged += Player_OnPositionChanged;
             this.OnCurTimeChanged += Player_OnCurTimeChanged;
-
+            this.OnVolumeChanged += Player_OnVolumeChanged;
 
 
             timer = new System.Windows.Threading.DispatcherTimer();
@@ -119,6 +132,7 @@ namespace LevelSetsEditor.View.VideoPlayerMVVM
 
         public void SetCurTime(TimeSpan time)
         {
+            if (time < TimeSpan.FromSeconds(0)) return;
             vlc.MediaPlayer.Time = (long)time.TotalMilliseconds;
         }
 
@@ -133,6 +147,14 @@ namespace LevelSetsEditor.View.VideoPlayerMVVM
             if ((vlc.MediaPlayer.Video != null) && (!vlc.MediaPlayer.IsPlaying))
             {
                 vlc.MediaPlayer.Time = (long)Math.Round(Position * Duration.TotalMilliseconds / 1000);
+            }
+        }
+
+        private void Player_OnVolumeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if ((vlc.MediaPlayer.Audio != null))
+            {
+                vlc.MediaPlayer.Audio.Volume = (int)Volume ;
             }
         }
 
@@ -153,8 +175,9 @@ namespace LevelSetsEditor.View.VideoPlayerMVVM
 
         private void MuteBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (vlc.MediaPlayer.Audio.Volume != 0) vlc.MediaPlayer.Audio.Volume = 0;
-            else vlc.MediaPlayer.Audio.Volume = 50;
+            if (vlc.MediaPlayer.Audio.Volume != 0) Volume = 0;
+            else Volume = 50;
+
         }
 
 

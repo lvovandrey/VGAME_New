@@ -19,7 +19,8 @@ namespace LevelSetsEditor.ViewModel
         public SceneVM(Scene _scene, VideoPlayerVM _videoPlayerVM)
         {
             this.scene = _scene;
-            videoPlayerVM = _videoPlayerVM;          
+            videoPlayerVM = _videoPlayerVM;
+            TrackTime = true;
         }
 
 
