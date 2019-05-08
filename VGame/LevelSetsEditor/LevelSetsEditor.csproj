@@ -158,6 +158,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DB\Context.cs" />
+    <Compile Include="DB\DBTools.cs" />
     <Compile Include="Model\WebBrowserModel.cs" />
     <Compile Include="Tools\ToolsTimer.cs" />
     <Compile Include="ViewModel\LevelVM.cs" />

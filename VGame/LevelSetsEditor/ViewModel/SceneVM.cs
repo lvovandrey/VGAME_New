@@ -83,6 +83,7 @@ namespace LevelSetsEditor.ViewModel
         }
 
 
+
         private RelayCommand incTimeCommand;
         public RelayCommand IncTimeCommand
         {

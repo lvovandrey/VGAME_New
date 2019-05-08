@@ -268,7 +268,10 @@ namespace LevelSetsEditor.ViewModel
 
         }
 
-
+        public void JoinYoutubeVideoInLevel(string YoutubeAddress)
+        {
+            _Level.JoinYoutubeVideoInLevel(YoutubeAddress);
+        }
 
         #region mvvm
         public event PropertyChangedEventHandler PropertyChanged;

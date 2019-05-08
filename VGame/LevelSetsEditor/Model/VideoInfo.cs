@@ -74,6 +74,25 @@ namespace LevelSetsEditor.Model
         public int ResolutionHeight { get; set; }
         public int ResolutionWidth { get; set; }
 
+        #region reserve
+        //Резервные поля для базы данных
+        [NotMapped]
+        public string _GameInfo1 { get; set; }
+        [NotMapped]
+        public string _GameInfo2 { get; set; }
+        [NotMapped]
+        public string _GameInfo3 { get; set; }
+        [NotMapped]
+        public string _GameInfo4 { get; set; }
+        [NotMapped]
+        public string _GameInfo5 { get; set; }
+
+        public string GameInfo1 { get { return _GameInfo1; } set { _GameInfo1 = value; OnPropertyChanged("GameInfo1"); } }
+        public string GameInfo2 { get { return _GameInfo1; } set { _GameInfo1 = value; OnPropertyChanged("GameInfo1"); } }
+        public string GameInfo3 { get { return _GameInfo1; } set { _GameInfo1 = value; OnPropertyChanged("GameInfo1"); } }
+        public string GameInfo4 { get { return _GameInfo1; } set { _GameInfo1 = value; OnPropertyChanged("GameInfo1"); } }
+        public string GameInfo5 { get { return _GameInfo1; } set { _GameInfo1 = value; OnPropertyChanged("GameInfo1"); } }
+        #endregion
 
         #region mvvm
         public event PropertyChangedEventHandler PropertyChanged;

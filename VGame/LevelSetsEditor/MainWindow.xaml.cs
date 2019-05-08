@@ -40,26 +40,12 @@ namespace LevelSetsEditor
             settings.CachePath = @"C:\CEFcookies"; // Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\CEF";
             CefSharp.Cef.Initialize(settings);
 
-            
-            //ViewModel.SelectedLevelSet.LevelSet = new Model.LevelSet();
 
             InitializeComponent();
             
             WebBrowserVM = new WebBrowserVM(Browser);
             GridBrowser.DataContext = WebBrowserVM;
             mainWindow = this;
-
-
-           
-
-
-            //ViewModel.SelectedLevelSet.LevelSet.Scenes = new List<Model.Scene>();
-            //ViewModel.SelectedLevelSet.LevelSet.VideoInfo = new Model.VideoInfo();
-            //ViewModel.SelectedLevelSet.LevelSet.VideoInfo.Preview = new Model.Preview();
-
-
-            //   Button_Click_2(null, null);
-
 
         }
 
@@ -119,9 +105,6 @@ namespace LevelSetsEditor
             ViewModel.SelectedLevelVM.VideoInfoVM.Resolution = vidInfo.Resolution;
             ViewModel.SelectedLevelVM.VideoInfoVM.Title = vidInfo.Title;
             ViewModel.SelectedLevelVM.VideoInfoVM.Type = Model.VideoType.youtube;
-            //    ViewModel.SelectedLevelVM.VideoInfoVM.Preview.
-            //  ViewModel.SelectedLevelVM.Scenes.
-
             ViewModel.SelectedLevelVM.VideoInfoVM.PreviewVM.Source = new Uri(vidInfo.ImageUrl);
             ViewModel.SelectedLevelVM.VideoInfoVM.PreviewVM.Size = new System.Drawing.Size(480, 360);
 
@@ -134,78 +117,23 @@ namespace LevelSetsEditor
             ViewModel.SelectedLevelVM.SegregateScenes();
         }
 
-        private void AutoSegregateVideoToScenes(LevelVM LSet)
-        {
-        }
-
-        private void TextBox_MouseWheel(object sender, MouseWheelEventArgs e)
-        {
-            //TimeSpan dtime;
-            //if (e.Delta > 0) dtime = TimeSpan.FromSeconds(1);
-            //else dtime = TimeSpan.FromSeconds(-1);
-
-            //object o = ((TextBox)sender).DataContext;
-
-            //string text = ((TextBox)sender).Text;
-            //TimeSpan time;
-            //if (TimeSpan.TryParse(text, out time))
-            //{
-            //    time += dtime;
-            //    ((TextBox)sender).Text = time.ToString();
-            //}
 
 
-        }
-
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-            
-            ////////this.VideoPlayer.SetPosition( 1000*ViewModel.SelectedLevelSet.SelectedSceneVM.VideoSegment_TimeBegin.TotalSeconds/ ViewModel.SelectedLevelSet.VideoInfoVM.Duration.TotalSeconds);
-        }
-
-        private void CreateBD()
-        {
-
-            ViewModel = new VM(new VideoPlayerVM(VideoPlayer));
-            // ViewModel.SelectedLevelVM = ViewModel.LevelVMs.First(); 
-            DataContext = ViewModel;
-            //   TabItemEditor.DataContext = ViewModel.SelectedLevelSet;
-
-            //     LevelsFromDB l = new LevelsFromDB();
-
-            //using (LevelSetContext db = new LevelSetContext())
-            //{
-            //    // создаем два объекта User
-            //    LevelSet level = new LevelSet();
-            //    level.Name = "Some Level name";
-            //    db.LevelSets.Add(level);
-            //    db.SaveChanges();
-            //}
-        }
-
-        private void Button_Click_4(object sender, RoutedEventArgs e)
-        {
-          //  CreateBD(); LBL.DataContext = mainWindow.ViewModel.LevelSetVMs.First();
-        }
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            //ViewModel.CloseDb();
-        }
-
-        private void Button_Click_5(object sender, RoutedEventArgs e)
-        {
-          
-            //CreateBD();
-            //LBL.DataContext = mainWindow.ViewModel.LevelSetVMs.First();
-            ////            this.DataContext = ViewModel;
-            //           LBL.Content = mainWindow.ViewModel.SelectedLevelSet.Name;
-        }
+      
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            CreateBD();
-            ////////LBL.DataContext = mainWindow.ViewModel.LevelSetVMs.First();
+            ViewModel = new VM(new VideoPlayerVM(VideoPlayer), this);
+        }
+
+        private void Button_Click_JOIN(object sender, RoutedEventArgs e)
+        {
+            Button_Click_2(sender, e);
+        }
+
+        private void Button_Click_NEW_LVL(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

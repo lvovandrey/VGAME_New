@@ -18,6 +18,12 @@ namespace LevelSetsEditor.Model
         [NotMapped]
         public string _Name { get; set; }
 
+
+
+
+
+
+
         public VideoInfo VideoInfo { get { return _VideoInfo; } set { _VideoInfo = value; OnPropertyChanged("VideoInfo"); } }
         public string Name { get { return _Name; } set { _Name = value; OnPropertyChanged("Name"); } }
 
@@ -112,6 +118,25 @@ namespace LevelSetsEditor.Model
             OnPropertyChanged("VideoInfo");
         }
 
+        #region reserve
+        //Резервные поля для базы данных
+        [NotMapped]
+        public string _GameInfo1 { get; set; }
+        [NotMapped]
+        public string _GameInfo2 { get; set; }
+        [NotMapped]
+        public string _GameInfo3 { get; set; }
+        [NotMapped]
+        public string _GameInfo4 { get; set; }
+        [NotMapped]
+        public string _GameInfo5 { get; set; }
+
+        public string GameInfo1 { get { return _GameInfo1; } set { _GameInfo1 = value; OnPropertyChanged("GameInfo1"); } }
+        public string GameInfo2 { get { return _GameInfo1; } set { _GameInfo1 = value; OnPropertyChanged("GameInfo1"); } }
+        public string GameInfo3 { get { return _GameInfo1; } set { _GameInfo1 = value; OnPropertyChanged("GameInfo1"); } }
+        public string GameInfo4 { get { return _GameInfo1; } set { _GameInfo1 = value; OnPropertyChanged("GameInfo1"); } }
+        public string GameInfo5 { get { return _GameInfo1; } set { _GameInfo1 = value; OnPropertyChanged("GameInfo1"); } }
+        #endregion
 
         #region mvvm
         public event PropertyChangedEventHandler PropertyChanged;
