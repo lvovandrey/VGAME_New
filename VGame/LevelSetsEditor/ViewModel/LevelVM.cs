@@ -98,7 +98,10 @@ namespace LevelSetsEditor.ViewModel
                 return addSceneCommand ??
                   (addSceneCommand = new RelayCommand(obj =>
                   {
-                      _Level.Scenes.Add(new Scene());
+                      Scene scene = new Scene();
+                      scene.VideoSegment.TimeEnd = _Level.VideoInfo.Duration;
+                      scene.VideoSegment.Source = _Level.VideoInfo.Source;
+                      _Level.Scenes.Add(scene);
                       OnPropertyChanged("SceneVMs");
                   }));
             }
