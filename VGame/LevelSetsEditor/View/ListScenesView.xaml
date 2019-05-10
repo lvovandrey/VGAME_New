@@ -16,7 +16,7 @@
                     <ColumnDefinition Width="*"/>
 
                 </Grid.ColumnDefinitions>
-                <Label Content="Юнитов" FontSize="11"/>
+                <Label Content="№" FontSize="11"/>
                 <Label Content="Врем.нач." Grid.Column="1" FontSize="11"/>
                 <Label Content="Врем.кон." Grid.Column="2" FontSize="11"/>
                 <Label Content="Название" Grid.Column="3" FontSize="11"/>
@@ -33,7 +33,7 @@
                                 <ColumnDefinition Width="*"/>
 
                             </Grid.ColumnDefinitions>
-                            <Label Content="{Binding UnitsCount, UpdateSourceTrigger=PropertyChanged}"  Grid.Column="0" />
+                            <Label Content="{Binding Position, UpdateSourceTrigger=PropertyChanged}"  Grid.Column="0" />
                             <Label Content="{Binding VideoSegment_TimeBegin, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"  />
                             <Label Content="{Binding VideoSegment_TimeEnd, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2"   />
                             <Label Content="{Binding VideoSegment_Source, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Grid.Column="3" />

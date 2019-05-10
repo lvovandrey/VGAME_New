@@ -38,7 +38,7 @@ namespace LevelSetsEditor.DB
                 {
                     l.VideoInfo = VList.Where(n => n.Id == l.VideoInfoId).FirstOrDefault();
                     l.VideoInfo.Preview = PList.Where(n => n.Id == l.VideoInfo.PreviewId).FirstOrDefault();
-                    var newScenes = l.Scenes.OrderBy(i => i.Id);
+                    var newScenes = l.Scenes.OrderBy(i => i.Position);
                     l.Scenes = new ObservableCollection<Scene>();
                     foreach (Scene s in newScenes)
                     {

@@ -52,6 +52,7 @@ namespace LevelSetsEditor.Model
             for (int i = 1; i <= NumScenes; i++)
             {
                 Scene s = new Scene();
+                s.Position = i;
                 s.UnitsCount = i;
                 s.VideoSegment.TimeBegin = TimeSpan.FromSeconds((i - 1) * 120);
                 if (i < NumScenes)
@@ -64,6 +65,10 @@ namespace LevelSetsEditor.Model
 
             return "someShit";
         }
+
+
+
+
 
         public void JoinYoutubeVideoInLevel(string YoutubeAddress)
         {

@@ -54,7 +54,9 @@ namespace LevelSetsEditor.ViewModel
             get
             {
                 _scenesvm = new ObservableCollection<SceneVM>(from l in _scenes select new SceneVM(l, _videoPlayerVM));
+                //_scenesvm = _scenesvm.OrderBy
                 return _scenesvm;
+
             }
         }
 
@@ -98,7 +100,9 @@ namespace LevelSetsEditor.ViewModel
                 return addSceneCommand ??
                   (addSceneCommand = new RelayCommand(obj =>
                   {
+                      int pos = _Level.Scenes.Max(a => a.Id);
                       Scene scene = new Scene();
+                      scene.Position = ++pos;
                       scene.VideoSegment.TimeEnd = _Level.VideoInfo.Duration;
                       scene.VideoSegment.Source = _Level.VideoInfo.Source;
                       _Level.Scenes.Add(scene);
@@ -143,6 +147,30 @@ namespace LevelSetsEditor.ViewModel
                 return upSceneCommand ??
                   (upSceneCommand = new RelayCommand(obj =>
                   {
+
+                      if (SelectedSceneVM == null) return;
+                      int pos = SelectedSceneVM.scene.Position;
+
+                      Scene PrevScene = _scenes.Where(i => i.Position == pos - 1).FirstOrDefault();
+                      PrevScene.Position = pos;
+                      SelectedSceneVM.scene.Position = pos - 1;
+
+                     var newscenes = _scenes.OrderBy(a => a.Position).OfType<Scene>();
+                      
+                      ObservableCollection<Scene> Tmp = new ObservableCollection<Scene>();
+                      foreach (var item in newscenes)
+                      {
+                          Tmp.Add((Scene)item);
+                      }
+                      _scenes.Clear();
+                      _scenes = Tmp;
+                     // _scenesvm.OrderBy(a => a.Position);
+                      //int i1 = SceneVMs.IndexOf(SelectedSceneVM);
+                      //int i2 = SceneVMs.IndexOf(SceneVMs.Where(a=> a.Position == pos-1).FirstOrDefault());
+                      //SceneVMs.Move(i1, i2);
+
+                      OnPropertyChanged("SceneVMs");
+                      OnPropertyChanged("SelectedSceneVM");
 
                   }));
             }

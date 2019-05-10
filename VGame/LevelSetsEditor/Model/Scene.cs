@@ -21,9 +21,13 @@ namespace LevelSetsEditor.Model
         private VideoSegment _VideoSegment { get; set; }
         [NotMapped]
         private int _UnitsCount { get; set; }
+        [NotMapped]
+        private int _Position { get; set; }
+
 
         public VideoSegment VideoSegment { get { return _VideoSegment; } set { _VideoSegment = value; OnPropertyChanged("VideoSegment"); } }
         public int UnitsCount { get { return _UnitsCount; } set { _UnitsCount = value; OnPropertyChanged("UnitsCount"); } }
+        public int Position { get { return _Position; } set { _Position = value; OnPropertyChanged("Position"); } }
 
         #region reserve
         //Резервные поля для базы данных
@@ -39,12 +43,11 @@ namespace LevelSetsEditor.Model
         public string _GameInfo5 { get; set; }
 
         public string GameInfo1 { get { return _GameInfo1; } set { _GameInfo1 = value; OnPropertyChanged("GameInfo1"); } }
-        public string GameInfo2 { get { return _GameInfo1; } set { _GameInfo1 = value; OnPropertyChanged("GameInfo1"); } }
-        public string GameInfo3 { get { return _GameInfo1; } set { _GameInfo1 = value; OnPropertyChanged("GameInfo1"); } }
-        public string GameInfo4 { get { return _GameInfo1; } set { _GameInfo1 = value; OnPropertyChanged("GameInfo1"); } }
-        public string GameInfo5 { get { return _GameInfo1; } set { _GameInfo1 = value; OnPropertyChanged("GameInfo1"); } }
+        public string GameInfo2 { get { return _GameInfo2; } set { _GameInfo2 = value; OnPropertyChanged("GameInfo2"); } }
+        public string GameInfo3 { get { return _GameInfo3; } set { _GameInfo3 = value; OnPropertyChanged("GameInfo3"); } }
+        public string GameInfo4 { get { return _GameInfo4; } set { _GameInfo4 = value; OnPropertyChanged("GameInfo4"); } }
+        public string GameInfo5 { get { return _GameInfo5; } set { _GameInfo5 = value; OnPropertyChanged("GameInfo5"); } }
         #endregion
-
         #region mvvm
         public event PropertyChangedEventHandler PropertyChanged;
 

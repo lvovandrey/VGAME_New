@@ -83,7 +83,18 @@ namespace LevelSetsEditor.ViewModel
             }
         }
 
-
+        public int Position
+        {
+            get
+            {
+                return scene.Position;
+            }
+            set
+            {
+                scene.Position = value;
+                OnPropertyChanged("Position");
+            }
+        }
 
         private RelayCommand incTimeCommand;
         public RelayCommand IncTimeCommand
