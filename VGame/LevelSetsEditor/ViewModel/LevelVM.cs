@@ -17,7 +17,6 @@ namespace LevelSetsEditor.ViewModel
         private VideoInfo _VideoInfo { get { return _Level.VideoInfo; } set { _Level.VideoInfo = value; } }
         private VideoPlayerVM _videoPlayerVM;
 
-
         public LevelVM(Level level, VideoPlayerVM videoPlayerVM)
         {
             _Level = level;
@@ -134,7 +133,25 @@ namespace LevelSetsEditor.ViewModel
                 return downSceneCommand ??
                   (downSceneCommand = new RelayCommand(obj =>
                   {
+                      if (SelectedSceneVM == null) return;
+                      int pos = SelectedSceneVM.scene.Position;
 
+                      Scene PostScene = _scenes.Where(i => i.Position == pos + 1).FirstOrDefault();
+                      PostScene.Position = pos;
+                      SelectedSceneVM.scene.Position = pos + 1;
+
+                      var newscenes = _scenes.OrderBy(a => a.Position).OfType<Scene>();
+
+                      ObservableCollection<Scene> Tmp = new ObservableCollection<Scene>();
+                      foreach (var item in newscenes)
+                      {
+                          Tmp.Add((Scene)item);
+                      }
+                      _scenes.Clear();
+                      _scenes = Tmp;
+
+                      OnPropertyChanged("SceneVMs");
+                      OnPropertyChanged("SelectedSceneVM");
                   }));
             }
         }
@@ -164,16 +181,18 @@ namespace LevelSetsEditor.ViewModel
                       }
                       _scenes.Clear();
                       _scenes = Tmp;
-                     // _scenesvm.OrderBy(a => a.Position);
-                      //int i1 = SceneVMs.IndexOf(SelectedSceneVM);
-                      //int i2 = SceneVMs.IndexOf(SceneVMs.Where(a=> a.Position == pos-1).FirstOrDefault());
-                      //SceneVMs.Move(i1, i2);
 
                       OnPropertyChanged("SceneVMs");
                       OnPropertyChanged("SelectedSceneVM");
 
                   }));
             }
+        }
+
+
+        public void SelectedSceneVMUpdate()
+        {
+
         }
 
         private RelayCommand clearScenesListCommand;
@@ -206,89 +225,6 @@ namespace LevelSetsEditor.ViewModel
                   }));
             }
         }
-
-        //public ObservableCollection<SceneVM> SceneVMs
-        //{
-        //    get { return sceneVMs; }
-        //    set { sceneVMs = value; OnPropertyChanged("SceneVMs"); }
-        //}
-
-
-        //public VideoInfoVM VideoInfoVM { get; set; }
-        //private VideoPlayerVM videoPlayerVM;
-
-        //private ObservableCollection<SceneVM> sceneVMs;
-        //private SceneVM selectedScene;
-
-
-        ////public LevelSetVM() // В этом конструкторе заполняем тестовыми данными свойства ойства...
-        ////{
-        ////    LevelSet = new Model.LevelSet();
-        ////    VideoInfoVM = new VideoInfoVM(LevelSet);
-        ////    sceneVMs = new ObservableCollection<SceneVM>();
-        ////    VideoPlayerVM = new VideoPlayerVM(this);
-        ////    PropertyChanged += LevelSetVM_PropertyChanged;
-        ////}
-
-        //public LevelVM(Level levelSet) // В этом конструкторе заполняем тестовыми данными свойства ойства...
-        //{
-        //    LevelSet = levelSet;
-        //    VideoInfoVM = new VideoInfoVM(LevelSet);
-        //    sceneVMs = new ObservableCollection<SceneVM>();
-        //    VideoPlayerVM = new VideoPlayerVM(this);
-        //    PropertyChanged += LevelSetVM_PropertyChanged;
-        //}
-
-        //private void LevelSetVM_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        //{
-        //    if (e.PropertyName == "SelectedSceneVM") // Надо бы как-то иначе это реализовать идиотизм какой-то...
-        //    {
-        //        selectedScene.UnitsCount = selectedScene.UnitsCount;
-        //        selectedScene.VideoSegment_Source = selectedScene.VideoSegment_Source;
-        //        selectedScene.VideoSegment_TimeBegin = selectedScene.VideoSegment_TimeBegin;
-        //        selectedScene.VideoSegment_TimeEnd = selectedScene.VideoSegment_TimeEnd;
-        //    }
-        //}
-
-
-
-        //public SceneVM SelectedSceneVM
-        //{
-        //    get { return selectedScene; }
-        //    set
-        //    {
-        //        selectedScene = value;
-        //        OnPropertyChanged("SelectedSceneVM");
-        //    }
-        //}
-
-        //public VideoPlayerVM VideoPlayerVM
-        //{
-        //    get { return videoPlayerVM; }
-        //    set { videoPlayerVM = value; OnPropertyChanged("VideoPlayerVM"); }
-        //}
-
-        //public VideoInfo VideoInfo
-        //{
-        //    get { return LevelSet.VideoInfo; }
-        //    set
-        //    {
-        //        LevelSet.VideoInfo = value;
-        //        OnPropertyChanged("VideoInfo");
-        //    }
-        //}
-
-
-
-        //public string Name
-        //{
-        //    get { return LevelSet.Name; }
-        //    set
-        //    {
-        //        LevelSet.Name = value;
-        //        OnPropertyChanged("Name");
-        //    }
-        //}
 
 
 
