@@ -114,7 +114,7 @@ namespace LevelSetsEditor
                 uris.Add(new Uri(vidInfo.PrevImagesUrl[i]));
 
             ViewModel.SelectedLevelVM.VideoInfoVM.PreviewVM.MultiplePrevSources = uris;
-            ViewModel.SelectedLevelVM.SegregateScenes();
+       //     ViewModel.SelectedLevelVM.SegregateScenes();
         }
 
 
@@ -132,6 +132,11 @@ namespace LevelSetsEditor
         }
 
         private void Button_Click_NEW_LVL(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void LevelViewDB_Loaded(object sender, RoutedEventArgs e)
         {
 
         }

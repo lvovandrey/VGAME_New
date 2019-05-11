@@ -22,6 +22,8 @@ namespace LevelSetsEditor.ViewModel
             _Level = level;
             _VideoInfoVM = new VideoInfoVM(_Level.VideoInfo);  //ВОт как надо - надо опираться на единую модель и не создавать новые представления в геттерах!!!
             _videoPlayerVM = videoPlayerVM;
+            SegregateTime = TimeSpan.FromSeconds(100);
+            SegregateCount = 5;
         }
 
         public string Name
@@ -64,7 +66,9 @@ namespace LevelSetsEditor.ViewModel
         public SceneVM SelectedSceneVM
         {
             get
-            { return _SelectedSceneVM; }
+            {
+                return _SelectedSceneVM;
+            }
             set
             {
                 _SelectedSceneVM = value;
@@ -75,7 +79,10 @@ namespace LevelSetsEditor.ViewModel
 
 
 
-
+        public TimeSpan _SegregateTime { get; set; }
+        public int _SegregateCount { get; set; }
+        public TimeSpan SegregateTime { get { return _SegregateTime; } set { _SegregateTime = value; OnPropertyChanged("SegregateTime"); } }
+        public int SegregateCount { get { return _SegregateCount; } set { _SegregateCount = value; OnPropertyChanged("SegregateCount"); } }
 
 
 
@@ -150,6 +157,7 @@ namespace LevelSetsEditor.ViewModel
                       _scenes.Clear();
                       _scenes = Tmp;
 
+                      SelectedSceneVM = SceneVMs.Last();
                       OnPropertyChanged("SceneVMs");
                       OnPropertyChanged("SelectedSceneVM");
                   }));
@@ -219,21 +227,49 @@ namespace LevelSetsEditor.ViewModel
                 return segregateScenesCommand ??
                   (segregateScenesCommand = new RelayCommand(obj =>
                   {
+
                       if (MessageBox.Show("Точно заменить все сцены?", "Замена всех сцен", MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.No) return;
-                      SegregateScenes();
+                      SegregateScenes(obj);
                       OnPropertyChanged("SceneVMs");
                   }));
             }
         }
 
 
-
-        public void SegregateScenes()
+        public void SegregateScenes(object parameter)
         {
-            _Level.SegregateScenes();
+            if (parameter == null)
+                _Level.SegregateScenes();
+            else if (parameter is TimeSpan) 
+                _Level.SegregateScenes(SegregateTime);
+            else if (parameter is int)
+                _Level.SegregateScenes(SegregateCount);
+
             OnPropertyChanged("SceneVMs");
 
         }
+
+        private RelayCommand splitScenesCommand;
+        public RelayCommand SplitScenesCommand
+        {
+            get
+            {
+                return splitScenesCommand ??
+                  (splitScenesCommand = new RelayCommand(obj =>
+                  {
+
+                      if (MessageBox.Show("Разделить сцену?", "Разделение сцены", MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.No) return;
+                      SplitScene(obj);
+                      OnPropertyChanged("SceneVMs");
+                  }));
+            }
+        }
+        private void SplitScene(object parameter)
+        {
+            if (parameter is TimeSpan)
+                _Level.SplitScene((TimeSpan)parameter);
+        }
+
 
         public void JoinYoutubeVideoInLevel(string YoutubeAddress)
         {

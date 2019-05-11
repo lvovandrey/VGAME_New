@@ -39,7 +39,7 @@
                     <lst:ListLevelsViewDB Grid.ColumnSpan="3" />
 
 
-                    <propview:LevelViewDB DataContext="{Binding SelectedLevelVM}" Grid.Column="3"/>
+                    <propview:LevelViewDB DataContext="{Binding SelectedLevelVM}" Grid.Column="3" Loaded="LevelViewDB_Loaded"/>
                 </Grid>
             </TabItem>
 
@@ -57,18 +57,18 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Grid.Column="1" >
-                        <Button Content="SegregScene" Height="30" Width="75"  Command="{Binding Path=AutoSegregateVideoToScenes}" Margin="5" />
-                    </StackPanel>
 
 
 
-                    <Grid>
+
+                    <Grid Grid.ColumnSpan="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50"/>
                             <ColumnDefinition Width="80"/>
                             <ColumnDefinition Width="80"/>
                             <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="25"/>
@@ -80,8 +80,25 @@
                         <Label Content="Врем.кон." Grid.Column="2" />
                         <Label Content="Название" Grid.Column="3" />
 
-                        <ListBox ItemsSource="{Binding Path=SceneVMs, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
-                SelectedItem="{Binding Path=SelectedSceneVM, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.ColumnSpan="4">
+
+                        <GroupBox x:Name="SelectedGroup" Header="sdfsdfsd" HorizontalAlignment="Stretch" Grid.Column="5" Grid.RowSpan="2" VerticalAlignment="Stretch" 
+                  DataContext="{Binding Path=SelectedSceneVM, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                            <StackPanel Orientation="Vertical" Height="373" Margin="0,0,0,-0.2" VerticalAlignment="Top">
+                                <propview:TimeWatcherView DataContext="{Binding VideoSegment_TimeBegin, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                                Command="{Binding ElementName=SelectedGroup,Path=DataContext.WheelTimeBeginCommand}" Tag="Начало" />
+                                <propview:TimeWatcherView DataContext="{Binding VideoSegment_TimeEnd, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  
+                                                  Command="{Binding ElementName=SelectedGroup,Path=DataContext.WheelTimeEndCommand}" Tag="Конец" Margin="0,10,0,0"/>
+                                <propview:CountWatcherView DataContext="{Binding UnitsCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                  Command="{Binding ElementName=SelectedGroup,Path=DataContext.WheelUnitsCommand}" Tag="Юнитов" Margin="0,10,0,0"/>
+                                <CheckBox Content="Track" VerticalAlignment="Center" Margin="5" 
+                          IsChecked="{Binding TrackTime, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                            </StackPanel>
+                        </GroupBox>
+
+
+
+                        <ListBox Name="SceneListBox" ItemsSource="{Binding Path=SceneVMs, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+                         SelectedItem="{Binding Path=SelectedSceneVM, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="1" Grid.ColumnSpan="4" IsSynchronizedWithCurrentItem="True">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
@@ -101,29 +118,29 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
-                        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="4">
+                        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="5">
                             <Button Width="20" Content="+" Margin="5" Command="{Binding AddSceneCommand}"/>
                             <Button Width="20" Content="-" Margin="5" Command="{Binding RemoveSceneCommand}"/>
-                            <Button Width="40" Content="Up" Margin="5" Command="{Binding UpSceneCommand}"/>
+                            <Button Width="40" Content="Up" Margin="5" Command="{Binding UpSceneCommand}" />
                             <Button Width="40" Content="Down" Margin="5" Command="{Binding DownSceneCommand}"/>
                             <Button Width="40" Content="Clear" Margin="5" Command="{Binding ClearScenesListCommand}"/>
                             <Button Width="40" Content="Auto" Margin="5" Command="{Binding SegregateScenesCommand}"/>
+
+                            <TextBox Name="SegregateTextBox" Margin="25,5,5,5" Width="60" Text="{Binding SegregateTime, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                            <Button Width="40" Content="AutoT" Margin="5" Command="{Binding SegregateScenesCommand}" CommandParameter="{Binding SegregateTime}"/>
+
+                            <TextBox Name="SegregateTextBox2" Margin="25,5,5,5" Width="60" Text="{Binding SegregateCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                            <Button Width="40" Content="AutoN" Margin="5" Command="{Binding SegregateScenesCommand}" CommandParameter="{Binding SegregateCount}"/>
+                            <Button Width="30" Margin="5" Command="{Binding SplitScenesCommand}" CommandParameter="{Binding ElementName=VideoPlayer, Path=CurTime}">
+                                <Image Source="icons/icon.png"/>
+                            </Button>
+
                         </StackPanel>
+
+
+
                     </Grid>
 
-                    <GroupBox x:Name="SelectedGroup" Header="Выбранный элемент" HorizontalAlignment="Stretch" Grid.Column="1" VerticalAlignment="Stretch" 
-                  DataContext="{Binding SelectedSceneVM, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
-                        <StackPanel Orientation="Vertical" Height="373" Margin="0,0,0,-0.2" VerticalAlignment="Top">
-                            <propview:TimeWatcherView DataContext="{Binding VideoSegment_TimeBegin, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
-                                                Command="{Binding ElementName=SelectedGroup,Path=DataContext.WheelTimeBeginCommand}" Tag="Начало" />
-                            <propview:TimeWatcherView DataContext="{Binding VideoSegment_TimeEnd, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  
-                                                  Command="{Binding ElementName=SelectedGroup,Path=DataContext.WheelTimeEndCommand}" Tag="Конец" Margin="0,10,0,0"/>
-                            <propview:CountWatcherView DataContext="{Binding UnitsCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                                  Command="{Binding ElementName=SelectedGroup,Path=DataContext.WheelUnitsCommand}" Tag="Юнитов" Margin="0,10,0,0"/>
-                            <CheckBox Content="Track" VerticalAlignment="Center" Margin="5" 
-                          IsChecked="{Binding TrackTime, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-                        </StackPanel>
-                    </GroupBox>
 
                     <GroupBox Header="Превью" x:Name="PreviewGroupBox"  DataContext="{Binding Path=VideoInfoVM}" Grid.Row="1" Grid.ColumnSpan="2" >
                         <propview:PreviewViewer DataContext="{Binding Path=PreviewVM}"></propview:PreviewViewer>

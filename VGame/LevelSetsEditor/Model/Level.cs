@@ -66,8 +66,81 @@ namespace LevelSetsEditor.Model
             return "someShit";
         }
 
+        /// <summary>
+        /// Разбивает видеозапись на сцены по равным отрезкам времени. Последний отрезок - по остаточному принципу (может быть коротеньким совсем)
+        /// </summary>
+        /// <param name="segrTime">Время одной сцены</param>
+        /// <returns></returns>
+        public string SegregateScenes(TimeSpan segrTime)
+        {
 
+            TimeSpan Dur = VideoInfo.Duration;
+            int NumScenes = (int)Math.Ceiling(VideoInfo.Duration.TotalMinutes / segrTime.TotalMinutes);
+            Scenes = new ObservableCollection<Scene>();
+            for (int i = 1; i <= NumScenes; i++)
+            {
+                Scene s = new Scene();
+                s.Position = i;
+                s.UnitsCount = i;
+                s.VideoSegment.TimeBegin = TimeSpan.FromSeconds((i - 1) * segrTime.TotalSeconds);
+                if (i < NumScenes)
+                    s.VideoSegment.TimeEnd = TimeSpan.FromSeconds(i * segrTime.TotalSeconds);
+                else
+                    s.VideoSegment.TimeEnd = VideoInfo.Duration - TimeSpan.FromSeconds(0.1);
+                s.VideoSegment.Source = VideoInfo.Source;
+                Scenes.Add(s);
+            }
 
+            return "someShit";
+        }
+
+        /// <summary>
+        /// Разбивает видеозапись заданное количество сцен с равной длительностью 
+        /// </summary>
+        /// <param name="scenesCount">Нужное количество сцен</param>
+        /// <returns></returns>
+        public string SegregateScenes(int scenesCount)
+        {
+
+            TimeSpan Dur = VideoInfo.Duration;
+            TimeSpan segrTime = TimeSpan.FromSeconds((Dur.TotalSeconds - 0.1)/ scenesCount);
+
+            int NumScenes = scenesCount;
+            Scenes = new ObservableCollection<Scene>();
+            for (int i = 1; i <= NumScenes; i++)
+            {
+                Scene s = new Scene();
+                s.Position = i;
+                s.UnitsCount = i;
+                s.VideoSegment.TimeBegin = TimeSpan.FromSeconds((i - 1) * segrTime.TotalSeconds);
+                if (i < NumScenes)
+                    s.VideoSegment.TimeEnd = TimeSpan.FromSeconds(i * segrTime.TotalSeconds);
+                else
+                    s.VideoSegment.TimeEnd = VideoInfo.Duration;
+                s.VideoSegment.Source = VideoInfo.Source;
+                Scenes.Add(s);
+            }
+
+            return "someShit";
+        }
+
+        /// <summary>
+        /// Разделение сцены на 2 части по времени указанному в параметере
+        /// </summary>
+        /// <param name="parameter">Время разделения сцен</param>
+        public void SplitScene(TimeSpan splitTime)
+        {
+            foreach(Scene s in Scenes)
+            {
+                if ((s.VideoSegment.TimeBegin<splitTime) && (s.VideoSegment.TimeEnd>splitTime))
+                {
+                    Scene newS =new Scene();
+                    newS.VideoSegment
+
+                }
+
+            }
+        }
 
 
         public void JoinYoutubeVideoInLevel(string YoutubeAddress)
@@ -151,6 +224,7 @@ namespace LevelSetsEditor.Model
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
+
         #endregion
     }
 }

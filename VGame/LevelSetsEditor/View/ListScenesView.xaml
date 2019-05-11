@@ -22,7 +22,7 @@
                 <Label Content="Название" Grid.Column="3" FontSize="11"/>
             </Grid>
             <ListBox ItemsSource="{Binding Path=SceneVMs, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" MaxHeight="200" 
-                SelectedItem="{Binding Path=SelectedSceneVM}" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" >
+                SelectedItem="{Binding Path=SelectedSceneVM, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid  ShowGridLines="True">
