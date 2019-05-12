@@ -14,12 +14,10 @@
             <Grid >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
 
 
-                <TextBox Text="{Binding ElementName=ThisView, Path=DataContext, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay, StringFormat=hh\\:mm\\:ss\\.ff}" MinWidth="100"  TextAlignment="Center"  FontSize="22">
+                <TextBox Text="{Binding ElementName=ThisView, Path=DataContext, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay, StringFormat=hh\\:mm\\:ss\\.f}" MinWidth="100"  TextAlignment="Center"  FontSize="22">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseWheel" >
                             <cmd:InvokeCommandAction Command="{Binding ElementName=ThisView, Path=Command}" />

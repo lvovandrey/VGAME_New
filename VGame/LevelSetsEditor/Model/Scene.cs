@@ -22,11 +22,14 @@ namespace LevelSetsEditor.Model
         [NotMapped]
         private int _UnitsCount { get; set; }
         [NotMapped]
+        private int _TasksCount { get; set; }
+        [NotMapped]
         private int _Position { get; set; }
 
 
         public VideoSegment VideoSegment { get { return _VideoSegment; } set { _VideoSegment = value; OnPropertyChanged("VideoSegment"); } }
         public int UnitsCount { get { return _UnitsCount; } set { _UnitsCount = value; OnPropertyChanged("UnitsCount"); } }
+        public int TasksCount { get { return _TasksCount; } set { _TasksCount = value; OnPropertyChanged("TasksCount"); } }
         public int Position { get { return _Position; } set { _Position = value; OnPropertyChanged("Position"); } }
 
 

@@ -83,6 +83,19 @@ namespace LevelSetsEditor.ViewModel
             }
         }
 
+        public int TasksCount
+        {
+            get
+            {
+                return scene.TasksCount;
+            }
+            set
+            {
+                scene.TasksCount = value;
+                OnPropertyChanged("TasksCount");
+            }
+        }
+
         public int Position
         {
             get
@@ -170,6 +183,25 @@ namespace LevelSetsEditor.ViewModel
                 });
             }
         }
+
+        public DelegateCommand<MouseWheelEventArgs> WheelTasksCommand
+        {
+            get
+            {
+                return new DelegateCommand<MouseWheelEventArgs>(args =>
+                {
+                    if (args.Delta > 0)
+                    {
+                        TasksCount += 1;
+                    }
+                    if (args.Delta < 0)
+                    {
+                        TasksCount -= 1;
+                    }
+                });
+            }
+        }
+
 
         #region mvvm
         public event PropertyChangedEventHandler PropertyChanged;

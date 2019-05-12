@@ -64,8 +64,9 @@
                     <Grid Grid.ColumnSpan="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50"/>
-                            <ColumnDefinition Width="80"/>
-                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="60"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="2*"/>
 
@@ -76,20 +77,23 @@
                             <RowDefinition Height="40"/>
                         </Grid.RowDefinitions>
                         <Label Content="Юнитов"/>
-                        <Label Content="Врем.нач." Grid.Column="1"/>
-                        <Label Content="Врем.кон." Grid.Column="2" />
-                        <Label Content="Название" Grid.Column="3" />
+                        <Label Content="Заданий" Grid.Column="1"/>
+                        <Label Content="Врем.нач." Grid.Column="2"/>
+                        <Label Content="Врем.кон." Grid.Column="3" />
+                        <Label Content="Название" Grid.Column="4" />
 
 
-                        <GroupBox x:Name="SelectedGroup" Header="sdfsdfsd" HorizontalAlignment="Stretch" Grid.Column="5" Grid.RowSpan="2" VerticalAlignment="Stretch" 
+                        <GroupBox x:Name="SelectedGroup" Header="Сцена" HorizontalAlignment="Stretch" Grid.Column="6" Grid.RowSpan="2" VerticalAlignment="Stretch" 
                   DataContext="{Binding Path=SelectedSceneVM, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
-                            <StackPanel Orientation="Vertical" Height="373" Margin="0,0,0,-0.2" VerticalAlignment="Top">
+                            <StackPanel Orientation="Vertical" Height="373" VerticalAlignment="Top">
                                 <propview:TimeWatcherView DataContext="{Binding VideoSegment_TimeBegin, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
-                                                Command="{Binding ElementName=SelectedGroup,Path=DataContext.WheelTimeBeginCommand}" Tag="Начало" />
+                                                Command="{Binding ElementName=SelectedGroup,Path=DataContext.WheelTimeBeginCommand}" Tag="Начало" HorizontalAlignment="Stretch" />
                                 <propview:TimeWatcherView DataContext="{Binding VideoSegment_TimeEnd, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  
                                                   Command="{Binding ElementName=SelectedGroup,Path=DataContext.WheelTimeEndCommand}" Tag="Конец" Margin="0,10,0,0"/>
                                 <propview:CountWatcherView DataContext="{Binding UnitsCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                   Command="{Binding ElementName=SelectedGroup,Path=DataContext.WheelUnitsCommand}" Tag="Юнитов" Margin="0,10,0,0"/>
+                                <propview:CountWatcherView DataContext="{Binding TasksCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                  Command="{Binding ElementName=SelectedGroup,Path=DataContext.WheelTasksCommand}" Tag="Заданий" Margin="0,10,0,0"/>
                                 <CheckBox Content="Track" VerticalAlignment="Center" Margin="5" 
                           IsChecked="{Binding TrackTime, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                             </StackPanel>
@@ -98,27 +102,29 @@
 
 
                         <ListBox Name="SceneListBox" ItemsSource="{Binding Path=SceneVMs, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
-                         SelectedItem="{Binding Path=SelectedSceneVM, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="1" Grid.ColumnSpan="4" IsSynchronizedWithCurrentItem="True">
+                         SelectedItem="{Binding Path=SelectedSceneVM, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="1" Grid.ColumnSpan="5" IsSynchronizedWithCurrentItem="True">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="50"/>
-                                            <ColumnDefinition Width="80"/>
-                                            <ColumnDefinition Width="80"/>
+                                            <ColumnDefinition Width="60"/>
+                                            <ColumnDefinition Width="60"/>
+                                            <ColumnDefinition Width="60"/>
                                             <ColumnDefinition/>
 
                                         </Grid.ColumnDefinitions>
                                         <Label Content="{Binding UnitsCount, UpdateSourceTrigger=PropertyChanged}"  Grid.Column="0"/>
-                                        <Label Content="{Binding VideoSegment_TimeBegin, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
-                                        <Label Content="{Binding VideoSegment_TimeEnd, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" />
-                                        <Label Content="{Binding VideoSegment_Source, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Grid.Column="3" />
+                                        <Label Content="{Binding TasksCount, UpdateSourceTrigger=PropertyChanged}"  Grid.Column="1"/>
+                                        <Label Content="{Binding VideoSegment_TimeBegin, UpdateSourceTrigger=PropertyChanged}" ContentStringFormat="{}{0:hh':'mm':'ss}" Grid.Column="2"/>
+                                        <Label Content="{Binding VideoSegment_TimeEnd, UpdateSourceTrigger=PropertyChanged}" ContentStringFormat="{}{0:hh':'mm':'ss}" Grid.Column="3" />
+                                        <Label Content="{Binding ElementName=TabItemEditor, Path=DataContext.VideoInfoVM.Title, UpdateSourceTrigger=PropertyChanged}" Grid.Column="4" />
 
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
-                        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="5">
+                        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="6">
                             <Button Width="20" Content="+" Margin="5" Command="{Binding AddSceneCommand}"/>
                             <Button Width="20" Content="-" Margin="5" Command="{Binding RemoveSceneCommand}"/>
                             <Button Width="40" Content="Up" Margin="5" Command="{Binding UpSceneCommand}" />
