@@ -162,6 +162,12 @@ namespace LevelSetsEditor.View.VideoPlayerMVVM
         {
 
         }
+
+        public void pause()
+        {
+            if (vlc.MediaPlayer.IsPlaying) vlc.MediaPlayer.Pause();
+        }
+
         private void PlayBtn_Click_1(object sender, RoutedEventArgs e)
         {
             if (vlc.MediaPlayer.IsPlaying) vlc.MediaPlayer.Pause();

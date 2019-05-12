@@ -131,7 +131,7 @@
 
                             <TextBox Name="SegregateTextBox2" Margin="25,5,5,5" Width="60" Text="{Binding SegregateCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                             <Button Width="40" Content="AutoN" Margin="5" Command="{Binding SegregateScenesCommand}" CommandParameter="{Binding SegregateCount}"/>
-                            <Button Width="30" Margin="5" Command="{Binding SplitScenesCommand}" CommandParameter="{Binding ElementName=VideoPlayer, Path=CurTime}">
+                            <Button Name="SplitScene" Width="30" Margin="5" Command="{Binding SplitScenesCommand}" CommandParameter="{Binding ElementName=VideoPlayer, Path=CurTime}" Click="SplitScene_Click" >
                                 <Image Source="icons/icon.png"/>
                             </Button>
 
@@ -166,6 +166,7 @@
                                 <propview:PropertyViewer x:Name="PropViewTitle" DataContext="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Название"/>
                                 <propview:PropertyViewer  DataContext="{Binding Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Описание"/>
                                 <propview:PropertyViewer  DataContext="{Binding Duration, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Длительность"/>
+                                <propview:PropertyViewer  DataContext="{Binding Address, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="URL"/>
                                 <propview:PropertyViewer  DataContext="{Binding Source, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Источник"/>
                                 <propview:PropertyViewer  DataContext="{Binding Type,  UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Тип видео"/>
                                 <propview:PropertyViewer  DataContext="{Binding Resolution, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Разрешение" Margin="0,0,0,50"/>

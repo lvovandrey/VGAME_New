@@ -37,6 +37,12 @@ namespace LevelSetsEditor.Model
             {
                 SourceDb = value.ToString();
                 OnPropertyChanged("Source");
+                //проверим изменился ли тип ссылки на 
+                PreviewType newType=Type;
+                if ((value.ToString().Contains("youtube.com"))&& (value.ToString().StartsWith("http"))) { newType = PreviewType.youtube; }
+                else if (value.ToString().StartsWith("http")) { newType = PreviewType.net; }
+                else if (value.ToString().StartsWith("file")) { newType = PreviewType.local; }
+                if (newType != Type) { Type = newType; OnPropertyChanged("Type"); }
             }
         }
         [Column("Source")]

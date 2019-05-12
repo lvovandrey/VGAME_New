@@ -25,7 +25,7 @@ namespace LevelSetsEditor.ViewModel
         public Uri Source
         {
             get { return _Preview.Source; }
-            set { _Preview.Source = value; OnPropertyChanged("Source"); }
+            set { _Preview.Source = value; OnPropertyChanged("Source"); OnPropertyChanged("Type"); }
         }
 
         public System.Drawing.Size Size

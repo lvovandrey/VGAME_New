@@ -130,18 +130,44 @@ namespace LevelSetsEditor.Model
         /// <param name="parameter">Время разделения сцен</param>
         public void SplitScene(TimeSpan splitTime)
         {
-            foreach(Scene s in Scenes)
+            foreach (Scene s in _Scenes)
             {
-                if ((s.VideoSegment.TimeBegin<splitTime) && (s.VideoSegment.TimeEnd>splitTime))
+                if ((s.VideoSegment.TimeBegin < splitTime) && (s.VideoSegment.TimeEnd > splitTime))
                 {
-                    Scene newS =new Scene();
-                    newS.VideoSegment
+                    Scene newS = new Scene();
+                    s.Copy(newS);
 
+                    newS.VideoSegment.TimeBegin = splitTime;
+                    s.VideoSegment.TimeEnd = splitTime;
+
+                    ObservableCollection<Scene> newScenes = new ObservableCollection<Scene>();
+                   
+                    foreach (Scene ss in _Scenes)
+                    {
+
+                        if (ss.Equals(s))
+                        {
+                            newScenes.Add(ss);
+                            newScenes.Add(newS);
+                        }
+                        else
+                        {
+                            newScenes.Add(ss);
+                        }
+                    }
+                    _Scenes.Clear();
+                    _Scenes = newScenes;
+                    break;
                 }
 
             }
+            //приводим в порядок очередность сцен
+            int pos = 0;
+            foreach (Scene s in _Scenes)
+            {
+                pos++; s.Position = pos;
+            }
         }
-
 
         public void JoinYoutubeVideoInLevel(string YoutubeAddress)
         {

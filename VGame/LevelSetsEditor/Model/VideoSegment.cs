@@ -78,6 +78,23 @@ namespace LevelSetsEditor.Model
         public string GameInfo5 { get { return _GameInfo1; } set { _GameInfo1 = value; OnPropertyChanged("GameInfo1"); } }
         #endregion
 
+        /// <summary>
+        /// Копирует состояние данного объекта VideoSegment в объект передаваемый в аргументе
+        /// </summary>
+        /// <param name="videoSegment">Объект куда копируются данные</param>
+        public void Copy(VideoSegment videoSegment)
+        {
+            videoSegment.timeBegin = this.timeBegin;
+            videoSegment.timeEnd = this.timeEnd;
+            videoSegment.SourceDb = this.SourceDb;
+
+            videoSegment._GameInfo1 = this._GameInfo1;
+            videoSegment._GameInfo2 = this._GameInfo2;
+            videoSegment._GameInfo3 = this._GameInfo3;
+            videoSegment._GameInfo4 = this._GameInfo4;
+            videoSegment._GameInfo5 = this._GameInfo5;
+        }
+
         #region mvvm
         public event PropertyChangedEventHandler PropertyChanged;
 
