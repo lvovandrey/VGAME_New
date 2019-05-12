@@ -22,6 +22,8 @@ using System.IO;
 using LevelSetsEditor.DB;
 using LevelSetsEditor.Model;
 using System.Collections.ObjectModel;
+using System.Threading;
+using LevelSetsEditor.View;
 
 namespace LevelSetsEditor
 {
@@ -141,6 +143,24 @@ namespace LevelSetsEditor
 
         }
 
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            Thread newWindowThread = new Thread(new ThreadStart(ThreadStartingPoint));
+            newWindowThread.SetApartmentState(ApartmentState.STA);
+            newWindowThread.IsBackground = true;
+            newWindowThread.Start();
+        }
+
+        WindowProgress tempWindow;
+        private void ThreadStartingPoint()
+        {
+            tempWindow = new WindowProgress();
+            tempWindow.Show();
+            System.Windows.Threading.Dispatcher.Run();
+        }
+
+
+
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
 
@@ -149,6 +169,17 @@ namespace LevelSetsEditor
         private void SplitScene_Click(object sender, RoutedEventArgs e)
         {
             VideoPlayer.pause();
+        }
+
+
+        static object locker = new object();
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+            lock (tempWindow)
+            {
+
+                tempWindow.ProgressBar.Value += 10;
+            }
         }
     }
 }
