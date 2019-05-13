@@ -1,5 +1,6 @@
 ﻿using LevelSetsEditor.DB;
 using LevelSetsEditor.Model;
+using LevelSetsEditor.Tools;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -180,7 +181,7 @@ namespace LevelSetsEditor.ViewModel
                 return loadDBCommand ??
                   (loadDBCommand = new RelayCommand(obj =>
                   {
-                      bool res = DBTools.loadDB(this, _levels, context);
+                      bool res = DBTools.LoadDB(this, _levels, context,(IInfoUI)mainWindow.windowProgress);
                       if (!res)
                       {
                           MessageBox.Show("Ошибка загрузки базы данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);

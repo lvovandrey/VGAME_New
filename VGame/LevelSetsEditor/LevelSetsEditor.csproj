@@ -160,6 +160,7 @@
     <Compile Include="DB\Context.cs" />
     <Compile Include="DB\DBTools.cs" />
     <Compile Include="Model\WebBrowserModel.cs" />
+    <Compile Include="Tools\IInfoUI.cs" />
     <Compile Include="Tools\ToolsTimer.cs" />
     <Compile Include="ViewModel\LevelVM.cs" />
     <Compile Include="ViewModel\ListScenesViewModel.cs" />

@@ -1,4 +1,5 @@
 ﻿using LevelSetsEditor.Model;
+using LevelSetsEditor.Tools;
 using LevelSetsEditor.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -11,11 +12,13 @@ namespace LevelSetsEditor.DB
 {
     public class DBTools
     {
-        public static bool loadDB(VM vm,  ObservableCollection<Level> _levels, Context context)
+        public static bool LoadDB(VM vm,  ObservableCollection<Level> _levels, Context context, IInfoUI infoUI)
         {
+            
             bool error = false;
             try
             {
+                infoUI.Progress = 10;
                 _levels = new ObservableCollection<Level>();
 
                 context = new Context();
@@ -31,11 +34,17 @@ namespace LevelSetsEditor.DB
 
                 IEnumerable<VideoSegment> Vss = context.VideoSegments.OfType<VideoSegment>().Where(n => n.Id < 1000);
                 List<VideoSegment> VssList = Vss.ToList();
+                infoUI.Progress = 20;
 
+                int levNumber = 0;
+                int levCount = 1;
                 ////То же самое с помощью операции OfType
                 IEnumerable<Level> LLL = context.Levels.OfType<Level>().Where(n => n.Id < 1000);
+                levCount = LLL.Count();
                 foreach (Level l in LLL)
                 {
+                    levNumber++;
+                    infoUI.Progress = 100*levNumber /levCount;
                     l.VideoInfo = VList.Where(n => n.Id == l.VideoInfoId).FirstOrDefault();
                     l.VideoInfo.Preview = PList.Where(n => n.Id == l.VideoInfo.PreviewId).FirstOrDefault();
                     var newScenes = l.Scenes.OrderBy(i => i.Position);
@@ -59,13 +68,20 @@ namespace LevelSetsEditor.DB
                 }
 
                 vm.init(_levels, context);
+                infoUI.Close();
             }
             catch
             {
                 error = true;
+                infoUI.Close();
             }
             return !error;
         }
 
+        public static bool loadDB(VM vm, ObservableCollection<Level> _levels, Context context)
+        {
+            IInfoUI emptyInfoUI = new EmptyInfoUi();
+            return LoadDB(vm, _levels, context, emptyInfoUI);
+        }
     }
 }

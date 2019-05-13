@@ -151,11 +151,11 @@ namespace LevelSetsEditor
             newWindowThread.Start();
         }
 
-        WindowProgress tempWindow;
+        public WindowProgress windowProgress;
         private void ThreadStartingPoint()
         {
-            tempWindow = new WindowProgress();
-            tempWindow.Show();
+            windowProgress = new WindowProgress();
+            windowProgress.Show();
             System.Windows.Threading.Dispatcher.Run();
         }
 
@@ -172,14 +172,10 @@ namespace LevelSetsEditor
         }
 
 
-        static object locker = new object();
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
-            lock (tempWindow)
-            {
-
-                tempWindow.ProgressBar.Value += 10;
-            }
+            //int progress = windowProgress.Progress;
+            //windowProgress.Progress = progress+10;
         }
     }
 }
