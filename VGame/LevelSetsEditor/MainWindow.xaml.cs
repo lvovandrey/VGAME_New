@@ -49,6 +49,8 @@ namespace LevelSetsEditor
             GridBrowser.DataContext = WebBrowserVM;
             mainWindow = this;
 
+            StartWindowInfo();
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -143,19 +145,20 @@ namespace LevelSetsEditor
 
         }
 
-        private void Button_Click_4(object sender, RoutedEventArgs e)
+
+
+        private void StartWindowInfo()
         {
             Thread newWindowThread = new Thread(new ThreadStart(ThreadStartingPoint));
             newWindowThread.SetApartmentState(ApartmentState.STA);
             newWindowThread.IsBackground = true;
             newWindowThread.Start();
         }
-
         public WindowProgress windowProgress;
         private void ThreadStartingPoint()
         {
             windowProgress = new WindowProgress();
-            windowProgress.Show();
+            windowProgress.Hide();
             System.Windows.Threading.Dispatcher.Run();
         }
 
@@ -172,10 +175,5 @@ namespace LevelSetsEditor
         }
 
 
-        private void Button_Click_5(object sender, RoutedEventArgs e)
-        {
-            //int progress = windowProgress.Progress;
-            //windowProgress.Progress = progress+10;
-        }
     }
 }

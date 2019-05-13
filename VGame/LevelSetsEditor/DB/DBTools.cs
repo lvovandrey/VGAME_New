@@ -14,11 +14,11 @@ namespace LevelSetsEditor.DB
     {
         public static bool LoadDB(VM vm,  ObservableCollection<Level> _levels, Context context, IInfoUI infoUI)
         {
-            
+            if (infoUI == null) infoUI = new EmptyInfoUi();
             bool error = false;
             try
             {
-                infoUI.Progress = 10;
+                SetInfoUI(infoUI);
                 _levels = new ObservableCollection<Level>();
 
                 context = new Context();
@@ -34,17 +34,17 @@ namespace LevelSetsEditor.DB
 
                 IEnumerable<VideoSegment> Vss = context.VideoSegments.OfType<VideoSegment>().Where(n => n.Id < 1000);
                 List<VideoSegment> VssList = Vss.ToList();
-                infoUI.Progress = 20;
 
                 int levNumber = 0;
                 int levCount = 1;
-                ////То же самое с помощью операции OfType
                 IEnumerable<Level> LLL = context.Levels.OfType<Level>().Where(n => n.Id < 1000);
                 levCount = LLL.Count();
+
                 foreach (Level l in LLL)
                 {
                     levNumber++;
-                    infoUI.Progress = 100*levNumber /levCount;
+                    infoUI.Progress = 100*levNumber /levCount; infoUI.Message = "Загрузка " + infoUI.Progress.ToString() + "%";
+
                     l.VideoInfo = VList.Where(n => n.Id == l.VideoInfoId).FirstOrDefault();
                     l.VideoInfo.Preview = PList.Where(n => n.Id == l.VideoInfo.PreviewId).FirstOrDefault();
                     var newScenes = l.Scenes.OrderBy(i => i.Position);
@@ -68,12 +68,14 @@ namespace LevelSetsEditor.DB
                 }
 
                 vm.init(_levels, context);
-                infoUI.Close();
+                infoUI.Hide();
             }
             catch
             {
                 error = true;
-                infoUI.Close();
+                infoUI.Clear();
+                infoUI.Hide();
+
             }
             return !error;
         }
@@ -82,6 +84,16 @@ namespace LevelSetsEditor.DB
         {
             IInfoUI emptyInfoUI = new EmptyInfoUi();
             return LoadDB(vm, _levels, context, emptyInfoUI);
+        }
+
+        private static void SetInfoUI(IInfoUI infoUI)
+        {
+            infoUI.Clear();
+            infoUI.Title = "Загрузка БД";
+            infoUI.Progress = 0;
+            infoUI.Message = "Загрузка ...%";
+            infoUI.Show();
+            
         }
     }
 }

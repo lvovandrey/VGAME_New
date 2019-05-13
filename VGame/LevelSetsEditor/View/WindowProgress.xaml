@@ -5,12 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LevelSetsEditor.View"
         mc:Ignorable="d"
-        Title="Title" Height="145" Width="300">
+       
+        Title="Title" Height="120" Width="300" Closing="Window_Closing" WindowStyle="ToolWindow" WindowStartupLocation="CenterOwner" SizeToContent="WidthAndHeight" ResizeMode="NoResize" ShowInTaskbar="False" Cursor="Wait" >
     <Grid>
-        <StackPanel>
-            <ProgressBar Value="50" Name="ProgressBar" Height="30"/>
-            <Label Content="Message" Name="LabelMessage" Height="30" HorizontalAlignment="Center"/>
-            <Button Content="Command" Name="ButtonCommand" Height="30" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        <StackPanel Margin="5">
+            <ProgressBar Value="50" Name="ProgressBar" Height="30" Width="250"/>
+            <Label Content="Message" Name="LabelMessage" HorizontalAlignment="Center"/>
+            <Button Content="Command" Name="ButtonCommand"  HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
         </StackPanel>
     </Grid>
 </Window>

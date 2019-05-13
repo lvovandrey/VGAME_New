@@ -9,12 +9,15 @@ namespace LevelSetsEditor.Tools
     public interface IInfoUI
     {
         void Close();
+        void Show();
         void Hide();
         void Clear();
      
         int Progress { get; set; }
         string Title { get; set; }
         string Message { get; set; }
+        bool IsHaveCommand { get; set; }
+
 
         void Command(Action command, Action completed, string name);
         void InvokeCommand();
@@ -25,6 +28,7 @@ namespace LevelSetsEditor.Tools
         public int Progress { get; set; }
         public string Title { get; set; }
         public string Message { get; set; }
+        public bool IsHaveCommand { get; set; }
 
         public void Clear()
         {
@@ -49,6 +53,11 @@ namespace LevelSetsEditor.Tools
         public void InvokeCommand()
         {
            
+        }
+
+        public void Show()
+        {
+            
         }
     }
 

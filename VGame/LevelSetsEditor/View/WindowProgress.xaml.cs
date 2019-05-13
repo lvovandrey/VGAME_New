@@ -38,16 +38,28 @@ namespace LevelSetsEditor.View
 
         void IInfoUI.Close()
         {
-            Dispatcher.Invoke(() => { this.Close(); });
+            Dispatcher.Invoke(() => { MessageBox.Show("Это окошко может закрыть только пользователь или программа"); });
         }
 
         Action Command;
+        bool IInfoUI.IsHaveCommand
+        {
+            get
+            {
+                bool res = false;
+                Dispatcher.Invoke(() => { res = (Command != null); });
+                return res;
+            }
+            set { }
+        }
+
         void IInfoUI.Command(Action command, Action completed, string name)
         {
             Dispatcher.Invoke(() =>
             {
                 Command = command;
                 ButtonCommand.Content = name;
+                ButtonCommand.Visibility = Visibility.Visible;
             });
         }
 
@@ -59,9 +71,37 @@ namespace LevelSetsEditor.View
             });
         }
 
-        public void Clear()
+        void IInfoUI.Hide()
         {
-           
+            Dispatcher.Invoke(() =>
+            {
+                this.Topmost = false;
+                this.Hide();
+
+            });
+        }
+
+        void IInfoUI.Clear()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                this.Title = "";
+                this.LabelMessage.Content = "";
+                this.ButtonCommand.Content = "";
+                ButtonCommand.Visibility = Visibility.Collapsed;
+                Command = null;
+            });
+        }
+
+        void IInfoUI.Show()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                this.Topmost = true;
+               // this.Hide();
+                this.Show();
+               // this.Focus();
+            });
         }
 
         string IInfoUI.Title
@@ -83,6 +123,11 @@ namespace LevelSetsEditor.View
                 return message;
             }
             set => Dispatcher.Invoke(() => { LabelMessage.Content = value; });
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
         }
     }
 }
