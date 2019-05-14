@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 
 namespace LevelSetsEditor.DB
 {
@@ -19,7 +20,7 @@ namespace LevelSetsEditor.DB
             try
             {
                 SetInfoUI(infoUI);
-                Speaker.Speak("Подождите! База данных загружается.");
+                Speaker.Speak("Загрузка");
                 _levels = new ObservableCollection<Level>();
 
                 context = new Context();
