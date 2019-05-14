@@ -22,7 +22,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-
+            <TextBox Name="txtSpeak" Width=" 300"/>
+            <Button Content="Читать" Click="Button_Click_4" />
             <Label  Content="{Binding SelectedLevelVM.Name}" FontWeight="Black" FontSize="16"/>
             <Label  Content="  -  " FontWeight="Black" FontSize="16"/>
             <Label  Content="{Binding SelectedLevelVM.VideoInfoVM.Title}" FontWeight="Black" FontSize="16"/>

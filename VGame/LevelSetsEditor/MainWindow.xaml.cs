@@ -24,6 +24,7 @@ using LevelSetsEditor.Model;
 using System.Collections.ObjectModel;
 using System.Threading;
 using LevelSetsEditor.View;
+using LevelSetsEditor.Tools;
 
 namespace LevelSetsEditor
 {
@@ -177,6 +178,11 @@ namespace LevelSetsEditor
         private void MAINWINDOW_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
            
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            Speaker.Speak(txtSpeak.Text);
         }
     }
 }
