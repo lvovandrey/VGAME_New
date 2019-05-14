@@ -24,13 +24,13 @@ namespace LevelSetsEditor.View
         {
             InitializeComponent();
         }
-               
+
         int IInfoUI.Progress
         {
             get
             {
-                int progress=0;
-                Dispatcher.Invoke(() => {progress = (int)ProgressBar.Value; });
+                int progress = 0;
+                Dispatcher.Invoke(() => { progress = (int)ProgressBar.Value; });
                 return progress;
             }
             set { Dispatcher.Invoke(() => { ProgressBar.Value = value; }); }
@@ -98,9 +98,9 @@ namespace LevelSetsEditor.View
             Dispatcher.Invoke(() =>
             {
                 this.Topmost = true;
-               // this.Hide();
+                // this.Hide();
                 this.Show();
-               // this.Focus();
+                // this.Focus();
             });
         }
 
@@ -108,7 +108,7 @@ namespace LevelSetsEditor.View
         {
             get
             {
-                string title="";
+                string title = "";
                 Dispatcher.Invoke(() => { title = this.Title; });
                 return title;
             }
@@ -125,9 +125,15 @@ namespace LevelSetsEditor.View
             set => Dispatcher.Invoke(() => { LabelMessage.Content = value; });
         }
 
+        class closeflag
+        {
+
+        }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            e.Cancel = true;
+            if (sender is closeflag) e.Cancel = false;
+            else e.Cancel = true;
         }
+
     }
 }

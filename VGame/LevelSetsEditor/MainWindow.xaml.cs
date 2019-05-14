@@ -174,6 +174,9 @@ namespace LevelSetsEditor
             VideoPlayer.pause();
         }
 
-
+        private void MAINWINDOW_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+           
+        }
     }
 }

@@ -85,6 +85,10 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Speech, Version=11.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Windows\assembly\GAC_MSIL\Microsoft.Speech\11.0.0.0__31bf3856ad364e35\Microsoft.Speech.dll</HintPath>
+    </Reference>
     <Reference Include="Prism, Version=7.1.0.431, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Core.7.1.0.431\lib\net45\Prism.dll</HintPath>
     </Reference>
@@ -161,6 +165,7 @@
     <Compile Include="DB\DBTools.cs" />
     <Compile Include="Model\WebBrowserModel.cs" />
     <Compile Include="Tools\IInfoUI.cs" />
+    <Compile Include="Tools\Speaker.cs" />
     <Compile Include="Tools\ToolsTimer.cs" />
     <Compile Include="ViewModel\LevelVM.cs" />
     <Compile Include="ViewModel\ListScenesViewModel.cs" />
