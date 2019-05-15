@@ -1,3 +1,4 @@
+using LevelSetsEditor.Tools;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -196,7 +197,9 @@ namespace LevelSetsEditor.Model
 
 
             this.VideoInfo.Preview.Source = new Uri(vidInfo.ImageUrl);
-            this.VideoInfo.Preview.Size = new System.Drawing.Size(480, 360);
+            
+            this.VideoInfo.Preview.Size = PictHelper.GetPictureSize(this.VideoInfo.Preview.Source);
+            //this.VideoInfo.Preview.Size =  new System.Drawing.Size(480, 360);
 
             this.VideoInfo.Preview.Type = PreviewType.youtube;
             ObservableCollection<Uri> uris = new ObservableCollection<Uri>();

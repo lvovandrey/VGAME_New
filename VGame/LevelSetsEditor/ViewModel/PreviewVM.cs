@@ -25,7 +25,7 @@ namespace LevelSetsEditor.ViewModel
         public Uri Source
         {
             get { return _Preview.Source; }
-            set { _Preview.Source = value; OnPropertyChanged("Source"); OnPropertyChanged("Type"); }
+            set { _Preview.Source = value; OnPropertyChanged("Source"); OnPropertyChanged("Type"); OnPropertyChanged("Size"); }
         }
 
         public System.Drawing.Size Size
@@ -131,6 +131,8 @@ namespace LevelSetsEditor.ViewModel
                         openFileDialog.Title = "Открыть свое изображение для превью видео";
                         if (openFileDialog.ShowDialog() == true)
                             Source = new Uri(@openFileDialog.FileName);
+                    
+
                     }));
             }
         }

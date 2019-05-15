@@ -165,6 +165,7 @@
     <Compile Include="DB\DBTools.cs" />
     <Compile Include="Model\WebBrowserModel.cs" />
     <Compile Include="Tools\IInfoUI.cs" />
+    <Compile Include="Tools\PictHelper.cs" />
     <Compile Include="Tools\Speaker.cs" />
     <Compile Include="Tools\ToolsTimer.cs" />
     <Compile Include="ViewModel\LevelVM.cs" />

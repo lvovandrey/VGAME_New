@@ -1,3 +1,4 @@
+using LevelSetsEditor.Tools;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -38,11 +39,18 @@ namespace LevelSetsEditor.Model
                 SourceDb = value.ToString();
                 OnPropertyChanged("Source");
                 //проверим изменился ли тип ссылки на 
-                PreviewType newType=Type;
-                if ((value.ToString().Contains("youtube.com"))&& (value.ToString().StartsWith("http"))) { newType = PreviewType.youtube; }
+                PreviewType newType = Type;
+                if ((value.ToString().Contains("youtube.com")) && (value.ToString().StartsWith("http"))) { newType = PreviewType.youtube; }
                 else if (value.ToString().StartsWith("http")) { newType = PreviewType.net; }
                 else if (value.ToString().StartsWith("file")) { newType = PreviewType.local; }
                 if (newType != Type) { Type = newType; OnPropertyChanged("Type"); }
+
+                //пересчитаем превью
+                if ((SourceDb == "http://localhost/") && (SourceDb == "")) { Size = new System.Drawing.Size(0, 0); return; }
+                //if (Type == PreviewType.local) PictHelper.GetLocalPictureSize(SourceDb);
+                //if ((Type == PreviewType.net)|| (Type == PreviewType.youtube))
+                   Size = PictHelper.GetPictureSize(Source);
+                 OnPropertyChanged("Size");
             }
         }
         [Column("Source")]
