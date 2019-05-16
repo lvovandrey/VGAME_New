@@ -76,7 +76,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="25"/>
                             <RowDefinition Height="*" />
-                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Label Content="Юнитов"/>
                         <Label Content="Заданий" Grid.Column="1"/>
@@ -126,7 +126,7 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
-                        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="6">
+                        <WrapPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="6">
                             <Button Width="20" Content="+" Margin="5" Command="{Binding AddSceneCommand}"/>
                             <Button Width="20" Content="-" Margin="5" Command="{Binding RemoveSceneCommand}"/>
                             <Button Width="40" Content="Up" Margin="5" Command="{Binding UpSceneCommand}" />
@@ -142,8 +142,10 @@
                             <Button Name="SplitScene" Width="30" Margin="5" Command="{Binding SplitScenesCommand}" CommandParameter="{Binding ElementName=VideoPlayer, Path=CurTime}" Click="SplitScene_Click" >
                                 <Image Source="icons/icon.png"/>
                             </Button>
+                            <Button Width="40" Content="Check" Margin="5" Command="{Binding CheckIntersectionScenesCommand}" />
 
-                        </StackPanel>
+
+                        </WrapPanel>
 
 
 

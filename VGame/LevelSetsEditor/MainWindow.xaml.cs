@@ -163,7 +163,7 @@ namespace LevelSetsEditor
             {
                 Thread newWindowThread = new Thread(new ThreadStart(ThreadStartingPoint));
                 newWindowThread.SetApartmentState(ApartmentState.STA);
-                newWindowThread.IsBackground = true;
+                newWindowThread.IsBackground = true;        
                 newWindowThread.Start();
             }
 

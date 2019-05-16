@@ -1,0 +1,15 @@
+﻿<Window x:Class="ScenesTimeLine.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ScenesTimeLine"
+        xmlns:el="clr-namespace:ScenesTimeLine.Elements"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" Name="Window1">
+    <Grid Background="#FF1E1E1E">
+        <Button Name="Button1" Margin="600,200, 100,100" />
+        <el:Cursor Width="10" HorizontalAlignment="Center" Height="{Binding ElementName=Button1, Path=ActualHeight}" Margin="200.184,0,581.816,-30"/>
+        <el:SceneTimeView Width="{Binding ElementName=Button1, Path=ActualHeight}"  Height="100" Margin="177.643,173.266,510.296,146.733"/>
+    </Grid>
+</Window>
