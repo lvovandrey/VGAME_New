@@ -50,7 +50,11 @@ namespace LevelSetsEditor
             GridBrowser.DataContext = WebBrowserVM;
             mainWindow = this;
 
-            StartWindowInfo();
+
+            startNewWindowProgress();
+      
+
+            //            StartWindowInfo();
 
         }
 
@@ -148,20 +152,30 @@ namespace LevelSetsEditor
 
 
 
-        private void StartWindowInfo()
-        {
-            Thread newWindowThread = new Thread(new ThreadStart(ThreadStartingPoint));
-            newWindowThread.SetApartmentState(ApartmentState.STA);
-            newWindowThread.IsBackground = true;
-            newWindowThread.Start();
-        }
+
         public WindowProgress windowProgress;
+        public void startNewWindowProgress()
+        {
+            if (WindowProgress.count == 0) { MessageBox.Show("Можно создать только одно окно infoUI."); }
+            //сперва хотел синглтон, потом сделал просто счетчик. 
+            //Потому что синглтон в своем потоке - это как-то сложно пока для меня
+            else
+            {
+                Thread newWindowThread = new Thread(new ThreadStart(ThreadStartingPoint));
+                newWindowThread.SetApartmentState(ApartmentState.STA);
+                newWindowThread.IsBackground = true;
+                newWindowThread.Start();
+            }
+
+        }
+
         private void ThreadStartingPoint()
         {
-            windowProgress = new WindowProgress();
-            windowProgress.Hide();
-            System.Windows.Threading.Dispatcher.Run();
-        }
+                windowProgress = new WindowProgress();
+                windowProgress.Hide();
+                System.Windows.Threading.Dispatcher.Run();
+       }
+       
 
 
 
@@ -182,7 +196,7 @@ namespace LevelSetsEditor
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            Speaker.Speak(txtSpeak.Text);
+            Speaker.Speak(txtSpeak.Text);         
         }
     }
 }

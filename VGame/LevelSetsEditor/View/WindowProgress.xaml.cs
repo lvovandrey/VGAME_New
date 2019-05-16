@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,10 +21,16 @@ namespace LevelSetsEditor.View
     /// </summary>
     public partial class WindowProgress : Window, IInfoUI
     {
+        public static int count = 0;
         public WindowProgress()
         {
+            count++;
             InitializeComponent();
         }
+
+                
+
+
 
         int IInfoUI.Progress
         {
@@ -137,3 +144,4 @@ namespace LevelSetsEditor.View
 
     }
 }
+
