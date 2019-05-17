@@ -7,9 +7,13 @@
         xmlns:el="clr-namespace:ScenesTimeLine.Elements"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Name="Window1">
-    <Grid Background="#FF1E1E1E">
-        <Button Name="Button1" Margin="600,200, 100,100" />
-        <el:Cursor Width="10" HorizontalAlignment="Center" Height="{Binding ElementName=Button1, Path=ActualHeight}" Margin="200.184,0,581.816,-30"/>
-        <el:SceneTimeView Width="{Binding ElementName=Button1, Path=ActualHeight}"  Height="100" Margin="177.643,173.266,510.296,146.733"/>
+
+    <Window.Resources>
+        <el:HeightConverter x:Key="HeightConverter" />
+    </Window.Resources>
+    <Grid Background="White">
+        <Button Name="Button1" Margin="600,100, 100,200" />
+        <el:Cursor Width="10" VerticalAlignment="Bottom" Height="{Binding ElementName=Button1, Path=ActualHeight, Converter={StaticResource HeightConverter}}" Margin="73,0,0,9" HorizontalAlignment="Left"/>
+        <el:SceneTimeView Width="{Binding ElementName=Button1, Path=ActualWidth}"  Height="{Binding ElementName=Button1, Path=ActualHeight}"    VerticalAlignment="Bottom" Margin="0,0,0,15" HorizontalAlignment="Left"/>
     </Grid>
 </Window>

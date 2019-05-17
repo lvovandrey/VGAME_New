@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ScenesTimeLine.Elements"
              mc:Ignorable="d" 
-             d:DesignHeight="90" d:DesignWidth="10">
+             d:DesignHeight="90" d:DesignWidth="10" MinHeight="30">
     <Grid VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="5"/>
