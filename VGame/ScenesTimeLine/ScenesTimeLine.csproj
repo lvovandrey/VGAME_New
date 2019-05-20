@@ -58,6 +58,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Elements\Dash.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Elements\ScenesTimeLine.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -67,6 +71,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Elements\TimeLabel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Elements\TimeScale.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -81,6 +89,9 @@
     <Compile Include="Elements\Cursor.xaml.cs">
       <DependentUpon>Cursor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Elements\Dash.xaml.cs">
+      <DependentUpon>Dash.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Elements\ScenesTimeLine.xaml.cs">
       <DependentUpon>ScenesTimeLine.xaml</DependentUpon>
     </Compile>
@@ -89,6 +100,9 @@
     </Compile>
     <Compile Include="Elements\TimeLabel.xaml.cs">
       <DependentUpon>TimeLabel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Elements\TimeScale.xaml.cs">
+      <DependentUpon>TimeScale.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
