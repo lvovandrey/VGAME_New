@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
-
+using System.Windows.Data;
+using System.Windows.Media.Animation;
 
 namespace ScenesTimeLine.Elements
 {
@@ -18,6 +20,18 @@ namespace ScenesTimeLine.Elements
         {
             InitializeComponent();
             Dashes = new ObservableCollection<Dash>();
+            addDash();
+            addDash();
+            addDash();
+            addDash();
+            addDash();
+            addDash();
+            addDash();
+            addDash();
+            addDash();
+            addDash();
+            addDash();
+
         }
 
 
@@ -97,7 +111,134 @@ namespace ScenesTimeLine.Elements
                 }
         }
 
+
+
+      //  int N_el = 5;
+        double W_full = 1000;
+
+        TimeSpan T_el = TimeSpan.FromSeconds(60);
+        TimeSpan T_full = TimeSpan.FromSeconds(450);
+
+
+        public double W_el
+        {
+            get
+            {
+                double tmp = W_full * T_el.TotalMilliseconds / T_full.TotalMilliseconds;
+                if (tmp < 0) tmp = 0; 
+                return (tmp);
+            }
+        }
+
+
+        public double N_el
+        {
+            get
+            {
+                double tmp = T_full.TotalMilliseconds/T_el.TotalMilliseconds;
+                if (tmp < 0) tmp = 0;
+                return (tmp);
+            }
+        }
+
+        public double Scale=0.5;
+
+        void addDash()
+        {
+
+            Dash d = new Dash();
+            RefreshBinding(d);
+            MainStack.Children.Add(d);
+        }
+
+        private void MainStack_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == System.Windows.Input.MouseButton.Left)
+                Scale *= 1.1;
+            else 
+                Scale /= 1.1;
+            foreach (var item in MainStack.Children)
+            {
+                if (!(item is Dash)) continue;
+                Dash dash = (item as Dash);
+
+                double nextwidth = Scale*this.ActualWidth / N_el;
+                ScaleAnimation(dash, dash.ActualWidth,nextwidth , (s, ee) => 
+                {
+                    RefreshBinding(dash);
+
+                    dash.BeginAnimation(Dash.WidthProperty, null);
+                    });
+                
+            }
+        }
+
+        
+
+        void ScaleAnimation(Dash d, double From, double To, EventHandler eventHandler)
+        {
+            DoubleAnimation a = new DoubleAnimation();
+            a.From = From;
+            a.To = To;
+            a.Duration = TimeSpan.FromSeconds(0.1);
+            a.Completed += eventHandler;
+            d.BeginAnimation(Dash.WidthProperty, a);
+        }
+
+
+
+        void RefreshBinding(Dash dash)
+        {
+            Binding binding = new Binding();
+            binding.Source = this;  // элемент-источник
+            binding.Converter = new WidthConverter();
+            binding.ConverterParameter = new WidthConverterParameter(this);
+            binding.Path = new PropertyPath("ActualWidth"); // свойство элемента-источника
+            dash.SetBinding(Dash.WidthProperty, binding); // установка привязки для элемента-приемника
+        }
+
+
+
+        class WidthConverter : IValueConverter
+        {
+            public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+            {
+                return (((WidthConverterParameter)parameter).Scale * (double)value / ( ((WidthConverterParameter)parameter).ElementsCount  ));
+            }
+
+            public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+            {
+                return DependencyProperty.UnsetValue;
+            }
+        }
+
     }
+
+
+    public class WidthConverterParameter
+    {
+        ScenesTimeLine TimeLine;
+        public WidthConverterParameter(ScenesTimeLine timeLine)
+        {
+            TimeLine = timeLine;
+        }
+
+        public double ElementsCount
+        {
+            get
+            {
+                return TimeLine.N_el;
+            }
+        }
+        public double Scale
+        {
+            get
+            {
+                return TimeLine.Scale;
+            }
+        }
+    }
+
 }
 
 
