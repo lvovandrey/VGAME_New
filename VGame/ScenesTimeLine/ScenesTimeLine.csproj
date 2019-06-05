@@ -62,7 +62,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Elements\ScenesTimeLine.xaml">
+    <Page Include="Elements\TimeLine.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -92,8 +92,9 @@
     <Compile Include="Elements\Dash.xaml.cs">
       <DependentUpon>Dash.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Elements\ScenesTimeLine.xaml.cs">
-      <DependentUpon>ScenesTimeLine.xaml</DependentUpon>
+    <Compile Include="Elements\Interval.cs" />
+    <Compile Include="Elements\TimeLine.xaml.cs">
+      <DependentUpon>TimeLine.xaml</DependentUpon>
     </Compile>
     <Compile Include="Elements\SceneTimeView.xaml.cs">
       <DependentUpon>SceneTimeView.xaml</DependentUpon>

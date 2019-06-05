@@ -10,11 +10,19 @@
 
     <Window.Resources>
         <el:HeightConverter x:Key="HeightConverter" />
+        <local:TimeConverter x:Key="TimeConverter" />
     </Window.Resources>
     <Grid Background="White">
-        <Button Name="Button1" Margin="600,100, 100,200" />
-        <el:Cursor Width="10" VerticalAlignment="Bottom" Height="{Binding ElementName=Button1, Path=ActualHeight, Converter={StaticResource HeightConverter}}" Margin="73,0,0,9" HorizontalAlignment="Left"/>
-        <el:SceneTimeView Width="{Binding ElementName=Button1, Path=ActualWidth}"  Height="{Binding ElementName=Button1, Path=ActualHeight}"    VerticalAlignment="Bottom" Margin="0,0,0,15" HorizontalAlignment="Left"/>
-        <el:ScenesTimeLine Width="{Binding ElementName=Button1, Path=ActualWidth}" Height="30"></el:ScenesTimeLine>
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Height="100" Width="100" Click="Button_Click"></Button>
+        <TextBox HorizontalAlignment="Center" Text="{Binding ElementName=TS, Path=SelectedInterval.Begin, Converter={StaticResource ResourceKey=TimeConverter}}"  VerticalAlignment="Top" Height="100" Width="100" Margin="337,44,355,0" ></TextBox>
+
+        <Button Name="Button1" Margin="300,10, 10,20" VerticalAlignment="Top" Click="Button1_Click" />
+        <!--<el:Cursor Width="10" VerticalAlignment="Bottom" Height="{Binding ElementName=Button1, Path=ActualHeight, Converter={StaticResource HeightConverter}}" Margin="73,0,0,9" HorizontalAlignment="Left"/>
+        <el:SceneTimeView Width="{Binding ElementName=Button1, Path=ActualWidth}"  Height="{Binding ElementName=Button1, Path=ActualHeight}"    VerticalAlignment="Bottom" Margin="0,0,0,15" HorizontalAlignment="Left"/>-->
+        <!--<el:TimeLine Width="{Binding ElementName=Button1, Path=ActualWidth}" Height="30" x:Name="T1"></el:TimeLine>
+        <el:TimeLine Width="{Binding ElementName=Button1, Path=ActualWidth}" Height="30" x:Name="T2"></el:TimeLine>-->
+        <el:TimeScale Width="{Binding ElementName=Button1, Path=ActualWidth}" Height="30" x:Name="TS" ></el:TimeScale>
+        
+        
     </Grid>
 </Window>

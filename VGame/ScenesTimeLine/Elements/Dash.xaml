@@ -11,7 +11,7 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Name="col1" Width="*"/>
         </Grid.ColumnDefinitions>
-        <Rectangle Fill="Black" Width="2" Name="DashLine" Grid.Column="0"/>
-        <Rectangle Fill="#66FAEBD7" Width="{Binding ElementName=col1, Path=Width}" Name="DashInterval" Grid.Column="1"/>
+        <Rectangle Fill="Black" Width="{Binding LineWidth}" Height="{Binding LineHeight}" Name="DashLine" Grid.Column="0" VerticalAlignment="Bottom" />
+        <Rectangle Fill="#00FAEBD7" Width="{Binding ElementName=col1, Path=Width}" Name="DashInterval" Grid.Column="1"/>
     </Grid>
 </UserControl>

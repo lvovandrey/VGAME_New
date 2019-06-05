@@ -7,9 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Height="11" Text="  00:12:33 - 00:14:54  " 
-                   Name="TextBlock1" HorizontalAlignment="Center" 
-                   Panel.ZIndex="1" FontSize="8" Foreground="Black"  >
+        <TextBlock Height="11" Text="{Binding TimeInterval, UpdateSourceTrigger=PropertyChanged}" 
+                   Name="TextBlock1" HorizontalAlignment="Center"  TextAlignment="Center"
+                   Panel.ZIndex="1" FontSize="8" Foreground="Black" Width="80" >
 
         </TextBlock>
         <Rectangle Fill="#B2FFFF3E"  Stroke="Black" Width="{Binding ElementName=TextBlock1, Path=ActualWidth}"   Opacity="0.7" RadiusX="2" RadiusY="2" StrokeThickness="1" Height="{Binding ElementName=TextBlock1, Path=ActualHeight}" HorizontalAlignment="Center">

@@ -14,24 +14,16 @@ namespace ScenesTimeLine.Elements
     /// <summary>
     /// Логика взаимодействия для ScenesTimeLine.xaml
     /// </summary>
-    public partial class ScenesTimeLine : UserControl
+    public partial class TimeLine : UserControl
     {
-        public ScenesTimeLine()
+        public TimeLine()
         {
             InitializeComponent();
             Dashes = new ObservableCollection<Dash>();
-            addDash();
-            addDash();
-            addDash();
-            addDash();
-            addDash();
-            addDash();
-            addDash();
-            addDash();
-            addDash();
-            addDash();
-            addDash();
-
+            for (int i = 0; i < 100; i++)
+            {
+                addDash();
+            }
         }
 
 
@@ -40,15 +32,15 @@ namespace ScenesTimeLine.Elements
     
 
         public static readonly DependencyProperty PositionProperty = DependencyProperty.Register("Position",
-          typeof(double), typeof(ScenesTimeLine),
+          typeof(double), typeof(TimeLine),
           new FrameworkPropertyMetadata(new PropertyChangedCallback(PositionPropertyChangedCallback)));
 
         public static readonly DependencyProperty DurationProperty = DependencyProperty.Register("Duration",
-          typeof(TimeSpan), typeof(ScenesTimeLine),
+          typeof(TimeSpan), typeof(TimeLine),
           new FrameworkPropertyMetadata(new PropertyChangedCallback(DurationPropertyChangedCallback)));
 
         public static readonly DependencyProperty CurTimeProperty = DependencyProperty.Register("CurTime",
-            typeof(TimeSpan), typeof(ScenesTimeLine),
+            typeof(TimeSpan), typeof(TimeLine),
             new FrameworkPropertyMetadata(new PropertyChangedCallback(CurTimePropertyChangedCallback)));
 
         public double Position { get { return (double)GetValue(PositionProperty); } set { SetValue(PositionProperty, value); } }
@@ -64,20 +56,20 @@ namespace ScenesTimeLine.Elements
 
         static void PositionPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (((ScenesTimeLine)d).OnPositionChanged != null)
-                ((ScenesTimeLine)d).OnPositionChanged(d, e);
+            if (((TimeLine)d).OnPositionChanged != null)
+                ((TimeLine)d).OnPositionChanged(d, e);
         }
 
         static void DurationPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (((ScenesTimeLine)d).OnDurationChanged != null)
-                ((ScenesTimeLine)d).OnDurationChanged(d, e);
+            if (((TimeLine)d).OnDurationChanged != null)
+                ((TimeLine)d).OnDurationChanged(d, e);
         }
 
         static void CurTimePropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (((ScenesTimeLine)d).OnCurTimeChanged != null)
-                ((ScenesTimeLine)d).OnCurTimeChanged(d, e);
+            if (((TimeLine)d).OnCurTimeChanged != null)
+                ((TimeLine)d).OnCurTimeChanged(d, e);
         }
 
     
@@ -116,8 +108,8 @@ namespace ScenesTimeLine.Elements
       //  int N_el = 5;
         double W_full = 1000;
 
-        TimeSpan T_el = TimeSpan.FromSeconds(60);
-        TimeSpan T_full = TimeSpan.FromSeconds(450);
+        public TimeSpan T_el = TimeSpan.FromSeconds(60);
+        public TimeSpan T_full = TimeSpan.FromSeconds(450);
 
 
         public double W_el
@@ -141,9 +133,31 @@ namespace ScenesTimeLine.Elements
             }
         }
 
-        public double Scale=0.5;
 
-        void addDash()
+        //две извращенческие функции.... 
+        public void ChangeDashesWidth(double width)
+        {
+                foreach (var item in MainStack.Children)
+                {
+                    if (!(item is Dash)) continue;
+                    Dash dash = (item as Dash);
+
+                    dash.sets.LineWidth = width;
+                }
+        }
+
+        public void ChangeDashesHeight(double height)
+        {
+            foreach (var item in MainStack.Children)
+            {
+                if (!(item is Dash)) continue;
+                Dash dash = (item as Dash);
+
+                dash.sets.LineHeight = height;
+            }
+        }
+
+        public void addDash()
         {
 
             Dash d = new Dash();
@@ -157,24 +171,38 @@ namespace ScenesTimeLine.Elements
                 Scale *= 1.1;
             else 
                 Scale /= 1.1;
-            foreach (var item in MainStack.Children)
-            {
-                if (!(item is Dash)) continue;
-                Dash dash = (item as Dash);
 
-                double nextwidth = Scale*this.ActualWidth / N_el;
-                ScaleAnimation(dash, dash.ActualWidth,nextwidth , (s, ee) => 
-                {
-                    RefreshBinding(dash);
-
-                    dash.BeginAnimation(Dash.WidthProperty, null);
-                    });
-                
-            }
         }
 
-        
+        double scale=1;
+        public double Scale
+        {
+            get
+            {
+                return scale;
+            }
 
+            set
+            {
+                if (value <= 0.001) return;
+                scale = value;
+                foreach (var item in MainStack.Children)
+                {
+                    if (!(item is Dash)) continue;
+                    Dash dash = (item as Dash);
+
+                    double nextwidth = scale * this.ActualWidth / N_el;
+                    ScaleAnimation(dash, dash.ActualWidth, nextwidth, (s, ee) =>
+                    {
+                        RefreshBinding(dash);
+
+                        dash.BeginAnimation(Dash.WidthProperty, null);
+                    });
+
+                }
+
+            }
+        }
         void ScaleAnimation(Dash d, double From, double To, EventHandler eventHandler)
         {
             DoubleAnimation a = new DoubleAnimation();
@@ -217,8 +245,8 @@ namespace ScenesTimeLine.Elements
 
     public class WidthConverterParameter
     {
-        ScenesTimeLine TimeLine;
-        public WidthConverterParameter(ScenesTimeLine timeLine)
+        TimeLine TimeLine;
+        public WidthConverterParameter(TimeLine timeLine)
         {
             TimeLine = timeLine;
         }
