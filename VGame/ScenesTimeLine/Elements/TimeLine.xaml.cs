@@ -40,6 +40,7 @@ namespace ScenesTimeLine.Elements
             T2.T_el = TimeSpan.FromSeconds(10);
             T2.ChangeDashesHeight(6);
 
+            Cursor1.Container = this;
 
         }
 

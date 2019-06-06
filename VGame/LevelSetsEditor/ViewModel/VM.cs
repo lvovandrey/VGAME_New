@@ -256,30 +256,7 @@ namespace LevelSetsEditor.ViewModel
             }
         }
 
-        //    if (ViewModel.SelectedLevelVM == null) return;
-
-        //    YoutubeVidInfo vidInfo = new YoutubeVidInfo(TextURL.Text);
-        //    if (vidInfo.DirectURL == "") return;
-
-        //    ViewModel.SelectedLevelVM.VideoInfoVM.Source = new Uri(vidInfo.DirectURL);
-        //ViewModel.SelectedLevelVM.VideoInfoVM.Address = TextURL.Text;
-        //    ViewModel.SelectedLevelVM.VideoInfoVM.Description = vidInfo.Title;
-        //    ViewModel.SelectedLevelVM.VideoInfoVM.Duration = vidInfo.Duration;
-        //    ViewModel.SelectedLevelVM.VideoInfoVM.Resolution = vidInfo.Resolution;
-        //    ViewModel.SelectedLevelVM.VideoInfoVM.Title = vidInfo.Title;
-        //    ViewModel.SelectedLevelVM.VideoInfoVM.Type = Model.VideoType.youtube;
-        //    ViewModel.SelectedLevelVM.VideoInfoVM.PreviewVM.Source = new Uri(vidInfo.ImageUrl);
-        //ViewModel.SelectedLevelVM.VideoInfoVM.PreviewVM.Size = new System.Drawing.Size(480, 360);
-
-        //    ViewModel.SelectedLevelVM.VideoInfoVM.PreviewVM.Type = Model.PreviewType.youtube;
-        //    ObservableCollection<Uri> uris = new ObservableCollection<Uri>();
-        //    for (int i = 0; i< 3; i++)
-        //        uris.Add(new Uri(vidInfo.PrevImagesUrl[i]));
-
-        //    ViewModel.SelectedLevelVM.VideoInfoVM.PreviewVM.MultiplePrevSources = uris;
-        //    ViewModel.SelectedLevelVM.SegregateScenes();
-
-
+   
 
         #region mvvm
         public event PropertyChangedEventHandler PropertyChanged;
