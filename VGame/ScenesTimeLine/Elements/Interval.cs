@@ -14,6 +14,7 @@ namespace ScenesTimeLine.Elements
         bool _LabelVisibility;
 
 
+
         public Interval(TimeLine container, TimeSpan begin, TimeSpan end, int zindex = 1)
         {
             Container = container;
