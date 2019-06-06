@@ -6,7 +6,7 @@ namespace ScenesTimeLine.Elements
 {
     public class Interval : INotifyPropertyChanged
     {
-         TimeScale _Container;
+         TimeLine _Container;
          SceneTimeView _Body;
          TimeSpan _Begin;
          TimeSpan _End;
@@ -14,7 +14,7 @@ namespace ScenesTimeLine.Elements
         bool _LabelVisibility;
 
 
-        public Interval(TimeScale container, TimeSpan begin, TimeSpan end, int zindex = 1)
+        public Interval(TimeLine container, TimeSpan begin, TimeSpan end, int zindex = 1)
         {
             Container = container;
             Begin = begin;
@@ -31,7 +31,7 @@ namespace ScenesTimeLine.Elements
         void SubscribeDepPropertyEvents()
         {
             //Подписываемся на изменение DependedcyProperty FullTime у контейнера
-            PropertyDescriptor FullTimeDesc = DependencyPropertyDescriptor.FromProperty(TimeScale.FullTimeProperty, typeof(TimeScale));
+            PropertyDescriptor FullTimeDesc = DependencyPropertyDescriptor.FromProperty(TimeLine.FullTimeProperty, typeof(TimeLine));
             FullTimeDesc.AddValueChanged(Container, 
                 new EventHandler(
                 (sender, e) =>
@@ -41,7 +41,7 @@ namespace ScenesTimeLine.Elements
             ));
 
             //Подписываемся на изменение DependedcyProperty ActualWidth у контейнера
-            PropertyDescriptor ActualWidthDesc = DependencyPropertyDescriptor.FromProperty(TimeScale.ActualWidthProperty, typeof(TimeScale));
+            PropertyDescriptor ActualWidthDesc = DependencyPropertyDescriptor.FromProperty(TimeLine.ActualWidthProperty, typeof(TimeLine));
             ActualWidthDesc.AddValueChanged(Container,
                 new EventHandler(
                 (sender, e) =>
@@ -50,7 +50,7 @@ namespace ScenesTimeLine.Elements
 
         }
 
-        public TimeScale Container
+        public TimeLine Container
         {
             get { return _Container; }
             set { _Container = value; OnPropertyChanged("Container"); }

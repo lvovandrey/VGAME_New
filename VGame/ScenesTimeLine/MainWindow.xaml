@@ -21,7 +21,7 @@
         <el:SceneTimeView Width="{Binding ElementName=Button1, Path=ActualWidth}"  Height="{Binding ElementName=Button1, Path=ActualHeight}"    VerticalAlignment="Bottom" Margin="0,0,0,15" HorizontalAlignment="Left"/>-->
         <!--<el:TimeLine Width="{Binding ElementName=Button1, Path=ActualWidth}" Height="30" x:Name="T1"></el:TimeLine>
         <el:TimeLine Width="{Binding ElementName=Button1, Path=ActualWidth}" Height="30" x:Name="T2"></el:TimeLine>-->
-        <el:TimeScale Width="{Binding ElementName=Button1, Path=ActualWidth}" Height="30" x:Name="TS" ></el:TimeScale>
+        <el:TimeLine Width="{Binding ElementName=Button1, Path=ActualWidth}" Height="30" x:Name="TS" ></el:TimeLine>
         
         
     </Grid>

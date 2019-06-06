@@ -1,14 +1,11 @@
-﻿<UserControl x:Class="ScenesTimeLine.Elements.TimeScale"
+﻿<UserControl x:Class="ScenesTimeLine.Elements.ScaleTime"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ScenesTimeLine.Elements"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid x:Name="GridMain">
-        <local:TimeLine x:Name="T1"></local:TimeLine>
-        <local:TimeLine x:Name="T2"></local:TimeLine>
-        <!--<local:SceneTimeView x:Name="Sc1" Width="150" HorizontalAlignment="Left" Margin="50,0,0,0"></local:SceneTimeView>-->
-    </Grid>
+             d:DesignHeight="45" d:DesignWidth="450">
+    <StackPanel Name="MainStack" Orientation="Horizontal"  MouseUp="MainStack_MouseUp"/>
+
 </UserControl>

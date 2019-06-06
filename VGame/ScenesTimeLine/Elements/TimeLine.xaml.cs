@@ -1,272 +1,97 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Media.Animation;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
 namespace ScenesTimeLine.Elements
 {
-    public delegate void PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e);
-
-
     /// <summary>
-    /// Логика взаимодействия для ScenesTimeLine.xaml
+    /// Логика взаимодействия для TimeLine.xaml
     /// </summary>
     public partial class TimeLine : UserControl
     {
+        ObservableCollection<Interval> Intervals;
+      
+
         public TimeLine()
         {
             InitializeComponent();
-            Dashes = new ObservableCollection<Dash>();
-            for (int i = 0; i < 100; i++)
-            {
-                addDash();
-            }
+
+            Intervals = new ObservableCollection<Interval>();
+            FullTime = TimeSpan.FromSeconds(450);
+
+            T1.T_full = FullTime;
+            T1.T_el = TimeSpan.FromSeconds(60);
+            T1.ChangeDashesHeight(12);
+            T1.ChangeDashesWidth(1);
+
+            T2.T_full = FullTime;
+            T2.T_el = TimeSpan.FromSeconds(10);
+            T2.ChangeDashesHeight(6);
+
+
         }
 
-
-        public TimeSpan Interval { get; set; }
-
+        //DependencyProperty SelectedInterval  - Попробовать с ним поработать снаружи
+        public Interval SelectedInterval
+        {
+            get { return (Interval)GetValue(SelectedIntervalProperty); }
+            set { SetValue(SelectedIntervalProperty, value); }
+        }
+        public static readonly DependencyProperty SelectedIntervalProperty =
+            DependencyProperty.Register("SelectedInterval", typeof(Interval), typeof(TimeLine), new PropertyMetadata(null));
     
 
-        public static readonly DependencyProperty PositionProperty = DependencyProperty.Register("Position",
-          typeof(double), typeof(TimeLine),
-          new FrameworkPropertyMetadata(new PropertyChangedCallback(PositionPropertyChangedCallback)));
-
-        public static readonly DependencyProperty DurationProperty = DependencyProperty.Register("Duration",
-          typeof(TimeSpan), typeof(TimeLine),
-          new FrameworkPropertyMetadata(new PropertyChangedCallback(DurationPropertyChangedCallback)));
-
-        public static readonly DependencyProperty CurTimeProperty = DependencyProperty.Register("CurTime",
-            typeof(TimeSpan), typeof(TimeLine),
-            new FrameworkPropertyMetadata(new PropertyChangedCallback(CurTimePropertyChangedCallback)));
-
-        public double Position { get { return (double)GetValue(PositionProperty); } set { SetValue(PositionProperty, value); } }
-        public TimeSpan Duration { get { return (TimeSpan)GetValue(DurationProperty); } set { SetValue(DurationProperty, value); } }
-        public TimeSpan CurTime { get { return (TimeSpan)GetValue(CurTimeProperty); } set { SetValue(CurTimeProperty, value); } }
-
-        public event PropertyChanged OnPositionChanged;
-        public event PropertyChanged OnDurationChanged;
-        public event PropertyChanged OnCurTimeChanged;
-
-        public ObservableCollection<Dash> Dashes;
-
-
-        static void PositionPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        //DependencyProperty FullTime  - чтобы можно было подписаться на него
+        public TimeSpan FullTime
         {
-            if (((TimeLine)d).OnPositionChanged != null)
-                ((TimeLine)d).OnPositionChanged(d, e);
+            get { return (TimeSpan)GetValue(FullTimeProperty); }
+            set { SetValue(FullTimeProperty, value); }
         }
+        public static readonly DependencyProperty FullTimeProperty =
+            DependencyProperty.Register("FullTime", typeof(TimeSpan), typeof(TimeLine), new PropertyMetadata(TimeSpan.FromSeconds(10)));
 
-        static void DurationPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        //Добавляем интервал
+        public void AddInterval(TimeSpan begin, TimeSpan end)
         {
-            if (((TimeLine)d).OnDurationChanged != null)
-                ((TimeLine)d).OnDurationChanged(d, e);
-        }
-
-        static void CurTimePropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (((TimeLine)d).OnCurTimeChanged != null)
-                ((TimeLine)d).OnCurTimeChanged(d, e);
-        }
-
-    
-
-        public void SetCurTime(TimeSpan time)
-        {
-        }
-
-        private void CalcDashesPosition()
-        {
-            int NDashes;
-            NDashes = (int)Duration.TotalMinutes;
-            Dashes = new ObservableCollection<Dash>();
-            double width = this.ActualWidth;
-            double dashIntervals = width / Duration.TotalMinutes;
-            double curDashLeftCoord = 0;
-            for (int i=1; i <= NDashes; i++)
+            Interval interval = new Interval(this, begin, end);
+            this.GridMain.Children.Add(interval.Body);
+            Intervals.Add(interval);
+            interval.Body.OnClick += (sender, e) => 
             {
-                Dash dash = new Dash();
-                dash.Margin = new Thickness(curDashLeftCoord, 0, 0, 0);
-                Dashes.Add(dash);
-                curDashLeftCoord += dashIntervals;
-            }
-        }
-        public void UpdateDashes()
-        {
-            if (Dashes.Count > 0)
-                for (int i = 0; i < Dashes.Count; i++)
+                foreach (Interval i in Intervals)
                 {
-                    MainStack.Children.Add(Dashes[i]);
+                    i.Body.Selected = false;
                 }
+                ((SceneTimeView)sender).Selected = true;
+                SelectedInterval = interval;
+            };
+            interval.UpdateView();
         }
-
-
-
-      //  int N_el = 5;
-        double W_full = 1000;
-
-        public TimeSpan T_el = TimeSpan.FromSeconds(60);
-        public TimeSpan T_full = TimeSpan.FromSeconds(450);
-
-
-        public double W_el
+        
+        //Удаляем интервал
+        public void RemoveInterval(Interval interval)
         {
-            get
-            {
-                double tmp = W_full * T_el.TotalMilliseconds / T_full.TotalMilliseconds;
-                if (tmp < 0) tmp = 0; 
-                return (tmp);
-            }
-        }
-
-
-        public double N_el
-        {
-            get
-            {
-                double tmp = T_full.TotalMilliseconds/T_el.TotalMilliseconds;
-                if (tmp < 0) tmp = 0;
-                return (tmp);
-            }
-        }
-
-
-        //две извращенческие функции.... 
-        public void ChangeDashesWidth(double width)
-        {
-                foreach (var item in MainStack.Children)
-                {
-                    if (!(item is Dash)) continue;
-                    Dash dash = (item as Dash);
-
-                    dash.sets.LineWidth = width;
-                }
-        }
-
-        public void ChangeDashesHeight(double height)
-        {
-            foreach (var item in MainStack.Children)
-            {
-                if (!(item is Dash)) continue;
-                Dash dash = (item as Dash);
-
-                dash.sets.LineHeight = height;
-            }
-        }
-
-        public void addDash()
-        {
-
-            Dash d = new Dash();
-            RefreshBinding(d);
-            MainStack.Children.Add(d);
-        }
-
-        private void MainStack_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == System.Windows.Input.MouseButton.Left)
-                Scale *= 1.1;
-            else 
-                Scale /= 1.1;
-
-        }
-
-        double scale=1;
-        public double Scale
-        {
-            get
-            {
-                return scale;
-            }
-
-            set
-            {
-                if (value <= 0.001) return;
-                scale = value;
-                foreach (var item in MainStack.Children)
-                {
-                    if (!(item is Dash)) continue;
-                    Dash dash = (item as Dash);
-
-                    double nextwidth = scale * this.ActualWidth / N_el;
-                    ScaleAnimation(dash, dash.ActualWidth, nextwidth, (s, ee) =>
-                    {
-                        RefreshBinding(dash);
-
-                        dash.BeginAnimation(Dash.WidthProperty, null);
-                    });
-
-                }
-
-            }
-        }
-        void ScaleAnimation(Dash d, double From, double To, EventHandler eventHandler)
-        {
-            DoubleAnimation a = new DoubleAnimation();
-            a.From = From;
-            a.To = To;
-            a.Duration = TimeSpan.FromSeconds(0.1);
-            a.Completed += eventHandler;
-            d.BeginAnimation(Dash.WidthProperty, a);
-        }
-
-
-
-        void RefreshBinding(Dash dash)
-        {
-            Binding binding = new Binding();
-            binding.Source = this;  // элемент-источник
-            binding.Converter = new WidthConverter();
-            binding.ConverterParameter = new WidthConverterParameter(this);
-            binding.Path = new PropertyPath("ActualWidth"); // свойство элемента-источника
-            dash.SetBinding(Dash.WidthProperty, binding); // установка привязки для элемента-приемника
-        }
-
-
-
-        class WidthConverter : IValueConverter
-        {
-            public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-            {
-                return (((WidthConverterParameter)parameter).Scale * (double)value / ( ((WidthConverterParameter)parameter).ElementsCount  ));
-            }
-
-            public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-            {
-                return DependencyProperty.UnsetValue;
-            }
+            this.GridMain.Children.Remove(interval.Body);
+            Intervals.Remove(interval);
+            interval.Body.ClearOnClick();
+            interval.Body = null; // это наверное излишне
+            interval = null;
         }
 
     }
 
 
-    public class WidthConverterParameter
-    {
-        TimeLine TimeLine;
-        public WidthConverterParameter(TimeLine timeLine)
-        {
-            TimeLine = timeLine;
-        }
-
-        public double ElementsCount
-        {
-            get
-            {
-                return TimeLine.N_el;
-            }
-        }
-        public double Scale
-        {
-            get
-            {
-                return TimeLine.Scale;
-            }
-        }
-    }
 
 }
-
-

@@ -62,7 +62,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Elements\TimeLine.xaml">
+    <Page Include="Elements\ScaleTime.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -74,7 +74,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Elements\TimeScale.xaml">
+    <Page Include="Elements\TimeLine.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -93,8 +93,8 @@
       <DependentUpon>Dash.xaml</DependentUpon>
     </Compile>
     <Compile Include="Elements\Interval.cs" />
-    <Compile Include="Elements\TimeLine.xaml.cs">
-      <DependentUpon>TimeLine.xaml</DependentUpon>
+    <Compile Include="Elements\ScaleTime.xaml.cs">
+      <DependentUpon>ScaleTime.xaml</DependentUpon>
     </Compile>
     <Compile Include="Elements\SceneTimeView.xaml.cs">
       <DependentUpon>SceneTimeView.xaml</DependentUpon>
@@ -102,8 +102,8 @@
     <Compile Include="Elements\TimeLabel.xaml.cs">
       <DependentUpon>TimeLabel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Elements\TimeScale.xaml.cs">
-      <DependentUpon>TimeScale.xaml</DependentUpon>
+    <Compile Include="Elements\TimeLine.xaml.cs">
+      <DependentUpon>TimeLine.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
