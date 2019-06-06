@@ -12,6 +12,7 @@
         xmlns:propview ="clr-namespace:LevelSetsEditor.View"
         xmlns:lst ="clr-namespace:LevelSetsEditor.View.LevelsDBViews"
         xmlns:player ="clr-namespace:LevelSetsEditor.View.VideoPlayerMVVM"
+        xmlns:timeline="clr-namespace:LevelSetsEditor.View.TimeLine"
         mc:Ignorable="d"
         Title="MainWindow" Height="850" Width="1200"  Loaded="Window_Loaded"
         Name="MAINWINDOW" Closing="MAINWINDOW_Closing">
@@ -162,6 +163,7 @@
                     <Grid Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="2">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="5"/>
                             <RowDefinition Height="49.6"/>
                             <RowDefinition Height="176"/>
@@ -169,9 +171,10 @@
 
 
                         <player:VideoPlayer x:Name="VideoPlayer" Source="{Binding Path=VideoInfoVM.Source, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Margin="22,22,22.4,22.8" />
-                        <GridSplitter Grid.Row="1" Height="3"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,1.2,0.4,0.6" />
+                        <timeline:TimeLine Height="50" Grid.Row="1" ></timeline:TimeLine>
+                        <GridSplitter Grid.Row="2" Height="3"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,1.2,0.4,0.6" />
                         <GroupBox Header="Инфо о видео" x:Name="VideoInfoGroupBox" 
-                         DataContext="{Binding VideoInfoVM}"   Grid.Row="2" Margin="0,0.4,0.4,0.2" Grid.RowSpan="2">
+                         DataContext="{Binding VideoInfoVM}"   Grid.Row="3" Margin="0,0.4,0.4,0.2" Grid.RowSpan="2">
                             <StackPanel Orientation="Vertical">
                                 <propview:PropertyViewer x:Name="PropViewTitle" DataContext="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Название"/>
                                 <propview:PropertyViewer  DataContext="{Binding Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Описание"/>

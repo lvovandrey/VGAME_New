@@ -89,6 +89,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\Windows\assembly\GAC_MSIL\Microsoft.Speech\11.0.0.0__31bf3856ad364e35\Microsoft.Speech.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Users\MyLogin\source\repos\YoutubeExtractor3\YoutubeExtractor\YoutubeExtractor\bin\Debug\Full\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Prism, Version=7.1.0.431, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Core.7.1.0.431\lib\net45\Prism.dll</HintPath>
     </Reference>
@@ -155,6 +159,9 @@
     <Reference Include="Xceed.Wpf.Toolkit, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
       <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
     </Reference>
+    <Reference Include="YoutubeExtractor">
+      <HintPath>..\..\..\..\Users\MyLogin\source\repos\YoutubeExtractor3\YoutubeExtractor\YoutubeExtractor\bin\Debug\Full\YoutubeExtractor.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -203,6 +210,25 @@
     </Compile>
     <Compile Include="View\CountWatcherView.xaml.cs">
       <DependentUpon>CountWatcherView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TimeLine\Cursor.xaml.cs">
+      <DependentUpon>Cursor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TimeLine\Dash.xaml.cs">
+      <DependentUpon>Dash.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TimeLine\Interval.cs" />
+    <Compile Include="View\TimeLine\ScaleTime.xaml.cs">
+      <DependentUpon>ScaleTime.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TimeLine\SceneTimeView.xaml.cs">
+      <DependentUpon>SceneTimeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TimeLine\TimeLabel.xaml.cs">
+      <DependentUpon>TimeLabel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TimeLine\TimeLine.xaml.cs">
+      <DependentUpon>TimeLine.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TimeWatcherView.xaml.cs">
       <DependentUpon>TimeWatcherView.xaml</DependentUpon>
@@ -259,6 +285,30 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CountWatcherView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\TimeLine\Cursor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\TimeLine\Dash.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\TimeLine\ScaleTime.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\TimeLine\SceneTimeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\TimeLine\TimeLabel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\TimeLine\TimeLine.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -343,9 +393,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="View\TimeLine\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

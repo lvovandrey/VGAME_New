@@ -48,7 +48,7 @@ namespace ScenesTimeLine
             S += TimeSpan.FromSeconds(40);
         }
     }
-    class TimeConverter : IValueConverter
+    public class TimeConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
