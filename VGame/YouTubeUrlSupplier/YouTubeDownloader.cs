@@ -60,8 +60,15 @@ namespace YouTubeUrlSupplier
             }
             else
             {
-                infoUrl = string.Format(CultureInfo.InvariantCulture, "http://www.youtube.com/get_video_info?&video_id={0}&el=detailpage&ps=default&eurl=&gl=US&hl=en", longId);
+                infoUrl = string.Format(CultureInfo.InvariantCulture, "https://www.youtube.com/get_video_info?&video_id={0}&el=detailpage&ps=default&eurl=&gl=US&hl=en", longId);
             }
+
+     //       infoUrl = string.Format(CultureInfo.InvariantCulture, "https://www.youtube.com/get_video_info?&video_id={0}", longId);
+
+            //System.Net.WebClient wc = new System.Net.WebClient();
+            //string Text = wc.DownloadString("http://www.climahom.eu/EULA.txt");
+            //string Text2 = wc.DownloadString(infoUrl);
+
             infoText = webClient.DownloadString(infoUrl);
             webClient.Dispose();
             var infoValues = HttpUtility.ParseQueryString(infoText);
