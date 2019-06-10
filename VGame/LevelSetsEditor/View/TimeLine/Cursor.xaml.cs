@@ -44,7 +44,7 @@ namespace LevelSetsEditor.View.TimeLine
 
         #region Реализация Drag'n'Drop
 
-        public UIElement Container;
+        public FrameworkElement Container;
         Vector relativeMousePos;
         FrameworkElement draggedObject;
 
@@ -68,7 +68,10 @@ namespace LevelSetsEditor.View.TimeLine
         {
             var point = e.GetPosition(Container);
             var newPos = point - relativeMousePos;
-            draggedObject.Margin = new Thickness(newPos.X, -5, 0, -5);
+            if(newPos.X<0) draggedObject.Margin = new Thickness(0, -5, 0, -5);
+            else if(newPos.X>Container.ActualWidth) draggedObject.Margin = new Thickness(Container.ActualWidth, -5, 0, -5);
+            else draggedObject.Margin = new Thickness(newPos.X, -5, 0, -5);
+            PosLabel.Content = ((int)newPos.X).ToString();
         }
 
         void OnMouseUp(object sender, MouseButtonEventArgs e)
