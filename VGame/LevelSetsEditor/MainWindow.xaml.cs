@@ -156,19 +156,19 @@ namespace LevelSetsEditor
         public WindowProgress windowProgress;
         public void startNewWindowProgress()
         {
-            if (WindowProgress.count == 0) { MessageBox.Show("Можно создать только одно окно infoUI."); }
+            if (WindowProgress.count > 0) { MessageBox.Show("Можно создать только одно окно infoUI."); }
             //сперва хотел синглтон, потом сделал просто счетчик. 
             //Потому что синглтон в своем потоке - это как-то сложно пока для меня
             else
             {
-                Thread newWindowThread = new Thread(new ThreadStart(ThreadStartingPoint));
-                newWindowThread.SetApartmentState(ApartmentState.STA);
-                newWindowThread.IsBackground = true;        
-                newWindowThread.Start();
+                WindowProgressThread = new Thread(new ThreadStart(ThreadStartingPoint));
+                WindowProgressThread.SetApartmentState(ApartmentState.STA);
+                WindowProgressThread.IsBackground = true;        
+                WindowProgressThread.Start();
             }
 
         }
-
+        Thread WindowProgressThread;
         private void ThreadStartingPoint()
         {
                 windowProgress = new WindowProgress();
@@ -191,7 +191,14 @@ namespace LevelSetsEditor
 
         private void MAINWINDOW_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-           
+            if (WindowProgress.count > 0)
+                try
+                {
+                    WindowProgressThread.Abort();
+                }
+                catch
+                {
+                }
         }
 
         private void Button_Click_4(object sender, RoutedEventArgs e)

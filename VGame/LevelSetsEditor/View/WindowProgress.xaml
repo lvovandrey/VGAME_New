@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:LevelSetsEditor.View"
         mc:Ignorable="d"
        
-        Title="Title" Height="120" Width="300" Closing="Window_Closing" WindowStyle="ToolWindow" WindowStartupLocation="CenterOwner" SizeToContent="WidthAndHeight" ResizeMode="NoResize" ShowInTaskbar="False" Cursor="Wait" >
+        Title="Title" Height="120" Width="300" Closing="Window_Closing" 
+        WindowStyle="ToolWindow" WindowStartupLocation="CenterOwner" 
+        SizeToContent="WidthAndHeight" ResizeMode="NoResize" ShowInTaskbar="False" Cursor="Wait" >
     <Grid>
         <StackPanel Margin="5">
             <ProgressBar Value="50" Name="ProgressBar" Height="30" Width="250"/>
