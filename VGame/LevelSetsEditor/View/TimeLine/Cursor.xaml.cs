@@ -26,9 +26,18 @@ namespace LevelSetsEditor.View.TimeLine
             MouseLeftButtonDown += StartDrag;
             
             CursorColor = new SolidColorBrush(Color.FromArgb(255, 7, 0, 71));
+            OnCRPositionChanged += Cursor_OnCRPositionChanged;
         }
 
+        private void Cursor_OnCRPositionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            double newPos = Container.ActualWidth * CRPosition;
 
+            if (newPos < 0) Margin = new Thickness(0, -5, 0, -5);
+            else if (newPos > Container.ActualWidth) Margin = new Thickness(Container.ActualWidth, -5, 0, -5);
+            else Margin = new Thickness(newPos, -5, 0, -5);
+            PosLabel.Content = ((int)newPos).ToString();
+        }
 
         SolidColorBrush _CursorColor { get; set; }
         public SolidColorBrush CursorColor
@@ -41,15 +50,39 @@ namespace LevelSetsEditor.View.TimeLine
             }
         }
 
+        #region DependencyProperties
+        public static readonly DependencyProperty CRPositionProperty = DependencyProperty.Register("CRPosition",
+         typeof(double), typeof(Cursor),
+         new FrameworkPropertyMetadata(new PropertyChangedCallback(CRPositionPropertyChangedCallback)));
+  
+        public double CRPosition {
+            get { return (double)GetValue(CRPositionProperty); }
+            set { SetValue(CRPositionProperty, value); } }
 
+
+        public event PropertyChanged OnCRPositionChanged;
+        public event Action OnCRPChanged;
+
+        static void CRPositionPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (((Cursor)d).OnCRPositionChanged != null)
+                ((Cursor)d).OnCRPositionChanged(d, e);
+        }
+        #endregion
+
+                       
         #region Реализация Drag'n'Drop
 
         public FrameworkElement Container;
         Vector relativeMousePos;
         FrameworkElement draggedObject;
 
+        public event Action OnStartDrag;
+        public event Action OnEndDrag;
+
         void StartDrag(object sender, MouseButtonEventArgs e)
         {
+            OnStartDrag();
             draggedObject = (FrameworkElement)sender;
             relativeMousePos = e.GetPosition(draggedObject) - new Point();
             draggedObject.MouseMove += OnDragMove;
@@ -72,6 +105,9 @@ namespace LevelSetsEditor.View.TimeLine
             else if(newPos.X>Container.ActualWidth) draggedObject.Margin = new Thickness(Container.ActualWidth, -5, 0, -5);
             else draggedObject.Margin = new Thickness(newPos.X, -5, 0, -5);
             PosLabel.Content = ((int)newPos.X).ToString();
+
+            CRPosition = draggedObject.Margin.Left / Container.ActualWidth;
+            OnCRPChanged();
         }
 
         void OnMouseUp(object sender, MouseButtonEventArgs e)
@@ -93,6 +129,7 @@ namespace LevelSetsEditor.View.TimeLine
             UpdatePosition(e);
             if(IsMouseOver) CursorColor = new SolidColorBrush(Color.FromArgb(255, 0, 50, 255));
             else CursorColor = new SolidColorBrush(Color.FromArgb(255, 7, 0, 71));
+            OnEndDrag();
         }
         #endregion
 

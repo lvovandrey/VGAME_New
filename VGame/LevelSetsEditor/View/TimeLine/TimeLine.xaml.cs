@@ -22,12 +22,12 @@ namespace LevelSetsEditor.View.TimeLine
     public partial class TimeLine : UserControl
     {
         ObservableCollection<Interval> Intervals;
-      
 
+        public VideoPlayerMVVM.VideoPlayer videoPlayer;
         public TimeLine()
         {
             InitializeComponent();
-
+            DataContext = this;
             Intervals = new ObservableCollection<Interval>();
             FullTime = TimeSpan.FromSeconds(450);
 
@@ -43,9 +43,70 @@ namespace LevelSetsEditor.View.TimeLine
             Cursor1.Container = this;
 
 
+            Binding binding = new Binding();
 
+            binding.ElementName = "Cursor1"; // элемент-источник
+            binding.Path = new PropertyPath("CRPosition"); // свойство элемента-источника
+            binding.Mode = BindingMode.TwoWay;
+            this.SetBinding(TimeLine.POSProperty, binding); // установка привязки для элемента-приемника
+
+            OnPOSChanged += TimeLine_OnPOSChanged;
+            Cursor1.OnCRPChanged += Cursor1_OnCRPChanged;
+            Cursor1.OnStartDrag += Cursor1_OnStartDrag;
+            Cursor1.OnEndDrag += Cursor1_OnEndDrag;
         }
 
+        bool wasplayed = false;
+        private void Cursor1_OnStartDrag()
+        {
+            
+            if (videoPlayer != null) { wasplayed = videoPlayer.IsPlaying; videoPlayer.pause(); }
+        }
+        private void Cursor1_OnEndDrag()
+        {
+            if ((videoPlayer != null) && (wasplayed)) { videoPlayer.play(); }
+        }
+
+        bool PosSelf = false;
+        private void Cursor1_OnCRPChanged()
+        {
+            PosSelf = true;
+            POS = Cursor1.CRPosition*1000;
+        }
+
+        private void TimeLine_OnPOSChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (PosSelf) { PosSelf = false; return; }
+            if (POS>-0.1) Cursor1.CRPosition = POS/1000;
+        }
+
+
+
+
+        #region DependencyProperties2
+        public static readonly DependencyProperty POSProperty = DependencyProperty.Register("POS",
+         typeof(double), typeof(TimeLine),
+         new FrameworkPropertyMetadata(new PropertyChangedCallback(POSPropertyChangedCallback)));
+
+        public double POS
+        {
+            get { return (double)GetValue(POSProperty); }
+            set { SetValue(POSProperty, value); }
+        }
+
+
+        public event PropertyChanged OnPOSChanged;
+
+
+        static void POSPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (((TimeLine)d).OnPOSChanged != null)
+                ((TimeLine)d).OnPOSChanged(d, e);
+        }
+        #endregion
+
+
+        #region intervalsOperations
         //DependencyProperty SelectedInterval  - Попробовать с ним поработать снаружи
         public Interval SelectedInterval
         {
@@ -92,7 +153,7 @@ namespace LevelSetsEditor.View.TimeLine
             interval.Body = null; // это наверное излишне
             interval = null;
         }
-
+        #endregion
     }
 
 

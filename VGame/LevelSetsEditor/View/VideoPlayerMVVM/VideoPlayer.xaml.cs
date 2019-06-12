@@ -167,6 +167,10 @@ namespace LevelSetsEditor.View.VideoPlayerMVVM
         {
             if (vlc.MediaPlayer.IsPlaying) vlc.MediaPlayer.Pause();
         }
+        public void play()
+        {
+            if (vlc.MediaPlayer.Video != null) vlc.MediaPlayer.Play();
+        }
 
         private void PlayBtn_Click_1(object sender, RoutedEventArgs e)
         {
@@ -186,7 +190,7 @@ namespace LevelSetsEditor.View.VideoPlayerMVVM
 
         }
 
-
+        public bool IsPlaying { get {return vlc.MediaPlayer.IsPlaying; } }
         bool WasPlaing;
 
         private void TimeSlider_PreviewMouseDown(object sender, MouseButtonEventArgs e)

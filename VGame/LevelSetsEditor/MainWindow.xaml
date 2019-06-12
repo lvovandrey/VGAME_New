@@ -171,9 +171,10 @@
 
 
                         <player:VideoPlayer x:Name="VideoPlayer" Source="{Binding Path=VideoInfoVM.Source, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Margin="22,22,22.4,22.8" />
-                        <timeline:TimeLine Height="50" Grid.Row="1" Margin="10"></timeline:TimeLine>
+                        <!--<TextBox x:Name="TESTtimelineTextbox" Text="{Binding ElementName=TimeLine1, Path=POS, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="4" Background="AliceBlue" Width="100" Height="100"/>-->
+                        <timeline:TimeLine  x:Name="TimeLine1" Height="50" Grid.Row="1" Margin="10" POS="{Binding ElementName=VideoPlayer,Path=Position,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></timeline:TimeLine>
                         <GridSplitter Grid.Row="2" Height="3"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,1.2,0.4,0.6" />
-                        <GroupBox Header="Инфо о видео" x:Name="VideoInfoGroupBox" 
+                        <!--<GroupBox Header="Инфо о видео" x:Name="VideoInfoGroupBox" 
                          DataContext="{Binding VideoInfoVM}"   Grid.Row="3" Margin="0,0.4,0.4,0.2" Grid.RowSpan="2">
                             <StackPanel Orientation="Vertical">
                                 <propview:PropertyViewer x:Name="PropViewTitle" DataContext="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Название"/>
@@ -184,7 +185,7 @@
                                 <propview:PropertyViewer  DataContext="{Binding Type,  UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Тип видео"/>
                                 <propview:PropertyViewer  DataContext="{Binding Resolution, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Разрешение" Margin="0,0,0,50"/>
                             </StackPanel>
-                        </GroupBox>
+                        </GroupBox>-->
                     </Grid>
                 </Grid>
             </TabItem>

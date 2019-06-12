@@ -49,7 +49,7 @@ namespace LevelSetsEditor
             WebBrowserVM = new WebBrowserVM(Browser);
             GridBrowser.DataContext = WebBrowserVM;
             mainWindow = this;
-
+            TimeLine1.videoPlayer = this.VideoPlayer;
 
             startNewWindowProgress();
       
