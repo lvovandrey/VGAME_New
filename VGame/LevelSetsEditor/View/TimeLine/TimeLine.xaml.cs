@@ -153,6 +153,16 @@ namespace LevelSetsEditor.View.TimeLine
             interval.Body = null; // это наверное излишне
             interval = null;
         }
+        //Удаляем интервал
+        public void ClearIntervals()
+        {
+            foreach(Interval I in Intervals)
+            {
+                RemoveInterval(I);
+            }
+            Intervals.Clear();
+        }
+
         #endregion
     }
 

@@ -132,7 +132,7 @@ namespace LevelSetsEditor
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ViewModel = new VM(new VideoPlayerVM(VideoPlayer), this);
+            ViewModel = new VM(new VideoPlayerVM(VideoPlayer), new TimeLineVM(VideoPlayer,TimeLine1), this);
         }
 
         private void Button_Click_JOIN(object sender, RoutedEventArgs e)

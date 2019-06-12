@@ -24,6 +24,7 @@ namespace LevelSetsEditor.ViewModel
         private ObservableCollection<Level> _levels { get; set; }
         private ObservableCollection<LevelVM> _levelsvm { get; set; }
         private VideoPlayerVM _videoPlayerVM;
+        private TimeLineVM _timeLineVM;
 
         public ObservableCollection<LevelVM> LevelVMs
         {
@@ -45,6 +46,7 @@ namespace LevelSetsEditor.ViewModel
             {
                 _SelectedLevelVM = value;
                 OnPropertyChanged("SelectedLevelVM");
+                _timeLineVM.SelectedLevelVM = SelectedLevelVM;
             }
 
         }
@@ -58,9 +60,11 @@ namespace LevelSetsEditor.ViewModel
             mainWindow = _mainWindow;
         }
 
-        public VM(VideoPlayerVM videoPlayerVM, MainWindow _mainWindow):this(_mainWindow)
+        public VM(VideoPlayerVM videoPlayerVM,TimeLineVM timeLineVM, MainWindow _mainWindow):this(_mainWindow)
         {
             _videoPlayerVM = videoPlayerVM;
+            _timeLineVM = timeLineVM;
+          //  mainWindow.TimeLine1.DataContext = _timeLineVM;
             mainWindow.DataContext = this;
         }
 
