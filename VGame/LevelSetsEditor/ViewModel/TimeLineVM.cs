@@ -44,9 +44,9 @@ namespace LevelSetsEditor.ViewModel
 
 
                 _SelectedLevelVM = value;
-                _SelectedLevelVM.SceneVMs.CollectionChanged += SceneVMs_CollectionChanged;
+          //      _SelectedLevelVM.SceneVMs.CollectionChanged += SceneVMs_CollectionChanged;
                 OnPropertyChanged("SelectedLevelVM");
-                SceneVMs_CollectionChanged(null, null);
+            //    SceneVMs_CollectionChanged(null, null);
                 TimeLine.FullTime = _SelectedLevelVM.VideoInfoVM.Duration;
 
             }

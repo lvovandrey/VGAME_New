@@ -24,6 +24,13 @@ namespace LevelSetsEditor.ViewModel
             _videoPlayerVM = videoPlayerVM;
             SegregateTime = TimeSpan.FromSeconds(100);
             SegregateCount = 5;
+
+            _Level.Scenes.CollectionChanged += SceneVMs_CollectionChanged;
+        }
+
+        private void SceneVMs_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            MessageBox.Show("Изменение коллекции");
         }
 
         public string Name

@@ -121,10 +121,24 @@ namespace LevelSetsEditor.View.TimeLine
         public TimeSpan FullTime
         {
             get { return (TimeSpan)GetValue(FullTimeProperty); }
-            set { SetValue(FullTimeProperty, value); }
+            set { SetValue(FullTimeProperty, value);
+                RefreshDashes();
+            }
         }
+
         public static readonly DependencyProperty FullTimeProperty =
             DependencyProperty.Register("FullTime", typeof(TimeSpan), typeof(TimeLine), new PropertyMetadata(TimeSpan.FromSeconds(10)));
+
+        void RefreshDashes()
+        {
+
+            T1.T_full = FullTime;
+            T2.T_full = FullTime;
+            int N = (int)Math.Round((FullTime.TotalSeconds / T1.T_el.TotalSeconds))+1;
+            T1.FillDashes(N);
+            N = (int)Math.Round((FullTime.TotalSeconds / T2.T_el.TotalSeconds)) + 1;
+            T2.FillDashes(N);
+        }
 
         //Добавляем интервал
         public void AddInterval(TimeSpan begin, TimeSpan end)

@@ -104,7 +104,7 @@ namespace LevelSetsEditor.View.TimeLine
 
 
       //  int N_el = 5;
-        double W_full = 1000;
+        public double W_full = 1000;
 
         public TimeSpan T_el = TimeSpan.FromSeconds(60);
         public TimeSpan T_full = TimeSpan.FromSeconds(450);
@@ -161,6 +161,18 @@ namespace LevelSetsEditor.View.TimeLine
             Dash d = new Dash();
             RefreshBinding(d);
             MainStack.Children.Add(d);
+        }
+
+        public void FillDashes(int num)
+        {
+            if(MainStack.Children.Count<num)
+            {
+                int N = MainStack.Children.Count - num;
+                for (int i = 1; i < num; i++)
+                {
+                    addDash();
+                }
+            }
         }
 
         private void MainStack_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
