@@ -20,16 +20,23 @@ namespace LevelSetsEditor.ViewModel
         {
             TimeLine = timeLine;
             TimeLine.videoPlayer = _videoPlayer;
+
         //    _SelectedLevelVM.SceneVMs.CollectionChanged += SceneVMs_CollectionChanged;
         }
 
-        private void SceneVMs_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void _SelectedLevelVM_SceneVMsCollectionChangedEvent()
         {
             TimeLine.ClearIntervals();
             foreach (SceneVM sceneVM in _SelectedLevelVM.SceneVMs)
             {
                 TimeLine.AddInterval(sceneVM.VideoSegment_TimeBegin, sceneVM.VideoSegment_TimeEnd);
             }
+           // throw new NotImplementedException();
+        }
+
+        private void SceneVMs_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+
         }
 
         private LevelVM _SelectedLevelVM;
@@ -49,6 +56,8 @@ namespace LevelSetsEditor.ViewModel
             //    SceneVMs_CollectionChanged(null, null);
                 TimeLine.FullTime = _SelectedLevelVM.VideoInfoVM.Duration;
 
+                _SelectedLevelVM.SceneVMsCollectionChangedEventClear();
+                _SelectedLevelVM.SceneVMsCollectionChangedEvent += _SelectedLevelVM_SceneVMsCollectionChangedEvent;
             }
 
         }

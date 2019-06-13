@@ -25,13 +25,17 @@ namespace LevelSetsEditor.ViewModel
             SegregateTime = TimeSpan.FromSeconds(100);
             SegregateCount = 5;
 
-            _Level.Scenes.CollectionChanged += SceneVMs_CollectionChanged;
+            try { _Level.Scenes.CollectionChanged -= SceneVMs_CollectionChanged; }
+            finally { _Level.Scenes.CollectionChanged += SceneVMs_CollectionChanged; }
         }
 
+
+        public event Action SceneVMsCollectionChangedEvent;
         private void SceneVMs_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            MessageBox.Show("Изменение коллекции");
+            SceneVMsCollectionChangedEvent();
         }
+        public void SceneVMsCollectionChangedEventClear() { SceneVMsCollectionChangedEvent = null; }
 
         public string Name
         {
