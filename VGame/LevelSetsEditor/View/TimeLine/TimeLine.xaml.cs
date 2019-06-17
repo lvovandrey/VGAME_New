@@ -21,14 +21,14 @@ namespace LevelSetsEditor.View.TimeLine
     /// </summary>
     public partial class TimeLine : UserControl
     {
-        ObservableCollection<Interval> Intervals;
+        List<Interval> Intervals;
 
         public VideoPlayerMVVM.VideoPlayer videoPlayer;
         public TimeLine()
         {
             InitializeComponent();
             DataContext = this;
-            Intervals = new ObservableCollection<Interval>();
+            Intervals = new List<Interval>();
             FullTime = TimeSpan.FromSeconds(450);
 
             T1.T_full = FullTime;
@@ -167,12 +167,14 @@ namespace LevelSetsEditor.View.TimeLine
             interval.Body = null; // это наверное излишне
             interval = null;
         }
-        //Удаляем интервал
+        //Удаляем интервалы все
         public void ClearIntervals()
         {
-            foreach(Interval I in Intervals)
+            foreach (Interval I in Intervals)
             {
-                RemoveInterval(I);
+                this.GridMain.Children.Remove(I.Body);
+                I.Body.ClearOnClick();
+                I.Body = null; // это наверное излишне
             }
             Intervals.Clear();
         }

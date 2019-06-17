@@ -31,7 +31,6 @@ namespace LevelSetsEditor.ViewModel
             {
                 TimeLine.AddInterval(sceneVM.VideoSegment_TimeBegin, sceneVM.VideoSegment_TimeEnd);
             }
-           // throw new NotImplementedException();
         }
 
         private void SceneVMs_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -58,6 +57,7 @@ namespace LevelSetsEditor.ViewModel
 
                 _SelectedLevelVM.SceneVMsCollectionChangedEventClear();
                 _SelectedLevelVM.SceneVMsCollectionChangedEvent += _SelectedLevelVM_SceneVMsCollectionChangedEvent;
+                _SelectedLevelVM_SceneVMsCollectionChangedEvent();
             }
 
         }
