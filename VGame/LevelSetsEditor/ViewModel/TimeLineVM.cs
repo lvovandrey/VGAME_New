@@ -8,20 +8,26 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace LevelSetsEditor.ViewModel
 {
     public class TimeLineVM : INotifyPropertyChanged
     {
         TimeLine TimeLine;
-        //public ObservableCollection<Interval> Intervals;
+       
 
         public TimeLineVM(VideoPlayer _videoPlayer, TimeLine timeLine)
         {
             TimeLine = timeLine;
             TimeLine.videoPlayer = _videoPlayer;
 
-        //    _SelectedLevelVM.SceneVMs.CollectionChanged += SceneVMs_CollectionChanged;
+            TimeLine.SceneSelect += TimeLine_SceneSelect;
+        }
+
+        private void TimeLine_SceneSelect()
+        {
+            SetSelectedSceneFormTimeline();
         }
 
         private void _SelectedLevelVM_SceneVMsCollectionChangedEvent()
@@ -45,21 +51,44 @@ namespace LevelSetsEditor.ViewModel
             { return _SelectedLevelVM; }
             set
             {
-                //if (_SelectedLevelVM!=null && _SelectedLevelVM.SceneVMs!=null)
-                // _SelectedLevelVM.SceneVMs.CollectionChanged -= SceneVMs_CollectionChanged;
-
-
                 _SelectedLevelVM = value;
-          //      _SelectedLevelVM.SceneVMs.CollectionChanged += SceneVMs_CollectionChanged;
                 OnPropertyChanged("SelectedLevelVM");
-            //    SceneVMs_CollectionChanged(null, null);
                 TimeLine.FullTime = _SelectedLevelVM.VideoInfoVM.Duration;
-
                 _SelectedLevelVM.SceneVMsCollectionChangedEventClear();
                 _SelectedLevelVM.SceneVMsCollectionChangedEvent += _SelectedLevelVM_SceneVMsCollectionChangedEvent;
                 _SelectedLevelVM_SceneVMsCollectionChangedEvent();
             }
+        }
 
+        private SceneVM _SelectedSceneVM;
+        public SceneVM SelectedSceneVM
+        {
+            get
+            { return _SelectedSceneVM; }
+            set
+            {
+                _SelectedSceneVM = value;
+                OnPropertyChanged("SelectedSceneVM");
+                _SelectedSceneVM.SceneVMsCollectionChangedEventClear();
+                _SelectedSceneVM.SceneVMsCollectionChangedEvent += _SelectedSceneVM_SceneVMsCollectionChangedEvent;
+                _SelectedSceneVM_SceneVMsCollectionChangedEvent();
+            }
+        }
+
+        private void _SelectedSceneVM_SceneVMsCollectionChangedEvent()
+        {
+            MessageBox.Show("Сцена изменилась выбранная");
+        }
+
+        internal void SelectedSceneChange(SceneVM selectedSceneVM)
+        {
+            SelectedSceneVM = selectedSceneVM;
+        }
+
+        private void SetSelectedSceneFormTimeline()
+        {
+            SceneVM sceneVM = _SelectedLevelVM.SceneVMs[2];
+            _SelectedLevelVM.SelectedSceneVM = sceneVM;
         }
 
         private Level Level { get { return SelectedLevelVM._level; } }

@@ -180,6 +180,14 @@ namespace LevelSetsEditor.View.TimeLine
         }
 
         #endregion
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            SceneSelect();
+        }
+
+        public event Action SceneSelect;
+
     }
 
 

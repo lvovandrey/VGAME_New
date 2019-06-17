@@ -9,8 +9,8 @@
     
         <Grid x:Name="GridMain" Background="DarkGoldenrod"  Margin="0,0,-20,0">
         <!--<TextBox Text="{Binding ElementName=Cursor1,Path=CRPosition, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Background="BurlyWood" Width="50" Height="25" Margin="-500,-25,0,50" Panel.ZIndex="100"></TextBox>-->
-        <TextBox Text="{Binding POS, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Background="#FFF0AB52" Width="50" Height="25" Margin="-500,-50,0,75" Panel.ZIndex="100"></TextBox>
-
+        <!--<TextBox Text="{Binding POS, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Background="#FFF0AB52" Width="50" Height="25" Margin="-500,-50,0,75" Panel.ZIndex="100"></TextBox>-->
+        <Button Content="12312312"  Background="#FFF0AB52" Width="50" Height="25" Margin="-500,-50,0,75" Panel.ZIndex="100" Click="Button_Click"     />
 
         <Grid Background="Cyan"  Margin="0,0,20,0">
                 <local:ScaleTime x:Name="T1"></local:ScaleTime>

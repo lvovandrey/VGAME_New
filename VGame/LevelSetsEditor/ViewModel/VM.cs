@@ -31,7 +31,7 @@ namespace LevelSetsEditor.ViewModel
             get
             {
                 if (_levels == null) return null;
-                _levelsvm = new ObservableCollection<LevelVM>(from l in _levels select new LevelVM(l,_videoPlayerVM));
+                _levelsvm = new ObservableCollection<LevelVM>(from l in _levels select new LevelVM(l,_videoPlayerVM,_timeLineVM));
                 return _levelsvm;
             }
         }

@@ -60,10 +60,6 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-
-
-
-
                     <Grid Grid.ColumnSpan="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50"/>
@@ -151,15 +147,10 @@
 
 
                     </Grid>
-
-
                     <GroupBox Header="Превью" x:Name="PreviewGroupBox"  DataContext="{Binding Path=VideoInfoVM}" Grid.Row="1" Grid.ColumnSpan="2" >
                         <propview:PreviewViewer DataContext="{Binding Path=PreviewVM}"></propview:PreviewViewer>
                     </GroupBox>
-
                     <GridSplitter Grid.Column ="2" Grid.RowSpan="2" Width="5"  HorizontalAlignment="Center" VerticalAlignment="Stretch" />
-
-
                     <Grid Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="2">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -168,11 +159,11 @@
                             <RowDefinition Height="49.6"/>
                             <RowDefinition Height="176"/>
                         </Grid.RowDefinitions>
-
-
                         <player:VideoPlayer x:Name="VideoPlayer" Source="{Binding Path=VideoInfoVM.Source, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Margin="22,22,22.4,22.8" />
                         <!--<TextBox x:Name="TESTtimelineTextbox" Text="{Binding ElementName=TimeLine1, Path=POS, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="4" Background="AliceBlue" Width="100" Height="100"/>-->
-                        <timeline:TimeLine  x:Name="TimeLine1" Height="50" Grid.Row="1" Margin="10" POS="{Binding ElementName=VideoPlayer,Path=Position,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></timeline:TimeLine>
+                        <timeline:TimeLine  x:Name="TimeLine1" Height="50" Grid.Row="1" Margin="10" 
+                                            POS="{Binding ElementName=VideoPlayer,Path=Position,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                            ></timeline:TimeLine>
                         <GridSplitter Grid.Row="2" Height="3"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,1.2,0.4,0.6" />
                         <!--<GroupBox Header="Инфо о видео" x:Name="VideoInfoGroupBox" 
                          DataContext="{Binding VideoInfoVM}"   Grid.Row="3" Margin="0,0.4,0.4,0.2" Grid.RowSpan="2">

@@ -16,12 +16,14 @@ namespace LevelSetsEditor.ViewModel
         private Level _Level;
         private VideoInfo _VideoInfo { get { return _Level.VideoInfo; } set { _Level.VideoInfo = value; } }
         private VideoPlayerVM _videoPlayerVM;
+        private TimeLineVM _timeLineVM;
 
-        public LevelVM(Level level, VideoPlayerVM videoPlayerVM)
+        public LevelVM(Level level, VideoPlayerVM videoPlayerVM, TimeLineVM timeLineVM)
         {
             _Level = level;
             _VideoInfoVM = new VideoInfoVM(_Level.VideoInfo);  //ВОт как надо - надо опираться на единую модель и не создавать новые представления в геттерах!!!
             _videoPlayerVM = videoPlayerVM;
+            _timeLineVM = timeLineVM;
             SegregateTime = TimeSpan.FromSeconds(100);
             SegregateCount = 5;
 
@@ -84,6 +86,7 @@ namespace LevelSetsEditor.ViewModel
             {
                 _SelectedSceneVM = value;
                 OnPropertyChanged("SelectedSceneVM");
+                _timeLineVM.SelectedSceneChange(_SelectedSceneVM);
             }
 
         }
