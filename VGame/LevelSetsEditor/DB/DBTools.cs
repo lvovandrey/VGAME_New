@@ -25,21 +25,21 @@ namespace LevelSetsEditor.DB
 
                 context = new Context();
 
-                IEnumerable<VideoInfo> VI = context.VideoInfoes.OfType<VideoInfo>().Where(n => n.Id < 1000);
+                IEnumerable<VideoInfo> VI = context.VideoInfoes.OfType<VideoInfo>().Where(n => n.Id < 10000);
                 List<VideoInfo> VList = VI.ToList();
 
-                IEnumerable<Preview> Pr = context.Previews.OfType<Preview>().Where(n => n.Id < 1000);
+                IEnumerable<Preview> Pr = context.Previews.OfType<Preview>().Where(n => n.Id < 10000);
                 List<Preview> PList = Pr.ToList();
 
-                IEnumerable<Scene> Sc = context.Scenes.OfType<Scene>().Where(n => n.Id < 1000);
+                IEnumerable<Scene> Sc = context.Scenes.OfType<Scene>().Where(n => n.Id < 10000);
                 List<Scene> ScList = Sc.ToList();
 
-                IEnumerable<VideoSegment> Vss = context.VideoSegments.OfType<VideoSegment>().Where(n => n.Id < 1000);
+                IEnumerable<VideoSegment> Vss = context.VideoSegments.OfType<VideoSegment>().Where(n => n.Id < 10000);
                 List<VideoSegment> VssList = Vss.ToList();
 
                 int levNumber = 0;
                 int levCount = 1;
-                IEnumerable<Level> LLL = context.Levels.OfType<Level>().Where(n => n.Id < 1000);
+                IEnumerable<Level> LLL = context.Levels.OfType<Level>().Where(n => n.Id < 10000);
                 levCount = LLL.Count();
 
                 foreach (Level l in LLL)

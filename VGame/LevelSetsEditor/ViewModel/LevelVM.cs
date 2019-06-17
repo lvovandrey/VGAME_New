@@ -26,18 +26,20 @@ namespace LevelSetsEditor.ViewModel
             _timeLineVM = timeLineVM;
             SegregateTime = TimeSpan.FromSeconds(100);
             SegregateCount = 5;
-
-            try { _Level.Scenes.CollectionChanged -= SceneVMs_CollectionChanged; }
+            
+            //пробрасываем событие изменения коллекции сцен 
+            try { _Level.Scenes.CollectionChanged -= SceneVMs_CollectionChanged; } 
             finally { _Level.Scenes.CollectionChanged += SceneVMs_CollectionChanged; }
         }
 
-
-        public event Action SceneVMsCollectionChangedEvent;
+        #region Свое событие изменения коллекции сцен (collectionChanged) т.к. родное криво работает.
+        public event Action SceneVMsCollectionChangedEvent; //событие изменения коллекции сцен  - родное снаружи не работает
         private void SceneVMs_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             SceneVMsCollectionChangedEvent();
         }
         public void SceneVMsCollectionChangedEventClear() { SceneVMsCollectionChangedEvent = null; }
+        #endregion
 
         public string Name
         {
@@ -86,7 +88,7 @@ namespace LevelSetsEditor.ViewModel
             {
                 _SelectedSceneVM = value;
                 OnPropertyChanged("SelectedSceneVM");
-                _timeLineVM.SelectedSceneChange(_SelectedSceneVM);
+                //_timeLineVM.SelectedSceneChange(_SelectedSceneVM);
             }
 
         }

@@ -43,7 +43,8 @@ namespace LevelSetsEditor.View.TimeLine
             {
                 _Selected = value;
                 OnPropertyChanged("Selected");
-                if (_Selected) RectColor = new SolidColorBrush(System.Windows.Media.Color.FromArgb(128,139, 255, 0));
+                if (_Selected)
+                    RectColor = new SolidColorBrush(System.Windows.Media.Color.FromArgb(128,139, 255, 0));
                 else RectColor = new SolidColorBrush(System.Windows.Media.Color.FromArgb(128, 34, 139, 34));
             }
         }

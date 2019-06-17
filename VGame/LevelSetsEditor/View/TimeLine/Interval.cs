@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LevelSetsEditor.ViewModel;
+using System;
 using System.ComponentModel;
 using System.Windows;
 
@@ -8,6 +9,7 @@ namespace LevelSetsEditor.View.TimeLine
     {
          TimeLine _Container;
          SceneTimeView _Body;
+        public SceneVM sceneVM; 
          TimeSpan _Begin;
          TimeSpan _End;
          int _Zindex;
@@ -15,7 +17,7 @@ namespace LevelSetsEditor.View.TimeLine
 
 
 
-        public Interval(TimeLine container, TimeSpan begin, TimeSpan end, int zindex = 1)
+        public Interval(TimeLine container, TimeSpan begin, TimeSpan end, SceneVM _sceneVM, int zindex = 1)
         {
             Container = container;
             Begin = begin;
@@ -23,6 +25,7 @@ namespace LevelSetsEditor.View.TimeLine
             Zindex = zindex;
             Body = new SceneTimeView();
             Body.HorizontalAlignment = HorizontalAlignment.Left;
+            sceneVM = _sceneVM;
             SubscribeDepPropertyEvents();
 
             Body.Selected = false;

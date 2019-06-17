@@ -21,28 +21,11 @@ namespace LevelSetsEditor.ViewModel
         {
             TimeLine = timeLine;
             TimeLine.videoPlayer = _videoPlayer;
-
-            TimeLine.SceneSelect += TimeLine_SceneSelect;
         }
 
-        private void TimeLine_SceneSelect()
-        {
-            SetSelectedSceneFormTimeline();
-        }
 
-        private void _SelectedLevelVM_SceneVMsCollectionChangedEvent()
-        {
-            TimeLine.ClearIntervals();
-            foreach (SceneVM sceneVM in _SelectedLevelVM.SceneVMs)
-            {
-                TimeLine.AddInterval(sceneVM.VideoSegment_TimeBegin, sceneVM.VideoSegment_TimeEnd);
-            }
-        }
 
-        private void SceneVMs_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
 
-        }
 
         private LevelVM _SelectedLevelVM;
         public LevelVM SelectedLevelVM
@@ -54,11 +37,22 @@ namespace LevelSetsEditor.ViewModel
                 _SelectedLevelVM = value;
                 OnPropertyChanged("SelectedLevelVM");
                 TimeLine.FullTime = _SelectedLevelVM.VideoInfoVM.Duration;
-                _SelectedLevelVM.SceneVMsCollectionChangedEventClear();
+
+                _SelectedLevelVM.SceneVMsCollectionChangedEventClear();//Обрабатываем/подписываемся на событие изменения коллекции сцен
                 _SelectedLevelVM.SceneVMsCollectionChangedEvent += _SelectedLevelVM_SceneVMsCollectionChangedEvent;
                 _SelectedLevelVM_SceneVMsCollectionChangedEvent();
             }
         }
+        //Обрабатываем событие изменения коллекции сцен
+        private void _SelectedLevelVM_SceneVMsCollectionChangedEvent()
+        {
+            TimeLine.ClearIntervals();
+            foreach (SceneVM sceneVM in _SelectedLevelVM.SceneVMs)
+            {
+                TimeLine.AddInterval(sceneVM.VideoSegment_TimeBegin, sceneVM.VideoSegment_TimeEnd, sceneVM);
+            }
+        }
+
 
         private SceneVM _SelectedSceneVM;
         public SceneVM SelectedSceneVM
@@ -69,26 +63,12 @@ namespace LevelSetsEditor.ViewModel
             {
                 _SelectedSceneVM = value;
                 OnPropertyChanged("SelectedSceneVM");
-                _SelectedSceneVM.SceneVMsCollectionChangedEventClear();
-                _SelectedSceneVM.SceneVMsCollectionChangedEvent += _SelectedSceneVM_SceneVMsCollectionChangedEvent;
-                _SelectedSceneVM_SceneVMsCollectionChangedEvent();
             }
-        }
-
-        private void _SelectedSceneVM_SceneVMsCollectionChangedEvent()
-        {
-            MessageBox.Show("Сцена изменилась выбранная");
         }
 
         internal void SelectedSceneChange(SceneVM selectedSceneVM)
         {
             SelectedSceneVM = selectedSceneVM;
-        }
-
-        private void SetSelectedSceneFormTimeline()
-        {
-            SceneVM sceneVM = _SelectedLevelVM.SceneVMs[2];
-            _SelectedLevelVM.SelectedSceneVM = sceneVM;
         }
 
         private Level Level { get { return SelectedLevelVM._level; } }

@@ -45,18 +45,15 @@ namespace LevelSetsEditor
 
 
             InitializeComponent();
-            
+
             WebBrowserVM = new WebBrowserVM(Browser);
             GridBrowser.DataContext = WebBrowserVM;
             mainWindow = this;
             TimeLine1.videoPlayer = this.VideoPlayer;
 
             startNewWindowProgress();
-      
-
-            //            StartWindowInfo();
-
         }
+            
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -133,7 +130,52 @@ namespace LevelSetsEditor
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             ViewModel = new VM(new VideoPlayerVM(VideoPlayer), new TimeLineVM(VideoPlayer,TimeLine1), this);
+            //подписываемся на событие выбора нового Level -поверь пригодится...
+            ViewModel.PropertyChanged += ViewModel_PropertyChanged;
+
         }
+
+        private void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "SelectedLevelVM")
+            {
+                //для начала отвязать попробуем
+                try { ViewModel.SelectedLevelVM.PropertyChanged -= SelectedLevelVM_PropertyChanged; }
+                finally
+                {
+                    //подписываемся на событие выбора новой сцены (т.к. ListView надо бы обновлять)
+                    ViewModel.SelectedLevelVM.PropertyChanged += SelectedLevelVM_PropertyChanged;
+                }
+            }
+        }
+
+        bool Hadndled1 = false;//флаг для предотвращения бесконечного цикла  выбора сцены
+        private void SelectedLevelVM_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (Hadndled1) { Hadndled1 = false; return; }
+
+            //Обработка события выбора новой сцены (т.к. ListView надо бы обновлять)
+            if (e.PropertyName == "SelectedSceneVM")
+            {
+                
+               // index = 4;
+                Tools.ToolsTimer.Delay(() =>   //Die, die die my darling I'll be seeing you in Hell
+                {
+                    Hadndled1 = true;
+                    int i = 0;
+                    SceneVM sceneVM = ViewModel.SelectedLevelVM.SelectedSceneVM;
+                    foreach(SceneVM s in ViewModel.SelectedLevelVM.SceneVMs)
+                    {
+                        i++;
+                        if (s.SceneId == sceneVM.SceneId) {  break; }
+                    }
+
+                   
+                    SceneListBox.SelectedIndex = i-1;
+                }, TimeSpan.FromMilliseconds(20));
+            }
+        }
+
 
         private void Button_Click_JOIN(object sender, RoutedEventArgs e)
         {
@@ -204,6 +246,11 @@ namespace LevelSetsEditor
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
             Speaker.Speak(txtSpeak.Text);         
+        }
+
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+            SceneListBox.SelectedIndex = 2;
         }
     }
 }

@@ -100,8 +100,8 @@
 
 
 
-                        <ListBox Name="SceneListBox" ItemsSource="{Binding Path=SceneVMs, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
-                         SelectedItem="{Binding Path=SelectedSceneVM, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="1" Grid.ColumnSpan="5" IsSynchronizedWithCurrentItem="True">
+                        <ListView Name="SceneListBox" ItemsSource="{Binding Path=SceneVMs, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+                         SelectedItem="{Binding Path=SelectedSceneVM, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="1" Grid.ColumnSpan="5" IsSynchronizedWithCurrentItem="True" >
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
@@ -122,7 +122,7 @@
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
-                        </ListBox>
+                        </ListView>
                         <WrapPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="6">
                             <Button Width="20" Content="+" Margin="5" Command="{Binding AddSceneCommand}"/>
                             <Button Width="20" Content="-" Margin="5" Command="{Binding RemoveSceneCommand}"/>
@@ -130,7 +130,9 @@
                             <Button Width="40" Content="Down" Margin="5" Command="{Binding DownSceneCommand}"/>
                             <Button Width="40" Content="Clear" Margin="5" Command="{Binding ClearScenesListCommand}"/>
                             <Button Width="40" Content="Auto" Margin="5" Command="{Binding SegregateScenesCommand}"/>
-
+                            
+                            <Button Width="40" Content="!!!!!" Margin="5" Click="Button_Click_5"/>
+                            
                             <TextBox Name="SegregateTextBox" Margin="25,5,5,5" Width="60" Text="{Binding SegregateTime, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                             <Button Width="40" Content="AutoT" Margin="5" Command="{Binding SegregateScenesCommand}" CommandParameter="{Binding SegregateTime}"/>
 
@@ -163,7 +165,9 @@
                         <!--<TextBox x:Name="TESTtimelineTextbox" Text="{Binding ElementName=TimeLine1, Path=POS, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="4" Background="AliceBlue" Width="100" Height="100"/>-->
                         <timeline:TimeLine  x:Name="TimeLine1" Height="50" Grid.Row="1" Margin="10" 
                                             POS="{Binding ElementName=VideoPlayer,Path=Position,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                                            ></timeline:TimeLine>
+                                            SelectedItem="{Binding ElementName=SceneListBox, Path=SelectedItem ,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                            />
+                        <!-- -->
                         <GridSplitter Grid.Row="2" Height="3"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,1.2,0.4,0.6" />
                         <!--<GroupBox Header="Инфо о видео" x:Name="VideoInfoGroupBox" 
                          DataContext="{Binding VideoInfoVM}"   Grid.Row="3" Margin="0,0.4,0.4,0.2" Grid.RowSpan="2">

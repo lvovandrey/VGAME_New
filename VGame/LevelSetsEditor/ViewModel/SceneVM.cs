@@ -21,11 +21,8 @@ namespace LevelSetsEditor.ViewModel
             this.scene = _scene;
             videoPlayerVM = _videoPlayerVM;
             TrackTime = true;
-            SceneVMsCollectionChangedEvent?.Invoke();
         }
 
-        public event Action SceneVMsCollectionChangedEvent;
-        public void SceneVMsCollectionChangedEventClear() { SceneVMsCollectionChangedEvent = null; }
 
         public TimeSpan VideoSegment_TimeBegin
         {
@@ -98,6 +95,7 @@ namespace LevelSetsEditor.ViewModel
                 OnPropertyChanged("TasksCount");
             }
         }
+
 
         public int Position
         {
@@ -205,6 +203,7 @@ namespace LevelSetsEditor.ViewModel
             }
         }
 
+       
 
         #region mvvm
         public event PropertyChangedEventHandler PropertyChanged;
@@ -213,8 +212,6 @@ namespace LevelSetsEditor.ViewModel
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-
-            SceneVMsCollectionChangedEvent?.Invoke();
         }
         #endregion
     }
