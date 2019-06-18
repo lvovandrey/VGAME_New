@@ -12,10 +12,10 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="1"/>
         </Grid.RowDefinitions>
-       
-        
-        
-            <Rectangle Fill="{Binding RectColor,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Stretch" 
+
+
+        <Rectangle Fill="Black" VerticalAlignment="Stretch" Width="5" HorizontalAlignment="Left" Panel.ZIndex="100" />
+        <Rectangle Fill="{Binding RectColor,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Stretch" 
                        Margin="0,1,0,-5" Stroke="#FF004100"   RadiusX="4" 
                        RadiusY="4" StrokeThickness="1" />
             <local:TimeLabel x:Name="TimeLabel" Margin="0,0,0,2" VerticalAlignment="Bottom"/>

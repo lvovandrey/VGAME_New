@@ -63,6 +63,8 @@ namespace LevelSetsEditor.View.TimeLine
         }
 
 
+
+
         #region mvvm
         public event PropertyChangedEventHandler PropertyChanged;
 
