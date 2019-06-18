@@ -63,6 +63,7 @@ namespace LevelSetsEditor.View.TimeLine
 
         private void TimeLine_OnSelectedItemChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
+            if (SelectedItem == null) return;
             Interval IntervalForSelection=Intervals.Where(n => n.sceneVM.SceneId == SelectedItem.SceneId).FirstOrDefault();
             if (IntervalForSelection!=null)
             SelectInterval(IntervalForSelection, "Событие");
