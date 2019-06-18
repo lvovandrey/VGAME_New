@@ -160,6 +160,7 @@ namespace LevelSetsEditor.View.TimeLine
         {
             Interval interval = new Interval(this, begin, end, sceneVM);
             this.GridMain.Children.Add(interval.Body);
+            interval.Body.Container = this;
             Intervals.Add(interval);
             interval.Body.OnClick += (sender, e) => 
             {
@@ -172,19 +173,22 @@ namespace LevelSetsEditor.View.TimeLine
         //выбрать интервал
         public void SelectInterval(Interval interval, string sender)
         {
-            
+
             //if (sender == "Клик")
             //{
-                if (SelectionIsAlreadyChange) { return; }
-                foreach (Interval i in Intervals)
-                {
-                    i.Body.Selected = false;
-                }
-                interval.Body.Selected = true;
-                SelectedInterval = interval;
-                SelectionIsAlreadyChange = true;
-                Tools.ToolsTimer.Delay(() => { SelectionIsAlreadyChange = false; }, TimeSpan.FromMilliseconds(5));
-                SelectedItem = interval.sceneVM;
+            if (SelectionIsAlreadyChange) { return; }
+            foreach (Interval i in Intervals)
+            {
+                i.Body.Selected = false;
+                Panel.SetZIndex(i.Body, 0);
+            }
+            interval.Body.Selected = true;
+            Panel.SetZIndex(interval.Body, 1);
+
+            SelectedInterval = interval;
+            SelectionIsAlreadyChange = true;
+            Tools.ToolsTimer.Delay(() => { SelectionIsAlreadyChange = false; }, TimeSpan.FromMilliseconds(5));
+            SelectedItem = interval.sceneVM;
             //}
             //if (sender == "Событие")
             //{

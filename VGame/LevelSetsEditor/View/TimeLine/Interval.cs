@@ -23,7 +23,7 @@ namespace LevelSetsEditor.View.TimeLine
             Begin = begin;
             End = end;
             Zindex = zindex;
-            Body = new SceneTimeView();
+            Body = new SceneTimeView(this);
             Body.HorizontalAlignment = HorizontalAlignment.Left;
             sceneVM = _sceneVM;
             SubscribeDepPropertyEvents();
@@ -134,10 +134,13 @@ namespace LevelSetsEditor.View.TimeLine
             if (Body.Width > 90) { LabelVisibility = true; } else { LabelVisibility = false; }
             Body.TimeLabel.End = End;
             Body.TimeLabel.Begin = Begin;
-
-
         }
 
+        public void UpdateFromUI()
+        {
+            if (Body.ActualWidth > 90) { LabelVisibility = true; } else { LabelVisibility = false; }
+
+        }
         #region mvvm
         public event PropertyChangedEventHandler PropertyChanged;
 
