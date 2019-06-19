@@ -135,20 +135,8 @@ namespace LevelSetsEditor.View.TimeLine
         }
         #endregion
         #region Реализация установки курсора в определенную точку
-        //Попробуем сделать перемещение с помощью имитации драг-дропа
         public void SetPosition(double Position, MouseButtonEventArgs e)
         {
-            //StartDrag(this, e);
-            //relativeMousePos.X = 0;
-            //relativeMousePos.Y = 0;
-            //Tools.ToolsTimer.Delay(() =>
-            //{
-            //    UpdatePosition(e);
-            //    Tools.ToolsTimer.Delay(() =>
-            //    {
-            //        OnMouseUp(this,e);
-            //    }, TimeSpan.FromMilliseconds(100));
-            //}, TimeSpan.FromMilliseconds(100));
             OnStartDrag();
             draggedObject = this;
             var newPos = e.GetPosition(Container);
@@ -163,7 +151,7 @@ namespace LevelSetsEditor.View.TimeLine
                 OnCRPChanged();
                 OnEndDrag();
                 StartDrag(this, e);
-            }, TimeSpan.FromMilliseconds(100));
+            }, TimeSpan.FromMilliseconds(10));
 
         }
 
