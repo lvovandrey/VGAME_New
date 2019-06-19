@@ -163,7 +163,7 @@
                         </Grid.RowDefinitions>
                         <player:VideoPlayer x:Name="VideoPlayer" Source="{Binding Path=VideoInfoVM.Source, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Margin="22,22,22.4,22.8" />
                         <!--<TextBox x:Name="TESTtimelineTextbox" Text="{Binding ElementName=TimeLine1, Path=POS, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="4" Background="AliceBlue" Width="100" Height="100"/>-->
-                        <timeline:TimeLine  x:Name="TimeLine1" Height="50" Grid.Row="1" Margin="10" 
+                        <timeline:TimeLine  x:Name="TimeLine1" Height="60" Grid.Row="1" Margin="10" 
                                             POS="{Binding ElementName=VideoPlayer,Path=Position,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                             SelectedItem="{Binding ElementName=SceneListBox, Path=SelectedItem ,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                             />

@@ -18,9 +18,9 @@ namespace LevelSetsEditor.View.TimeLine
         {
             InitializeComponent();
             Dashes = new ObservableCollection<Dash>();
-            for (int i = 0; i < 100; i++)
+            for (int i = 1; i < 100; i++)
             {
-                addDash();
+                addDash(i);
             }
         }
 
@@ -166,9 +166,10 @@ namespace LevelSetsEditor.View.TimeLine
             }
         }
 
-        public void addDash()
+        public void addDash(int i)
         {
             Dash d = new Dash();
+            d.Time =  TimeSpan.FromSeconds( T_el.TotalSeconds * ((double)(i-1)));
             RefreshBinding(d);
             MainStack.Children.Add(d);
             
@@ -181,7 +182,7 @@ namespace LevelSetsEditor.View.TimeLine
                 int N = MainStack.Children.Count - num;
                 for (int i = 1; i < num; i++)
                 {
-                    addDash();
+                    addDash(i);
                 }
             }
         }
@@ -245,10 +246,11 @@ namespace LevelSetsEditor.View.TimeLine
             binding.Path = new PropertyPath("ActualWidth"); // свойство элемента-источника
             dash.SetBinding(Dash.WidthProperty, binding); // установка привязки для элемента-приемника
 
-            Binding bindingTimeLabel = new Binding();
-            bindingTimeLabel.Source = this;  // элемент-источник
-            bindingTimeLabel.Path = new PropertyPath("TimeLabelVisibility"); // свойство элемента-источника
-            dash.SetBinding(Dash.TimeLabelVisibilityProperty, bindingTimeLabel); // установка привязки для элемента-приемника
+            Binding bindingTimeLabelVis = new Binding();
+            bindingTimeLabelVis.Source = this;  // элемент-источник
+            bindingTimeLabelVis.Path = new PropertyPath("TimeLabelVisibility"); // свойство элемента-источника
+            dash.SetBinding(Dash.TimeLabelVisibilityProperty, bindingTimeLabelVis); // установка привязки для элемента-приемника
+
         }
 
 

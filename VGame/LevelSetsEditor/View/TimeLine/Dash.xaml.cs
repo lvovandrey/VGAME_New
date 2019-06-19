@@ -58,6 +58,33 @@ namespace LevelSetsEditor.View.TimeLine
                 ((Dash)d).OnTimeLabelVisibilityChanged(d, e);
         }
 
+
+        public static readonly DependencyProperty TimeProperty = DependencyProperty.Register("Time",
+        typeof(TimeSpan), typeof(Dash),
+        new FrameworkPropertyMetadata(new PropertyChangedCallback(TimePropertyChangedCallback)));
+
+        public TimeSpan Time
+        {
+            get
+            {
+                return (TimeSpan)GetValue(TimeProperty);
+            }
+            set
+            {
+                SetValue(TimeProperty, value);
+                OnPropertyChanged("Time");
+            }
+        }
+
+        public event PropertyChanged OnTimeChanged;
+
+        static void TimePropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (((Dash)d).OnTimeChanged != null)
+                ((Dash)d).OnTimeChanged(d, e);
+        }
+
+
         double lineWidth = 0.5;
         public double LineWidth
         {
@@ -87,30 +114,6 @@ namespace LevelSetsEditor.View.TimeLine
                 OnPropertyChanged("LineHeight");
             }
         }
-
-        TimeSpan Time = TimeSpan.FromSeconds(0);
-        private Dash dash;
-
-
-
-        public string TimeText
-        {
-            get
-            {
-                return Time.ToString();
-            }
-            //set
-            //{
-            //    if (value <= 0.001) return;
-            //    lineHeight = value;
-            //    OnPropertyChanged("LineHeight");
-            //}
-        }
-
-
-
-
-
 
         #region INPC
         public event PropertyChangedEventHandler PropertyChanged;
