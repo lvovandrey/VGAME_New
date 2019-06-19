@@ -146,6 +146,7 @@ namespace LevelSetsEditor.View.TimeLine
                 {
                     //double curWidth = newPos.X - oldPos;
                     //if (curWidth < 5) return;
+                    if (newPos.X + ActualWidth > Container.ActualWidth) return;
                     Margin = new Thickness(newPos.X, Top, 0, Bottom);
                     //Width = curWidth;
                 }

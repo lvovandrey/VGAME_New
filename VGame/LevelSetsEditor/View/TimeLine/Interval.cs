@@ -126,10 +126,12 @@ namespace LevelSetsEditor.View.TimeLine
             double conWidth = Container.ActualWidth;
 
             double NewBodyWidth = conWidth * (end-beg) / tfull;
-            if (Body.ActualWidth != NewBodyWidth) Body.Width = NewBodyWidth;
+            //if (Body.ActualWidth != NewBodyWidth)
+                Body.Width = NewBodyWidth;
 
             double NewBodyLeft = conWidth * (beg) / tfull;
-            if (Body.Margin.Left != NewBodyLeft) Body.Margin = new Thickness(NewBodyLeft, Body.Margin.Top, Body.Margin.Right, Body.Margin.Bottom);
+            //if (Body.Margin.Left != NewBodyLeft)
+                Body.Margin = new Thickness(NewBodyLeft, Body.Margin.Top, Body.Margin.Right, Body.Margin.Bottom);
 
             if (Body.Width > 90) { LabelVisibility = true; } else { LabelVisibility = false; }
             Body.TimeLabel.End = End;
@@ -140,6 +142,20 @@ namespace LevelSetsEditor.View.TimeLine
         {
             if (Body.ActualWidth > 90) { LabelVisibility = true; } else { LabelVisibility = false; }
 
+            double tfull = Container.FullTime.TotalMilliseconds;
+            double conWidth = Container.ActualWidth;
+            double NewBegin = Body.Margin.Left * tfull / conWidth;
+            double NewEnd = Body.ActualWidth * tfull / conWidth + NewBegin;
+
+            _Begin = TimeSpan.FromMilliseconds(NewBegin);
+            _End = TimeSpan.FromMilliseconds(NewEnd);
+
+            Body.TimeLabel.End = End;
+            Body.TimeLabel.Begin = Begin;
+
+            OnPropertyChanged("Begin");
+            OnPropertyChanged("End");
+          //  UpdateView();
         }
         #region mvvm
         public event PropertyChangedEventHandler PropertyChanged;
