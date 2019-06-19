@@ -150,18 +150,58 @@ namespace LevelSetsEditor.View.TimeLine
 
             T1.T_full = FullTime;
             T2.T_full = FullTime;
+            T10.T_full = FullTime;
+
+            T1.T_el = TimeSpan.FromSeconds(60);
+            T2.T_el = TimeSpan.FromSeconds(10);
+            T10.T_el = TimeSpan.FromSeconds(600);
+
+
             int N = (int)Math.Round((FullTime.TotalSeconds / T1.T_el.TotalSeconds))+1;
             T1.ClearDashes();
             T1.FillDashes(N);
+
             N = (int)Math.Round((FullTime.TotalSeconds / T2.T_el.TotalSeconds)) + 1;
             T2.ClearDashes();
             T2.FillDashes(N);
-            T1.T_el = TimeSpan.FromSeconds(60);
+
+            N = (int)Math.Round((FullTime.TotalSeconds / T10.T_el.TotalSeconds)) + 1;
+            T10.ClearDashes();
+            T10.FillDashes(N);
+
+
             T1.ChangeDashesHeight(12);
             T1.ChangeDashesWidth(1);
 
-            T2.T_el = TimeSpan.FromSeconds(10);
             T2.ChangeDashesHeight(6);
+
+            T10.ChangeDashesHeight(18);
+            T10.ChangeDashesWidth(2);
+
+            T1.Visibility = Visibility.Visible;
+            T2.Visibility = Visibility.Visible;
+            T10.Visibility = Visibility.Visible;
+
+            if (FullTime < TimeSpan.FromMinutes(1))
+            {
+                T1.TimeLabelVisibility = Visibility.Hidden;
+                T2.TimeLabelVisibility = Visibility.Visible;
+                T10.TimeLabelVisibility = Visibility.Hidden;
+            }
+            else if (FullTime<TimeSpan.FromMinutes(20))
+            {
+                T1.TimeLabelVisibility = Visibility.Visible;
+                T2.TimeLabelVisibility = Visibility.Hidden;
+                T10.TimeLabelVisibility = Visibility.Hidden;
+            }
+            else if (FullTime >= TimeSpan.FromMinutes(20))
+            {
+                T1.TimeLabelVisibility = Visibility.Hidden;
+                T2.TimeLabelVisibility = Visibility.Hidden;
+                T10.TimeLabelVisibility = Visibility.Visible;
+                T2.Visibility = Visibility.Hidden;
+            }
+
         }
 
         //Добавляем интервал
