@@ -24,7 +24,7 @@ namespace LevelSetsEditor.View.TimeLine
             InitializeComponent();
             DataContext = this;
             MouseLeftButtonDown += StartDrag;
-            
+
             CursorColor = new SolidColorBrush(Color.FromArgb(255, 7, 0, 71));
             OnCRPositionChanged += Cursor_OnCRPositionChanged;
         }
@@ -54,10 +54,12 @@ namespace LevelSetsEditor.View.TimeLine
         public static readonly DependencyProperty CRPositionProperty = DependencyProperty.Register("CRPosition",
          typeof(double), typeof(Cursor),
          new FrameworkPropertyMetadata(new PropertyChangedCallback(CRPositionPropertyChangedCallback)));
-  
-        public double CRPosition {
+
+        public double CRPosition
+        {
             get { return (double)GetValue(CRPositionProperty); }
-            set { SetValue(CRPositionProperty, value); } }
+            set { SetValue(CRPositionProperty, value); }
+        }
 
 
         public event PropertyChanged OnCRPositionChanged;
@@ -70,7 +72,7 @@ namespace LevelSetsEditor.View.TimeLine
         }
         #endregion
 
-                       
+
         #region Реализация Drag'n'Drop
 
         public FrameworkElement Container;
@@ -101,8 +103,8 @@ namespace LevelSetsEditor.View.TimeLine
         {
             var point = e.GetPosition(Container);
             var newPos = point - relativeMousePos;
-            if(newPos.X<0) draggedObject.Margin = new Thickness(0, -5, 0, -5);
-            else if(newPos.X>Container.ActualWidth) draggedObject.Margin = new Thickness(Container.ActualWidth, -5, 0, -5);
+            if (newPos.X < 0) draggedObject.Margin = new Thickness(0, -5, 0, -5);
+            else if (newPos.X > Container.ActualWidth) draggedObject.Margin = new Thickness(Container.ActualWidth, -5, 0, -5);
             else draggedObject.Margin = new Thickness(newPos.X, -5, 0, -5);
             PosLabel.Content = ((int)newPos.X).ToString();
 
@@ -127,12 +129,45 @@ namespace LevelSetsEditor.View.TimeLine
             draggedObject.LostMouseCapture -= OnLostCapture;
             draggedObject.MouseUp -= OnMouseUp;
             UpdatePosition(e);
-            if(IsMouseOver) CursorColor = new SolidColorBrush(Color.FromArgb(255, 0, 50, 255));
+            if (IsMouseOver) CursorColor = new SolidColorBrush(Color.FromArgb(255, 0, 50, 255));
             else CursorColor = new SolidColorBrush(Color.FromArgb(255, 7, 0, 71));
             OnEndDrag();
         }
         #endregion
+        #region Реализация установки курсора в определенную точку
+        //Попробуем сделать перемещение с помощью имитации драг-дропа
+        public void SetPosition(double Position, MouseButtonEventArgs e)
+        {
+            //StartDrag(this, e);
+            //relativeMousePos.X = 0;
+            //relativeMousePos.Y = 0;
+            //Tools.ToolsTimer.Delay(() =>
+            //{
+            //    UpdatePosition(e);
+            //    Tools.ToolsTimer.Delay(() =>
+            //    {
+            //        OnMouseUp(this,e);
+            //    }, TimeSpan.FromMilliseconds(100));
+            //}, TimeSpan.FromMilliseconds(100));
+            OnStartDrag();
+            draggedObject = this;
+            var newPos = e.GetPosition(Container);
+            if (newPos.X < 0) draggedObject.Margin = new Thickness(0, -5, 0, -5);
+            else if (newPos.X > Container.ActualWidth) draggedObject.Margin = new Thickness(Container.ActualWidth, -5, 0, -5);
+            else draggedObject.Margin = new Thickness(newPos.X, -5, 0, -5);
+            PosLabel.Content = ((int)newPos.X).ToString();
 
+            Tools.ToolsTimer.Delay(() =>
+            {
+                CRPosition = draggedObject.Margin.Left / Container.ActualWidth;
+                OnCRPChanged();
+                OnEndDrag();
+                StartDrag(this, e);
+            }, TimeSpan.FromMilliseconds(100));
+
+        }
+
+        #endregion
 
         #region mvvm
         public event PropertyChangedEventHandler PropertyChanged;
@@ -146,7 +181,7 @@ namespace LevelSetsEditor.View.TimeLine
 
         private void Cursor_MouseEnter(object sender, MouseEventArgs e)
         {
-            CursorColor = new SolidColorBrush(Color.FromArgb(255, 0 , 50, 255));
+            CursorColor = new SolidColorBrush(Color.FromArgb(255, 0, 50, 255));
         }
 
         private void Cursor_MouseLeave(object sender, MouseEventArgs e)

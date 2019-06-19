@@ -173,9 +173,6 @@ namespace LevelSetsEditor.View.TimeLine
         //выбрать интервал
         public void SelectInterval(Interval interval, string sender)
         {
-
-            //if (sender == "Клик")
-            //{
             if (SelectionIsAlreadyChange) { return; }
             foreach (Interval i in Intervals)
             {
@@ -189,19 +186,6 @@ namespace LevelSetsEditor.View.TimeLine
             SelectionIsAlreadyChange = true;
             Tools.ToolsTimer.Delay(() => { SelectionIsAlreadyChange = false; }, TimeSpan.FromMilliseconds(5));
             SelectedItem = interval.sceneVM;
-            //}
-            //if (sender == "Событие")
-            //{
-            //    if (SelectionIsAlreadyChange) { SelectionIsAlreadyChange = false; return; }
-            //    foreach (Interval i in Intervals)
-            //    {
-            //        i.Body.Selected = false;
-            //    }
-            //    interval.Body.Selected = true;
-            //    SelectedInterval = interval;
-            //    SelectionIsAlreadyChange = true;
-            //    SelectedItem = interval.sceneVM;
-            //}
         }
 
         //Удаляем интервал
@@ -255,6 +239,12 @@ namespace LevelSetsEditor.View.TimeLine
 
 
 
+        private void Grid_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            //Перемещаем курсор в точку клика на таймлайне
+            Cursor1.SetPosition(0, e);
+
+        }
     }
 
 

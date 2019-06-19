@@ -11,7 +11,7 @@
 
         </Grid>
         <Grid VerticalAlignment="Bottom" Height="15">
-            <Grid  Height="15" VerticalAlignment="Bottom" Margin="0,0,20,0">
+            <Grid  Height="15" VerticalAlignment="Bottom" Margin="0,0,20,0" PreviewMouseDown="Grid_PreviewMouseDown">
                 <local:ScaleTime x:Name="T1"></local:ScaleTime>
                 <local:ScaleTime x:Name="T2"></local:ScaleTime>
             </Grid>
