@@ -175,6 +175,12 @@ namespace LevelSetsEditor.View.TimeLine
             
         }
 
+        public void ClearDashes()
+        {
+            Dashes.Clear();
+            MainStack.Children.Clear();
+        }
+
         public void FillDashes(int num)
         {
             if(MainStack.Children.Count<num)

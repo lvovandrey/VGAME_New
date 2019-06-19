@@ -136,7 +136,8 @@ namespace LevelSetsEditor.View.TimeLine
         public TimeSpan FullTime
         {
             get { return (TimeSpan)GetValue(FullTimeProperty); }
-            set { SetValue(FullTimeProperty, value);
+            set {
+                SetValue(FullTimeProperty, value);
                 RefreshDashes();
             }
         }
@@ -150,9 +151,17 @@ namespace LevelSetsEditor.View.TimeLine
             T1.T_full = FullTime;
             T2.T_full = FullTime;
             int N = (int)Math.Round((FullTime.TotalSeconds / T1.T_el.TotalSeconds))+1;
+            T1.ClearDashes();
             T1.FillDashes(N);
             N = (int)Math.Round((FullTime.TotalSeconds / T2.T_el.TotalSeconds)) + 1;
+            T2.ClearDashes();
             T2.FillDashes(N);
+            T1.T_el = TimeSpan.FromSeconds(60);
+            T1.ChangeDashesHeight(12);
+            T1.ChangeDashesWidth(1);
+
+            T2.T_el = TimeSpan.FromSeconds(10);
+            T2.ChangeDashesHeight(6);
         }
 
         //Добавляем интервал
