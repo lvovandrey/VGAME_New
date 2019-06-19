@@ -140,6 +140,7 @@ namespace LevelSetsEditor.View.VideoPlayerMVVM
         {
             if (Source == null) return;
             vlc.MediaPlayer.Play(Source);
+            Volume = 20;
         }
 
         private void Player_OnPositionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
