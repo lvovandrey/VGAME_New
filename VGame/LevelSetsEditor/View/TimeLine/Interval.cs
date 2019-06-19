@@ -10,18 +10,14 @@ namespace LevelSetsEditor.View.TimeLine
          TimeLine _Container;
          SceneTimeView _Body;
         public SceneVM sceneVM; 
-         TimeSpan _Begin;
-         TimeSpan _End;
          int _Zindex;
         bool _LabelVisibility;
 
 
 
-        public Interval(TimeLine container, TimeSpan begin, TimeSpan end, SceneVM _sceneVM, int zindex = 1)
+        public Interval(TimeLine container, SceneVM _sceneVM, int zindex = 1)
         {
             Container = container;
-            Begin = begin;
-            End = end;
             Zindex = zindex;
             Body = new SceneTimeView(this);
             Body.HorizontalAlignment = HorizontalAlignment.Left;
@@ -67,22 +63,22 @@ namespace LevelSetsEditor.View.TimeLine
         }
         public TimeSpan Begin
         {
-            get { return _Begin; }
+            get { return sceneVM.VideoSegment_TimeBegin; }
             set
             {
-                if (value == _Begin) return;
-                _Begin = value;
+                if (value == sceneVM.VideoSegment_TimeBegin) return;
+                sceneVM.VideoSegment_TimeBegin = value;
                 OnPropertyChanged("Begin");
                 UpdateView();
             }
         }
         public TimeSpan End
         {
-            get { return _End; }
+            get { return sceneVM.VideoSegment_TimeEnd; }
             set
             {
-                if (value == _End) return;
-                _End = value;
+                if (value == sceneVM.VideoSegment_TimeEnd) return;
+                sceneVM.VideoSegment_TimeEnd = value;
                 OnPropertyChanged("End");
                 UpdateView();
             }
@@ -147,8 +143,8 @@ namespace LevelSetsEditor.View.TimeLine
             double NewBegin = Body.Margin.Left * tfull / conWidth;
             double NewEnd = Body.ActualWidth * tfull / conWidth + NewBegin;
 
-            _Begin = TimeSpan.FromMilliseconds(NewBegin);
-            _End = TimeSpan.FromMilliseconds(NewEnd);
+            sceneVM.VideoSegment_TimeBegin = TimeSpan.FromMilliseconds(NewBegin);
+            sceneVM.VideoSegment_TimeEnd = TimeSpan.FromMilliseconds(NewEnd);
 
             Body.TimeLabel.End = End;
             Body.TimeLabel.Begin = Begin;

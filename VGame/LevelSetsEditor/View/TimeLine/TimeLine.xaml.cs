@@ -156,9 +156,9 @@ namespace LevelSetsEditor.View.TimeLine
         }
 
         //Добавляем интервал
-        public void AddInterval(TimeSpan begin, TimeSpan end, SceneVM sceneVM)
+        public void AddInterval(SceneVM sceneVM)
         {
-            Interval interval = new Interval(this, begin, end, sceneVM);
+            Interval interval = new Interval(this, sceneVM);
             this.GridMain.Children.Add(interval.Body);
             interval.Body.Container = this;
             Intervals.Add(interval);

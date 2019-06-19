@@ -49,7 +49,7 @@ namespace LevelSetsEditor.ViewModel
             TimeLine.ClearIntervals();
             foreach (SceneVM sceneVM in _SelectedLevelVM.SceneVMs)
             {
-                TimeLine.AddInterval(sceneVM.VideoSegment_TimeBegin, sceneVM.VideoSegment_TimeEnd, sceneVM);
+                TimeLine.AddInterval(sceneVM);
             }
         }
 
