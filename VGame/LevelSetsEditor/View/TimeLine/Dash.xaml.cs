@@ -19,19 +19,45 @@ namespace LevelSetsEditor.View.TimeLine
     /// <summary>
     /// Логика взаимодействия для Dash.xaml
     /// </summary>
-    public partial class Dash : UserControl
+    public partial class Dash : UserControl, INotifyPropertyChanged
     {
-        public DashSets sets;
+
         public Dash()
         {
             InitializeComponent();
-            sets = new DashSets();
-            DataContext = sets;
-        }
-    }
 
-    public class DashSets:INotifyPropertyChanged
-    {
+            DataContext = this;
+        }
+
+
+
+
+
+        public static readonly DependencyProperty TimeLabelVisibilityProperty = DependencyProperty.Register("TimeLabelVisibility",
+        typeof(Visibility), typeof(Dash),
+        new FrameworkPropertyMetadata(new PropertyChangedCallback(TimeLabelVisibilityPropertyChangedCallback)));
+
+        public Visibility TimeLabelVisibility
+        {
+            get
+            {
+                return (Visibility)GetValue(TimeLabelVisibilityProperty);
+            }
+            set
+            {
+                SetValue(TimeLabelVisibilityProperty, value);
+                OnPropertyChanged("TimeLabelVisibility");
+            }
+        }
+
+        public event PropertyChanged OnTimeLabelVisibilityChanged;
+
+        static void TimeLabelVisibilityPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (((Dash)d).OnTimeLabelVisibilityChanged != null)
+                ((Dash)d).OnTimeLabelVisibilityChanged(d, e);
+        }
+
         double lineWidth = 0.5;
         public double LineWidth
         {
@@ -61,6 +87,30 @@ namespace LevelSetsEditor.View.TimeLine
                 OnPropertyChanged("LineHeight");
             }
         }
+
+        TimeSpan Time = TimeSpan.FromSeconds(0);
+        private Dash dash;
+
+
+
+        public string TimeText
+        {
+            get
+            {
+                return Time.ToString();
+            }
+            //set
+            //{
+            //    if (value <= 0.001) return;
+            //    lineHeight = value;
+            //    OnPropertyChanged("LineHeight");
+            //}
+        }
+
+
+
+
+
 
         #region INPC
         public event PropertyChangedEventHandler PropertyChanged;

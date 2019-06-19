@@ -5,15 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LevelSetsEditor.View.TimeLine"
              mc:Ignorable="d" 
-             d:DesignHeight="50" d:DesignWidth="820" Name="THIS">
+             d:DesignHeight="60" d:DesignWidth="820" Name="THIS">
     <Grid Margin="0,0,-20,0" Background="#FF83FBF0" >
         <Grid x:Name="GridMain"  Height="35" VerticalAlignment="Top" >
 
         </Grid>
-        <Grid VerticalAlignment="Bottom" Height="15">
-            <Grid  Height="15" VerticalAlignment="Bottom" Margin="0,0,20,0" PreviewMouseDown="Grid_PreviewMouseDown">
-                <local:ScaleTime x:Name="T1"></local:ScaleTime>
-                <local:ScaleTime x:Name="T2"></local:ScaleTime>
+        <Grid VerticalAlignment="Bottom" Height="25">
+            <Grid  Height="25" VerticalAlignment="Bottom" Margin="0,0,20,0" PreviewMouseDown="Grid_PreviewMouseDown">
+                <local:ScaleTime x:Name="T1" TimeLabelVisibility="Visible"></local:ScaleTime>
+                <local:ScaleTime x:Name="T2" TimeLabelVisibility="Hidden"></local:ScaleTime>
             </Grid>
         </Grid>
         <local:Cursor x:Name="Cursor1" Margin="100,-5,0,-5" HorizontalAlignment="Left" Panel.ZIndex="10" Width="13" ClipToBounds="False" CRPosition="{Binding POS,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" >

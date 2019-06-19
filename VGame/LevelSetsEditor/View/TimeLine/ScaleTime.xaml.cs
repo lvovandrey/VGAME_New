@@ -41,13 +41,19 @@ namespace LevelSetsEditor.View.TimeLine
             typeof(TimeSpan), typeof(ScaleTime),
             new FrameworkPropertyMetadata(new PropertyChangedCallback(CurTimePropertyChangedCallback)));
 
+        public static readonly DependencyProperty TimeLabelVisibilityProperty = DependencyProperty.Register("TimeLabelVisibility",
+           typeof(Visibility), typeof(ScaleTime),
+           new FrameworkPropertyMetadata(new PropertyChangedCallback(TimeLabelVisibilityPropertyChangedCallback)));
+
         public double Position { get { return (double)GetValue(PositionProperty); } set { SetValue(PositionProperty, value); } }
         public TimeSpan Duration { get { return (TimeSpan)GetValue(DurationProperty); } set { SetValue(DurationProperty, value); } }
         public TimeSpan CurTime { get { return (TimeSpan)GetValue(CurTimeProperty); } set { SetValue(CurTimeProperty, value); } }
+        public Visibility TimeLabelVisibility { get { return (Visibility)GetValue(TimeLabelVisibilityProperty); } set { SetValue(TimeLabelVisibilityProperty, value); } }
 
         public event PropertyChanged OnPositionChanged;
         public event PropertyChanged OnDurationChanged;
         public event PropertyChanged OnCurTimeChanged;
+        public event PropertyChanged OnTimeLabelVisibilityChanged;
 
         public ObservableCollection<Dash> Dashes;
 
@@ -70,7 +76,12 @@ namespace LevelSetsEditor.View.TimeLine
                 ((ScaleTime)d).OnCurTimeChanged(d, e);
         }
 
-    
+        static void TimeLabelVisibilityPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (((ScaleTime)d).OnTimeLabelVisibilityChanged != null)
+                ((ScaleTime)d).OnTimeLabelVisibilityChanged(d, e);
+        }
+
 
         public void SetCurTime(TimeSpan time)
         {
@@ -140,7 +151,7 @@ namespace LevelSetsEditor.View.TimeLine
                     if (!(item is Dash)) continue;
                     Dash dash = (item as Dash);
 
-                    dash.sets.LineWidth = width;
+                    dash.LineWidth = width;
                 }
         }
 
@@ -151,16 +162,16 @@ namespace LevelSetsEditor.View.TimeLine
                 if (!(item is Dash)) continue;
                 Dash dash = (item as Dash);
 
-                dash.sets.LineHeight = height;
+                dash.LineHeight = height;
             }
         }
 
         public void addDash()
         {
-
             Dash d = new Dash();
             RefreshBinding(d);
             MainStack.Children.Add(d);
+            
         }
 
         public void FillDashes(int num)
@@ -233,6 +244,11 @@ namespace LevelSetsEditor.View.TimeLine
             binding.ConverterParameter = new WidthConverterParameter(this);
             binding.Path = new PropertyPath("ActualWidth"); // свойство элемента-источника
             dash.SetBinding(Dash.WidthProperty, binding); // установка привязки для элемента-приемника
+
+            Binding bindingTimeLabel = new Binding();
+            bindingTimeLabel.Source = this;  // элемент-источник
+            bindingTimeLabel.Path = new PropertyPath("TimeLabelVisibility"); // свойство элемента-источника
+            dash.SetBinding(Dash.TimeLabelVisibilityProperty, bindingTimeLabel); // установка привязки для элемента-приемника
         }
 
 
