@@ -137,7 +137,7 @@ namespace LevelSetsEditor
 
         private void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "SelectedLevelVM")
+            if (e.PropertyName == "SelectedLevelVM" && ViewModel.SelectedLevelVM!=null)
             {
                 //для начала отвязать попробуем
                 try { ViewModel.SelectedLevelVM.PropertyChanged -= SelectedLevelVM_PropertyChanged; }

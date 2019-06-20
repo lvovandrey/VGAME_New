@@ -101,9 +101,13 @@ namespace LevelSetsEditor.View.VideoPlayerMVVM
         {
             InitializeComponent();
 
+            string vlcpath1 = @"c:\Program Files\VideoLAN\VLC\";
+           // string vlcpath2 = @"c:\Program Files (x86)\VideoLAN\VLC\";
 
-
-            vlc.MediaPlayer.VlcLibDirectory = new System.IO.DirectoryInfo(@"c:\Program Files\VideoLAN\VLC\");
+            if (System.IO.Directory.Exists(vlcpath1))
+                vlc.MediaPlayer.VlcLibDirectory = new System.IO.DirectoryInfo(vlcpath1);
+            //if (System.IO.Directory.Exists(vlcpath2))
+            //    vlc.MediaPlayer.VlcLibDirectory = new System.IO.DirectoryInfo(vlcpath2);
             vlc.MediaPlayer.EndInit();
             vlc.MediaPlayer.Play(new Uri(@"C:\1.wmv"));
 
