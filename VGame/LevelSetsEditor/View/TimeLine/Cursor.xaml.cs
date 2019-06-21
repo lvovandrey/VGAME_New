@@ -50,6 +50,19 @@ namespace LevelSetsEditor.View.TimeLine
             }
         }
 
+        TimeSpan _Time { get; set; }
+        public TimeSpan Time
+        {
+            get { return TimeSpan.FromSeconds(222); } //TODO:Заменить на нормальное свойство //_Time; }
+            set
+            {
+                _Time = value;
+                OnPropertyChanged("Time");
+            }
+        }
+
+
+
         #region DependencyProperties
         public static readonly DependencyProperty CRPositionProperty = DependencyProperty.Register("CRPosition",
          typeof(double), typeof(Cursor),

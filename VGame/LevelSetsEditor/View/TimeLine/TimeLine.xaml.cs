@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace LevelSetsEditor.View.TimeLine
     /// <summary>
     /// Логика взаимодействия для TimeLine.xaml
     /// </summary>
-    public partial class TimeLine : UserControl
+    public partial class TimeLine : UserControl, INotifyPropertyChanged
     {
         List<Interval> Intervals;
 
@@ -139,6 +140,7 @@ namespace LevelSetsEditor.View.TimeLine
             set {
                 SetValue(FullTimeProperty, value);
                 RefreshDashes();
+                OnPropertyChanged("FullTime");
             }
         }
 
@@ -294,8 +296,18 @@ namespace LevelSetsEditor.View.TimeLine
             Cursor1.SetPosition(0, e);
 
         }
-    }
 
+
+        #region mvvm
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
+    }
 
 
 }

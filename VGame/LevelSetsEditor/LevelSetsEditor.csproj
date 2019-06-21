@@ -214,6 +214,9 @@
     <Compile Include="View\TimeLine\Cursor.xaml.cs">
       <DependentUpon>Cursor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\TimeLine\CursorTimeLabel.xaml.cs">
+      <DependentUpon>CursorTimeLabel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\TimeLine\Dash.xaml.cs">
       <DependentUpon>Dash.xaml</DependentUpon>
     </Compile>
@@ -291,6 +294,10 @@
     <Page Include="View\TimeLine\Cursor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\TimeLine\CursorTimeLabel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\TimeLine\Dash.xaml">
       <Generator>MSBuild:Compile</Generator>

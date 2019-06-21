@@ -4,8 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LevelSetsEditor.View.TimeLine"
+             
              mc:Ignorable="d" 
              d:DesignHeight="60" d:DesignWidth="820" Name="THIS">
+    <UserControl.Resources>
+        <local:CursorTimeLabelConverter x:Key="CursorTimeLabelConverter"/>
+        
+    </UserControl.Resources>
     <Grid Margin="0,0,-20,0" Background="#FF83FBF0" >
         <Grid x:Name="GridMain"  Height="35" VerticalAlignment="Top" >
 
@@ -17,11 +22,18 @@
                 <local:ScaleTime x:Name="T10" TimeLabelVisibility="Hidden"></local:ScaleTime>
             </Grid>
         </Grid>
-        <local:Cursor x:Name="Cursor1" Margin="100,-5,0,-5" HorizontalAlignment="Left" Panel.ZIndex="10" Width="13" ClipToBounds="False" CRPosition="{Binding POS,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" >
+        <local:Cursor x:Name="Cursor1" Margin="100,-5,0,-5" HorizontalAlignment="Left" Panel.ZIndex="10" Width="13" 
+                      ClipToBounds="False" CRPosition="{Binding POS,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" >
             <local:Cursor.Effect>
                 <DropShadowEffect BlurRadius="0" ShadowDepth="1" Direction="315" Color="White"/>
             </local:Cursor.Effect>
         </local:Cursor>
-
+        <local:CursorTimeLabel
+            Width ="100" Height="20"
+            HorizontalAlignment="Left" VerticalAlignment="Bottom"
+            DataContext="{Binding ElementName=Cursor1}"
+            Margin="{Binding ElementName=Cursor1, Path=Margin, UpdateSourceTrigger=PropertyChanged, 
+            Converter={StaticResource CursorTimeLabelConverter},
+            ConverterParameter=-30#0#0#-10 }"/>
     </Grid>
 </UserControl>
