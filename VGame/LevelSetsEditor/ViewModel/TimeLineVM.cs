@@ -66,6 +66,7 @@ namespace LevelSetsEditor.ViewModel
             }
         }
 
+
         internal void SelectedSceneChange(SceneVM selectedSceneVM)
         {
             SelectedSceneVM = selectedSceneVM;

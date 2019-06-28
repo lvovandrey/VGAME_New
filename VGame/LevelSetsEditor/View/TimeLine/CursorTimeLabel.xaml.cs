@@ -20,12 +20,67 @@ namespace LevelSetsEditor.View.TimeLine
     /// <summary>
     /// Логика взаимодействия для CursorTimeLabel.xaml
     /// </summary>
-    public partial class CursorTimeLabel : UserControl
+    public partial class CursorTimeLabel : UserControl, INotifyPropertyChanged
     {
         public CursorTimeLabel()
         {
             InitializeComponent();
+
+            Binding bindingTimeLabelVis = new Binding();
+            bindingTimeLabelVis.Source = this;  // элемент-источник
+            bindingTimeLabelVis.Path = new PropertyPath("Position"); // свойство элемента-источника
+            PosLabel.SetBinding(PosLabel.TimeLabelVisibilityProperty, bindingTimeLabelVis); // установка привязки для элемента-приемника
         }
+
+        public static readonly DependencyProperty TTTProperty = DependencyProperty.Register("TTT",
+        typeof(double), typeof(CursorTimeLabel));
+        public double TTT
+        {
+            get { return Position; }
+        }
+
+        public static readonly DependencyProperty DurationProperty = DependencyProperty.Register("Duration",
+        typeof(TimeSpan), typeof(CursorTimeLabel));
+
+        public TimeSpan Duration {
+            get { return (TimeSpan)GetValue(DurationProperty); }
+            set { SetValue(DurationProperty, value); OnPropertyChanged("TTT");
+            } }
+
+        public static readonly DependencyProperty TimeProperty = DependencyProperty.Register("Time",
+        typeof(TimeSpan), typeof(CursorTimeLabel));
+
+        public TimeSpan Time
+        {
+            get { return (TimeSpan)GetValue(TimeProperty); }
+            set
+            {
+                SetValue(TimeProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty PositionProperty = DependencyProperty.Register("Position",
+        typeof(double), typeof(CursorTimeLabel));
+
+        public double Position
+        {
+            get { return (double)GetValue(PositionProperty); }
+            set
+            {
+                SetValue(PositionProperty, value); OnPropertyChanged("TTT");
+            }
+        }
+
+
+        #region mvvm
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
     }
 
 

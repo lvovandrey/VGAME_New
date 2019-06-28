@@ -36,7 +36,7 @@ namespace LevelSetsEditor.View.TimeLine
             if (newPos < 0) Margin = new Thickness(0, -5, 0, -5);
             else if (newPos > Container.ActualWidth) Margin = new Thickness(Container.ActualWidth, -5, 0, -5);
             else Margin = new Thickness(newPos, -5, 0, -5);
-            PosLabel.Content = ((int)newPos).ToString();
+            PosLabel.Content = (FullTime).ToString();
         }
 
         SolidColorBrush _CursorColor { get; set; }
@@ -50,13 +50,11 @@ namespace LevelSetsEditor.View.TimeLine
             }
         }
 
-        TimeSpan _Time { get; set; }
         public TimeSpan Time
         {
-            get { return TimeSpan.FromSeconds(222); } //TODO:Заменить на нормальное свойство //_Time; }
+            get { return TimeSpan.FromSeconds(FullTime.TotalSeconds/CRPosition); }
             set
             {
-                _Time = value;
                 OnPropertyChanged("Time");
             }
         }
@@ -83,6 +81,19 @@ namespace LevelSetsEditor.View.TimeLine
             if (((Cursor)d).OnCRPositionChanged != null)
                 ((Cursor)d).OnCRPositionChanged(d, e);
         }
+
+
+        public static readonly DependencyProperty FullTimeProperty = DependencyProperty.Register("FullTime",
+         typeof(TimeSpan), typeof(Cursor));
+
+        public TimeSpan FullTime
+        {
+            get { return (TimeSpan)GetValue(FullTimeProperty); }
+            set { SetValue(FullTimeProperty, value); }
+        }
+
+       
+
         #endregion
 
 

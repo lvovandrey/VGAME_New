@@ -7,18 +7,23 @@
              mc:Ignorable="d" 
              d:DesignHeight="90" d:DesignWidth="10" MinHeight="30" MouseEnter="Cursor_MouseEnter" MouseLeave="Cursor_MouseLeave" ClipToBounds="False" >
     <Grid VerticalAlignment="Stretch" ClipToBounds="False"  Margin="-5,0,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="11*"/>
+        </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="5"/>
             <RowDefinition Height="*" Name="Row2"/>
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
-        <Label x:Name="PosLabel" Content="000" Margin="-10,-20,-10,0" FontSize="12" HorizontalAlignment="Center"></Label>
-        <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="3" Fill="#00F3FF00"  />
-        <Path Data="M0,0 L5,5 10,0" Grid.Row="0"  Stroke="{Binding CursorColor, UpdateSourceTrigger=PropertyChanged}" StrokeThickness="1.5" />
-        <Path Data="M5,0 L5,1000" Grid.Row="1"  Stroke="{Binding CursorColor, UpdateSourceTrigger=PropertyChanged}" StrokeThickness="2" />
-        <Path Data="M0,5 L5,0 10,5" Grid.Row="2"  Stroke="{Binding CursorColor, UpdateSourceTrigger=PropertyChanged}"  StrokeThickness="1.5"/>
-        
+        <Label x:Name="PosLabel" Content="000" Margin="-7,-20,-7.4,79.8" 
+               FontSize="12" HorizontalAlignment="Center" Grid.ColumnSpan="2" Grid.RowSpan="2"></Label>
+        <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="3" Fill="#00F3FF00" Grid.ColumnSpan="2" Margin="0,0,0.6,-0.4"  />
+        <Path Data="M0,0 L5,5 10,0" Grid.Row="0"  Stroke="{Binding CursorColor, UpdateSourceTrigger=PropertyChanged}" StrokeThickness="1.5" Grid.ColumnSpan="2" Margin="0,0,0.2,0" />
+        <Path Data="M5,0 L5,1000" Grid.Row="1"  Stroke="{Binding CursorColor, UpdateSourceTrigger=PropertyChanged}" StrokeThickness="2" Grid.ColumnSpan="2" Margin="0,0,0.2,0" />
+        <Path Data="M0,5 L5,0 10,5" Grid.Row="2"  Stroke="{Binding CursorColor, UpdateSourceTrigger=PropertyChanged}"  StrokeThickness="1.5" Grid.ColumnSpan="2" Margin="0,0,0.2,0"/>
+
 
 
 
