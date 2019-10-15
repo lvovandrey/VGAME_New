@@ -7,7 +7,8 @@ using System.Text.RegularExpressions;
 using System.Net;
 using System.Web;
 using System.Globalization;
-
+using System.Diagnostics;
+using System.Reflection;
 
 namespace YouTubeUrlSupplier
 {
@@ -170,13 +171,18 @@ namespace YouTubeUrlSupplier
                     var tagInfo = new ITagInfo(Uri.UnescapeDataString(data["itag"]));
                     videoItem.Dimension = tagInfo.VideoDimensions;
                     videoItem.Extension = tagInfo.VideoExtensions;
-                    videoItem.Length = long.Parse(videoDuration, CultureInfo.InvariantCulture);
+                    try
+                    {
+                        videoItem.Length = long.Parse(videoDuration, CultureInfo.InvariantCulture);
+                    }
+                    catch { Debug.WriteLine("Can't get info about videoItem.Length (videoItem.Length). Assembly:" + Assembly.GetExecutingAssembly().GetName().ToString() + " Class YouTubeDownloader,  Method GetYouTubeVideoUrls"); ; }
+
                     list.Add(videoItem);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    //string ex = e.Message;
-                    //  throw;
+                    string ex = e.Message;
+                    throw;
 
                 }
             }
