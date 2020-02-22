@@ -71,7 +71,7 @@ namespace LevelSetsEditor
         }
 
 
-        private void RefreshYoutubeVideoInfo(VideoInfoVM videoInfoVM)
+        private async void RefreshYoutubeVideoInfo(VideoInfoVM videoInfoVM)
         {
 
             if (videoInfoVM == null) return;
@@ -79,6 +79,7 @@ namespace LevelSetsEditor
             if (videoInfoVM.Type != Model.VideoType.youtube) return;
             
             YoutubeVidInfo vidInfo = new YoutubeVidInfo(videoInfoVM.Title);
+            await vidInfo.NEWLIBRARY_GetVideoAsync();
             if (vidInfo.DirectURL == "") return;
 
             videoInfoVM.Source = new Uri(vidInfo.DirectURL);
@@ -96,12 +97,13 @@ namespace LevelSetsEditor
             ViewModel.SelectedLevelVM.VideoInfoVM.PreviewVM.MultiplePrevSources = uris;
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private async void Button_Click_2(object sender, RoutedEventArgs e)
         {
             TabItemEditor.Focus();
             if (ViewModel.SelectedLevelVM == null) return;
 
             YoutubeVidInfo vidInfo = new YoutubeVidInfo(TextURL.Text);
+            await vidInfo.NEWLIBRARY_GetVideoAsync();
             if (vidInfo.DirectURL == "") return;
 
             ViewModel.SelectedLevelVM.VideoInfoVM.Source = new Uri(vidInfo.DirectURL);

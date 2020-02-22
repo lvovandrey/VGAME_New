@@ -170,7 +170,7 @@ namespace LevelSetsEditor.Model
             }
         }
 
-        public void JoinYoutubeVideoInLevel(string YoutubeAddress)
+        public async void JoinYoutubeVideoInLevel(string YoutubeAddress)
         {
             MessageBoxResult Res = MessageBoxResult.None;
             if (this.VideoInfo.Address == @"http://localhost/")
@@ -179,6 +179,7 @@ namespace LevelSetsEditor.Model
 
 
             YoutubeVidInfo vidInfo = new YoutubeVidInfo(YoutubeAddress);
+            await vidInfo.NEWLIBRARY_GetVideoAsync();
             if (vidInfo.DirectURL == "")
             {
                 MessageBox.Show("Невозможно получить прямую ссылку на это видео", "Ошибка получения ссылки", MessageBoxButton.OK, MessageBoxImage.Exclamation);
@@ -210,11 +211,12 @@ namespace LevelSetsEditor.Model
             this.SegregateScenes();
         }
 
-        public void RefreshYoutubeLink()
+        public async void RefreshYoutubeLink()
         {
             if (this.VideoInfo.Type != VideoType.youtube) return;
 
             YoutubeVidInfo vidInfo = new YoutubeVidInfo(VideoInfo.Address);
+            await vidInfo.NEWLIBRARY_GetVideoAsync();
             if (vidInfo.DirectURL == "")
             {
                 MessageBox.Show("Невозможно получить прямую ссылку на это видео", "Ошибка получения ссылки", MessageBoxButton.OK, MessageBoxImage.Exclamation);

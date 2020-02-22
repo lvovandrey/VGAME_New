@@ -1,4 +1,4 @@
-﻿using Microsoft.Speech.Synthesis;
+﻿//using Microsoft.Speech.Synthesis;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,17 +13,17 @@ namespace LevelSetsEditor.Tools
 
         public static void Speak(string text)
         {
-            SpeechSynthesizer synthesizer = new SpeechSynthesizer();
+            //SpeechSynthesizer synthesizer = new SpeechSynthesizer();
             
-                ReadOnlyCollection<InstalledVoice> voices = synthesizer.GetInstalledVoices();// (new CultureInfo("ru-RU"));
+            //    ReadOnlyCollection<InstalledVoice> voices = synthesizer.GetInstalledVoices();// (new CultureInfo("ru-RU"));
 
-                synthesizer.SetOutputToDefaultAudioDevice();
-                synthesizer.Volume = 100;  // 0...100
-                synthesizer.TtsVolume = 100;
-                synthesizer.Rate = 0;     // -10...10
-                PromptBuilder prompt = new PromptBuilder();
-                prompt.AppendText(text);
-                synthesizer.Speak(prompt);
+            //    synthesizer.SetOutputToDefaultAudioDevice();
+            //    synthesizer.Volume = 100;  // 0...100
+            //    synthesizer.TtsVolume = 100;
+            //    synthesizer.Rate = 0;     // -10...10
+            //    PromptBuilder prompt = new PromptBuilder();
+            //    prompt.AppendText(text);
+            //    synthesizer.Speak(prompt);
             
         }
 
