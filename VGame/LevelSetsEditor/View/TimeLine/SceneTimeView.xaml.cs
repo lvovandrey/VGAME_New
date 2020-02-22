@@ -75,7 +75,7 @@ namespace LevelSetsEditor.View.TimeLine
         public FrameworkElement Container;
         FrameworkElement draggedObject;
         Vector relativeMousePos;
-        double WidthFirst;
+        double oldWidth;
 
         double oldPos;
         public event Action OnStartDragLeft;
@@ -93,9 +93,11 @@ namespace LevelSetsEditor.View.TimeLine
             if (((FrameworkElement)sender).Name == "CentralLimit") OnStartDragCentral?.Invoke();
 
             oldPos = Margin.Left;
+            oldWidth = ActualWidth;
             draggedObject = (FrameworkElement)sender;
-            WidthFirst = ActualWidth;
-            relativeMousePos = e.GetPosition(draggedObject) - new System.Windows.Point();
+           
+//            relativeMousePos = e.GetPosition(draggedObject) - new System.Windows.Point();
+            relativeMousePos = e.GetPosition(this) - new System.Windows.Point();
             draggedObject.MouseMove += OnDragMove;
             draggedObject.LostMouseCapture += OnLostCapture;
             draggedObject.MouseUp += OnMouseUp;
@@ -116,11 +118,11 @@ namespace LevelSetsEditor.View.TimeLine
 
             if (draggedObject.Name == "LeftLimit")
             {
+                double curWidth = oldWidth - newPos.X + oldPos;
                 if (newPos.X < 0) Margin = new Thickness(0, Top, 0, Bottom);
                 else if (newPos.X > Container.ActualWidth) Margin = new Thickness(Container.ActualWidth, Top, 0, Bottom);
                 else
                 {
-                    double curWidth = WidthFirst - newPos.X + oldPos;
                     if (curWidth < 5) return;
                     Margin = new Thickness(newPos.X, Top, 0, Bottom);
                     Width = curWidth;
@@ -128,27 +130,29 @@ namespace LevelSetsEditor.View.TimeLine
             }
             if (draggedObject.Name == "RightLimit")
             {
-                if (newPos.X < 0) return; //Margin = new Thickness(0, Top, 0, Bottom);
-                else if (newPos.X > Container.ActualWidth) return;//Margin = new Thickness(Container.ActualWidth, Top, 0, Bottom);
+                double curWidth = newPos.X - oldPos + oldWidth;
+                if (newPos.X < -oldWidth) return;
+                else if ((newPos.X+oldWidth) > Container.ActualWidth)
+                {
+                    return;
+                }
                 else
                 {
-                    double curWidth = newPos.X - oldPos;
                     if (curWidth < 5) return;
-                    //                    Margin = new Thickness(newPos.X, Top, 0, Bottom);
                     Width = curWidth;
                 }
             }
             if (draggedObject.Name == "CentralLimit")
             {
-                if (newPos.X < 0) Margin = new Thickness(0, Top, 0, Bottom);
-                else if (newPos.X > Container.ActualWidth) Margin = new Thickness(Container.ActualWidth, Top, 0, Bottom);
+                if (newPos.X < 0)
+                    Margin = new Thickness(0, Top, 0, Bottom);
+                else if (newPos.X > Container.ActualWidth)
+                    return;
                 else
                 {
-                    //double curWidth = newPos.X - oldPos;
-                    //if (curWidth < 5) return;
-                    if (newPos.X + ActualWidth > Container.ActualWidth) return;
+                    if (newPos.X + ActualWidth > Container.ActualWidth)
+                        return;
                     Margin = new Thickness(newPos.X, Top, 0, Bottom);
-                    //Width = curWidth;
                 }
             }
             interval.UpdateFromUI();
