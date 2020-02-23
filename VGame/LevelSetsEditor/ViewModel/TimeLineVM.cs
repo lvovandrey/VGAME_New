@@ -44,8 +44,10 @@ namespace LevelSetsEditor.ViewModel
             }
         }
         //Обрабатываем событие изменения коллекции сцен
-        private void _SelectedLevelVM_SceneVMsCollectionChangedEvent()
+        public void _SelectedLevelVM_SceneVMsCollectionChangedEvent()
         {
+            if (_SelectedLevelVM == null) return;
+
             TimeLine.ClearIntervals();
             foreach (SceneVM sceneVM in _SelectedLevelVM.SceneVMs)
             {
@@ -71,6 +73,12 @@ namespace LevelSetsEditor.ViewModel
             SelectedSceneVM = selectedSceneVM;
         }
 
+        internal void SelectedSceneVMRefresh()
+        {
+            OnPropertyChanged("SelectedSceneVM");
+            //    _SelectedLevelVM_SceneVMsCollectionChangedEvent();
+        }
+
         private Level Level { get { return SelectedLevelVM._level; } }
 
 
@@ -83,6 +91,8 @@ namespace LevelSetsEditor.ViewModel
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
+
+
         #endregion
     }
 }

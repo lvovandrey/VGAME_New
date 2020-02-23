@@ -142,6 +142,7 @@
                                 <Image Source="icons/icon.png"/>
                             </Button>
                             <Button Width="40" Content="Check" Margin="5" Command="{Binding CheckIntersectionScenesCommand}" />
+                            <Button Width="40" Content="Check" Margin="5" Command="{Binding TimeLineRefreshCommand}" />
 
 
                         </WrapPanel>
@@ -167,6 +168,8 @@
                                             POS="{Binding ElementName=VideoPlayer,Path=Position,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                             SelectedItem="{Binding ElementName=SceneListBox, Path=SelectedItem ,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                             />
+                        <!--SelectedItem ="{Binding Path=SelectedSceneVM, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
+                        
                         <!-- -->
                         <GridSplitter Grid.Row="2" Height="3"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,1.2,0.4,0.6" />
                         <GroupBox Header="Инфо о видео" x:Name="VideoInfoGroupBox" 

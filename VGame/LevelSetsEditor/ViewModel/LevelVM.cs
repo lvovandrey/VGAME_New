@@ -5,8 +5,10 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 using LevelSetsEditor.Model;
 
 namespace LevelSetsEditor.ViewModel
@@ -31,6 +33,8 @@ namespace LevelSetsEditor.ViewModel
             try { _Level.Scenes.CollectionChanged -= SceneVMs_CollectionChanged; } 
             finally { _Level.Scenes.CollectionChanged += SceneVMs_CollectionChanged; }
         }
+
+
 
         #region Свое событие изменения коллекции сцен (collectionChanged) т.к. родное криво работает.
         public event Action SceneVMsCollectionChangedEvent; //событие изменения коллекции сцен  - родное снаружи не работает
@@ -69,11 +73,19 @@ namespace LevelSetsEditor.ViewModel
         {
             get
             {
-                _scenesvm = new ObservableCollection<SceneVM>(from l in _scenes select new SceneVM(l, _videoPlayerVM));
+                _scenesvm = new ObservableCollection<SceneVM>(from l in _scenes select new SceneVM(l, _videoPlayerVM, this));
                 //_scenesvm = _scenesvm.OrderBy
                 return _scenesvm;
 
             }
+        }
+
+
+        public void SelectedSceneVMRefresh()
+        {
+            OnPropertyChanged("SelectedSceneVM");
+            _timeLineVM.SelectedSceneVMRefresh();
+            OnPropertyChanged("SceneVMs");
         }
 
 
@@ -252,6 +264,8 @@ namespace LevelSetsEditor.ViewModel
         }
 
 
+
+
         public void SegregateScenes(object parameter)
         {
             if (parameter == null)
@@ -277,6 +291,7 @@ namespace LevelSetsEditor.ViewModel
                       if (MessageBox.Show("Разделить сцену?", "Разделение сцены", MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.No) return;
                       SplitScene(obj);
                       OnPropertyChanged("SceneVMs");
+                      _timeLineVM._SelectedLevelVM_SceneVMsCollectionChangedEvent();
                   }));
             }
         }
@@ -285,6 +300,22 @@ namespace LevelSetsEditor.ViewModel
             if (parameter is TimeSpan)
                 _Level.SplitScene((TimeSpan)parameter);
         }
+
+
+
+        private RelayCommand timeLineRefreshCommand;
+        public RelayCommand TimeLineRefreshCommand
+        {
+            get
+            {
+                return timeLineRefreshCommand ?? (timeLineRefreshCommand = new RelayCommand(obj =>
+                {
+                    _timeLineVM._SelectedLevelVM_SceneVMsCollectionChangedEvent();
+                }));
+            }
+        }
+
+
 
 
         public void JoinYoutubeVideoInLevel(string YoutubeAddress)

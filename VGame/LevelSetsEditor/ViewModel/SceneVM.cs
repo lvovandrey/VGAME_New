@@ -14,13 +14,15 @@ namespace LevelSetsEditor.ViewModel
     {
         public Scene scene;
         private VideoPlayerVM videoPlayerVM;
+        private LevelVM levelVM;
         public int SceneId { get { return scene.Id; } }
 
-        public SceneVM(Scene _scene, VideoPlayerVM _videoPlayerVM)
+        public SceneVM(Scene _scene, VideoPlayerVM _videoPlayerVM, LevelVM _levelVM)
         {
             this.scene = _scene;
             videoPlayerVM = _videoPlayerVM;
             TrackTime = true;
+            levelVM = _levelVM;
         }
 
 
@@ -34,6 +36,8 @@ namespace LevelSetsEditor.ViewModel
             {
                 scene.VideoSegment.TimeBegin = value;
                 OnPropertyChanged("VideoSegment_TimeBegin");
+                levelVM.SelectedSceneVMRefresh();
+                
             }
         }
 
@@ -47,6 +51,7 @@ namespace LevelSetsEditor.ViewModel
             {
                 scene.VideoSegment.TimeEnd = value;
                 OnPropertyChanged("VideoSegment_TimeEnd");
+                levelVM.SelectedSceneVMRefresh();
             }
         }
 

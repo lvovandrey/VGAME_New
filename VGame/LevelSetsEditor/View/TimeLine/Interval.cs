@@ -134,6 +134,8 @@ namespace LevelSetsEditor.View.TimeLine
             Body.TimeLabel.Begin = Begin;
         }
 
+
+
         public void UpdateFromUI()
         {
             if (Body.ActualWidth > 90) { LabelVisibility = true; } else { LabelVisibility = false; }
@@ -151,6 +153,9 @@ namespace LevelSetsEditor.View.TimeLine
 
             OnPropertyChanged("Begin");
             OnPropertyChanged("End");
+
+            
+
           //  UpdateView();
         }
         #region mvvm

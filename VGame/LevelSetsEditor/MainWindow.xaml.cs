@@ -254,5 +254,10 @@ namespace LevelSetsEditor
         {
             SceneListBox.SelectedIndex = 2;
         }
+
+        private void VideoPlayer_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
