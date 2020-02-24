@@ -145,6 +145,8 @@ namespace LevelSetsEditor.View.TimeLine
             double NewBegin = Body.Margin.Left * tfull / conWidth;
             double NewEnd = Body.ActualWidth * tfull / conWidth + NewBegin;
 
+
+            Tools.ToolsTimer.Delay(() => { 
             sceneVM.VideoSegment_TimeBegin = TimeSpan.FromMilliseconds(NewBegin);
             sceneVM.VideoSegment_TimeEnd = TimeSpan.FromMilliseconds(NewEnd);
 
@@ -153,10 +155,10 @@ namespace LevelSetsEditor.View.TimeLine
 
             OnPropertyChanged("Begin");
             OnPropertyChanged("End");
+            }, TimeSpan.FromMilliseconds(100));
 
-            
 
-          //  UpdateView();
+            //  UpdateView();
         }
         #region mvvm
         public event PropertyChangedEventHandler PropertyChanged;

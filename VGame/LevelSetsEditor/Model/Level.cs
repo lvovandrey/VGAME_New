@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using YouTubeUrlSupplier;
@@ -49,10 +50,15 @@ namespace LevelSetsEditor.Model
 
             TimeSpan Dur = VideoInfo.Duration;
             int NumScenes = (int)Math.Ceiling(VideoInfo.Duration.TotalMinutes / 2);
-            Scenes = new ObservableCollection<Scene>();
+            //Scenes = new ObservableCollection<Scene>();
+            Scenes.Clear();
             for (int i = 1; i <= NumScenes; i++)
             {
                 Scene s = new Scene();
+                int nextid = 0;
+                if (Scenes.Count > 0)
+                    nextid = Scenes.Max(a => a.Id);
+                s.Id = ++nextid;
                 s.Position = i;
                 s.UnitsCount = i;
                 s.VideoSegment.TimeBegin = TimeSpan.FromSeconds((i - 1) * 120);
@@ -77,10 +83,15 @@ namespace LevelSetsEditor.Model
 
             TimeSpan Dur = VideoInfo.Duration;
             int NumScenes = (int)Math.Ceiling(VideoInfo.Duration.TotalMinutes / segrTime.TotalMinutes);
-            Scenes = new ObservableCollection<Scene>();
+            //Scenes = new ObservableCollection<Scene>();
+            Scenes.Clear();
             for (int i = 1; i <= NumScenes; i++)
             {
                 Scene s = new Scene();
+                int nextid = 0;
+                if (Scenes.Count > 0)
+                    nextid = Scenes.Max(a => a.Id);
+                s.Id = ++nextid;
                 s.Position = i;
                 s.UnitsCount = i;
                 s.VideoSegment.TimeBegin = TimeSpan.FromSeconds((i - 1) * segrTime.TotalSeconds);
@@ -107,10 +118,16 @@ namespace LevelSetsEditor.Model
             TimeSpan segrTime = TimeSpan.FromSeconds((Dur.TotalSeconds - 0.1)/ scenesCount);
 
             int NumScenes = scenesCount;
-            Scenes = new ObservableCollection<Scene>();
+            //Scenes = new ObservableCollection<Scene>();
+            Scenes.Clear();
             for (int i = 1; i <= NumScenes; i++)
             {
                 Scene s = new Scene();
+
+                int nextid = 0;
+                if (Scenes.Count > 0)
+                    nextid = Scenes.Max(a => a.Id);
+                s.Id = ++nextid;
                 s.Position = i;
                 s.UnitsCount = i;
                 s.VideoSegment.TimeBegin = TimeSpan.FromSeconds((i - 1) * segrTime.TotalSeconds);

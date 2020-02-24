@@ -318,6 +318,10 @@ namespace LevelSetsEditor.View.TimeLine
 
         #endregion
 
+
+        /// <summary>
+        /// Все удалить нахер и отрисовать заново
+        /// </summary>
         public void RefreshAll()
         {
             if (SceneVMs == null) return;
@@ -328,6 +332,19 @@ namespace LevelSetsEditor.View.TimeLine
                 AddInterval(sceneVM);
             }
         }
+
+        /// <summary>
+        /// Отрисовать все не удаляя.
+        /// </summary>
+        public void RepaintAll()
+        {
+            if (SceneVMs == null) return;
+            foreach ( Interval I in Intervals)
+            {
+                I.UpdateView();
+            }
+        }
+
 
 
 

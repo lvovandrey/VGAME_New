@@ -81,13 +81,6 @@ namespace LevelSetsEditor.ViewModel
         }
 
 
-        public void SelectedSceneVMRefresh()
-        {
-            OnPropertyChanged("SelectedSceneVM");
-            _timeLineVM.SelectedSceneVMRefresh();
-            OnPropertyChanged("SceneVMs");
-        }
-
 
         private SceneVM _SelectedSceneVM;
         public SceneVM SelectedSceneVM
@@ -100,11 +93,15 @@ namespace LevelSetsEditor.ViewModel
             {
                 _SelectedSceneVM = value;
                 OnPropertyChanged("SelectedSceneVM");
-                //_timeLineVM.SelectedSceneChange(_SelectedSceneVM);
             }
 
         }
 
+
+        public void RepaintTimeLineIntervals()
+        {
+            TimeLineRepaintCommand.Execute(null);
+        }
 
 
         public TimeSpan _SegregateTime { get; set; }
@@ -134,7 +131,9 @@ namespace LevelSetsEditor.ViewModel
                 return addSceneCommand ??
                   (addSceneCommand = new RelayCommand(obj =>
                   {
-                      int pos = _Level.Scenes.Max(a => a.Id);
+                      int pos;
+                      if (_Level.Scenes.Count == 0) return; //TODO: Тут потенциальная ошибка "Последовательность не содержит элементов"
+                      pos = _Level.Scenes.Max(a => a.Id);
                       Scene scene = new Scene();
                       scene.Position = ++pos;
                       scene.VideoSegment.TimeEnd = _Level.VideoInfo.Duration;
@@ -144,6 +143,7 @@ namespace LevelSetsEditor.ViewModel
                   }));
             }
         }
+
 
         private RelayCommand removeSceneCommand;
         public RelayCommand RemoveSceneCommand
@@ -223,12 +223,6 @@ namespace LevelSetsEditor.ViewModel
 
                   }));
             }
-        }
-
-
-        public void SelectedSceneVMUpdate()
-        {
-
         }
 
         private RelayCommand clearScenesListCommand;
@@ -314,6 +308,17 @@ namespace LevelSetsEditor.ViewModel
             }
         }
 
+        private RelayCommand timeLineRepaintCommand;
+        public RelayCommand TimeLineRepaintCommand
+        {
+            get
+            {
+                return timeLineRepaintCommand ?? (timeLineRepaintCommand = new RelayCommand(obj =>
+                {
+                    _timeLineVM.Body.RepaintAll();
+                }));
+            }
+        }
 
 
 

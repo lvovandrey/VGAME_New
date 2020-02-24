@@ -39,32 +39,7 @@ namespace LevelSetsEditor.ViewModel
                 TimeLine.FullTime = _SelectedLevelVM.VideoInfoVM.Duration;
             }
         }
-        //Обрабатываем событие изменения коллекции сцен
 
-
-
-        private SceneVM _SelectedSceneVM;
-        public SceneVM SelectedSceneVM
-        {
-            get
-            { return _SelectedSceneVM; }
-            set
-            {
-                _SelectedSceneVM = value;
-                OnPropertyChanged("SelectedSceneVM");
-            }
-        }
-
-        internal void SelectedSceneChange(SceneVM selectedSceneVM)
-        {
-            SelectedSceneVM = selectedSceneVM;
-        }
-
-        internal void SelectedSceneVMRefresh()
-        {
-            OnPropertyChanged("SelectedSceneVM");
-            //    _SelectedLevelVM_SceneVMsCollectionChangedEvent();
-        }
 
         private Level Level { get { return SelectedLevelVM._level; } }
 
