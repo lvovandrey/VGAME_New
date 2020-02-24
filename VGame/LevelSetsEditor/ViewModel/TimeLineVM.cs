@@ -15,7 +15,7 @@ namespace LevelSetsEditor.ViewModel
     public class TimeLineVM : INotifyPropertyChanged
     {
         TimeLine TimeLine;
-       
+        public TimeLine Body { get { return TimeLine; } }
 
         public TimeLineVM(VideoPlayer _videoPlayer, TimeLine timeLine)
         {
@@ -37,23 +37,10 @@ namespace LevelSetsEditor.ViewModel
                 _SelectedLevelVM = value;
                 OnPropertyChanged("SelectedLevelVM");
                 TimeLine.FullTime = _SelectedLevelVM.VideoInfoVM.Duration;
-
-                _SelectedLevelVM.SceneVMsCollectionChangedEventClear();//Обрабатываем/подписываемся на событие изменения коллекции сцен
-                _SelectedLevelVM.SceneVMsCollectionChangedEvent += _SelectedLevelVM_SceneVMsCollectionChangedEvent;
-                _SelectedLevelVM_SceneVMsCollectionChangedEvent();
             }
         }
         //Обрабатываем событие изменения коллекции сцен
-        public void _SelectedLevelVM_SceneVMsCollectionChangedEvent()
-        {
-            if (_SelectedLevelVM == null) return;
 
-            TimeLine.ClearIntervals();
-            foreach (SceneVM sceneVM in _SelectedLevelVM.SceneVMs)
-            {
-                TimeLine.AddInterval(sceneVM);
-            }
-        }
 
 
         private SceneVM _SelectedSceneVM;

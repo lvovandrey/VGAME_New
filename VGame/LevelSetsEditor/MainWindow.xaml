@@ -167,6 +167,7 @@
                         <timeline:TimeLine  x:Name="TimeLine1" Height="60" Grid.Row="1" Margin="10" 
                                             POS="{Binding ElementName=VideoPlayer,Path=Position,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                             SelectedItem="{Binding ElementName=SceneListBox, Path=SelectedItem ,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                            SceneVMs ="{Binding ElementName=SceneListBox, Path = ItemsSource}"
                                             />
                         <!--SelectedItem ="{Binding Path=SelectedSceneVM, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
                         

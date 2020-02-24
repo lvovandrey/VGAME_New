@@ -253,9 +253,10 @@ namespace LevelSetsEditor.View.TimeLine
         {
             foreach (Interval I in Intervals)
             {
+
                 this.GridMain.Children.Remove(I.Body);
                 I.Body.ClearOnClick();
-                I.Body = null; // это наверное излишне
+              //  I.Body = null; // это наверное излишне
             }
             Intervals.Clear();
         }
@@ -287,6 +288,46 @@ namespace LevelSetsEditor.View.TimeLine
         } // Как и многие жизненные проблемы, эту можно решить сгибанием.....
 
         #endregion
+
+
+        #region Свойство зависимости SceneVMs и все что с ним связано
+        //создаем свойство инкапсулирующее свойство зависимости
+        public ObservableCollection<SceneVM> SceneVMs
+        {
+            get { return (ObservableCollection<SceneVM>)GetValue(SceneVMsProperty); }
+            set { SetValue(SceneVMsProperty, value); }
+        }
+
+        //регистрируем свойство зависимости
+        public static readonly DependencyProperty SceneVMsProperty =
+            DependencyProperty.Register("SceneVMs", typeof(ObservableCollection<SceneVM>), typeof(TimeLine), new FrameworkPropertyMetadata(new PropertyChangedCallback(SceneVMsPropertyChangedCallback)));
+
+       
+        //создаем метод который вызывает событие изменения свойства
+        private static void SceneVMsPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((TimeLine)d).SceneVMs.CollectionChanged += ((TimeLine)d).SceneVMs_CollectionChanged;
+            ((TimeLine)d).RefreshAll();
+
+        } // Как и многие жизненные проблемы, эту можно решить сгибанием.....
+
+        private void SceneVMs_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            RefreshAll();
+        }
+
+        #endregion
+
+        public void RefreshAll()
+        {
+            if (SceneVMs == null) return;
+
+            ClearIntervals();
+            foreach (SceneVM sceneVM in SceneVMs)
+            {
+                AddInterval(sceneVM);
+            }
+        }
 
 
 

@@ -36,7 +36,7 @@ namespace LevelSetsEditor.ViewModel
             {
                 scene.VideoSegment.TimeBegin = value;
                 OnPropertyChanged("VideoSegment_TimeBegin");
-                levelVM.SelectedSceneVMRefresh();
+               // levelVM.SelectedSceneVMRefresh();
                 
             }
         }
@@ -51,7 +51,7 @@ namespace LevelSetsEditor.ViewModel
             {
                 scene.VideoSegment.TimeEnd = value;
                 OnPropertyChanged("VideoSegment_TimeEnd");
-                levelVM.SelectedSceneVMRefresh();
+             //   levelVM.SelectedSceneVMRefresh();
             }
         }
 

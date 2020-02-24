@@ -40,7 +40,7 @@ namespace LevelSetsEditor.ViewModel
         public event Action SceneVMsCollectionChangedEvent; //событие изменения коллекции сцен  - родное снаружи не работает
         private void SceneVMs_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            SceneVMsCollectionChangedEvent();
+            SceneVMsCollectionChangedEvent?.Invoke();
         }
         public void SceneVMsCollectionChangedEventClear() { SceneVMsCollectionChangedEvent = null; }
         #endregion
@@ -291,7 +291,6 @@ namespace LevelSetsEditor.ViewModel
                       if (MessageBox.Show("Разделить сцену?", "Разделение сцены", MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.No) return;
                       SplitScene(obj);
                       OnPropertyChanged("SceneVMs");
-                      _timeLineVM._SelectedLevelVM_SceneVMsCollectionChangedEvent();
                   }));
             }
         }
@@ -310,7 +309,7 @@ namespace LevelSetsEditor.ViewModel
             {
                 return timeLineRefreshCommand ?? (timeLineRefreshCommand = new RelayCommand(obj =>
                 {
-                    _timeLineVM._SelectedLevelVM_SceneVMsCollectionChangedEvent();
+                    _timeLineVM.Body.RefreshAll();
                 }));
             }
         }
