@@ -13,7 +13,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="120"/>
@@ -61,8 +61,8 @@
                             TextAlignment="Center" VerticalAlignment="Center" Height="20" 
                             BorderBrush="{x:Null}" Text="{Binding ElementName=ThisPlayer, Path=CurTime, StringFormat=hh\\:mm\\:ss\\.ff }"/>
             <TextBlock  x:Name="DurationTextBox" 
-                            TextAlignment="Center" VerticalAlignment="Center" Height="10" 
-                            Text="{Binding ElementName=ThisPlayer, Path=CurTime, StringFormat=hh\\:mm\\:ss\\.ff }"/>
+                            TextAlignment="Center" VerticalAlignment="Center"  FontSize="10"
+                            Text="{Binding ElementName=ThisPlayer, Path=Duration, StringFormat=hh\\:mm\\:ss\\.ff }"/>
         </StackPanel>
 
 

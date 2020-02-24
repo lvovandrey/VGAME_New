@@ -29,11 +29,11 @@
             </local:Cursor.Effect>
         </local:Cursor>
         <local:CursorTimeLabel
-            Width ="100" Height="20"
-            HorizontalAlignment="Left" VerticalAlignment="Bottom"
-            DataContext="{Binding ElementName=Cursor1}"
+            Width ="70" Height="20"
+            HorizontalAlignment="Left" VerticalAlignment="Top"
+            DataContext="{Binding ElementName=THIS}"
             Margin="{Binding ElementName=Cursor1, Path=Margin, UpdateSourceTrigger=PropertyChanged, 
             Converter={StaticResource CursorTimeLabelConverter},
-            ConverterParameter=-30#0#0#-10 }"/>
+            ConverterParameter=-35#-20#0#0 }"/>
     </Grid>
 </UserControl>

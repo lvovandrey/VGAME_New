@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Threading;
 using LevelSetsEditor.Model;
 
@@ -19,6 +20,7 @@ namespace LevelSetsEditor.ViewModel
         private VideoInfo _VideoInfo { get { return _Level.VideoInfo; } set { _Level.VideoInfo = value; } }
         private VideoPlayerVM _videoPlayerVM;
         private TimeLineVM _timeLineVM;
+        private ListView SceneListBox;
 
         public LevelVM(Level level, VideoPlayerVM videoPlayerVM, TimeLineVM timeLineVM)
         {
@@ -28,7 +30,9 @@ namespace LevelSetsEditor.ViewModel
             _timeLineVM = timeLineVM;
             SegregateTime = TimeSpan.FromSeconds(100);
             SegregateCount = 5;
-            
+
+            SceneListBox = ((MainWindow)Application.Current.MainWindow).SceneListBox;
+
             //пробрасываем событие изменения коллекции сцен 
             try { _Level.Scenes.CollectionChanged -= SceneVMs_CollectionChanged; } 
             finally { _Level.Scenes.CollectionChanged += SceneVMs_CollectionChanged; }
@@ -207,6 +211,9 @@ namespace LevelSetsEditor.ViewModel
                 return upSceneCommand ??
                   (upSceneCommand = new RelayCommand(obj =>
                   {
+
+
+                      Console.WriteLine(SceneListBox.Items.CurrentPosition ); //SceneListBox.SelectedItem
 
                       if (SelectedSceneVM == null) return;
                       int pos = SelectedSceneVM.scene.Position;

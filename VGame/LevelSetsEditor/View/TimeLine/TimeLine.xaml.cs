@@ -331,6 +331,21 @@ namespace LevelSetsEditor.View.TimeLine
         }
 
         #endregion
+        #region Свойство зависимости CurTime и все что с ним связано
+        //создаем свойство инкапсулирующее свойство зависимости
+        public TimeSpan CurTime
+        {
+            get { return (TimeSpan)GetValue(CurTimeProperty); }
+            set { SetValue(CurTimeProperty, value); }
+        }
+
+        //регистрируем свойство зависимости
+        public static readonly DependencyProperty CurTimeProperty =
+            DependencyProperty.Register("CurTime", typeof(TimeSpan), typeof(TimeLine));
+
+
+        #endregion
+
 
 
         /// <summary>
