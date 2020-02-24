@@ -183,6 +183,25 @@ namespace LevelSetsEditor.View.VideoPlayerMVVM
             else vlc.MediaPlayer.Play();
         }
 
+        private void RePlayBtn_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (Source == null) return;
+            vlc.MediaPlayer.Play(Source);
+        }
+
+        private void Speed2xBtn_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (vlc.MediaPlayer.Video != null)
+                vlc.MediaPlayer.Rate *= 2f;
+        }
+        private void Speed05xBtn_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (vlc.MediaPlayer.Video != null)
+                vlc.MediaPlayer.Rate *= 0.5f;
+        }
+        
+
+
         private void SplitBtn_Click(object sender, RoutedEventArgs e)
         {
 

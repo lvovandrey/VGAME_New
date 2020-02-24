@@ -93,6 +93,8 @@ namespace LevelSetsEditor.ViewModel
             {
                 _SelectedSceneVM = value;
                 OnPropertyChanged("SelectedSceneVM");
+
+                Console.WriteLine("LevelVM.SelectedSceneVM Change");
             }
 
         }
@@ -133,8 +135,13 @@ namespace LevelSetsEditor.ViewModel
                   {
                       int pos;
                       if (_Level.Scenes.Count == 0) return; //TODO: Тут потенциальная ошибка "Последовательность не содержит элементов"
-                      pos = _Level.Scenes.Max(a => a.Id);
                       Scene scene = new Scene();
+
+                      int nextid = 0;
+                      if (_Level.Scenes.Count > 0)
+                          nextid = _Level.Scenes.Max(a => a.Id);
+                      scene.Id = ++nextid;
+                      pos = _Level.Scenes.Max(a => a.Id);
                       scene.Position = ++pos;
                       scene.VideoSegment.TimeEnd = _Level.VideoInfo.Duration;
                       scene.VideoSegment.Source = _Level.VideoInfo.Source;

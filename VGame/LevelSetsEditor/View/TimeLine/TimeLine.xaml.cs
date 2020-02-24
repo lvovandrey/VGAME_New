@@ -64,10 +64,23 @@ namespace LevelSetsEditor.View.TimeLine
 
         private void TimeLine_OnSelectedItemChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
+            Interval IntervalForSelection = null;
             if (SelectedItem == null) return;
-            Interval IntervalForSelection=Intervals.Where(n => n.sceneVM.SceneId == SelectedItem.SceneId).FirstOrDefault();
+            {
+                IEnumerable<Interval> v = Intervals.Where(n => n.sceneVM.GetHashCode() == SelectedItem.GetHashCode());
+                if( v.Count() > 0 )
+                    IntervalForSelection = v.First();
+                else if (v.Count() != 1)
+                    IntervalForSelection = v.Where(n => n.sceneVM.VideoSegment_TimeBegin == SelectedItem.VideoSegment_TimeBegin).FirstOrDefault();
+            }
             if (IntervalForSelection!=null)
-            SelectInterval(IntervalForSelection, "Событие");
+                SelectInterval(IntervalForSelection, "Событие");
+
+            Console.WriteLine("   SelectedItem.GetHashCode() = " + SelectedItem.GetHashCode());
+            foreach (var item in Intervals)
+            {
+                Console.WriteLine(item.sceneVM.GetHashCode());
+            }
         }
 
 
@@ -235,7 +248,7 @@ namespace LevelSetsEditor.View.TimeLine
 
             SelectedInterval = interval;
             SelectionIsAlreadyChange = true;
-            Tools.ToolsTimer.Delay(() => { SelectionIsAlreadyChange = false; }, TimeSpan.FromMilliseconds(5));
+            Tools.ToolsTimer.Delay(() => { SelectionIsAlreadyChange = false; }, TimeSpan.FromMilliseconds(250));
             SelectedItem = interval.sceneVM;
         }
 
@@ -306,6 +319,7 @@ namespace LevelSetsEditor.View.TimeLine
         //создаем метод который вызывает событие изменения свойства
         private static void SceneVMsPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
+            if (((TimeLine)d).SceneVMs == null) return;
             ((TimeLine)d).SceneVMs.CollectionChanged += ((TimeLine)d).SceneVMs_CollectionChanged;
             ((TimeLine)d).RefreshAll();
 

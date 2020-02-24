@@ -12,6 +12,7 @@ namespace LevelSetsEditor.Model
         public Scene()
         {
             _VideoSegment = new VideoSegment();
+
         }
 
 
