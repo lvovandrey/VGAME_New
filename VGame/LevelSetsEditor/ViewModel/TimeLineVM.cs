@@ -36,6 +36,7 @@ namespace LevelSetsEditor.ViewModel
             {
                 _SelectedLevelVM = value;
                 OnPropertyChanged("SelectedLevelVM");
+                if (_SelectedLevelVM == null) return;
                 TimeLine.FullTime = _SelectedLevelVM.VideoInfoVM.Duration;
             }
         }

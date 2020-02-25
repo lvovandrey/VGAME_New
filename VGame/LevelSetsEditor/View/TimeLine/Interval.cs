@@ -120,14 +120,13 @@ namespace LevelSetsEditor.View.TimeLine
             double end = End.TotalMilliseconds;
             double tfull = Container.FullTime.TotalMilliseconds;
             double conWidth = Container.ActualWidth;
+            if (tfull == 0) tfull = 60000;
 
             double NewBodyWidth = conWidth * (end-beg) / tfull;
-            //if (Body.ActualWidth != NewBodyWidth)
-                Body.Width = NewBodyWidth;
+            Body.Width = NewBodyWidth;
 
             double NewBodyLeft = conWidth * (beg) / tfull;
-            //if (Body.Margin.Left != NewBodyLeft)
-                Body.Margin = new Thickness(NewBodyLeft, Body.Margin.Top, Body.Margin.Right, Body.Margin.Bottom);
+            Body.Margin = new Thickness(NewBodyLeft, Body.Margin.Top, Body.Margin.Right, Body.Margin.Bottom);
 
             if (Body.Width > 90) { LabelVisibility = true; } else { LabelVisibility = false; }
             Body.TimeLabel.End = End;
@@ -156,9 +155,6 @@ namespace LevelSetsEditor.View.TimeLine
             OnPropertyChanged("Begin");
             OnPropertyChanged("End");
             }, TimeSpan.FromMilliseconds(100));
-
-
-            //  UpdateView();
         }
         #region mvvm
         public event PropertyChangedEventHandler PropertyChanged;
