@@ -90,7 +90,7 @@ namespace LevelSetsEditor.ViewModel
             Level l = new Level() { Id = _levels.Count + 1, Name = "Level " + (_levels.Count + 1).ToString() };
             l.VideoInfo = new VideoInfo() { Title = (_levels.Count + 1).ToString(), Id = l.Id };
             l.VideoInfoId = l.VideoInfo.Id;
-            l.VideoInfo.Preview = new Preview() { Source = new Uri(@"C:\Program Files\FuckWinActivator\wallpapers\1.jpg"), Id = l.VideoInfo.Id };
+            l.VideoInfo.Preview = new Preview() { Source = new Uri(@"C:\1.png"), Id = l.VideoInfo.Id };
             l.VideoInfo.PreviewId = l.VideoInfo.Preview.Id;
             _levels.Add(l);
             context.Levels.Add(l);
@@ -163,7 +163,7 @@ namespace LevelSetsEditor.ViewModel
                       Level l = new Level() { Id = _levels.Count + 1, Name = "Level " + (_levels.Count + 1).ToString() };
                       l.VideoInfo = new VideoInfo() { Title = (_levels.Count + 1).ToString(), Id = l.Id };
                       l.VideoInfoId = l.VideoInfo.Id;
-                      l.VideoInfo.Preview = new Preview() { Source = new Uri(@"C:\Program Files\FuckWinActivator\wallpapers\1.jpg"), Id = l.VideoInfo.Id };
+                      l.VideoInfo.Preview = new Preview() { Source = new Uri(@"C:\1.png"), Id = l.VideoInfo.Id };
                       l.VideoInfo.PreviewId = l.VideoInfo.Preview.Id;
                       _levels.Add(l);
                       context.Levels.Add(l);

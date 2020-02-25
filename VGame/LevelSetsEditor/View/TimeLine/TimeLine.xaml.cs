@@ -64,10 +64,23 @@ namespace LevelSetsEditor.View.TimeLine
 
         private void TimeLine_OnSelectedItemChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
+            Interval IntervalForSelection = null;
             if (SelectedItem == null) return;
-            Interval IntervalForSelection=Intervals.Where(n => n.sceneVM.SceneId == SelectedItem.SceneId).FirstOrDefault();
+            {
+                IEnumerable<Interval> v = Intervals.Where(n => n.sceneVM.GetHashCode() == SelectedItem.GetHashCode());
+                if( v.Count() > 0 )
+                    IntervalForSelection = v.First();
+                else if (v.Count() != 1)
+                    IntervalForSelection = v.Where(n => n.sceneVM.VideoSegment_TimeBegin == SelectedItem.VideoSegment_TimeBegin).FirstOrDefault();
+            }
             if (IntervalForSelection!=null)
-            SelectInterval(IntervalForSelection, "Событие");
+                SelectInterval(IntervalForSelection, "Событие");
+
+            Console.WriteLine("   SelectedItem.GetHashCode() = " + SelectedItem.GetHashCode());
+            foreach (var item in Intervals)
+            {
+                Console.WriteLine(item.sceneVM.GetHashCode());
+            }
         }
 
 
@@ -235,7 +248,7 @@ namespace LevelSetsEditor.View.TimeLine
 
             SelectedInterval = interval;
             SelectionIsAlreadyChange = true;
-            Tools.ToolsTimer.Delay(() => { SelectionIsAlreadyChange = false; }, TimeSpan.FromMilliseconds(5));
+            Tools.ToolsTimer.Delay(() => { SelectionIsAlreadyChange = false; }, TimeSpan.FromMilliseconds(250));
             SelectedItem = interval.sceneVM;
         }
 
@@ -253,9 +266,10 @@ namespace LevelSetsEditor.View.TimeLine
         {
             foreach (Interval I in Intervals)
             {
+
                 this.GridMain.Children.Remove(I.Body);
                 I.Body.ClearOnClick();
-                I.Body = null; // это наверное излишне
+              //  I.Body = null; // это наверное излишне
             }
             Intervals.Clear();
         }
@@ -287,6 +301,79 @@ namespace LevelSetsEditor.View.TimeLine
         } // Как и многие жизненные проблемы, эту можно решить сгибанием.....
 
         #endregion
+
+
+        #region Свойство зависимости SceneVMs и все что с ним связано
+        //создаем свойство инкапсулирующее свойство зависимости
+        public ObservableCollection<SceneVM> SceneVMs
+        {
+            get { return (ObservableCollection<SceneVM>)GetValue(SceneVMsProperty); }
+            set { SetValue(SceneVMsProperty, value); }
+        }
+
+        //регистрируем свойство зависимости
+        public static readonly DependencyProperty SceneVMsProperty =
+            DependencyProperty.Register("SceneVMs", typeof(ObservableCollection<SceneVM>), typeof(TimeLine), new FrameworkPropertyMetadata(new PropertyChangedCallback(SceneVMsPropertyChangedCallback)));
+
+       
+        //создаем метод который вызывает событие изменения свойства
+        private static void SceneVMsPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (((TimeLine)d).SceneVMs == null) return;
+            ((TimeLine)d).SceneVMs.CollectionChanged += ((TimeLine)d).SceneVMs_CollectionChanged;
+            ((TimeLine)d).RefreshAll();
+
+        } // Как и многие жизненные проблемы, эту можно решить сгибанием.....
+
+        private void SceneVMs_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            RefreshAll();
+        }
+
+        #endregion
+        #region Свойство зависимости CurTime и все что с ним связано
+        //создаем свойство инкапсулирующее свойство зависимости
+        public TimeSpan CurTime
+        {
+            get { return (TimeSpan)GetValue(CurTimeProperty); }
+            set { SetValue(CurTimeProperty, value); }
+        }
+
+        //регистрируем свойство зависимости
+        public static readonly DependencyProperty CurTimeProperty =
+            DependencyProperty.Register("CurTime", typeof(TimeSpan), typeof(TimeLine));
+
+
+        #endregion
+
+
+
+        /// <summary>
+        /// Все удалить нахер и отрисовать заново
+        /// </summary>
+        public void RefreshAll()
+        {
+            if (SceneVMs == null) return;
+
+            ClearIntervals();
+            foreach (SceneVM sceneVM in SceneVMs)
+            {
+                AddInterval(sceneVM);
+            }
+        }
+
+        /// <summary>
+        /// Отрисовать все не удаляя.
+        /// </summary>
+        public void RepaintAll()
+        {
+            if (SceneVMs == null) return;
+            foreach ( Interval I in Intervals)
+            {
+                I.UpdateView();
+            }
+        }
+
 
 
 

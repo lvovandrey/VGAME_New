@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Threading;
 using LevelSetsEditor.Model;
 
@@ -19,16 +20,19 @@ namespace LevelSetsEditor.ViewModel
         private VideoInfo _VideoInfo { get { return _Level.VideoInfo; } set { _Level.VideoInfo = value; } }
         private VideoPlayerVM _videoPlayerVM;
         private TimeLineVM _timeLineVM;
+        private ListView SceneListBox;
 
         public LevelVM(Level level, VideoPlayerVM videoPlayerVM, TimeLineVM timeLineVM)
         {
             _Level = level;
-            _VideoInfoVM = new VideoInfoVM(_Level.VideoInfo);  //ВОт как надо - надо опираться на единую модель и не создавать новые представления в геттерах!!!
+            _VideoInfoVM = new VideoInfoVM(_Level.VideoInfo, level);  //ВОт как надо - надо опираться на единую модель и не создавать новые представления в геттерах!!!
             _videoPlayerVM = videoPlayerVM;
             _timeLineVM = timeLineVM;
             SegregateTime = TimeSpan.FromSeconds(100);
             SegregateCount = 5;
-            
+
+            SceneListBox = ((MainWindow)Application.Current.MainWindow).SceneListBox;
+
             //пробрасываем событие изменения коллекции сцен 
             try { _Level.Scenes.CollectionChanged -= SceneVMs_CollectionChanged; } 
             finally { _Level.Scenes.CollectionChanged += SceneVMs_CollectionChanged; }
@@ -40,7 +44,7 @@ namespace LevelSetsEditor.ViewModel
         public event Action SceneVMsCollectionChangedEvent; //событие изменения коллекции сцен  - родное снаружи не работает
         private void SceneVMs_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            SceneVMsCollectionChangedEvent();
+            SceneVMsCollectionChangedEvent?.Invoke();
         }
         public void SceneVMsCollectionChangedEventClear() { SceneVMsCollectionChangedEvent = null; }
         #endregion
@@ -81,13 +85,6 @@ namespace LevelSetsEditor.ViewModel
         }
 
 
-        public void SelectedSceneVMRefresh()
-        {
-            OnPropertyChanged("SelectedSceneVM");
-            _timeLineVM.SelectedSceneVMRefresh();
-            OnPropertyChanged("SceneVMs");
-        }
-
 
         private SceneVM _SelectedSceneVM;
         public SceneVM SelectedSceneVM
@@ -100,11 +97,17 @@ namespace LevelSetsEditor.ViewModel
             {
                 _SelectedSceneVM = value;
                 OnPropertyChanged("SelectedSceneVM");
-                //_timeLineVM.SelectedSceneChange(_SelectedSceneVM);
+
+                Console.WriteLine("LevelVM.SelectedSceneVM Change");
             }
 
         }
 
+
+        public void RepaintTimeLineIntervals()
+        {
+            TimeLineRepaintCommand.Execute(null);
+        }
 
 
         public TimeSpan _SegregateTime { get; set; }
@@ -134,8 +137,15 @@ namespace LevelSetsEditor.ViewModel
                 return addSceneCommand ??
                   (addSceneCommand = new RelayCommand(obj =>
                   {
-                      int pos = _Level.Scenes.Max(a => a.Id);
+                      int pos;
+                      if (_Level.Scenes.Count == 0) return; //TODO: Тут потенциальная ошибка "Последовательность не содержит элементов"
                       Scene scene = new Scene();
+
+                      int nextid = 0;
+                      if (_Level.Scenes.Count > 0)
+                          nextid = _Level.Scenes.Max(a => a.Id);
+                      scene.Id = ++nextid;
+                      pos = _Level.Scenes.Max(a => a.Id);
                       scene.Position = ++pos;
                       scene.VideoSegment.TimeEnd = _Level.VideoInfo.Duration;
                       scene.VideoSegment.Source = _Level.VideoInfo.Source;
@@ -144,6 +154,7 @@ namespace LevelSetsEditor.ViewModel
                   }));
             }
         }
+
 
         private RelayCommand removeSceneCommand;
         public RelayCommand RemoveSceneCommand
@@ -168,6 +179,9 @@ namespace LevelSetsEditor.ViewModel
                 return downSceneCommand ??
                   (downSceneCommand = new RelayCommand(obj =>
                   {
+                      int oldPos = SceneListBox.Items.CurrentPosition;
+                      if (oldPos >= SceneListBox.Items.Count-1) return;
+
                       if (SelectedSceneVM == null) return;
                       int pos = SelectedSceneVM.scene.Position;
 
@@ -185,8 +199,11 @@ namespace LevelSetsEditor.ViewModel
                       _scenes.Clear();
                       _scenes = Tmp;
 
-                      SelectedSceneVM = SceneVMs.Last();
+                    //  SelectedSceneVM = SceneVMs.Last();
+
+                      SceneListBox.SelectedIndex = oldPos + 1;
                       OnPropertyChanged("SceneVMs");
+                      SceneListBox.SelectedIndex = oldPos + 1;
                       OnPropertyChanged("SelectedSceneVM");
                   }));
             }
@@ -200,6 +217,10 @@ namespace LevelSetsEditor.ViewModel
                 return upSceneCommand ??
                   (upSceneCommand = new RelayCommand(obj =>
                   {
+
+                      int oldPos = SceneListBox.Items.CurrentPosition;
+                      if (oldPos < 1) return;
+                   //   MessageBox.Show(SceneListBox.Items.CurrentPosition.ToString() ); //SceneListBox.SelectedItem
 
                       if (SelectedSceneVM == null) return;
                       int pos = SelectedSceneVM.scene.Position;
@@ -217,18 +238,13 @@ namespace LevelSetsEditor.ViewModel
                       }
                       _scenes.Clear();
                       _scenes = Tmp;
-
+                      SceneListBox.SelectedIndex = oldPos - 1;
                       OnPropertyChanged("SceneVMs");
+                      SceneListBox.SelectedIndex = oldPos - 1;
                       OnPropertyChanged("SelectedSceneVM");
 
                   }));
             }
-        }
-
-
-        public void SelectedSceneVMUpdate()
-        {
-
         }
 
         private RelayCommand clearScenesListCommand;
@@ -291,7 +307,6 @@ namespace LevelSetsEditor.ViewModel
                       if (MessageBox.Show("Разделить сцену?", "Разделение сцены", MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.No) return;
                       SplitScene(obj);
                       OnPropertyChanged("SceneVMs");
-                      _timeLineVM._SelectedLevelVM_SceneVMsCollectionChangedEvent();
                   }));
             }
         }
@@ -310,11 +325,22 @@ namespace LevelSetsEditor.ViewModel
             {
                 return timeLineRefreshCommand ?? (timeLineRefreshCommand = new RelayCommand(obj =>
                 {
-                    _timeLineVM._SelectedLevelVM_SceneVMsCollectionChangedEvent();
+                    _timeLineVM.Body.RefreshAll();
                 }));
             }
         }
 
+        private RelayCommand timeLineRepaintCommand;
+        public RelayCommand TimeLineRepaintCommand
+        {
+            get
+            {
+                return timeLineRepaintCommand ?? (timeLineRepaintCommand = new RelayCommand(obj =>
+                {
+                    _timeLineVM.Body.RepaintAll();
+                }));
+            }
+        }
 
 
 

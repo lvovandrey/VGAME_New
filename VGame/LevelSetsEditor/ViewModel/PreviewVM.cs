@@ -14,10 +14,12 @@ namespace LevelSetsEditor.ViewModel
     public class PreviewVM : INotifyPropertyChanged
     {
         private Preview _Preview { get; set; }
+        private Level _Level { get; set; }
 
-        public PreviewVM(Preview _preview)
+        public PreviewVM(Preview _preview, Level level)
         {
             this._Preview= _preview;
+            _Level = level;
         }
 
        
@@ -136,6 +138,22 @@ namespace LevelSetsEditor.ViewModel
                     }));
             }
         }
+
+
+        private RelayCommand reLoadPreviewFromYoutubeCommand;
+        public RelayCommand ReLoadPreviewFromYoutubeCommand
+        {
+            get
+            {
+                return reLoadPreviewFromYoutubeCommand ?? (reLoadPreviewFromYoutubeCommand = new RelayCommand(obj =>
+                {
+                    Source = new Uri(_Level.YoutubePreview);
+                }));
+            }
+        }
+
+
+        
 
         #region mvvm
         public event PropertyChangedEventHandler PropertyChanged;

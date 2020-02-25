@@ -8,7 +8,7 @@
              d:DesignHeight="20" d:DesignWidth="100" Background="Green" BorderBrush="YellowGreen" BorderThickness="2">
     <Grid>
         <TextBlock x:Name="PosLabel"  
-                   Text="{Binding Time, UpdateSourceTrigger=PropertyChanged, StringFormat=hh\\:mm\\:ss\\.f}"  
+                   Text="{Binding CurTime, UpdateSourceTrigger=PropertyChanged, StringFormat=hh\\:mm\\:ss\\.f}"  
                    FontSize="12" HorizontalAlignment="Center"></TextBlock>
     </Grid>
 </UserControl>

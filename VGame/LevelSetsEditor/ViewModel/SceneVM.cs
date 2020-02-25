@@ -36,7 +36,6 @@ namespace LevelSetsEditor.ViewModel
             {
                 scene.VideoSegment.TimeBegin = value;
                 OnPropertyChanged("VideoSegment_TimeBegin");
-                levelVM.SelectedSceneVMRefresh();
                 
             }
         }
@@ -51,7 +50,7 @@ namespace LevelSetsEditor.ViewModel
             {
                 scene.VideoSegment.TimeEnd = value;
                 OnPropertyChanged("VideoSegment_TimeEnd");
-                levelVM.SelectedSceneVMRefresh();
+                
             }
         }
 
@@ -149,6 +148,8 @@ namespace LevelSetsEditor.ViewModel
                     }
 
                     if(TrackTime) videoPlayerVM.CurTime = VideoSegment_TimeBegin;
+
+                    levelVM.RepaintTimeLineIntervals();
                 });
             }
         }
@@ -167,6 +168,8 @@ namespace LevelSetsEditor.ViewModel
                         VideoSegment_TimeEnd -= TimeSpan.FromSeconds(1);
                     }
                     if (TrackTime) videoPlayerVM.CurTime = VideoSegment_TimeEnd;
+
+                    levelVM.RepaintTimeLineIntervals();
                 });
             }
         }
