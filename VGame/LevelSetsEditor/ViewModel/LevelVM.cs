@@ -179,6 +179,9 @@ namespace LevelSetsEditor.ViewModel
                 return downSceneCommand ??
                   (downSceneCommand = new RelayCommand(obj =>
                   {
+                      int oldPos = SceneListBox.Items.CurrentPosition;
+                      if (oldPos >= SceneListBox.Items.Count-1) return;
+
                       if (SelectedSceneVM == null) return;
                       int pos = SelectedSceneVM.scene.Position;
 
@@ -196,8 +199,11 @@ namespace LevelSetsEditor.ViewModel
                       _scenes.Clear();
                       _scenes = Tmp;
 
-                      SelectedSceneVM = SceneVMs.Last();
+                    //  SelectedSceneVM = SceneVMs.Last();
+
+                      SceneListBox.SelectedIndex = oldPos + 1;
                       OnPropertyChanged("SceneVMs");
+                      SceneListBox.SelectedIndex = oldPos + 1;
                       OnPropertyChanged("SelectedSceneVM");
                   }));
             }
@@ -212,8 +218,9 @@ namespace LevelSetsEditor.ViewModel
                   (upSceneCommand = new RelayCommand(obj =>
                   {
 
-
-                      Console.WriteLine(SceneListBox.Items.CurrentPosition ); //SceneListBox.SelectedItem
+                      int oldPos = SceneListBox.Items.CurrentPosition;
+                      if (oldPos < 1) return;
+                   //   MessageBox.Show(SceneListBox.Items.CurrentPosition.ToString() ); //SceneListBox.SelectedItem
 
                       if (SelectedSceneVM == null) return;
                       int pos = SelectedSceneVM.scene.Position;
@@ -231,8 +238,9 @@ namespace LevelSetsEditor.ViewModel
                       }
                       _scenes.Clear();
                       _scenes = Tmp;
-
+                      SceneListBox.SelectedIndex = oldPos - 1;
                       OnPropertyChanged("SceneVMs");
+                      SceneListBox.SelectedIndex = oldPos - 1;
                       OnPropertyChanged("SelectedSceneVM");
 
                   }));
