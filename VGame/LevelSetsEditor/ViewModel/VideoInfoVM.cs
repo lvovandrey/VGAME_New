@@ -14,10 +14,10 @@ namespace LevelSetsEditor.ViewModel
         public PreviewVM PreviewVM { get { return _PreviewVM; } set { _PreviewVM = value; } }
 
 
-        public VideoInfoVM(VideoInfo VideoInfo)
+        public VideoInfoVM(VideoInfo VideoInfo,Level level)
         {
             this._VideoInfo = VideoInfo;
-            _PreviewVM = new PreviewVM(_VideoInfo.Preview);
+            _PreviewVM = new PreviewVM(_VideoInfo.Preview, level);
 
         }
 

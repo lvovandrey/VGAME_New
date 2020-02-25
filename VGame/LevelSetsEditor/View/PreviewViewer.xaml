@@ -13,9 +13,14 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="30"/>
                 </Grid.ColumnDefinitions>
                 <local:PropertyViewer DataContext="{Binding Source, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Путь к изобр."/>
                 <Button Content="..." Grid.Column="1" Command="{Binding OpenPreviewFileCommand}"/>
+                <Button Grid.Column="2" Command="{Binding ReLoadPreviewFromYoutubeCommand}">
+                    <Image Source="/LevelSetsEditor;component/icons/youtube_logo.png" Margin="2"/>
+                </Button>
+
             </Grid>
             <local:PropertyViewer DataContext="{Binding Size, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Размер"/>
             <Grid > <!--Height="{Binding Size.Height, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"-->

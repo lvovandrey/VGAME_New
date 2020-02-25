@@ -33,24 +33,6 @@ namespace YouTubeUrlSupplier
             PrevImagesUrl = new string[] { "", "", "" };
 
             Url = url;
-            try
-            {
-           //     NEWLIBRARY_GetVideoAsync(url);
-
-                //IList<VideoQuality> list = null;
-                //list = YouTubeDownloader.GetYouTubeVideoUrls(url);
-                //DirectURL = list.First().DownloadUrl;
-                //Title = list.First().VideoTitle;
-                //Duration = TimeSpan.FromSeconds(list.First().Length);
-                //Resolution = list.First().Dimension;
-
-
-
-            }
-            catch
-            {
-                MessageBox.Show("Error creating YoutubeVideoInfo object. ");
-            }
         }
 
         public async void NEWLIBRARY_GetVideoAsync(string urlstring)

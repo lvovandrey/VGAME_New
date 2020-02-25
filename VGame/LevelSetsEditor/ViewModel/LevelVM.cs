@@ -25,7 +25,7 @@ namespace LevelSetsEditor.ViewModel
         public LevelVM(Level level, VideoPlayerVM videoPlayerVM, TimeLineVM timeLineVM)
         {
             _Level = level;
-            _VideoInfoVM = new VideoInfoVM(_Level.VideoInfo);  //ВОт как надо - надо опираться на единую модель и не создавать новые представления в геттерах!!!
+            _VideoInfoVM = new VideoInfoVM(_Level.VideoInfo, level);  //ВОт как надо - надо опираться на единую модель и не создавать новые представления в геттерах!!!
             _videoPlayerVM = videoPlayerVM;
             _timeLineVM = timeLineVM;
             SegregateTime = TimeSpan.FromSeconds(100);

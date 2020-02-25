@@ -125,14 +125,13 @@
                         </ListView>
                         <WrapPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="6">
                             <Button Width="20" Content="+" Margin="5" Command="{Binding AddSceneCommand}"/>
-                            <Button Width="20" Content="-" Margin="5" Command="{Binding RemoveSceneCommand}"/>
+                            <Button Width="20" Content="-" Margin="5 5 5 5" Command="{Binding RemoveSceneCommand}"/>
                             <Button Width="40" Content="Up" Margin="5" Command="{Binding UpSceneCommand}" />
                             <Button Width="40" Content="Down" Margin="5" Command="{Binding DownSceneCommand}"/>
                             <Button Width="40" Content="Clear" Margin="5" Command="{Binding ClearScenesListCommand}"/>
                             <Button Width="40" Content="Auto" Margin="5" Command="{Binding SegregateScenesCommand}"/>
 
-                            <Button Width="40" Content="!!!!!" Margin="5" Click="Button_Click_5"/>
-
+                            
                             <TextBox Name="SegregateTextBox" Margin="25,5,5,5" Width="60" Text="{Binding SegregateTime, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                             <Button Width="40" Content="AutoT" Margin="5" Command="{Binding SegregateScenesCommand}" CommandParameter="{Binding SegregateTime}"/>
 
@@ -141,8 +140,8 @@
                             <Button Name="SplitScene" Width="30" Margin="5" Command="{Binding SplitScenesCommand}" CommandParameter="{Binding ElementName=VideoPlayer, Path=CurTime}" Click="SplitScene_Click" >
                                 <Image Source="icons/icon.png"/>
                             </Button>
-                            <Button Width="40" Content="Check" Margin="5" Command="{Binding CheckIntersectionScenesCommand}" />
-                            <Button Width="40" Content="Check" Margin="5" Command="{Binding TimeLineRefreshCommand}" />
+                            <Button IsEnabled="False" Width="40" Content="Check" Margin="5" Command="{Binding CheckIntersectionScenesCommand}" />
+                            <Button Width="100" Content="TimeLineRefresh" Margin="5" Command="{Binding TimeLineRefreshCommand}" />
 
 
                         </WrapPanel>

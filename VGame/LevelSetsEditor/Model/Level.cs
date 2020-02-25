@@ -20,7 +20,8 @@ namespace LevelSetsEditor.Model
         [NotMapped]
         public string _Name { get; set; }
 
-
+        [NotMapped]
+        public string YoutubePreview { get; private set; }
 
 
 
@@ -213,7 +214,7 @@ namespace LevelSetsEditor.Model
 
             OnPropertyChanged("VideoInfo");
 
-
+            YoutubePreview = vidInfo.ImageUrl;
             this.VideoInfo.Preview.Source = new Uri(vidInfo.ImageUrl);
             
             this.VideoInfo.Preview.Size = PictHelper.GetPictureSize(this.VideoInfo.Preview.Source);
@@ -239,6 +240,8 @@ namespace LevelSetsEditor.Model
                 MessageBox.Show("Невозможно получить прямую ссылку на это видео", "Ошибка получения ссылки", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 return;
             }
+
+            YoutubePreview = vidInfo.ImageUrl;
 
             this.VideoInfo.Source = new Uri(vidInfo.DirectURL);
             OnPropertyChanged("VideoInfo");
