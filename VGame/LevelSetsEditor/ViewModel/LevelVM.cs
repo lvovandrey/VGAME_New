@@ -30,7 +30,7 @@ namespace LevelSetsEditor.ViewModel
             _timeLineVM = timeLineVM;
             SegregateTime = TimeSpan.FromSeconds(100);
             SegregateCount = 5;
-
+            OverlapSegregateTime = TimeSpan.Zero;
             SceneListBox = ((MainWindow)Application.Current.MainWindow).SceneListBox;
 
             //пробрасываем событие изменения коллекции сцен 
@@ -111,14 +111,13 @@ namespace LevelSetsEditor.ViewModel
 
 
         public TimeSpan _SegregateTime { get; set; }
+        public TimeSpan _OverlapSegregateTime { get; set; }
         public int _SegregateCount { get; set; }
         public TimeSpan SegregateTime { get { return _SegregateTime; } set { _SegregateTime = value; OnPropertyChanged("SegregateTime"); } }
+        public TimeSpan OverlapSegregateTime { get { return _OverlapSegregateTime; } set { _OverlapSegregateTime = value; OnPropertyChanged("OverlapSegregateTime"); } }
         public int SegregateCount { get { return _SegregateCount; } set { _SegregateCount = value; OnPropertyChanged("SegregateCount"); } }
 
-
-
         public int id { get { return _Level.Id; } }
-
         public Level _level { get { return _Level; } }
 
 
@@ -287,9 +286,9 @@ namespace LevelSetsEditor.ViewModel
             if (parameter == null)
                 _Level.SegregateScenes();
             else if (parameter is TimeSpan) 
-                _Level.SegregateScenes(SegregateTime);
+                _Level.SegregateScenes(SegregateTime, OverlapSegregateTime);
             else if (parameter is int)
-                _Level.SegregateScenes(SegregateCount);
+                _Level.SegregateScenes(SegregateCount, OverlapSegregateTime);
 
             OnPropertyChanged("SceneVMs");
 

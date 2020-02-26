@@ -11,8 +11,11 @@ using YouTubeUrlSupplier;
 
 namespace LevelSetsEditor.Model
 {
+        
+
     public class Level : INotifyPropertyChanged
     {
+
         public int Id { get; set; }
         public int VideoInfoId { get;set;}
         [NotMapped]
@@ -79,7 +82,7 @@ namespace LevelSetsEditor.Model
         /// </summary>
         /// <param name="segrTime">Время одной сцены</param>
         /// <returns></returns>
-        public string SegregateScenes(TimeSpan segrTime)
+        public string SegregateScenes(TimeSpan segrTime, TimeSpan OverlapSegregateTime)
         {
 
             TimeSpan Dur = VideoInfo.Duration;
@@ -97,7 +100,7 @@ namespace LevelSetsEditor.Model
                 s.UnitsCount = i;
                 s.VideoSegment.TimeBegin = TimeSpan.FromSeconds((i - 1) * segrTime.TotalSeconds);
                 if (i < NumScenes)
-                    s.VideoSegment.TimeEnd = TimeSpan.FromSeconds(i * segrTime.TotalSeconds);
+                    s.VideoSegment.TimeEnd = TimeSpan.FromSeconds((i * segrTime.TotalSeconds) + OverlapSegregateTime.TotalSeconds);
                 else
                     s.VideoSegment.TimeEnd = VideoInfo.Duration - TimeSpan.FromSeconds(0.1);
                 s.VideoSegment.Source = VideoInfo.Source;
@@ -112,7 +115,7 @@ namespace LevelSetsEditor.Model
         /// </summary>
         /// <param name="scenesCount">Нужное количество сцен</param>
         /// <returns></returns>
-        public string SegregateScenes(int scenesCount)
+        public string SegregateScenes(int scenesCount, TimeSpan OverlapSegregateTime)
         {
 
             TimeSpan Dur = VideoInfo.Duration;
@@ -133,9 +136,9 @@ namespace LevelSetsEditor.Model
                 s.UnitsCount = i;
                 s.VideoSegment.TimeBegin = TimeSpan.FromSeconds((i - 1) * segrTime.TotalSeconds);
                 if (i < NumScenes)
-                    s.VideoSegment.TimeEnd = TimeSpan.FromSeconds(i * segrTime.TotalSeconds);
+                    s.VideoSegment.TimeEnd = TimeSpan.FromSeconds((i * segrTime.TotalSeconds) + OverlapSegregateTime.TotalSeconds);
                 else
-                    s.VideoSegment.TimeEnd = VideoInfo.Duration;
+                    s.VideoSegment.TimeEnd = VideoInfo.Duration - TimeSpan.FromSeconds(0.1); 
                 s.VideoSegment.Source = VideoInfo.Source;
                 Scenes.Add(s);
             }
