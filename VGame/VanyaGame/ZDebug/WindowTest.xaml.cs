@@ -92,7 +92,7 @@ namespace VanyaGame.ZDebug
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            TxtLink.Text = YouTubeUrlSupplier.YoutubeGet.GetVideoDirectURL(TxtUri.Text);
+            TxtLink.Text = YouTubeUrlSupplier.YoutubeVidInfo.GetVideoDirectURL(TxtUri.Text);
             vlc1.vlcPlayer.MediaPlayer.VlcLibDirectory  =new System.IO.DirectoryInfo(@Environment.CurrentDirectory + @"\Tools\vlcLib\");
             // new System.IO.DirectoryInfo(@"c:\Program Files\VideoLAN\VLC\");
             //new System.IO.DirectoryInfo(@"c:\vlcLib\");
@@ -103,7 +103,7 @@ namespace VanyaGame.ZDebug
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Uri U = new Uri(@YouTubeUrlSupplier.YoutubeGet.GetVideoDirectURL(TxtUri.Text), UriKind.Absolute);//@TxtLink.Text);   (@"c:\1.VANYA GAME\LEVELS\VanjaGame\Level_001\video\1.wmv");
+            Uri U = new Uri(@YouTubeUrlSupplier.YoutubeVidInfo.GetVideoDirectURL(TxtUri.Text), UriKind.Absolute);//@TxtLink.Text);   (@"c:\1.VANYA GAME\LEVELS\VanjaGame\Level_001\video\1.wmv");
         //    MediaElement1.Source = U;
 
            // MediaElement1.Source = new Uri(@"http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4");

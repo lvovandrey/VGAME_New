@@ -35,6 +35,16 @@ namespace YouTubeUrlSupplier
             Url = url;
         }
 
+        public static string GetVideoDirectURL(string urlstring)
+        {
+            var id = YoutubeClient.ParseVideoId(urlstring);
+            var client = new YoutubeClient();
+            var _streamInfoSet = client.GetVideoMediaStreamInfosAsync(id.ToString());
+            MuxedStreamInfo _streamInfo = _streamInfoSet.Result.Muxed.WithHighestVideoQuality();
+
+            return _streamInfo.Url;
+        }
+
         public async void NEWLIBRARY_GetVideoAsync(string urlstring)
         {
             try
