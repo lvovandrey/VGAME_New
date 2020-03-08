@@ -16,7 +16,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using VanyaGame.GameNumber.Data;
 
-namespace VanyaGame.GameNumber.Interface
+namespace VanyaGame.GameNumberDB.Interface
 {
     /// <summary>
     /// Логика взаимодействия для KeyboardElement.xaml

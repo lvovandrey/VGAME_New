@@ -7,7 +7,7 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using VanyaGame.GameNumber.Data;
 
-namespace VanyaGame.GameNumber.Interface
+namespace VanyaGame.GameNumberDB.Interface
 {
     public class Keyboard 
     {

@@ -4,7 +4,7 @@ using VanyaGame.Abstract;
 using VanyaGame.Units;
 using VanyaGame.Units.Components;
 
-namespace VanyaGame.GameNumber.Units.Components
+namespace VanyaGame.GameNumberDB.Units.Components
 {
     /// <summary>
     /// Определяет специфичные для Number методы показывания и исчезновения элементов с экрана

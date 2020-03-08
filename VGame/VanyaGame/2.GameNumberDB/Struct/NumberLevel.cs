@@ -5,7 +5,7 @@ using System.Windows;
 using VanyaGame.Struct;
 using VanyaGame.Struct.Components;
 
-namespace VanyaGame.GameNumber.Struct
+namespace VanyaGame.GameNumberDB.Struct
 {
 
     /// <summary>

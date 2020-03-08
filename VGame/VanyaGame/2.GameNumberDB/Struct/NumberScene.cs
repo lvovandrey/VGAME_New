@@ -13,7 +13,7 @@ using VanyaGame.Struct.Components;
 using VanyaGame.Units;
 using VanyaGame.Units.Components;
 
-namespace VanyaGame.GameNumber.Struct
+namespace VanyaGame.GameNumberDB.Struct
 {
     public class NumberScene : Scene
     {

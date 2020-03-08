@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Xml;
 
-namespace VanyaGame.GameNumber.Data
+namespace VanyaGame.GameNumberDB.Data
 {
     /// <summary>
     /// Класс для загрузки даных из xml

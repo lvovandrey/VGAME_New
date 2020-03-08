@@ -74,10 +74,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationFramework.Classic" />
     <Reference Include="PresentationUI, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="ReachFramework" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
@@ -127,6 +134,8 @@
     <Compile Include="1.GameNumber\Units\Components\NumberShower.cs" />
     <Compile Include="2.GameNumberDB\Data\DBKeyboardTools.cs" />
     <Compile Include="2.GameNumberDB\Data\XMLTools.cs" />
+    <Compile Include="2.GameNumberDB\DB\Context.cs" />
+    <Compile Include="2.GameNumberDB\DB\DBTools.cs" />
     <Compile Include="2.GameNumberDB\Interface\BeautyButtonNumber.xaml.cs">
       <DependentUpon>BeautyButtonNumber.xaml</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -141,9 +150,15 @@
     <Compile Include="2.GameNumberDB\Interface\PaperGrid.xaml.cs">
       <DependentUpon>PaperGrid.xaml</DependentUpon>
     </Compile>
+    <Compile Include="2.GameNumberDB\Model\Level.cs" />
+    <Compile Include="2.GameNumberDB\Model\Preview.cs" />
+    <Compile Include="2.GameNumberDB\Model\Scene.cs" />
+    <Compile Include="2.GameNumberDB\Model\VideoInfo.cs" />
+    <Compile Include="2.GameNumberDB\Model\VideoSegment.cs" />
     <Compile Include="2.GameNumberDB\Struct\NumberIteration.cs" />
     <Compile Include="2.GameNumberDB\Struct\NumberLevel.cs" />
     <Compile Include="2.GameNumberDB\Struct\NumberScene.cs" />
+    <Compile Include="2.GameNumberDB\Tools\PictHelper.cs" />
     <Compile Include="2.GameNumberDB\Units\Components\NumberShower.cs" />
     <Compile Include="2.GameNumberDB\Units\NumberElement.xaml.cs">
       <DependentUpon>NumberElement.xaml</DependentUpon>
@@ -1653,9 +1668,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="2.GameNumberDB\Tools\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

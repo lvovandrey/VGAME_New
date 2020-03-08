@@ -6,7 +6,7 @@ using VanyaGame.Units.Components;
 using VanyaGame.GameNumber.Units.Components;
 using VanyaGame.Struct;
 
-namespace VanyaGame.GameNumber.Units
+namespace VanyaGame.GameNumberDB.Units
 {
     public enum NumberState {Hidden, ShowingOnGrid, Showed,  ShowingInStack, InStack};
     

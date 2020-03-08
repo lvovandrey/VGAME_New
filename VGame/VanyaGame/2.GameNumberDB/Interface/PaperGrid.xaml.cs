@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace VanyaGame.GameNumber.Interface
+namespace VanyaGame.GameNumberDB.Interface
 {
     /// <summary>
     /// Логика взаимодействия для PaperGrid.xaml

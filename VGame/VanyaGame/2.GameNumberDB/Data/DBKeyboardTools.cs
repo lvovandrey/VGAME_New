@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Windows;
 
-namespace VanyaGame.GameNumber.Data
+namespace VanyaGame.GameNumberDB.Data
 {
     /// <summary>
     /// Класс для загрузки даных из базы данных sql
