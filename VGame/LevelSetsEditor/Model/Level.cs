@@ -20,15 +20,12 @@ namespace LevelSetsEditor.Model
         public int VideoInfoId { get;set;}
         [NotMapped]
         public VideoInfo _VideoInfo { get; set; }
+
         [NotMapped]
         public string _Name { get; set; }
 
         [NotMapped]
         public string YoutubePreview { get; private set; }
-
-
-
-
 
         public VideoInfo VideoInfo { get { return _VideoInfo; } set { _VideoInfo = value; OnPropertyChanged("VideoInfo"); } }
         public string Name { get { return _Name; } set { _Name = value; OnPropertyChanged("Name"); } }

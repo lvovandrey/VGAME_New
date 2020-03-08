@@ -93,7 +93,7 @@ namespace VanyaGame.GameNumber.Interface
             }
 
             KeysLocations = new Dictionary<string, Point>();        
-            DBTools dBTools = new DBTools();
+            DBKeyboardTools dBTools = new DBKeyboardTools();
             dBTools.LoadKeyLocationsFromDB(KeysLocations);
         }
     }
