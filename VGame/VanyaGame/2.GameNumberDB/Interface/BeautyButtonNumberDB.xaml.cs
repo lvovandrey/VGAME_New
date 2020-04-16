@@ -19,18 +19,18 @@ namespace VanyaGame.GameNumberDB.Interface
     /// <summary>
     /// Логика взаимодействия для BeautyButton.xaml
     /// </summary>
-    public partial class BeautyButtonNumber : UserControl
+    public partial class BeautyButtonNumberDB : UserControl
     {
         bool isFlieing = false;
-        public BeautyButtonNumber()
+        public BeautyButtonNumberDB()
         {
             InitializeComponent();
         }
 
         private void Img_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            this.Img.Source = new BitmapImage(new Uri("pack://application:,,,/1.GameNumber/Images/btn_start2.png"));
-            var uri = new Uri("pack://application:,,,/1.GameNumber/Images/HandPushDown.cur");
+            this.Img.Source = new BitmapImage(new Uri("pack://application:,,,/2.GameNumberDB/Images/btn_start2.png"));
+            var uri = new Uri("pack://application:,,,/2.GameNumberDB/Images/HandPushDown.cur");
             var stream = Application.GetResourceStream(uri).Stream;
             var cursor = new Cursor(stream);
             Img.Cursor = cursor;
@@ -40,7 +40,7 @@ namespace VanyaGame.GameNumberDB.Interface
         private void Img_MouseLeave(object sender, MouseEventArgs e)
         {
             if (!isFlieing)
-            this.Img.Source = new BitmapImage(new Uri("pack://application:,,,/1.GameNumber/Images/btn_start.png"));
+            this.Img.Source = new BitmapImage(new Uri("pack://application:,,,/2.GameNumberDB/Images/btn_start.png"));
             
 
         }
@@ -49,8 +49,8 @@ namespace VanyaGame.GameNumberDB.Interface
         {
             isFlieing = true;
 
-            this.Img.Source = new BitmapImage(new Uri("pack://application:,,,/1.GameNumber/Images/btn_start3.png"));
-            var uri = new Uri("pack://application:,,,/1.GameNumber/Images/HandPush.cur");
+            this.Img.Source = new BitmapImage(new Uri("pack://application:,,,/2.GameNumberDB/Images/btn_start3.png"));
+            var uri = new Uri("pack://application:,,,/2.GameNumberDB/Images/HandPush.cur");
             var stream = Application.GetResourceStream(uri).Stream;
             var cursor = new Cursor(stream);
             Img.Cursor = cursor;
@@ -65,8 +65,8 @@ namespace VanyaGame.GameNumberDB.Interface
         {
             if (!isFlieing)
             {
-                this.Img.Source = new BitmapImage(new Uri("pack://application:,,,/1.GameNumber/Images/btn_start1.png"));
-                var uri = new Uri("pack://application:,,,/1.GameNumber/Images/HandPush.cur");
+                this.Img.Source = new BitmapImage(new Uri("pack://application:,,,/2.GameNumberDB/Images/btn_start1.png"));
+                var uri = new Uri("pack://application:,,,/2.GameNumberDB/Images/HandPush.cur");
                 var stream = Application.GetResourceStream(uri).Stream;
                 var cursor = new Cursor(stream);
                 Img.Cursor = cursor;

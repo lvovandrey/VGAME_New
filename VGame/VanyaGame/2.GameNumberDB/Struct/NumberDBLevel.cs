@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
+using VanyaGame.GameNumberDB.DB;
 using VanyaGame.Struct;
 using VanyaGame.Struct.Components;
 
@@ -12,12 +13,12 @@ namespace VanyaGame.GameNumberDB.Struct
     /// Данный класс переопределяет функционал стандартного класса. 
     /// По умолчанию ничего не меняется - просто вызываются одноименные методы базового класса
     /// </summary>
-    public class NumberLevel : Level
+    public class NumberDBLevel : Level
     {
 
 
 
-        public NumberLevel(string _LevelDir = @"\Level1") : base()
+        public NumberDBLevel(string _LevelDir = @"\Level1") : base()
         {
             Sets = new LevelSets(this);
             Sets.Directory = _LevelDir;
@@ -28,6 +29,15 @@ namespace VanyaGame.GameNumberDB.Struct
         }
 
 
+        public static void LoadLevels()
+        {
+            DBmainTools DB = new DBmainTools();
+            DB.LoadDB(new System.Collections.ObjectModel.ObservableCollection<LevelSetsEditor.Model.Level>(), DB.Context);
+
+
+
+            throw new NotImplementedException("NumberDBLevel.LoadLevels()");
+        }
 
 
         private void LoadSets()
@@ -45,6 +55,8 @@ namespace VanyaGame.GameNumberDB.Struct
         /// </summary>
         private void CreateEmptyScenes()
         {
+            MessageBox.Show("Остановился тут - NumberDBLevel.CreateEmptyScenes!!!!!!");
+
             Scenes.Clear();
             string filenameXML = Game.Sets.MainDir + this.Sets.Directory + @"\LevelSets.xml";
 
@@ -53,7 +65,7 @@ namespace VanyaGame.GameNumberDB.Struct
             foreach (string Scene_dir in Scene_dirs)
             {
                 string Scene_dir_short = @"\" + Scene_dir.Replace(dir, "");
-                NumberScene NewScene = new NumberScene(this, Scene_dir_short, Scene_dir.Replace(dir, ""));
+                NumberDBScene NewScene = new NumberDBScene(this, Scene_dir_short, Scene_dir.Replace(dir, ""));
                 Scenes.Add(Scene_dir_short, NewScene);
             }
 
@@ -125,6 +137,7 @@ namespace VanyaGame.GameNumberDB.Struct
 
         public int SceneNomer { get; private set; }
         public string[] Scene_dirs { get; private set; }
+        public static object DBMainTools { get; private set; }
 
         /// <summary>
         /// Переключение на следующую сцену

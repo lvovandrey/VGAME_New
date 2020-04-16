@@ -1,72 +1,62 @@
-
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 using System.Text;
-using System.Windows;
-using YouTubeUrlSupplier;
 
-namespace VanyaGame.GameNumberDB.Model
+namespace LevelSetsEditor.Model
 {
-        
+	public class VideoSegment:INotifyPropertyChanged
+	{
 
-    public class Level : INotifyPropertyChanged
-    {
 
         public int Id { get; set; }
-        public int VideoInfoId { get;set;}
-        [NotMapped]
-        public VideoInfo _VideoInfo { get; set; }
 
         [NotMapped]
-        public string _Name { get; set; }
-
-        [NotMapped]
-        public string YoutubePreview { get; private set; }
-
-        public VideoInfo VideoInfo { get { return _VideoInfo; } set { _VideoInfo = value; OnPropertyChanged("VideoInfo"); } }
-        public string Name { get { return _Name; } set { _Name = value; OnPropertyChanged("Name"); } }
-
-
-
-        [NotMapped]
-        private ObservableCollection<Scene> _Scenes { get; set; }
-
-        public ObservableCollection<Scene> Scenes { get { return _Scenes; } set { _Scenes = value; OnPropertyChanged("Scenes"); } }
-
-
-
-        public Level()
+        TimeSpan timeBegin;
+        public TimeSpan TimeBegin
         {
-            Scenes = new ObservableCollection<Scene>();
-            
-            VideoInfo = new VideoInfo();
-        }
-
-       
-
-       
-
-        public async void RefreshYoutubeLink()
-        {
-            if (this.VideoInfo.Type != VideoType.youtube) return;
-
-            YoutubeVidInfo vidInfo = new YoutubeVidInfo(VideoInfo.Address);
-            await vidInfo.NEWLIBRARY_GetVideoAsync();
-            if (vidInfo.DirectURL == "")
+            get
             {
-                MessageBox.Show("Невозможно получить прямую ссылку на это видео", "Ошибка получения ссылки", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                return;
+                return timeBegin;
             }
-
-            YoutubePreview = vidInfo.ImageUrl;
-
-            this.VideoInfo.Source = new Uri(vidInfo.DirectURL);
-            OnPropertyChanged("VideoInfo");
+            set
+            {
+                timeBegin = value;
+            }
         }
+
+        [NotMapped]
+        TimeSpan timeEnd;
+        public TimeSpan TimeEnd
+        {
+            get
+            {
+                return timeEnd;
+            }
+            set
+            {
+                timeEnd = value;
+            }
+        }
+
+        [NotMapped]
+        public Uri Source
+        {
+            get
+            {
+                if (SourceDb == null) SourceDb = "http://localhost/";
+                return new Uri(this.SourceDb);
+            }
+            set
+            {
+                this.SourceDb = value.ToString();
+            }
+        }
+
+        [Column("Source")]
+        public string SourceDb { get; set; }
+
 
         #region reserve
         //Резервные поля для базы данных
@@ -88,6 +78,23 @@ namespace VanyaGame.GameNumberDB.Model
         public string GameInfo5 { get { return _GameInfo1; } set { _GameInfo1 = value; OnPropertyChanged("GameInfo1"); } }
         #endregion
 
+        /// <summary>
+        /// Копирует состояние данного объекта VideoSegment в объект передаваемый в аргументе
+        /// </summary>
+        /// <param name="videoSegment">Объект куда копируются данные</param>
+        public void Copy(VideoSegment videoSegment)
+        {
+            videoSegment.timeBegin = this.timeBegin;
+            videoSegment.timeEnd = this.timeEnd;
+            videoSegment.SourceDb = this.SourceDb;
+
+            videoSegment._GameInfo1 = this._GameInfo1;
+            videoSegment._GameInfo2 = this._GameInfo2;
+            videoSegment._GameInfo3 = this._GameInfo3;
+            videoSegment._GameInfo4 = this._GameInfo4;
+            videoSegment._GameInfo5 = this._GameInfo5;
+        }
+
         #region mvvm
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -96,7 +103,6 @@ namespace VanyaGame.GameNumberDB.Model
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
-
         #endregion
     }
 }

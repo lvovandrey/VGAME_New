@@ -15,14 +15,14 @@ using VanyaGame.Units.Components;
 
 namespace VanyaGame.GameNumberDB.Struct
 {
-    public class NumberScene : Scene
+    public class NumberDBScene : Scene
     {
         private UnitsCollection<Number> UnitsCol; //For easy call this component 
         private bool ReadyToNextUnit;
 
         private KeyboardElement keyboardElement;
 
-        public NumberScene(Level _Level, string _SceneDir, string name) : base(_Level, name)
+        public NumberDBScene(Level _Level, string _SceneDir, string name) : base(_Level, name)
         {
             Sets = new SceneSets(_Level, this);
             Sets.Directory = _SceneDir;
@@ -208,7 +208,7 @@ namespace VanyaGame.GameNumberDB.Struct
                 TDrawEffects.BlurHide(Game.Owner.LabelWait, 1, 0, () => { Game.Owner.LabelWait.Visibility = System.Windows.Visibility.Hidden; });
                
                 Game.CurVideo.ClearOnEndedEvent();
-                Game.CurVideo.OnEnded += ((NumberLevel)Level).NextScene;
+                Game.CurVideo.OnEnded += ((NumberDBLevel)Level).NextScene;
                 Game.CurVideo.OnEnded += () =>
                 {
                     Game.CurVideo.ClearOnEndedEvent();

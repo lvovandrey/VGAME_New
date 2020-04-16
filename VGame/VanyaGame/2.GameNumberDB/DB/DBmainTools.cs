@@ -1,15 +1,28 @@
-﻿
+﻿using LevelSetsEditor.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using LevelSetsEditor.Model;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace VanyaGame.GameNumberDB.DB
 {
-    public class DBTools
+    public class DBmainTools
     {
-        public static bool LoadDB(ObservableCollection<Level> _levels, Context context)
+        public ObservableCollection<Level> Levels = new ObservableCollection<Level>();
+        public Context Context;
+
+        //позорный костыль для загрузки БД - так и не разобрался почему коллекция после выхода из статического метода не изменяется. а внутри меняется вроде.
+        public void init(ObservableCollection<Level> levels, Context context)
         {
+            Levels = levels;
+            Context = context;
+        }
+
+        public bool LoadDB(ObservableCollection<Level> _levels, Context context)
+        {
+          
             bool error = false;
             try
             {
@@ -37,7 +50,7 @@ namespace VanyaGame.GameNumberDB.DB
                 foreach (Level l in LLL)
                 {
                     levNumber++;
-
+               
                     l.VideoInfo = VList.Where(n => n.Id == l.VideoInfoId).FirstOrDefault();
                     l.VideoInfo.Preview = PList.Where(n => n.Id == l.VideoInfo.PreviewId).FirstOrDefault();
                     var newScenes = l.Scenes.OrderBy(i => i.Position);
@@ -60,19 +73,14 @@ namespace VanyaGame.GameNumberDB.DB
                     _levels.Add(l);
                 }
 
-
+                init(_levels, context);
+             
             }
             catch
             {
                 error = true;
-
             }
             return !error;
-        }
-
-        public static bool loadDB(ObservableCollection<Level> _levels, Context context)
-        {
-            return LoadDB( _levels, context);
         }
 
     }

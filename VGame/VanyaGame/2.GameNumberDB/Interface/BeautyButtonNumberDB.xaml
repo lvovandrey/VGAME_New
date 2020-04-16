@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="VanyaGame.GameNumberDB.Interface.BeautyButtonNumber"
+﻿<UserControl x:Class="VanyaGame.GameNumberDB.Interface.BeautyButtonNumberDB"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -28,7 +28,7 @@
 
 
     <Grid>
-        <Image Name="Img" Source="pack://application:,,,/1.GameNumber/Images/btn_start.png" MouseDown="Img_MouseDown" MouseLeave="Img_MouseLeave" MouseUp="Img_MouseUp" MouseEnter="Img_MouseEnter" RenderTransformOrigin="0.5,0.5"  >
+        <Image Name="Img" Source="pack://application:,,,/2.GameNumberDB/Images/Paper.png" MouseDown="Img_MouseDown" MouseLeave="Img_MouseLeave" MouseUp="Img_MouseUp" MouseEnter="Img_MouseEnter" RenderTransformOrigin="0.5,0.5"  >
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

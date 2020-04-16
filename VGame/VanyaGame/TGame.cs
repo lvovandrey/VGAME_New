@@ -12,6 +12,7 @@ using VanyaGame.Struct.Components;
 using VanyaGame.Media;
 using VanyaGame.Media.Abstract;
 using VanyaGame.Abstract;
+using VanyaGame.GameNumberDB.Struct;
 
 namespace VanyaGame
 {
@@ -26,7 +27,8 @@ namespace VanyaGame
     public enum GameType
     {
         Fish,
-        Number,
+        Number,      
+        NumberDB,
         None
     }
 
@@ -92,6 +94,12 @@ namespace VanyaGame
 
         public static void LoadLevels(string dir) 
         {
+            if (Game.Sets.gameType == GameType.NumberDB)
+            {
+                NumberDBLevel.LoadLevels();
+                return;
+            }
+
             string dir_ = dir + @"\";
             string[] Level_dirs = Directory.GetDirectories(dir_, "Level*");
             
@@ -115,6 +123,7 @@ namespace VanyaGame
                 {
                     NewLevel = new NumberLevel(Level_dir_short);
                 }
+
                 Levels.Enqueue(NewLevel);
             }
         }
@@ -253,6 +262,8 @@ namespace VanyaGame
             if (sender.GetType() == typeof(VanyaGame.GameNumber.Interface.BeautyButtonNumber))
                 Sets.gameType = GameType.Number;
 
+            if (sender.GetType() == typeof(VanyaGame.GameNumberDB.Interface.BeautyButtonNumberDB))
+                Sets.gameType = GameType.NumberDB;
 
             ToolsTimer.Delay(() =>
             {

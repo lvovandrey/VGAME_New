@@ -1,7 +1,10 @@
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
 
-namespace VanyaGame.GameNumberDB.Model
+namespace LevelSetsEditor.Model
 {
 
     public class Scene : INotifyPropertyChanged

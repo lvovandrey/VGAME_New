@@ -1,9 +1,13 @@
+
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
 //using System.Windows;
+using System.Drawing;
 
-namespace VanyaGame.GameNumberDB.Model
+namespace LevelSetsEditor.Model
 {
     public enum VideoType {local, youtube, net, none}
     public class VideoInfo : INotifyPropertyChanged

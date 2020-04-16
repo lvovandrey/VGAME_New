@@ -1,10 +1,11 @@
-﻿using System;
+﻿using LevelSetsEditor.Model;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VanyaGame.GameNumberDB.Model;
+
 
 namespace VanyaGame.GameNumberDB.DB
 {
@@ -12,7 +13,7 @@ namespace VanyaGame.GameNumberDB.DB
     public class Context : DbContext
     {
         public Context()
-            : base("DbConnection")
+            : base("DBConnectionLevelSets")
         { }
 
         public DbSet<Level> Levels { get; set; }

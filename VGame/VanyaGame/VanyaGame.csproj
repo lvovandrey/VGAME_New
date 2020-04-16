@@ -135,9 +135,16 @@
     <Compile Include="2.GameNumberDB\Data\DBKeyboardTools.cs" />
     <Compile Include="2.GameNumberDB\Data\XMLTools.cs" />
     <Compile Include="2.GameNumberDB\DB\Context.cs" />
+    <Compile Include="2.GameNumberDB\DB\DBmainTools.cs" />
+    <Compile Include="2.GameNumberDB\DB\DBRepositoryModel\Level.cs" />
+    <Compile Include="2.GameNumberDB\DB\DBRepositoryModel\Preview.cs" />
+    <Compile Include="2.GameNumberDB\DB\DBRepositoryModel\Scene.cs" />
+    <Compile Include="2.GameNumberDB\DB\DBRepositoryModel\VideoInfo.cs" />
+    <Compile Include="2.GameNumberDB\DB\DBRepositoryModel\VideoSegment.cs" />
+    <Compile Include="2.GameNumberDB\DB\DBRepositoryModel\WebBrowserModel.cs" />
     <Compile Include="2.GameNumberDB\DB\DBTools.cs" />
-    <Compile Include="2.GameNumberDB\Interface\BeautyButtonNumber.xaml.cs">
-      <DependentUpon>BeautyButtonNumber.xaml</DependentUpon>
+    <Compile Include="2.GameNumberDB\Interface\BeautyButtonNumberDB.xaml.cs">
+      <DependentUpon>BeautyButtonNumberDB.xaml</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="2.GameNumberDB\Interface\Keyboard.cs" />
@@ -150,14 +157,9 @@
     <Compile Include="2.GameNumberDB\Interface\PaperGrid.xaml.cs">
       <DependentUpon>PaperGrid.xaml</DependentUpon>
     </Compile>
-    <Compile Include="2.GameNumberDB\Model\Level.cs" />
-    <Compile Include="2.GameNumberDB\Model\Preview.cs" />
-    <Compile Include="2.GameNumberDB\Model\Scene.cs" />
-    <Compile Include="2.GameNumberDB\Model\VideoInfo.cs" />
-    <Compile Include="2.GameNumberDB\Model\VideoSegment.cs" />
-    <Compile Include="2.GameNumberDB\Struct\NumberIteration.cs" />
-    <Compile Include="2.GameNumberDB\Struct\NumberLevel.cs" />
-    <Compile Include="2.GameNumberDB\Struct\NumberScene.cs" />
+    <Compile Include="2.GameNumberDB\Struct\NumberDBIteration.cs" />
+    <Compile Include="2.GameNumberDB\Struct\NumberDBLevel.cs" />
+    <Compile Include="2.GameNumberDB\Struct\NumberDBScene.cs" />
     <Compile Include="2.GameNumberDB\Tools\PictHelper.cs" />
     <Compile Include="2.GameNumberDB\Units\Components\NumberShower.cs" />
     <Compile Include="2.GameNumberDB\Units\NumberElement.xaml.cs">
@@ -252,7 +254,7 @@
     <Compile Include="ZDebug\WindowTest.xaml.cs">
       <DependentUpon>WindowTest.xaml</DependentUpon>
     </Compile>
-    <Page Include="2.GameNumberDB\Interface\BeautyButtonNumber.xaml">
+    <Page Include="2.GameNumberDB\Interface\BeautyButtonNumberDB.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

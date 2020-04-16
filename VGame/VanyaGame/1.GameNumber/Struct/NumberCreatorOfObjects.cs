@@ -41,7 +41,7 @@ namespace VanyaGame.GameNumber.Behaviour
             (ref Queue<Iteration> Iterations, Scene Scene, Iteration PrevIteration, int curIterationNumber)
         {
             //IterationNumber=curIterationNumber+1;
-            //NumberIteration It = new NumberIteration(Scene);
+            //NumberDBIteration It = new NumberDBIteration(Scene);
             //It.IterationNumber = IterationNumber;
             //It.Behaviour = new NumberIterationBehaviour();
 

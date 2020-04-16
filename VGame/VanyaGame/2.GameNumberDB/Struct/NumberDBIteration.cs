@@ -10,9 +10,9 @@ using VanyaGame.Units.Components;
 
 namespace VanyaGame.GameNumberDB.Struct
 {
-    public class NumberIteration: Iteration
+    public class NumberDBIteration: Iteration
     {
-        public NumberIteration(Scene _Scene): base(new IterationSets(), _Scene, "Iteration1")///ЗАТЫЧКА получилась
+        public NumberDBIteration(Scene _Scene): base(new IterationSets(), _Scene, "Iteration1")///ЗАТЫЧКА получилась
         {
             UnitsCollection<Number> units = new UnitsCollection<Number>("Units", this);
         }
