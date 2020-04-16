@@ -13,6 +13,7 @@ using VanyaGame.Media;
 using VanyaGame.Media.Abstract;
 using VanyaGame.Abstract;
 using VanyaGame.GameNumberDB.Struct;
+using VanyaGame.GameNumberDB.DB;
 
 namespace VanyaGame
 {
@@ -47,6 +48,8 @@ namespace VanyaGame
         public static bool IsPlaying = false;
         public static TDrawEffects DrawEffects = new TDrawEffects();
         public static TUserActivity UserActivity = new TUserActivity();
+
+        public static DBmainTools DB = new DBmainTools();
 
         private static ComponentContainer mediaContainer;
 
@@ -96,7 +99,8 @@ namespace VanyaGame
         {
             if (Game.Sets.gameType == GameType.NumberDB)
             {
-                NumberDBLevel.LoadLevels();
+                DB = new DBmainTools();
+                NumberDBLevel.LoadLevels(DB);
                 return;
             }
 
@@ -208,8 +212,8 @@ namespace VanyaGame
         /// <param name="BackgroundFilename">Путь к файлу картинки на диске</param>
         public static void LoadPreview(string Filename)
         {
-            System.Drawing.Bitmap myBitmap = new System.Drawing.Bitmap(@Filename);
-            Owner.PrevImg.Source = Imaging.CreateBitmapSourceFromBitmap(myBitmap);
+//            System.Drawing.Bitmap myBitmap = new System.Drawing.Bitmap(@Filename);
+            Owner.PrevImg.Source = new BitmapImage(new Uri(Filename));// Imaging.CreateBitmapSourceFromBitmap(myBitmap);
         }
 
 

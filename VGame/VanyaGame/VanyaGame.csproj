@@ -160,6 +160,7 @@
     <Compile Include="2.GameNumberDB\Struct\NumberDBIteration.cs" />
     <Compile Include="2.GameNumberDB\Struct\NumberDBLevel.cs" />
     <Compile Include="2.GameNumberDB\Struct\NumberDBScene.cs" />
+    <Compile Include="2.GameNumberDB\Tools\ConvertDBTools.cs" />
     <Compile Include="2.GameNumberDB\Tools\PictHelper.cs" />
     <Compile Include="2.GameNumberDB\Units\Components\NumberShower.cs" />
     <Compile Include="2.GameNumberDB\Units\NumberElement.xaml.cs">

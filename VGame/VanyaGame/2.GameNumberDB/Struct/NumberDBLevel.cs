@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
+
 using VanyaGame.GameNumberDB.DB;
 using VanyaGame.Struct;
 using VanyaGame.Struct.Components;
@@ -15,8 +16,7 @@ namespace VanyaGame.GameNumberDB.Struct
     /// </summary>
     public class NumberDBLevel : Level
     {
-
-
+        private LevelSetsEditor.Model.Level DbLevelRecord;
 
         public NumberDBLevel(string _LevelDir = @"\Level1") : base()
         {
@@ -28,24 +28,89 @@ namespace VanyaGame.GameNumberDB.Struct
             GetComponent<Starter>().StartElements.Add(Start);
         }
 
-
-        public static void LoadLevels()
+        public NumberDBLevel(LevelSetsEditor.Model.Level DbLevelRecord) : base()
         {
-            DBmainTools DB = new DBmainTools();
+            this.DbLevelRecord = DbLevelRecord;
+            Sets = new LevelSets(this);
+            
+           // Sets.Directory = "NONE";
+
+            GetComponent<Loader>().LoadSets = LoadSets;
+            GetComponent<Loader>().LoadContent = LoadContent;
+
+            GetComponent<Starter>().StartElements.Add(Start);
+        }
+
+        public static void LoadLevels(DBmainTools DB)
+        {
+            
             DB.LoadDB(new System.Collections.ObjectModel.ObservableCollection<LevelSetsEditor.Model.Level>(), DB.Context);
 
 
+           
+            Random random = new Random();
 
-            throw new NotImplementedException("NumberDBLevel.LoadLevels()");
+            //Перемешиваем уровни  //что за алгоритм - хз - раньше работал вроде
+            for (int i = DB.Levels.Count - 1; i >= 1; i--)
+            {
+                int j = random.Next(i+1);
+                var tmpLevel = DB.Levels[j];
+                DB.Levels[j] = DB.Levels[i];
+                DB.Levels[i] = tmpLevel;
+            }
+
+            foreach (var level in DB.Levels)
+            {
+                
+                Level NewLevel = new NumberDBLevel(level);
+                
+                Game.Levels.Enqueue(NewLevel);
+            }
+
+
+       //     throw new NotImplementedException("NumberDBLevel.LoadLevels()");
         }
 
 
         private void LoadSets()
         {
-            CreateEmptyScenes();
-            string filenameXML = Game.Sets.MainDir + Sets.Directory + @"\LevelSets.xml";
-            VanyaGame.XMLTools.LoadSetsFromXML(this, filenameXML);
+           // CreateEmptyScenes();
+            // string filenameXML = Game.Sets.MainDir + Sets.Directory + @"\LevelSets.xml";
+            LoadSetsFromDBRecord(this);
         }
+
+
+        public static void LoadSetsFromDBRecord(NumberDBLevel Level)
+        {
+            Level.Scenes.Clear();
+
+          
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //Level.Name = Level.DbLevelRecord.Name;
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            Level.Sets.Description = Level.DbLevelRecord.VideoInfo.Title;
+            Level.Sets.Name = Level.DbLevelRecord.Name;
+            Level.Sets.PreviewType = Level.DbLevelRecord.VideoInfo.Preview.Type.ToString();
+            Level.Sets.BaseVideoFilename = Level.DbLevelRecord.VideoInfo.Address;
+
+
+            foreach (var Scene in Level.DbLevelRecord.Scenes)
+            {
+                Scene NewScene = new NumberDBScene(Level, Scene, "Scene" + Scene.Id.ToString());
+                NewScene.Sets.GetComponent<InnerVideoSets>().VideoFileName = Level.DbLevelRecord.VideoInfo.Address;
+                NewScene.Sets.GetComponent<InnerVideoSets>().VideoFileType = Tools.ConvertDBTools.VideoTypeConvertFromDB(Level.DbLevelRecord.VideoInfo.Type);
+                NewScene.Sets.GetComponent<InnerVideoSets>().VideoFileNumber = Level.DbLevelRecord.Scenes.IndexOf(Scene).ToString();
+                NewScene.Sets.GetComponent<InnerVideoSets>().VideoTimeBegin = Scene.VideoSegment.TimeBegin;
+                NewScene.Sets.GetComponent<InnerVideoSets>().VideoTimeEnd = Scene.VideoSegment.TimeEnd;
+                Level.Scenes.Add(NewScene.Name, NewScene);
+            }
+
+
+            
+        }
+
+
+
 
 
         /// <summary>
@@ -55,19 +120,21 @@ namespace VanyaGame.GameNumberDB.Struct
         /// </summary>
         private void CreateEmptyScenes()
         {
-            MessageBox.Show("Остановился тут - NumberDBLevel.CreateEmptyScenes!!!!!!");
+            //MessageBox.Show("Остановился тут - NumberDBLevel.CreateEmptyScenes!!!!!!");
 
-            Scenes.Clear();
-            string filenameXML = Game.Sets.MainDir + this.Sets.Directory + @"\LevelSets.xml";
+            //Scenes.Clear();
+            ////string filenameXML = Game.Sets.MainDir + this.Sets.Directory + @"\LevelSets.xml";
 
-            string dir = Game.Sets.MainDir + this.Sets.Directory + @"\";
-            Scene_dirs = Directory.GetDirectories(dir, "Scene*");
-            foreach (string Scene_dir in Scene_dirs)
-            {
-                string Scene_dir_short = @"\" + Scene_dir.Replace(dir, "");
-                NumberDBScene NewScene = new NumberDBScene(this, Scene_dir_short, Scene_dir.Replace(dir, ""));
-                Scenes.Add(Scene_dir_short, NewScene);
-            }
+            ////  string dir = Game.Sets.MainDir + this.Sets.Directory + @"\";
+            ////  Scene_dirs = Directory.GetDirectories(dir, "Scene*");
+
+            //foreach (var scene in DbLevelRecord.Scenes)
+            //{
+            //    //string Scene_dir_short = @"\" + Scene_dir.Replace(dir, "");
+
+            //    NumberDBScene NewScene = new NumberDBScene(this, scene, scene.Name);
+            //    Scenes.Add(NewScene.Name, NewScene);
+            //}
 
 
         }
@@ -94,9 +161,9 @@ namespace VanyaGame.GameNumberDB.Struct
 
         public void LoadMedia()
         {
-            Game.Sound.LoadMediaFilesFromDir(Game.Sets.MainDir + Sets.Directory + Sets.SoundDir + @"\");
-            Game.Music.LoadMediaFilesFromDir(Game.Sets.MainDir + Sets.Directory + Sets.MusicDir + @"\");
-            Game.CurVideo.LoadMediaFilesFromDir(Game.Sets.MainDir + Sets.Directory + Sets.VideoDir + @"\");
+            Game.Sound.LoadMediaFilesFromDir(Game.Sets.MainDir +  Sets.SoundDir + @"\");
+            Game.Music.LoadMediaFilesFromDir(Game.Sets.MainDir +  Sets.MusicDir + @"\");
+           // Game.CurVideo.LoadMediaFilesFromDir(Game.Sets.MainDir + Sets.Directory + Sets.VideoDir + @"\");
         }
 
         /// <summary>
@@ -106,7 +173,7 @@ namespace VanyaGame.GameNumberDB.Struct
         /// <param name="fileshortname">Имя файла фона. По умолч."back.jpg"</param>
         public void LoadBackground(string fileshortname = @"back.jpg")
         {
-            string BackGrndFilepath = Game.Sets.MainDir + Sets.Directory + Sets.InterfaceDir + @"\" + fileshortname;
+            string BackGrndFilepath = Game.Sets.MainDir +  Sets.InterfaceDir + @"\" + fileshortname;
             try
             {
                 Game.LoadBackGround(BackGrndFilepath);
@@ -124,6 +191,15 @@ namespace VanyaGame.GameNumberDB.Struct
         /// <param name="fileshortname">Имя файла фона. По умолч."back.jpg"</param>
         public void LoadPreview(string fileshortname = @"preview.jpg")
         {
+            if (Sets.PreviewType == VideoType.youtube.ToString())
+            {
+                string filename;
+                try { filename = YouTubeUrlSupplier.YoutubeGet.GetImage(Sets.BaseVideoFilename); }
+                catch { filename = Game.Sets.MainDir + @"\default.jpg"; Sets.PreviewType = "local"; }
+                Game.LoadPreview(filename);
+                return;
+            }
+
             string Filepath = Game.Sets.MainDir + Sets.Directory + Sets.InterfaceDir + @"\" + fileshortname;
             try
             {

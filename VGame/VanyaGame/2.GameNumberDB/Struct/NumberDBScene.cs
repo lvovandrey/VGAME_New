@@ -15,19 +15,27 @@ using VanyaGame.Units.Components;
 
 namespace VanyaGame.GameNumberDB.Struct
 {
-    public class NumberDBScene : Scene
+    public class NumberDBScene : VanyaGame.Struct.Scene
     {
         private UnitsCollection<Number> UnitsCol; //For easy call this component 
         private bool ReadyToNextUnit;
 
         private KeyboardElement keyboardElement;
+        private NumberDBLevel numberDBLevel;
+        private LevelSetsEditor.Model.Scene DBSceneRecord;
 
-        public NumberDBScene(Level _Level, string _SceneDir, string name) : base(_Level, name)
+
+
+        public NumberDBScene(Level _Level, LevelSetsEditor.Model.Scene scene, string name) : base(_Level, name)
         {
+            this.Level = _Level;
+            this.DBSceneRecord = scene;
             Sets = new SceneSets(_Level, this);
-            Sets.Directory = _SceneDir;
+            //Sets.Directory = "NONE SCENE DIR!!!";
+
             InnerVideoSets IVC = new InnerVideoSets("InnerVideoSets", Sets);
             Level = _Level;
+
             GetComponent<Loader>().LoadSets = LoadSets;
             GetComponent<Loader>().LoadContent = LoadContent;
 
@@ -35,14 +43,12 @@ namespace VanyaGame.GameNumberDB.Struct
 
             UnitsCol = new UnitsCollection<Number>("UnitsCollection", this);
             ReadyToNextUnit = true;
+
         }
-
-
-
 
         private void LoadSets()
         {
-            string filenameXML = Game.Sets.MainDir + Level.Sets.Directory + Sets.Directory + @"\SceneSets.xml";
+            //string filenameXML = Game.Sets.MainDir + Level.Sets.Directory + Sets.Directory + @"\SceneSets.xml";
             //VanyaGame.XMLTools.LoadSetsFromXML(this, filenameXML);
         }
 
@@ -52,7 +58,7 @@ namespace VanyaGame.GameNumberDB.Struct
             //LoadPreview();
             int prevNum = Game.RandomGenerator.Next(1, 9);
 
-            for (int i = 1; i < 2; i++)
+            for (int i = 1; i <= DBSceneRecord.UnitsCount; i++)
             {
 
                 int ii = Game.RandomGenerator.Next(1, 9);
