@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="CardsEditor.View.ListCardsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CardsEditor.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height ="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Button Content="Load DB" Command="{Binding LoadDBCommand}"  Grid.Column="0" Margin="3" 
+                Foreground="Red" FontWeight="Black" />
+        <Button Content="Add" Command="{Binding AddCommand}" Grid.Column="2" Margin="3"/>
+        <Button Content="Remove" Command="{Binding RemoveCommand}" Grid.Column="3" Margin="3"/>
+        <Button Content="Save all" Command="{Binding SaveCommand}"  Grid.Column="4" Margin="3" />
+
+
+
+        <ListBox SelectedItem="{Binding SelectedLevelVM,UpdateSourceTrigger=PropertyChanged}" 
+                 ItemsSource="{Binding Path=LevelVMs, UpdateSourceTrigger=PropertyChanged,
+                 Mode=OneWay}"
+                 Grid.Row="1" Grid.ColumnSpan="12" 
+                 ScrollViewer.VerticalScrollBarVisibility="Visible" 
+                 ScrollViewer.CanContentScroll="False" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+
+                    <local:CardItemListView HorizontalAlignment="Stretch"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+
+        </ListBox>
+    </Grid>
+</UserControl>
