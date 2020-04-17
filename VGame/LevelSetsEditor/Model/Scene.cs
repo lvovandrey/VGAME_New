@@ -41,6 +41,7 @@ namespace LevelSetsEditor.Model
         public void Copy(Scene scene)
         {
             scene._UnitsCount = this._UnitsCount;
+            scene._TasksCount= this._TasksCount;
             scene._Position = this._Position;
 
             scene._GameInfo1 = this._GameInfo1;

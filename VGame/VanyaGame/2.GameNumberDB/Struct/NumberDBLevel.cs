@@ -212,7 +212,7 @@ namespace VanyaGame.GameNumberDB.Struct
         }
 
         public int SceneNomer { get; private set; }
-        public string[] Scene_dirs { get; private set; }
+       
         public static object DBMainTools { get; private set; }
 
         /// <summary>
@@ -221,14 +221,17 @@ namespace VanyaGame.GameNumberDB.Struct
         internal void NextScene()
         {
             SceneNomer++;
-            if ((SceneNomer <= Scene_dirs.GetUpperBound(0)) && (SceneNomer >= Scene_dirs.GetLowerBound(0)))
+            List<string> ScenesKeys = new List<string>();
+            foreach (KeyValuePair<string, Scene> Sc in Scenes)
             {
-                string dir = Game.Sets.MainDir + this.Sets.Directory + @"\";
-                string SceneKey = @"\" + Scene_dirs[SceneNomer].Replace(dir, "");
-                CurScene = Scenes[SceneKey];
+                ScenesKeys.Add(Sc.Key);
+            }
+            if ((SceneNomer <= ScenesKeys.Count-1) && (SceneNomer >= 0))
+            {
+                CurScene = Scenes[ScenesKeys[SceneNomer]];
                 CurScene.GetComponent<Starter>().Start();
             }
-            else if (SceneNomer > Scene_dirs.GetUpperBound(0))
+            else if (SceneNomer > ScenesKeys.Count - 1)
             {
                 End();
             }
@@ -254,9 +257,13 @@ namespace VanyaGame.GameNumberDB.Struct
                 Sc.Value.GetComponent<Loader>().Load();
             }
             SceneNomer = 0;
-            string dir = Game.Sets.MainDir + this.Sets.Directory + @"\";
-            string SceneKey = @"\" + Scene_dirs[SceneNomer].Replace(dir, "");
-            CurScene = Scenes[SceneKey];
+            List<string> ScenesKeys = new List<string>();
+            foreach (KeyValuePair<string, Scene> Sc in Scenes)
+            {
+                ScenesKeys.Add(Sc.Key);
+            }
+
+            CurScene = Scenes[ScenesKeys[0]];
         }
 
 

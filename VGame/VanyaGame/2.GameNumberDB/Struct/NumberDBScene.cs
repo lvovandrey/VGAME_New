@@ -58,7 +58,7 @@ namespace VanyaGame.GameNumberDB.Struct
             //LoadPreview();
             int prevNum = Game.RandomGenerator.Next(1, 9);
 
-            for (int i = 1; i <= DBSceneRecord.UnitsCount; i++)
+            for (int i = 1; i <= DBSceneRecord.TasksCount; i++)
             {
 
                 int ii = Game.RandomGenerator.Next(1, 9);

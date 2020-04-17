@@ -46,7 +46,7 @@ namespace LevelSetsEditor.Model
             VideoInfo = new VideoInfo();
         }
 
-        public string SegregateScenes()
+        public string SegregateScenes(int _tasksCount = 3, int _unitsCount = 3)
         {
 
             TimeSpan Dur = VideoInfo.Duration;
@@ -61,7 +61,8 @@ namespace LevelSetsEditor.Model
                     nextid = Scenes.Max(a => a.Id);
                 s.Id = ++nextid;
                 s.Position = i;
-                s.UnitsCount = i;
+                s.UnitsCount = _unitsCount;
+                s.TasksCount = _tasksCount;
                 s.VideoSegment.TimeBegin = TimeSpan.FromSeconds((i - 1) * 120);
                 if (i < NumScenes)
                     s.VideoSegment.TimeEnd = TimeSpan.FromSeconds(i * 120);
@@ -79,7 +80,7 @@ namespace LevelSetsEditor.Model
         /// </summary>
         /// <param name="segrTime">Время одной сцены</param>
         /// <returns></returns>
-        public string SegregateScenes(TimeSpan segrTime, TimeSpan OverlapSegregateTime)
+        public string SegregateScenes(TimeSpan segrTime, TimeSpan OverlapSegregateTime, int _tasksCount = 3, int _unitsCount = 3)
         {
 
             TimeSpan Dur = VideoInfo.Duration;
@@ -94,7 +95,8 @@ namespace LevelSetsEditor.Model
                     nextid = Scenes.Max(a => a.Id);
                 s.Id = ++nextid;
                 s.Position = i;
-                s.UnitsCount = i;
+                s.UnitsCount = _unitsCount;
+                s.TasksCount = _tasksCount;
                 s.VideoSegment.TimeBegin = TimeSpan.FromSeconds((i - 1) * segrTime.TotalSeconds);
                 if (i < NumScenes)
                     s.VideoSegment.TimeEnd = TimeSpan.FromSeconds((i * segrTime.TotalSeconds) + OverlapSegregateTime.TotalSeconds);
@@ -112,7 +114,7 @@ namespace LevelSetsEditor.Model
         /// </summary>
         /// <param name="scenesCount">Нужное количество сцен</param>
         /// <returns></returns>
-        public string SegregateScenes(int scenesCount, TimeSpan OverlapSegregateTime)
+        public string SegregateScenes(int scenesCount, TimeSpan OverlapSegregateTime, int _tasksCount = 3, int _unitsCount = 3)
         {
 
             TimeSpan Dur = VideoInfo.Duration;
@@ -130,7 +132,8 @@ namespace LevelSetsEditor.Model
                     nextid = Scenes.Max(a => a.Id);
                 s.Id = ++nextid;
                 s.Position = i;
-                s.UnitsCount = i;
+                s.UnitsCount = _unitsCount;
+                s.TasksCount = _tasksCount;
                 s.VideoSegment.TimeBegin = TimeSpan.FromSeconds((i - 1) * segrTime.TotalSeconds);
                 if (i < NumScenes)
                     s.VideoSegment.TimeEnd = TimeSpan.FromSeconds((i * segrTime.TotalSeconds) + OverlapSegregateTime.TotalSeconds);
@@ -211,7 +214,7 @@ namespace LevelSetsEditor.Model
             this.VideoInfo.Resolution = vidInfo.Resolution;
             this.VideoInfo.Title = vidInfo.Title;
             this.VideoInfo.Type = VideoType.youtube;
-
+            
             OnPropertyChanged("VideoInfo");
 
             YoutubePreview = vidInfo.ImageUrl;
