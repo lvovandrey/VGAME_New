@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CardsEditor.Model
 {
-    internal class TagGroup : INPCBase
+    public class TagGroup : INPCBase
     {
         [NotMapped]
         private string _Name { get; set; }

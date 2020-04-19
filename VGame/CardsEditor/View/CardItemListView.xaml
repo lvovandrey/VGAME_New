@@ -31,7 +31,7 @@
             </Grid.Background>
         </Grid>
 
-        <Image Source="{Binding VideoInfoVM.PreviewVM.Source, UpdateSourceTrigger=PropertyChanged}" Stretch="Fill" Margin="5">
+        <Image Source="{Binding ImageAdressURI, UpdateSourceTrigger=PropertyChanged}" Stretch="Fill" Margin="5">
             <Image.Effect>
                 <DropShadowEffect ShadowDepth="0"/>
             </Image.Effect>
@@ -45,13 +45,13 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Label Content="{Binding Name, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.ColumnSpan="2" FontSize="22">
+            <Label Content="{Binding Title, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.ColumnSpan="2" FontSize="22">
                 <Label.Effect>
                     <DropShadowEffect ShadowDepth="2" BlurRadius="0" Color="#FFFFF700" Opacity="0.4" />
                 </Label.Effect>
             </Label>
-            <Label Content="{Binding VideoInfoVM.Title, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" FontSize="16"/>
-            <Label Content="{Binding VideoInfoVM.Duration, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" FontSize="16"/>
+            <!--<Label Content="{Binding VideoInfoVM.Title, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" FontSize="16"/>
+            <Label Content="{Binding VideoInfoVM.Duration, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" FontSize="16"/>-->
         </Grid>
     </Grid>
 </UserControl>

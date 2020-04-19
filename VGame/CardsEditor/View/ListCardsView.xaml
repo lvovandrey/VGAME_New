@@ -28,8 +28,8 @@
 
 
 
-        <ListBox SelectedItem="{Binding SelectedLevelVM,UpdateSourceTrigger=PropertyChanged}" 
-                 ItemsSource="{Binding Path=LevelVMs, UpdateSourceTrigger=PropertyChanged,
+        <ListBox SelectedItem="{Binding SelectedCardVM,UpdateSourceTrigger=PropertyChanged}" 
+                 ItemsSource="{Binding Path=CardVMs, UpdateSourceTrigger=PropertyChanged,
                  Mode=OneWay}"
                  Grid.Row="1" Grid.ColumnSpan="12" 
                  ScrollViewer.VerticalScrollBarVisibility="Visible" 

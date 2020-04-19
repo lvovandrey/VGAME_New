@@ -1,5 +1,4 @@
-﻿using CardsEditor.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,23 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CardsEditor
+namespace CardsEditor.View
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для CardView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CardView : UserControl
     {
-        VM vm;
-        public MainWindow()
+        public CardView()
         {
             InitializeComponent();
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            vm = new VM(this);
-
         }
     }
 }
