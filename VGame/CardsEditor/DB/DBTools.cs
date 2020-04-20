@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace CardsEditor.DB
 {
@@ -21,30 +22,15 @@ namespace CardsEditor.DB
                 _tags = new ObservableCollection<Tag>();
                 context = new Context();
 
-                IEnumerable<Tag> tags = context.Tags.OfType<Tag>().Where(n => n.Id < 10000);
-                List<Tag> TagList = tags.ToList();
+                IEnumerable<Tag> tags = context.Tags.Include(p => p.Cards).ToList();
 
-                //IEnumerable<TagGroup> tagGroups = context.TagGroups.OfType<TagGroup>().Where(n => n.Id < 10000);
-                //List<TagGroup> TagGroupList = tagGroups.ToList();
-
-                int cardNumber = 0;
-                int tagNumber = 0;
-                int cardCount = 1;
-                IEnumerable<Card> cards = context.Cards.OfType<Card>().Where(n => n.Id < 10000);
-                cardCount = cards.Count();
+                IEnumerable<Card> cards = context.Cards.Include(p => p.Tags).ToList();
 
                 foreach (Card c in cards)
-                {
-                    cardNumber++;
-                     //   c.Tags = new ObservableCollection<Tag>();
                     _cards.Add(c);
-                }
 
                 foreach (Tag t in tags)
-                {
-                    tagNumber++;
                     _tags.Add(t);
-                }
 
                 vm.init(_cards,_tags, context);
             }

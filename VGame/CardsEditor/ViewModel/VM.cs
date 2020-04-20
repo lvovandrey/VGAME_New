@@ -76,9 +76,12 @@ namespace CardsEditor.ViewModel
                 if (SelectedCardVM == null) return null;
                 var _selcardTags = new ObservableCollection<TagVM>();
                 Card card = SelectedCardVM.Card;
+                if (card.Tags == null) return null;
                 foreach (var tag in _tags)
+                {
                     if (card.Tags.Contains(tag))
                         _selcardTags.Add(new TagVM(tag));
+                }
                 return _selcardTags;
             }
         }
@@ -117,6 +120,7 @@ namespace CardsEditor.ViewModel
             context.Tags.Add(t);
             context.SaveChanges();
             OnPropertyChanged("TagVMs");
+            OnPropertyChanged("SelectedCardTagVMs");
             return t;
         }
         #endregion
