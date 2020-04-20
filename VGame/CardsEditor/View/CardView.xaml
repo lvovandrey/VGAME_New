@@ -5,16 +5,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CardsEditor.View"
               mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="400" Background="White">
+             d:DesignHeight="800" d:DesignWidth="600" Background="White">
     <Grid >
         <StackPanel>
             <GroupBox Header="Инфо о видео" x:Name="VideoInfoGroupBox" >
                 <StackPanel Orientation="Vertical">
-                    <Image Source="{Binding ImageAdressURI}"></Image>
+                    <Image Source="{Binding ImageAdressURI}" MaxHeight="200"></Image>
                     <local:PropertyViewer  DataContext="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Название"/>
                     <local:PropertyViewer  DataContext="{Binding Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Описание"/>
-                    <local:PropertyViewer  DataContext="{Binding SoundAddress, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="URL-адрес"/>
-                    <local:PropertyViewer  DataContext="{Binding ImageAdress, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Источник"/>
+                    <StackPanel>
+                    <local:PropertyViewer  DataContext="{Binding SoundedText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Произносимое слово"/>
+                        <Button Content="Прослушать текст" Command="{Binding SoundedTextSpeakCommand, ConverterParameter= SoundedText}" Margin="80,0,80,20"/>
+
+                    </StackPanel>
+                    <local:PropertyViewer  DataContext="{Binding SoundAddress, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Звуковой файл" IsEnabled="False"/>
+                    <local:PropertyViewer  DataContext="{Binding ImageAddress, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Изображение"/>
                     <Button Content="Выбрать изображение" Command="{Binding OpenImageFileCommand}" Margin="80,0,80,20"/>
                 </StackPanel>
             </GroupBox>

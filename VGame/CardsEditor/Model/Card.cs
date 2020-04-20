@@ -1,4 +1,5 @@
 ﻿using CardsEditor.Abstract;
+using LevelSetsEditor.DB;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,6 +12,10 @@ namespace CardsEditor.Model
 {
     public class Card : INPCBase
     {
+        //public Card()
+        //{
+        //    Tags = new ObservableCollection<Tag>();
+        //}
         [NotMapped]
         private string _Title { get; set; }
         [NotMapped]
@@ -27,17 +32,12 @@ namespace CardsEditor.Model
 
 
         public int Id { get; set; }
-        
+        public ObservableCollection<Tag> Tags { get { return _Tags; } set { _Tags = value; OnPropertyChanged("Tags"); } }
         public string Title { get { return _Title; } set { _Title = value; OnPropertyChanged("Title"); } }
         public string SoundedText { get { return _SoundedText; } set { _SoundedText = value; OnPropertyChanged("SoundedText"); } }
         public string Description { get { return _Description; } set { _Description = value; OnPropertyChanged("Description"); } }
         public string ImageAddress { get { return _ImageAddress; } set { _ImageAddress = value; OnPropertyChanged("ImageAddress"); } }
         public string SoundAddress { get { return _SoundAddress; } set { _SoundAddress = value; OnPropertyChanged("SoundAddress"); } }
-
-
-
-
-//        public ObservableCollection<Tag> Tags { get { return _Tags; } set { _Tags = value; OnPropertyChanged("Tags"); } }
 
 
         [NotMapped]

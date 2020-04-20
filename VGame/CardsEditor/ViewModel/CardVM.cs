@@ -3,7 +3,9 @@ using CardsEditor.Model;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Speech.Synthesis;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -48,7 +50,6 @@ namespace CardsEditor.ViewModel
             }
         }
 
-
         #endregion
 
         #region Methods
@@ -73,6 +74,25 @@ namespace CardsEditor.ViewModel
                 }));
             }
         }
+
+
+
+        private RelayCommand soundedTextSpeakCommand;
+        public RelayCommand SoundedTextSpeakCommand
+        {
+            get
+            {
+                return soundedTextSpeakCommand ?? (soundedTextSpeakCommand = new RelayCommand(obj =>
+                {
+                    if (SoundedText == null) return;
+                    SpeechSynthesizer speaker = new SpeechSynthesizer();
+                    speaker.Rate = 1;
+                    speaker.Volume = 100;
+                    speaker.SpeakAsync(SoundedText);
+                }));
+            }
+        }
+
 
 
         #endregion

@@ -18,8 +18,6 @@ namespace LevelSetsEditor.DB
 
         public DbSet<Card> Cards { get; set; }
         public DbSet<Tag> Tags { get; set; }
-        public DbSet<TagGroup> TagGroups { get; set; }
-
 
     }
 }

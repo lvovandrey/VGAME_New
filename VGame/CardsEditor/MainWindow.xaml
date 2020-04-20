@@ -13,6 +13,41 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
             <view:ListCardsView></view:ListCardsView>
-            <view:CardView Grid.Column="1"></view:CardView>
+        <StackPanel Grid.Column="1">
+            
+            <view:CardView  DataContext="{Binding SelectedCardVM}"></view:CardView>
+
+            <ListBox ItemsSource="{Binding Path=TagVMs, UpdateSourceTrigger=PropertyChanged,
+                 Mode=OneWay}"
+                 Grid.Row="1" Grid.ColumnSpan="12" 
+                 ScrollViewer.VerticalScrollBarVisibility="Visible" 
+                 ScrollViewer.CanContentScroll="False" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="2"/>
+                            <TextBlock Text="{Binding FirstCardTitle, UpdateSourceTrigger=PropertyChanged}" Margin="2"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Button Command="{Binding AddTagCommand}" Height="20" Content="+"/>
+
+
+            <ListBox ItemsSource="{Binding Path=SelectedCardTagVMs, UpdateSourceTrigger=PropertyChanged,
+                 Mode=OneWay}"
+                 Grid.Row="1" Grid.ColumnSpan="12" 
+                 ScrollViewer.VerticalScrollBarVisibility="Visible" 
+                 ScrollViewer.CanContentScroll="False" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="2"/>
+                            <TextBlock Text="{Binding FirstCardTitle, UpdateSourceTrigger=PropertyChanged}" Margin="2"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
     </Grid>
 </Window>

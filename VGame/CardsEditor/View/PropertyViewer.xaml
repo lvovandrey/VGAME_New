@@ -9,7 +9,7 @@
     <Grid>
         <Grid x:Name="ThisGrid" Tag="Название">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="200" />
                 <ColumnDefinition Width="*" MinWidth="100"/>
             </Grid.ColumnDefinitions>
             <TextBox Text="{Binding ElementName=This, Path=DataContext, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="1" />
