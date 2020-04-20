@@ -41,20 +41,5 @@ namespace CardsEditor.DB
             return !error;
         }
 
-        //public static bool loadDB(VM vm, ObservableCollection<Level> _levels, Context context)
-        //{
-        //    IInfoUI emptyInfoUI = new EmptyInfoUi();
-        //    return LoadDB(vm, _levels, context, emptyInfoUI);
-        //}
-
-        //private static void SetInfoUI(IInfoUI infoUI)
-        //{
-        //    infoUI.Clear();
-        //    infoUI.Title = "Загрузка БД";
-        //    infoUI.Progress = 0;
-        //    infoUI.Message = "Загрузка ...%";
-        //    infoUI.Show();
-
-        //}
     }
 }

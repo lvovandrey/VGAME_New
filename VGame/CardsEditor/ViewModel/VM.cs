@@ -162,6 +162,22 @@ namespace CardsEditor.ViewModel
         }
 
 
+        private RelayCommand removeTagCommand;
+        public RelayCommand RemoveTagCommand
+
+        {
+            get
+            {
+                return removeTagCommand ?? (removeTagCommand = new RelayCommand(obj =>
+                {
+                    RemoveTagCommand(obj);
+                }));
+            }
+        }
+
+
+
+
         private RelayCommand saveCommand;
         public RelayCommand SaveCommand
         {
