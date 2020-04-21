@@ -54,6 +54,17 @@ namespace CardsEditor.ViewModel
             }
         }
 
+        private TagVM _SelectedTagVM;
+        public TagVM SelectedTagVM
+        {
+            get
+            { return _SelectedTagVM; }
+            set
+            {
+                _SelectedTagVM = value;
+                OnPropertyChanged("SelectedTagVM");
+            }
+        }
 
         private CardVM _SelectedCardVM;
         public CardVM SelectedCardVM
@@ -69,6 +80,19 @@ namespace CardsEditor.ViewModel
 
         }
 
+        private TagVM _SelectedOnCardTagVM;
+        public TagVM SelectedOnCardTagVM
+        {
+            get
+            { return _SelectedOnCardTagVM; }
+            set
+            {
+                _SelectedOnCardTagVM = value;
+                OnPropertyChanged("SelectedOnCardTagVM");
+
+            }
+        }
+
         public ObservableCollection<TagVM> SelectedCardTagVMs
         {
             get
@@ -80,7 +104,11 @@ namespace CardsEditor.ViewModel
                 foreach (var tag in _tags)
                 {
                     if (card.Tags.Contains(tag))
-                        _selcardTags.Add(new TagVM(tag));
+                    {
+                        var t = (from tt in TagVMs where tt.Tag == tag select tt).First();
+                        if (t == null) continue;
+                        _selcardTags.Add(t);
+                    }
                 }
                 return _selcardTags;
             }
@@ -114,6 +142,8 @@ namespace CardsEditor.ViewModel
         //создаем и добавляем в БД новый тег
         private Tag AddTag(object obj)
         {
+            if (SelectedCardVM == null) return null;
+
             Tag t = new Tag() { Id = _tags.Count + 1, Name = "Tag " + (_tags.Count + 1).ToString(), Cards = new ObservableCollection<Card>() { SelectedCardVM.Card } };
             t.SoundedText = "Пустой текст";
             _tags.Add(t);
@@ -122,6 +152,61 @@ namespace CardsEditor.ViewModel
             OnPropertyChanged("TagVMs");
             OnPropertyChanged("SelectedCardTagVMs");
             return t;
+        }
+
+        //удаляем из БД тег
+        private void RemoveTag(object obj)
+        {
+            Tag t = ((TagVM)obj).Tag;
+            _tags.Remove(t);
+            context.Entry(t).State = EntityState.Deleted;
+            context.SaveChanges();
+//            _tagvms.Remove((TagVM)obj);
+
+            OnPropertyChanged("TagVMs");
+            OnPropertyChanged("SelectedCardTagVMs");
+        }
+
+        private void AttachTagOnCard()
+        {
+            if (SelectedTagVM == null) return;
+            if (SelectedCardVM == null) return;
+            if (SelectedCardVM.Card.Tags == null) return;
+            if (SelectedCardVM.Card.Tags.Contains(SelectedTagVM.Tag)) return;
+            SelectedCardVM.Card.Tags.Add(SelectedTagVM.Tag);
+
+            context.SaveChanges();
+            OnPropertyChanged("SelectedCardTagVMs");
+        }
+
+
+        private void AttachAllTagsOnCard()
+        {
+            if (SelectedCardVM == null) return;
+            foreach (var tvm in TagVMs)
+            {
+                if (SelectedCardVM.Card.Tags.Contains(tvm.Tag)) continue;
+                SelectedCardVM.Card.Tags.Add(tvm.Tag);
+            }
+
+            context.SaveChanges();
+            OnPropertyChanged("SelectedCardTagVMs");
+        }
+        private void DetachAllTagsFromCard()
+        {
+            
+
+        }
+        private void DetachTagFromCard()
+        {
+            if (SelectedOnCardTagVM == null) return;
+            if (SelectedCardVM == null) return;
+            if (!SelectedCardVM.Card.Tags.Contains(SelectedOnCardTagVM.Tag)) return;
+            SelectedCardVM.Card.Tags.Remove(SelectedOnCardTagVM.Tag);
+            context.Entry(SelectedCardVM.Card).State = EntityState.Modified;
+            context.SaveChanges();
+            OnPropertyChanged("SelectedCardTagVMs");
+            OnPropertyChanged("SelectedOnCardTagVM");
         }
         #endregion
 
@@ -144,6 +229,7 @@ namespace CardsEditor.ViewModel
                       //context.SaveChanges();
                       //CardsVMs.Add(new CardVM(new Card()));
                       OnPropertyChanged("CardVMs");
+                      OnPropertyChanged("TagVMs");
                   }));
             }
         }
@@ -158,20 +244,6 @@ namespace CardsEditor.ViewModel
                   {
                       Add(obj);
                   }));
-            }
-        }
-
-
-        private RelayCommand removeTagCommand;
-        public RelayCommand RemoveTagCommand
-
-        {
-            get
-            {
-                return removeTagCommand ?? (removeTagCommand = new RelayCommand(obj =>
-                {
-                    RemoveTagCommand(obj);
-                }));
             }
         }
 
@@ -238,6 +310,79 @@ namespace CardsEditor.ViewModel
                 }));
             }
         }
+
+        private RelayCommand removeTagCommand;
+        public RelayCommand RemoveTagCommand
+
+        {
+            get
+            {
+                return removeTagCommand ?? (removeTagCommand = new RelayCommand(obj =>
+                {
+                    RemoveTag(SelectedTagVM);
+                }));
+            }
+        }
+
+
+
+
+        private RelayCommand attachTagOnCardCommand;
+        public RelayCommand AttachTagOnCardCommand
+        {
+            get
+            {
+                return attachTagOnCardCommand ?? (attachTagOnCardCommand = new RelayCommand(obj =>
+                {
+                    AttachTagOnCard();
+                }));
+            }
+        }
+
+
+
+        private RelayCommand attachAllTagsOnCardCommand;
+        public RelayCommand AttachAllTagsOnCardCommand
+        {
+            get
+            {
+                return attachAllTagsOnCardCommand ?? (attachAllTagsOnCardCommand = new RelayCommand(obj =>
+                {
+                    AttachAllTagsOnCard();
+                }));
+            }
+        }
+
+        private RelayCommand detachTagFromCardCommand;
+        public RelayCommand DetachTagFromCardCommand
+        {
+            get
+            {
+                return detachTagFromCardCommand ?? (detachTagFromCardCommand = new RelayCommand(obj =>
+                {
+                    DetachTagFromCard();
+                }));
+            }
+        }
+
+        private RelayCommand detachAllTagsFromCardCommand;
+        public RelayCommand DetachAllTagsFromCardCommand
+        {
+            get
+            {
+                return detachAllTagsFromCardCommand ?? (detachAllTagsFromCardCommand = new RelayCommand(obj =>
+                {
+                    DetachAllTagsFromCard();
+                }));
+            }
+        }
+
+
+
+
+
+
+
 
 
         #endregion

@@ -29,7 +29,8 @@ namespace CardsEditor.ViewModel
         }
 
         public int Id { get { return Tag.Id; } }
-        public string Name { get { return Tag.Name; } set { Tag.Name = value; OnPropertyChanged("Name"); } }
+        public string Name { get { return Tag.Name; } set { Tag.Name = value;
+                OnPropertyChanged("Name"); } }
         public string SoundedText { get { return Tag.SoundedText; } set { Tag.SoundedText = value; OnPropertyChanged("SoundedText"); } }
 
         public string FirstCardTitle
