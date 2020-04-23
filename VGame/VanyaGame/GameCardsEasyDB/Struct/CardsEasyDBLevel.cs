@@ -108,35 +108,6 @@ namespace VanyaGame.GameCardsEasyDB.Struct
         }
 
 
-
-
-
-        /// <summary>
-        /// Создает в объекте уровня (TGameLevel) объекты субуровней из текущей директории (указана в Sets.Directory) и
-        /// создает из них коллекцию Scenes.
-        /// Название папок уровней должно начинаться со строки "Scene"
-        /// </summary>
-        private void CreateEmptyScenes()
-        {
-            //MessageBox.Show("Остановился тут - NumberDBLevel.CreateEmptyScenes!!!!!!");
-
-            //Scenes.Clear();
-            ////string filenameXML = Game.Sets.MainDir + this.Sets.Directory + @"\LevelSets.xml";
-
-            ////  string dir = Game.Sets.MainDir + this.Sets.Directory + @"\";
-            ////  Scene_dirs = Directory.GetDirectories(dir, "Scene*");
-
-            //foreach (var scene in DbLevelRecord.Scenes)
-            //{
-            //    //string Scene_dir_short = @"\" + Scene_dir.Replace(dir, "");
-
-            //    NumberDBScene NewScene = new NumberDBScene(this, scene, scene.Name);
-            //    Scenes.Add(NewScene.Name, NewScene);
-            //}
-
-
-        }
-
         private void LoadContent()
         {
             LoadBackground();
@@ -151,7 +122,6 @@ namespace VanyaGame.GameCardsEasyDB.Struct
             Game.Music.Pause();
 
             CurScene.GetComponent<Starter>().Start();
-
         }
 
 
@@ -161,7 +131,6 @@ namespace VanyaGame.GameCardsEasyDB.Struct
         {
             Game.Sound.LoadMediaFilesFromDir(Game.Sets.MainDir +  Sets.SoundDir + @"\");
             Game.Music.LoadMediaFilesFromDir(Game.Sets.MainDir +  Sets.MusicDir + @"\");
-           // Game.CurVideo.LoadMediaFilesFromDir(Game.Sets.MainDir + Sets.Directory + Sets.VideoDir + @"\");
         }
 
         /// <summary>

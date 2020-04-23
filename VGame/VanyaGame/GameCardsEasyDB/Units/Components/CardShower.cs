@@ -9,10 +9,10 @@ namespace VanyaGame.GameCardsEasyDB.Units.Components
     /// <summary>
     /// Определяет специфичные для Number методы показывания и исчезновения элементов с экрана
     /// </summary>
-    class NumberShower : Component
+    class CardShower : Component
     {
         #region constructors
-        public NumberShower(string name, IComponentContainer container) : base(name, container)
+        public CardShower(string name, IComponentContainer container) : base(name, container)
         {
             if (Container.GetComponent<HiderShower>() == null)
                 throw new Exception("Have no component HiderShower in contaier");
@@ -39,12 +39,9 @@ namespace VanyaGame.GameCardsEasyDB.Units.Components
         public void Show(VoidDelegate complete)
         {
             TimeSpan t = TimeSpan.FromSeconds(0.5);
-           // HiderShower H = Container.GetComponent<HiderShower>();
 
             Container.GetComponent<HiderShower>().Show(1, t, new Thickness(0), TimeSpan.FromSeconds(0.3), 20000);
-           // H.Show(1, t, new Thickness(100), t);
             ToolsTimer.Delay(() => {
-               // Complete();
                 complete();
             }, t);
             Container.GetComponent<HaveBody>().Body.HorizontalAlignment = HorizontalAlignment.Center;

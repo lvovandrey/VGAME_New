@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" BorderThickness="3">
+             mc:Ignorable="d" BorderThickness="3" Margin="15">
     <UserControl.BorderBrush>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="#FF170B00" Offset="0"/>
@@ -28,7 +28,7 @@
                 </TransformGroup>
             </Grid.RenderTransform>
 
-            <Image Name="Img" Width="300"  Source="pack://application:,,,/1.GameNumber/Images/4.png" Stretch="Uniform" 
+            <Image Name="Img" Width="150"  Source="pack://application:,,,/1.GameNumber/Images/4.png" Stretch="Uniform" 
                RenderTransformOrigin="0.5,0.5"  Margin="0" 
                >
                 <!--<Image.Effect>

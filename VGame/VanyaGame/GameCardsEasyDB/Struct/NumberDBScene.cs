@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Windows;
+using System.Speech.Synthesis;
 using System.Windows.Input;
-using VanyaGame.GameNumber.Behaviour;
-using VanyaGame.GameNumber.Interface;
-using VanyaGame.GameNumber.Units;
-using VanyaGame.GameNumber.Units.Components;
+using VanyaGame.GameCardsEasyDB.Units;
+using VanyaGame.GameCardsEasyDB.Units.Components;
 using VanyaGame.Struct;
 using VanyaGame.Struct.Components;
-using VanyaGame.Units;
 using VanyaGame.Units.Components;
 using DBModel = VanyaGame.DB.DBLevelsRepositoryModel;
 
@@ -18,10 +13,9 @@ namespace VanyaGame.GameCardsEasyDB.Struct
 {
     public class CardsEasyDBScene : VanyaGame.Struct.Scene
     {
-        private UnitsCollection<Number> UnitsCol; //For easy call this component 
+        private UnitsCollection<CardUnit> UnitsCol; //For easy call this component 
+        private CardUnit CurUnit; //Текущая карточка, которую нужно озвучить и отгадать
         private bool ReadyToNextUnit;
-
-        private KeyboardElement keyboardElement;
         private CardsEasyDBLevel numberDBLevel;
         private DBModel.Scene DBSceneRecord;
 
@@ -42,107 +36,66 @@ namespace VanyaGame.GameCardsEasyDB.Struct
 
             GetComponent<Starter>().StartElements.Add(Start);
 
-            UnitsCol = new UnitsCollection<Number>("UnitsCollection", this);
+            UnitsCol = new UnitsCollection<CardUnit>("UnitsCollection", this);
             ReadyToNextUnit = true;
 
         }
 
         private void LoadSets()
         {
-            //string filenameXML = Game.Sets.MainDir + Level.Sets.Directory + Sets.Directory + @"\SceneSets.xml";
-            //VanyaGame.XMLTools.LoadSetsFromXML(this, filenameXML);
+
         }
 
         private void LoadContent()
         {
-            //LoadBackground();
-            //LoadPreview();
-            int prevNum = Game.RandomGenerator.Next(1, 9);
+            //Выбираем случайным образом текущий тег
+            var tags = Game.DBTools.Tags;
+            int rand = Game.RandomGenerator.Next(0, tags.Count-1);
+            var tag = tags[rand];
 
-            for (int i = 1; i <= DBSceneRecord.TasksCount; i++)
+            var cards = from c in Game.DBTools.Cards where c.Tags.Contains(tag) select c;
+            foreach (var card in cards)
             {
-
-                int ii = Game.RandomGenerator.Next(1, 9);
-                while (prevNum == ii)
-                {
-                    System.Threading.Thread.Sleep(1);
-                    ii = Game.RandomGenerator.Next(1, 9);
-                }
-                prevNum = ii;
-                Number N = new Number(ii.ToString(), this);
-                UnitsCol.AddUnit(N);
+                CardUnit c = new CardUnit(this, card);
+                UnitsCol.AddUnit(c);
             }
         }
 
         private void Start()
         {
-            Number N = UnitsCol.GetFirstUnit();
-            N.GetComponent<NumberShower>().Show(()=> { ReadyToNextUnit = true; });
+            CardUnit N = UnitsCol.GetFirstUnit();
+
+            foreach (var u in UnitsCol.GetAllUnits())
+                u.MouseClicked += U_MouseClicked;
             
 
-
-
-
+            NextNumber();
             SceneStarted(this, Level);
-            //LoadMedia();
-            //LoadScenes();
-            //CurScene.GetComponent<Starter>().Start();
-
-            foreach (Number NN in UnitsCol.GetAllUnits())
-            {
-                PaperGrid P = new PaperGrid();
-                P.Width = 100; P.Height = 100;
-                Game.Owner.StackPanelGame.Children.Add(P);
-                NN.Box = P.PaperGird;
-            }
-
             Game.UserActivity.UserDoSomethingEvent += UserDoSomething;
-            keyboardElement = new KeyboardElement();
-            Game.Owner.GridMain.Children.Add(keyboardElement);
-            keyboardElement.Show(N.GetComponent<CheckedSymbol>().Symbol);
         }
 
         private void UserDoSomething(MouseEventArgs mouse, MouseButtonEventArgs mousebutton, KeyEventArgs key)
         {
-            if (key != null)
-            {
-                Number N = UnitsCol.GetNewUnits().First();
-                string s;
-                s = key.Key.ToString();
-                s = s.Replace("D", "");
-                if (N.GetComponent<CheckedSymbol>().IsPrintedSimbolMatch(s) && ReadyToNextUnit == true)
-                {
-                    ReadyToNextUnit = false;
-                    N.GetComponent<UState>().newOld = NewOld.Old;
-                    N.RemoveToBox(() => 
-                    {
-                        
-                        NextNumber(); }
-                    );
-                    keyboardElement.Hide();
-                }
-                if (s == "Q")
-                {
-                    keyboardElement.Show(N.GetComponent<CheckedSymbol>().Symbol);
-                }
-                if (s == "M")
-                {
-                    keyboardElement.Show(s);
-                }
-
-            }
+           
         }
-
-
+        
 
         private void NextNumber()
         {
             if (UnitsCol.GetNewUnits().Count > 0)
             {
-                Number N = UnitsCol.GetNewUnits().First();
-                N.GetComponent<NumberShower>().Show(()=> { ReadyToNextUnit = true; });
 
-                keyboardElement.Show(N.GetComponent<CheckedSymbol>().Symbol);
+
+                foreach (var u in UnitsCol.GetAllUnits())
+                {
+                    u.GetComponent<CardShower>().Show(() => { ReadyToNextUnit = true; });
+                    u.GetComponent<Hit>().IsHited = false;
+                    u.readyToReactionOnMouseDown = true;
+                }
+                CurUnit = UnitsCol.GetNewUnits().First();
+
+
+                Speak("Ваня! Покажи " + CurUnit.Card.SoundedText + ". Ваня! Где " + CurUnit.Card.Title + "?");
             }
             else
             {
@@ -150,18 +103,50 @@ namespace VanyaGame.GameCardsEasyDB.Struct
             }
         }
 
+        private void U_MouseClicked()
+        {
+            bool IsHitSuccess = false;
+            foreach (var u in UnitsCol.GetAllUnits())
+            {
+                u.GetComponent<CardShower>().Show(() => { ReadyToNextUnit = true; });
+                u.readyToReactionOnMouseDown = false;
+                if ((u.GetComponent<Hit>().IsHited) && (CurUnit.Card.Title == u.Card.Title))
+                    IsHitSuccess = true;
+            }
+            if (IsHitSuccess)
+            {
+                CurUnit.GetComponent<UState>().newOld = NewOld.Old;
+                Speak("Молодец, Ваня! Умница! Ты показал " + CurUnit.Card.SoundedText);
+            }
+            else
+            {
+                Speak("Не правильно! Попробуй ещё раз.");
+            }
+
+            foreach (var u in UnitsCol.GetAllUnits())
+                u.GetComponent<CardShower>().Hide(() => { });
+            ToolsTimer.Delay(() =>
+            {
+                NextNumber();
+            }, TimeSpan.FromSeconds(10));
+        }
+
+        private void Speak(string text)
+        {
+            if (text == null) return;
+            SpeechSynthesizer speaker = new SpeechSynthesizer();
+            speaker.Rate = 1;
+            speaker.Volume = 100;
+            speaker.SpeakAsync(text);
+        }
+
+
         public void SceneStarted(Scene SL, Level Level)
         {
 
             Game.Music.Play();
             Game.Music.MediaGUI.UIMediaShow();
             Game.CurVideo.MediaGUI.UIMediaHide();
-            
-            //TDrawEffects.SlowDifferVolume(Game.Music.player, 1, 4, (sender, e) => { });
-            //Game.Music.player.Volume = 0;
-
-            Game.Owner.StackPanelGame.Children.Clear();
-
             Game.Owner.Cursor = Cursors.Arrow;
         }
 
@@ -169,20 +154,17 @@ namespace VanyaGame.GameCardsEasyDB.Struct
 
         public void SceneEnded(Scene SL, Level Level)
         {
-            Game.Owner.GridMain.Children.Remove(keyboardElement);
+
+            foreach (var u in UnitsCol.GetAllUnits())
+                u.MouseClicked -= U_MouseClicked;
 
 
             Game.UserActivity.UserDoSomethingEvent -= UserDoSomething;
 
-            Game.Owner.StackPanelGame.Children.Clear();
-           // TDrawEffects.SlowDifferVolume(Game.Music.player, 0, 2, (sender, e) =>
-           // {
-              //  Game.Music.player.Volume = 0;
                 Game.Music.Pause();
                 Game.Owner.StackPanelGame.Children.Clear();
 
-            //});
-
+          
             VideoType videoType = SL.Sets.GetComponent<InnerVideoSets>().VideoFileType;
             switch (videoType)
             {

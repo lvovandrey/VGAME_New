@@ -111,7 +111,7 @@ namespace VanyaGame
             {
                 DBTools = new DBmainTools();
                 CardsEasyDBLevel.LoadLevels(DBTools);
-
+                
 
                 return;
             }

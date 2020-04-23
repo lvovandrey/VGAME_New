@@ -90,6 +90,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Printing" />
+    <Reference Include="System.Speech" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Windows.Forms" />
@@ -173,7 +174,7 @@
     <Compile Include="GameCardsEasyDB\Struct\CardsEasyDBIteration.cs" />
     <Compile Include="GameCardsEasyDB\Struct\CardsEasyDBLevel.cs" />
     <Compile Include="GameCardsEasyDB\Struct\NumberDBScene.cs" />
-    <Compile Include="GameCardsEasyDB\Units\Components\NumberShower.cs" />
+    <Compile Include="GameCardsEasyDB\Units\Components\CardShower.cs" />
     <Compile Include="GameCardsEasyDB\Units\CardUnitElement.xaml.cs">
       <DependentUpon>CardUnitElement.xaml</DependentUpon>
     </Compile>
