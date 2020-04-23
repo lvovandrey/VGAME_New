@@ -1,11 +1,24 @@
-﻿<UserControl x:Class="VanyaGame.GameCardsEasyDB.Units.NumberElement"
+﻿<UserControl x:Class="VanyaGame.GameCardsEasyDB.Units.CardUnitElement"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d">
+             mc:Ignorable="d" BorderThickness="3">
+    <UserControl.BorderBrush>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF170B00" Offset="0"/>
+            <GradientStop Color="#FF422A15" Offset="1"/>
+        </LinearGradientBrush>
+    </UserControl.BorderBrush>
     <Grid>
-        <Grid Name="Grd" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+        <Grid Name="Grd" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"
+              >
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF896D46" Offset="0"/>
+                    <GradientStop Color="#FF704B16" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
             <Grid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

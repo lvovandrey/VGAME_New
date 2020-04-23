@@ -19,9 +19,9 @@ namespace VanyaGame.GameCardsEasyDB.Units
     /// <summary>
     /// Логика взаимодействия для NumberElement.xaml
     /// </summary>
-    public partial class NumberElement : UserControl
+    public partial class CardUnitElement : UserControl
     {
-        public NumberElement()
+        public CardUnitElement()
         {
             InitializeComponent();
         }

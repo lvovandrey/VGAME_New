@@ -174,10 +174,10 @@
     <Compile Include="GameCardsEasyDB\Struct\CardsEasyDBLevel.cs" />
     <Compile Include="GameCardsEasyDB\Struct\NumberDBScene.cs" />
     <Compile Include="GameCardsEasyDB\Units\Components\NumberShower.cs" />
-    <Compile Include="GameCardsEasyDB\Units\NumberElement.xaml.cs">
-      <DependentUpon>NumberElement.xaml</DependentUpon>
+    <Compile Include="GameCardsEasyDB\Units\CardUnitElement.xaml.cs">
+      <DependentUpon>CardUnitElement.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GameCardsEasyDB\Units\NumberUnit.cs" />
+    <Compile Include="GameCardsEasyDB\Units\CardUnit.cs" />
     <Compile Include="GameCardsEasyDB\Interface\BeautyButtonCardsEasyDB.xaml.cs">
       <DependentUpon>BeautyButtonCardsEasyDB.xaml</DependentUpon>
     </Compile>
@@ -290,7 +290,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="GameCardsEasyDB\Units\NumberElement.xaml">
+    <Page Include="GameCardsEasyDB\Units\CardUnitElement.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
