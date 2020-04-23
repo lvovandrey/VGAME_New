@@ -12,6 +12,7 @@ using VanyaGame.Struct;
 using VanyaGame.Struct.Components;
 using VanyaGame.Units;
 using VanyaGame.Units.Components;
+using DBModel = VanyaGame.DB.DBLevelsRepositoryModel;
 
 namespace VanyaGame.GameNumberDB.Struct
 {
@@ -22,11 +23,11 @@ namespace VanyaGame.GameNumberDB.Struct
 
         private KeyboardElement keyboardElement;
         private NumberDBLevel numberDBLevel;
-        private LevelSetsEditor.Model.Scene DBSceneRecord;
+        private DBModel.Scene DBSceneRecord;
 
 
 
-        public NumberDBScene(Level _Level, LevelSetsEditor.Model.Scene scene, string name) : base(_Level, name)
+        public NumberDBScene(Level _Level, DBModel.Scene scene, string name) : base(_Level, name)
         {
             this.Level = _Level;
             this.DBSceneRecord = scene;

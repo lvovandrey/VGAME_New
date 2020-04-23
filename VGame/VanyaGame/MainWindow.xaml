@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:VanyaGame" 
         xmlns:GameNumber="clr-namespace:VanyaGame.GameNumber.Interface" 
         xmlns:GameNumberDB="clr-namespace:VanyaGame.GameNumberDB.Interface" 
+        xmlns:GameCardsEasyDB="clr-namespace:VanyaGame.GameCardsEasyDB.Interface"
         xmlns:Interface ="clr-namespace:VanyaGame.Interface"
         x:Name="MyWindow" x:Class="VanyaGame.MainWindow"
         
@@ -58,7 +59,7 @@
                         </Label.Effect>
                     </Label>
                     <MediaElement x:Name="MediaElementVideo" HorizontalAlignment="Center" VerticalAlignment="Center" LoadedBehavior="Manual" Stretch="Fill" Opacity="0.1" KeyDown="MediaElementVideo_KeyDown"  />
-                    <GameNumberDB:BeautyButtonNumberDB x:Name="StartButton" HorizontalAlignment="Center" VerticalAlignment="Center" Height="250" Visibility="Visible" />
+                    <GameCardsEasyDB:BeautyButtonCardsEasyDB x:Name="StartButton" HorizontalAlignment="Center" VerticalAlignment="Center" Height="250" Visibility="Visible" />
                     <Button Name="VIDEOTEST" Content="VLC" Width ="200" Height="30" HorizontalAlignment="Left" Click="VIDEOTEST_Click" Opacity="0"/>
                     <Interface:VlcWrap x:Name="Vlc" Margin="0,70,0,100" Visibility="Hidden"/>
 

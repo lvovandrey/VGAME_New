@@ -134,15 +134,18 @@
     <Compile Include="1.GameNumber\Units\Components\NumberShower.cs" />
     <Compile Include="2.GameNumberDB\Data\DBKeyboardTools.cs" />
     <Compile Include="2.GameNumberDB\Data\XMLTools.cs" />
-    <Compile Include="2.GameNumberDB\DB\Context.cs" />
-    <Compile Include="2.GameNumberDB\DB\DBmainTools.cs" />
-    <Compile Include="2.GameNumberDB\DB\DBRepositoryModel\Level.cs" />
-    <Compile Include="2.GameNumberDB\DB\DBRepositoryModel\Preview.cs" />
-    <Compile Include="2.GameNumberDB\DB\DBRepositoryModel\Scene.cs" />
-    <Compile Include="2.GameNumberDB\DB\DBRepositoryModel\VideoInfo.cs" />
-    <Compile Include="2.GameNumberDB\DB\DBRepositoryModel\VideoSegment.cs" />
-    <Compile Include="2.GameNumberDB\DB\DBRepositoryModel\WebBrowserModel.cs" />
-    <Compile Include="2.GameNumberDB\DB\DBTools.cs" />
+    <Compile Include="Abstract\INPCBase.cs" />
+    <Compile Include="Abstract\RelayCommand.cs" />
+    <Compile Include="DB\Context.cs" />
+    <Compile Include="DB\DBCardsRepositoryModel\Card.cs" />
+    <Compile Include="DB\DBCardsRepositoryModel\Tag.cs" />
+    <Compile Include="DB\DBmainTools.cs" />
+    <Compile Include="DB\DBLevelsRepositoryModel\Level.cs" />
+    <Compile Include="DB\DBLevelsRepositoryModel\Preview.cs" />
+    <Compile Include="DB\DBLevelsRepositoryModel\Scene.cs" />
+    <Compile Include="DB\DBLevelsRepositoryModel\VideoInfo.cs" />
+    <Compile Include="DB\DBLevelsRepositoryModel\VideoSegment.cs" />
+    <Compile Include="DB\DBLevelsRepositoryModel\WebBrowserModel.cs" />
     <Compile Include="2.GameNumberDB\Interface\BeautyButtonNumberDB.xaml.cs">
       <DependentUpon>BeautyButtonNumberDB.xaml</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -160,13 +163,24 @@
     <Compile Include="2.GameNumberDB\Struct\NumberDBIteration.cs" />
     <Compile Include="2.GameNumberDB\Struct\NumberDBLevel.cs" />
     <Compile Include="2.GameNumberDB\Struct\NumberDBScene.cs" />
-    <Compile Include="2.GameNumberDB\Tools\ConvertDBTools.cs" />
+    <Compile Include="DB\ConvertDBTools.cs" />
     <Compile Include="2.GameNumberDB\Tools\PictHelper.cs" />
     <Compile Include="2.GameNumberDB\Units\Components\NumberShower.cs" />
     <Compile Include="2.GameNumberDB\Units\NumberElement.xaml.cs">
       <DependentUpon>NumberElement.xaml</DependentUpon>
     </Compile>
     <Compile Include="2.GameNumberDB\Units\NumberUnit.cs" />
+    <Compile Include="GameCardsEasyDB\Struct\CardsEasyDBIteration.cs" />
+    <Compile Include="GameCardsEasyDB\Struct\CardsEasyDBLevel.cs" />
+    <Compile Include="GameCardsEasyDB\Struct\NumberDBScene.cs" />
+    <Compile Include="GameCardsEasyDB\Units\Components\NumberShower.cs" />
+    <Compile Include="GameCardsEasyDB\Units\NumberElement.xaml.cs">
+      <DependentUpon>NumberElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GameCardsEasyDB\Units\NumberUnit.cs" />
+    <Compile Include="GameCardsEasyDB\Interface\BeautyButtonCardsEasyDB.xaml.cs">
+      <DependentUpon>BeautyButtonCardsEasyDB.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Interface\VlcWrap.xaml.cs">
       <DependentUpon>VlcWrap.xaml</DependentUpon>
     </Compile>
@@ -275,6 +289,14 @@
     <Page Include="2.GameNumberDB\Units\NumberElement.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GameCardsEasyDB\Units\NumberElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GameCardsEasyDB\Interface\BeautyButtonCardsEasyDB.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Interface\VlcWrap.xaml">
       <SubType>Designer</SubType>
@@ -560,6 +582,24 @@
     <Resource Include="2.GameNumberDB\Images\HandPushDown.cur" />
     <Resource Include="2.GameNumberDB\Images\keyboard.png" />
     <Resource Include="2.GameNumberDB\Images\Paper.png" />
+    <Resource Include="GameCardsEasyDB\Images\4.png" />
+    <Resource Include="GameCardsEasyDB\Images\btn_start.png" />
+    <Resource Include="GameCardsEasyDB\Images\btn_start1.png" />
+    <Resource Include="GameCardsEasyDB\Images\btn_start2.png" />
+    <Resource Include="GameCardsEasyDB\Images\btn_start3.png" />
+    <Resource Include="GameCardsEasyDB\Images\Hand.cur">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GameCardsEasyDB\Images\Hand1.cur">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GameCardsEasyDB\Images\HandPrint.png" />
+    <Resource Include="GameCardsEasyDB\Images\HandPush.cur">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GameCardsEasyDB\Images\HandPushDown.cur" />
+    <Resource Include="GameCardsEasyDB\Images\keyboard.png" />
+    <Resource Include="GameCardsEasyDB\Images\Paper.png" />
     <Content Include="Tools\vlcLib\axvlc.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1671,7 +1711,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="GameCardsEasyDB\Tools\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

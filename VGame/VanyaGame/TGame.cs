@@ -13,11 +13,12 @@ using VanyaGame.Media;
 using VanyaGame.Media.Abstract;
 using VanyaGame.Abstract;
 using VanyaGame.GameNumberDB.Struct;
-using VanyaGame.GameNumberDB.DB;
+using VanyaGame.GameCardsEasyDB.Struct;
+using VanyaGame.DB;
 
 namespace VanyaGame
 {
-    public delegate void VoidDelegate ();
+    public delegate void VoidDelegate();
     public delegate bool BoolDelegate();
     public delegate object FullFreeDelegate(params object[] vs);
     public delegate void TUserDoSomething(MouseEventArgs mouse, MouseButtonEventArgs mousebutton, KeyEventArgs key);
@@ -30,6 +31,7 @@ namespace VanyaGame
         Fish,
         Number,      
         NumberDB,
+        CardsEasy,
         None
     }
 
@@ -49,7 +51,8 @@ namespace VanyaGame
         public static TDrawEffects DrawEffects = new TDrawEffects();
         public static TUserActivity UserActivity = new TUserActivity();
 
-        public static DBmainTools DB = new DBmainTools();
+        public static DBmainTools DBTools = new DBmainTools();
+
 
         private static ComponentContainer mediaContainer;
 
@@ -99,8 +102,17 @@ namespace VanyaGame
         {
             if (Game.Sets.gameType == GameType.NumberDB)
             {
-                DB = new DBmainTools();
-                NumberDBLevel.LoadLevels(DB);
+                DBTools = new DBmainTools();
+                NumberDBLevel.LoadLevels(DBTools);
+                return;
+            }
+
+            if (Game.Sets.gameType == GameType.CardsEasy)
+            {
+                DBTools = new DBmainTools();
+                CardsEasyDBLevel.LoadLevels(DBTools);
+
+
                 return;
             }
 
@@ -268,6 +280,9 @@ namespace VanyaGame
 
             if (sender.GetType() == typeof(VanyaGame.GameNumberDB.Interface.BeautyButtonNumberDB))
                 Sets.gameType = GameType.NumberDB;
+
+            if (sender.GetType() == typeof(VanyaGame.GameCardsEasyDB.Interface.BeautyButtonCardsEasyDB))
+                Sets.gameType = GameType.CardsEasy;
 
             ToolsTimer.Delay(() =>
             {

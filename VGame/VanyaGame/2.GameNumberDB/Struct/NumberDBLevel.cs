@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 
-using VanyaGame.GameNumberDB.DB;
+using DBModel = VanyaGame.DB.DBLevelsRepositoryModel;
 using VanyaGame.Struct;
 using VanyaGame.Struct.Components;
+using VanyaGame.DB;
 
 namespace VanyaGame.GameNumberDB.Struct
 {
@@ -16,7 +17,7 @@ namespace VanyaGame.GameNumberDB.Struct
     /// </summary>
     public class NumberDBLevel : Level
     {
-        private LevelSetsEditor.Model.Level DbLevelRecord;
+        private DBModel.Level DbLevelRecord;
 
         public NumberDBLevel(string _LevelDir = @"\Level1") : base()
         {
@@ -28,7 +29,7 @@ namespace VanyaGame.GameNumberDB.Struct
             GetComponent<Starter>().StartElements.Add(Start);
         }
 
-        public NumberDBLevel(LevelSetsEditor.Model.Level DbLevelRecord) : base()
+        public NumberDBLevel(DBModel.Level DbLevelRecord) : base()
         {
             this.DbLevelRecord = DbLevelRecord;
             Sets = new LevelSets(this);
@@ -44,10 +45,7 @@ namespace VanyaGame.GameNumberDB.Struct
         public static void LoadLevels(DBmainTools DB)
         {
             
-            DB.LoadDB(new System.Collections.ObjectModel.ObservableCollection<LevelSetsEditor.Model.Level>(), DB.Context);
-
-
-           
+            DB.LoadLevelsDB(new System.Collections.ObjectModel.ObservableCollection<DBModel.Level>(), DB.Context);
             Random random = new Random();
 
             //Перемешиваем уровни  //что за алгоритм - хз - раньше работал вроде
@@ -66,9 +64,6 @@ namespace VanyaGame.GameNumberDB.Struct
                 
                 Game.Levels.Enqueue(NewLevel);
             }
-
-
-       //     throw new NotImplementedException("NumberDBLevel.LoadLevels()");
         }
 
 
@@ -98,7 +93,7 @@ namespace VanyaGame.GameNumberDB.Struct
             {
                 Scene NewScene = new NumberDBScene(Level, Scene, "Scene" + Scene.Id.ToString());
                 NewScene.Sets.GetComponent<InnerVideoSets>().VideoFileName = Level.DbLevelRecord.VideoInfo.Address;
-                NewScene.Sets.GetComponent<InnerVideoSets>().VideoFileType = Tools.ConvertDBTools.VideoTypeConvertFromDB(Level.DbLevelRecord.VideoInfo.Type);
+                NewScene.Sets.GetComponent<InnerVideoSets>().VideoFileType = ConvertDBTools.VideoTypeConvertFromDB(Level.DbLevelRecord.VideoInfo.Type);
                 NewScene.Sets.GetComponent<InnerVideoSets>().VideoFileNumber = Level.DbLevelRecord.Scenes.IndexOf(Scene).ToString();
                 NewScene.Sets.GetComponent<InnerVideoSets>().VideoTimeBegin = Scene.VideoSegment.TimeBegin;
                 NewScene.Sets.GetComponent<InnerVideoSets>().VideoTimeEnd = Scene.VideoSegment.TimeEnd;
