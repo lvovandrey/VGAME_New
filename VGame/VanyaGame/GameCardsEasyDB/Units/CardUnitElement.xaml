@@ -3,20 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" BorderThickness="3" Margin="15">
-    <UserControl.BorderBrush>
-        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="#FF170B00" Offset="0"/>
-            <GradientStop Color="#FF422A15" Offset="1"/>
-        </LinearGradientBrush>
-    </UserControl.BorderBrush>
+             mc:Ignorable="d" BorderThickness="1" Margin="150" BorderBrush="#FF3A1D00">
     <Grid>
         <Grid Name="Grd" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"
               >
             <Grid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF896D46" Offset="0"/>
-                    <GradientStop Color="#FF704B16" Offset="1"/>
+                    <GradientStop Color="#99FFDBA8" Offset="0"/>
+                    <GradientStop Color="#99E4A954" Offset="1"/>
                 </LinearGradientBrush>
             </Grid.Background>
             <Grid.RenderTransform>
@@ -28,8 +22,8 @@
                 </TransformGroup>
             </Grid.RenderTransform>
 
-            <Image Name="Img" Width="150"  Source="pack://application:,,,/1.GameNumber/Images/4.png" Stretch="Uniform" 
-               RenderTransformOrigin="0.5,0.5"  Margin="0" 
+            <Image Name="Img" Width="100" Height="100"  Source="pack://application:,,,/1.GameNumber/Images/4.png" Stretch="Uniform" 
+               RenderTransformOrigin="0.5,0.5"  Margin="10" 
                >
                 <!--<Image.Effect>
                     <DropShadowEffect ShadowDepth="6" BlurRadius="10" />

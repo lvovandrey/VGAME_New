@@ -41,7 +41,8 @@ namespace VanyaGame.GameCardsEasyDB.Units
             if (System.IO.File.Exists(card.ImageAddress))
             {
                 ((CardUnitElement)B.Body).Img.Source = new BitmapImage(new Uri(card.ImageAddress));
-                ((CardUnitElement)B.Body).Img.Width = 150;
+                //((CardUnitElement)B.Body).Img.Width = 150;
+                ((CardUnitElement)B.Body).Margin = new Thickness(50);
             }
             else
             {
