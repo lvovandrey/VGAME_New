@@ -145,16 +145,26 @@ namespace VanyaGame.Struct.Components
         public void Shuffle()
         {
 
-            Random random = new Random();
-            
-            for (int i = Units.Count - 1; i >= 1; i--)
+           
+
+            for (int x = 0; x < 1000; x++)
             {
-                int j = random.Next(i + 1);
+
+                int i = Game.RandomGenerator.Next(0,Units.Count);
+                int j = Game.RandomGenerator.Next(0,Units.Count);
                 // обменять значения data[j] и data[i]
                 var temp = Units[j];
                 Units[j] = Units[i];
                 Units[i] = temp;
             }
+            //for (int i = Units.Count - 1; i >= 0; i--)
+            //{
+            //    int j = random.Next(i + 1);
+            //    // обменять значения data[j] и data[i]
+            //    var temp = Units[j];
+            //    Units[j] = Units[i];
+            //    Units[i] = temp;
+            //}
         }
 
 

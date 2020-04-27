@@ -14,6 +14,11 @@ namespace VanyaGame.Abstract
             Container.Components.Add(name, this);
         }
 
+        public void Remove(string name, IComponentContainer container)
+        {
+            Container.Components.Remove(name);
+        }
+
         public void Dispose()
         {
             

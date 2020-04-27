@@ -250,6 +250,7 @@
     <Compile Include="TDrawEffects.cs" />
     <Compile Include="Abstract\Component.cs" />
     <Compile Include="Abstract\ComponentContainer.cs" />
+    <Compile Include="Tools\ListShuffle.cs" />
     <Compile Include="TUserActivity.cs" />
     <Compile Include="Units\Components\DragAndDrop.cs" />
     <Compile Include="Units\Components\Update.cs" />

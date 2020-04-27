@@ -119,17 +119,17 @@ namespace VanyaGame
             string dir_ = dir + @"\";
             string[] Level_dirs = Directory.GetDirectories(dir_, "Level*");
             
-            Random random = new Random();
+            //Random random = new Random();
 
-            //Перемешиваем уровни
-            for (int i = Level_dirs.Length - 1; i >= 1; i--)
-            {
-                int j = random.Next(i + 1);
-                // обменять значения data[j] и data[i]
-                string temp = Level_dirs[j];
-                Level_dirs[j] = Level_dirs[i];
-                Level_dirs[i] = temp;
-            }
+            ////Перемешиваем уровни
+            //for (int i = Level_dirs.Length - 1; i >= 1; i--)
+            //{
+            //    int j = random.Next(i + 1);
+            //    // обменять значения data[j] и data[i]
+            //    string temp = Level_dirs[j];
+            //    Level_dirs[j] = Level_dirs[i];
+            //    Level_dirs[i] = temp;
+            //}
             
             foreach (string Level_dir in Level_dirs)
             {

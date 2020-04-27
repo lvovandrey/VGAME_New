@@ -25,5 +25,32 @@ namespace VanyaGame.GameCardsEasyDB.Units
         {
             InitializeComponent();
         }
+
+        private void Img_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var uri = new Uri("Images/HandPushDown.cur", UriKind.Relative);
+            var stream = Application.GetResourceStream(uri).Stream;
+            var cursor = new Cursor(stream);
+            Img.Cursor = cursor;
+            //    AddDropShadowEffect(Img, 10, 20, 80);
+
+        }
+
+        private void Img_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            var uri = new Uri("Images/HandPush.cur", UriKind.Relative);
+            var stream = Application.GetResourceStream(uri).Stream;
+            var cursor = new Cursor(stream);
+            Img.Cursor = cursor;
+
+        }
+
+        private void Img_MouseLeave(object sender, MouseEventArgs e)
+        {
+            var uri = new Uri("Images/HandPush.cur", UriKind.Relative);
+            var stream = Application.GetResourceStream(uri).Stream;
+            var cursor = new Cursor(stream);
+            Img.Cursor = cursor;
+        }
     }
 }

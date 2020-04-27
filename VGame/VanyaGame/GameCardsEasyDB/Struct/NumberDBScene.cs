@@ -5,10 +5,12 @@ using System.Speech.Synthesis;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using VanyaGame.DB.DBCardsRepositoryModel;
 using VanyaGame.GameCardsEasyDB.Units;
 using VanyaGame.GameCardsEasyDB.Units.Components;
 using VanyaGame.Struct;
 using VanyaGame.Struct.Components;
+using VanyaGame.ToolsShuffle;
 using VanyaGame.Units.Components;
 using DBModel = VanyaGame.DB.DBLevelsRepositoryModel;
 
@@ -77,35 +79,29 @@ namespace VanyaGame.GameCardsEasyDB.Struct
                 throw new Exception("Тег уровня не найден в БД!");
             }
             cards = from c in Game.DBTools.Cards where c.Tags.Contains(TAG) select c;
-            //do
-            //{
-            //    //Выбираем случайным образом текущий тег
-            //    var tags = Game.DBTools.Tags;
-            //    int rand = Game.RandomGenerator.Next(0, tags.Count - 1);
-            //    var tag = tags[rand];
-            //    this.tag = tag.Name;
-            //    cards = from c in Game.DBTools.Cards where c.Tags.Contains(tag) select c;
-            //} while (cards.Count() < 2) ;
+            var cardsList = cards.ToList();
 
 
-            foreach (var card in cards)
+            cardsList = new ListShuffle<Card>().Shuffle(cardsList); 
+
+            for ( int i=0; i<cardsList.Count;i++)// var card in cards)
             {
-                CardUnit c = new CardUnit(this, card);
+                CardUnit c = new CardUnit(this, cardsList[i]);
                 UnitsCol.AddUnit(c);
             }
-            UnitsCol.Shuffle();
         }
+
+
 
         private void Start()
         {
-            Game.Owner.WrapPanelMain.Children.Clear();
 
-            foreach (var u in UnitsCol.GetAllUnits())
-            {
-                HaveBox HB = new HaveBox("HaveBox", Game.Owner, Game.Owner.WrapPanelMain, u);
-            }
-            UnitsCol.Shuffle();
-            CardUnit N = UnitsCol.GetFirstUnit();
+            //foreach (var u in UnitsCol.GetAllUnits())
+            //{
+            //    HaveBox HB = new HaveBox("HaveBox", Game.Owner, Game.Owner.WrapPanelMain, u);
+            //}
+            //UnitsCol.Shuffle();
+            // CardUnit N = UnitsCol.GetFirstUnit();
 
             foreach (var u in UnitsCol.GetAllUnits())
                 u.MouseClicked += U_MouseClicked;
@@ -129,7 +125,20 @@ namespace VanyaGame.GameCardsEasyDB.Struct
             if (UnitsCol.GetNewUnits().Count > 0)
             {
 
-               
+                Game.Owner.WrapPanelMain.Children.Clear();
+                UnitsCol.Shuffle();
+                var AllUnitsShuffled= new ListShuffle<CardUnit>().Shuffle(UnitsCol.GetAllUnits());
+                foreach (var u in AllUnitsShuffled)
+                {
+                    if (u.GetComponent<HaveBox>() != null)
+                    {
+                        u.GetComponent<HaveBox>().RemoveFromBox();
+                        u.Components.Remove("HaveBox");
+                    }
+                    HaveBox HB = new HaveBox("HaveBox", Game.Owner, Game.Owner.WrapPanelMain, u);
+                }
+
+
 
                 foreach (var u in UnitsCol.GetAllUnits())
                 {
@@ -138,10 +147,14 @@ namespace VanyaGame.GameCardsEasyDB.Struct
                     u.readyToReactionOnMouseDown = true;
                     Panel.SetZIndex(u.GetComponent<HaveBody>().Body, 33000);
                 }
-                CurUnit = UnitsCol.GetNewUnits().First();
 
+                if (CurUnit == null)
+                {
+                    List<CardUnit> newUnitsShuffled = new ListShuffle<CardUnit>().Shuffle(UnitsCol.GetNewUnits());
+                    CurUnit = newUnitsShuffled[0]; //UnitsCol.GetNewUnits().First();
+                }
                 Speak("Ваня! Покажи " + CurUnit.Card.SoundedText);// + ". Ваня! Где " + CurUnit.Card.Title + "?");
-                Game.Owner.TextForCardTag.Text = this.tag + "  " + CurUnit.Card.Title;
+                Game.Owner.TextForCardTag.Text = "Тема: " + this.tag + ".  Надо показать:" + CurUnit.Card.Title;
             }
             else
             {
@@ -163,6 +176,7 @@ namespace VanyaGame.GameCardsEasyDB.Struct
             {
                 CurUnit.GetComponent<UState>().newOld = NewOld.Old;
                 Speak("Молодец, Ваня!");// Умница! Ты показал " + CurUnit.Card.SoundedText);
+                CurUnit = null;
             }
             else
             {
@@ -197,7 +211,7 @@ namespace VanyaGame.GameCardsEasyDB.Struct
             Game.Music.Play();
             Game.Music.MediaGUI.UIMediaShow();
             Game.CurVideo.MediaGUI.UIMediaHide();
-            Game.Owner.Cursor = Cursors.Arrow;
+            //Game.Owner.Cursor = Cursors.Arrow;
         }
 
 
@@ -208,7 +222,7 @@ namespace VanyaGame.GameCardsEasyDB.Struct
             foreach (var u in UnitsCol.GetAllUnits())
                 u.MouseClicked -= U_MouseClicked;
 
-
+            Game.Owner.TextForCardTag.Text = "";
             Game.UserActivity.UserDoSomethingEvent -= UserDoSomething;
 
             Game.Music.Pause();
