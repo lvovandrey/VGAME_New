@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" BorderThickness="1" Margin="150" BorderBrush="#FF3A1D00">
+             mc:Ignorable="d" BorderThickness="1"  BorderBrush="#FF3A1D00">
     <Grid>
         <Grid Name="Grd" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"
               >

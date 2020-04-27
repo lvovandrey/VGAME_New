@@ -7,6 +7,7 @@
         xmlns:GameNumber="clr-namespace:VanyaGame.GameNumber.Interface" 
         xmlns:GameNumberDB="clr-namespace:VanyaGame.GameNumberDB.Interface" 
         xmlns:GameCardsEasyDB="clr-namespace:VanyaGame.GameCardsEasyDB.Interface"
+    xmlns:GGG="clr-namespace:VanyaGame.GameCardsEasyDB.Units"
         xmlns:Interface ="clr-namespace:VanyaGame.Interface"
         x:Name="MyWindow" x:Class="VanyaGame.MainWindow"
         
@@ -84,7 +85,13 @@
 
             </Grid>
             <Grid Grid.Row="0" x:Name="GridMain" VerticalAlignment="Stretch" Panel.ZIndex="0" HorizontalAlignment="Stretch" />
-            <StackPanel  VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center"  x:Name="WrapPanelMain" Grid.Row="0"  />
+            <WrapPanel  VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center"  x:Name="WrapPanelMain" Grid.Row="0" Background="Red" MinHeight="10" MinWidth="100"  >
+                <GGG:CardUnitElement/>
+                <GGG:CardUnitElement/>
+                <GGG:CardUnitElement/>
+                <GGG:CardUnitElement/>
+            </WrapPanel>
+            <TextBlock Text="/////" Panel.ZIndex="30000" Name="TextForCardTag" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="32"/>
             <WrapPanel  VerticalAlignment="Top" Orientation="Horizontal" HorizontalAlignment="Center"  x:Name="StackPanelGame" Grid.Row="0" />
 
             <Slider Cursor="{DynamicResource PushCursor}" x:Name="MusicVolumeSlider" HorizontalAlignment="Left" Height="50" 

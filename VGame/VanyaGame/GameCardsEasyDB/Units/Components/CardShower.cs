@@ -40,12 +40,13 @@ namespace VanyaGame.GameCardsEasyDB.Units.Components
         {
             TimeSpan t = TimeSpan.FromSeconds(0.5);
 
-            Container.GetComponent<HiderShower>().Show(1, t, new Thickness(0), TimeSpan.FromSeconds(0.3), 20000);
+            Container.GetComponent<HiderShower>().Show(1, t, new Thickness(0.1), TimeSpan.FromSeconds(0.3), 30000);
+
             ToolsTimer.Delay(() => {
                 complete();
             }, t);
-            Container.GetComponent<HaveBody>().Body.HorizontalAlignment = HorizontalAlignment.Center;
-            Container.GetComponent<HaveBody>().Body.VerticalAlignment = VerticalAlignment.Center;
+            //Container.GetComponent<HaveBody>().Body.HorizontalAlignment = HorizontalAlignment.Center;
+            //Container.GetComponent<HaveBody>().Body.VerticalAlignment = VerticalAlignment.Center;
 
         }
 
@@ -56,10 +57,12 @@ namespace VanyaGame.GameCardsEasyDB.Units.Components
 
         public void Hide(VoidDelegate complete)
         {
+            
 
             TimeSpan t = TimeSpan.FromSeconds(0.5);
             HiderShower H = Container.GetComponent<HiderShower>();
-            H.Show(0, t, new Thickness(0), t);
+            H.Hide();
+//            H.Show(0, t, new Thickness(0), t);
             ToolsTimer.Delay(() => 
             {
                 Complete();

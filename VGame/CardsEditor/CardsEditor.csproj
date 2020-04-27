@@ -70,6 +70,7 @@
     <Compile Include="Model\Card.cs" />
     <Compile Include="Model\Tag.cs" />
     <Compile Include="ViewModel\CardVM.cs" />
+    <Compile Include="ViewModel\TagEditorVM.cs" />
     <Compile Include="ViewModel\TagVM.cs" />
     <Compile Include="ViewModel\VM.cs" />
     <Compile Include="View\CardItemListView.xaml.cs">
@@ -86,6 +87,9 @@
     </Compile>
     <Compile Include="View\PropertyViewer.xaml.cs">
       <DependentUpon>PropertyViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TagEditorView.xaml.cs">
+      <DependentUpon>TagEditorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TagItemListView.xaml.cs">
       <DependentUpon>TagItemListView.xaml</DependentUpon>
@@ -119,6 +123,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PropertyViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TagEditorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

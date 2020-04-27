@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Speech.Synthesis;
 using System.Windows.Controls;
@@ -20,6 +21,7 @@ namespace VanyaGame.GameCardsEasyDB.Struct
         private CardsEasyDBLevel numberDBLevel;
         private DBModel.Scene DBSceneRecord;
 
+        public string tag;
 
 
         public CardsEasyDBScene(Level _Level, DBModel.Scene scene, string name) : base(_Level, name)
@@ -49,26 +51,40 @@ namespace VanyaGame.GameCardsEasyDB.Struct
 
         private void LoadContent()
         {
-            //Выбираем случайным образом текущий тег
-            var tags = Game.DBTools.Tags;
-            int rand = Game.RandomGenerator.Next(0, tags.Count-1);
-            var tag = tags[rand];
+            IEnumerable<DB.DBCardsRepositoryModel.Card> cards;
+            do
+            {
+                //Выбираем случайным образом текущий тег
+                var tags = Game.DBTools.Tags;
+                int rand = Game.RandomGenerator.Next(0, tags.Count - 1);
+                var tag = tags[rand];
+                this.tag = tag.Name;
+                cards = from c in Game.DBTools.Cards where c.Tags.Contains(tag) select c;
+            } while (cards.Count() < 3);
 
-            var cards = from c in Game.DBTools.Cards where c.Tags.Contains(tag) select c;
+
             foreach (var card in cards)
             {
                 CardUnit c = new CardUnit(this, card);
                 UnitsCol.AddUnit(c);
             }
+           
         }
 
         private void Start()
         {
+            Game.Owner.WrapPanelMain.Children.Clear();
+
+            foreach (var u in UnitsCol.GetAllUnits())
+            {
+                HaveBox HB = new HaveBox("HaveBox", Game.Owner, Game.Owner.WrapPanelMain, u);
+            }
+            UnitsCol.Shuffle();
             CardUnit N = UnitsCol.GetFirstUnit();
 
             foreach (var u in UnitsCol.GetAllUnits())
                 u.MouseClicked += U_MouseClicked;
-            
+            Game.Owner.TextForCardTag.Text = this.tag;
 
             NextNumber();
             SceneStarted(this, Level);
@@ -77,15 +93,18 @@ namespace VanyaGame.GameCardsEasyDB.Struct
 
         private void UserDoSomething(MouseEventArgs mouse, MouseButtonEventArgs mousebutton, KeyEventArgs key)
         {
-           
+
         }
-        
+
 
         private void NextNumber()
         {
+            Panel.SetZIndex(Game.Owner.WrapPanelMain, 30000);
+
             if (UnitsCol.GetNewUnits().Count > 0)
             {
 
+               
 
                 foreach (var u in UnitsCol.GetAllUnits())
                 {
@@ -95,9 +114,9 @@ namespace VanyaGame.GameCardsEasyDB.Struct
                     Panel.SetZIndex(u.GetComponent<HaveBody>().Body, 33000);
                 }
                 CurUnit = UnitsCol.GetNewUnits().First();
-                Panel.SetZIndex(CurUnit.GetComponent<HaveBox>().InnerBox, 30000);
 
                 Speak("Ваня! Покажи " + CurUnit.Card.SoundedText);// + ". Ваня! Где " + CurUnit.Card.Title + "?");
+                Game.Owner.TextForCardTag.Text = this.tag + "  " + CurUnit.Card.Title;
             }
             else
             {
@@ -127,7 +146,7 @@ namespace VanyaGame.GameCardsEasyDB.Struct
 
             foreach (var u in UnitsCol.GetAllUnits())
             {
-                Panel.SetZIndex(u.GetComponent<HaveBody>().Body, 0);
+                Panel.SetZIndex(u.GetComponent<HaveBody>().Body, 1110);
                 u.GetComponent<CardShower>().Hide(() => { });
             }
 
@@ -167,8 +186,8 @@ namespace VanyaGame.GameCardsEasyDB.Struct
 
             Game.UserActivity.UserDoSomethingEvent -= UserDoSomething;
 
-                Game.Music.Pause();
-                Game.Owner.StackPanelGame.Children.Clear();
+            Game.Music.Pause();
+            Game.Owner.WrapPanelMain.Children.Clear();
 
             ((CardsEasyDBLevel)Level).NextScene();
 

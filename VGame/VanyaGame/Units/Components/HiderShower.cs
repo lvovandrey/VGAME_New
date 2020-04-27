@@ -74,6 +74,7 @@ namespace VanyaGame.Units.Components
             FrameworkElement body = Container.GetComponent<HaveBody>().Body;
             Panel.SetZIndex(body, ZIndex);
         }
+
         public void Hide()
         {
             Show(0, TimeSpan.FromSeconds(0), Container.GetComponent<HaveBody>().Body.Margin, TimeSpan.FromSeconds(0));

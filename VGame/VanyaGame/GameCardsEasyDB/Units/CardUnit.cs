@@ -26,7 +26,7 @@ namespace VanyaGame.GameCardsEasyDB.Units
             Card = card;
 
             HaveBody B;
-            HaveBox HB;
+
             CheckedSymbol ChS;
             DragAndDrop DaD;
             Moveable M;
@@ -41,19 +41,19 @@ namespace VanyaGame.GameCardsEasyDB.Units
             if (System.IO.File.Exists(card.ImageAddress))
             {
                 ((CardUnitElement)B.Body).Img.Source = new BitmapImage(new Uri(card.ImageAddress));
-                //((CardUnitElement)B.Body).Img.Width = 150;
-                ((CardUnitElement)B.Body).Margin = new Thickness(50);
+                ((CardUnitElement)B.Body).Img.Width = 100;
+
             }
             else
             {
                 MessageBox.Show("Файл изображения не найден:  " + card.ImageAddress);
             }
 
-            HB = new HaveBox("HaveBox", Game.Owner, Game.Owner.WrapPanelMain, this);
-            M = new Moveable("Moveable", this);
+           
+         //   M = new Moveable("Moveable", this);
 
 
-            DaD = new DragAndDrop("DragAndDrop", this);
+         //   DaD = new DragAndDrop("DragAndDrop", this);
             ShowComp = new HiderShower("HiderShower", this);
             cardShower = new CardShower("CardShower", this);
             InGS = new OLDInGameStruct("InGameStruct", this, Scene);
