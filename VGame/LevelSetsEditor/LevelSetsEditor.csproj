@@ -181,6 +181,7 @@
     <Compile Include="ViewModel\INPCBase.cs" />
     <Compile Include="ViewModel\LevelVM.cs" />
     <Compile Include="ViewModel\ListScenesViewModel.cs" />
+    <Compile Include="ViewModel\TagVM.cs" />
     <Compile Include="ViewModel\TimeLineVM.cs" />
     <Compile Include="ViewModel\VM.cs" />
     <Compile Include="ViewModel\PreviewVM.cs" />

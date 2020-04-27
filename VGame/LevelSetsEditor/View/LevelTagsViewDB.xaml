@@ -7,7 +7,6 @@
             mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="400" Background="White">
     <Grid >
-        <!--DataContext="{Binding SelectedLevelSet, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"-->
         <StackPanel>
             <StackPanel DataContext="{Binding  SelectedLevelVM, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                 <TextBox   Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="35" FontSize="22" HorizontalAlignment="Center"/>
@@ -30,10 +29,10 @@
 
             <GroupBox Header="Теги">
                 <StackPanel>
-                    <local:PropertyViewer  DataContext="{Binding  SelectedLevelVM.Tag, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Текущий тег" Margin="0,0,0,20"/>
+                    <local:PropertyViewer  DataContext="{Binding  SelectedLevelVM.Tag}" Tag="Текущий тег" Margin="0,0,0,20"/>
                     <ListBox ItemsSource="{Binding Path=TagVMs, UpdateSourceTrigger=PropertyChanged}"
                              SelectedItem="{Binding Path=SelectedTagVM, UpdateSourceTrigger=PropertyChanged}"
-                 ScrollViewer.VerticalScrollBarVisibility="Visible" MinHeight="200" >
+                 ScrollViewer.VerticalScrollBarVisibility="Visible" MinHeight="200" MaxHeight="300"  >
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -42,10 +41,9 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <Button Content="Закрепить выбранный тег" Command="{Binding PreviewVM.OpenPreviewFileCommand}" Margin="80,5,80,20"/>
-
-
+                    <Button Content="Закрепить выбранный тег" Command="{Binding AttachSelectedTagToSelectedLevelCommand}" Margin="80,5,80,20"/>
                 </StackPanel>
+                
             </GroupBox>
             <!--<local:ListScenesView></local:ListScenesView>-->
 

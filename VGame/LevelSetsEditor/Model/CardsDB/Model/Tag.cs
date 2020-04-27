@@ -1,4 +1,5 @@
-﻿using CardsEditor.Abstract;
+﻿
+using LevelSetsEditor.ViewModel;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
 

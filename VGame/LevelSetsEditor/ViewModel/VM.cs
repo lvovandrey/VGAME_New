@@ -55,6 +55,29 @@ namespace LevelSetsEditor.ViewModel
 
         }
 
+        private ObservableCollection<TagVM> _tagvms { get; set; }
+        public ObservableCollection<TagVM> TagVMs
+        {
+            get
+            {
+                _tagvms = new ObservableCollection<TagVM>(from t in _tags select new TagVM(t));
+                return _tagvms;
+            }
+        }
+
+        private TagVM _SelectedTagVM;
+        public TagVM SelectedTagVM
+        {
+            get
+            { return _SelectedTagVM; }
+            set
+            {
+                _SelectedTagVM = value;
+                OnPropertyChanged("SelectedTagVM");
+            }
+        }
+
+
 
 
         public Context db;
@@ -195,8 +218,17 @@ namespace LevelSetsEditor.ViewModel
                           MessageBox.Show("Ошибка загрузки базы данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                           return;
                       }
+
+                      res = CardsEditor.DB.DBTools.LoadDB(this, _cards, _tags, contextCards);
+                      if (!res)
+                      {
+                          MessageBox.Show("Ошибка загрузки базы данных карточек", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                          return;
+                      }
                       mainWindow.DataContext = this;
                       OnPropertyChanged("LevelVMs");
+                      OnPropertyChanged("CardVMs");
+                      OnPropertyChanged("TagVMs");
                   }));
             }
         }
@@ -273,7 +305,21 @@ namespace LevelSetsEditor.ViewModel
             }
         }
 
-   
+
+
+        private RelayCommand attachSelectedTagToSelectedLevelCommand;
+        public RelayCommand AttachSelectedTagToSelectedLevelCommand
+        {
+            get
+            {
+                return attachSelectedTagToSelectedLevelCommand ?? (attachSelectedTagToSelectedLevelCommand = new RelayCommand(obj =>
+                {
+                    SelectedLevelVM.Tag = SelectedTagVM.Name;
+                }));
+            }
+        }
+
+
 
         #region mvvm
         public event PropertyChangedEventHandler PropertyChanged;
