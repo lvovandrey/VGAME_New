@@ -1,4 +1,5 @@
-﻿using LevelSetsEditor.DB;
+﻿using CardsEditor.Model;
+using LevelSetsEditor.DB;
 using LevelSetsEditor.Model;
 using LevelSetsEditor.Tools;
 using System;
@@ -25,6 +26,9 @@ namespace LevelSetsEditor.ViewModel
         private ObservableCollection<LevelVM> _levelsvm { get; set; }
         private VideoPlayerVM _videoPlayerVM;
         private TimeLineVM _timeLineVM;
+        ObservableCollection<Card> _cards = new ObservableCollection<Card>();
+        ObservableCollection<Tag> _tags = new ObservableCollection<Tag>();
+        private ContextCards contextCards;
 
         public ObservableCollection<LevelVM> LevelVMs
         {
@@ -204,6 +208,15 @@ namespace LevelSetsEditor.ViewModel
             context = Context;
             OnPropertyChanged("txt");
         }
+
+        //позорный костыль для загрузки БД - так и не разобрался почему коллекция после выхода из статического метода не изменяется. а внутри меняется вроде.
+        public void initCards(ObservableCollection<Card> cards, ObservableCollection<Tag> tags, ContextCards ContextCards)
+        {
+            _cards = cards;
+            _tags = tags;
+            contextCards = ContextCards;
+        }
+
 
         public string txt { get {return "sdfsdfsdf"; } set {} }
 

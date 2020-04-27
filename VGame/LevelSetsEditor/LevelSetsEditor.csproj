@@ -169,11 +169,16 @@
     </ApplicationDefinition>
     <Compile Include="DB\Context.cs" />
     <Compile Include="DB\DBTools.cs" />
+    <Compile Include="Model\CardsDB\DB\Context.cs" />
+    <Compile Include="Model\CardsDB\DB\DBTools.cs" />
+    <Compile Include="Model\CardsDB\Model\Card.cs" />
+    <Compile Include="Model\CardsDB\Model\Tag.cs" />
     <Compile Include="Model\WebBrowserModel.cs" />
     <Compile Include="Tools\IInfoUI.cs" />
     <Compile Include="Tools\PictHelper.cs" />
     <Compile Include="Tools\Speaker.cs" />
     <Compile Include="Tools\ToolsTimer.cs" />
+    <Compile Include="ViewModel\INPCBase.cs" />
     <Compile Include="ViewModel\LevelVM.cs" />
     <Compile Include="ViewModel\ListScenesViewModel.cs" />
     <Compile Include="ViewModel\TimeLineVM.cs" />
@@ -192,6 +197,9 @@
     </Compile>
     <Compile Include="View\LevelsDBViews\ListLevelsViewDB.xaml.cs">
       <DependentUpon>ListLevelsViewDB.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LevelTagsViewDB.xaml.cs">
+      <DependentUpon>LevelTagsViewDB.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LevelViewDB.xaml.cs">
       <DependentUpon>LevelViewDB.xaml</DependentUpon>
@@ -264,6 +272,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\LevelsDBViews\ListLevelsViewDB.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LevelTagsViewDB.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -411,6 +423,7 @@
   <ItemGroup>
     <Resource Include="icons\youtube_logo.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -231,6 +231,21 @@
                     </Grid>
                 </DockPanel>
             </TabItem>
+
+            <TabItem Name="TabItemLevelsTags" Header="Уровни c тегами">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="71*"/>
+                        <ColumnDefinition Width="168*"/>
+                        <ColumnDefinition Width="352*"/>
+                        <ColumnDefinition Width="591*"/>
+                    </Grid.ColumnDefinitions>
+                    <lst:ListLevelsViewDB Grid.ColumnSpan="3" />
+
+
+                    <propview:LevelTagsViewDB Grid.Column="3" Loaded="LevelViewDB_Loaded"/>
+                </Grid>
+            </TabItem>
         </TabControl>
 
     </Grid>
