@@ -40,7 +40,9 @@ namespace VanyaGame.Struct
         public string Name { get; set; }
         public string Description { get; set; }
         public string PreviewType { get; set; }
+        public string PreviewURL { get; set; }
         public string BackgroundType { get; set; }
         public string BaseVideoFilename { get; set; }
+        
     }
 }

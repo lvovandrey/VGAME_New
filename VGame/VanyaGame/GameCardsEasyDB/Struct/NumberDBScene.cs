@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Speech.Synthesis;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using VanyaGame.GameCardsEasyDB.Units;
@@ -52,15 +53,39 @@ namespace VanyaGame.GameCardsEasyDB.Struct
         private void LoadContent()
         {
             IEnumerable<DB.DBCardsRepositoryModel.Card> cards;
-            do
+            string LevelTag = ((CardsEasyDBLevel)this.Level).Tag;
+            if (LevelTag == null || LevelTag == "")
             {
-                //Выбираем случайным образом текущий тег
-                var tags = Game.DBTools.Tags;
-                int rand = Game.RandomGenerator.Next(0, tags.Count - 1);
-                var tag = tags[rand];
-                this.tag = tag.Name;
-                cards = from c in Game.DBTools.Cards where c.Tags.Contains(tag) select c;
-            } while (cards.Count() < 2) ;
+                MessageBox.Show("Тег уровня - пустой!");
+                throw new Exception("Тег уровня - пустой!");
+            }
+
+            var tags = Game.DBTools.Tags;
+            DB.DBCardsRepositoryModel.Tag TAG = new DB.DBCardsRepositoryModel.Tag();
+            foreach (var tagDB in Game.DBTools.Tags)
+            {
+                if (tagDB.Name == LevelTag)
+                {
+                    this.tag = tagDB.Name;
+                    TAG = tagDB;
+                    break;
+                }
+            }
+            if (tag == null || tag == "")
+            {
+                MessageBox.Show("Тег уровня не найден в БД!");
+                throw new Exception("Тег уровня не найден в БД!");
+            }
+            cards = from c in Game.DBTools.Cards where c.Tags.Contains(TAG) select c;
+            //do
+            //{
+            //    //Выбираем случайным образом текущий тег
+            //    var tags = Game.DBTools.Tags;
+            //    int rand = Game.RandomGenerator.Next(0, tags.Count - 1);
+            //    var tag = tags[rand];
+            //    this.tag = tag.Name;
+            //    cards = from c in Game.DBTools.Cards where c.Tags.Contains(tag) select c;
+            //} while (cards.Count() < 2) ;
 
 
             foreach (var card in cards)
@@ -68,7 +93,7 @@ namespace VanyaGame.GameCardsEasyDB.Struct
                 CardUnit c = new CardUnit(this, card);
                 UnitsCol.AddUnit(c);
             }
-           
+            UnitsCol.Shuffle();
         }
 
         private void Start()

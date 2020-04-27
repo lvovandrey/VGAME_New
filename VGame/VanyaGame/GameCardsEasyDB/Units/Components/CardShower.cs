@@ -40,7 +40,7 @@ namespace VanyaGame.GameCardsEasyDB.Units.Components
         {
             TimeSpan t = TimeSpan.FromSeconds(0.5);
 
-            Container.GetComponent<HiderShower>().Show(1, t, new Thickness(0.1), TimeSpan.FromSeconds(0.3), 30000);
+            Container.GetComponent<HiderShower>().Show(1, t, new Thickness(0), TimeSpan.FromSeconds(0.3), 30000);
 
             ToolsTimer.Delay(() => {
                 complete();
@@ -61,8 +61,8 @@ namespace VanyaGame.GameCardsEasyDB.Units.Components
 
             TimeSpan t = TimeSpan.FromSeconds(0.5);
             HiderShower H = Container.GetComponent<HiderShower>();
-            H.Hide();
-//            H.Show(0, t, new Thickness(0), t);
+            //H.Hide();
+            H.Show(0, t, new Thickness(0), t);
             ToolsTimer.Delay(() => 
             {
                 Complete();

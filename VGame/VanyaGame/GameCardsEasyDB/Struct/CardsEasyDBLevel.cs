@@ -90,6 +90,8 @@ namespace VanyaGame.GameCardsEasyDB.Struct
             Level.Sets.Name = Level.DbLevelRecord.Name;
             Level.Sets.PreviewType = Level.DbLevelRecord.VideoInfo.Preview.Type.ToString();
             Level.Sets.BaseVideoFilename = Level.DbLevelRecord.VideoInfo.Address;
+            Level.Sets.PreviewURL= Level.DbLevelRecord.VideoInfo.Preview.SourceDb;
+
 
 
             foreach (var Scene in Level.DbLevelRecord.Scenes)
@@ -111,7 +113,7 @@ namespace VanyaGame.GameCardsEasyDB.Struct
         private void LoadContent()
         {
             LoadBackground();
-            LoadPreview();            
+          //  LoadPreview();            
         }
 
         private void Start()
@@ -180,6 +182,8 @@ namespace VanyaGame.GameCardsEasyDB.Struct
 
         public int SceneNomer { get; private set; }
        
+        public string Tag { get { return DbLevelRecord.Tag; } }
+
         public static object DBMainTools { get; private set; }
 
         /// <summary>

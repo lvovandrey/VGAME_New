@@ -298,15 +298,18 @@ namespace VanyaGame
                     Level.GetComponent<Loader>().LoadSets();
                     string filename = Game.Sets.MainDir + @"\default.jpg";
                     if (Level.Sets.PreviewType == "local")
-                        filename = Game.Sets.MainDir + Level.Sets.Directory + Level.Sets.InterfaceDir + @"\preview.jpg";
-
+                    {
+                        //                        filename = Game.Sets.MainDir + Level.Sets.Directory + Level.Sets.InterfaceDir + @"\preview.jpg";
+                        if (Sets.gameType == GameType.CardsEasy)
+                            filename = ((CardsEasyDBLevel)Level).Sets.PreviewURL; 
+                    }
                     if (Level.Sets.PreviewType == "youtube")
                     {
                         try { filename = YouTubeUrlSupplier.YoutubeGet.GetImage(Level.Sets.BaseVideoFilename); }
                         catch { filename = Game.Sets.MainDir + @"\default.jpg"; Level.Sets.PreviewType = "local"; }
                     }
 
-                    PrevMenuItem NewItem = new PrevMenuNS.PrevMenuItem(filename, Level, Level.Sets.PreviewType);
+                    PrevMenuItem NewItem = new PrevMenuNS.PrevMenuItem(filename, Level, "youtube");
                     Owner.PreviewMenu.AddItem(NewItem, ItemClick);
                 }
             }, TimeSpan.FromSeconds(1.5));
