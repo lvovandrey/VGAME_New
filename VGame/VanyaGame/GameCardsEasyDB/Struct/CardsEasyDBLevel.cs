@@ -138,9 +138,9 @@ namespace VanyaGame.GameCardsEasyDB.Struct
         /// Папку в которой искать файл определяет самостоятельно по объектам Game.Sets и Level.Sets 
         /// </summary>
         /// <param name="fileshortname">Имя файла фона. По умолч."back.jpg"</param>
-        public void LoadBackground(string fileshortname = @"back.jpg")
+        public void LoadBackground(string fileshortname = @"backBegin.jpg")
         {
-            string BackGrndFilepath = Game.Sets.MainDir +  Sets.InterfaceDir + @"\" + fileshortname;
+            string BackGrndFilepath = Path.Combine(Game.Sets.InterfaceBackgroundDir,fileshortname);
             try
             {
                 Game.LoadBackGround(BackGrndFilepath);

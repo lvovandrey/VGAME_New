@@ -254,13 +254,13 @@ namespace VanyaGame
         }
         public static void GameOver() 
         {
-            LoadBackGround(Sets.InterfaceDirCurVersion + @"\backgrounds\backEnd.jpg");
+            LoadBackGround(Sets.InterfaceBackgroundDir + @"\backEnd.jpg");
 
             //   TDrawEffects.BlurHide(Owner, 5, 10, () => { Owner.Close(); });
         }
         public static void PreviewStart()
         {
-            LoadBackGround(Sets.InterfaceDirCurVersion + @"\backgrounds\backBegin.jpg");
+            LoadBackGround(Sets.InterfaceBackgroundDir + @"\backBegin.jpg");
 
             Owner.StartButton.Visibility = Visibility.Visible; Owner.StartButton.Opacity = 1;
             //            TDrawEffects.BlurShow(Owner.StartButton, 0.5);
@@ -315,7 +315,7 @@ namespace VanyaGame
 
         public static void PrevMenuShow()
         {
-            Game.LoadBackGround(Game.Sets.InterfaceDirCurVersion + @"\backgrounds\sky.jpg");
+            Game.LoadBackGround(Game.Sets.InterfaceBackgroundDir + @"\backMenu.jpg");
             Game.Owner.PreviewMenu.Visibility = Visibility.Visible;
         }
 
@@ -340,16 +340,22 @@ namespace VanyaGame
         public string VideoPlayer;
         public string InterfaceDir;
         public string InterfaceDirCurVersion;
+        public string InterfaceBackgroundDir;
+        public string InterfaceControlsDir;
+        public string InterfaceUnitsDir;
         public string DefaultVideo = @"\default.wmv";
 
         public int LevelsCount; //Количество уровней
-        public TGameSets(string _MainDir = @"\VanjaGame"):base()
+        public TGameSets():base()
         {
-            // MainDir = Directory.GetCurrentDirectory() + _MainDir;
-            MainDir = XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "maindir");  //(@"c:\1.VANYA GAME\LEVELS" + @"\GameSets.xml", "maindir");
+            MainDir = XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "maindir");  
             VideoPlayer = XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "videoplayer");
-            InterfaceDir = MainDir + @"\interface";
-            InterfaceDirCurVersion = InterfaceDir + @"\Numbers";
+            InterfaceDir = XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "InterfaceDir"); 
+            InterfaceDirCurVersion = XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "InterfaceDirCurVersion"); 
+            InterfaceBackgroundDir= XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "InterfaceBackgroundDir");
+            InterfaceControlsDir = XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "InterfaceControlsDir");
+            InterfaceUnitsDir = XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "InterfaceUnitsDir");
+            DefaultVideo = XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "DefaultVideo");
             LevelsCount = 0;
             DebugMode = true;
         }

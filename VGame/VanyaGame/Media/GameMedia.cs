@@ -91,7 +91,7 @@ namespace VanyaGame.Media
 
         public void Play(string MediaName, TimeSpan TimeBegin, TimeSpan TimeEnd, VideoType videoType)
         {
-            string S = @Game.Sets.MainDir + @Game.Sets.DefaultVideo; ;
+            string S = @Game.Sets.MainDir + @Game.Sets.DefaultVideo; 
             switch (videoType)
             {
                 case VideoType.local:   S = @Game.Sets.MainDir + @Game.Level.Sets.Directory + @Game.Level.Sets.VideoDir + @"\" + @MediaName; break;

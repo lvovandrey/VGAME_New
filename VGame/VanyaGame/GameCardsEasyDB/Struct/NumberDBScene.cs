@@ -60,7 +60,7 @@ namespace VanyaGame.GameCardsEasyDB.Struct
                 var tag = tags[rand];
                 this.tag = tag.Name;
                 cards = from c in Game.DBTools.Cards where c.Tags.Contains(tag) select c;
-            } while (cards.Count() < 3);
+            } while (cards.Count() < 2) ;
 
 
             foreach (var card in cards)
