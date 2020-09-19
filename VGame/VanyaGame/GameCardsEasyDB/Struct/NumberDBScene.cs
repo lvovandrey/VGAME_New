@@ -153,7 +153,7 @@ namespace VanyaGame.GameCardsEasyDB.Struct
                     List<CardUnit> newUnitsShuffled = new ListShuffle<CardUnit>().Shuffle(UnitsCol.GetNewUnits());
                     CurUnit = newUnitsShuffled[0]; //UnitsCol.GetNewUnits().First();
                 }
-                Speak("Ваня! Покажи " + CurUnit.Card.SoundedText);// + ". Ваня! Где " + CurUnit.Card.Title + "?");
+                Speak("Ваня! Покажи где " + CurUnit.Card.SoundedText);// + ". Ваня! Где " + CurUnit.Card.Title + "?");
                 Game.Owner.TextForCardTag.Text = "Тема: " + this.tag + ".  Надо показать:" + CurUnit.Card.Title;
             }
             else
@@ -175,11 +175,14 @@ namespace VanyaGame.GameCardsEasyDB.Struct
             if (IsHitSuccess)
             {
                 CurUnit.GetComponent<UState>().newOld = NewOld.Old;
+                Speak("Hello");
                 Speak("Молодец, Ваня!");// Умница! Ты показал " + CurUnit.Card.SoundedText);
                 CurUnit = null;
             }
             else
             {
+                Speak("Hello");
+
                 Speak("Не правильно! Попробуй ещё раз.");
             }
 

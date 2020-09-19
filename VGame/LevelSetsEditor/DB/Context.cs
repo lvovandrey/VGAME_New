@@ -12,7 +12,7 @@ namespace LevelSetsEditor.DB
     public class Context : DbContext
     {
         public Context()
-            : base("DbConnection")
+            : base("LevelSetsEditor.Properties.Settings.LEVELSDBConnectionString")
         { }
 
         public DbSet<Level> Levels { get; set; }

@@ -89,8 +89,9 @@ namespace VanyaGame.DB
                 init(_levels, context);
              
             }
-            catch
+            catch(Exception e)
             {
+                Console.WriteLine(e.Message);
                 error = true;
             }
             return !error;
@@ -117,8 +118,9 @@ namespace VanyaGame.DB
 
                 initCards(_cards, _tags, context);
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 error = true;
             }
             return !error;

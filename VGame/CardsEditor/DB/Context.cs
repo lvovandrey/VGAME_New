@@ -13,7 +13,7 @@ namespace LevelSetsEditor.DB
     public class Context : DbContext
     {
         public Context()
-            : base("DbConnection")
+            : base("CardsEditor.Properties.Settings.CardsDBInsectsConnectionString_OLD")
         { }
 
         public DbSet<Card> Cards { get; set; }

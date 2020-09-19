@@ -35,8 +35,9 @@ namespace CardsEditor.DB
 
                 vm.initCards(_cards,_tags, context);
             }
-            catch
+            catch(Exception e)
             {
+                Console.WriteLine(e.Message);
                 error = true;
             }
             return !error;

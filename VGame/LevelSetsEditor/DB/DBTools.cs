@@ -65,15 +65,16 @@ namespace LevelSetsEditor.DB
                             }
                         }
                     }
-                    l.RefreshYoutubeLink();
+                   // l.RefreshYoutubeLink();
                     _levels.Add(l);
                 }
 
                 vm.init(_levels, context);
                 infoUI.Hide();
             }
-            catch
+            catch(Exception e)
             {
+                Console.WriteLine(e.Message);
                 error = true;
                 infoUI.Clear();
                 infoUI.Hide();

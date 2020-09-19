@@ -85,7 +85,7 @@
 
             </Grid>
             <Grid Grid.Row="0" x:Name="GridMain" VerticalAlignment="Stretch" Panel.ZIndex="0" HorizontalAlignment="Stretch" />
-            <WrapPanel ItemWidth="200" ItemHeight="200" Orientation="Horizontal"  x:Name="WrapPanelMain" Grid.Row="0" MaxWidth="800" VerticalAlignment="Center" HorizontalAlignment="Center" >
+            <WrapPanel ItemWidth="240" ItemHeight="240" Orientation="Horizontal"  x:Name="WrapPanelMain" Grid.Row="0" MaxWidth="960" VerticalAlignment="Center" HorizontalAlignment="Center" >
                 <!--<GGG:CardUnitElement/>
                 <GGG:CardUnitElement/>
                 <GGG:CardUnitElement/>

@@ -20,7 +20,7 @@
             <Rectangle Stroke="#FF878787" StrokeThickness="3" Fill="#07FFFFFF" >
                 
             </Rectangle>
-            <Image Name="Img" Width="150" Height="150"  Source="pack://application:,,,/1.GameNumber/Images/4.png" Stretch="Uniform" 
+            <Image Name="Img" Width="200" Height="200"  Source="pack://application:,,,/1.GameNumber/Images/4.png" Stretch="Uniform" 
                RenderTransformOrigin="0.5,0.5"  Margin="10" MouseDown="Img_MouseDown" MouseUp="Img_MouseUp" MouseLeave="Img_MouseLeave" Panel.ZIndex="35000">
                 <Image.Triggers>
                     <EventTrigger RoutedEvent="Image.PreviewMouseDown">

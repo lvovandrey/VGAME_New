@@ -167,6 +167,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CardsDBInsectsDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CardsDBInsectsDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DB\Context.cs" />
     <Compile Include="DB\DBTools.cs" />
     <Compile Include="Model\CardsDB\DB\Context.cs" />
@@ -368,6 +373,17 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="CardsDBInsectsDataSet.xsc">
+      <DependentUpon>CardsDBInsectsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="CardsDBInsectsDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CardsDBInsectsDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="CardsDBInsectsDataSet.xss">
+      <DependentUpon>CardsDBInsectsDataSet.xsd</DependentUpon>
+    </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

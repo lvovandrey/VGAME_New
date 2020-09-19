@@ -137,6 +137,11 @@
     <Compile Include="2.GameNumberDB\Data\XMLTools.cs" />
     <Compile Include="Abstract\INPCBase.cs" />
     <Compile Include="Abstract\RelayCommand.cs" />
+    <Compile Include="CardsDBInsectsDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CardsDBInsectsDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DB\Context.cs" />
     <Compile Include="DB\DBCardsRepositoryModel\Card.cs" />
     <Compile Include="DB\DBCardsRepositoryModel\Tag.cs" />
@@ -184,6 +189,11 @@
     </Compile>
     <Compile Include="Interface\VlcWrap.xaml.cs">
       <DependentUpon>VlcWrap.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LevelSetsMYDBInsectsDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LevelSetsMYDBInsectsDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Media\Abstract\Player.cs" />
     <Compile Include="Media\GameMedia.cs" />
@@ -372,6 +382,28 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="CardsDBInsectsDataSet.xsc">
+      <DependentUpon>CardsDBInsectsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="CardsDBInsectsDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CardsDBInsectsDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="CardsDBInsectsDataSet.xss">
+      <DependentUpon>CardsDBInsectsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="LevelSetsMYDBInsectsDataSet.xsc">
+      <DependentUpon>LevelSetsMYDBInsectsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="LevelSetsMYDBInsectsDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>LevelSetsMYDBInsectsDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="LevelSetsMYDBInsectsDataSet.xss">
+      <DependentUpon>LevelSetsMYDBInsectsDataSet.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
