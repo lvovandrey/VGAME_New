@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Speech.Synthesis;
 using System.Windows;
@@ -175,14 +176,11 @@ namespace VanyaGame.GameCardsEasyDB.Struct
             if (IsHitSuccess)
             {
                 CurUnit.GetComponent<UState>().newOld = NewOld.Old;
-                Speak("Hello");
                 Speak("Молодец, Ваня!");// Умница! Ты показал " + CurUnit.Card.SoundedText);
                 CurUnit = null;
             }
             else
             {
-                Speak("Hello");
-
                 Speak("Не правильно! Попробуй ещё раз.");
             }
 
@@ -202,6 +200,11 @@ namespace VanyaGame.GameCardsEasyDB.Struct
         {
             if (text == null) return;
             SpeechSynthesizer speaker = new SpeechSynthesizer();
+
+            var voices = speaker.GetInstalledVoices(new CultureInfo("ru-RU"));
+
+            if (voices.Count == 0) MessageBox.Show("В системе не установлены голоса для синтеза речи на русском языке. Установите пожалуйста, а то ничего не будет слышно.");
+            else speaker.SelectVoice(voices[0].VoiceInfo.Name);
             speaker.Rate = 1;
             speaker.Volume = 100;
             speaker.SpeakAsync(text);
