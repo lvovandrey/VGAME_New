@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using VanyaGame.Abstract;
 using VanyaGame.Units;
 using VanyaGame.Units.Components;
-
+using System.Collections;
 
 namespace VanyaGame.Struct.Components
 {
@@ -141,6 +141,33 @@ namespace VanyaGame.Struct.Components
         {
             return Units.First();
         }
+
+        public void Shuffle()
+        {
+
+           
+
+            for (int x = 0; x < 1000; x++)
+            {
+
+                int i = Game.RandomGenerator.Next(0,Units.Count);
+                int j = Game.RandomGenerator.Next(0,Units.Count);
+                // обменять значения data[j] и data[i]
+                var temp = Units[j];
+                Units[j] = Units[i];
+                Units[i] = temp;
+            }
+            //for (int i = Units.Count - 1; i >= 0; i--)
+            //{
+            //    int j = random.Next(i + 1);
+            //    // обменять значения data[j] и data[i]
+            //    var temp = Units[j];
+            //    Units[j] = Units[i];
+            //    Units[i] = temp;
+            //}
+        }
+
+
         #endregion
 
     }

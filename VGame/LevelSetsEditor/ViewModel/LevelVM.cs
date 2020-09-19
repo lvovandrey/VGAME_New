@@ -55,6 +55,12 @@ namespace LevelSetsEditor.ViewModel
             set { _Level.Name = value; OnPropertyChanged("Name"); }
         }
 
+        public string Tag
+        {
+            get { return _Level.Tag; }
+            set { _Level.Tag = value; OnPropertyChanged("Tag"); }
+        }
+
         /// <summary>
         /// ВОТ !!! Вот как нада! 
         /// </summary>

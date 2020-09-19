@@ -90,6 +90,8 @@ namespace VanyaGame.GameCardsEasyDB.Struct
             Level.Sets.Name = Level.DbLevelRecord.Name;
             Level.Sets.PreviewType = Level.DbLevelRecord.VideoInfo.Preview.Type.ToString();
             Level.Sets.BaseVideoFilename = Level.DbLevelRecord.VideoInfo.Address;
+            Level.Sets.PreviewURL= Level.DbLevelRecord.VideoInfo.Preview.SourceDb;
+
 
 
             foreach (var Scene in Level.DbLevelRecord.Scenes)
@@ -108,39 +110,10 @@ namespace VanyaGame.GameCardsEasyDB.Struct
         }
 
 
-
-
-
-        /// <summary>
-        /// Создает в объекте уровня (TGameLevel) объекты субуровней из текущей директории (указана в Sets.Directory) и
-        /// создает из них коллекцию Scenes.
-        /// Название папок уровней должно начинаться со строки "Scene"
-        /// </summary>
-        private void CreateEmptyScenes()
-        {
-            //MessageBox.Show("Остановился тут - NumberDBLevel.CreateEmptyScenes!!!!!!");
-
-            //Scenes.Clear();
-            ////string filenameXML = Game.Sets.MainDir + this.Sets.Directory + @"\LevelSets.xml";
-
-            ////  string dir = Game.Sets.MainDir + this.Sets.Directory + @"\";
-            ////  Scene_dirs = Directory.GetDirectories(dir, "Scene*");
-
-            //foreach (var scene in DbLevelRecord.Scenes)
-            //{
-            //    //string Scene_dir_short = @"\" + Scene_dir.Replace(dir, "");
-
-            //    NumberDBScene NewScene = new NumberDBScene(this, scene, scene.Name);
-            //    Scenes.Add(NewScene.Name, NewScene);
-            //}
-
-
-        }
-
         private void LoadContent()
         {
             LoadBackground();
-            LoadPreview();            
+          //  LoadPreview();            
         }
 
         private void Start()
@@ -151,7 +124,6 @@ namespace VanyaGame.GameCardsEasyDB.Struct
             Game.Music.Pause();
 
             CurScene.GetComponent<Starter>().Start();
-
         }
 
 
@@ -161,7 +133,6 @@ namespace VanyaGame.GameCardsEasyDB.Struct
         {
             Game.Sound.LoadMediaFilesFromDir(Game.Sets.MainDir +  Sets.SoundDir + @"\");
             Game.Music.LoadMediaFilesFromDir(Game.Sets.MainDir +  Sets.MusicDir + @"\");
-           // Game.CurVideo.LoadMediaFilesFromDir(Game.Sets.MainDir + Sets.Directory + Sets.VideoDir + @"\");
         }
 
         /// <summary>
@@ -169,9 +140,9 @@ namespace VanyaGame.GameCardsEasyDB.Struct
         /// Папку в которой искать файл определяет самостоятельно по объектам Game.Sets и Level.Sets 
         /// </summary>
         /// <param name="fileshortname">Имя файла фона. По умолч."back.jpg"</param>
-        public void LoadBackground(string fileshortname = @"back.jpg")
+        public void LoadBackground(string fileshortname = @"backBegin.jpg")
         {
-            string BackGrndFilepath = Game.Sets.MainDir +  Sets.InterfaceDir + @"\" + fileshortname;
+            string BackGrndFilepath = Path.Combine(Game.Sets.InterfaceBackgroundDir,fileshortname);
             try
             {
                 Game.LoadBackGround(BackGrndFilepath);
@@ -211,6 +182,8 @@ namespace VanyaGame.GameCardsEasyDB.Struct
 
         public int SceneNomer { get; private set; }
        
+        public string Tag { get { return DbLevelRecord.Tag; } }
+
         public static object DBMainTools { get; private set; }
 
         /// <summary>

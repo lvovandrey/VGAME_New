@@ -8,65 +8,76 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="750" Width="800" Loaded="Window_Loaded">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-            <view:ListCardsView></view:ListCardsView>
-        <StackPanel Grid.Column="1">
-            
-            <view:CardView  DataContext="{Binding SelectedCardVM}"></view:CardView>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="30"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
+        <TabControl>
+            <TabItem Header="Карточки">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <view:ListCardsView></view:ListCardsView>
+                    <StackPanel Grid.Column="1">
 
-                <StackPanel Grid.Column="0">
-                    <ListBox ItemsSource="{Binding Path=TagVMs, UpdateSourceTrigger=PropertyChanged}"
+                        <view:CardView  DataContext="{Binding SelectedCardVM}"></view:CardView>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0">
+                                <ListBox ItemsSource="{Binding Path=TagVMs, UpdateSourceTrigger=PropertyChanged}"
                              SelectedItem="{Binding Path=SelectedTagVM, UpdateSourceTrigger=PropertyChanged}"
                  ScrollViewer.VerticalScrollBarVisibility="Visible" MinHeight="100" MaxHeight="200">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="2"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="2"/>
+                                    <Button Command="{Binding AddTagCommand}" Height="25" Width="25" Margin="2 2 5 2" Content="+"/>
+                                    <Button Command="{Binding RemoveTagCommand}" Height="25" Width="25" Margin="2 2 5 2" Content="-"/>
                                 </StackPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                    <StackPanel Orientation="Horizontal">
-                        <Button Command="{Binding AddTagCommand}" Height="25" Width="25" Margin="2 2 5 2" Content="+"/>
-                        <Button Command="{Binding RemoveTagCommand}" Height="25" Width="25" Margin="2 2 5 2" Content="-"/>
-                    </StackPanel>
 
-                </StackPanel>
+                            </StackPanel>
 
-                <StackPanel Grid.Column="1" >
-                    <Button Command="{Binding AttachTagOnCardCommand}" Height="20" Width="20" Margin="2" Content="-&gt;"/>
-                    <Button Command="{Binding AttachAllTagsOnCardCommand}" Height="20" Width="20" Margin="2" Content="=&gt;"/>
-                    <Button Command="{Binding DetachTagFromCardCommand}" Height="20" Width="20" Margin="2" Content="&lt;-"/>
-                    <Button Command="{Binding DetachAllTagsFromCardCommand}" Height="20" Width="20" Margin="2" Content="&lt;="/>
-                </StackPanel>
+                            <StackPanel Grid.Column="1" >
+                                <Button Command="{Binding AttachTagOnCardCommand}" Height="20" Width="20" Margin="2" Content="-&gt;"/>
+                                <Button Command="{Binding AttachAllTagsOnCardCommand}" Height="20" Width="20" Margin="2" Content="=&gt;"/>
+                                <Button Command="{Binding DetachTagFromCardCommand}" Height="20" Width="20" Margin="2" Content="&lt;-"/>
+                                <Button Command="{Binding DetachAllTagsFromCardCommand}" Height="20" Width="20" Margin="2" Content="&lt;="/>
+                            </StackPanel>
 
-                <StackPanel Grid.Column="2">
-                    <ListBox ItemsSource="{Binding Path=SelectedCardTagVMs, UpdateSourceTrigger=PropertyChanged,
+                            <StackPanel Grid.Column="2">
+                                <ListBox ItemsSource="{Binding Path=SelectedCardTagVMs, UpdateSourceTrigger=PropertyChanged,
                  Mode=OneWay}"
                              SelectedItem="{Binding Path=SelectedOnCardTagVM, UpdateSourceTrigger=PropertyChanged}"
                  ScrollViewer.VerticalScrollBarVisibility="Visible" MinHeight="100" MaxHeight="200">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="2"/>
-                                    
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </StackPanel>
-                
-            </Grid>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="2"/>
 
-        </StackPanel>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </StackPanel>
+
+                        </Grid>
+
+                    </StackPanel>
+                </Grid>
+
+            </TabItem>
+            <TabItem Header="Теги">
+                <view:TagEditorView/>
+            </TabItem>
+
+        </TabControl>
     </Grid>
 </Window>

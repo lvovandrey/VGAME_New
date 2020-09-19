@@ -12,16 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Media.Animation;
 
-namespace VanyaGame.GameCardsEasyDB.Units
+namespace LevelSetsEditor.View
 {
     /// <summary>
-    /// Логика взаимодействия для NumberElement.xaml
+    /// Логика взаимодействия для LevelTagsViewDB.xaml
     /// </summary>
-    public partial class NumberElement : UserControl
+    public partial class LevelTagsViewDB : UserControl
     {
-        public NumberElement()
+        public LevelTagsViewDB()
         {
             InitializeComponent();
         }

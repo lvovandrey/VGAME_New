@@ -38,6 +38,11 @@ namespace VanyaGame.DB.DBLevelsRepositoryModel
 
         public ObservableCollection<Scene> Scenes { get { return _Scenes; } set { _Scenes = value; OnPropertyChanged("Scenes"); } }
 
+        [NotMapped]
+        public string _Tag { get; set; }
+        public string Tag { get { return _Tag; } set { _Tag = value; OnPropertyChanged("Tag"); } }
+
+
 
 
         public Level()

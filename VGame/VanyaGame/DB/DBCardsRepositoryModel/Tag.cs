@@ -22,5 +22,9 @@ namespace VanyaGame.DB.DBCardsRepositoryModel
         public string Name { get { return _Name; } set { _Name = value; OnPropertyChanged("Name"); } }
         public string SoundedText { get { return _SoundedText; } set { _SoundedText = value; OnPropertyChanged("SoundedText"); } }
 
+        [NotMapped]
+        private string _TagGroup { get; set; }
+        public string TagGroup { get { return _TagGroup; } set { _TagGroup = value; OnPropertyChanged("TagGroup"); } }
+
     }
 }

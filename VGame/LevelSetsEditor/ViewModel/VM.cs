@@ -1,4 +1,5 @@
-﻿using LevelSetsEditor.DB;
+﻿using CardsEditor.Model;
+using LevelSetsEditor.DB;
 using LevelSetsEditor.Model;
 using LevelSetsEditor.Tools;
 using System;
@@ -25,6 +26,9 @@ namespace LevelSetsEditor.ViewModel
         private ObservableCollection<LevelVM> _levelsvm { get; set; }
         private VideoPlayerVM _videoPlayerVM;
         private TimeLineVM _timeLineVM;
+        ObservableCollection<Card> _cards = new ObservableCollection<Card>();
+        ObservableCollection<Tag> _tags = new ObservableCollection<Tag>();
+        private ContextCards contextCards;
 
         public ObservableCollection<LevelVM> LevelVMs
         {
@@ -50,6 +54,29 @@ namespace LevelSetsEditor.ViewModel
             }
 
         }
+
+        private ObservableCollection<TagVM> _tagvms { get; set; }
+        public ObservableCollection<TagVM> TagVMs
+        {
+            get
+            {
+                _tagvms = new ObservableCollection<TagVM>(from t in _tags select new TagVM(t));
+                return _tagvms;
+            }
+        }
+
+        private TagVM _SelectedTagVM;
+        public TagVM SelectedTagVM
+        {
+            get
+            { return _SelectedTagVM; }
+            set
+            {
+                _SelectedTagVM = value;
+                OnPropertyChanged("SelectedTagVM");
+            }
+        }
+
 
 
 
@@ -191,8 +218,17 @@ namespace LevelSetsEditor.ViewModel
                           MessageBox.Show("Ошибка загрузки базы данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                           return;
                       }
+
+                      res = CardsEditor.DB.DBTools.LoadDB(this, _cards, _tags, contextCards);
+                      if (!res)
+                      {
+                          MessageBox.Show("Ошибка загрузки базы данных карточек", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                          return;
+                      }
                       mainWindow.DataContext = this;
                       OnPropertyChanged("LevelVMs");
+                      OnPropertyChanged("CardVMs");
+                      OnPropertyChanged("TagVMs");
                   }));
             }
         }
@@ -204,6 +240,15 @@ namespace LevelSetsEditor.ViewModel
             context = Context;
             OnPropertyChanged("txt");
         }
+
+        //позорный костыль для загрузки БД - так и не разобрался почему коллекция после выхода из статического метода не изменяется. а внутри меняется вроде.
+        public void initCards(ObservableCollection<Card> cards, ObservableCollection<Tag> tags, ContextCards ContextCards)
+        {
+            _cards = cards;
+            _tags = tags;
+            contextCards = ContextCards;
+        }
+
 
         public string txt { get {return "sdfsdfsdf"; } set {} }
 
@@ -260,7 +305,21 @@ namespace LevelSetsEditor.ViewModel
             }
         }
 
-   
+
+
+        private RelayCommand attachSelectedTagToSelectedLevelCommand;
+        public RelayCommand AttachSelectedTagToSelectedLevelCommand
+        {
+            get
+            {
+                return attachSelectedTagToSelectedLevelCommand ?? (attachSelectedTagToSelectedLevelCommand = new RelayCommand(obj =>
+                {
+                    SelectedLevelVM.Tag = SelectedTagVM.Name;
+                }));
+            }
+        }
+
+
 
         #region mvvm
         public event PropertyChangedEventHandler PropertyChanged;
