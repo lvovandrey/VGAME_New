@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="LevelSetsEditor.View.VideoPlayerMVVM.VideoPlayer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LevelSetsEditor.View.VideoPlayerMVVM"
+             xmlns:wpf="clr-namespace:Vlc.DotNet.Wpf;assembly=Vlc.DotNet.Wpf"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+            
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="500" BorderBrush="Black" Margin="2,2,2,3"
+             x:Name="ThisPlayer">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="145"/>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="35"/>
+            <ColumnDefinition />
+            <ColumnDefinition Width="80"/>
+
+
+        </Grid.ColumnDefinitions>
+        <wpf:VlcControl Name="vlc" Grid.Row="0" Grid.ColumnSpan="6"/>
+        <Slider Name="TimeSlider" HorizontalAlignment="Stretch" Grid.Row="1" Margin="3" Grid.Column="3"  
+                VerticalAlignment="Center" Maximum="1000" Value="{Binding ElementName=ThisPlayer, Path=Position, UpdateSourceTrigger=PropertyChanged}" 
+                PreviewMouseDown="TimeSlider_PreviewMouseDown" 
+                PreviewMouseUp="TimeSlider_PreviewMouseUp" />
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+            <Button Name="PlayBtn"  Margin="3" Click="PlayBtn_Click_1"  Width="30">
+                <Image Source="/LevelSetsEditor;component/icons/play_pause.png"/>
+            </Button>
+            <Button Name="RePlayBtn"  Margin="3" Click="RePlayBtn_Click_1" Width="30" >
+                <Image Source="/LevelSetsEditor;component/icons/Recurring_Appointment.png" Width="15" Height="15" />
+            </Button>
+            <Button Name="Speed2xBtn"  Margin="3" Click="Speed2xBtn_Click_1" Width="30" >
+                2x
+            </Button>
+            <Button Name="Speed05xBtn"  Margin="3" Click="Speed05xBtn_Click_1" Width="30" >
+                0.5x
+            </Button>
+        </StackPanel>
+        <!--<Button Name="SplitBtn" Grid.Row="1" Grid.Column="1" Margin="3" HorizontalAlignment="Left" Click="SplitBtn_Click" >
+            <Image Source="/LevelSetsEditor;component/icons/icon.png"/>
+        </Button>-->
+        <Slider Name="VolumeSlider" HorizontalAlignment="Stretch" Grid.Row="1" Margin="3" Grid.Column="1"  
+                VerticalAlignment="Center" Maximum="100" Value="{Binding ElementName=ThisPlayer, Path=Volume, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+
+
+
+
+
+        <Button Name="MuteBtn" Grid.Row="1" Grid.Column="2" Margin="3" Click="MuteBtn_Click"  Width="30">
+            <Image Source="/LevelSetsEditor;component/icons/mute.png"/>
+        </Button>
+        <StackPanel Grid.Row="1" Grid.Column="4" >
+            <TextBox  x:Name="TimeTextBox" 
+                            TextAlignment="Center" VerticalAlignment="Center" Height="18" 
+                            BorderBrush="{x:Null}" Text="{Binding ElementName=ThisPlayer, Path=CurTime, StringFormat=hh\\:mm\\:ss\\.ff }"/>
+            <TextBlock  x:Name="DurationTextBox" 
+                            TextAlignment="Center" VerticalAlignment="Center"  FontSize="10"
+                            Text="{Binding ElementName=ThisPlayer, Path=Duration, StringFormat=hh\\:mm\\:ss\\.ff }"/>
+        </StackPanel>
+
+
+    </Grid>
+</UserControl>

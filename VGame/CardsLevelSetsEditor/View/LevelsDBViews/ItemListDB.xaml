@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="LevelSetsEditor.View.LevelsDBViews.ItemListDB"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LevelSetsEditor.View.LevelsDBViews"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" HorizontalAlignment="Stretch">
+    <Grid Height="90"  HorizontalAlignment="Stretch">
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="140"/>
+            <ColumnDefinition Width="*"/>
+
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.ColumnSpan="3" Opacity="0.7"  HorizontalAlignment="Stretch">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <LinearGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                            <RotateTransform Angle="-40.236" CenterY="0.5" CenterX="0.5"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </LinearGradientBrush.RelativeTransform>
+                    <GradientStop Color="#FF697DA4" Offset="0"/>
+                    <GradientStop Color="#FF89ACF5" Offset="0.864"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+        </Grid>
+
+        <Image Source="{Binding VideoInfoVM.PreviewVM.Source, UpdateSourceTrigger=PropertyChanged}" Stretch="Fill" Margin="5">
+            <Image.Effect>
+                <DropShadowEffect ShadowDepth="0"/>
+            </Image.Effect>
+        </Image>
+        <Grid Grid.Column="1"  HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label Content="{Binding Name, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.ColumnSpan="2" FontSize="22">
+                <Label.Effect>
+                    <DropShadowEffect ShadowDepth="2" BlurRadius="0" Color="#FFFFF700" Opacity="0.4" />
+                </Label.Effect>
+            </Label>
+            <Label Content="{Binding VideoInfoVM.Title, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" FontSize="16"/>
+            <Label Content="{Binding VideoInfoVM.Duration, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" FontSize="16"/>
+        </Grid>
+    </Grid>
+</UserControl>

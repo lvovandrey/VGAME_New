@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScenesTimeLine", "ScenesTim
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardsEditor", "CardsEditor\CardsEditor.csproj", "{0507637C-C80D-473D-B142-5F45AFA8018C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardsLevelSetsEditor", "CardsLevelSetsEditor\CardsLevelSetsEditor.csproj", "{5A4A1B00-DB13-4E3E-8ACD-1F9F272F4B6C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,6 +93,14 @@ Global
 		{0507637C-C80D-473D-B142-5F45AFA8018C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0507637C-C80D-473D-B142-5F45AFA8018C}.Release|x64.ActiveCfg = Release|Any CPU
 		{0507637C-C80D-473D-B142-5F45AFA8018C}.Release|x64.Build.0 = Release|Any CPU
+		{5A4A1B00-DB13-4E3E-8ACD-1F9F272F4B6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A4A1B00-DB13-4E3E-8ACD-1F9F272F4B6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A4A1B00-DB13-4E3E-8ACD-1F9F272F4B6C}.Debug|x64.ActiveCfg = Debug|x64
+		{5A4A1B00-DB13-4E3E-8ACD-1F9F272F4B6C}.Debug|x64.Build.0 = Debug|x64
+		{5A4A1B00-DB13-4E3E-8ACD-1F9F272F4B6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A4A1B00-DB13-4E3E-8ACD-1F9F272F4B6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A4A1B00-DB13-4E3E-8ACD-1F9F272F4B6C}.Release|x64.ActiveCfg = Release|x64
+		{5A4A1B00-DB13-4E3E-8ACD-1F9F272F4B6C}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
