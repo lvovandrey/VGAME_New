@@ -247,6 +247,8 @@ namespace VanyaGame.GameNumberDB.Struct
         /// </summary>
         public void LoadScenes()
         {
+
+          
             foreach (KeyValuePair<string, Scene> Sc in Scenes)
             {
                 Sc.Value.GetComponent<Loader>().Load();

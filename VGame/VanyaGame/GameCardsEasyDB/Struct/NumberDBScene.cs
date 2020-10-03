@@ -166,6 +166,8 @@ namespace VanyaGame.GameCardsEasyDB.Struct
         private void U_MouseClicked()
         {
             bool IsHitSuccess = false;
+            var CurUnittmp = CurUnit;
+
             foreach (var u in UnitsCol.GetAllUnits())
             {
                 u.GetComponent<CardShower>().Show(() => { ReadyToNextUnit = true; });
@@ -175,9 +177,27 @@ namespace VanyaGame.GameCardsEasyDB.Struct
             }
             if (IsHitSuccess)
             {
+
+                Panel.SetZIndex(CurUnittmp.GetComponent<HaveBody>().Body, 1110);
+                CurUnittmp.GetComponent<CardShower>().Hide(() => { });
+
                 CurUnit.GetComponent<UState>().newOld = NewOld.Old;
-                Speak("Молодец, Ваня!");// Умница! Ты показал " + CurUnit.Card.SoundedText);
+                Speak("Молодец! Это "+ CurUnit.Card.SoundedText);// Умница! Ты показал " + CurUnit.Card.SoundedText);
+                ToolsTimer.Delay(() =>
+                {
+                    SpeakSlow( CurUnittmp.Card.SoundedText);
+                }, TimeSpan.FromSeconds(3));
+
                 CurUnit = null;
+
+                Panel.SetZIndex(Game.Owner.WrapPanelBigCards, 30001);
+                var cu = CurUnittmp.DeepCopy();
+                cu.GetComponent<HaveBody>().Body.Height = 500;
+                cu.GetComponent<HaveBody>().Body.Width = 500;
+
+                HaveBox HB = new HaveBox("HaveBox", Game.Owner, Game.Owner.WrapPanelBigCards, cu);
+                cu.GetComponent<HiderShower>().Show(1, TimeSpan.FromSeconds(1), new Thickness(100), TimeSpan.FromSeconds(1));
+
             }
             else
             {
@@ -186,14 +206,23 @@ namespace VanyaGame.GameCardsEasyDB.Struct
 
             foreach (var u in UnitsCol.GetAllUnits())
             {
-                Panel.SetZIndex(u.GetComponent<HaveBody>().Body, 1110);
-                u.GetComponent<CardShower>().Hide(() => { });
+                if (u != CurUnittmp || (!IsHitSuccess && u == CurUnittmp))
+                {
+                    Panel.SetZIndex(u.GetComponent<HaveBody>().Body, 1110);
+                    u.GetComponent<CardShower>().Hide(() => { });
+                }
             }
 
             ToolsTimer.Delay(() =>
             {
-                NextNumber();
-            }, TimeSpan.FromSeconds(3));
+                Panel.SetZIndex(CurUnittmp.GetComponent<HaveBody>().Body, 1110);
+                CurUnittmp.GetComponent<CardShower>().Hide(() => { });
+                ToolsTimer.Delay(() =>
+                {
+                    Game.Owner.WrapPanelBigCards.Children.Clear();
+                    NextNumber();
+                }, TimeSpan.FromSeconds(1));
+            }, TimeSpan.FromSeconds(4));
         }
 
         private void Speak(string text)
@@ -209,6 +238,21 @@ namespace VanyaGame.GameCardsEasyDB.Struct
             speaker.Volume = 100;
             speaker.SpeakAsync(text);
         }
+
+        private void SpeakSlow(string text)
+        {
+            if (text == null) return;
+            SpeechSynthesizer speaker = new SpeechSynthesizer();
+
+            var voices = speaker.GetInstalledVoices(new CultureInfo("ru-RU"));
+
+            if (voices.Count == 0) MessageBox.Show("В системе не установлены голоса для синтеза речи на русском языке. Установите пожалуйста, а то ничего не будет слышно.");
+            else speaker.SelectVoice(voices[0].VoiceInfo.Name);
+            speaker.Rate = -3;
+            speaker.Volume = 100;
+            speaker.SpeakAsync(text);
+        }
+
 
 
         public void SceneStarted(Scene SL, Level Level)
@@ -236,48 +280,6 @@ namespace VanyaGame.GameCardsEasyDB.Struct
 
             ((CardsEasyDBLevel)Level).NextScene();
 
-            //VideoType videoType = SL.Sets.GetComponent<InnerVideoSets>().VideoFileType;
-            //switch (videoType)
-            //{
-            //    case VideoType.local: Game.VideoPlayerSet(Game.VideoWpf); break;
-            //    case VideoType.youtube: Game.VideoPlayerSet(Game.VideoVlc); break;
-            //}
-
-            //Game.Owner.TextVideoDescription.Text = Level.Sets.Description;
-
-            //Game.CurVideo.ShowVideoPlayer();
-            //Game.Music.MediaGUI.UIMediaHide();
-            //Game.Owner.LabelWait.Visibility = System.Windows.Visibility.Visible;
-            //TDrawEffects.BlurShow(Game.Owner.LabelWait,0.2, 0, () => { });
-            //ToolsTimer.Delay(() =>
-            //{
-            //    Game.CurVideo.MediaGUI.UIMediaShow();
-
-            //}, TimeSpan.FromSeconds(1));
-
-
-            //ToolsTimer.Delay(() =>
-            //{
-            //    string MediaName = SL.Sets.GetComponent<InnerVideoSets>().VideoFileName;
-
-
-            //    Game.CurVideo.Play(MediaName, SL.Sets.GetComponent<InnerVideoSets>().VideoTimeBegin, SL.Sets.GetComponent<InnerVideoSets>().VideoTimeEnd, SL.Sets.GetComponent<InnerVideoSets>().VideoFileType);
-            //    Game.Owner.VideoTimeSlider.Maximum = SL.Sets.GetComponent<InnerVideoSets>().VideoTimeEnd.TotalSeconds;
-            //    Game.Owner.VideoTimeSlider.Minimum = SL.Sets.GetComponent<InnerVideoSets>().VideoTimeBegin.TotalSeconds;
-
-            //    TDrawEffects.BlurHide(Game.Owner.LabelWait, 1, 0, () => { Game.Owner.LabelWait.Visibility = System.Windows.Visibility.Hidden; });
-
-            //    Game.CurVideo.ClearOnEndedEvent();
-            //    Game.CurVideo.OnEnded += ((CardsEasyDBLevel)Level).NextScene;
-            //    Game.CurVideo.OnEnded += () =>
-            //    {
-            //        Game.CurVideo.ClearOnEndedEvent();
-            //        Game.CurVideo.HideVideoPlayer();
-            //        Game.CurVideo.MediaGUI.UIMediaHide();
-            //        Game.Owner.LabelWait.Visibility = System.Windows.Visibility.Hidden;
-            //        Game.Owner.TextVideoDescription.Text = "Ничего...";
-            //    };
-            //}, TimeSpan.FromSeconds(1.3));
 
         }
 

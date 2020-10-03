@@ -223,6 +223,9 @@ namespace VanyaGame.GameCardsEasyDB.Struct
         /// </summary>
         public void LoadScenes()
         {
+            if (Scenes.Count == 0) Scenes.Add("Scene 1", new CardsEasyDBScene(this, new DBModel.Scene(), "Scene 1"));
+
+
             foreach (KeyValuePair<string, Scene> Sc in Scenes)
             {
                 Sc.Value.GetComponent<Loader>().Load();

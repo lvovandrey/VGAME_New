@@ -85,16 +85,13 @@
 
             </Grid>
             <Grid Grid.Row="0" x:Name="GridMain" VerticalAlignment="Stretch" Panel.ZIndex="0" HorizontalAlignment="Stretch" />
-            <WrapPanel ItemWidth="240" ItemHeight="240" Orientation="Horizontal"  x:Name="WrapPanelMain" Grid.Row="0" MaxWidth="960" VerticalAlignment="Center" HorizontalAlignment="Center" >
-                <!--<GGG:CardUnitElement/>
-                <GGG:CardUnitElement/>
-                <GGG:CardUnitElement/>
-                <GGG:CardUnitElement/>
-                <GGG:CardUnitElement/>
-                <GGG:CardUnitElement/>
-                <GGG:CardUnitElement/>
-                <GGG:CardUnitElement/>-->
+
+            <WrapPanel ItemWidth="700" ItemHeight="700" Orientation="Horizontal"  x:Name="WrapPanelBigCards" Grid.Row="0" MaxWidth="1260" VerticalAlignment="Center" HorizontalAlignment="Center" >
             </WrapPanel>
+
+            <WrapPanel ItemWidth="300" ItemHeight="300" Orientation="Horizontal"  x:Name="WrapPanelMain" Grid.Row="0" MaxWidth="1260" VerticalAlignment="Center" HorizontalAlignment="Center" >
+            </WrapPanel>
+
             <TextBlock Text="" FontFamily="Comic Sans MS" Panel.ZIndex="30000" Name="TextForCardTag" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,80,0,0" FontSize="32" Foreground="White" FontStyle="Italic"/>
             <WrapPanel  VerticalAlignment="Top" Orientation="Horizontal" HorizontalAlignment="Center"  x:Name="StackPanelGame" Grid.Row="0" />
 

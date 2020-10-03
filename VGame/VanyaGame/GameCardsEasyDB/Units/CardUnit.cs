@@ -18,12 +18,14 @@ namespace VanyaGame.GameCardsEasyDB.Units
     {
         public Panel Box { get; set; }
         public Card Card { get; set; }
+        public Scene Scene { get; set; }
         public event Action MouseClicked;
         public bool readyToReactionOnMouseDown= false;
 
-        public CardUnit(Scene Scene, Card card)
+        public CardUnit(Scene scene, Card card)
         {
             Card = card;
+            Scene = scene;
 
             HaveBody B;
 
@@ -74,25 +76,63 @@ namespace VanyaGame.GameCardsEasyDB.Units
             }
         }
 
-        
-        ///// <summary>
-        ///// Юнит исчезает из поля и появляется в Box. По завершении вызывается метод Complete
-        ///// </summary>
-        ///// <param name="Complete"></param>
-        //public void RemoveToBox(VoidDelegate Complete)
-        //{
-        //    if (Box == null)
-        //        throw new Exception("In game Unit Number inner Box (Panel) is not initialized. See NumberUnit module");
-        //    CardShower HS = this.GetComponent<CardShower>();
-        //    // HS.Complete += () =>
-        //    HS.Hide(() =>
-        //    {
-        //        this.GetComponent<HaveBox>().AddInBox(Box);
-        //        Panel.SetZIndex(Box, 0);
-        //        HS.Show(() => { Complete(); });
-        //    });
 
-        //}
+        public CardUnit DeepCopy()
+        {
+            var newcardunit =  new CardUnit(Scene, Card);
+
+
+            newcardunit.Components.Remove("HaveBody");
+            newcardunit.Components.Remove("CheckedSymbol");
+            newcardunit.Components.Remove("DragAndDrop");
+            newcardunit.Components.Remove("Moveable");
+            newcardunit.Components.Remove("HiderShower");
+            newcardunit.Components.Remove("CardShower"); 
+            
+            newcardunit.Components.Remove("InGameStruct"); 
+            newcardunit.Components.Remove("UState");
+            newcardunit.Components.Remove("Hit");
+
+
+
+            HaveBody B;
+
+            CheckedSymbol ChS;
+            DragAndDrop DaD;
+            Moveable M;
+            HiderShower ShowComp;
+            CardShower cardShower;
+            OLDInGameStruct InGS;
+            UState uState;
+            Hit hit;
+
+            B = new HaveBody("HaveBody", newcardunit, new CardUnitElement());
+
+            if (System.IO.File.Exists(Card.ImageAddress))
+            {
+                ((CardUnitElement)B.Body).Img.Source = new BitmapImage(new Uri(Card.ImageAddress));
+            }
+            else
+            {
+                MessageBox.Show("Файл изображения не найден:  " + Card.ImageAddress);
+            }
+
+            ShowComp = new HiderShower("HiderShower", newcardunit);
+            cardShower = new CardShower("CardShower", newcardunit);
+            InGS = new OLDInGameStruct("InGameStruct", newcardunit, Scene);
+            hit = new Hit("Hit", newcardunit);
+            uState = new UState("UState", newcardunit);
+            uState.newOld = NewOld.New;
+            ShowComp.Hide();
+
+            B.Body.PreviewMouseLeftButtonDown += newcardunit.Body_PreviewMouseLeftButtonDown;
+
+
+
+            return newcardunit;
+        }
+        
+
 
 
 
