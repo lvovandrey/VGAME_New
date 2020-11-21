@@ -84,9 +84,9 @@ namespace VanyaGame.GameCardsEasyDB.Struct
             var cardsList = cards.ToList();
 
 
-            cardsList = new ListShuffle<Card>().Shuffle(cardsList); 
+            cardsList = new ListShuffle<Card>().Shuffle(cardsList);
 
-            for ( int i=0; i<cardsList.Count;i++)// var card in cards)
+            for (int i = 0; i < cardsList.Count; i++)// var card in cards)
             {
                 CardUnit c = new CardUnit(this, cardsList[i]);
                 UnitsCol.AddUnit(c);
@@ -129,7 +129,7 @@ namespace VanyaGame.GameCardsEasyDB.Struct
 
                 Game.Owner.WrapPanelMain.Children.Clear();
                 UnitsCol.Shuffle();
-                var AllUnitsShuffled= new ListShuffle<CardUnit>().Shuffle(UnitsCol.GetAllUnits());
+                var AllUnitsShuffled = new ListShuffle<CardUnit>().Shuffle(UnitsCol.GetAllUnits());
                 foreach (var u in AllUnitsShuffled)
                 {
                     if (u.GetComponent<HaveBox>() != null)
@@ -156,7 +156,8 @@ namespace VanyaGame.GameCardsEasyDB.Struct
                     CurUnit = newUnitsShuffled[0]; //UnitsCol.GetNewUnits().First();
                 }
                 Speak("Ваня! Покажи где " + CurUnit.Card.SoundedText);// + ". Ваня! Где " + CurUnit.Card.Title + "?");
-                speakAgainTimer = new Timer(SpeakAgain,null, 15000, 10000);
+                needSpeakAgain = true;
+                speakAgainTimer = new Timer(SpeakAgain, null, 8000, 5000);
                 Game.Owner.TextForCardTag.Text = "Тема: " + this.tag + ".  Надо показать:" + CurUnit.Card.Title;
 
             }
@@ -166,14 +167,22 @@ namespace VanyaGame.GameCardsEasyDB.Struct
             }
         }
 
+        bool needSpeakAgain = false;
         Timer speakAgainTimer;
         private void SpeakAgain(object obj)
         {
-            SpeakSlow(CurUnit.Card.SoundedText);
+            if (needSpeakAgain)
+                SpeakSlow(CurUnit.Card.SoundedText);
         }
 
         private void U_MouseClicked()
         {
+            needSpeakAgain = false;
+            if (speakAgainTimer != null)
+            {
+                speakAgainTimer.Dispose();
+            }
+
             bool IsHitSuccess = false;
             var CurUnittmp = CurUnit;
 
@@ -186,18 +195,14 @@ namespace VanyaGame.GameCardsEasyDB.Struct
             }
             if (IsHitSuccess)
             {
-                if (speakAgainTimer != null)
-                {
-                    speakAgainTimer.Dispose();
-                }
                 Panel.SetZIndex(CurUnittmp.GetComponent<HaveBody>().Body, 1110);
                 CurUnittmp.GetComponent<CardShower>().Hide(() => { });
 
                 CurUnit.GetComponent<UState>().newOld = NewOld.Old;
-                Speak("Молодец! Это "+ CurUnit.Card.SoundedText);// Умница! Ты показал " + CurUnit.Card.SoundedText);
+                Speak("Молодец! Это " + CurUnit.Card.SoundedText);// Умница! Ты показал " + CurUnit.Card.SoundedText);
                 ToolsTimer.Delay(() =>
                 {
-                    SpeakSlow( CurUnittmp.Card.SoundedText);
+                    SpeakSlow(CurUnittmp.Card.SoundedText);
                 }, TimeSpan.FromSeconds(3));
 
                 CurUnit = null;
@@ -214,6 +219,7 @@ namespace VanyaGame.GameCardsEasyDB.Struct
             else
             {
                 Speak("Не правильно! Попробуй ещё раз.");
+                
             }
 
             foreach (var u in UnitsCol.GetAllUnits())
