@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Speech.Synthesis;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -155,12 +156,20 @@ namespace VanyaGame.GameCardsEasyDB.Struct
                     CurUnit = newUnitsShuffled[0]; //UnitsCol.GetNewUnits().First();
                 }
                 Speak("Ваня! Покажи где " + CurUnit.Card.SoundedText);// + ". Ваня! Где " + CurUnit.Card.Title + "?");
+                speakAgainTimer = new Timer(SpeakAgain,null, 15000, 10000);
                 Game.Owner.TextForCardTag.Text = "Тема: " + this.tag + ".  Надо показать:" + CurUnit.Card.Title;
+
             }
             else
             {
                 SceneEnded(this, Level);
             }
+        }
+
+        Timer speakAgainTimer;
+        private void SpeakAgain(object obj)
+        {
+            SpeakSlow(CurUnit.Card.SoundedText);
         }
 
         private void U_MouseClicked()
@@ -177,7 +186,10 @@ namespace VanyaGame.GameCardsEasyDB.Struct
             }
             if (IsHitSuccess)
             {
-
+                if (speakAgainTimer != null)
+                {
+                    speakAgainTimer.Dispose();
+                }
                 Panel.SetZIndex(CurUnittmp.GetComponent<HaveBody>().Body, 1110);
                 CurUnittmp.GetComponent<CardShower>().Hide(() => { });
 
