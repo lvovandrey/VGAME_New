@@ -223,6 +223,11 @@ namespace VanyaGame
             //L1.Content = Vlc.vlcPlayer.MediaPlayer.Audio.Volume;
             Game.VideoPlayerSet(Game.VideoWpf);
         }
+
+        private void SettingsWindowShowButtonClick(object sender, RoutedEventArgs e)
+        {
+            Game.ShowSettingsWindow();
+        }
     }
 
 

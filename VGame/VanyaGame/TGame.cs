@@ -96,7 +96,15 @@ namespace VanyaGame
         
         public static double TimeDiagnostic;
 
-
+        internal static void ShowSettingsWindow()
+        {
+            if (Game.Sets.gameType == GameType.CardsEasy)
+            {
+                var SettingsWindow = new GameCardsEasyDB.Interface.SettingsWindow();
+                var Settings = new GameCardsEasyDB.Interface.SettingsWindowVM(SettingsWindow);
+                SettingsWindow.Show();
+            }
+        }
 
         public static void LoadLevels(string dir) 
         {
@@ -252,6 +260,8 @@ namespace VanyaGame
                 Msg("GAME OVER");
             }
         }
+
+
         public static void GameOver() 
         {
             LoadBackGround(Sets.InterfaceBackgroundDir + @"\backEnd.jpg");

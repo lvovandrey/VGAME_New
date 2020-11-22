@@ -87,6 +87,7 @@
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
@@ -178,9 +179,16 @@
       <DependentUpon>NumberElement.xaml</DependentUpon>
     </Compile>
     <Compile Include="2.GameNumberDB\Units\NumberUnit.cs" />
+    <Compile Include="GameCardsEasyDB\Interface\SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GameCardsEasyDB\Interface\SettingsWindowVM.cs" />
     <Compile Include="GameCardsEasyDB\Struct\CardsEasyDBIteration.cs" />
     <Compile Include="GameCardsEasyDB\Struct\CardsEasyDBLevel.cs" />
     <Compile Include="GameCardsEasyDB\Struct\NumberDBScene.cs" />
+    <Compile Include="GameCardsEasyDB\Tools\ConfigurationTools.cs" />
+    <Compile Include="GameCardsEasyDB\Tools\InfoWindow.cs" />
+    <Compile Include="GameCardsEasyDB\Tools\Settings.cs" />
     <Compile Include="GameCardsEasyDB\Units\Components\CardShower.cs" />
     <Compile Include="GameCardsEasyDB\Units\CardUnitElement.xaml.cs">
       <DependentUpon>CardUnitElement.xaml</DependentUpon>
@@ -303,6 +311,10 @@
     <Page Include="2.GameNumberDB\Units\NumberElement.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GameCardsEasyDB\Interface\SettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GameCardsEasyDB\Units\CardUnitElement.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -1748,7 +1760,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="GameCardsEasyDB\Tools\" />
+    <Folder Include="GameCardsEasyDB\Interface\SettingsViewsElements\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

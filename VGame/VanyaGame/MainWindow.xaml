@@ -42,7 +42,7 @@
                     </Image.Effect>
                 </Image>
                 <Button x:Name="BtnNextLevel" Visibility="Hidden"  Content="NEXT LEVEL"  HorizontalAlignment="Center" Height="59"  VerticalAlignment="Center" Width="164" Click="BtnNextLevel_Click" Canvas.Left="410" Canvas.Top="208"/>
-                <TextBox Panel.ZIndex="15" x:Name="TxtBlock" Opacity="0.0" ScrollViewer.VerticalScrollBarVisibility="Visible" HorizontalAlignment="Right" Height="685" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="339" Canvas.Left="743" Canvas.Top="10" Visibility="Visible"/>
+                <TextBox Panel.ZIndex="15" x:Name="TxtBlock" Opacity="0.0" ScrollViewer.VerticalScrollBarVisibility="Visible" HorizontalAlignment="Right" Height="685" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="10" Canvas.Left="743" Canvas.Top="10" Visibility="Visible"/>
                 <Label  HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FFFF0909">
                     <Label.Effect>
                         <DropShadowEffect Color="#FFB9FF00" BlurRadius="2" ShadowDepth="3"/>
@@ -52,13 +52,18 @@
                 <MediaElement x:Name="MediaElementSound" HorizontalAlignment="Left" Height="35" Margin="448,519,0,0" VerticalAlignment="Top" Width="35" LoadedBehavior="Manual"/>
                 <MediaElement x:Name="MediaElementMusic" HorizontalAlignment="Left" Height="38" Margin="359,519,0,0" VerticalAlignment="Top" Width="41" LoadedBehavior="Manual" MediaEnded="MediaElementMusic_MediaEnded" Volume="0.1"/>
                 <Grid x:Name="GridVideo" VerticalAlignment="Stretch"  HorizontalAlignment="Stretch" >
-                    <Label x:Name="Label1" 
+                    <StackPanel HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Top" 
+                               Background="{x:Null}" Panel.ZIndex="2">
+                        <Button Click="SettingsWindowShowButtonClick" Content="Настройки"/>
+                        <Label x:Name="Label1" 
                            Content="Нажмите Esc для выхода из игры&#xA;Нажмите F для пропуска видео" 
-                           Visibility="Visible" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FFFF0909" Panel.ZIndex="2" Opacity="0.5">
-                        <Label.Effect>
-                            <DropShadowEffect Color="#FFB9FF00" BlurRadius="1" ShadowDepth="1"/>
-                        </Label.Effect>
-                    </Label>
+                           Visibility="Visible" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Top" 
+                               Background="{x:Null}" Foreground="#FFFF0909" Panel.ZIndex="2" Opacity="0.5">
+                            <Label.Effect>
+                                <DropShadowEffect Color="#FFB9FF00" BlurRadius="1" ShadowDepth="1"/>
+                            </Label.Effect>
+                        </Label>
+                    </StackPanel>
                     <MediaElement x:Name="MediaElementVideo" HorizontalAlignment="Center" VerticalAlignment="Center" LoadedBehavior="Manual" Stretch="Fill" Opacity="0.1" KeyDown="MediaElementVideo_KeyDown"  />
                     <GameCardsEasyDB:BeautyButtonCardsEasyDB x:Name="StartButton" HorizontalAlignment="Center" VerticalAlignment="Center" Height="250" Visibility="Visible" />
                     <Button Name="VIDEOTEST" Content="VLC" Width ="200" Height="30" HorizontalAlignment="Left" Click="VIDEOTEST_Click" Opacity="0"/>
