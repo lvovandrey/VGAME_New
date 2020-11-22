@@ -18,8 +18,10 @@
                 </TransformGroup>
             </Grid.RenderTransform>
             <Rectangle Stroke="#FF878787" StrokeThickness="3" Fill="#07FFFFFF" Stretch="UniformToFill">
-                
+
             </Rectangle>
+
+
             <Image Name="Img"   Source="pack://application:,,,/1.GameNumber/Images/4.png" Stretch="Uniform" 
                RenderTransformOrigin="0.5,0.5"  Margin="10" MouseDown="Img_MouseDown" MouseUp="Img_MouseUp" MouseLeave="Img_MouseLeave" Panel.ZIndex="35000">
                 <Image.Triggers>
@@ -57,6 +59,17 @@
                 </Image.Triggers>
 
             </Image>
+
+            <Rectangle x:Name="FlashedRect" Opacity="1" Panel.ZIndex="35001" Width="0" Height="0">
+                <Rectangle.Fill>
+                    <RadialGradientBrush>
+                        <GradientStop Offset="0.61" Color="#99FF0000"/>
+                        <GradientStop Color="#00FF0000" Offset="1"/>
+                        <GradientStop Color="#E4FF0000" Offset="0"/>
+                    </RadialGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+
             <Label x:Name="Lbl" Content="" Opacity="0"/>
         </Grid>
     </Grid>

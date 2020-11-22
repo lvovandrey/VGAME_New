@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Media.Animation;
+using System.Windows.Threading;
+using System.Threading;
 
 namespace VanyaGame.GameCardsEasyDB.Units
 {
@@ -51,6 +53,24 @@ namespace VanyaGame.GameCardsEasyDB.Units
             var stream = Application.GetResourceStream(uri).Stream;
             var cursor = new Cursor(stream);
             Img.Cursor = cursor;
+        }
+
+        public void Flash()
+        {
+            DoubleAnimation AW = new DoubleAnimation();
+            AW.From = 0;
+            AW.To = 250;
+            AW.AutoReverse = true;
+            AW.Duration = TimeSpan.FromSeconds(0.2);
+
+            DoubleAnimation AH = new DoubleAnimation();
+            AH.From = 0;
+            AH.To = 250;
+            AH.AutoReverse = true;
+            AH.Duration = TimeSpan.FromSeconds(0.2);
+
+            FlashedRect.BeginAnimation(Button.WidthProperty, AW);
+            FlashedRect.BeginAnimation(Button.HeightProperty, AH);
         }
     }
 }

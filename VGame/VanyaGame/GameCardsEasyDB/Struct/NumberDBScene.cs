@@ -7,6 +7,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 using VanyaGame.DB.DBCardsRepositoryModel;
 using VanyaGame.GameCardsEasyDB.Units;
 using VanyaGame.GameCardsEasyDB.Units.Components;
@@ -156,9 +157,13 @@ namespace VanyaGame.GameCardsEasyDB.Struct
                     CurUnit = newUnitsShuffled[0]; //UnitsCol.GetNewUnits().First();
                 }
                 Speak("Ваня! Покажи где " + CurUnit.Card.SoundedText);// + ". Ваня! Где " + CurUnit.Card.Title + "?");
+                
                 needSpeakAgain = true;
+                needFlash = true;
                 speakAgainTimer = new Timer(SpeakAgain, null, 8000, 5000);
-                Game.Owner.TextForCardTag.Text = "Тема: " + this.tag + ".  Надо показать:" + CurUnit.Card.Title;
+                flashTimer = new Timer(Flash, null, 30000, 20000);
+
+                Game.Owner.TextForCardTag.Text = "Тема: " + this.tag + ".  Надо показать: " + CurUnit.Card.Title;
 
             }
             else
@@ -172,8 +177,22 @@ namespace VanyaGame.GameCardsEasyDB.Struct
         private void SpeakAgain(object obj)
         {
             if (needSpeakAgain)
+            {
                 SpeakSlow(CurUnit.Card.SoundedText);
+            }
         }
+
+        bool needFlash = false;
+        Timer flashTimer;
+        private void Flash(object obj)
+        {
+            if (needFlash)
+            {
+                var body = CurUnit.GetComponent<HaveBody>().Body as CardUnitElement;
+                body.Dispatcher.Invoke(() => { body.Flash(); });
+            }
+        }
+
 
         private void U_MouseClicked()
         {
@@ -181,6 +200,12 @@ namespace VanyaGame.GameCardsEasyDB.Struct
             if (speakAgainTimer != null)
             {
                 speakAgainTimer.Dispose();
+            }
+
+            needFlash = false;
+            if (flashTimer != null)
+            {
+                flashTimer.Dispose();
             }
 
             bool IsHitSuccess = false;

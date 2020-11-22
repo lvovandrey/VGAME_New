@@ -53,13 +53,13 @@ namespace VanyaGame.GameCardsEasyDB.Struct
             Random random = new Random();
 
             //Перемешиваем уровни  //что за алгоритм - хз - раньше работал вроде
-            for (int i = DB.Levels.Count - 1; i >= 1; i--)
-            {
-                int j = random.Next(i+1);
-                var tmpLevel = DB.Levels[j];
-                DB.Levels[j] = DB.Levels[i];
-                DB.Levels[i] = tmpLevel;
-            }
+            //for (int i = DB.Levels.Count - 1; i >= 1; i--)
+            //{
+            //    int j = random.Next(i+1);
+            //    var tmpLevel = DB.Levels[j];
+            //    DB.Levels[j] = DB.Levels[i];
+            //    DB.Levels[i] = tmpLevel;
+            //}
 
             foreach (var level in DB.Levels)
             {
