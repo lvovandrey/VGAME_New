@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="VanyaGame.GameCardsEasyDB.Interface.SettingsViewsElements.HintSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VanyaGame.GameCardsEasyDB.Interface.SettingsViewsElements"
+             xmlns:el="clr-namespace:VanyaGame.GameCardsEasyDB.Interface.Elements"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <GroupBox Header="Общее" >
+            <StackPanel>
+
+                <GroupBox >
+                    <GroupBox.Header>
+                        Скорость воспроизведения
+                    </GroupBox.Header>
+                    <StackPanel>
+                        <el:PropertyViewer_DoubleNums_UpDown DataContext="{Binding SlowRate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Медленная скорость по умолчанию (клавиша Q)" Margin="5"/>
+                        <el:PropertyViewer_DoubleNums_UpDown DataContext="{Binding FastRate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Быстрая скорость воспроизведения по умолчанию (клавиша E)" Margin="5"/>
+                        <el:PropertyViewer_DoubleNums_UpDown DataContext="{Binding RateShift, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Шаг изменения скорости (Ctrl+Up, Ctrl+Down)" Margin="5"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox >
+                    <GroupBox.Header>
+                        Звук
+                    </GroupBox.Header>
+                    <StackPanel>
+                        <el:PropertyViewer_DoubleNums_UpDown DataContext="{Binding DefaultVolume, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Громкость по умолчанию" Margin="5"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox >
+                    <GroupBox.Header>
+                        Навигация по видео
+                    </GroupBox.Header>
+                    <StackPanel>
+                        <el:PropertyViewer_DoubleNums_UpDown DataContext="{Binding Step, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Шаг смещения (Ctrl+Left, Ctrl+Right)" Margin="5"/>
+                    </StackPanel>
+                </GroupBox>
+
+
+
+
+
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</UserControl>

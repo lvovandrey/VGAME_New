@@ -137,7 +137,7 @@ namespace VanyaGame.GameCardsEasyDB.Tools
             ConfigurationTools.AddUpdateAppSettings("Step", step);
             ConfigurationTools.AddUpdateAppSettings("DefaultVolume", defaultVolume);
 
-            if (SettingsChanged != null) SettingsChanged();
+            SettingsChanged?.Invoke();
         }
 
         static public void RestoreAllSettings()
@@ -151,9 +151,7 @@ namespace VanyaGame.GameCardsEasyDB.Tools
             step = ConfigurationTools.ReadSetting("Step");
             defaultVolume = ConfigurationTools.ReadSetting("DefaultVolume");
 
-            if (SettingsChanged != null) SettingsChanged();
+            SettingsChanged?.Invoke();
         }
-
-
     }
 }

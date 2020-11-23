@@ -179,6 +179,12 @@
       <DependentUpon>NumberElement.xaml</DependentUpon>
     </Compile>
     <Compile Include="2.GameNumberDB\Units\NumberUnit.cs" />
+    <Compile Include="GameCardsEasyDB\Interface\Elements\PropertyViewer_DoubleNums_UpDown.xaml.cs">
+      <DependentUpon>PropertyViewer_DoubleNums_UpDown.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GameCardsEasyDB\Interface\SettingsViewsElements\HintSettingsView.xaml.cs">
+      <DependentUpon>HintSettingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GameCardsEasyDB\Interface\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
@@ -311,6 +317,14 @@
     <Page Include="2.GameNumberDB\Units\NumberElement.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GameCardsEasyDB\Interface\Elements\PropertyViewer_DoubleNums_UpDown.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GameCardsEasyDB\Interface\SettingsViewsElements\HintSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GameCardsEasyDB\Interface\SettingsWindow.xaml">
       <SubType>Designer</SubType>
@@ -1759,9 +1773,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="GameCardsEasyDB\Interface\SettingsViewsElements\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
