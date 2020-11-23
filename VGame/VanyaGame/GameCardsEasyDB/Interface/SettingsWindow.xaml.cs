@@ -47,8 +47,10 @@ namespace VanyaGame.GameCardsEasyDB.Interface
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             SettingsElements.Add("Подсказки", HintSettins);
-            SettingsElements.Add("Вид", DBSettings);
-            SettingsElements.Add("Сохранение файлов", TestsSettings);
+            SettingsElements.Add("Озвучка", SpeakSettings);
+            SettingsElements.Add("Вид", ViewSettings);
+            SettingsElements.Add("База данных", DBSettings);
+            SettingsElements.Add("Задания", TestsSettings);
 
         }
     }

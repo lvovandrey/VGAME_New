@@ -6,43 +6,69 @@
              xmlns:local="clr-namespace:VanyaGame.GameCardsEasyDB.Interface.SettingsViewsElements"
              xmlns:el="clr-namespace:VanyaGame.GameCardsEasyDB.Interface.Elements"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="550" d:DesignWidth="800">
     <Grid>
-        <GroupBox Header="Общее" >
-            <StackPanel>
+        <GroupBox Header="Подсказки" >
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <StackPanel>
 
-                <GroupBox >
-                    <GroupBox.Header>
-                        Скорость воспроизведения
-                    </GroupBox.Header>
-                    <StackPanel>
-                        <el:PropertyViewer_DoubleNums_UpDown DataContext="{Binding SlowRate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Медленная скорость по умолчанию (клавиша Q)" Margin="5"/>
-                        <el:PropertyViewer_DoubleNums_UpDown DataContext="{Binding FastRate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Быстрая скорость воспроизведения по умолчанию (клавиша E)" Margin="5"/>
-                        <el:PropertyViewer_DoubleNums_UpDown DataContext="{Binding RateShift, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Шаг изменения скорости (Ctrl+Up, Ctrl+Down)" Margin="5"/>
-                    </StackPanel>
-                </GroupBox>
-                <GroupBox >
-                    <GroupBox.Header>
-                        Звук
-                    </GroupBox.Header>
-                    <StackPanel>
-                        <el:PropertyViewer_DoubleNums_UpDown DataContext="{Binding DefaultVolume, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Громкость по умолчанию" Margin="5"/>
-                    </StackPanel>
-                </GroupBox>
-                <GroupBox >
-                    <GroupBox.Header>
-                        Навигация по видео
-                    </GroupBox.Header>
-                    <StackPanel>
-                        <el:PropertyViewer_DoubleNums_UpDown DataContext="{Binding Step, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Шаг смещения (Ctrl+Left, Ctrl+Right)" Margin="5"/>
-                    </StackPanel>
-                </GroupBox>
-
-
-
-
-
-            </StackPanel>
+                    <GroupBox >
+                        <GroupBox.Header>
+                            Повторное озвучивание названия карточки
+                        </GroupBox.Header>
+                        <StackPanel>
+                            <el:PropertyViewer_DoubleNums_UpDown 
+                            DataContext="{Binding SpeakAgainCardNameDelay, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                            Tag="Через сколько секунд после первого озвучивания" Margin="5"/>
+                            <el:PropertyViewer_DoubleNums_UpDown 
+                            DataContext="{Binding SpeakAgainCardNameTimePeriod, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                            Tag="Интервал повторений, в секундах (после второго и последующих)" Margin="5"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox >
+                        <GroupBox.Header>
+                            Визуальная подсказка (красная метка на нужной карточке)
+                        </GroupBox.Header>
+                        <StackPanel>
+                            <CheckBox x:Name="VisualHintEnable" Content="Предъявлять визуальную подсказку" 
+                                      Margin="5" IsChecked="{Binding VisualHintEnable}"/>
+                            <el:PropertyViewer_DoubleNums_UpDown 
+                            DataContext="{Binding VisualHintDelay, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                            IsEnabled="{Binding ElementName=VisualHintEnable, Path=IsChecked}"
+                            Tag="Через сколько секунд после предъявления карточки должна появиться первая визуальная подсказка" Margin="5"/>
+                            <el:PropertyViewer_DoubleNums_UpDown 
+                            DataContext="{Binding VisualHintTimePeriod, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                            IsEnabled="{Binding ElementName=VisualHintEnable, Path=IsChecked}"
+                            Tag="Интервал повторений визуальной подсказки, в секундах (после второго и последующих)" Margin="5"/>
+                            <el:PropertyViewer_DoubleNums_UpDown 
+                            DataContext="{Binding VisualHintDuration, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                            IsEnabled="{Binding ElementName=VisualHintEnable, Path=IsChecked}"
+                            Tag="Длительность предъявления визуальной подсказки (сколько секунд она будет видна)" Margin="5"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox >
+                        <GroupBox.Header>
+                            Режим обучения
+                        </GroupBox.Header>
+                        <StackPanel>
+                            <CheckBox x:Name="EducationModeEnable" Content="Включить режим обучения" 
+                                      Margin="5" IsChecked="{Binding EducationModeEnable}"/>
+                            <el:PropertyViewer_DoubleNums_UpDown 
+                            DataContext="{Binding EducationVisualHintDelay, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                            IsEnabled="{Binding ElementName=EducationModeEnable, Path=IsChecked}"
+                            Tag="Через сколько секунд после предъявления карточки должна появиться первая визуальная подсказка" Margin="5"/>
+                            <el:PropertyViewer_DoubleNums_UpDown 
+                            DataContext="{Binding EducationVisualHintTimePeriod, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                            IsEnabled="{Binding ElementName=EducationModeEnable, Path=IsChecked}"
+                            Tag="Интервал повторений визуальной подсказки, в секундах (после второго и последующих)" Margin="5"/>
+                            <el:PropertyViewer_DoubleNums_UpDown 
+                            DataContext="{Binding EducationVisualHintDuration, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                            IsEnabled="{Binding ElementName=EducationModeEnable, Path=IsChecked}"
+                            Tag="Длительность предъявления визуальной подсказки (сколько секунд она будет видна)" Margin="5"/>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+            </ScrollViewer>
         </GroupBox>
     </Grid>
 </UserControl>

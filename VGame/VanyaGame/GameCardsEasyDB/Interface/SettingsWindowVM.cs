@@ -25,27 +25,6 @@ namespace VanyaGame.GameCardsEasyDB.Interface
         #endregion
 
         #region PROPERTIES
-        public bool IsStateFilesRestorePathTypeAbsolute
-        {
-            get
-            {
-                if (Settings.stateFilesRestorePathType == "Absolute")
-                    return true;
-                else return false;
-            }
-            set
-            {
-                if (value == true) Settings.stateFilesRestorePathType = "Absolute";
-                else Settings.stateFilesRestorePathType = "Relative";
-                OnPropertyChanged("IsStateFilesRestorePathTypeAbsolute");
-                OnPropertyChanged("IsStateFilesRestorePathTypeRelative");
-            }
-        }
-        public bool IsStateFilesRestorePathTypeRelative
-        {
-            get { return !IsStateFilesRestorePathTypeAbsolute; }
-            set { IsStateFilesRestorePathTypeAbsolute = !value; }
-        }
 
         public bool ShowFullNameInPlayerHeader
         {

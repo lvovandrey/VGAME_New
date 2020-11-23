@@ -6,7 +6,7 @@
         xmlns:el="clr-namespace:VanyaGame.GameCardsEasyDB.Interface.SettingsViewsElements"
         xmlns:local="clr-namespace:VanyaGame.GameCardsEasyDB.Interface"
         mc:Ignorable="d"
-        Title="Настройки" Height="400" Width="800" ResizeMode="NoResize"   WindowStartupLocation="CenterScreen" 
+        Title="Настройки" Height="400" Width="900" ResizeMode="NoResize"   WindowStartupLocation="CenterScreen" 
         BorderThickness="1" BorderBrush="#FFB07220"  Loaded="Window_Loaded"       >
     <Grid>
         <Grid.ColumnDefinitions>
@@ -23,12 +23,16 @@
             <TextBlock  Text="Разделы настроек" />
             <ListBox VerticalAlignment="Stretch" Background="{x:Null}"  SelectionChanged="ListBox_SelectionChanged">
                 <ListBoxItem >Подсказки</ListBoxItem>
+                <ListBoxItem >Озвучка</ListBoxItem>
+                <ListBoxItem >Вид</ListBoxItem>
                 <ListBoxItem >База данных</ListBoxItem>
                 <ListBoxItem >Задания</ListBoxItem>
 
             </ListBox>
         </StackPanel>
         <el:HintSettingsView Grid.Row="0" Grid.Column="1" x:Name="HintSettins"/>
+        <Rectangle Fill="Yellow" Grid.Row="0" Grid.Column="1" Visibility="Collapsed" x:Name="SpeakSettings" />
+        <Rectangle Fill="Yellow" Grid.Row="0" Grid.Column="1" Visibility="Collapsed" x:Name="ViewSettings" />
         <Rectangle Fill="Blue" Grid.Row="0" Grid.Column="1" Visibility="Collapsed" x:Name="DBSettings" />
         <Rectangle Fill="Green" Grid.Row="0" Grid.Column="1" Visibility="Collapsed" x:Name="TestsSettings" />
 
