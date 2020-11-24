@@ -44,29 +44,32 @@
                             DataContext="{Binding VisualHintDuration, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                             IsEnabled="{Binding ElementName=VisualHintEnable, Path=IsChecked}"
                             Tag="Длительность предъявления визуальной подсказки (сколько секунд она будет видна)" Margin="5"/>
-                        </StackPanel>
-                    </GroupBox>
-                    <GroupBox >
-                        <GroupBox.Header>
-                            Режим обучения
-                        </GroupBox.Header>
-                        <StackPanel>
-                            <CheckBox x:Name="EducationModeEnable" Content="Включить режим обучения" 
+
+                            <GroupBox IsEnabled="{Binding ElementName=VisualHintEnable, Path=IsChecked}" >
+                                <GroupBox.Header>
+                                    Режим обучения
+                                </GroupBox.Header>
+                                <StackPanel>
+                                    <CheckBox x:Name="EducationModeEnable" Content="Включить режим обучения" 
                                       Margin="5" IsChecked="{Binding EducationModeEnable}"/>
-                            <el:PropertyViewer_DoubleNums_UpDown 
+                                    <el:PropertyViewer_DoubleNums_UpDown 
                             DataContext="{Binding EducationVisualHintDelay, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                             IsEnabled="{Binding ElementName=EducationModeEnable, Path=IsChecked}"
                             Tag="Через сколько секунд после предъявления карточки должна появиться первая визуальная подсказка" Margin="5"/>
-                            <el:PropertyViewer_DoubleNums_UpDown 
+                                    <el:PropertyViewer_DoubleNums_UpDown 
                             DataContext="{Binding EducationVisualHintTimePeriod, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                             IsEnabled="{Binding ElementName=EducationModeEnable, Path=IsChecked}"
                             Tag="Интервал повторений визуальной подсказки, в секундах (после второго и последующих)" Margin="5"/>
-                            <el:PropertyViewer_DoubleNums_UpDown 
+                                    <el:PropertyViewer_DoubleNums_UpDown 
                             DataContext="{Binding EducationVisualHintDuration, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                             IsEnabled="{Binding ElementName=EducationModeEnable, Path=IsChecked}"
                             Tag="Длительность предъявления визуальной подсказки (сколько секунд она будет видна)" Margin="5"/>
+                                </StackPanel>
+                            </GroupBox>
                         </StackPanel>
+                        
                     </GroupBox>
+                   
                 </StackPanel>
             </ScrollViewer>
         </GroupBox>
