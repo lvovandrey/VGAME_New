@@ -40,7 +40,7 @@ namespace VanyaGame.GameCardsEasyDB.Interface
         private void SettingsElementShow(string ElementUsefulName)
         {
             foreach (var element in SettingsElements)
-                element.Value.Visibility = Visibility.Collapsed;
+                element.Value.Visibility = Visibility.Hidden;
             SettingsElements[ElementUsefulName].Visibility = Visibility.Visible;
         }
 

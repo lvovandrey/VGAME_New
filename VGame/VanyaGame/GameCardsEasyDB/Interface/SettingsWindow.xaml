@@ -31,10 +31,10 @@
             </ListBox>
         </StackPanel>
         <el:HintSettingsView Grid.Row="0" Grid.Column="1" x:Name="HintSettins"/>
-        <el:SpeakSettingsView Grid.Row="0" Grid.Column="1" Visibility="Collapsed" x:Name="SpeakSettings" />
-        <Rectangle Fill="Yellow" Grid.Row="0" Grid.Column="1" Visibility="Collapsed" x:Name="ViewSettings" />
-        <Rectangle Fill="Blue" Grid.Row="0" Grid.Column="1" Visibility="Collapsed" x:Name="DBSettings" />
-        <Rectangle Fill="Green" Grid.Row="0" Grid.Column="1" Visibility="Collapsed" x:Name="TestsSettings" />
+        <el:SpeakSettingsView Grid.Row="0" Grid.Column="1" Visibility="Hidden" x:Name="SpeakSettings" />
+        <Rectangle Fill="Yellow" Grid.Row="0" Grid.Column="1" Visibility="Hidden" x:Name="ViewSettings" />
+        <Rectangle Fill="Blue" Grid.Row="0" Grid.Column="1" Visibility="Hidden" x:Name="DBSettings" />
+        <Rectangle Fill="Green" Grid.Row="0" Grid.Column="1" Visibility="Hidden" x:Name="TestsSettings" />
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="1" Margin="0 0 10 0">
             <Button Command="{Binding SaveSettingsCommand}" Click="Button_Click_1" Margin="0 3 10 3" Padding="10 0 10 0">Применить</Button>
