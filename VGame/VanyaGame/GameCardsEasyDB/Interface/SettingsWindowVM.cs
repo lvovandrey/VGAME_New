@@ -91,9 +91,33 @@ namespace VanyaGame.GameCardsEasyDB.Interface
 
 
 
+        public string FirstQuestionText
+        {
+            get { return Settings.FirstQuestionText; }
+            set { Settings.FirstQuestionText = value; OnPropertyChanged("FirstQuestionText"); }
+        }
+
+        public string HintQuestionText
+        {
+            get { return Settings.HintQuestionText; }
+            set { Settings.HintQuestionText = value; OnPropertyChanged("HintQuestionText"); }
+        }
+
+        public string SuccessTestText
+        {
+            get { return Settings.SuccessTestText; }
+            set { Settings.SuccessTestText = value; OnPropertyChanged("SuccessTestText"); }
+        }
+
+        public string FallTestText
+        {
+            get { return Settings.FallTestText; }
+            set { Settings.FallTestText = value; OnPropertyChanged("FallTestText"); }
+        }
 
 
-        
+
+
 
         #endregion
 
@@ -107,6 +131,26 @@ namespace VanyaGame.GameCardsEasyDB.Interface
         {
             RestoreSettingsCommand.Execute(null);
         }
+
+        private void RefreshAllDependencyProperties()
+        {
+            OnPropertyChanged("VisualHintEnable");
+            OnPropertyChanged("EducationModeEnable");
+            OnPropertyChanged("SpeakAgainCardNameDelay");
+            OnPropertyChanged("SpeakAgainCardNameTimePeriod");
+            OnPropertyChanged("VisualHintDelay");
+            OnPropertyChanged("VisualHintTimePeriod");
+            OnPropertyChanged("VisualHintDuration");
+            OnPropertyChanged("EducationVisualHintDelay");
+            OnPropertyChanged("EducationVisualHintTimePeriod");
+            OnPropertyChanged("EducationVisualHintDuration");
+
+            OnPropertyChanged("FirstQuestionText");
+            OnPropertyChanged("HintQuestionText");
+            OnPropertyChanged("SuccessTestText");
+            OnPropertyChanged("FallTestText");
+        }
+
         #endregion
 
         #region COMMANDS
@@ -132,18 +176,7 @@ namespace VanyaGame.GameCardsEasyDB.Interface
                   (restoreSettingsCommand = new RelayCommand(obj =>
                   {
                       Settings.RestoreAllSettings();
-
-
-                       OnPropertyChanged("VisualHintEnable");
-                       OnPropertyChanged("EducationModeEnable");
-                       OnPropertyChanged("SpeakAgainCardNameDelay");
-                       OnPropertyChanged("SpeakAgainCardNameTimePeriod");
-                       OnPropertyChanged("VisualHintDelay");
-                       OnPropertyChanged("VisualHintTimePeriod");
-                       OnPropertyChanged("VisualHintDuration");
-                       OnPropertyChanged("EducationVisualHintDelay");
-                       OnPropertyChanged("EducationVisualHintTimePeriod");
-                       OnPropertyChanged("EducationVisualHintDuration");
+                      RefreshAllDependencyProperties();
                   }));
             }
         }

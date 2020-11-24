@@ -185,6 +185,9 @@
     <Compile Include="GameCardsEasyDB\Interface\SettingsViewsElements\HintSettingsView.xaml.cs">
       <DependentUpon>HintSettingsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GameCardsEasyDB\Interface\SettingsViewsElements\SpeakSettingsView.xaml.cs">
+      <DependentUpon>SpeakSettingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GameCardsEasyDB\Interface\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
@@ -323,6 +326,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GameCardsEasyDB\Interface\SettingsViewsElements\HintSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GameCardsEasyDB\Interface\SettingsViewsElements\SpeakSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

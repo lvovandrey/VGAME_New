@@ -31,7 +31,7 @@
             </ListBox>
         </StackPanel>
         <el:HintSettingsView Grid.Row="0" Grid.Column="1" x:Name="HintSettins"/>
-        <Rectangle Fill="Yellow" Grid.Row="0" Grid.Column="1" Visibility="Collapsed" x:Name="SpeakSettings" />
+        <el:SpeakSettingsView Grid.Row="0" Grid.Column="1" Visibility="Collapsed" x:Name="SpeakSettings" />
         <Rectangle Fill="Yellow" Grid.Row="0" Grid.Column="1" Visibility="Collapsed" x:Name="ViewSettings" />
         <Rectangle Fill="Blue" Grid.Row="0" Grid.Column="1" Visibility="Collapsed" x:Name="DBSettings" />
         <Rectangle Fill="Green" Grid.Row="0" Grid.Column="1" Visibility="Collapsed" x:Name="TestsSettings" />

@@ -99,13 +99,7 @@ namespace VanyaGame.GameCardsEasyDB.Struct
 
         private void Start()
         {
-
-            //foreach (var u in UnitsCol.GetAllUnits())
-            //{
-            //    HaveBox HB = new HaveBox("HaveBox", Game.Owner, Game.Owner.WrapPanelMain, u);
-            //}
-            //UnitsCol.Shuffle();
-            // CardUnit N = UnitsCol.GetFirstUnit();
+            Settings.RestoreAllSettings();
 
             foreach (var u in UnitsCol.GetAllUnits())
                 u.MouseClicked += U_MouseClicked;
@@ -157,7 +151,7 @@ namespace VanyaGame.GameCardsEasyDB.Struct
                     List<CardUnit> newUnitsShuffled = new ListShuffle<CardUnit>().Shuffle(UnitsCol.GetNewUnits());
                     CurUnit = newUnitsShuffled[0]; //UnitsCol.GetNewUnits().First();
                 }
-                Speak("Ваня! Покажи где " + CurUnit.Card.SoundedText);// + ". Ваня! Где " + CurUnit.Card.Title + "?");
+                Speak(Settings.FirstQuestionText + CurUnit.Card.SoundedText);
 
                 needSpeakAgain = true;
                 needFlash = true;
@@ -186,7 +180,7 @@ namespace VanyaGame.GameCardsEasyDB.Struct
         {
             if (needSpeakAgain)
             {
-                SpeakSlow(CurUnit.Card.SoundedText);
+                SpeakSlow(Settings.HintQuestionText + CurUnit.Card.SoundedText);
             }
         }
 
@@ -239,7 +233,7 @@ namespace VanyaGame.GameCardsEasyDB.Struct
                 CurUnittmp.GetComponent<CardShower>().Hide(() => { });
 
                 CurUnit.GetComponent<UState>().newOld = NewOld.Old;
-                Speak("Молодец! Это " + CurUnit.Card.SoundedText);// Умница! Ты показал " + CurUnit.Card.SoundedText);
+                Speak(Settings.SuccessTestText + CurUnit.Card.SoundedText);
                 ToolsTimer.Delay(() =>
                 {
                     SpeakSlow(CurUnittmp.Card.SoundedText);
@@ -258,7 +252,7 @@ namespace VanyaGame.GameCardsEasyDB.Struct
             }
             else
             {
-                Speak("Не правильно! Попробуй ещё раз.");
+                Speak(Settings.FallTestText);
 
             }
 

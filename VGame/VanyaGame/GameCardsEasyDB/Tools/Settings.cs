@@ -22,7 +22,7 @@ namespace VanyaGame.GameCardsEasyDB.Tools
                     return true;
                 else return false;
             }
-            set 
+            set
             {
                 if (value)
                     visualHintEnable = "True";
@@ -212,7 +212,25 @@ namespace VanyaGame.GameCardsEasyDB.Tools
         }
 
 
+        public static string FirstQuestionText
+        {
+            get; set;
+        }
 
+        public static string HintQuestionText
+        {
+            get; set;
+        }
+
+        public static string SuccessTestText
+        {
+            get; set;
+        }
+
+        public static string FallTestText
+        {
+            get; set;
+        }
 
 
         static public void SaveAllSettings()
@@ -227,6 +245,12 @@ namespace VanyaGame.GameCardsEasyDB.Tools
             ConfigurationTools.AddUpdateAppSettings("EducationVisualHintDelay", EducationvisualHintDelay);
             ConfigurationTools.AddUpdateAppSettings("EducationVisualHintTimePeriod", EducationvisualHintTimePeriod);
             ConfigurationTools.AddUpdateAppSettings("EducationVisualHintDuration", EducationvisualHintDuration);
+
+            ConfigurationTools.AddUpdateAppSettings("FirstQuestionText", FirstQuestionText);
+            ConfigurationTools.AddUpdateAppSettings("HintQuestionText", HintQuestionText);
+            ConfigurationTools.AddUpdateAppSettings("SuccessTestText", SuccessTestText);
+            ConfigurationTools.AddUpdateAppSettings("FallTestText", FallTestText);
+
 
             SettingsChanged?.Invoke();
         }
@@ -243,6 +267,11 @@ namespace VanyaGame.GameCardsEasyDB.Tools
             EducationvisualHintDelay = ConfigurationTools.ReadSetting("EducationVisualHintDelay");
             EducationvisualHintTimePeriod = ConfigurationTools.ReadSetting("EducationVisualHintTimePeriod");
             EducationvisualHintDuration = ConfigurationTools.ReadSetting("EducationVisualHintDuration");
+
+            FirstQuestionText = ConfigurationTools.ReadSetting("FirstQuestionText");
+            HintQuestionText = ConfigurationTools.ReadSetting("HintQuestionText");
+            SuccessTestText = ConfigurationTools.ReadSetting("SuccessTestText");
+            FallTestText = ConfigurationTools.ReadSetting("FallTestText");
 
             SettingsChanged?.Invoke();
         }
