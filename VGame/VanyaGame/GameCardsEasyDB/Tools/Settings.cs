@@ -22,6 +22,13 @@ namespace VanyaGame.GameCardsEasyDB.Tools
                     return true;
                 else return false;
             }
+            set 
+            {
+                if (value)
+                    visualHintEnable = "True";
+                else
+                    visualHintEnable = "False";
+            }
         }
 
         public static string educationModeEnable = "True";
@@ -32,6 +39,13 @@ namespace VanyaGame.GameCardsEasyDB.Tools
                 if (educationModeEnable == "True")
                     return true;
                 else return false;
+            }
+            set
+            {
+                if (value)
+                    educationModeEnable = "True";
+                else
+                    educationModeEnable = "False";
             }
         }
 

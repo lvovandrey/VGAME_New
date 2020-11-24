@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 using VanyaGame.DB.DBCardsRepositoryModel;
+using VanyaGame.GameCardsEasyDB.Tools;
 using VanyaGame.GameCardsEasyDB.Units;
 using VanyaGame.GameCardsEasyDB.Units.Components;
 using VanyaGame.Struct;
@@ -157,11 +158,18 @@ namespace VanyaGame.GameCardsEasyDB.Struct
                     CurUnit = newUnitsShuffled[0]; //UnitsCol.GetNewUnits().First();
                 }
                 Speak("Ваня! Покажи где " + CurUnit.Card.SoundedText);// + ". Ваня! Где " + CurUnit.Card.Title + "?");
-                
+
                 needSpeakAgain = true;
                 needFlash = true;
-                speakAgainTimer = new Timer(SpeakAgain, null, 8000, 5000);
-                flashTimer = new Timer(Flash, null, 30000, 20000);
+
+                speakAgainTimer = new Timer(SpeakAgain, null, (int)(1000 * Settings.SpeakAgainCardNameDelay), (int)(1000 * Settings.SpeakAgainCardNameTimePeriod));
+
+                if (Settings.VisualHintEnable)
+                    if (Settings.EducationModeEnable)
+                        flashTimer = new Timer(Flash, null, (int)(1000 * Settings.EducationVisualHintDelay), (int)(1000 * Settings.EducationVisualHintTimePeriod));
+                    else
+                        flashTimer = new Timer(Flash, null, (int)(1000 * Settings.VisualHintDelay), (int)(1000 * Settings.VisualHintTimePeriod));
+
 
                 Game.Owner.TextForCardTag.Text = "Тема: " + this.tag + ".  Надо показать: " + CurUnit.Card.Title;
 
@@ -189,7 +197,14 @@ namespace VanyaGame.GameCardsEasyDB.Struct
             if (needFlash)
             {
                 var body = CurUnit.GetComponent<HaveBody>().Body as CardUnitElement;
-                body.Dispatcher.Invoke(() => { body.Flash(); });
+
+                TimeSpan period;
+                if (Settings.EducationModeEnable)
+                    period = TimeSpan.FromSeconds(Settings.EducationVisualHintDuration);
+                else
+                    period = TimeSpan.FromSeconds(Settings.VisualHintDuration);
+
+                body.Dispatcher.Invoke(() => { body.Flash(period); });
             }
         }
 
@@ -244,7 +259,7 @@ namespace VanyaGame.GameCardsEasyDB.Struct
             else
             {
                 Speak("Не правильно! Попробуй ещё раз.");
-                
+
             }
 
             foreach (var u in UnitsCol.GetAllUnits())

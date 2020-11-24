@@ -26,51 +26,75 @@ namespace VanyaGame.GameCardsEasyDB.Interface
 
         #region PROPERTIES
 
-        public bool ShowFullNameInPlayerHeader
+        
+            
+
+        public bool VisualHintEnable
         {
-            get
-            {
-                if (Settings.showFullNameInPlayerHeader == "True")
-                    return true;
-                else return false;
-            }
-            set
-            {
-                if (value == true) Settings.showFullNameInPlayerHeader = "True";
-                else Settings.showFullNameInPlayerHeader = "False";
-                OnPropertyChanged("ShowFullNameInPlayerHeader");
-            }
+            get { return Settings.VisualHintEnable; }
+            set { Settings.VisualHintEnable = value; OnPropertyChanged("VisualHintEnable"); }
         }
 
-        public double SlowRate
+        public double SpeakAgainCardNameDelay
         {
-            get { return Settings.SlowRate; }
-            set { Settings.SlowRate = value; OnPropertyChanged("SlowRate"); }
+            get { return Settings.SpeakAgainCardNameDelay; }
+            set { Settings.SpeakAgainCardNameDelay = value; OnPropertyChanged("SpeakAgainCardNameDelay"); }
         }
 
-        public double FastRate
+        public bool EducationModeEnable
         {
-            get { return Settings.FastRate; }
-            set { Settings.FastRate = value; OnPropertyChanged("FastRate"); }
+            get { return Settings.EducationModeEnable; }
+            set { Settings.EducationModeEnable = value; OnPropertyChanged("EducationModeEnable"); }
         }
 
-        public double RateShift
+        public double SpeakAgainCardNameTimePeriod
         {
-            get { return Settings.RateShift; }
-            set { Settings.RateShift = value; OnPropertyChanged("RateShift"); }
+            get { return Settings.SpeakAgainCardNameTimePeriod; }
+            set { Settings.SpeakAgainCardNameTimePeriod = value; OnPropertyChanged("SpeakAgainCardNameTimePeriod"); }
         }
 
-        public double Step
+        public double VisualHintDelay
         {
-            get { return Settings.Step; }
-            set { Settings.Step = value; OnPropertyChanged("Step"); }
+            get { return Settings.VisualHintDelay; }
+            set { Settings.VisualHintDelay = value; OnPropertyChanged("VisualHintDelay"); }
         }
 
-        public double DefaultVolume
+        public double VisualHintTimePeriod
         {
-            get { return Settings.DefaultVolume; }
-            set { Settings.DefaultVolume = value; OnPropertyChanged("DefaultVolume"); }
+            get { return Settings.VisualHintTimePeriod; }
+            set { Settings.VisualHintTimePeriod = value; OnPropertyChanged("VisualHintTimePeriod"); }
         }
+
+        public double VisualHintDuration
+        {
+            get { return Settings.VisualHintDuration; }
+            set { Settings.VisualHintDuration = value; OnPropertyChanged("VisualHintDuration"); }
+        }
+
+        public double EducationVisualHintDelay
+        {
+            get { return Settings.EducationVisualHintDelay; }
+            set { Settings.EducationVisualHintDelay = value; OnPropertyChanged("EducationVisualHintDelay"); }
+        }
+
+        public double EducationVisualHintTimePeriod
+        {
+            get { return Settings.EducationVisualHintTimePeriod; }
+            set { Settings.EducationVisualHintTimePeriod = value; OnPropertyChanged("EducationVisualHintTimePeriod"); }
+        }
+
+        public double EducationVisualHintDuration
+        {
+            get { return Settings.EducationVisualHintDuration; }
+            set { Settings.EducationVisualHintDuration = value; OnPropertyChanged("EducationVisualHintDuration"); }
+        }
+
+
+
+
+
+        
+
         #endregion
 
         #region METHODS
@@ -108,14 +132,18 @@ namespace VanyaGame.GameCardsEasyDB.Interface
                   (restoreSettingsCommand = new RelayCommand(obj =>
                   {
                       Settings.RestoreAllSettings();
-                      OnPropertyChanged("IsStateFilesRestorePathTypeAbsolute");
-                      OnPropertyChanged("IsStateFilesRestorePathTypeRelative");
-                      OnPropertyChanged("ShowFullNameInPlayerHeader");
-                      OnPropertyChanged("SlowRate");
-                      OnPropertyChanged("FastRate");
-                      OnPropertyChanged("RateShift");
-                      OnPropertyChanged("Step");
-                      OnPropertyChanged("DefaultVolume");
+
+
+                       OnPropertyChanged("VisualHintEnable");
+                       OnPropertyChanged("EducationModeEnable");
+                       OnPropertyChanged("SpeakAgainCardNameDelay");
+                       OnPropertyChanged("SpeakAgainCardNameTimePeriod");
+                       OnPropertyChanged("VisualHintDelay");
+                       OnPropertyChanged("VisualHintTimePeriod");
+                       OnPropertyChanged("VisualHintDuration");
+                       OnPropertyChanged("EducationVisualHintDelay");
+                       OnPropertyChanged("EducationVisualHintTimePeriod");
+                       OnPropertyChanged("EducationVisualHintDuration");
                   }));
             }
         }
