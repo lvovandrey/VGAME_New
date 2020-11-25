@@ -55,17 +55,17 @@ namespace VanyaGame.GameCardsEasyDB.Units
             Img.Cursor = cursor;
         }
 
-        public void Flash(TimeSpan Period)
+        public void Flash(TimeSpan Period, double Size)
         {
             DoubleAnimation AW = new DoubleAnimation();
             AW.From = 0;
-            AW.To = 250;
+            AW.To = Size;
             AW.AutoReverse = true;
             AW.Duration = Period;
 
             DoubleAnimation AH = new DoubleAnimation();
             AH.From = 0;
-            AH.To = 250;
+            AH.To = Size;
             AH.AutoReverse = true;
             AH.Duration = Period;
 

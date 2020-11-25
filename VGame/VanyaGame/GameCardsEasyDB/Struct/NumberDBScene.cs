@@ -53,11 +53,13 @@ namespace VanyaGame.GameCardsEasyDB.Struct
 
         private void LoadSets()
         {
-
+            Settings.RestoreAllSettings();
         }
 
         private void LoadContent()
         {
+
+
             IEnumerable<DB.DBCardsRepositoryModel.Card> cards;
             string LevelTag = ((CardsEasyDBLevel)this.Level).Tag;
             if (LevelTag == null || LevelTag == "")
@@ -198,7 +200,7 @@ namespace VanyaGame.GameCardsEasyDB.Struct
                 else
                     period = TimeSpan.FromSeconds(Settings.VisualHintDuration);
 
-                body.Dispatcher.Invoke(() => { body.Flash(period); });
+                body.Dispatcher.Invoke(() => { body.Flash(period, Settings.CardSize); });
             }
         }
 
