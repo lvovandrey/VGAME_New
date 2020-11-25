@@ -8,7 +8,7 @@ namespace VanyaGame.DB
     public class Context : DbContext
     {
         public Context()
-            : base("LevelSetsEditor.Properties.Settings.LEVELSDBConnectionString")
+            : base("LEVELSDBConnectionString")
         { }
 
         public DbSet<Level> Levels { get; set; }
@@ -23,7 +23,7 @@ namespace VanyaGame.DB
     public class ContextCards : DbContext
     {
         public ContextCards()
-            : base("CardsEditor.Properties.Settings.CardsDBInsectsConnectionString_OLD")
+            : base("CardsDBConnectionString")
         { }
 
         public DbSet<Card> Cards { get; set; }

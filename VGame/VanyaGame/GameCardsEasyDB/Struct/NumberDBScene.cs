@@ -101,8 +101,7 @@ namespace VanyaGame.GameCardsEasyDB.Struct
 
         private void Start()
         {
-            Settings.RestoreAllSettings();
-
+           
             foreach (var u in UnitsCol.GetAllUnits())
                 u.MouseClicked += U_MouseClicked;
             Game.Owner.TextForCardTag.Text = this.tag;
