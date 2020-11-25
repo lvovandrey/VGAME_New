@@ -91,7 +91,7 @@
             </Grid>
             <Grid Grid.Row="0" x:Name="GridMain" VerticalAlignment="Stretch" Panel.ZIndex="0" HorizontalAlignment="Stretch" />
 
-            <WrapPanel ItemWidth="700" ItemHeight="700" Orientation="Horizontal"  x:Name="WrapPanelBigCards" Grid.Row="0" MaxWidth="1260" VerticalAlignment="Center" HorizontalAlignment="Center" >
+            <WrapPanel Orientation="Horizontal"  x:Name="WrapPanelBigCards" Grid.Row="0" Margin="50 50 50 0" VerticalAlignment="Center" HorizontalAlignment="Center" >
             </WrapPanel>
 
             <WrapPanel ItemWidth="300" ItemHeight="300" Orientation="Horizontal"  x:Name="WrapPanelMain" Grid.Row="0" MaxWidth="1260" VerticalAlignment="Center" HorizontalAlignment="Center" >

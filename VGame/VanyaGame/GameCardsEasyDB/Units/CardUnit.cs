@@ -22,7 +22,14 @@ namespace VanyaGame.GameCardsEasyDB.Units
         public event Action MouseClicked;
         public bool readyToReactionOnMouseDown= false;
 
-        public CardUnit(Scene scene, Card card)
+
+        public CardUnit(Scene scene, Card card, double size) : this(scene, card)
+        {
+            ((CardUnitElement)this.GetComponent<HaveBody>().Body).Width = size;
+            ((CardUnitElement)this.GetComponent<HaveBody>().Body).Height = size;
+        }
+
+        private CardUnit(Scene scene, Card card)
         {
             Card = card;
             Scene = scene;

@@ -90,7 +90,7 @@ namespace VanyaGame.GameCardsEasyDB.Struct
 
             for (int i = 0; i < cardsList.Count; i++)// var card in cards)
             {
-                CardUnit c = new CardUnit(this, cardsList[i]);
+                CardUnit c = new CardUnit(this, cardsList[i], Settings.CardSize);
                 UnitsCol.AddUnit(c);
             }
         }
@@ -237,14 +237,14 @@ namespace VanyaGame.GameCardsEasyDB.Struct
                 ToolsTimer.Delay(() =>
                 {
                     SpeakSlow(CurUnittmp.Card.SoundedText);
-                }, TimeSpan.FromSeconds(3));
+                }, TimeSpan.FromSeconds(Settings.CardSuccesTime));
 
                 CurUnit = null;
 
                 Panel.SetZIndex(Game.Owner.WrapPanelBigCards, 30001);
                 var cu = CurUnittmp.DeepCopy();
-                cu.GetComponent<HaveBody>().Body.Height = 500;
-                cu.GetComponent<HaveBody>().Body.Width = 500;
+                cu.GetComponent<HaveBody>().Body.Height = Settings.CardSuccesSize;
+                cu.GetComponent<HaveBody>().Body.Width = Settings.CardSuccesSize;
 
                 HaveBox HB = new HaveBox("HaveBox", Game.Owner, Game.Owner.WrapPanelBigCards, cu);
                 cu.GetComponent<HiderShower>().Show(1, TimeSpan.FromSeconds(1), new Thickness(100), TimeSpan.FromSeconds(1));
@@ -274,7 +274,7 @@ namespace VanyaGame.GameCardsEasyDB.Struct
                     Game.Owner.WrapPanelBigCards.Children.Clear();
                     NextNumber();
                 }, TimeSpan.FromSeconds(1));
-            }, TimeSpan.FromSeconds(4));
+            }, TimeSpan.FromSeconds(Settings.CardSuccesTime+1));
         }
 
         private void Speak(string text)

@@ -212,6 +212,8 @@ namespace VanyaGame.GameCardsEasyDB.Tools
         }
 
 
+
+
         public static string FirstQuestionText
         {
             get; set;
@@ -233,6 +235,68 @@ namespace VanyaGame.GameCardsEasyDB.Tools
         }
 
 
+
+
+        public static string cardSize = "250";
+        public static double CardSize
+        {
+            get
+            {
+                double s = 250;
+                if (double.TryParse(cardSize, out s)) return s;
+                else return 250;
+            }
+            set
+            {
+                if (value <= 0 || value > 1000)
+                {
+                    InfoWindow.Show("Размер карточек должно быть положительным числом от 0.001 до 1000");
+                    return;
+                }
+                cardSize = value.ToString();
+            }
+        }
+
+        public static string cardSuccesSize = "500";
+        public static double CardSuccesSize
+        {
+            get
+            {
+                double s = 500;
+                if (double.TryParse(cardSuccesSize, out s)) return s;
+                else return 500;
+            }
+            set
+            {
+                if (value <= 0 || value > 2000)
+                {
+                    InfoWindow.Show("Размер увеличенной карточки после правильного ответа должно быть положительным числом от 0.001 до 2000");
+                    return;
+                }
+                cardSuccesSize = value.ToString();
+            }
+        }
+
+        public static string cardSuccesTime = "3";
+        public static double CardSuccesTime
+        {
+            get
+            {
+                double s = 3;
+                if (double.TryParse(cardSuccesTime, out s)) return s;
+                else return 3;
+            }
+            set
+            {
+                if (value <= 0 || value > 100)
+                {
+                    InfoWindow.Show("Время предъявления увеличенной карточки после правильного ответа должно быть положительным числом от 0.001 до 100");
+                    return;
+                }
+                cardSuccesTime = value.ToString();
+            }
+        }
+
         static public void SaveAllSettings()
         {
             ConfigurationTools.AddUpdateAppSettings("VisualHintEnable", visualHintEnable);
@@ -250,6 +314,11 @@ namespace VanyaGame.GameCardsEasyDB.Tools
             ConfigurationTools.AddUpdateAppSettings("HintQuestionText", HintQuestionText);
             ConfigurationTools.AddUpdateAppSettings("SuccessTestText", SuccessTestText);
             ConfigurationTools.AddUpdateAppSettings("FallTestText", FallTestText);
+
+            ConfigurationTools.AddUpdateAppSettings("CardSize", cardSize);
+            ConfigurationTools.AddUpdateAppSettings("CardSuccesSize", cardSuccesSize);
+            ConfigurationTools.AddUpdateAppSettings("CardSuccesTime", cardSuccesTime);
+
 
 
             SettingsChanged?.Invoke();
@@ -272,6 +341,10 @@ namespace VanyaGame.GameCardsEasyDB.Tools
             HintQuestionText = ConfigurationTools.ReadSetting("HintQuestionText");
             SuccessTestText = ConfigurationTools.ReadSetting("SuccessTestText");
             FallTestText = ConfigurationTools.ReadSetting("FallTestText");
+
+            cardSize = ConfigurationTools.ReadSetting("CardSize");
+            cardSuccesSize = ConfigurationTools.ReadSetting("CardSuccesSize");
+            cardSuccesTime = ConfigurationTools.ReadSetting("CardSuccesTime");
 
             SettingsChanged?.Invoke();
         }

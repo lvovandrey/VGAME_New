@@ -188,6 +188,9 @@
     <Compile Include="GameCardsEasyDB\Interface\SettingsViewsElements\SpeakSettingsView.xaml.cs">
       <DependentUpon>SpeakSettingsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GameCardsEasyDB\Interface\SettingsViewsElements\ViewSettingsView.xaml.cs">
+      <DependentUpon>ViewSettingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GameCardsEasyDB\Interface\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
@@ -330,6 +333,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GameCardsEasyDB\Interface\SettingsViewsElements\SpeakSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GameCardsEasyDB\Interface\SettingsViewsElements\ViewSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

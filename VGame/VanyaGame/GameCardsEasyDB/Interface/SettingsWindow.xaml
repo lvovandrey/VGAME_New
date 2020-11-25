@@ -32,7 +32,7 @@
         </StackPanel>
         <el:HintSettingsView Grid.Row="0" Grid.Column="1" x:Name="HintSettins"/>
         <el:SpeakSettingsView Grid.Row="0" Grid.Column="1" Visibility="Hidden" x:Name="SpeakSettings" />
-        <Rectangle Fill="Yellow" Grid.Row="0" Grid.Column="1" Visibility="Hidden" x:Name="ViewSettings" />
+        <el:ViewSettingsView Grid.Row="0" Grid.Column="1" Visibility="Hidden" x:Name="ViewSettings" />
         <Rectangle Fill="Blue" Grid.Row="0" Grid.Column="1" Visibility="Hidden" x:Name="DBSettings" />
         <Rectangle Fill="Green" Grid.Row="0" Grid.Column="1" Visibility="Hidden" x:Name="TestsSettings" />
 
