@@ -297,6 +297,48 @@ namespace VanyaGame.GameCardsEasyDB.Tools
             }
         }
 
+
+        public static string cardWrongPauseTime = "3";
+        public static double CardWrongPauseTime
+        {
+            get
+            {
+                double s = 3;
+                if (double.TryParse(cardWrongPauseTime, out s)) return s;
+                else return 3;
+            }
+            set
+            {
+                if (value <= 0 || value > 100)
+                {
+                    InfoWindow.Show("Время паузы после НЕправильного ответа должно быть положительным числом от 0.001 до 100");
+                    return;
+                }
+                cardWrongPauseTime = value.ToString();
+            }
+        }
+        public static string cardSuccesSpeakAgainTime = "3";
+        public static double CardSuccesSpeakAgainTime
+        {
+            get
+            {
+                double s = 3;
+                if (double.TryParse(cardSuccesSpeakAgainTime, out s)) return s;
+                else return 3;
+            }
+            set
+            {
+                if (value <= 0 || value > 100)
+                {
+                    InfoWindow.Show("Время повторного озвучивания карточки после правильного ответа должно быть положительным числом от 0.001 до 100");
+                    return;
+                }
+                cardSuccesSpeakAgainTime = value.ToString();
+            }
+        }
+        
+
+
         static public void SaveAllSettings()
         {
             ConfigurationTools.AddUpdateAppSettings("VisualHintEnable", visualHintEnable);
@@ -318,7 +360,9 @@ namespace VanyaGame.GameCardsEasyDB.Tools
             ConfigurationTools.AddUpdateAppSettings("CardSize", cardSize);
             ConfigurationTools.AddUpdateAppSettings("CardSuccesSize", cardSuccesSize);
             ConfigurationTools.AddUpdateAppSettings("CardSuccesTime", cardSuccesTime);
-
+            ConfigurationTools.AddUpdateAppSettings("CardWrongPauseTime", cardWrongPauseTime);
+            ConfigurationTools.AddUpdateAppSettings("CardSuccesSpeakAgainTime", cardSuccesSpeakAgainTime);
+            
 
 
             SettingsChanged?.Invoke();
@@ -345,6 +389,8 @@ namespace VanyaGame.GameCardsEasyDB.Tools
             cardSize = ConfigurationTools.ReadSetting("CardSize");
             cardSuccesSize = ConfigurationTools.ReadSetting("CardSuccesSize");
             cardSuccesTime = ConfigurationTools.ReadSetting("CardSuccesTime");
+            cardWrongPauseTime = ConfigurationTools.ReadSetting("CardWrongPauseTime");
+            cardSuccesSpeakAgainTime = ConfigurationTools.ReadSetting("CardSuccesSpeakAgainTime"); 
 
             SettingsChanged?.Invoke();
         }

@@ -132,8 +132,17 @@ namespace VanyaGame.GameCardsEasyDB.Interface
             set { Settings.CardSuccesTime = value; OnPropertyChanged("CardSuccesTime"); }
         }
 
-      
-
+        public double CardWrongPauseTime
+        {
+            get { return Settings.CardWrongPauseTime; }
+            set { Settings.CardWrongPauseTime = value; OnPropertyChanged("CardWrongPauseTime"); }
+        }
+        public double CardSuccesSpeakAgainTime
+        {
+            get { return Settings.CardSuccesSpeakAgainTime; }
+            set { Settings.CardSuccesSpeakAgainTime = value; OnPropertyChanged("CardSuccesSpeakAgainTime"); }
+        }
+        
 
 
         #endregion
@@ -170,6 +179,9 @@ namespace VanyaGame.GameCardsEasyDB.Interface
             OnPropertyChanged("CardSize");
             OnPropertyChanged("CardSuccesSize");
             OnPropertyChanged("CardSuccesTime");
+            OnPropertyChanged("CardWrongPauseTime");
+            OnPropertyChanged("CardSuccesSpeakAgainTime");
+            
         }
 
         #endregion

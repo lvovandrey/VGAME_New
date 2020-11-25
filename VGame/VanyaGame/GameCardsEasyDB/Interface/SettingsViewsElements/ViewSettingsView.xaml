@@ -13,15 +13,29 @@
 
 
                 <StackPanel>
-                    <el:PropertyViewer_DoubleNums_UpDown DataContext="{Binding CardSize, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                    <GroupBox Header="Размеры" Margin="5">
+                        <StackPanel>
+                            <el:PropertyViewer_DoubleNums_UpDown DataContext="{Binding CardSize, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                                          Tag="Размер карточек"
                                                          Margin="5"/>
-                    <el:PropertyViewer_DoubleNums_UpDown DataContext="{Binding CardSuccesSize, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                            <el:PropertyViewer_DoubleNums_UpDown DataContext="{Binding CardSuccesSize, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                                          Tag="Размер увеличенной карточки после правильного ответа"
                                                          Margin="5"/>
-                    <el:PropertyViewer_DoubleNums_UpDown DataContext="{Binding CardSuccesTime, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Различные времена" Margin="5">
+                        <StackPanel>
+                            <el:PropertyViewer_DoubleNums_UpDown DataContext="{Binding CardSuccesTime, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                                          Tag="Время предъявления увеличенной карточки после правильного ответа"
                                                          Margin="5"/>
+                            <el:PropertyViewer_DoubleNums_UpDown DataContext="{Binding CardWrongPauseTime, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                                         Tag="Время задержки после НЕправильного ответа"
+                                                         Margin="5"/>
+                            <el:PropertyViewer_DoubleNums_UpDown DataContext="{Binding CardSuccesSpeakAgainTime, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                                         Tag="Время повторного озвучивания карточки после правильного ответа"
+                                                         Margin="5"/>
+                        </StackPanel>
+                    </GroupBox>
                 </StackPanel>
 
             </ScrollViewer>

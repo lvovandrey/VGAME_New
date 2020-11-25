@@ -239,7 +239,7 @@ namespace VanyaGame.GameCardsEasyDB.Struct
                 ToolsTimer.Delay(() =>
                 {
                     SpeakSlow(CurUnittmp.Card.SoundedText);
-                }, TimeSpan.FromSeconds(Settings.CardSuccesTime));
+                }, TimeSpan.FromSeconds(Settings.CardSuccesSpeakAgainTime));
 
                 CurUnit = null;
 
@@ -267,6 +267,13 @@ namespace VanyaGame.GameCardsEasyDB.Struct
                 }
             }
 
+
+            TimeSpan CardPauseTime;
+            if (IsHitSuccess)
+                CardPauseTime = TimeSpan.FromSeconds(Settings.CardSuccesTime);
+            else
+                CardPauseTime = TimeSpan.FromSeconds(Settings.CardWrongPauseTime);
+
             ToolsTimer.Delay(() =>
             {
                 Panel.SetZIndex(CurUnittmp.GetComponent<HaveBody>().Body, 1110);
@@ -276,7 +283,7 @@ namespace VanyaGame.GameCardsEasyDB.Struct
                     Game.Owner.WrapPanelBigCards.Children.Clear();
                     NextNumber();
                 }, TimeSpan.FromSeconds(1));
-            }, TimeSpan.FromSeconds(Settings.CardSuccesTime+1));
+            }, CardPauseTime);
         }
 
         private void Speak(string text)
