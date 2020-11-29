@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Data.SqlClient;
 using VanyaGame.DB.DBCardsRepositoryModel;
 using VanyaGame.DB.DBLevelsRepositoryModel;
 
@@ -11,11 +12,18 @@ namespace VanyaGame.DB
             : base("LEVELSDBConnectionString")
         { }
 
+        public Context(string connectionString)
+   : base(new SqlConnection(connectionString), true)
+        { }
+
         public DbSet<Level> Levels { get; set; }
         public DbSet<VideoInfo> VideoInfoes { get; set; }
         public DbSet<Preview> Previews { get; set; }
         public DbSet<Scene> Scenes { get; set; }
         public DbSet<VideoSegment> VideoSegments { get; set; }
+
+
+
 
     }
 
@@ -24,6 +32,10 @@ namespace VanyaGame.DB
     {
         public ContextCards()
             : base("CardsDBConnectionString")
+        { }
+
+        public ContextCards(string connectionString)
+           : base(new SqlConnection(connectionString), true)
         { }
 
         public DbSet<Card> Cards { get; set; }

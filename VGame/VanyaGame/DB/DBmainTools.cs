@@ -41,7 +41,7 @@ namespace VanyaGame.DB
             {
                 _levels = new ObservableCollection<Level>();
 
-                context = new Context();
+                context = new Context(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Professional\TestBackupDB\LevelSetsMYDBInsects.mdf;Integrated Security=True;Connect Timeout=30");
 
                 IEnumerable<VideoInfo> VI = context.VideoInfoes.OfType<VideoInfo>().Where(n => n.Id < 10000);
                 List<VideoInfo> VList = VI.ToList();
@@ -97,6 +97,70 @@ namespace VanyaGame.DB
             return !error;
         }
 
+        public bool LoadLevelsDB(ObservableCollection<Level> _levels, Context context, string AttachDbFilename)
+        {
+
+            bool error = false;
+            try
+            {
+                _levels = new ObservableCollection<Level>();
+
+                context = new Context(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename="+AttachDbFilename+ @";Integrated Security=True;Connect Timeout=30");
+
+                IEnumerable<VideoInfo> VI = context.VideoInfoes.OfType<VideoInfo>().Where(n => n.Id < 10000);
+                List<VideoInfo> VList = VI.ToList();
+
+                IEnumerable<Preview> Pr = context.Previews.OfType<Preview>().Where(n => n.Id < 10000);
+                List<Preview> PList = Pr.ToList();
+
+                IEnumerable<Scene> Sc = context.Scenes.OfType<Scene>().Where(n => n.Id < 10000);
+                List<Scene> ScList = Sc.ToList();
+
+                IEnumerable<VideoSegment> Vss = context.VideoSegments.OfType<VideoSegment>().Where(n => n.Id < 10000);
+                List<VideoSegment> VssList = Vss.ToList();
+
+                int levNumber = 0;
+                int levCount = 1;
+                IEnumerable<Level> LLL = context.Levels.OfType<Level>().Where(n => n.Id < 10000);
+                levCount = LLL.Count();
+
+                foreach (Level l in LLL)
+                {
+                    levNumber++;
+
+                    l.VideoInfo = VList.Where(n => n.Id == l.VideoInfoId).FirstOrDefault();
+                    l.VideoInfo.Preview = PList.Where(n => n.Id == l.VideoInfo.PreviewId).FirstOrDefault();
+                    var newScenes = l.Scenes.OrderBy(i => i.Position);
+                    l.Scenes = new ObservableCollection<Scene>();
+                    foreach (Scene s in newScenes)
+                    {
+                        l.Scenes.Add(s);
+                    }
+                    foreach (Scene s in l.Scenes)
+                    {
+                        foreach (VideoSegment v in VssList)
+                        {
+                            if (s.VideoSegmentId == v.Id)
+                            {
+                                s.VideoSegment = v;
+                            }
+                        }
+                    }
+                    // l.RefreshYoutubeLink();
+                    _levels.Add(l);
+                }
+
+                init(_levels, context);
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                error = true;
+            }
+            return !error;
+        }
+
         public bool LoadCardsDB(ObservableCollection<Card> _cards, ObservableCollection<Tag> _tags, ContextCards context)
         {
             bool error = false;
@@ -126,6 +190,35 @@ namespace VanyaGame.DB
             return !error;
         }
 
+        public bool LoadCardsDB(ObservableCollection<Card> _cards, ObservableCollection<Tag> _tags, ContextCards context, string AttachDbFilename)
+        {
+            bool error = false;
+            try
+            {
+                _cards = new ObservableCollection<Card>();
+                _tags = new ObservableCollection<Tag>();
+                context = new ContextCards(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + AttachDbFilename + @";Integrated Security=True;Connect Timeout=30");
+
+
+                IEnumerable<Tag> tags = context.Tags.Include(p => p.Cards).ToList();
+
+                IEnumerable<Card> cards = context.Cards.Include(p => p.Tags).ToList();
+
+                foreach (Card c in cards)
+                    _cards.Add(c);
+
+                foreach (Tag t in tags)
+                    _tags.Add(t);
+
+                initCards(_cards, _tags, context);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                error = true;
+            }
+            return !error;
+        }
 
     }
 }
