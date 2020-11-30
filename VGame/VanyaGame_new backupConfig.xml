@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <configSections>
+    <!-- For more information on Entity Framework configuration, visit http://go.microsoft.com/fwlink/?LinkID=237468 -->
+    <section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
+  </configSections>
+  <appSettings>
+    <add key="VisualHintEnable" value="Not Found" />
+    <add key="EducationModeEnable" value="Not Found" />
+    <add key="SpeakAgainCardNameDelay" value="Not Found" />
+    <add key="SpeakAgainCardNameTimePeriod" value="Not Found" />
+    <add key="VisualHintDelay" value="Not Found" />
+    <add key="VisualHintTimePeriod" value="Not Found" />
+    <add key="VisualHintDuration" value="Not Found" />
+    <add key="EducationVisualHintDelay" value="Not Found" />
+    <add key="EducationVisualHintTimePeriod" value="Not Found" />
+    <add key="EducationVisualHintDuration" value="Not Found" />
+    <add key="FirstQuestionText" value="Ваня! Где " />
+    <add key="HintQuestionText" value="" />
+    <add key="SuccessTestText" value="Молодец! Это " />
+    <add key="FallTestText" value="Неправильно! Попробуй еще раз." />
+    <add key="CardSize" value="270" />
+    <add key="CardSuccesSize" value="700" />
+    <add key="CardSuccesTime" value="7" />
+    <add key="CardWrongPauseTime" value="2" />
+    <add key="CardSuccesSpeakAgainTime" value="4" />
+    <add key="AttachedDBCardsFilename" value="C:\Users\Professional\TestBackupDB\CardsDBInsects.mdf" />
+    <add key="AttachedDBLevelsFilename" value="C:\Users\Professional\TestBackupDB\LevelSetsMYDBInsects.mdf" />
+  </appSettings>
+  <connectionStrings>
+    <add name="LEVELSDBConnectionString"
+      connectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Professional\TestBackupDB\LevelSetsMYDBInsects.mdf;Integrated Security=True;Connect Timeout=30"
+      providerName="System.Data.SqlClient" />
+    <add name="CardsDBConnectionString"
+      connectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Professional\TestBackupDB\CardsDBInsects.mdf;Integrated Security=True;Connect Timeout=30"
+  providerName="System.Data.SqlClient" />
+    
+    
+  </connectionStrings>
+  <startup>
+    <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5.2" />
+  </startup>
+  <entityFramework>
+    <defaultConnectionFactory type="System.Data.Entity.Infrastructure.LocalDbConnectionFactory, EntityFramework">
+      <parameters>
+        <parameter value="mssqllocaldb" />
+      </parameters>
+    </defaultConnectionFactory>
+    <providers>
+      <provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer" />
+    </providers>
+  </entityFramework>
+</configuration>

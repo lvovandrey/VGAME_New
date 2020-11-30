@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -297,6 +298,48 @@ namespace VanyaGame.GameCardsEasyDB.Tools
             }
         }
 
+        static string attachedDBLevelsFilename="";
+        public static string AttachedDBLevelsFilename
+        {
+            get
+            {
+                if (attachedDBLevelsFilename == "")
+                    attachedDBLevelsFilename = @"C:\Users\Professional\TestBackupDB\LevelSetsMYDBInsects.mdf";
+                return attachedDBLevelsFilename;
+            }
+            set 
+            {
+                if (!File.Exists(value) || Path.GetExtension(value)!=".mdf")
+                {
+                    InfoWindow.Show("Нужно выбрать существующий файл типа *.mdf для базы данных уровней");
+                    return;
+                }
+                attachedDBLevelsFilename = value;
+            }
+        }
+
+        static string attachedDBCardsFilename="";
+        public static string AttachedDBCardsFilename
+        {
+            get
+            {
+                if (attachedDBCardsFilename == "")
+                    attachedDBCardsFilename = @"C:\Users\Professional\TestBackupDB\CardsDBInsects.mdf";
+                return attachedDBCardsFilename;
+            }
+            set
+            {
+                if (!File.Exists(value) || Path.GetExtension(value) != ".mdf")
+                {
+                    InfoWindow.Show("Нужно выбрать существующий файл типа *.mdf для базы данных уровней");
+                    return;
+                }
+                attachedDBCardsFilename = value;
+            }
+        }
+
+
+
 
         public static string cardWrongPauseTime = "3";
         public static double CardWrongPauseTime
@@ -362,7 +405,9 @@ namespace VanyaGame.GameCardsEasyDB.Tools
             ConfigurationTools.AddUpdateAppSettings("CardSuccesTime", cardSuccesTime);
             ConfigurationTools.AddUpdateAppSettings("CardWrongPauseTime", cardWrongPauseTime);
             ConfigurationTools.AddUpdateAppSettings("CardSuccesSpeakAgainTime", cardSuccesSpeakAgainTime);
-            
+
+            ConfigurationTools.AddUpdateAppSettings("AttachedDBCardsFilename", attachedDBCardsFilename);
+            ConfigurationTools.AddUpdateAppSettings("AttachedDBLevelsFilename", attachedDBLevelsFilename);
 
 
             SettingsChanged?.Invoke();
@@ -390,7 +435,12 @@ namespace VanyaGame.GameCardsEasyDB.Tools
             cardSuccesSize = ConfigurationTools.ReadSetting("CardSuccesSize");
             cardSuccesTime = ConfigurationTools.ReadSetting("CardSuccesTime");
             cardWrongPauseTime = ConfigurationTools.ReadSetting("CardWrongPauseTime");
-            cardSuccesSpeakAgainTime = ConfigurationTools.ReadSetting("CardSuccesSpeakAgainTime"); 
+            cardSuccesSpeakAgainTime = ConfigurationTools.ReadSetting("CardSuccesSpeakAgainTime");
+
+            attachedDBCardsFilename = ConfigurationTools.ReadSetting("AttachedDBCardsFilename");
+            attachedDBLevelsFilename = ConfigurationTools.ReadSetting("AttachedDBLevelsFilename");
+
+
 
             SettingsChanged?.Invoke();
         }

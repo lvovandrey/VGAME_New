@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using VanyaGame.Abstract;
 using VanyaGame.GameCardsEasyDB.Tools;
 
@@ -143,7 +144,17 @@ namespace VanyaGame.GameCardsEasyDB.Interface
             set { Settings.CardSuccesSpeakAgainTime = value; OnPropertyChanged("CardSuccesSpeakAgainTime"); }
         }
         
+        public string AttachedDBCardsFilename
+        {
+            get { return Settings.AttachedDBCardsFilename; }
+            set { Settings.AttachedDBCardsFilename = value; OnPropertyChanged("AttachedDBCardsFilename"); }
+        }
 
+        public string AttachedDBLevelsFilename
+        {
+            get { return Settings.AttachedDBLevelsFilename; }
+            set { Settings.AttachedDBLevelsFilename = value; OnPropertyChanged("AttachedDBLevelsFilename"); }
+        }
 
         #endregion
 
@@ -181,7 +192,9 @@ namespace VanyaGame.GameCardsEasyDB.Interface
             OnPropertyChanged("CardSuccesTime");
             OnPropertyChanged("CardWrongPauseTime");
             OnPropertyChanged("CardSuccesSpeakAgainTime");
-            
+
+            OnPropertyChanged("AttachedDBCardsFilename");
+            OnPropertyChanged("AttachedDBLevelsFilename");
         }
 
         #endregion
@@ -210,6 +223,48 @@ namespace VanyaGame.GameCardsEasyDB.Interface
                   {
                       Settings.RestoreAllSettings();
                       RefreshAllDependencyProperties();
+                  }));
+            }
+        }
+
+        private RelayCommand chooseAttachedDBCardsFilename;
+        public RelayCommand ChooseAttachedDBCardsFilename
+        {
+            get
+            {
+                return chooseAttachedDBCardsFilename ??
+                  (chooseAttachedDBCardsFilename = new RelayCommand(obj =>
+                  {
+                      using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                      {
+                          openFileDialog.Filter = "Файлы базы данных(*.mdf)|*.mdf";
+                          openFileDialog.ValidateNames = false;
+                          if (openFileDialog.ShowDialog() == DialogResult.OK)
+                          {
+                              AttachedDBCardsFilename = @openFileDialog.FileName;
+                          }
+                      }
+                  }));
+            }
+        }
+
+        private RelayCommand chooseAttachedDBLevelsFilename;
+        public RelayCommand ChooseAttachedDBLevelsFilename
+        {
+            get
+            {
+                return chooseAttachedDBLevelsFilename ??
+                  (chooseAttachedDBLevelsFilename = new RelayCommand(obj =>
+                  {
+                      using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                      {
+                          openFileDialog.Filter = "Файлы базы данных(*.mdf)|*.mdf";
+                          openFileDialog.ValidateNames = false;
+                          if (openFileDialog.ShowDialog() == DialogResult.OK)
+                          {
+                              AttachedDBLevelsFilename = @openFileDialog.FileName;
+                          }
+                      }
                   }));
             }
         }

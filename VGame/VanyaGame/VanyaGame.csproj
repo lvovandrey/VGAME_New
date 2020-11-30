@@ -177,6 +177,9 @@
     <Compile Include="GameCardsEasyDB\Interface\Elements\PropertyViewer_DoubleNums_UpDown.xaml.cs">
       <DependentUpon>PropertyViewer_DoubleNums_UpDown.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GameCardsEasyDB\Interface\SettingsViewsElements\DBSettingsView.xaml.cs">
+      <DependentUpon>DBSettingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GameCardsEasyDB\Interface\SettingsViewsElements\HintSettingsView.xaml.cs">
       <DependentUpon>HintSettingsView.xaml</DependentUpon>
     </Compile>
@@ -315,6 +318,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="GameCardsEasyDB\Interface\Elements\PropertyViewer_DoubleNums_UpDown.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GameCardsEasyDB\Interface\SettingsViewsElements\DBSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -278,7 +278,8 @@ namespace VanyaGame
 
             /// ??? двойной вызов с ImageBegin_MouseUp   
             Owner.StartButton.MouseUp += StartButton_MouseUp;
-           
+            Owner.StartButton2.MouseUp += StartButton_MouseUp;
+            Owner.StartButton3.MouseUp += StartButton_MouseUp;
         }
 
 

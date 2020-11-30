@@ -8,6 +8,7 @@ using VanyaGame.Struct.Components;
 using DBModel = VanyaGame.DB.DBLevelsRepositoryModel;
 using DBCardsModel = VanyaGame.DB.DBCardsRepositoryModel;
 using System.Collections.ObjectModel;
+using VanyaGame.GameCardsEasyDB.Tools;
 
 namespace VanyaGame.GameCardsEasyDB.Struct
 {
@@ -45,9 +46,10 @@ namespace VanyaGame.GameCardsEasyDB.Struct
 
         public static void LoadLevels(DBmainTools DB)
         {
-            
-            DB.LoadLevelsDB(new ObservableCollection<DBModel.Level>(), DB.Context);
-            DB.LoadCardsDB(new ObservableCollection<DBCardsModel.Card>(), new ObservableCollection<DBCardsModel.Tag>(), DB.ContextCards);
+            Settings.RestoreAllSettings();
+
+            DB.LoadLevelsDB(new ObservableCollection<DBModel.Level>(), DB.Context, Settings.AttachedDBLevelsFilename);
+            DB.LoadCardsDB(new ObservableCollection<DBCardsModel.Card>(), new ObservableCollection<DBCardsModel.Tag>(), DB.ContextCards, Settings.AttachedDBCardsFilename);
 
            
             Random random = new Random();
