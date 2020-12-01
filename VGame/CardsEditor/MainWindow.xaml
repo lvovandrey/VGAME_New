@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CardsEditor"
         xmlns:view="clr-namespace:CardsEditor.View"
+        xmlns:viewlvl="clr-namespace:CardsEditor.View.Level"
+        xmlns:cardattach="clr-namespace:CardsEditor.View.CardsAttachLevel"
         mc:Ignorable="d"
         Title="MainWindow" Height="750" Width="800" Loaded="Window_Loaded">
     <Grid>
@@ -19,63 +21,39 @@
                     <StackPanel Grid.Column="1">
 
                         <view:CardView  DataContext="{Binding SelectedCardVM}"></view:CardView>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="30"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-
-                            <StackPanel Grid.Column="0">
-                                <ListBox ItemsSource="{Binding Path=TagVMs, UpdateSourceTrigger=PropertyChanged}"
-                             SelectedItem="{Binding Path=SelectedTagVM, UpdateSourceTrigger=PropertyChanged}"
-                 ScrollViewer.VerticalScrollBarVisibility="Visible" MinHeight="100" MaxHeight="200">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="2"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                                <StackPanel Orientation="Horizontal">
-                                    <Button Command="{Binding AddTagCommand}" Height="25" Width="25" Margin="2 2 5 2" Content="+"/>
-                                    <Button Command="{Binding RemoveTagCommand}" Height="25" Width="25" Margin="2 2 5 2" Content="-"/>
-                                </StackPanel>
-
-                            </StackPanel>
-
-                            <StackPanel Grid.Column="1" >
-                                <Button Command="{Binding AttachTagOnCardCommand}" Height="20" Width="20" Margin="2" Content="-&gt;"/>
-                                <Button Command="{Binding AttachAllTagsOnCardCommand}" Height="20" Width="20" Margin="2" Content="=&gt;"/>
-                                <Button Command="{Binding DetachTagFromCardCommand}" Height="20" Width="20" Margin="2" Content="&lt;-"/>
-                                <Button Command="{Binding DetachAllTagsFromCardCommand}" Height="20" Width="20" Margin="2" Content="&lt;="/>
-                            </StackPanel>
-
-                            <StackPanel Grid.Column="2">
-                                <ListBox ItemsSource="{Binding Path=SelectedCardTagVMs, UpdateSourceTrigger=PropertyChanged,
-                 Mode=OneWay}"
-                             SelectedItem="{Binding Path=SelectedOnCardTagVM, UpdateSourceTrigger=PropertyChanged}"
-                 ScrollViewer.VerticalScrollBarVisibility="Visible" MinHeight="100" MaxHeight="200">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="2"/>
-
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                            </StackPanel>
-
-                        </Grid>
+                      
 
                     </StackPanel>
                 </Grid>
 
             </TabItem>
-            <TabItem Header="Теги">
-                <view:TagEditorView/>
+            <TabItem Header="Уровни">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <viewlvl:ListLevelsView></viewlvl:ListLevelsView>
+                    <StackPanel Grid.Column="1">
+
+                        <viewlvl:LevelView  DataContext="{Binding SelectedLevelVM}"></viewlvl:LevelView>
+                        
+
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Заполнение уровней">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <viewlvl:ListLevelsView />
+                    <cardattach:CardsAttachLevelList Grid.Column="1"/>
+                    <cardattach:InLevelCardsList DataContext="{Binding SelectedLevelVM}" Grid.Column="2"/>
+                </Grid>
             </TabItem>
 
         </TabControl>

@@ -16,14 +16,16 @@ namespace CardsEditor.ViewModel
     public class CardVM : INPCBase
     {
         #region Constructors
-        public CardVM(Card card)
+        public CardVM(Card card, VM vm)
         {
             _card = card;
+            _vm = vm;
         }
         #endregion
 
         #region Fields
         Card _card;
+        VM _vm;
         #endregion
 
         #region Properties
@@ -69,7 +71,7 @@ namespace CardsEditor.ViewModel
                 {
                     OpenFileDialog openFileDialog = new OpenFileDialog();
                     openFileDialog.Filter = "Файлы изображений (*.bmp, *.jpg, *.png)|*.bmp;*.jpg;*.png";
-                    openFileDialog.Title = "Открыть свое изображение для превью видео";
+                    openFileDialog.Title = "Открыть свое изображение для карточки";
                     if (openFileDialog.ShowDialog() == true)
                         ImageAddress = @openFileDialog.FileName;
 
@@ -100,6 +102,45 @@ namespace CardsEditor.ViewModel
             }
         }
 
+        private RelayCommand copyTitleToSoundedTextCommand;
+        public RelayCommand CopyTitleToSoundedTextCommand
+        {
+            get
+            {
+                return copyTitleToSoundedTextCommand ?? (copyTitleToSoundedTextCommand = new RelayCommand(obj =>
+                {
+                    SoundedText = Title;
+                }));
+            }
+        }
+
+        private RelayCommand detachCardToSelectedLevelCommand;
+        public RelayCommand DetachCardToSelectedLevelCommand
+        {
+            get
+            {
+                return detachCardToSelectedLevelCommand ?? (detachCardToSelectedLevelCommand = new RelayCommand(obj =>
+                {
+                    //var cardvm = obj as CardVM;
+                    //if (cardvm == null) return;
+                    _vm.SelectedLevelVM.DetachCardToSelectedLevel(this);
+                }));
+            }
+        }
+
+        private RelayCommand attachCardToSelectedLevelCommand;
+        public RelayCommand AttachCardToSelectedLevelCommand
+        {
+            get
+            {
+                return attachCardToSelectedLevelCommand ?? (attachCardToSelectedLevelCommand = new RelayCommand(obj =>
+                {
+                    //var cardvm = obj as CardVM;
+                    //if (cardvm == null) return;
+                    _vm.SelectedLevelVM.AttachCardToSelectedLevel(this);
+                }));
+            }
+        }
 
 
         #endregion

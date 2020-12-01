@@ -13,11 +13,11 @@ namespace LevelSetsEditor.DB
     public class Context : DbContext
     {
         public Context()
-            : base("CardsEditor.Properties.Settings.CardsDBInsectsConnectionString_OLD")
+            : base("CardsAndLevelsConnection")
         { }
 
         public DbSet<Card> Cards { get; set; }
-        public DbSet<Tag> Tags { get; set; }
+        public DbSet<Level> Levels { get; set; }
 
     }
 }

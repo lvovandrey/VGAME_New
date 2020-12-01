@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CardsEditor.View
+namespace CardsEditor.View.CardsAttachLevel
 {
     /// <summary>
-    /// Логика взаимодействия для TagItemListView.xaml
+    /// Interaction logic for CardsAttachLevelList.xaml
     /// </summary>
-    public partial class TagItemListView : UserControl
+    public partial class CardsAttachLevelList : UserControl
     {
-        public TagItemListView()
+        public CardsAttachLevelList()
         {
             InitializeComponent();
         }

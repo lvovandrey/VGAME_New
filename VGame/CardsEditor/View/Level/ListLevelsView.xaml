@@ -1,10 +1,10 @@
-﻿<UserControl x:Class="CardsEditor.View.ListTagsView"
+﻿<UserControl x:Class="CardsEditor.View.Level.ListLevelsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:CardsEditor.View"
-                         mc:Ignorable="d" 
+             xmlns:local="clr-namespace:CardsEditor.View.Level"
+             mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -20,15 +20,14 @@
             <RowDefinition Height ="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-
-        <Button Content="Add" Command="{Binding AddCommand}" Grid.Column="2" Margin="3"/>
-        <Button Content="Remove" Command="{Binding RemoveCommand}" Grid.Column="3" Margin="3"/>
+        <Button Content="Add" Command="{Binding AddLevelCommand}" Grid.Column="2" Margin="3"/>
+        <Button Content="Remove" Command="{Binding RemoveLevelCommand}" Grid.Column="3" Margin="3"/>
         <Button Content="Save all" Command="{Binding SaveCommand}"  Grid.Column="4" Margin="3" />
 
 
 
-        <ListBox SelectedItem="{Binding SelectedTagVM,UpdateSourceTrigger=PropertyChanged}" 
-                 ItemsSource="{Binding Path=TagVMs, UpdateSourceTrigger=PropertyChanged,
+        <ListBox SelectedItem="{Binding SelectedLevelVM,UpdateSourceTrigger=PropertyChanged}" 
+                 ItemsSource="{Binding Path=LevelVMs, UpdateSourceTrigger=PropertyChanged,
                  Mode=OneWay}"
                  Grid.Row="1" Grid.ColumnSpan="12" 
                  ScrollViewer.VerticalScrollBarVisibility="Visible" 
@@ -36,7 +35,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
 
-                    <local:TagItemListView HorizontalAlignment="Stretch"/>
+                    <local:LevelItemListView HorizontalAlignment="Stretch"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
 

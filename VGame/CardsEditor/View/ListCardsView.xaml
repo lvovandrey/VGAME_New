@@ -22,8 +22,8 @@
         </Grid.RowDefinitions>
         <Button Content="Load DB" Command="{Binding LoadDBCommand}"  Grid.Column="0" Margin="3" 
                 Foreground="Red" FontWeight="Black" />
-        <Button Content="Add" Command="{Binding AddCommand}" Grid.Column="2" Margin="3"/>
-        <Button Content="Remove" Command="{Binding RemoveCommand}" Grid.Column="3" Margin="3"/>
+        <Button Content="Add" Command="{Binding AddCardCommand}" Grid.Column="2" Margin="3"/>
+        <Button Content="Remove" Command="{Binding RemoveCardCommand}" Grid.Column="3" Margin="3"/>
         <Button Content="Save all" Command="{Binding SaveCommand}"  Grid.Column="4" Margin="3" />
 
 

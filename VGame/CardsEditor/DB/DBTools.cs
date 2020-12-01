@@ -13,26 +13,25 @@ namespace CardsEditor.DB
 {
     public class DBTools
     {
-        public static bool LoadDB(VM vm, ObservableCollection<Card> _cards, ObservableCollection<Tag> _tags, Context context)
+        public static bool LoadDB(VM vm, ObservableCollection<Card> _cards, ObservableCollection<Level> _levels, Context context)
         {
             bool error = false;
             try
             {
                 _cards = new ObservableCollection<Card>();
-                _tags = new ObservableCollection<Tag>();
+                _levels = new ObservableCollection<Level>();
                 context = new Context();
 
-                IEnumerable<Tag> tags = context.Tags.Include(p => p.Cards).ToList();
-
-                IEnumerable<Card> cards = context.Cards.Include(p => p.Tags).ToList();
+                IEnumerable<Level> levels = context.Levels.Include(p => p.Cards).ToList();
+                IEnumerable<Card> cards = context.Cards.ToList();
 
                 foreach (Card c in cards)
                     _cards.Add(c);
 
-                foreach (Tag t in tags)
-                    _tags.Add(t);
+                foreach (Level t in levels)
+                    _levels.Add(t);
 
-                vm.init(_cards,_tags, context);
+                vm.init(_cards, _levels, context);
             }
             catch(Exception e)
             {

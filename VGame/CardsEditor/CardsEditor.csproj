@@ -82,39 +82,45 @@
     </ApplicationDefinition>
     <Compile Include="Abstract\INPCBase.cs" />
     <Compile Include="Abstract\RelayCommand.cs" />
-    <Compile Include="CardsDBInsectsDataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CardsDBInsectsDataSet1.xsd</DependentUpon>
-    </Compile>
     <Compile Include="DB\Context.cs" />
     <Compile Include="DB\DBTools.cs" />
     <Compile Include="Model\Card.cs" />
-    <Compile Include="Model\Tag.cs" />
+    <Compile Include="Model\Level.cs" />
     <Compile Include="ViewModel\CardVM.cs" />
-    <Compile Include="ViewModel\TagEditorVM.cs" />
-    <Compile Include="ViewModel\TagVM.cs" />
+    <Compile Include="ViewModel\LevelVM.cs" />
     <Compile Include="ViewModel\VM.cs" />
     <Compile Include="View\CardItemListView.xaml.cs">
       <DependentUpon>CardItemListView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\CardsAttachLevel\CardAttachedView.xaml.cs">
+      <DependentUpon>CardAttachedView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CardsAttachLevel\CardsAttachLevelList.xaml.cs">
+      <DependentUpon>CardsAttachLevelList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CardsAttachLevel\InLevelCardItem.xaml.cs">
+      <DependentUpon>InLevelCardItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CardsAttachLevel\InLevelCardsList.xaml.cs">
+      <DependentUpon>InLevelCardsList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CardView.xaml.cs">
       <DependentUpon>CardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Level\LevelItemListView.xaml.cs">
+      <DependentUpon>LevelItemListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Level\LevelView.xaml.cs">
+      <DependentUpon>LevelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Level\ListLevelsView.xaml.cs">
+      <DependentUpon>ListLevelsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ListCardsView.xaml.cs">
       <DependentUpon>ListCardsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ListTagsView.xaml.cs">
-      <DependentUpon>ListTagsView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\PropertyViewer.xaml.cs">
       <DependentUpon>PropertyViewer.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\TagEditorView.xaml.cs">
-      <DependentUpon>TagEditorView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\TagItemListView.xaml.cs">
-      <DependentUpon>TagItemListView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -132,7 +138,35 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\CardsAttachLevel\CardAttachedView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CardsAttachLevel\CardsAttachLevelList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CardsAttachLevel\InLevelCardItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CardsAttachLevel\InLevelCardsList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\CardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Level\LevelItemListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Level\LevelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Level\ListLevelsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -140,19 +174,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ListTagsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\PropertyViewer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\TagEditorView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\TagItemListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -175,17 +197,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="CardsDBInsectsDataSet1.xsc">
-      <DependentUpon>CardsDBInsectsDataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="CardsDBInsectsDataSet1.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>CardsDBInsectsDataSet1.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="CardsDBInsectsDataSet1.xss">
-      <DependentUpon>CardsDBInsectsDataSet1.xsd</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -197,15 +208,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tools\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="CardsDBInsects.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CardsDBInsects_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>CardsDBInsects.mdf</DependentUpon>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

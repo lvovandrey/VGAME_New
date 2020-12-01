@@ -14,7 +14,9 @@
                     <local:PropertyViewer  DataContext="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Название"/>
                     <local:PropertyViewer  DataContext="{Binding Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Описание"/>
                     <StackPanel>
-                    <local:PropertyViewer  DataContext="{Binding SoundedText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Произносимое слово"/>
+
+                        <local:PropertyViewer  DataContext="{Binding SoundedText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Произносимое слово"/>
+                        <Button Content="Копировать называние" Command="{Binding CopyTitleToSoundedTextCommand, ConverterParameter= SoundedText}" Margin="80,0,80,20"/>
                         <Button Content="Прослушать текст" Command="{Binding SoundedTextSpeakCommand, ConverterParameter= SoundedText}" Margin="80,0,80,20"/>
 
                     </StackPanel>
