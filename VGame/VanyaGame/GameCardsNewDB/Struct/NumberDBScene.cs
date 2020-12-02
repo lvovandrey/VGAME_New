@@ -1,0 +1,348 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Speech.Synthesis;
+using System.Threading;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Threading;
+using VanyaGame.DB.DBCardsRepositoryModel;
+using VanyaGame.GameCardsNewDB.Tools;
+using VanyaGame.GameCardsNewDB.Units;
+using VanyaGame.GameCardsNewDB.Units.Components;
+using VanyaGame.Struct;
+using VanyaGame.Struct.Components;
+using VanyaGame.ToolsShuffle;
+using VanyaGame.Units.Components;
+using DBModel = VanyaGame.DB.DBLevelsRepositoryModel;
+
+namespace VanyaGame.GameCardsNewDB.Struct
+{
+    public class CardsNewDBScene : VanyaGame.Struct.Scene
+    {
+        private UnitsCollection<CardUnit> UnitsCol; //For easy call this component 
+        private CardUnit CurUnit; //Текущая карточка, которую нужно озвучить и отгадать
+        private bool ReadyToNextUnit;
+        private CardsNewDBLevel numberDBLevel;
+        private DBModel.Scene DBSceneRecord;
+
+        public string tag;
+
+
+        public CardsNewDBScene(Level _Level, DBModel.Scene scene, string name) : base(_Level, name)
+        {
+            this.Level = _Level;
+            this.DBSceneRecord = scene;
+            Sets = new SceneSets(_Level, this);
+            //Sets.Directory = "NONE SCENE DIR!!!";
+
+            InnerVideoSets IVC = new InnerVideoSets("InnerVideoSets", Sets);
+            Level = _Level;
+
+            GetComponent<Loader>().LoadSets = LoadSets;
+            GetComponent<Loader>().LoadContent = LoadContent;
+
+            GetComponent<Starter>().StartElements.Add(Start);
+
+            UnitsCol = new UnitsCollection<CardUnit>("UnitsCollection", this);
+            ReadyToNextUnit = true;
+
+        }
+
+        private void LoadSets()
+        {
+            Settings.RestoreAllSettings();
+        }
+
+        private void LoadContent()
+        {
+
+
+            IEnumerable<DB.DBCardsRepositoryModel.Card> cards;
+            string LevelTag = ((CardsNewDBLevel)this.Level).Tag;
+            if (LevelTag == null || LevelTag == "")
+            {
+                MessageBox.Show("Тег уровня - пустой!");
+                throw new Exception("Тег уровня - пустой!");
+            }
+
+            var tags = Game.DBTools.Tags;
+            DB.DBCardsRepositoryModel.Tag TAG = new DB.DBCardsRepositoryModel.Tag();
+            foreach (var tagDB in Game.DBTools.Tags)
+            {
+                if (tagDB.Name == LevelTag)
+                {
+                    this.tag = tagDB.Name;
+                    TAG = tagDB;
+                    break;
+                }
+            }
+            if (tag == null || tag == "")
+            {
+                MessageBox.Show("Тег уровня не найден в БД!");
+                throw new Exception("Тег уровня не найден в БД!");
+            }
+            cards = from c in Game.DBTools.Cards where c.Tags.Contains(TAG) select c;
+            var cardsList = cards.ToList();
+
+
+            cardsList = new ListShuffle<Card>().Shuffle(cardsList);
+
+            for (int i = 0; i < cardsList.Count; i++)// var card in cards)
+            {
+                CardUnit c = new CardUnit(this, cardsList[i], Settings.CardSize);
+                UnitsCol.AddUnit(c);
+            }
+        }
+
+
+
+        private void Start()
+        {
+           
+            foreach (var u in UnitsCol.GetAllUnits())
+                u.MouseClicked += U_MouseClicked;
+            Game.Owner.TextForCardTag.Text = this.tag;
+
+            NextNumber();
+            SceneStarted(this, Level);
+            Game.UserActivity.UserDoSomethingEvent += UserDoSomething;
+        }
+
+        private void UserDoSomething(MouseEventArgs mouse, MouseButtonEventArgs mousebutton, KeyEventArgs key)
+        {
+
+        }
+
+
+        private void NextNumber()
+        {
+            Panel.SetZIndex(Game.Owner.WrapPanelMain, 30000);
+
+            if (UnitsCol.GetNewUnits().Count > 0)
+            {
+
+                Game.Owner.WrapPanelMain.Children.Clear();
+                UnitsCol.Shuffle();
+                var AllUnitsShuffled = new ListShuffle<CardUnit>().Shuffle(UnitsCol.GetAllUnits());
+                foreach (var u in AllUnitsShuffled)
+                {
+                    if (u.GetComponent<HaveBox>() != null)
+                    {
+                        u.GetComponent<HaveBox>().RemoveFromBox();
+                        u.Components.Remove("HaveBox");
+                    }
+                    HaveBox HB = new HaveBox("HaveBox", Game.Owner, Game.Owner.WrapPanelMain, u);
+                }
+
+
+
+                foreach (var u in UnitsCol.GetAllUnits())
+                {
+                    u.GetComponent<CardShower>().Show(() => { ReadyToNextUnit = true; });
+                    u.GetComponent<Hit>().IsHited = false;
+                    u.readyToReactionOnMouseDown = true;
+                    Panel.SetZIndex(u.GetComponent<HaveBody>().Body, 33000);
+                }
+
+                if (CurUnit == null)
+                {
+                    List<CardUnit> newUnitsShuffled = new ListShuffle<CardUnit>().Shuffle(UnitsCol.GetNewUnits());
+                    CurUnit = newUnitsShuffled[0]; //UnitsCol.GetNewUnits().First();
+                }
+                Speak(Settings.FirstQuestionText + CurUnit.Card.SoundedText);
+
+                needSpeakAgain = true;
+                needFlash = true;
+
+                speakAgainTimer = new Timer(SpeakAgain, null, (int)(1000 * Settings.SpeakAgainCardNameDelay), (int)(1000 * Settings.SpeakAgainCardNameTimePeriod));
+
+                if (Settings.VisualHintEnable)
+                    if (Settings.EducationModeEnable)
+                        flashTimer = new Timer(Flash, null, (int)(1000 * Settings.EducationVisualHintDelay), (int)(1000 * Settings.EducationVisualHintTimePeriod));
+                    else
+                        flashTimer = new Timer(Flash, null, (int)(1000 * Settings.VisualHintDelay), (int)(1000 * Settings.VisualHintTimePeriod));
+
+
+                Game.Owner.TextForCardTag.Text = "Тема: " + this.tag + ".  Надо показать: " + CurUnit.Card.Title;
+
+            }
+            else
+            {
+                SceneEnded(this, Level);
+            }
+        }
+
+        bool needSpeakAgain = false;
+        Timer speakAgainTimer;
+        private void SpeakAgain(object obj)
+        {
+            if (needSpeakAgain)
+            {
+                SpeakSlow(Settings.HintQuestionText + CurUnit.Card.SoundedText);
+            }
+        }
+
+        bool needFlash = false;
+        Timer flashTimer;
+        private void Flash(object obj)
+        {
+            if (needFlash)
+            {
+                var body = CurUnit.GetComponent<HaveBody>().Body as CardUnitElement;
+
+                TimeSpan period;
+                if (Settings.EducationModeEnable)
+                    period = TimeSpan.FromSeconds(Settings.EducationVisualHintDuration);
+                else
+                    period = TimeSpan.FromSeconds(Settings.VisualHintDuration);
+
+                body.Dispatcher.Invoke(() => { body.Flash(period, Settings.CardSize); });
+            }
+        }
+
+
+        private void U_MouseClicked()
+        {
+            needSpeakAgain = false;
+            if (speakAgainTimer != null)
+            {
+                speakAgainTimer.Dispose();
+            }
+
+            needFlash = false;
+            if (flashTimer != null)
+            {
+                flashTimer.Dispose();
+            }
+
+            bool IsHitSuccess = false;
+            var CurUnittmp = CurUnit;
+
+            foreach (var u in UnitsCol.GetAllUnits())
+            {
+                u.GetComponent<CardShower>().Show(() => { ReadyToNextUnit = true; });
+                u.readyToReactionOnMouseDown = false;
+                if ((u.GetComponent<Hit>().IsHited) && (CurUnit.Card.Title == u.Card.Title))
+                    IsHitSuccess = true;
+            }
+            if (IsHitSuccess)
+            {
+                Panel.SetZIndex(CurUnittmp.GetComponent<HaveBody>().Body, 1110);
+                CurUnittmp.GetComponent<CardShower>().Hide(() => { });
+
+                CurUnit.GetComponent<UState>().newOld = NewOld.Old;
+                Speak(Settings.SuccessTestText + CurUnit.Card.SoundedText);
+                ToolsTimer.Delay(() =>
+                {
+                    SpeakSlow(CurUnittmp.Card.SoundedText);
+                }, TimeSpan.FromSeconds(Settings.CardSuccesSpeakAgainTime));
+
+                CurUnit = null;
+
+                Panel.SetZIndex(Game.Owner.WrapPanelBigCards, 30001);
+                var cu = CurUnittmp.DeepCopy();
+                cu.GetComponent<HaveBody>().Body.Height = Settings.CardSuccesSize;
+                cu.GetComponent<HaveBody>().Body.Width = Settings.CardSuccesSize;
+
+                HaveBox HB = new HaveBox("HaveBox", Game.Owner, Game.Owner.WrapPanelBigCards, cu);
+                cu.GetComponent<HiderShower>().Show(1, TimeSpan.FromSeconds(1), new Thickness(100), TimeSpan.FromSeconds(1));
+
+            }
+            else
+            {
+                Speak(Settings.FallTestText);
+
+            }
+
+            foreach (var u in UnitsCol.GetAllUnits())
+            {
+                if (u != CurUnittmp || (!IsHitSuccess && u == CurUnittmp))
+                {
+                    Panel.SetZIndex(u.GetComponent<HaveBody>().Body, 1110);
+                    u.GetComponent<CardShower>().Hide(() => { });
+                }
+            }
+
+
+            TimeSpan CardPauseTime;
+            if (IsHitSuccess)
+                CardPauseTime = TimeSpan.FromSeconds(Settings.CardSuccesTime);
+            else
+                CardPauseTime = TimeSpan.FromSeconds(Settings.CardWrongPauseTime);
+
+            ToolsTimer.Delay(() =>
+            {
+                Panel.SetZIndex(CurUnittmp.GetComponent<HaveBody>().Body, 1110);
+                CurUnittmp.GetComponent<CardShower>().Hide(() => { });
+                ToolsTimer.Delay(() =>
+                {
+                    Game.Owner.WrapPanelBigCards.Children.Clear();
+                    NextNumber();
+                }, TimeSpan.FromSeconds(1));
+            }, CardPauseTime);
+        }
+
+        private void Speak(string text)
+        {
+            if (text == null) return;
+            SpeechSynthesizer speaker = new SpeechSynthesizer();
+
+            var voices = speaker.GetInstalledVoices(new CultureInfo("ru-RU"));
+
+            if (voices.Count == 0) MessageBox.Show("В системе не установлены голоса для синтеза речи на русском языке. Установите пожалуйста, а то ничего не будет слышно.");
+            else speaker.SelectVoice(voices[0].VoiceInfo.Name);
+            speaker.Rate = 1;
+            speaker.Volume = 100;
+            speaker.SpeakAsync(text);
+        }
+
+        private void SpeakSlow(string text)
+        {
+            if (text == null) return;
+            SpeechSynthesizer speaker = new SpeechSynthesizer();
+
+            var voices = speaker.GetInstalledVoices(new CultureInfo("ru-RU"));
+
+            if (voices.Count == 0) MessageBox.Show("В системе не установлены голоса для синтеза речи на русском языке. Установите пожалуйста, а то ничего не будет слышно.");
+            else speaker.SelectVoice(voices[0].VoiceInfo.Name);
+            speaker.Rate = -3;
+            speaker.Volume = 100;
+            speaker.SpeakAsync(text);
+        }
+
+
+
+        public void SceneStarted(Scene SL, Level Level)
+        {
+
+            Game.Music.Play();
+            Game.Music.MediaGUI.UIMediaShow();
+            Game.CurVideo.MediaGUI.UIMediaHide();
+            //Game.Owner.Cursor = Cursors.Arrow;
+        }
+
+
+
+        public void SceneEnded(Scene SL, Level Level)
+        {
+
+            foreach (var u in UnitsCol.GetAllUnits())
+                u.MouseClicked -= U_MouseClicked;
+
+            Game.Owner.TextForCardTag.Text = "";
+            Game.UserActivity.UserDoSomethingEvent -= UserDoSomething;
+
+            Game.Music.Pause();
+            Game.Owner.WrapPanelMain.Children.Clear();
+
+            ((CardsNewDBLevel)Level).NextScene();
+
+
+        }
+
+
+    }
+}

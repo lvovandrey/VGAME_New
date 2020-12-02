@@ -15,6 +15,7 @@ using VanyaGame.Abstract;
 using VanyaGame.GameNumberDB.Struct;
 using VanyaGame.GameCardsEasyDB.Struct;
 using VanyaGame.DB;
+using VanyaGame.GameCardsNewDB.Struct;
 
 namespace VanyaGame
 {
@@ -32,6 +33,7 @@ namespace VanyaGame
         Number,      
         NumberDB,
         CardsEasy,
+        CardsNewDB,
         None
     }
 
@@ -52,7 +54,6 @@ namespace VanyaGame
         public static TUserActivity UserActivity = new TUserActivity();
 
         public static DBmainTools DBTools = new DBmainTools();
-
 
         private static ComponentContainer mediaContainer;
 
@@ -123,6 +124,14 @@ namespace VanyaGame
 
                 return;
             }
+
+            if (Game.Sets.gameType == GameType.CardsNewDB)
+            {
+                CardsNewDBLevel.LoadLevels();
+                return;
+            }
+
+
 
             string dir_ = dir + @"\";
             string[] Level_dirs = Directory.GetDirectories(dir_, "Level*");
@@ -294,6 +303,9 @@ namespace VanyaGame
 
             if (sender.GetType() == typeof(VanyaGame.GameCardsEasyDB.Interface.BeautyButtonCardsEasyDB))
                 Sets.gameType = GameType.CardsEasy;
+
+            if (sender.GetType() == typeof(VanyaGame.GameCardsNewDB.Interface.BeautyButtonCardsNewDB))
+                Sets.gameType = GameType.CardsNewDB;
 
             ToolsTimer.Delay(() =>
             {

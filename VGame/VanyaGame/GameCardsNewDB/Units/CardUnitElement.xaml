@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="VanyaGame.GameCardsNewDB.Units.CardUnitElement"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" Width="280" Height="280">
+    <Grid>
+        <Grid Name="Grd" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Background="#3FE0E0E0">
+            <Grid.Effect>
+                <DropShadowEffect ShadowDepth="15" BlurRadius="10"/>
+            </Grid.Effect>
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform X="0"/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+            <Rectangle Stroke="#FF878787" StrokeThickness="3" Fill="#07FFFFFF" Stretch="UniformToFill">
+
+            </Rectangle>
+
+
+            <Image Name="Img"   Source="pack://application:,,,/1.GameNumber/Images/4.png" Stretch="Uniform" 
+               RenderTransformOrigin="0.5,0.5"  Margin="10" MouseDown="Img_MouseDown" MouseUp="Img_MouseUp" MouseLeave="Img_MouseLeave" Panel.ZIndex="35000">
+                <Image.Triggers>
+                    <EventTrigger RoutedEvent="Image.PreviewMouseDown">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard TargetProperty="Opacity" TargetName="Img">
+                                    <DoubleAnimation  To="0.1"
+                             
+                             Duration="0:0:0.3" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="Image.MouseEnter">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard TargetProperty="Opacity" TargetName="Img">
+                                    <DoubleAnimation  To="0.6"
+                             Duration="0:0:0.3" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="Image.MouseLeave">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard TargetProperty="Opacity" TargetName="Img">
+                                    <DoubleAnimation To="1"
+                             Duration="0:0:0.3" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </Image.Triggers>
+
+            </Image>
+
+            <Rectangle x:Name="FlashedRect" Opacity="1" Panel.ZIndex="35001" Width="0" Height="0">
+                <Rectangle.Fill>
+                    <RadialGradientBrush>
+                        <GradientStop Offset="0.61" Color="#99FF0000"/>
+                        <GradientStop Color="#00FF0000" Offset="1"/>
+                        <GradientStop Color="#E4FF0000" Offset="0"/>
+                    </RadialGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <Label x:Name="Lbl" Content="" Opacity="0"/>
+        </Grid>
+    </Grid>
+</UserControl>

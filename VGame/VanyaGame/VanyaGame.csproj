@@ -174,6 +174,42 @@
       <DependentUpon>NumberElement.xaml</DependentUpon>
     </Compile>
     <Compile Include="2.GameNumberDB\Units\NumberUnit.cs" />
+    <Compile Include="GameCardsNewDB\DB\RepositoryModel\Context.cs" />
+    <Compile Include="GameCardsNewDB\DB\RepositoryModel\DBTools.cs" />
+    <Compile Include="GameCardsNewDB\DB\RepositoryModel\Repository.cs" />
+    <Compile Include="GameCardsNewDB\Interface\BeautyButtonCardsNewDB.xaml.cs">
+      <DependentUpon>BeautyButtonCardsNewDB.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GameCardsNewDB\Interface\Elements\PropertyViewer_DoubleNums_UpDown.xaml.cs">
+      <DependentUpon>PropertyViewer_DoubleNums_UpDown.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GameCardsNewDB\Interface\SettingsViewsElements\DBSettingsView.xaml.cs">
+      <DependentUpon>DBSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GameCardsNewDB\Interface\SettingsViewsElements\HintSettingsView.xaml.cs">
+      <DependentUpon>HintSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GameCardsNewDB\Interface\SettingsViewsElements\SpeakSettingsView.xaml.cs">
+      <DependentUpon>SpeakSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GameCardsNewDB\Interface\SettingsViewsElements\ViewSettingsView.xaml.cs">
+      <DependentUpon>ViewSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GameCardsNewDB\Interface\SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GameCardsNewDB\Interface\SettingsWindowVM.cs" />
+    <Compile Include="GameCardsNewDB\Struct\CardsNewDBIteration.cs" />
+    <Compile Include="GameCardsNewDB\Struct\CardsNewDBLevel.cs" />
+    <Compile Include="GameCardsNewDB\Struct\NumberDBScene.cs" />
+    <Compile Include="GameCardsNewDB\Tools\ConfigurationTools.cs" />
+    <Compile Include="GameCardsNewDB\Tools\InfoWindow.cs" />
+    <Compile Include="GameCardsNewDB\Tools\Settings.cs" />
+    <Compile Include="GameCardsNewDB\Units\CardUnit.cs" />
+    <Compile Include="GameCardsNewDB\Units\CardUnitElement.xaml.cs">
+      <DependentUpon>CardUnitElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GameCardsNewDB\Units\Components\CardShower.cs" />
     <Compile Include="GameCardsEasyDB\Interface\Elements\PropertyViewer_DoubleNums_UpDown.xaml.cs">
       <DependentUpon>PropertyViewer_DoubleNums_UpDown.xaml</DependentUpon>
     </Compile>
@@ -314,6 +350,38 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="2.GameNumberDB\Units\NumberElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GameCardsNewDB\Interface\BeautyButtonCardsNewDB.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GameCardsNewDB\Interface\Elements\PropertyViewer_DoubleNums_UpDown.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GameCardsNewDB\Interface\SettingsViewsElements\DBSettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GameCardsNewDB\Interface\SettingsViewsElements\HintSettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GameCardsNewDB\Interface\SettingsViewsElements\SpeakSettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GameCardsNewDB\Interface\SettingsViewsElements\ViewSettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GameCardsNewDB\Interface\SettingsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GameCardsNewDB\Units\CardUnitElement.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -651,6 +719,24 @@
     <Resource Include="GameCardsEasyDB\Images\HandPushDown.cur" />
     <Resource Include="GameCardsEasyDB\Images\keyboard.png" />
     <Resource Include="GameCardsEasyDB\Images\Paper.png" />
+    <Resource Include="GameCardsNewDB\Images\4.png" />
+    <Resource Include="GameCardsNewDB\Images\btn_start.png" />
+    <Resource Include="GameCardsNewDB\Images\btn_start1.png" />
+    <Resource Include="GameCardsNewDB\Images\btn_start2.png" />
+    <Resource Include="GameCardsNewDB\Images\btn_start3.png" />
+    <Resource Include="GameCardsNewDB\Images\Hand.cur">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GameCardsNewDB\Images\Hand1.cur">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GameCardsNewDB\Images\HandPrint.png" />
+    <Resource Include="GameCardsNewDB\Images\HandPush.cur">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GameCardsNewDB\Images\HandPushDown.cur" />
+    <Resource Include="GameCardsNewDB\Images\keyboard.png" />
+    <Resource Include="GameCardsNewDB\Images\Paper.png" />
     <Content Include="Tools\vlcLib\axvlc.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
