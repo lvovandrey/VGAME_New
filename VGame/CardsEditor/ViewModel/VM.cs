@@ -123,9 +123,9 @@ namespace CardsEditor.ViewModel
         //создаем и добавляем в БД новый тег
         private Level AddLevel(object obj)
         {
-            if (SelectedCardVM == null) return null;
+           // if (SelectedCardVM == null) return null;
 
-            Level t = new Level() { Id = _levels.Count + 1, Name = "Level " + (_levels.Count + 1).ToString(), Cards = new ObservableCollection<Card>() { SelectedCardVM.Card } };
+            Level t = new Level() { Id = _levels.Count + 1, Name = "Level " + (_levels.Count + 1).ToString(), Cards = new ObservableCollection<Card>()};
             _levels.Add(t);
             context.Levels.Add(t);
             context.SaveChanges();

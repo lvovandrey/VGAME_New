@@ -75,16 +75,16 @@ namespace CardsEditor.ViewModel
         #region Methods
         public void DetachCardToSelectedLevel(CardVM cardVM)
         {
-            if (!AttachedCardVMs.Contains(cardVM)) return;
+            if (!_cards.Contains(cardVM.Card)) return;
             _cards.Remove(cardVM.Card);
-            OnPropertyChanged("CardVMs");
+            OnPropertyChanged("AttachedCardVMs");
         }
 
         public void AttachCardToSelectedLevel(CardVM cardVM)
         {
-            if (AttachedCardVMs.Contains(cardVM)) return;
+            if (_cards.Contains(cardVM.Card)) return;
             _cards.Add(cardVM.Card);
-            OnPropertyChanged("CardVMs");
+            OnPropertyChanged("AttachedCardVMs");
         }
 
 
