@@ -53,9 +53,12 @@
                 <MediaElement x:Name="MediaElementSound" HorizontalAlignment="Left" Height="35" Margin="448,519,0,0" VerticalAlignment="Top" Width="35" LoadedBehavior="Manual"/>
                 <MediaElement x:Name="MediaElementMusic" HorizontalAlignment="Left" Height="38" Margin="359,519,0,0" VerticalAlignment="Top" Width="41" LoadedBehavior="Manual" MediaEnded="MediaElementMusic_MediaEnded" Volume="0.1"/>
                 <Grid x:Name="GridVideo" VerticalAlignment="Stretch"  HorizontalAlignment="Stretch" >
+
+                    
+                    
                     <StackPanel HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Top" 
                                Background="{x:Null}" Panel.ZIndex="2">
-                        <Button Click="SettingsWindowShowButtonClick" Content="Настройки"/>
+                        
                         <Label x:Name="Label1" 
                            Content="Нажмите Esc для выхода из игры&#xA;Нажмите F для пропуска видео" 
                            Visibility="Visible" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Top" 
@@ -110,7 +113,7 @@
 
             <Slider Cursor="{DynamicResource PushCursor}" x:Name="MusicVolumeSlider" HorizontalAlignment="Left" Height="50" 
             	Value="{Binding level, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-            	Margin="10,10,0,0" VerticalAlignment="Top" Width="245"  
+            	Margin="100,10,0,0" VerticalAlignment="Top" Width="245"  
             	MouseLeave="MusicVolumeSlider_MouseLeave" MouseEnter="MusicVolumeSlider_MouseEnter" Opacity="0.5"
             	Maximum="100"  Panel.ZIndex="10"
             	Style="{DynamicResource SliderStyle1}" >
@@ -134,8 +137,8 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="120"/>
                 </Grid.RowDefinitions>
-
-                <Slider Cursor="{DynamicResource PushCursor}"  Grid.ColumnSpan="3" Grid.Row="0" Grid.Column="0" x:Name="VideoVolumeSlider" HorizontalAlignment="Left" Height="50" 
+                <GameCardsNewDB:BeautyButtonSettings MouseUp="SettingsWindowShowButtonClick" Height="70" Width="70" Opacity="1"  Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Slider Cursor="{DynamicResource PushCursor}"  Grid.ColumnSpan="3" Grid.Row="0" Grid.Column="1" x:Name="VideoVolumeSlider" HorizontalAlignment="Left" Height="50" 
                     Value="{Binding level, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                     Margin="10,10,0,0" VerticalAlignment="Top" Width="245"  
                     MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave"                        

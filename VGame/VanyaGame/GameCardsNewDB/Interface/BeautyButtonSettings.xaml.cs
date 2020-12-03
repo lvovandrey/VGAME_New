@@ -19,9 +19,9 @@ namespace VanyaGame.GameCardsNewDB.Interface
     /// <summary>
     /// Логика взаимодействия для BeautyButtonCardsNewDB.xaml
     /// </summary>
-    public partial class BeautyButtonCardsNewDB : UserControl
+    public partial class BeautyButtonSettings : UserControl
     {
-        public BeautyButtonCardsNewDB()
+        public BeautyButtonSettings()
         {
             InitializeComponent();
         }
@@ -57,8 +57,8 @@ namespace VanyaGame.GameCardsNewDB.Interface
             Img.Cursor = cursor;
 
 
-            Storyboard s = (Storyboard)TryFindResource("AnimationHide");
-            s.Begin();  // Start animation}
+            //Storyboard s = (Storyboard)TryFindResource("AnimationHide");
+            //s.Begin();  // Start animation}
         }
 
 

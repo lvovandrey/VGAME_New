@@ -224,7 +224,7 @@ namespace VanyaGame
             Game.VideoPlayerSet(Game.VideoWpf);
         }
 
-        private void SettingsWindowShowButtonClick(object sender, RoutedEventArgs e)
+        private void SettingsWindowShowButtonClick(object sender, MouseButtonEventArgs e)
         {
             Game.ShowSettingsWindow();
         }

@@ -25,11 +25,34 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
 
+        
+        
     </UserControl.Resources>
-
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="MouseEnter">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <Storyboard TargetProperty="Width" TargetName="Img">
+                        <DoubleAnimation To="220" From="250"
+                                         Duration="0:0:0.1" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="MouseLeave">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <Storyboard TargetProperty="Width" TargetName="Img">
+                        <DoubleAnimation To="250" From="220"
+                                         Duration="0:0:0.1" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </UserControl.Triggers>
 
     <Grid>
-        <Image Name="Img" Source="pack://application:,,,/1.GameNumber/Images/btn_start.png" MouseDown="Img_MouseDown" MouseLeave="Img_MouseLeave" MouseUp="Img_MouseUp" MouseEnter="Img_MouseEnter" RenderTransformOrigin="0.5,0.5"  >
+        <Image Name="Img" Source="pack://application:,,,/GameCardsNewDB/Images/btn_startNew.png" MouseDown="Img_MouseDown" MouseEnter="Img_MouseEnter"  MouseUp="Img_MouseUp" MouseLeave="Img_MouseLeave" RenderTransformOrigin="0.5,0.5"  >
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

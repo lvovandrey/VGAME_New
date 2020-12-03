@@ -50,7 +50,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Images\logo.ico</ApplicationIcon>
+    <ApplicationIcon>book-icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -182,6 +182,9 @@
     </Compile>
     <Compile Include="GameCardsNewDB\Interface\Elements\PropertyViewer_DoubleNums_UpDown.xaml.cs">
       <DependentUpon>PropertyViewer_DoubleNums_UpDown.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GameCardsNewDB\Interface\BeautyButtonSettings.xaml.cs">
+      <DependentUpon>BeautyButtonSettings.xaml</DependentUpon>
     </Compile>
     <Compile Include="GameCardsNewDB\Interface\SettingsViewsElements\DBSettingsView.xaml.cs">
       <DependentUpon>DBSettingsView.xaml</DependentUpon>
@@ -358,6 +361,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="GameCardsNewDB\Interface\Elements\PropertyViewer_DoubleNums_UpDown.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GameCardsNewDB\Interface\BeautyButtonSettings.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -737,6 +744,10 @@
     <Resource Include="GameCardsNewDB\Images\HandPushDown.cur" />
     <Resource Include="GameCardsNewDB\Images\keyboard.png" />
     <Resource Include="GameCardsNewDB\Images\Paper.png" />
+    <Resource Include="GameCardsNewDB\Images\btn_startNew.png" />
+    <Resource Include="GameCardsNewDB\Images\btn_settings.png" />
+    <Resource Include="Images\book-icon.ico" />
+    <Resource Include="book-icon.ico" />
     <Content Include="Tools\vlcLib\axvlc.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

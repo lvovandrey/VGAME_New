@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace VanyaGame.GameCardsNewDB.Tools
 {
+    
+
     public static class Settings
     {
+
+        static long asdn = 584695540911;
         /// <summary>
         /// Событие возникает когда изменяются настройки. На него рекомендуется вешать все изменения которые завязаны с настройками.
         /// </summary>
