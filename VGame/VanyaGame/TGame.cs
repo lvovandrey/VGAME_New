@@ -99,6 +99,7 @@ namespace VanyaGame
 
         internal static void ShowSettingsWindow()
         {
+
             if (Game.Sets.gameType == GameType.CardsEasy)
             {
                 var SettingsWindow = new GameCardsEasyDB.Interface.SettingsWindow();
@@ -198,6 +199,19 @@ namespace VanyaGame
             Owner = WND_Owner;
             RandomGenerator = new Random();
             Sets = new TGameSets();
+
+            if (Owner.StartButton.GetType() == typeof(VanyaGame.GameNumber.Interface.BeautyButtonNumber))
+                Sets.gameType = GameType.Number;
+
+            if (Owner.StartButton.GetType() == typeof(VanyaGame.GameNumberDB.Interface.BeautyButtonNumberDB))
+                Sets.gameType = GameType.NumberDB;
+
+            if (Owner.StartButton.GetType() == typeof(VanyaGame.GameCardsEasyDB.Interface.BeautyButtonCardsEasyDB))
+                Sets.gameType = GameType.CardsEasy;
+
+            if (Owner.StartButton.GetType() == typeof(VanyaGame.GameCardsNewDB.Interface.BeautyButtonCardsNewDB))
+                Sets.gameType = GameType.CardsNewDB;
+
             mediaContainer = new GameMediaContainer();
 
             Player Snd = new PlayerWpf("PlayerSound", mediaContainer, Owner.MediaElementSound);

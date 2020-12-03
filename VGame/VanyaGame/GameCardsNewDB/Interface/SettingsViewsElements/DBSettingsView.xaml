@@ -22,7 +22,6 @@
                                 VerticalAlignment="Top"
                                 Command="{Binding ChooseAttachedDBCardsFilename}"/>
                     </StackPanel>
-                    <Label Content="База данных уровней" Margin="5 0 5 -1"/>
                 </StackPanel>
 
             </ScrollViewer>
