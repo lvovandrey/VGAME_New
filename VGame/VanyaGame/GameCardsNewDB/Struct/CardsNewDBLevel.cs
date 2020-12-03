@@ -21,19 +21,10 @@ namespace VanyaGame.GameCardsNewDB.Struct
     /// </summary>
     public class CardsNewDBLevel : Level
     {
-        private DBModel.Level DbLevelRecord;
+        public DB.RepositoryModel.Level DbLevelRecord;
 
-        public CardsNewDBLevel(string _LevelDir = @"\Level1") : base()
-        {
-            Sets = new LevelSets(this);
-            Sets.Directory = _LevelDir;
-            GetComponent<Loader>().LoadSets = LoadSets;
-            GetComponent<Loader>().LoadContent = LoadContent;
 
-            GetComponent<Starter>().StartElements.Add(Start);
-        }
-
-        public CardsNewDBLevel(DBModel.Level DbLevelRecord) : base()
+        public CardsNewDBLevel(DB.RepositoryModel.Level DbLevelRecord) : base()
         {
             this.DbLevelRecord = DbLevelRecord;
             Sets = new LevelSets(this);
@@ -49,7 +40,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
         {
             Settings.RestoreAllSettings();
 
-            DBTools.LoadDB(new ObservableCollection<DB.RepositoryModel.Card>(), new ObservableCollection<DB.RepositoryModel.Level>(),  Settings.AttachedDBLevelsFilename);
+            DBTools.LoadDB(new ObservableCollection<DB.RepositoryModel.Card>(), new ObservableCollection<DB.RepositoryModel.Level>(),  Settings.AttachedDBCardsFilename);
            
            
             Random random = new Random();
@@ -63,9 +54,9 @@ namespace VanyaGame.GameCardsNewDB.Struct
             //    DB.Levels[i] = tmpLevel;
             //}
 
-            foreach (var level in DBTools.Levels)
+            foreach (var level in DB.DBTools.Levels)
             {
-                Level NewLevel = new CardsNewDBLevel(level.Name);
+                Level NewLevel = new CardsNewDBLevel(level);
                 Game.Levels.Enqueue(NewLevel);
             }
 
@@ -81,27 +72,12 @@ namespace VanyaGame.GameCardsNewDB.Struct
         public static void LoadSetsFromDBRecord(CardsNewDBLevel Level)
         {
             Level.Scenes.Clear();
-            Level.Sets.Description = Level.DbLevelRecord.VideoInfo.Title;
             Level.Sets.Name = Level.DbLevelRecord.Name;
-            Level.Sets.PreviewType = Level.DbLevelRecord.VideoInfo.Preview.Type.ToString();
-            Level.Sets.BaseVideoFilename = Level.DbLevelRecord.VideoInfo.Address;
-            Level.Sets.PreviewURL= Level.DbLevelRecord.VideoInfo.Preview.SourceDb;
-
-
-
-            foreach (var Scene in Level.DbLevelRecord.Scenes)
-            {
-                Scene NewScene = new CardsNewDBScene(Level, Scene, "Scene" + Scene.Id.ToString());
-                NewScene.Sets.GetComponent<InnerVideoSets>().VideoFileName = Level.DbLevelRecord.VideoInfo.Address;
-                NewScene.Sets.GetComponent<InnerVideoSets>().VideoFileType = ConvertDBTools.VideoTypeConvertFromDB(Level.DbLevelRecord.VideoInfo.Type);
-                NewScene.Sets.GetComponent<InnerVideoSets>().VideoFileNumber = Level.DbLevelRecord.Scenes.IndexOf(Scene).ToString();
-                NewScene.Sets.GetComponent<InnerVideoSets>().VideoTimeBegin = Scene.VideoSegment.TimeBegin;
-                NewScene.Sets.GetComponent<InnerVideoSets>().VideoTimeEnd = Scene.VideoSegment.TimeEnd;
-                Level.Scenes.Add(NewScene.Name, NewScene);
-            }
-
-
-            
+            Level.Sets.Description = Level.Sets.Name;
+            Level.Sets.PreviewURL = Level.DbLevelRecord.ImageAddress;
+            Level.Sets.PreviewType = "local";
+            Scene NewScene = new CardsNewDBScene(Level);
+            Level.Scenes.Add(NewScene.Name, NewScene);
         }
 
 
@@ -147,39 +123,9 @@ namespace VanyaGame.GameCardsNewDB.Struct
             }
         }
 
-        /// <summary>
-        /// Дает команду объекту игры Game загрузить превью уровня из файла. 
-        /// Папку в которой искать файл определяет самостоятельно по объектам Game.Sets и Level.Sets 
-        /// </summary>
-        /// <param name="fileshortname">Имя файла фона. По умолч."back.jpg"</param>
-        public void LoadPreview(string fileshortname = @"preview.jpg")
-        {
-            if (Sets.PreviewType == VideoType.youtube.ToString())
-            {
-                string filename;
-                try { filename = YouTubeUrlSupplier.YoutubeGet.GetImage(Sets.BaseVideoFilename); }
-                catch { filename = Game.Sets.MainDir + @"\default.jpg"; Sets.PreviewType = "local"; }
-                Game.LoadPreview(filename);
-                return;
-            }
-
-            string Filepath = Game.Sets.MainDir + Sets.Directory + Sets.InterfaceDir + @"\" + fileshortname;
-            try
-            {
-                Game.LoadPreview(Filepath);
-            }
-            catch
-            {
-                MessageBox.Show("Не могу загрузить файл превью");
-            }
-        }
-
+  
         public int SceneNomer { get; private set; }
        
-        public string Tag { get { return DbLevelRecord.Tag; } }
-
-        public static object DBMainTools { get; private set; }
-
         /// <summary>
         /// Переключение на следующую сцену
         /// </summary>
@@ -217,7 +163,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
         /// </summary>
         public void LoadScenes()
         {
-            if (Scenes.Count == 0) Scenes.Add("Scene 1", new CardsNewDBScene(this, new DBModel.Scene(), "Scene 1"));
+            if (Scenes.Count == 0) Scenes.Add("Scene 1", new CardsNewDBScene(this));
 
 
             foreach (KeyValuePair<string, Scene> Sc in Scenes)

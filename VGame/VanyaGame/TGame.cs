@@ -105,6 +105,13 @@ namespace VanyaGame
                 var Settings = new GameCardsEasyDB.Interface.SettingsWindowVM(SettingsWindow);
                 SettingsWindow.Show();
             }
+
+            if (Game.Sets.gameType == GameType.CardsNewDB)
+            {
+                var SettingsWindow = new GameCardsNewDB.Interface.SettingsWindow();
+                var Settings = new GameCardsNewDB.Interface.SettingsWindowVM(SettingsWindow);
+                SettingsWindow.Show();
+            }
         }
 
         public static void LoadLevels(string dir) 
@@ -324,7 +331,9 @@ namespace VanyaGame
                     {
                         //                        filename = Game.Sets.MainDir + Level.Sets.Directory + Level.Sets.InterfaceDir + @"\preview.jpg";
                         if (Sets.gameType == GameType.CardsEasy)
-                            filename = ((CardsEasyDBLevel)Level).Sets.PreviewURL; 
+                            filename = ((CardsEasyDBLevel)Level).Sets.PreviewURL;
+                        if (Sets.gameType == GameType.CardsNewDB)
+                            filename = ((CardsNewDBLevel)Level).Sets.PreviewURL;
                     }
                     if (Level.Sets.PreviewType == "youtube")
                     {

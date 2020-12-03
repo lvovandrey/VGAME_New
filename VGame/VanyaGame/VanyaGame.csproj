@@ -201,7 +201,7 @@
     <Compile Include="GameCardsNewDB\Interface\SettingsWindowVM.cs" />
     <Compile Include="GameCardsNewDB\Struct\CardsNewDBIteration.cs" />
     <Compile Include="GameCardsNewDB\Struct\CardsNewDBLevel.cs" />
-    <Compile Include="GameCardsNewDB\Struct\NumberDBScene.cs" />
+    <Compile Include="GameCardsNewDB\Struct\CardsNewDBScene.cs" />
     <Compile Include="GameCardsNewDB\Tools\ConfigurationTools.cs" />
     <Compile Include="GameCardsNewDB\Tools\InfoWindow.cs" />
     <Compile Include="GameCardsNewDB\Tools\Settings.cs" />

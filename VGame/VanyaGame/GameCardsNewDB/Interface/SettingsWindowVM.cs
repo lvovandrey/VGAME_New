@@ -150,12 +150,6 @@ namespace VanyaGame.GameCardsNewDB.Interface
             set { Settings.AttachedDBCardsFilename = value; OnPropertyChanged("AttachedDBCardsFilename"); }
         }
 
-        public string AttachedDBLevelsFilename
-        {
-            get { return Settings.AttachedDBLevelsFilename; }
-            set { Settings.AttachedDBLevelsFilename = value; OnPropertyChanged("AttachedDBLevelsFilename"); }
-        }
-
         #endregion
 
         #region METHODS
@@ -194,7 +188,6 @@ namespace VanyaGame.GameCardsNewDB.Interface
             OnPropertyChanged("CardSuccesSpeakAgainTime");
 
             OnPropertyChanged("AttachedDBCardsFilename");
-            OnPropertyChanged("AttachedDBLevelsFilename");
         }
 
         #endregion
@@ -242,27 +235,6 @@ namespace VanyaGame.GameCardsNewDB.Interface
                           if (openFileDialog.ShowDialog() == DialogResult.OK)
                           {
                               AttachedDBCardsFilename = @openFileDialog.FileName;
-                          }
-                      }
-                  }));
-            }
-        }
-
-        private RelayCommand chooseAttachedDBLevelsFilename;
-        public RelayCommand ChooseAttachedDBLevelsFilename
-        {
-            get
-            {
-                return chooseAttachedDBLevelsFilename ??
-                  (chooseAttachedDBLevelsFilename = new RelayCommand(obj =>
-                  {
-                      using (OpenFileDialog openFileDialog = new OpenFileDialog())
-                      {
-                          openFileDialog.Filter = "Файлы базы данных(*.mdf)|*.mdf";
-                          openFileDialog.ValidateNames = false;
-                          if (openFileDialog.ShowDialog() == DialogResult.OK)
-                          {
-                              AttachedDBLevelsFilename = @openFileDialog.FileName;
                           }
                       }
                   }));

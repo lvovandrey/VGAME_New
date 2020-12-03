@@ -23,17 +23,6 @@
                                 Command="{Binding ChooseAttachedDBCardsFilename}"/>
                     </StackPanel>
                     <Label Content="База данных уровней" Margin="5 0 5 -1"/>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBox Text="{Binding AttachedDBLevelsFilename, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
-                                Margin="10 0 2 15" MinWidth="500" 
-                                x:Name="TextBoxAttachedDBLevelsFilename"/>
-                        <Button Content="..." Width="20" 
-                                Height="{Binding ElementName=TextBoxAttachedDBLevelsFilename, Path=ActualHeight}" 
-                                VerticalAlignment="Top"
-                                Command="{Binding ChooseAttachedDBLevelsFilename}"/>
-
-                    </StackPanel>
-
                 </StackPanel>
 
             </ScrollViewer>

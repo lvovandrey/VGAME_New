@@ -5,7 +5,7 @@ using System.Windows.Media.Imaging;
 using VanyaGame.Units.Components;
 using VanyaGame.Struct;
 using System.IO;
-using VanyaGame.DB.DBCardsRepositoryModel;
+using VanyaGame.GameCardsNewDB.DB.RepositoryModel;
 using VanyaGame.GameCardsNewDB.Units.Components;
 
 namespace VanyaGame.GameCardsNewDB.Units

@@ -26,7 +26,6 @@
                 <ListBoxItem >Озвучка</ListBoxItem>
                 <ListBoxItem >Вид</ListBoxItem>
                 <ListBoxItem >База данных</ListBoxItem>
-                <ListBoxItem >Задания</ListBoxItem>
 
             </ListBox>
         </StackPanel>
@@ -34,7 +33,6 @@
         <el:SpeakSettingsView Grid.Row="0" Grid.Column="1" Visibility="Hidden" x:Name="SpeakSettings" />
         <el:ViewSettingsView Grid.Row="0" Grid.Column="1" Visibility="Hidden" x:Name="ViewSettings" />
         <el:DBSettingsView Grid.Row="0" Grid.Column="1" Visibility="Hidden" x:Name="DBSettings" />
-        <Rectangle Fill="Green" Grid.Row="0" Grid.Column="1" Visibility="Hidden" x:Name="TestsSettings" />
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="1" Margin="0 0 10 0">
             <Button Command="{Binding SaveSettingsCommand}" Click="Button_Click_1" Margin="0 3 10 3" Padding="10 0 10 0">Применить</Button>

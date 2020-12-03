@@ -50,7 +50,6 @@ namespace VanyaGame.GameCardsNewDB.Interface
             SettingsElements.Add("Озвучка", SpeakSettings);
             SettingsElements.Add("Вид", ViewSettings);
             SettingsElements.Add("База данных", DBSettings);
-            SettingsElements.Add("Задания", TestsSettings);
 
         }
     }

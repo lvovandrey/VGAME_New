@@ -8,15 +8,15 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
-using VanyaGame.DB.DBCardsRepositoryModel;
 using VanyaGame.GameCardsNewDB.Tools;
 using VanyaGame.GameCardsNewDB.Units;
 using VanyaGame.GameCardsNewDB.Units.Components;
+using VanyaGame.GameCardsNewDB.DB;
 using VanyaGame.Struct;
 using VanyaGame.Struct.Components;
 using VanyaGame.ToolsShuffle;
 using VanyaGame.Units.Components;
-using DBModel = VanyaGame.DB.DBLevelsRepositoryModel;
+using VanyaGame.GameCardsNewDB.DB.RepositoryModel;
 
 namespace VanyaGame.GameCardsNewDB.Struct
 {
@@ -26,21 +26,13 @@ namespace VanyaGame.GameCardsNewDB.Struct
         private CardUnit CurUnit; //Текущая карточка, которую нужно озвучить и отгадать
         private bool ReadyToNextUnit;
         private CardsNewDBLevel numberDBLevel;
-        private DBModel.Scene DBSceneRecord;
-
-        public string tag;
 
 
-        public CardsNewDBScene(Level _Level, DBModel.Scene scene, string name) : base(_Level, name)
+        public CardsNewDBScene(CardsNewDBLevel _Level) : base(_Level, _Level.Sets.Name)
         {
             this.Level = _Level;
-            this.DBSceneRecord = scene;
             Sets = new SceneSets(_Level, this);
-            //Sets.Directory = "NONE SCENE DIR!!!";
-
-            InnerVideoSets IVC = new InnerVideoSets("InnerVideoSets", Sets);
-            Level = _Level;
-
+            numberDBLevel = _Level;
             GetComponent<Loader>().LoadSets = LoadSets;
             GetComponent<Loader>().LoadContent = LoadContent;
 
@@ -48,7 +40,6 @@ namespace VanyaGame.GameCardsNewDB.Struct
 
             UnitsCol = new UnitsCollection<CardUnit>("UnitsCollection", this);
             ReadyToNextUnit = true;
-
         }
 
         private void LoadSets()
@@ -58,39 +49,12 @@ namespace VanyaGame.GameCardsNewDB.Struct
 
         private void LoadContent()
         {
+            IEnumerable<Card> cards;
 
-
-            IEnumerable<DB.DBCardsRepositoryModel.Card> cards;
-            string LevelTag = ((CardsNewDBLevel)this.Level).Tag;
-            if (LevelTag == null || LevelTag == "")
-            {
-                MessageBox.Show("Тег уровня - пустой!");
-                throw new Exception("Тег уровня - пустой!");
-            }
-
-            var tags = Game.DBTools.Tags;
-            DB.DBCardsRepositoryModel.Tag TAG = new DB.DBCardsRepositoryModel.Tag();
-            foreach (var tagDB in Game.DBTools.Tags)
-            {
-                if (tagDB.Name == LevelTag)
-                {
-                    this.tag = tagDB.Name;
-                    TAG = tagDB;
-                    break;
-                }
-            }
-            if (tag == null || tag == "")
-            {
-                MessageBox.Show("Тег уровня не найден в БД!");
-                throw new Exception("Тег уровня не найден в БД!");
-            }
-            cards = from c in Game.DBTools.Cards where c.Tags.Contains(TAG) select c;
-            var cardsList = cards.ToList();
-
-
+            var cardsList = numberDBLevel.DbLevelRecord.Cards.ToList();
             cardsList = new ListShuffle<Card>().Shuffle(cardsList);
 
-            for (int i = 0; i < cardsList.Count; i++)// var card in cards)
+            for (int i = 0; i < cardsList.Count; i++)
             {
                 CardUnit c = new CardUnit(this, cardsList[i], Settings.CardSize);
                 UnitsCol.AddUnit(c);
@@ -104,10 +68,10 @@ namespace VanyaGame.GameCardsNewDB.Struct
            
             foreach (var u in UnitsCol.GetAllUnits())
                 u.MouseClicked += U_MouseClicked;
-            Game.Owner.TextForCardTag.Text = this.tag;
+            Game.Owner.TextForCardTag.Text = this.Name;
 
             NextNumber();
-            SceneStarted(this, Level);
+            SceneStarted(this);
             Game.UserActivity.UserDoSomethingEvent += UserDoSomething;
         }
 
@@ -166,12 +130,12 @@ namespace VanyaGame.GameCardsNewDB.Struct
                         flashTimer = new Timer(Flash, null, (int)(1000 * Settings.VisualHintDelay), (int)(1000 * Settings.VisualHintTimePeriod));
 
 
-                Game.Owner.TextForCardTag.Text = "Тема: " + this.tag + ".  Надо показать: " + CurUnit.Card.Title;
+                Game.Owner.TextForCardTag.Text = "Тема: " + this.Name + ".  Надо показать: " + CurUnit.Card.Title;
 
             }
             else
             {
-                SceneEnded(this, Level);
+                SceneEnded(this, (CardsNewDBLevel)Level);
             }
         }
 
@@ -315,18 +279,16 @@ namespace VanyaGame.GameCardsNewDB.Struct
 
 
 
-        public void SceneStarted(Scene SL, Level Level)
+        public void SceneStarted(Scene SL)
         {
-
             Game.Music.Play();
             Game.Music.MediaGUI.UIMediaShow();
             Game.CurVideo.MediaGUI.UIMediaHide();
-            //Game.Owner.Cursor = Cursors.Arrow;
         }
 
 
 
-        public void SceneEnded(Scene SL, Level Level)
+        public void SceneEnded(Scene SL, CardsNewDBLevel level)
         {
 
             foreach (var u in UnitsCol.GetAllUnits())
@@ -338,7 +300,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
             Game.Music.Pause();
             Game.Owner.WrapPanelMain.Children.Clear();
 
-            ((CardsNewDBLevel)Level).NextScene();
+            level.NextScene();
 
 
         }

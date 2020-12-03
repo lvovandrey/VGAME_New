@@ -7,7 +7,8 @@
         xmlns:GameNumber="clr-namespace:VanyaGame.GameNumber.Interface" 
         xmlns:GameNumberDB="clr-namespace:VanyaGame.GameNumberDB.Interface" 
         xmlns:GameCardsEasyDB="clr-namespace:VanyaGame.GameCardsEasyDB.Interface"
-    xmlns:GGG="clr-namespace:VanyaGame.GameCardsEasyDB.Units"
+        xmlns:GameCardsNewDB ="clr-namespace:VanyaGame.GameCardsNewDB.Interface"
+        xmlns:GGG="clr-namespace:VanyaGame.GameCardsEasyDB.Units"
         xmlns:Interface ="clr-namespace:VanyaGame.Interface"
         x:Name="MyWindow" x:Class="VanyaGame.MainWindow"
         
@@ -68,7 +69,8 @@
 
 
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-                        <GameCardsEasyDB:BeautyButtonCardsEasyDB x:Name="StartButton"  Height="250" Visibility="Visible" Margin="20"/>
+                        <GameCardsNewDB:BeautyButtonCardsNewDB x:Name="StartButton"  Height="250" Visibility="Visible" Margin="20"/>
+                        <GameCardsEasyDB:BeautyButtonCardsEasyDB x:Name="StartButton1"  Height="250" Visibility="Collapsed" Margin="20"/>
                         <GameNumberDB:BeautyButtonNumberDB x:Name="StartButton2" Height="250" Visibility="Collapsed" Margin="20"/>
                         <GameNumber:BeautyButtonNumber x:Name="StartButton3" Height="250" Visibility="Collapsed" Margin="20"/>
                     </StackPanel>

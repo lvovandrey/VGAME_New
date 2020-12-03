@@ -298,25 +298,6 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
-        static string attachedDBLevelsFilename="";
-        public static string AttachedDBLevelsFilename
-        {
-            get
-            {
-                if (attachedDBLevelsFilename == "")
-                    attachedDBLevelsFilename = @"C:\Users\Professional\TestBackupDB\LevelSetsMYDBInsects.mdf";
-                return attachedDBLevelsFilename;
-            }
-            set 
-            {
-                if (!File.Exists(value) || Path.GetExtension(value)!=".mdf")
-                {
-                    InfoWindow.Show("Нужно выбрать существующий файл типа *.mdf для базы данных уровней");
-                    return;
-                }
-                attachedDBLevelsFilename = value;
-            }
-        }
 
         static string attachedDBCardsFilename="";
         public static string AttachedDBCardsFilename
@@ -407,7 +388,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
             ConfigurationTools.AddUpdateAppSettings("CardSuccesSpeakAgainTime", cardSuccesSpeakAgainTime);
 
             ConfigurationTools.AddUpdateAppSettings("AttachedDBCardsFilename", attachedDBCardsFilename);
-            ConfigurationTools.AddUpdateAppSettings("AttachedDBLevelsFilename", attachedDBLevelsFilename);
+
 
 
             SettingsChanged?.Invoke();
@@ -438,9 +419,6 @@ namespace VanyaGame.GameCardsNewDB.Tools
             cardSuccesSpeakAgainTime = ConfigurationTools.ReadSetting("CardSuccesSpeakAgainTime");
 
             attachedDBCardsFilename = ConfigurationTools.ReadSetting("AttachedDBCardsFilename");
-            attachedDBLevelsFilename = ConfigurationTools.ReadSetting("AttachedDBLevelsFilename");
-
-
 
             SettingsChanged?.Invoke();
         }
