@@ -20,7 +20,7 @@ namespace CardsEditor.DB
             {
                 _cards = new ObservableCollection<Card>();
                 _levels = new ObservableCollection<Level>();
-                context = new Context();
+                context = new Context("DefaultConnection");
 
                 IEnumerable<Level> levels = context.Levels.Include(p => p.Cards).ToList();
                 IEnumerable<Card> cards = context.Cards.ToList();

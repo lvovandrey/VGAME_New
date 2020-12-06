@@ -12,9 +12,14 @@ namespace LevelSetsEditor.DB
 
     public class Context : DbContext
     {
-        public Context()
+        private Context()
             : base("CardsAndLevelsConnection")
         { }
+
+        public Context(string ConnectionName)
+            : base(ConnectionName)
+        { }
+
 
         public DbSet<Card> Cards { get; set; }
         public DbSet<Level> Levels { get; set; }
