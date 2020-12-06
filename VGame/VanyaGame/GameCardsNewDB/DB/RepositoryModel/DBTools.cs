@@ -29,7 +29,7 @@ namespace VanyaGame.GameCardsNewDB.DB
             {
                 _cards = new ObservableCollection<Card>();
                 _levels = new ObservableCollection<Level>();
-                Context = new Context(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + AttachDbFilename + @";Integrated Security=True;Connect Timeout=30");
+                Context = new Context(@"Data Source=" + AttachDbFilename);
 
                 IEnumerable<Level> levels = Context.Levels.Include(p => p.Cards).ToList();
                 IEnumerable<Card> cards = Context.Cards.ToList();

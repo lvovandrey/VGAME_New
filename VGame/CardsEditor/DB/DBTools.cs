@@ -13,14 +13,14 @@ namespace CardsEditor.DB
 {
     public class DBTools
     {
-        public static bool LoadDB(VM vm, ObservableCollection<Card> _cards, ObservableCollection<Level> _levels, Context context)
+        public static bool LoadDB(VM vm, ObservableCollection<Card> _cards, ObservableCollection<Level> _levels, Context context, string DBFilename)
         {
             bool error = false;
             try
             {
                 _cards = new ObservableCollection<Card>();
                 _levels = new ObservableCollection<Level>();
-                context = new Context("DefaultConnection");
+                context = new Context(@"Data Source=" + DBFilename);
 
                 IEnumerable<Level> levels = context.Levels.Include(p => p.Cards).ToList();
                 IEnumerable<Card> cards = context.Cards.ToList();

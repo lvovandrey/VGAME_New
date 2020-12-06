@@ -230,7 +230,7 @@ namespace VanyaGame.GameCardsNewDB.Interface
                   {
                       using (OpenFileDialog openFileDialog = new OpenFileDialog())
                       {
-                          openFileDialog.Filter = "Файлы базы данных(*.mdf)|*.mdf";
+                          openFileDialog.Filter = "Файлы базы данных(*.db)|*.db";
                           openFileDialog.ValidateNames = false;
                           if (openFileDialog.ShowDialog() == DialogResult.OK)
                           {

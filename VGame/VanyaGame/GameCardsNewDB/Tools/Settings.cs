@@ -314,9 +314,9 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
             set
             {
-                if (!File.Exists(value) || Path.GetExtension(value) != ".mdf")
+                if (!File.Exists(value) || Path.GetExtension(value) != ".db")
                 {
-                    InfoWindow.Show("Нужно выбрать существующий файл типа *.mdf для базы данных уровней");
+                    InfoWindow.Show("Нужно выбрать существующий файл типа *.db (SQLite-бд) для базы данных уровней");
                     return;
                 }
                 attachedDBCardsFilename = value;

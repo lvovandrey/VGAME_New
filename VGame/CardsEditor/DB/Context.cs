@@ -1,10 +1,6 @@
 ﻿using CardsEditor.Model;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SQLite;
 
 
 namespace LevelSetsEditor.DB
@@ -12,14 +8,7 @@ namespace LevelSetsEditor.DB
 
     public class Context : DbContext
     {
-        private Context()
-            : base("CardsAndLevelsConnection")
-        { }
-
-        public Context(string ConnectionName)
-            : base(ConnectionName)
-        { }
-
+        public Context(string connectionString) : base(new SQLiteConnection(connectionString), true) { }
 
         public DbSet<Card> Cards { get; set; }
         public DbSet<Level> Levels { get; set; }

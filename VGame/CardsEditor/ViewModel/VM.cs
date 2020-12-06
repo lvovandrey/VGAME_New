@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
 
 namespace CardsEditor.ViewModel
 {
@@ -159,17 +160,29 @@ namespace CardsEditor.ViewModel
                 return loadDBCommand ??
                   (loadDBCommand = new RelayCommand(obj =>
                   {
-                      bool res = DBTools.LoadDB(this, _cards, _levels, context);
-                      if (!res)
+
+                      string DBFilename = "";
+                      using (OpenFileDialog openFileDialog = new OpenFileDialog())
                       {
-                          MessageBox.Show("Ошибка загрузки базы данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                          return;
+                          openFileDialog.Filter = "Файлы базы данных(*.db)|*.db";
+                          openFileDialog.ValidateNames = false;
+                          if (openFileDialog.ShowDialog() == DialogResult.OK)
+                          {
+                              DBFilename = @openFileDialog.FileName;
+                              bool res = DBTools.LoadDB(this, _cards, _levels, context, DBFilename);
+                              if (!res)
+                              {
+                                  System.Windows.MessageBox.Show("Ошибка загрузки базы данных "+ DBFilename, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                                  return;
+                              }
+                              mainWindow.DataContext = this;
+                              OnPropertyChanged("CardVMs");
+                              OnPropertyChanged("LevelVMs");
+                          }
                       }
-                      mainWindow.DataContext = this;
-                      //context.SaveChanges();
-                      //CardsVMs.Add(new CardVM(new Card()));
-                      OnPropertyChanged("CardVMs");
-                      OnPropertyChanged("LevelVMs");
+
+
+
                   }));
             }
         }
