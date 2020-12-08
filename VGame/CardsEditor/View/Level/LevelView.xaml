@@ -8,17 +8,21 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid >
-        <StackPanel Orientation="Vertical">
-            <Image Source="{Binding ImageAdressURI}" MaxHeight="200" Height="200"></Image>
-            <view:PropertyViewer  DataContext="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Название" Margin="0,0,0,20"/>
-            <Grid >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="30"/>
-                </Grid.ColumnDefinitions>
-                <view:PropertyViewer Grid.Column="0"  DataContext="{Binding ImageAddress, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Изображение"/>
-                <Button Grid.Column="1" Content="..." Width="30" Command="{Binding OpenImageFileCommand}" />
-            </Grid>
-        </StackPanel>
+        <GroupBox Header="Информация об уровне">
+            <StackPanel Orientation="Vertical">
+                <Border BorderBrush="Gray" BorderThickness="2" Margin="10">
+                    <Image Source="{Binding ImageAdressURI}" MaxHeight="200" Height="200"/>
+                </Border>
+                <view:PropertyViewer  DataContext="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Название" Margin="0,0,0,20"/>
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+                    <view:PropertyViewer Grid.Column="0"  DataContext="{Binding ImageAddress, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Изображение"/>
+                    <Button Grid.Column="1" Content="..." Width="30" Command="{Binding OpenImageFileCommand}" />
+                </Grid>
+            </StackPanel>
+        </GroupBox>
     </Grid>
 </UserControl>

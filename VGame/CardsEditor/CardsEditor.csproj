@@ -135,6 +135,9 @@
     <Compile Include="View\Level\ListLevelsView.xaml.cs">
       <DependentUpon>ListLevelsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Level\MinLevelItemListView.xaml.cs">
+      <DependentUpon>MinLevelItemListView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ListCardsView.xaml.cs">
       <DependentUpon>ListCardsView.xaml</DependentUpon>
     </Compile>
@@ -190,6 +193,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Level\ListLevelsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Level\MinLevelItemListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -65,15 +65,14 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
+                        <ColumnDefinition Width="3"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <view:ListCardsView></view:ListCardsView>
-                    <StackPanel Grid.Column="1">
-
-                        <view:CardView  DataContext="{Binding SelectedCardVM}"></view:CardView>
-
-
-                    </StackPanel>
+                    <view:ListCardsView/>
+                    <GridSplitter Grid.Column="1" ShowsPreview="False" Width="3"
+                        HorizontalAlignment="Center" VerticalAlignment="Stretch" />
+                    <view:CardView Grid.Column="2" 
+                                   DataContext="{Binding SelectedCardVM}"/>
                 </Grid>
 
             </TabItem>
@@ -81,15 +80,15 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
+                        <ColumnDefinition Width="3"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <viewlvl:ListLevelsView></viewlvl:ListLevelsView>
-                    <StackPanel Grid.Column="1">
+                    <viewlvl:ListLevelsView/>
+                    <GridSplitter Grid.Column="1" ShowsPreview="False" Width="3"
+                        HorizontalAlignment="Center" VerticalAlignment="Stretch" />
+                    <viewlvl:LevelView Grid.Column="2"
+                        DataContext="{Binding SelectedLevelVM}"/>
 
-                        <viewlvl:LevelView  DataContext="{Binding SelectedLevelVM}"></viewlvl:LevelView>
-
-
-                    </StackPanel>
                 </Grid>
             </TabItem>
 
@@ -97,7 +96,9 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
+                        <ColumnDefinition Width="3"/>
                         <ColumnDefinition/>
+                        <ColumnDefinition Width="3"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -109,23 +110,29 @@
                                VerticalAlignment="Center"
                                FontSize="20"/>
                     <TextBlock Text="Все карточки"
-                               Grid.Column="1"
+                               Grid.Column="2"
                                HorizontalAlignment="Center" 
                                VerticalAlignment="Center"
                                FontSize="20"/>
                     <TextBlock Text="{Binding SelectedLevelVM.Name, StringFormat=Карточки уровня {0}}"
-                               Grid.Column="2"
+                               Grid.Column="4"
                                HorizontalAlignment="Center" 
                                VerticalAlignment="Center"
                                FontSize="16"/>
                     <cardattach:ListLevelsInAttachView Grid.Row="1" Margin="10"/>
                     <cardattach:CardsAttachLevelList 
-                        Grid.Row="1" Grid.Column="1"
+                        Grid.Row="1" Grid.Column="2"
                         Margin="10"/>
                     <cardattach:InLevelCardsList 
                         DataContext="{Binding SelectedLevelVM}" 
-                        Grid.Row="1" Grid.Column="2"
+                        Grid.Row="1" Grid.Column="4"
                         Margin="10"/>
+
+                    <GridSplitter Grid.Column="1" Grid.RowSpan="2" ShowsPreview="False" Width="3"
+                        HorizontalAlignment="Center" VerticalAlignment="Stretch" />
+                    <GridSplitter Grid.Column="3" Grid.RowSpan="2" ShowsPreview="False" Width="3"
+                        HorizontalAlignment="Center" VerticalAlignment="Stretch" />
+
                 </Grid>
             </TabItem>
 

@@ -54,6 +54,18 @@ namespace CardsEditor.ViewModel
             }
         }
 
+        private ObservableCollection<Level> _levels { get { return _card.Levels; } set { _card.Levels = value; OnPropertyChanged("AttachedLevelsVMs"); } }
+        private ObservableCollection<LevelVM> _levelsvm { get; set; }
+
+        public ObservableCollection<LevelVM> AttachedLevelsVMs
+        {
+            get
+            {
+                _levelsvm = new ObservableCollection<LevelVM>(from l in _levels select new LevelVM(l, _vm));
+                return _levelsvm;
+            }
+        }
+
         #endregion
 
         #region Methods
