@@ -31,7 +31,9 @@
                 </LinearGradientBrush>
             </Grid.Background>
         </Grid>
-        <Button Command="{Binding AttachCardToSelectedLevelCommand}" CommandParameter="{Binding DataContext}" Content="+"/>
+        <Button Command="{Binding AttachCardToSelectedLevelCommand}" CommandParameter="{Binding DataContext}">
+            <Image Source="/CardsEditor;component/Images/Arrow-Right.png" />
+        </Button>
         <Image Grid.Column="1" Source="{Binding ImageAdressURI, UpdateSourceTrigger=PropertyChanged}" Margin="5">
             <Image.Effect>
                 <DropShadowEffect ShadowDepth="0"/>

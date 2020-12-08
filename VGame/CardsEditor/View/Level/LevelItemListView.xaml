@@ -36,12 +36,23 @@
                 <DropShadowEffect ShadowDepth="0"/>
             </Image.Effect>
         </Image>
-        <TextBox Grid.Column="1" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.ColumnSpan="2" FontSize="18"
-                 HorizontalAlignment="Left" Margin="10" VerticalAlignment="Center" Background="{x:Null}"
-                 >
+
+        <StackPanel  Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center">
+            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontSize="18"
+                 HorizontalAlignment="Left" Margin="10"  Background="{x:Null}">
                 <TextBox.Effect>
                     <DropShadowEffect ShadowDepth="2" BlurRadius="0" Color="#FFFFF700" Opacity="0.4" />
                 </TextBox.Effect>
             </TextBox>
+
+            <TextBlock Text="{Binding CardsCount, StringFormat=Кол-во карточек в уровне {0}}"  FontSize="14"
+                 HorizontalAlignment="Left" Margin="10 0 10 5" Background="{x:Null}">
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="2" BlurRadius="0" Color="#FFFFF700" Opacity="0.4" />
+                </TextBlock.Effect>
+            </TextBlock>
+
+        </StackPanel>
+
     </Grid>
 </UserControl>

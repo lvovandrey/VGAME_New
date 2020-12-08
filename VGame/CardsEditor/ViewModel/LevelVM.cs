@@ -17,7 +17,10 @@ namespace CardsEditor.ViewModel
         {
             _level = level;
             _vm = vm;
+            _cards.CollectionChanged += _cards_CollectionChanged;
         }
+
+
         #endregion
 
         #region Fields
@@ -44,6 +47,12 @@ namespace CardsEditor.ViewModel
             }
         }
 
+        public int CardsCount
+        {
+            get { return _cards.Count; }
+        }
+
+
         public string ImageAddress { get { return Level.ImageAddress; } set { Level.ImageAddress = value; OnPropertyChanged("ImageAddress"); OnPropertyChanged("ImageAdressURI"); } }
       
         public Uri ImageAdressURI
@@ -58,7 +67,7 @@ namespace CardsEditor.ViewModel
         }
 
 
-        private ObservableCollection<Card> _cards { get { return _level.Cards; } set { _level.Cards = value; OnPropertyChanged("CardVMs"); } }
+        private ObservableCollection<Card> _cards { get { return _level.Cards; } set { _level.Cards = value; OnPropertyChanged("AttachedCardVMs"); } }
         private ObservableCollection<CardVM> _cardsvm { get; set; }
 
         public ObservableCollection<CardVM> AttachedCardVMs
@@ -70,9 +79,17 @@ namespace CardsEditor.ViewModel
             }
         }
 
+
         #endregion
 
         #region Methods
+
+        private void _cards_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            OnPropertyChanged("AttachedCardVMs");
+            OnPropertyChanged("CardsCount");
+        }
+
         public void DetachCardToSelectedLevel(CardVM cardVM)
         {
             if (!_cards.Contains(cardVM.Card)) return;

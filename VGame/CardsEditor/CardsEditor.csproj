@@ -120,6 +120,9 @@
     <Compile Include="View\CardsAttachLevel\InLevelCardsList.xaml.cs">
       <DependentUpon>InLevelCardsList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\CardsAttachLevel\ListLevelsInAttachView.xaml.cs">
+      <DependentUpon>ListLevelsInAttachView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CardView.xaml.cs">
       <DependentUpon>CardView.xaml</DependentUpon>
     </Compile>
@@ -167,6 +170,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CardsAttachLevel\InLevelCardsList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CardsAttachLevel\ListLevelsInAttachView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

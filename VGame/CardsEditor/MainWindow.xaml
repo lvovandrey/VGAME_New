@@ -118,7 +118,7 @@
                                HorizontalAlignment="Center" 
                                VerticalAlignment="Center"
                                FontSize="16"/>
-                    <viewlvl:ListLevelsView Grid.Row="1" Margin="10"/>
+                    <cardattach:ListLevelsInAttachView Grid.Row="1" Margin="10"/>
                     <cardattach:CardsAttachLevelList 
                         Grid.Row="1" Grid.Column="1"
                         Margin="10"/>
