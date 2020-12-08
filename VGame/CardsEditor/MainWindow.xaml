@@ -8,7 +8,8 @@
         xmlns:viewlvl="clr-namespace:CardsEditor.View.Level"
         xmlns:cardattach="clr-namespace:CardsEditor.View.CardsAttachLevel"
         mc:Ignorable="d"
-        Title="{Binding DBFilename, StringFormat=Редактор БД карточек и уровней           {0}}" Height="750" Width="800" Loaded="Window_Loaded">
+        Title="{Binding DBFilename, StringFormat=Редактор БД карточек и уровней           {0}}" 
+        Height="800" Width="850" Loaded="Window_Loaded">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Button.Background" Value="{x:Null}" />
@@ -64,7 +65,7 @@
             <TabItem Header="Карточки">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="390"/>
                         <ColumnDefinition Width="3"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
@@ -79,7 +80,7 @@
             <TabItem Header="Уровни">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="370"/>
                         <ColumnDefinition Width="3"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>

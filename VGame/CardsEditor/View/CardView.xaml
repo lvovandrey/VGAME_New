@@ -59,7 +59,7 @@
                              Height="150" 
                              ScrollViewer.VerticalScrollBarVisibility="Visible" 
                              ScrollViewer.CanContentScroll="False">
-                           <ListBox.ItemTemplate>
+                        <ListBox.ItemTemplate>
                             <DataTemplate >
                                 <lvl:MinLevelItemListView HorizontalAlignment="Stretch"/>
                             </DataTemplate>

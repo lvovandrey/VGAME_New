@@ -10,17 +10,29 @@
     <Grid >
         <GroupBox Header="Информация об уровне">
             <StackPanel Orientation="Vertical">
-                <Border BorderBrush="Gray" BorderThickness="2" Margin="10">
+                <Border BorderBrush="LightGray" BorderThickness="1" Margin="10">
                     <Image Source="{Binding ImageAdressURI}" MaxHeight="200" Height="200"/>
                 </Border>
-                <view:PropertyViewer  DataContext="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Название" Margin="0,0,0,20"/>
-                <Grid >
+                <view:PropertyViewer  
+                    Margin="5"
+                    x:Name="NamePropView"
+                    DataContext="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                    Tag="Название"/>
+
+                <Grid Margin="5" Height="45">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="45"/>
                     </Grid.ColumnDefinitions>
-                    <view:PropertyViewer Grid.Column="0"  DataContext="{Binding ImageAddress, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Изображение"/>
-                    <Button Grid.Column="1" Content="..." Width="30" Command="{Binding OpenImageFileCommand}" />
+                    <view:PropertyViewer  DataContext="{Binding ImageAddress, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                               Height="{Binding ElementName=NamePropView, Path=ActualHeight}"
+                                               Tag="Изображение"/>
+                    <Button ToolTip="Выбрать изображение" 
+                                Grid.Column="1"
+                                 MaxHeight="36" MaxWidth="36" 
+                                Command="{Binding OpenImageFileCommand}" >
+                        <Image Source="/CardsEditor;component/Images/Folder-Picture.png"/>
+                    </Button>
                 </Grid>
             </StackPanel>
         </GroupBox>

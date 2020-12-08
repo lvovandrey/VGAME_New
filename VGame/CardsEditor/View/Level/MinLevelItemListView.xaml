@@ -15,10 +15,10 @@
         <Image Source="{Binding ImageAdressURI, UpdateSourceTrigger=PropertyChanged}" Margin="2"/> 
         <StackPanel  Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" Orientation="Horizontal">
             <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontSize="12"
-                 HorizontalAlignment="Left" Margin="5"  />
+                 HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center"  />
 
             <TextBlock Text="{Binding CardsCount, StringFormat=Кол-во карточек {0}}"  FontSize="10"
-                 HorizontalAlignment="Left" Margin="5" >
+                 HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center" >
             </TextBlock>
 
         </StackPanel>
