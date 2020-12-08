@@ -7,23 +7,24 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="45"/>
             <RowDefinition Height ="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Button Content="Add" Command="{Binding AddLevelCommand}" Grid.Column="2" Margin="3"/>
-        <Button Content="Remove" Command="{Binding RemoveLevelCommand}" Grid.Column="3" Margin="3"/>
-        <Button Content="Save all" Command="{Binding SaveCommand}"  Grid.Column="4" Margin="3" />
+        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="3">
+            <Button Command="{Binding AddLevelCommand}" >
+                <Image Source="/CardsEditor;component/Images/Script-Add.png"/>
+            </Button>
+            <Button Command="{Binding RemoveLevelCommand}">
+                <Image Source="/CardsEditor;component/Images/Script-Delete.png"/>
+            </Button>
+            <Button  Command="{Binding SaveCommand}">
+                <Image Source="/CardsEditor;component/Images/Disk-Multiple.png"/>
+            </Button>
 
+        </StackPanel>
+        
 
 
         <ListBox SelectedItem="{Binding SelectedLevelVM,UpdateSourceTrigger=PropertyChanged}" 

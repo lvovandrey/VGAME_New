@@ -8,19 +8,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Data.SQLite;
+using System.Data.Common;
+using System.Data;
 
 namespace CardsEditor.DB
 {
     public class DBTools
     {
-        public static bool LoadDB(VM vm, ObservableCollection<Card> _cards, ObservableCollection<Level> _levels, Context context, string DBFilename)
+        public static bool IsDBLoaded = false;
+        public static string DBFilename = "";
+
+        public static bool LoadDB(VM vm, ObservableCollection<Card> _cards, ObservableCollection<Level> _levels, Context context, string _DBFilename)
         {
             bool error = false;
             try
             {
                 _cards = new ObservableCollection<Card>();
                 _levels = new ObservableCollection<Level>();
-                context = new Context(@"Data Source=" + DBFilename);
+                context = new Context(@"Data Source=" + _DBFilename);
 
                 IEnumerable<Level> levels = context.Levels.Include(p => p.Cards).ToList();
                 IEnumerable<Card> cards = context.Cards.ToList();
@@ -32,6 +38,8 @@ namespace CardsEditor.DB
                     _levels.Add(t);
 
                 vm.init(_cards, _levels, context);
+                IsDBLoaded = true;
+                DBFilename = _DBFilename;
             }
             catch(Exception e)
             {
@@ -41,5 +49,71 @@ namespace CardsEditor.DB
             return !error;
         }
 
+
+        public static bool CreateDB(VM vm, ObservableCollection<Card> _cards, ObservableCollection<Level> _levels, Context context, string _DBFilename)
+        {
+            bool error = false;
+            try
+            {
+
+                SQLiteConnection.CreateFile(_DBFilename);
+
+                SQLiteFactory factory = (SQLiteFactory)DbProviderFactories.GetFactory("System.Data.SQLite");
+                using (SQLiteConnection connection = (SQLiteConnection)factory.CreateConnection())
+                {
+                    connection.ConnectionString = "Data Source = " + _DBFilename;
+                    connection.Open();
+
+                    using (SQLiteCommand command = new SQLiteCommand(connection))
+                    {
+                        command.CommandText = @"CREATE TABLE [Cards] (
+	[Id]	INTEGER NOT NULL UNIQUE,
+	[Title]	TEXT,
+	[SoundedText]	TEXT,
+	[Description]	TEXT,
+	[ImageAddress]	TEXT,
+	[SoundAddress]	TEXT,
+	PRIMARY KEY([Id] AUTOINCREMENT)
+)";
+                        command.CommandType = CommandType.Text;
+                        command.ExecuteNonQuery();
+                    }
+                    using (SQLiteCommand command = new SQLiteCommand(connection))
+                    {
+                        command.CommandText = @"CREATE TABLE [Levels] (
+
+    [Id]    INTEGER NOT NULL UNIQUE, 
+    [Name]  TEXT,
+	[ImageAddress]  TEXT,
+	PRIMARY KEY([Id] AUTOINCREMENT)
+)";
+                        command.CommandType = CommandType.Text;
+                        command.ExecuteNonQuery();
+                    }
+                    using (SQLiteCommand command = new SQLiteCommand(connection))
+                    {
+                        command.CommandText = @"CREATE TABLE [LevelCards] (
+
+    [Level_Id]  INTEGER,
+	[Card_Id]   INTEGER,
+	[Id]    INTEGER NOT NULL UNIQUE,
+    FOREIGN KEY([Level_Id]) REFERENCES [Levels]([Id]),
+	FOREIGN KEY([Card_Id]) REFERENCES [Cards]([Id]),
+	PRIMARY KEY([Id] AUTOINCREMENT)
+)";
+                        command.CommandType = CommandType.Text;
+                        command.ExecuteNonQuery();
+                    }
+                }
+
+                LoadDB(vm, _cards, _levels, context, _DBFilename);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                error = true;
+            }
+            return !error;
+        }
     }
 }

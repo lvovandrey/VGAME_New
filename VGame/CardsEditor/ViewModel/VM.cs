@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,15 @@ namespace CardsEditor.ViewModel
         #endregion
 
         #region Properties
+
+        public string DBFilename
+        { 
+            get 
+            {
+                return Path.GetFileName(DBTools.DBFilename);
+            } 
+        }
+
         private ObservableCollection<CardVM> _cardvms { get; set; }
         public ObservableCollection<CardVM> CardVMs
         {
@@ -121,6 +131,17 @@ namespace CardsEditor.ViewModel
             return c;
         }
 
+        private Card AddCard(string title, string soundedText, string imageAddress, string description)
+        {
+            Random random = new Random();
+            Card c = new Card() { Id = _cards.Count + 1, Title = title, SoundedText= soundedText,  ImageAddress = imageAddress, Description = description };
+            _cards.Add(c);
+            context.Cards.Add(c);
+            context.SaveChanges();
+            OnPropertyChanged("CardVMs");
+            return c;
+        }
+
         //создаем и добавляем в БД новый тег
         private Level AddLevel(object obj)
         {
@@ -148,17 +169,97 @@ namespace CardsEditor.ViewModel
             OnPropertyChanged("SelectedCardLevelVMs");
         }
 
- 
+        private void CreateCardsFromImageFiles(object obj)
+        {
+            string[] Filenames = new string[] { };
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Файлы изображений (*.bmp, *.jpg, *.png)|*.bmp;*.jpg;*.png";
+                openFileDialog.Title = "Открыть свое изображение для карточки";
+                openFileDialog.Multiselect = true;
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    Filenames = @openFileDialog.FileNames;
+                    if (Filenames.Length < 1) return;
+                    foreach (var filename in Filenames)
+                    {
+                        AddCard(Path.GetFileNameWithoutExtension(filename),
+                            Path.GetFileNameWithoutExtension(filename),
+                            filename, "Нет описания");
+                    }
+                    OnPropertyChanged("CardVMs");
+                }
+            }
+
+        }
+        private bool IsDBLoaded(object obj)
+        {
+            return DBTools.IsDBLoaded;
+        }
+
         #endregion
 
         #region Commands
-        private RelayCommand loadDBCommand;
-        public RelayCommand LoadDBCommand
+
+
+
+        private RelayCommand сreateBDCommand;
+        public RelayCommand CreateBDCommand
         {
             get
             {
-                return loadDBCommand ??
-                  (loadDBCommand = new RelayCommand(obj =>
+                return сreateBDCommand ??
+                  (сreateBDCommand = new RelayCommand(obj =>
+                  {
+
+                      string DBFilename = "";
+                      using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                      {
+                          saveFileDialog.Filter = "Файлы базы данных(*.db)|*.db";
+                          saveFileDialog.ValidateNames = false;
+                          if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                          {
+                              DBFilename = saveFileDialog.FileName;
+                              bool res = DBTools.CreateDB(this, _cards, _levels, context, DBFilename);
+                              if (!res)
+                              {
+                                  System.Windows.MessageBox.Show("Ошибка загрузки базы данных " + DBFilename, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                                  return;
+                              }
+                              mainWindow.DataContext = this;
+                              OnPropertyChanged("CardVMs");
+                              OnPropertyChanged("LevelVMs");
+                              OnPropertyChanged("DBFilename");
+                          }
+                      }
+
+
+
+                  }));
+            }
+        }
+
+        
+
+            private RelayCommand сreateCardsFromImageFilesCommand;
+        public RelayCommand CreateCardsFromImageFilesCommand
+        {
+            get
+            {
+                return сreateCardsFromImageFilesCommand ??
+                  (сreateCardsFromImageFilesCommand = new RelayCommand(CreateCardsFromImageFiles, IsDBLoaded));
+            }
+        }
+
+
+
+        private RelayCommand openBDCommand;
+        public RelayCommand OpenBDCommand
+        {
+            get
+            {
+                return openBDCommand ??
+                  (openBDCommand = new RelayCommand(obj =>
                   {
 
                       string DBFilename = "";
@@ -178,6 +279,7 @@ namespace CardsEditor.ViewModel
                               mainWindow.DataContext = this;
                               OnPropertyChanged("CardVMs");
                               OnPropertyChanged("LevelVMs");
+                              OnPropertyChanged("DBFilename");
                           }
                       }
 
@@ -196,7 +298,7 @@ namespace CardsEditor.ViewModel
                   (addCardCommand = new RelayCommand(obj =>
                   {
                       AddCard(obj);
-                  }));
+                  }, IsDBLoaded));
             }
         }
 
@@ -221,7 +323,7 @@ namespace CardsEditor.ViewModel
                           OnPropertyChanged("CardVMs");
                           OnPropertyChanged("LevelVMs");
                       }
-                  }));
+                  }, IsDBLoaded));
             }
         }
 
@@ -246,7 +348,7 @@ namespace CardsEditor.ViewModel
                           OnPropertyChanged("CardVMs");
                           SelectedCardVM = CardVMs.FirstOrDefault();
                       }
-                  }));
+                  }, IsDBLoaded));
             }
         }
 
@@ -260,7 +362,7 @@ namespace CardsEditor.ViewModel
                 return addLevelCommand ?? (addLevelCommand = new RelayCommand(obj =>
                 {
                     AddLevel(obj);
-                }));
+                }, IsDBLoaded));
             }
         }
 
@@ -273,7 +375,7 @@ namespace CardsEditor.ViewModel
                 return removeLevelCommand ?? (removeLevelCommand = new RelayCommand(obj =>
                 {
                     RemoveLevel(SelectedLevelVM);
-                }));
+                }, IsDBLoaded));
             }
         }
 
