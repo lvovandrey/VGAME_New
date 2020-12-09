@@ -66,6 +66,7 @@
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite, Version=1.0.113.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\lib\net46\System.Data.SQLite.dll</HintPath>
@@ -103,6 +104,7 @@
     <Compile Include="Model\Card.cs" />
     <Compile Include="Model\Level.cs" />
     <Compile Include="Model\Settings.cs" />
+    <Compile Include="Tools\ConfigurationTools.cs" />
     <Compile Include="ViewModel\CardVM.cs" />
     <Compile Include="ViewModel\LevelVM.cs" />
     <Compile Include="ViewModel\VM.cs" />
@@ -127,6 +129,9 @@
     <Compile Include="View\CardView.xaml.cs">
       <DependentUpon>CardView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Elements\PropertyViewer_DoubleNums_UpDown.xaml.cs">
+      <DependentUpon>PropertyViewer_DoubleNums_UpDown.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Level\LevelItemListView.xaml.cs">
       <DependentUpon>LevelItemListView.xaml</DependentUpon>
     </Compile>
@@ -144,6 +149,9 @@
     </Compile>
     <Compile Include="View\PropertyViewer.xaml.cs">
       <DependentUpon>PropertyViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TTSSettingsWindow.xaml.cs">
+      <DependentUpon>TTSSettingsWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -185,6 +193,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Elements\PropertyViewer_DoubleNums_UpDown.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Level\LevelItemListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -206,6 +218,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PropertyViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TTSSettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -237,9 +253,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Tools\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>
