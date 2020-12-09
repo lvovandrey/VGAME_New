@@ -59,6 +59,12 @@
                         <Image Source="Images/Folder-Picture.png" />
                     </MenuItem.Icon>
                 </MenuItem>
+                <MenuItem Header="Выбор синтезатора речи..."
+                          Command="{Binding TTSChangeCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="Images/Sound.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
         </Menu>
         <TabControl Grid.Row="1">

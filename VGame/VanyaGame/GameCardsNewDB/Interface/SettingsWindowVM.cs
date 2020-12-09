@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
+using System.Speech.Synthesis;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -148,6 +151,24 @@ namespace VanyaGame.GameCardsNewDB.Interface
         {
             get { return Settings.AttachedDBCardsFilename; }
             set { Settings.AttachedDBCardsFilename = value; OnPropertyChanged("AttachedDBCardsFilename"); }
+        }
+
+        public ObservableCollection<string> TextToSpeachSynthesizers
+        {
+            get 
+            {
+                SpeechSynthesizer speaker = new SpeechSynthesizer();
+
+                var voices = speaker.GetInstalledVoices(new CultureInfo("ru-RU"));
+                
+                return new ObservableCollection<string>(from v in voices select v.VoiceInfo.Name);
+            }
+        }
+
+        public string TTSSynthesizer 
+        {
+            get;
+            set;
         }
 
         #endregion

@@ -106,8 +106,9 @@ namespace CardsEditor.ViewModel
                     var voices = speaker.GetInstalledVoices(new CultureInfo("ru-RU"));
 
                     if (voices.Count == 0) MessageBox.Show("В системе не установлены голоса для синтеза речи на русском языке. Установите пожалуйста, а то ничего не будет слышно.");
+                    else if(voices.Count>1) speaker.SelectVoice(voices[1].VoiceInfo.Name);
                     else speaker.SelectVoice(voices[0].VoiceInfo.Name);
-                    speaker.Rate = 1;
+                    speaker.Rate = -2;
                     speaker.Volume = 100;
                     speaker.SpeakAsync(SoundedText);
                 }));
