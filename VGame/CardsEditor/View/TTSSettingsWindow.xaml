@@ -19,8 +19,8 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <el:PropertyViewer_DoubleNums_UpDown Tag="Темп речи" DataContext="{Binding TTSVoiceRate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="0 20 0 0"/>
-            <el:PropertyViewer_DoubleNums_UpDown Tag="Громкость" DataContext="{Binding TTSVoiceVolume, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="0 20 0 0"/>
+            <el:PropertyViewer_IntNums_UpDown Tag="Темп речи" DataContext="{Binding TTSVoiceRate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="0 20 0 0"/>
+            <el:PropertyViewer_IntNums_UpDown Tag="Громкость" DataContext="{Binding TTSVoiceVolume, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="0 20 0 0"/>
 
         </StackPanel>
         <Button Content="ОК" Width="50" Height="25" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="20" Click="Button_Click" />

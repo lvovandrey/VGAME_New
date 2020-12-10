@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Speech.Synthesis;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace VanyaGame.GameCardsNewDB.Tools
 {
-    
+
 
     public static class Settings
     {
-
-
         /// <summary>
         /// Событие возникает когда изменяются настройки. На него рекомендуется вешать все изменения которые завязаны с настройками.
         /// </summary>
@@ -303,7 +304,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
         }
 
 
-        static string attachedDBCardsFilename="";
+        static string attachedDBCardsFilename = "";
         public static string AttachedDBCardsFilename
         {
             get
@@ -345,6 +346,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
                 cardWrongPauseTime = value.ToString();
             }
         }
+
         public static string cardSuccesSpeakAgainTime = "3";
         public static double CardSuccesSpeakAgainTime
         {
@@ -364,7 +366,113 @@ namespace VanyaGame.GameCardsNewDB.Tools
                 cardSuccesSpeakAgainTime = value.ToString();
             }
         }
-        
+
+
+        private static ReadOnlyCollection<InstalledVoice> GetTTSVoices() 
+        {
+            var voices = new SpeechSynthesizer().GetInstalledVoices(new CultureInfo("ru-RU"));
+            TTSVoice = voices.First();
+            return voices;
+        }
+
+        private static ReadOnlyCollection<InstalledVoice> _TextToSpeachVoices = GetTTSVoices();
+        public static ObservableCollection<InstalledVoice> TextToSpeachVoices
+        {
+            get
+            {
+                return new ObservableCollection<InstalledVoice>(_TextToSpeachVoices);
+            }
+        }
+
+
+        public static string TTSVoiceName
+        {
+            get
+            {
+                return _TTSVoice.VoiceInfo.Name;
+            }
+            set
+            {
+                var TextToSpeachVoicesNames = from v in TextToSpeachVoices select v.VoiceInfo.Name;
+                if (TextToSpeachVoicesNames.Contains(value))
+                {
+                    TTSVoice = (from v in TextToSpeachVoices where (v.VoiceInfo.Name == value) select v).First();
+                }
+            }
+        }
+
+        private static InstalledVoice _TTSVoice;
+        public static InstalledVoice TTSVoice
+        {
+            get { return _TTSVoice; }
+            set
+            {
+                _TTSVoice = value;
+            }
+        }
+
+
+        public static string _TTSVoiceRate = "0";
+        public static int TTSVoiceRate
+        {
+            get
+            {
+                int s = 0;
+                if (int.TryParse(_TTSVoiceRate, out s)) return s;
+                else return 0;
+            }
+            set
+            {
+                if (value < -10 || value > 10)
+                {
+                    InfoWindow.Show("Темп речи должен быть целым числом от -10 до 10");
+                    return;
+                }
+                _TTSVoiceRate = value.ToString();
+            }
+        }
+
+        public static string _TTSVoiceSlowRate = "-2";
+        public static int TTSVoiceSlowRate
+        {
+            get
+            {
+                int s = -2;
+                if (int.TryParse(_TTSVoiceSlowRate, out s)) return s;
+                else return -2;
+            }
+            set
+            {
+                if (value < -10 || value > 10)
+                {
+                    InfoWindow.Show("Темп речи должен быть целым числом от -10 до 10");
+                    return;
+                }
+                _TTSVoiceSlowRate = value.ToString();
+            }
+        }
+
+        public static string _TTSVoiceVolume = "100";
+        public static int TTSVoiceVolume
+        {
+            get
+            {
+                int s = 100;
+                if (int.TryParse(_TTSVoiceVolume, out s)) return s;
+                else return 100;
+            }
+            set
+            {
+                if (value < 0 || value > 100)
+                {
+                    InfoWindow.Show("Громкость должна быть целым числом от 0 до 100");
+                    return;
+                }
+                _TTSVoiceVolume = value.ToString();
+            }
+        }
+
+
 
 
         static public void SaveAllSettings()
@@ -393,6 +501,10 @@ namespace VanyaGame.GameCardsNewDB.Tools
 
             ConfigurationTools.AddUpdateAppSettings("AttachedDBCardsFilename", attachedDBCardsFilename);
 
+            ConfigurationTools.AddUpdateAppSettings("TTSVoiceName", TTSVoiceName);
+            ConfigurationTools.AddUpdateAppSettings("TTSVoiceRate", _TTSVoiceRate);
+            ConfigurationTools.AddUpdateAppSettings("TTSVoiceSlowRate", _TTSVoiceSlowRate);
+            ConfigurationTools.AddUpdateAppSettings("TTSVoiceVolume", _TTSVoiceVolume);
 
 
             SettingsChanged?.Invoke();
@@ -423,6 +535,11 @@ namespace VanyaGame.GameCardsNewDB.Tools
             cardSuccesSpeakAgainTime = ConfigurationTools.ReadSetting("CardSuccesSpeakAgainTime");
 
             attachedDBCardsFilename = ConfigurationTools.ReadSetting("AttachedDBCardsFilename");
+
+            TTSVoiceName = ConfigurationTools.ReadSetting("TTSVoiceName");
+            _TTSVoiceRate = ConfigurationTools.ReadSetting("TTSVoiceRate");
+            _TTSVoiceSlowRate = ConfigurationTools.ReadSetting("TTSVoiceSlowRate");
+            _TTSVoiceVolume = ConfigurationTools.ReadSetting("TTSVoiceVolume");
 
             SettingsChanged?.Invoke();
         }

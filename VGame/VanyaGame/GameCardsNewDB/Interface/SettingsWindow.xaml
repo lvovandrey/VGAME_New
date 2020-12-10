@@ -23,16 +23,17 @@
             <TextBlock  Text="Разделы настроек" />
             <ListBox VerticalAlignment="Stretch" Background="{x:Null}"  SelectionChanged="ListBox_SelectionChanged">
                 <ListBoxItem >Подсказки</ListBoxItem>
-                <ListBoxItem >Озвучка</ListBoxItem>
+                <ListBoxItem >Текст озвучки</ListBoxItem>
+                <ListBoxItem >Голос</ListBoxItem>
                 <ListBoxItem >Вид</ListBoxItem>
                 <ListBoxItem >База данных</ListBoxItem>
-
             </ListBox>
         </StackPanel>
         <el:HintSettingsView Grid.Row="0" Grid.Column="1" x:Name="HintSettins"/>
         <el:SpeakSettingsView Grid.Row="0" Grid.Column="1" Visibility="Hidden" x:Name="SpeakSettings" />
         <el:ViewSettingsView Grid.Row="0" Grid.Column="1" Visibility="Hidden" x:Name="ViewSettings" />
         <el:DBSettingsView Grid.Row="0" Grid.Column="1" Visibility="Hidden" x:Name="DBSettings" />
+        <el:VoiceSettingsView Grid.Row="0" Grid.Column="1" Visibility="Hidden" x:Name="VoiceSettings"/>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="1" Margin="0 0 10 0">
             <Button Command="{Binding SaveSettingsCommand}" Click="Button_Click_1" Margin="0 3 10 3" Padding="10 0 10 0">Применить</Button>

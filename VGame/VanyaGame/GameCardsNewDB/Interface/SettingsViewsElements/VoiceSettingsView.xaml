@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="VanyaGame.GameCardsNewDB.Interface.SettingsViewsElements.VoiceSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VanyaGame.GameCardsNewDB.Interface.SettingsViewsElements"
+             xmlns:el="clr-namespace:VanyaGame.GameCardsNewDB.Interface.Elements"
+             mc:Ignorable="d" 
+             d:DesignHeight="550" d:DesignWidth="800">
+    <Grid>
+        <GroupBox Header="Настройки голоса" >
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+
+
+                <StackPanel>
+                    <Label Content="Голос синтезатора речи (TTS)" Margin="5 0 5 -1"/>
+                    <ComboBox Margin="10 0 10 15"
+                              ItemsSource="{Binding TextToSpeachVoicesNames}" 
+                              SelectedItem="{Binding TTSVoiceName}">
+
+                    </ComboBox>
+                    <el:PropertyViewer_IntNums_UpDown Margin="10 10 10 15"
+                                                         Tag="Темп речи" 
+                                                         DataContext="{Binding TTSVoiceRate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                    <el:PropertyViewer_IntNums_UpDown Margin="10 10 10 15"
+                                                         Tag="Медленный темп речи (используется при повторении)" 
+                                                         DataContext="{Binding TTSVoiceSlowRate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                    <el:PropertyViewer_IntNums_UpDown Margin="10 10 10 15"
+                                                         Tag="Громкость" 
+                                                         DataContext="{Binding TTSVoiceVolume, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+
+                </StackPanel>
+
+            </ScrollViewer>
+        </GroupBox>
+    </Grid>
+</UserControl>

@@ -153,22 +153,51 @@ namespace VanyaGame.GameCardsNewDB.Interface
             set { Settings.AttachedDBCardsFilename = value; OnPropertyChanged("AttachedDBCardsFilename"); }
         }
 
-        public ObservableCollection<string> TextToSpeachSynthesizers
-        {
-            get 
-            {
-                SpeechSynthesizer speaker = new SpeechSynthesizer();
 
-                var voices = speaker.GetInstalledVoices(new CultureInfo("ru-RU"));
-                
+
+        public  ObservableCollection<string> TextToSpeachVoicesNames
+        {
+            get
+            {
+                var voices = Settings.TextToSpeachVoices;
                 return new ObservableCollection<string>(from v in voices select v.VoiceInfo.Name);
             }
         }
 
-        public string TTSSynthesizer 
+
+        public string TTSVoiceName
         {
-            get;
-            set;
+            get
+            {
+                return Settings.TTSVoiceName;
+            }
+            set
+            {
+                if (TextToSpeachVoicesNames.Contains(value))
+                {
+                    Settings.TTSVoiceName = value;
+                    OnPropertyChanged("TTSVoiceName");
+                }
+            }
+        }
+
+
+        public int TTSVoiceRate
+        {
+            get { return Settings.TTSVoiceRate; }
+            set { Settings.TTSVoiceRate = value; OnPropertyChanged("TTSVoiceRate"); }
+        }
+
+        public int TTSVoiceSlowRate
+        {
+            get { return Settings.TTSVoiceSlowRate; }
+            set { Settings.TTSVoiceSlowRate = value; OnPropertyChanged("TTSVoiceSlowRate"); }
+        }
+
+        public int TTSVoiceVolume
+        {
+            get { return Settings.TTSVoiceVolume; }
+            set { Settings.TTSVoiceVolume = value; OnPropertyChanged("TTSVoiceVolume"); }
         }
 
         #endregion
@@ -209,6 +238,12 @@ namespace VanyaGame.GameCardsNewDB.Interface
             OnPropertyChanged("CardSuccesSpeakAgainTime");
 
             OnPropertyChanged("AttachedDBCardsFilename");
+
+            OnPropertyChanged("TextToSpeachVoicesNames");
+            OnPropertyChanged("TTSVoiceName");
+            OnPropertyChanged("TTSVoiceRate");
+            OnPropertyChanged("TTSVoiceSlowRate");
+            OnPropertyChanged("TTSVoiceVolume");
         }
 
         #endregion

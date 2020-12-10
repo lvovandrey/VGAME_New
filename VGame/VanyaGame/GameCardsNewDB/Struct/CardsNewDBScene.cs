@@ -253,13 +253,14 @@ namespace VanyaGame.GameCardsNewDB.Struct
         {
             if (text == null) return;
             SpeechSynthesizer speaker = new SpeechSynthesizer();
-
-            var voices = speaker.GetInstalledVoices(new CultureInfo("ru-RU"));
-
-            if (voices.Count == 0) MessageBox.Show("В системе не установлены голоса для синтеза речи на русском языке. Установите пожалуйста, а то ничего не будет слышно.");
-            else speaker.SelectVoice(voices[0].VoiceInfo.Name);
-            speaker.Rate = 1;
-            speaker.Volume = 100;
+            if (Settings.TextToSpeachVoices.Count == 0)
+            {
+                MessageBox.Show("В системе не установлены голоса для синтеза речи на русском языке. Установите пожалуйста, а то ничего не будет слышно.");
+                return;
+            }
+            else speaker.SelectVoice(Settings.TTSVoice.VoiceInfo.Name);
+            speaker.Rate = Settings.TTSVoiceRate;
+            speaker.Volume = Settings.TTSVoiceVolume;
             speaker.SpeakAsync(text);
         }
 
@@ -267,13 +268,14 @@ namespace VanyaGame.GameCardsNewDB.Struct
         {
             if (text == null) return;
             SpeechSynthesizer speaker = new SpeechSynthesizer();
-
-            var voices = speaker.GetInstalledVoices(new CultureInfo("ru-RU"));
-
-            if (voices.Count == 0) MessageBox.Show("В системе не установлены голоса для синтеза речи на русском языке. Установите пожалуйста, а то ничего не будет слышно.");
-            else speaker.SelectVoice(voices[0].VoiceInfo.Name);
-            speaker.Rate = -3;
-            speaker.Volume = 100;
+            if (Settings.TextToSpeachVoices.Count == 0)
+            {
+                MessageBox.Show("В системе не установлены голоса для синтеза речи на русском языке. Установите пожалуйста, а то ничего не будет слышно.");
+                return;
+            }
+            else speaker.SelectVoice(Settings.TTSVoice.VoiceInfo.Name);
+            speaker.Rate = Settings.TTSVoiceSlowRate;
+            speaker.Volume = Settings.TTSVoiceVolume;
             speaker.SpeakAsync(text);
         }
 

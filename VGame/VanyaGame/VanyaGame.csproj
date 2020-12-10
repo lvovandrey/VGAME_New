@@ -198,6 +198,9 @@
     <Compile Include="GameCardsNewDB\Interface\BeautyButtonSettings.xaml.cs">
       <DependentUpon>BeautyButtonSettings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GameCardsNewDB\Interface\Elements\PropertyViewer_IntNums_UpDown.xaml.cs">
+      <DependentUpon>PropertyViewer_IntNums_UpDown.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GameCardsNewDB\Interface\SettingsViewsElements\DBSettingsView.xaml.cs">
       <DependentUpon>DBSettingsView.xaml</DependentUpon>
     </Compile>
@@ -209,6 +212,9 @@
     </Compile>
     <Compile Include="GameCardsNewDB\Interface\SettingsViewsElements\ViewSettingsView.xaml.cs">
       <DependentUpon>ViewSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GameCardsNewDB\Interface\SettingsViewsElements\VoiceSettingsView.xaml.cs">
+      <DependentUpon>VoiceSettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="GameCardsNewDB\Interface\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
@@ -380,6 +386,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="GameCardsNewDB\Interface\Elements\PropertyViewer_IntNums_UpDown.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GameCardsNewDB\Interface\SettingsViewsElements\DBSettingsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -395,6 +405,10 @@
     <Page Include="GameCardsNewDB\Interface\SettingsViewsElements\ViewSettingsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GameCardsNewDB\Interface\SettingsViewsElements\VoiceSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GameCardsNewDB\Interface\SettingsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

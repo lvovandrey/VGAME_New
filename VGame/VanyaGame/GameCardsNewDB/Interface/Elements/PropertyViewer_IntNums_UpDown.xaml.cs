@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CardsEditor.View.Elements
+namespace VanyaGame.GameCardsNewDB.Interface.Elements
 {
     /// <summary>
-    /// Interaction logic for PropertyViewer_DoubleNums_UpDown.xaml
+    /// Interaction logic for PropertyViewer_IntNums_UpDown.xaml
     /// </summary>
-    public partial class PropertyViewer_DoubleNums_UpDown : UserControl
+    public partial class PropertyViewer_IntNums_UpDown : UserControl
     {
-        public PropertyViewer_DoubleNums_UpDown()
+        public PropertyViewer_IntNums_UpDown()
         {
             InitializeComponent();
         }

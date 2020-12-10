@@ -47,10 +47,10 @@ namespace VanyaGame.GameCardsNewDB.Interface
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             SettingsElements.Add("Подсказки", HintSettins);
-            SettingsElements.Add("Озвучка", SpeakSettings);
+            SettingsElements.Add("Текст озвучки", SpeakSettings);
+            SettingsElements.Add("Голос", VoiceSettings);
             SettingsElements.Add("Вид", ViewSettings);
             SettingsElements.Add("База данных", DBSettings);
-
         }
     }
 }
