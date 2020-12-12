@@ -8,12 +8,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="800">
     <Grid>
-        <GroupBox Header="Карточки" >
+        <GroupBox Header="Вид" >
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
 
 
                 <StackPanel>
-                    <GroupBox Header="Размеры" Margin="5">
+                    <GroupBox Header="Размеры карточек" Margin="5">
                         <StackPanel>
                             <el:PropertyViewer_DoubleNums_UpDown DataContext="{Binding CardSize, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                                          Tag="Размер карточек"
@@ -23,7 +23,7 @@
                                                          Margin="5"/>
                         </StackPanel>
                     </GroupBox>
-                    <GroupBox Header="Различные времена" Margin="5">
+                    <GroupBox Header="Различные времена предъявления карточек" Margin="5">
                         <StackPanel>
                             <el:PropertyViewer_DoubleNums_UpDown DataContext="{Binding CardSuccesTime, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                                          Tag="Время предъявления увеличенной карточки после правильного ответа"
@@ -34,6 +34,50 @@
                             <el:PropertyViewer_DoubleNums_UpDown DataContext="{Binding CardSuccesSpeakAgainTime, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                                          Tag="Время повторного озвучивания карточки после правильного ответа"
                                                          Margin="5"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Фоновое изображение" Margin="5">
+                        <StackPanel>
+                            <Label Content="Путь к фоновому изображению первичной заставки" Margin="5 0 5 -1"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Text="{Binding BackgroundStartFilename, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                 Margin="10 0 2 0" MinWidth="500" />
+                                <Button Content="..." Width="20" 
+                                VerticalAlignment="Top"
+                                Command="{Binding ChooseBackgroundStartFilename}"/>
+                                
+                            </StackPanel>
+
+                            <Label Content="Путь к фоновому изображению в меню выбора уровня" Margin="5 0 5 -1"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Text="{Binding BackgroundMenuFilename, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                 Margin="10 0 2 0" MinWidth="500" />
+                                <Button Content="..." Width="20" 
+                                VerticalAlignment="Top"
+                                Command="{Binding ChooseBackgroundMenuFilename}"/>
+
+                            </StackPanel>
+
+                            <Label Content="Путь к фоновому изображению при выполнении заданий" Margin="5 0 5 -1"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Text="{Binding BackgroundFilename, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                 Margin="10 0 2 0" MinWidth="500" />
+                                <Button Content="..." Width="20" 
+                                VerticalAlignment="Top"
+                                Command="{Binding ChooseBackgroundFilename}"/>
+
+                            </StackPanel>
+
+                            <Label Content="Путь к фоновому изображению при завершении работы (не активно)" Margin="5 0 5 -1"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Text="{Binding BackgroundGameOverFilename, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                 Margin="10 0 2 0" MinWidth="500" />
+                                <Button Content="..." Width="20" 
+                                VerticalAlignment="Top"
+                                Command="{Binding ChooseBackgroundGameOverFilename}"/>
+
+                            </StackPanel>
+
                         </StackPanel>
                     </GroupBox>
                 </StackPanel>

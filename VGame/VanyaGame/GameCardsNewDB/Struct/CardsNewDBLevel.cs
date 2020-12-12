@@ -112,10 +112,9 @@ namespace VanyaGame.GameCardsNewDB.Struct
         /// <param name="fileshortname">Имя файла фона. По умолч."back.jpg"</param>
         public void LoadBackground(string fileshortname = @"backBegin.jpg")
         {
-            string BackGrndFilepath = Path.Combine(Game.Sets.InterfaceBackgroundDir,fileshortname);
             try
             {
-                Game.LoadBackGround(BackGrndFilepath);
+                Game.LoadBackGround(Settings.BackgroundFilename);
             }
             catch
             {

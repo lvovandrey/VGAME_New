@@ -8,6 +8,7 @@ using System.Speech.Synthesis;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace VanyaGame.GameCardsNewDB.Tools
 {
 
@@ -219,28 +220,63 @@ namespace VanyaGame.GameCardsNewDB.Tools
 
 
 
-
+        private static string firstQuestionText = "";
         public static string FirstQuestionText
         {
-            get; set;
+            get
+            {
+                if (firstQuestionText == "" || firstQuestionText == "Not Found")
+                    firstQuestionText = "Покажи где - ";
+                return firstQuestionText;
+            }
+            set
+            {
+                firstQuestionText = value;
+            }
         }
 
+        private static string hintQuestionText = "";
         public static string HintQuestionText
         {
-            get; set;
+            get
+            {
+                return hintQuestionText;
+            }
+            set
+            {
+                hintQuestionText = value;
+            }
         }
 
+        private static string successTestText = "";
         public static string SuccessTestText
         {
-            get; set;
+            get
+            {
+                if (successTestText == "" || successTestText == "Not Found")
+                    successTestText = "Молодец! Это -  ";
+                return successTestText;
+            }
+            set
+            {
+                successTestText = value;
+            }
         }
 
+        private static string fallTestText = "";
         public static string FallTestText
         {
-            get; set;
+            get
+            {
+                if (fallTestText == "" || fallTestText == "Not Found")
+                    fallTestText = "Не правильно! Попробуй еще раз.";
+                return fallTestText;
+            }
+            set
+            {
+                fallTestText = value;
+            }
         }
-
-
 
 
         public static string cardSize = "250";
@@ -309,7 +345,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
         {
             get
             {
-                if (attachedDBCardsFilename == "")
+                if (attachedDBCardsFilename == "" || attachedDBCardsFilename == "Not Found")
                     attachedDBCardsFilename = @"C:\Users\Professional\TestBackupDB\CardsDBInsects.mdf";
                 return attachedDBCardsFilename;
             }
@@ -474,6 +510,25 @@ namespace VanyaGame.GameCardsNewDB.Tools
 
 
 
+        static string backgroundFilename = "";
+        public static string BackgroundFilename
+        {
+            get
+            {
+                if (backgroundFilename == "" || backgroundFilename == "Not Found")
+                    backgroundFilename = @"J:\1.VANYA GAME\LEVELS\VanjaGame\interface\back.jpg";
+                return backgroundFilename;
+            }
+            set
+            {
+                if (!File.Exists(value))
+                {
+                    InfoWindow.Show("Нужно выбрать существующий файл изображения для фона");
+                    return;
+                }
+                backgroundFilename = value;
+            }
+        }
 
         static public void SaveAllSettings()
         {
@@ -498,6 +553,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
             ConfigurationTools.AddUpdateAppSettings("CardSuccesTime", cardSuccesTime);
             ConfigurationTools.AddUpdateAppSettings("CardWrongPauseTime", cardWrongPauseTime);
             ConfigurationTools.AddUpdateAppSettings("CardSuccesSpeakAgainTime", cardSuccesSpeakAgainTime);
+            ConfigurationTools.AddUpdateAppSettings("BackgroundFilename", backgroundFilename);
 
             ConfigurationTools.AddUpdateAppSettings("AttachedDBCardsFilename", attachedDBCardsFilename);
 
@@ -506,6 +562,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
             ConfigurationTools.AddUpdateAppSettings("TTSVoiceSlowRate", _TTSVoiceSlowRate);
             ConfigurationTools.AddUpdateAppSettings("TTSVoiceVolume", _TTSVoiceVolume);
 
+            VanyaGame.Sets.Settings.SaveAllSettings();
 
             SettingsChanged?.Invoke();
         }
@@ -533,13 +590,16 @@ namespace VanyaGame.GameCardsNewDB.Tools
             cardSuccesTime = ConfigurationTools.ReadSetting("CardSuccesTime");
             cardWrongPauseTime = ConfigurationTools.ReadSetting("CardWrongPauseTime");
             cardSuccesSpeakAgainTime = ConfigurationTools.ReadSetting("CardSuccesSpeakAgainTime");
-
+            backgroundFilename = ConfigurationTools.ReadSetting("BackgroundFilename");
+   
             attachedDBCardsFilename = ConfigurationTools.ReadSetting("AttachedDBCardsFilename");
 
             TTSVoiceName = ConfigurationTools.ReadSetting("TTSVoiceName");
             _TTSVoiceRate = ConfigurationTools.ReadSetting("TTSVoiceRate");
             _TTSVoiceSlowRate = ConfigurationTools.ReadSetting("TTSVoiceSlowRate");
             _TTSVoiceVolume = ConfigurationTools.ReadSetting("TTSVoiceVolume");
+
+            VanyaGame.Sets.Settings.RestoreAllSettings();
 
             SettingsChanged?.Invoke();
         }

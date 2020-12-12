@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace VanyaGame.GameCardsNewDB.Tools
+namespace VanyaGame
 {
     public static class ConfigurationTools
     {
@@ -22,7 +22,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
             catch (ConfigurationErrorsException)
             {
-                InfoWindow.Show("Error reading app settings");
+                MessageBox.Show("Error reading app settings");
                 return result;
             }
         }
@@ -46,7 +46,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
             catch (ConfigurationErrorsException)
             {
-                InfoWindow.Show("Error writing app settings");
+                MessageBox.Show("Error writing app settings");
             }
         }
     }

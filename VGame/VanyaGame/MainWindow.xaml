@@ -17,7 +17,7 @@
         WindowStartupLocation="CenterScreen" Cursor="{DynamicResource HandCursor}" Loaded="MyWindow_Loaded" 
         WindowStyle="None" WindowState="Maximized" PreviewMouseDown="MyWindow_PreviewMouseDown" 
         Closing="MyWindow_Closing"  
-        PreviewMouseUp="MyWindow_PreviewMouseUp" PreviewMouseMove="MyWindow_PreviewMouseMove" Icon="Images\logo.ico" PreviewMouseWheel="MyWindow_PreviewMouseWheel" >
+        PreviewMouseUp="MyWindow_PreviewMouseUp" PreviewMouseMove="MyWindow_PreviewMouseMove" Icon="Images\book-icon.ico" PreviewMouseWheel="MyWindow_PreviewMouseWheel" >
 
     <Window.Resources>
 
@@ -29,7 +29,13 @@
 
 
 
-    <Grid x:Name="BaseGrid"  Background="#FFC9C9C9" >
+    <Grid x:Name="BaseGrid" >
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF009B62"/>
+                <GradientStop Color="#FF423A09" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Button Panel.ZIndex="5000"  x:Name="DB_button" Content="Показать БД" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="300,300,0,0" Width="100" Height="50" Click="DB_button_Click" Visibility="Collapsed"/>
         <Grid>
             <Grid.RowDefinitions>
@@ -54,11 +60,11 @@
                 <MediaElement x:Name="MediaElementMusic" HorizontalAlignment="Left" Height="38" Margin="359,519,0,0" VerticalAlignment="Top" Width="41" LoadedBehavior="Manual" MediaEnded="MediaElementMusic_MediaEnded" Volume="0.1"/>
                 <Grid x:Name="GridVideo" VerticalAlignment="Stretch"  HorizontalAlignment="Stretch" >
 
-                    
-                    
+
+
                     <StackPanel HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Top" 
                                Background="{x:Null}" Panel.ZIndex="2">
-                        
+
                         <Label x:Name="Label1" 
                            Content="Нажмите Esc для выхода из игры&#xA;Нажмите F для пропуска видео" 
                            Visibility="Visible" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Top" 

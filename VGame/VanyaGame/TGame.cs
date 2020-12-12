@@ -196,6 +196,8 @@ namespace VanyaGame
 
         public static void Create(MainWindow WND_Owner)
         {
+
+            VanyaGame.Sets.Settings.RestoreAllSettings();
             Owner = WND_Owner;
             RandomGenerator = new Random();
             Sets = new TGameSets();
@@ -294,17 +296,14 @@ namespace VanyaGame
 
         public static void GameOver() 
         {
-            LoadBackGround(Sets.InterfaceBackgroundDir + @"\backEnd.jpg");
-
-            //   TDrawEffects.BlurHide(Owner, 5, 10, () => { Owner.Close(); });
+            LoadBackGround(VanyaGame.Sets.Settings.BackgroundGameOverFilename);
         }
         public static void PreviewStart()
         {
-            LoadBackGround(Sets.InterfaceBackgroundDir + @"\backBegin.jpg");
+           
+            LoadBackGround(VanyaGame.Sets.Settings.BackgroundStartFilename);
 
             Owner.StartButton.Visibility = Visibility.Visible; Owner.StartButton.Opacity = 1;
-            //            TDrawEffects.BlurShow(Owner.StartButton, 0.5);
-
 
             /// ??? двойной вызов с ImageBegin_MouseUp   
             Owner.StartButton.MouseUp += StartButton_MouseUp;
@@ -364,7 +363,7 @@ namespace VanyaGame
 
         public static void PrevMenuShow()
         {
-            Game.LoadBackGround(Game.Sets.InterfaceBackgroundDir + @"\backMenu.jpg");
+            Game.LoadBackGround(VanyaGame.Sets.Settings.BackgroundMenuFilename);
             Game.Owner.PreviewMenu.Visibility = Visibility.Visible;
         }
 

@@ -223,7 +223,7 @@
     <Compile Include="GameCardsNewDB\Struct\CardsNewDBIteration.cs" />
     <Compile Include="GameCardsNewDB\Struct\CardsNewDBLevel.cs" />
     <Compile Include="GameCardsNewDB\Struct\CardsNewDBScene.cs" />
-    <Compile Include="GameCardsNewDB\Tools\ConfigurationTools.cs" />
+    <Compile Include="Tools\ConfigurationTools.cs" />
     <Compile Include="GameCardsNewDB\Tools\InfoWindow.cs" />
     <Compile Include="GameCardsNewDB\Tools\Settings.cs" />
     <Compile Include="GameCardsNewDB\Units\CardUnit.cs" />
@@ -277,6 +277,7 @@
     <Compile Include="Media\PlayerWpf.cs" />
     <Compile Include="Media\Time.cs" />
     <Compile Include="Media\Volume.cs" />
+    <Compile Include="Sets\Settings.cs" />
     <Compile Include="Struct\Components\CursorSets.cs" />
     <Compile Include="Struct\Components\InnerVideoSets.cs" />
     <Compile Include="Struct\Components\UnitsCollection.cs" />
@@ -333,6 +334,7 @@
     <Compile Include="Abstract\Component.cs" />
     <Compile Include="Abstract\ComponentContainer.cs" />
     <Compile Include="Tools\ListShuffle.cs" />
+    <Compile Include="Tools\Miscellanea.cs" />
     <Compile Include="TUserActivity.cs" />
     <Compile Include="Units\Components\DragAndDrop.cs" />
     <Compile Include="Units\Components\Update.cs" />
@@ -774,6 +776,9 @@
     <Resource Include="GameCardsNewDB\Images\btn_settings.png" />
     <Resource Include="Images\book-icon.ico" />
     <Resource Include="book-icon.ico" />
+    <Content Include="Images\back.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Tools\vlcLib\axvlc.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -200,6 +200,31 @@ namespace VanyaGame.GameCardsNewDB.Interface
             set { Settings.TTSVoiceVolume = value; OnPropertyChanged("TTSVoiceVolume"); }
         }
 
+
+        public string BackgroundFilename
+        {
+            get { return Settings.BackgroundFilename; }
+            set { Settings.BackgroundFilename = value; OnPropertyChanged("BackgroundFilename"); }
+        }
+
+        public string BackgroundGameOverFilename
+        {
+            get { return Sets.Settings.BackgroundGameOverFilename; }
+            set { Sets.Settings.BackgroundGameOverFilename = value; OnPropertyChanged("BackgroundGameOverFilename"); }
+        }
+
+        public string BackgroundMenuFilename
+        {
+            get { return Sets.Settings.BackgroundMenuFilename; }
+            set { Sets.Settings.BackgroundMenuFilename = value; OnPropertyChanged("BackgroundMenuFilename"); }
+        }
+
+        public string BackgroundStartFilename
+        {
+            get { return Sets.Settings.BackgroundStartFilename; }
+            set { Sets.Settings.BackgroundStartFilename = value; OnPropertyChanged("BackgroundStartFilename"); }
+        }
+
         #endregion
 
         #region METHODS
@@ -235,7 +260,12 @@ namespace VanyaGame.GameCardsNewDB.Interface
             OnPropertyChanged("CardSuccesSize");
             OnPropertyChanged("CardSuccesTime");
             OnPropertyChanged("CardWrongPauseTime");
-            OnPropertyChanged("CardSuccesSpeakAgainTime");
+            OnPropertyChanged("CardSuccesSpeakAgainTime"); 
+            OnPropertyChanged("BackgroundFilename");
+
+            OnPropertyChanged("BackgroundGameOverFilename");
+            OnPropertyChanged("BackgroundMenuFilename");
+            OnPropertyChanged("BackgroundStartFilename");
 
             OnPropertyChanged("AttachedDBCardsFilename");
 
@@ -296,6 +326,76 @@ namespace VanyaGame.GameCardsNewDB.Interface
                   }));
             }
         }
+
+
+        private string ChooseFilename(string CurFilename, string filter, string title)
+        {
+            string NewFilename = CurFilename;
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = filter;
+                openFileDialog.Title = title;
+                openFileDialog.ValidateNames = false;
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    NewFilename = @openFileDialog.FileName;
+                }
+            }
+            return NewFilename;
+        }
+
+        private RelayCommand chooseBackgroundFilename;
+        public RelayCommand ChooseBackgroundFilename
+        {
+            get
+            {
+                return chooseBackgroundFilename ??
+                  (chooseBackgroundFilename = new RelayCommand(obj =>
+                  {
+                      BackgroundFilename = ChooseFilename(BackgroundFilename, "Файлы изображений (*.bmp, *.jpg, *.png)|*.bmp;*.jpg;*.png", "Выбор файла для фона");
+                  }));
+            }
+        }
+
+        private RelayCommand chooseBackgroundGameOverFilename;
+        public RelayCommand ChooseBackgroundGameOverFilename
+        {
+            get
+            {
+                return chooseBackgroundGameOverFilename ??
+                  (chooseBackgroundGameOverFilename = new RelayCommand(obj =>
+                  {
+                      BackgroundGameOverFilename = ChooseFilename(BackgroundGameOverFilename, "Файлы изображений (*.bmp, *.jpg, *.png)|*.bmp;*.jpg;*.png", "Выбор файла для конечного фона");
+                  }));
+            }
+        }
+
+        private RelayCommand сhooseBackgroundMenuFilename;
+        public RelayCommand ChooseBackgroundMenuFilename
+        {
+            get
+            {
+                return сhooseBackgroundMenuFilename ??
+                  (сhooseBackgroundMenuFilename = new RelayCommand(obj =>
+                  {
+                      BackgroundMenuFilename = ChooseFilename(BackgroundMenuFilename, "Файлы изображений (*.bmp, *.jpg, *.png)|*.bmp;*.jpg;*.png", "Выбор файла для фона меню");
+                  }));
+            }
+        }
+
+        private RelayCommand сhooseBackgroundStartFilename;
+        public RelayCommand ChooseBackgroundStartFilename
+        {
+            get
+            {
+                return сhooseBackgroundStartFilename ??
+                  (сhooseBackgroundStartFilename = new RelayCommand(obj =>
+                  {
+                      BackgroundStartFilename = ChooseFilename(BackgroundStartFilename, "Файлы изображений (*.bmp, *.jpg, *.png)|*.bmp;*.jpg;*.png", "Выбор файла для первичного фона");
+                  }));
+            }
+        }
+
         #endregion
 
     }
