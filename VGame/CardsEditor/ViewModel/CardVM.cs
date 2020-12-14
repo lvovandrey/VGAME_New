@@ -61,6 +61,7 @@ namespace CardsEditor.ViewModel
         {
             get
             {
+                if (_levels == null) return null;
                 _levelsvm = new ObservableCollection<LevelVM>(from l in _levels select new LevelVM(l, _vm));
                 return _levelsvm;
             }

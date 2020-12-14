@@ -29,6 +29,7 @@ namespace VanyaGame.PrevMenuNS
         }
         public PrevMenuItem(string ImgFilename,string ImgType) : this()
         {
+            if (ImgFilename == "" || ImgFilename == null) return;
             if (ImgType == "youtube")
                 Img.Source = new BitmapImage(new Uri(@ImgFilename));
             else
