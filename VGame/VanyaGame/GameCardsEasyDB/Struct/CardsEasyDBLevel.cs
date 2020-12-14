@@ -122,7 +122,7 @@ namespace VanyaGame.GameCardsEasyDB.Struct
         {
             LoadMedia();
             LoadScenes();
-            Game.Music.PlayRandom();
+            Game.Music.PlayRandom(true);
             Game.Music.Pause();
 
             CurScene.GetComponent<Starter>().Start();

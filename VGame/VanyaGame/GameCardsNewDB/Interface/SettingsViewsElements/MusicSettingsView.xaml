@@ -6,6 +6,9 @@
              xmlns:local="clr-namespace:VanyaGame.GameCardsNewDB.Interface.SettingsViewsElements"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <local:BoolNotOperationConverter x:Key="BoolNotOperationConverter"/>
+    </UserControl.Resources>
     <Grid>
         <GroupBox Header="Музыкальное сопровождение" >
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
@@ -34,8 +37,13 @@
                         <Button Content="-" Command="{Binding RemoveMusicFilenameCommand}" Width="30" Margin="5"/>
                         <Button Content="К файлу..." Command="{Binding OpenMusicFileInExplorerCommand}" Width="60" Margin="5"/>
                     </StackPanel>
-                    <CheckBox IsChecked="{Binding ShuffleMusic}" Content="Проигрывать в случайном порядке" Margin="10"/>
-
+                    <CheckBox IsChecked="{Binding ShuffleMusic}" 
+                              Content="Проигрывать в случайном порядке" 
+                              x:Name="ShuffleMusicCheckBox" Margin="10"/>
+                    <CheckBox IsChecked="{Binding RepeatMusicPlaylist}" 
+                              Content="Повторять плейлист" 
+                              IsEnabled="{Binding ElementName=ShuffleMusicCheckBox, Path=IsChecked, Mode=OneWay, Converter={StaticResource ResourceKey=BoolNotOperationConverter}}" 
+                              Margin="10 0 10 10"/>
                 </StackPanel>
             </ScrollViewer>
         </GroupBox>

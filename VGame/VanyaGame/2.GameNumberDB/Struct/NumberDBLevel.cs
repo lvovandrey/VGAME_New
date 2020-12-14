@@ -144,7 +144,7 @@ namespace VanyaGame.GameNumberDB.Struct
         {
             LoadMedia();
             LoadScenes();
-            Game.Music.PlayRandom();
+            Game.Music.PlayRandom(true);
             Game.Music.Pause();
 
             CurScene.GetComponent<Starter>().Start();

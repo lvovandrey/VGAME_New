@@ -39,6 +39,8 @@ namespace VanyaGame.Media
         public bool IsPlaying = false;
         public bool IsPaused = false;
         public bool IsShuffle = false;
+        public bool IsPlaylistRepeat = true;
+
 
         public GameMedia(ref Player _player)
         {
@@ -134,6 +136,7 @@ namespace VanyaGame.Media
 
         public void Play(string MediaName)
         {
+            if (!Media.ContainsKey(MediaName)) return;
             player.Source = @Media[MediaName];
             player.Play();
             IsPaused = false;
@@ -153,9 +156,10 @@ namespace VanyaGame.Media
                 if (onStateChangeEvent != null) onStateChangeEvent();
             }
         }
-        public void PlayRandom()
+        public void PlayRandom(bool isPlaylistRepeat)
         {
             IsShuffle = true;
+            IsPlaylistRepeat = isPlaylistRepeat;
             int c = Media.Count;
             int x = Game.RandomGenerator.Next(1, c + 1);
             int y = 1;
@@ -171,13 +175,13 @@ namespace VanyaGame.Media
 
         }
 
-        public void PlayInOrder()
+        public void PlayInOrder(bool isPlaylistRepeat)
         {
             IsShuffle = false;
-
+            IsPlaylistRepeat = isPlaylistRepeat;
             string s = player.Source;
             string mkey = "";
-            if (s == "" || s==null) mkey = OrderedMediaKeys.First();
+            if (s == "" || s == null) mkey = OrderedMediaKeys.First();
             else
             {
                 foreach (var item in OrderedMediaKeys)
@@ -187,7 +191,13 @@ namespace VanyaGame.Media
                         if (OrderedMediaKeys.IndexOf(item) + 1 < OrderedMediaKeys.Count)
                             mkey = OrderedMediaKeys[OrderedMediaKeys.IndexOf(item) + 1];
                         else
-                            mkey = OrderedMediaKeys.First();
+                        {
+                            if (IsPlaylistRepeat) mkey = OrderedMediaKeys.First();
+                            else
+                            {
+                                IsPlaying = false; return;
+                            }
+                        }
                         break;
                     }
                 }
@@ -201,15 +211,15 @@ namespace VanyaGame.Media
         {
             if (IsPlaying)
             {
-                if (IsShuffle) PlayRandom();
-                else PlayInOrder();
+                if (IsShuffle) PlayRandom(IsPlaylistRepeat);
+                else PlayInOrder(IsPlaylistRepeat);
             }
         }
 
         public void Start()
         {
             IsPlaying = true;
-            PlayRandom();
+            PlayRandom(IsPlaylistRepeat);
         }
 
         public void Pause()

@@ -90,8 +90,8 @@ namespace VanyaGame.GameCardsNewDB.Struct
         {
             LoadMedia();
             LoadScenes();
-            if (Settings.ShuffleMusic) Game.Music.PlayRandom();
-            else Game.Music.PlayInOrder();
+            if (Settings.ShuffleMusic) Game.Music.PlayRandom(Settings.RepeatMusicPlaylist);
+            else Game.Music.PlayInOrder(Settings.RepeatMusicPlaylist);
             Game.Music.Pause();
 
             CurScene.GetComponent<Starter>().Start();

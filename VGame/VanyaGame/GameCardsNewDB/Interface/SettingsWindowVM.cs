@@ -244,13 +244,13 @@ namespace VanyaGame.GameCardsNewDB.Interface
 
         public ObservableCollection<string> MusicFilenames
         {
-            get 
+            get
             {
                 return Settings.MusicFilenames;
             }
         }
 
-        public class MusicInfo 
+        public class MusicInfo
         {
             public MusicInfo(string fullfilename)
             {
@@ -263,12 +263,19 @@ namespace VanyaGame.GameCardsNewDB.Interface
             public string FullFileName { get; set; }
         }
 
-        
-                    public bool ShuffleMusic
+
+        public bool ShuffleMusic
         {
             get { return Settings.ShuffleMusic; }
             set { Settings.ShuffleMusic = value; OnPropertyChanged("ShuffleMusic"); }
         }
+
+        public bool RepeatMusicPlaylist
+        {
+            get { return Settings.RepeatMusicPlaylist; }
+            set { Settings.RepeatMusicPlaylist = value; OnPropertyChanged("RepeatMusicPlaylist"); }
+        }
+        
         #endregion
 
         #region METHODS
@@ -322,6 +329,7 @@ namespace VanyaGame.GameCardsNewDB.Interface
             OnPropertyChanged("MusicFilenames");
             OnPropertyChanged("MusicInfos");
             OnPropertyChanged("ShuffleMusic");
+            OnPropertyChanged("RepeatMusicPlaylist");
         }
 
         #endregion
@@ -486,11 +494,11 @@ namespace VanyaGame.GameCardsNewDB.Interface
                 return openMusicFileInExplorerCommand ??
                   (openMusicFileInExplorerCommand = new RelayCommand(obj =>
                   {
-                      Miscellanea.OpenFileInExplorer(SelectedMusicInfo.FullFileName);  
+                      Miscellanea.OpenFileInExplorer(SelectedMusicInfo.FullFileName);
                   }));
             }
         }
-        
+
 
         #endregion
 

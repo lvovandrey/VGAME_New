@@ -580,6 +580,24 @@ namespace VanyaGame.GameCardsNewDB.Tools
                     shuffleMusic = "False";
             }
         }
+
+        public static string repeatMusicPlaylist = "True";
+        public static bool RepeatMusicPlaylist
+        {
+            get
+            {
+                if (repeatMusicPlaylist == "True")
+                    return true;
+                else return false;
+            }
+            set
+            {
+                if (value)
+                    repeatMusicPlaylist = "True";
+                else
+                    repeatMusicPlaylist = "False";
+            }
+        }
         static public void SaveAllSettings()
         {
             ConfigurationTools.AddUpdateAppSettings("VisualHintEnable", visualHintEnable);
@@ -614,10 +632,8 @@ namespace VanyaGame.GameCardsNewDB.Tools
 
             ConfigurationTools.AddUpdateAppSettings("MusicFilenames", PackObservableCollectionToString(_MusicFilenames));
             ConfigurationTools.AddUpdateAppSettings("ShuffleMusic", shuffleMusic);
-
-            
-
-
+            ConfigurationTools.AddUpdateAppSettings("RepeatMusicPlaylist", repeatMusicPlaylist);
+  
             VanyaGame.Sets.Settings.SaveAllSettings();
 
             SettingsChanged?.Invoke();
@@ -660,6 +676,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
 
             _MusicFilenames =  UnpackObservableCollectionFromString(ConfigurationTools.ReadSetting("MusicFilenames"));
             shuffleMusic = ConfigurationTools.ReadSetting("ShuffleMusic");
+            repeatMusicPlaylist = ConfigurationTools.ReadSetting("RepeatMusicPlaylist");
 
             VanyaGame.Sets.Settings.RestoreAllSettings();
 
