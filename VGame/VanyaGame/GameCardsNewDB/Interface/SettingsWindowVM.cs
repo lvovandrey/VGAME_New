@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Speech.Synthesis;
 using System.Text;
@@ -30,8 +31,8 @@ namespace VanyaGame.GameCardsNewDB.Interface
 
         #region PROPERTIES
 
-        
-            
+
+
 
         public bool VisualHintEnable
         {
@@ -146,7 +147,7 @@ namespace VanyaGame.GameCardsNewDB.Interface
             get { return Settings.CardSuccesSpeakAgainTime; }
             set { Settings.CardSuccesSpeakAgainTime = value; OnPropertyChanged("CardSuccesSpeakAgainTime"); }
         }
-        
+
         public string AttachedDBCardsFilename
         {
             get { return Settings.AttachedDBCardsFilename; }
@@ -155,7 +156,7 @@ namespace VanyaGame.GameCardsNewDB.Interface
 
 
 
-        public  ObservableCollection<string> TextToSpeachVoicesNames
+        public ObservableCollection<string> TextToSpeachVoicesNames
         {
             get
             {
@@ -225,6 +226,49 @@ namespace VanyaGame.GameCardsNewDB.Interface
             set { Sets.Settings.BackgroundStartFilename = value; OnPropertyChanged("BackgroundStartFilename"); }
         }
 
+
+
+        public MusicInfo SelectedMusicInfo
+        {
+            get;
+            set;
+        }
+
+        public ObservableCollection<MusicInfo> MusicInfos
+        {
+            get
+            {
+                return new ObservableCollection<MusicInfo>(from m in MusicFilenames select new MusicInfo(m));
+            }
+        }
+
+        public ObservableCollection<string> MusicFilenames
+        {
+            get 
+            {
+                return Settings.MusicFilenames;
+            }
+        }
+
+        public class MusicInfo 
+        {
+            public MusicInfo(string fullfilename)
+            {
+                FullFileName = fullfilename;
+                IsExist = File.Exists(fullfilename);
+                ShortFileName = Path.GetFileName(fullfilename);
+            }
+            public bool IsExist { get; private set; }
+            public string ShortFileName { get; private set; }
+            public string FullFileName { get; set; }
+        }
+
+        
+                    public bool ShuffleMusic
+        {
+            get { return Settings.ShuffleMusic; }
+            set { Settings.ShuffleMusic = value; OnPropertyChanged("ShuffleMusic"); }
+        }
         #endregion
 
         #region METHODS
@@ -260,7 +304,7 @@ namespace VanyaGame.GameCardsNewDB.Interface
             OnPropertyChanged("CardSuccesSize");
             OnPropertyChanged("CardSuccesTime");
             OnPropertyChanged("CardWrongPauseTime");
-            OnPropertyChanged("CardSuccesSpeakAgainTime"); 
+            OnPropertyChanged("CardSuccesSpeakAgainTime");
             OnPropertyChanged("BackgroundFilename");
 
             OnPropertyChanged("BackgroundGameOverFilename");
@@ -274,6 +318,10 @@ namespace VanyaGame.GameCardsNewDB.Interface
             OnPropertyChanged("TTSVoiceRate");
             OnPropertyChanged("TTSVoiceSlowRate");
             OnPropertyChanged("TTSVoiceVolume");
+
+            OnPropertyChanged("MusicFilenames");
+            OnPropertyChanged("MusicInfos");
+            OnPropertyChanged("ShuffleMusic");
         }
 
         #endregion
@@ -395,6 +443,54 @@ namespace VanyaGame.GameCardsNewDB.Interface
                   }));
             }
         }
+
+
+
+        private RelayCommand addMusicFilenameCommand;
+        public RelayCommand AddMusicFilenameCommand
+        {
+            get
+            {
+                return addMusicFilenameCommand ??
+                  (addMusicFilenameCommand = new RelayCommand(obj =>
+                  {
+                      MusicFilenames.Add(ChooseFilename(BackgroundStartFilename, "Файлы .mp3 (*.mp3)|*.mp3", "Выбор файлов для музыкального сопровождения"));
+                      OnPropertyChanged("MusicFilenames");
+                      OnPropertyChanged("MusicInfos");
+                  }));
+            }
+        }
+
+        private RelayCommand removeMusicFilenameCommand;
+        public RelayCommand RemoveMusicFilenameCommand
+        {
+            get
+            {
+                return removeMusicFilenameCommand ??
+                  (removeMusicFilenameCommand = new RelayCommand(obj =>
+                  {
+                      if (SelectedMusicInfo == null) return;
+                      if (MusicFilenames.Contains(SelectedMusicInfo.FullFileName))
+                          MusicFilenames.Remove(SelectedMusicInfo.FullFileName);
+                      OnPropertyChanged("MusicFilenames");
+                      OnPropertyChanged("MusicInfos");
+                  }));
+            }
+        }
+
+        private RelayCommand openMusicFileInExplorerCommand;
+        public RelayCommand OpenMusicFileInExplorerCommand
+        {
+            get
+            {
+                return openMusicFileInExplorerCommand ??
+                  (openMusicFileInExplorerCommand = new RelayCommand(obj =>
+                  {
+                      Miscellanea.OpenFileInExplorer(SelectedMusicInfo.FullFileName);  
+                  }));
+            }
+        }
+        
 
         #endregion
 

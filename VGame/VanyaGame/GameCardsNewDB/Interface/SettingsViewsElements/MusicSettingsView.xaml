@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="VanyaGame.GameCardsNewDB.Interface.SettingsViewsElements.MusicSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VanyaGame.GameCardsNewDB.Interface.SettingsViewsElements"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <GroupBox Header="Музыкальное сопровождение" >
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <Label Content="Список файлов музыкального сопровождения" Margin="5 0 5 -1"/>
+                    <ListView Margin="10 0 10 0"
+                              Height="150"
+                              ItemsSource="{Binding MusicInfos, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
+                              SelectedItem="{Binding SelectedMusicInfo}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn  Width="100" Header="Наличие файла">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding Path=IsExist, Mode=OneWay}" IsEnabled="False"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=ShortFileName}" Width="200" Header="Имя"></GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=FullFileName}" Width="300" Header="Путь"></GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <StackPanel Orientation="Horizontal" >
+                        <Button Content="+" Command="{Binding AddMusicFilenameCommand}" Width="30" Margin="10 5 5 5"/>
+                        <Button Content="-" Command="{Binding RemoveMusicFilenameCommand}" Width="30" Margin="5"/>
+                        <Button Content="К файлу..." Command="{Binding OpenMusicFileInExplorerCommand}" Width="60" Margin="5"/>
+                    </StackPanel>
+                    <CheckBox IsChecked="{Binding ShuffleMusic}" Content="Проигрывать в случайном порядке" Margin="10"/>
+
+                </StackPanel>
+            </ScrollViewer>
+        </GroupBox>
+    </Grid>
+</UserControl>

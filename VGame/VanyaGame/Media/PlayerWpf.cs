@@ -24,6 +24,7 @@ namespace VanyaGame.Media
                 return;
             }
             Body = body;
+            ((MediaElement)Body).MediaEnded += PlayerWpf_MediaEnded;
         }
 
         public override double Volume
@@ -76,10 +77,8 @@ namespace VanyaGame.Media
         public override void Play()
         {
             if (Source == "") return;
-            ((MediaElement)Body).MediaEnded += PlayerWpf_MediaEnded;
             ((MediaElement)Body).Source = new Uri(@Source);
             ((MediaElement)Body).Play();
-           
         }
 
         private void PlayerWpf_MediaEnded(object sender, RoutedEventArgs e)

@@ -31,8 +31,14 @@ namespace VanyaGame.Media
         /// Словарь медиафайлов - ключ-"название", значение - путь к файлу на диске
         /// </summary>
         public Dictionary<string, string> Media = new Dictionary<string, string>();
+        /// <summary>
+        /// Упорядоченная синхронизированная с Media коллекция. Для информации об очередности треков. Не очень как-то... ну ладно.
+        /// </summary>
+        public List<string> OrderedMediaKeys = new List<string>();
+
         public bool IsPlaying = false;
         public bool IsPaused = false;
+        public bool IsShuffle = false;
 
         public GameMedia(ref Player _player)
         {
@@ -56,11 +62,7 @@ namespace VanyaGame.Media
 
         void volume_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-
-            //   this.player.BeginAnimation(MediaElement.VolumeProperty, null);
-
             this.player.Volume = (volume.level) / 100;
-
         }
 
 
@@ -83,6 +85,7 @@ namespace VanyaGame.Media
                 OnEnded();
                 if (timer_ != null) timer_.Stop();
             }
+            End();
         }
         public void ClearOnEndedEvent()
         {
@@ -91,10 +94,10 @@ namespace VanyaGame.Media
 
         public void Play(string MediaName, TimeSpan TimeBegin, TimeSpan TimeEnd, VideoType videoType)
         {
-            string S = @Game.Sets.MainDir + @Game.Sets.DefaultVideo; 
+            string S = @Game.Sets.MainDir + @Game.Sets.DefaultVideo;
             switch (videoType)
             {
-                case VideoType.local:   S = @Game.Sets.MainDir + @Game.Level.Sets.Directory + @Game.Level.Sets.VideoDir + @"\" + @MediaName; break;
+                case VideoType.local: S = @Game.Sets.MainDir + @Game.Level.Sets.Directory + @Game.Level.Sets.VideoDir + @"\" + @MediaName; break;
                 case VideoType.youtube:
                     {
                         try
@@ -113,11 +116,11 @@ namespace VanyaGame.Media
                             break;
                         }
                     }
-                case VideoType.net:     S = @MediaName; break;
-                case VideoType.ipcam:   S = @MediaName; break;
+                case VideoType.net: S = @MediaName; break;
+                case VideoType.ipcam: S = @MediaName; break;
             }
             player.Source = S;
-           
+
             IsPlaying = true;
             timer_ = new MediaTimer(TimeBegin, TimeEnd);
             timer_.Start(OnTimerTick);
@@ -152,6 +155,7 @@ namespace VanyaGame.Media
         }
         public void PlayRandom()
         {
+            IsShuffle = true;
             int c = Media.Count;
             int x = Game.RandomGenerator.Next(1, c + 1);
             int y = 1;
@@ -166,18 +170,48 @@ namespace VanyaGame.Media
             Play(s);
 
         }
+
+        public void PlayInOrder()
+        {
+            IsShuffle = false;
+
+            string s = player.Source;
+            string mkey = "";
+            if (s == "" || s==null) mkey = OrderedMediaKeys.First();
+            else
+            {
+                foreach (var item in OrderedMediaKeys)
+                {
+                    if (Media[item] == s)
+                    {
+                        if (OrderedMediaKeys.IndexOf(item) + 1 < OrderedMediaKeys.Count)
+                            mkey = OrderedMediaKeys[OrderedMediaKeys.IndexOf(item) + 1];
+                        else
+                            mkey = OrderedMediaKeys.First();
+                        break;
+                    }
+                }
+
+            }
+            IsPlaying = true;
+            Play(mkey);
+        }
+
         public void End()
         {
             if (IsPlaying)
             {
-                this.PlayRandom();
+                if (IsShuffle) PlayRandom();
+                else PlayInOrder();
             }
         }
+
         public void Start()
         {
             IsPlaying = true;
             PlayRandom();
         }
+
         public void Pause()
         {
             if (IsPlaying)
@@ -196,6 +230,7 @@ namespace VanyaGame.Media
             player.Stop();
             if (onStateChangeEvent != null) onStateChangeEvent();
         }
+
         public virtual void Rewind(TimeSpan span, bool reverse)
         {
             TimeSpan NewTime = new TimeSpan();
@@ -216,8 +251,24 @@ namespace VanyaGame.Media
             string[] MediaPaths = Directory.GetFiles(Dir, "*." + file_extension, SearchOption.TopDirectoryOnly);
             foreach (string s in MediaPaths)
             {
-                string tmp = System.IO.Path.GetFileName(s);
-                Media.Add(tmp.Substring(0, tmp.Length - 4), s);
+                string tmp = System.IO.Path.GetFileNameWithoutExtension(s);
+                Media.Add(tmp, s);
+                OrderedMediaKeys.Add(tmp); //вот и получается что тут надо синхронно коллекции заполнять - не очень хорошо. Забуду где-нибудь и будут проблемы.
+            }
+        }
+
+        /// <summary>
+        /// Загружает в словарь Media названия и пути к медиафайлам. 
+        /// </summary>
+        /// <param name="filenames">Имена файлов</param>
+        public virtual void LoadMediaFiles(List<string> filenames)
+        {
+            Media.Clear();
+            foreach (string f in filenames)
+            {
+                string tmp = System.IO.Path.GetFileNameWithoutExtension(f);
+                Media.Add(tmp, f);
+                OrderedMediaKeys.Add(tmp);
             }
         }
 
@@ -226,26 +277,29 @@ namespace VanyaGame.Media
         /// Берутся все подходящие файлы. Названия выделяются из имени файла 
         /// </summary>
         /// <param name="Dir">Путь к директории</param>
-        public virtual void LoadMediaFilesFromDir(string Dir)
+        public virtual void LoadMediaFilesFromDir(string Dir) //какой-то дурацкий метод.
         {
             Media.Clear();
             string[] MediaPaths = Directory.GetFiles(Dir, "*.avi", SearchOption.TopDirectoryOnly);
             foreach (string s in MediaPaths)
             {
                 string tmp = System.IO.Path.GetFileName(s);
-                Media.Add(tmp.Substring(0, tmp.Length - 4), s);
+                Media.Add(tmp, s);
+                OrderedMediaKeys.Add(tmp);
             }
             MediaPaths = Directory.GetFiles(Dir, "*.wmv", SearchOption.TopDirectoryOnly);
             foreach (string s in MediaPaths)
             {
                 string tmp = System.IO.Path.GetFileName(s);
-                Media.Add(tmp.Substring(0, tmp.Length - 4), s);
+                Media.Add(tmp, s);
+                OrderedMediaKeys.Add(tmp);
             }
             MediaPaths = Directory.GetFiles(Dir, "*.mkv", SearchOption.TopDirectoryOnly);
             foreach (string s in MediaPaths)
             {
                 string tmp = System.IO.Path.GetFileName(s);
-                Media.Add(tmp.Substring(0, tmp.Length - 4), s);
+                Media.Add(tmp, s);
+                OrderedMediaKeys.Add(tmp);
             }
         }
 
@@ -308,9 +362,6 @@ namespace VanyaGame.Media
         /// <param name="Dir">Путь к директории</param>
         public override void LoadMediaFilesFromDir(string Dir)
         {
-            //base.LoadMediaFilesFromDir(Dir, "avi");
-            //base.LoadMediaFilesFromDir(Dir, "wmv");
-            //base.LoadMediaFilesFromDir(Dir, "mkv");
             base.LoadMediaFilesFromDir(Dir);
         }
         public virtual void ShowVideoPlayer()

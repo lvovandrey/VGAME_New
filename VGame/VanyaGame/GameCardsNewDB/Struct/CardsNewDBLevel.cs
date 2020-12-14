@@ -90,7 +90,8 @@ namespace VanyaGame.GameCardsNewDB.Struct
         {
             LoadMedia();
             LoadScenes();
-            Game.Music.PlayRandom();
+            if (Settings.ShuffleMusic) Game.Music.PlayRandom();
+            else Game.Music.PlayInOrder();
             Game.Music.Pause();
 
             CurScene.GetComponent<Starter>().Start();
@@ -102,7 +103,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
         public void LoadMedia()
         {
             Game.Sound.LoadMediaFilesFromDir(Game.Sets.MainDir +  Sets.SoundDir + @"\");
-            Game.Music.LoadMediaFilesFromDir(Game.Sets.MainDir +  Sets.MusicDir + @"\");
+            Game.Music.LoadMediaFiles(new List<string>(Settings.MusicFilenames));
         }
 
         /// <summary>

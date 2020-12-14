@@ -408,8 +408,11 @@ namespace VanyaGame.GameCardsNewDB.Tools
         {
             var voices = new SpeechSynthesizer().GetInstalledVoices(new CultureInfo("ru-RU"));
             TTSVoice = voices.First();
+
+           
             return voices;
         }
+
 
         private static ReadOnlyCollection<InstalledVoice> _TextToSpeachVoices = GetTTSVoices();
         public static ObservableCollection<InstalledVoice> TextToSpeachVoices
@@ -530,6 +533,53 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
+
+
+        public static ObservableCollection<string> _MusicFilenames;
+        public static ObservableCollection<string> MusicFilenames
+        {
+            get
+            {
+                return _MusicFilenames;
+            }
+        }
+
+
+        private static string PackObservableCollectionToString(ObservableCollection<string> collection)
+        {
+            string packedString = "";
+
+            if (collection.Count() == 0) { return packedString; }
+            packedString = collection.First();
+            for (int i = 1; i < collection.Count(); i++)
+            {
+                packedString += "|" + collection[i];
+            }
+            return packedString;
+        }
+
+        private static ObservableCollection<string>  UnpackObservableCollectionFromString(string str)
+        {
+            return new ObservableCollection<string>(str.Split('|'));
+        }
+
+        public static string shuffleMusic = "True";
+        public static bool ShuffleMusic
+        {
+            get
+            {
+                if (shuffleMusic == "True")
+                    return true;
+                else return false;
+            }
+            set
+            {
+                if (value)
+                    shuffleMusic = "True";
+                else
+                    shuffleMusic = "False";
+            }
+        }
         static public void SaveAllSettings()
         {
             ConfigurationTools.AddUpdateAppSettings("VisualHintEnable", visualHintEnable);
@@ -562,13 +612,22 @@ namespace VanyaGame.GameCardsNewDB.Tools
             ConfigurationTools.AddUpdateAppSettings("TTSVoiceSlowRate", _TTSVoiceSlowRate);
             ConfigurationTools.AddUpdateAppSettings("TTSVoiceVolume", _TTSVoiceVolume);
 
+            ConfigurationTools.AddUpdateAppSettings("MusicFilenames", PackObservableCollectionToString(_MusicFilenames));
+            ConfigurationTools.AddUpdateAppSettings("ShuffleMusic", shuffleMusic);
+
+            
+
+
             VanyaGame.Sets.Settings.SaveAllSettings();
 
             SettingsChanged?.Invoke();
         }
 
+
         static public void RestoreAllSettings()
         {
+
+
             visualHintEnable = ConfigurationTools.ReadSetting("VisualHintEnable");
             educationModeEnable = ConfigurationTools.ReadSetting("EducationModeEnable");
             speakAgainCardNameDelay = ConfigurationTools.ReadSetting("SpeakAgainCardNameDelay");
@@ -598,6 +657,9 @@ namespace VanyaGame.GameCardsNewDB.Tools
             _TTSVoiceRate = ConfigurationTools.ReadSetting("TTSVoiceRate");
             _TTSVoiceSlowRate = ConfigurationTools.ReadSetting("TTSVoiceSlowRate");
             _TTSVoiceVolume = ConfigurationTools.ReadSetting("TTSVoiceVolume");
+
+            _MusicFilenames =  UnpackObservableCollectionFromString(ConfigurationTools.ReadSetting("MusicFilenames"));
+            shuffleMusic = ConfigurationTools.ReadSetting("ShuffleMusic");
 
             VanyaGame.Sets.Settings.RestoreAllSettings();
 

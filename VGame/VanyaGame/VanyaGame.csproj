@@ -207,6 +207,9 @@
     <Compile Include="GameCardsNewDB\Interface\SettingsViewsElements\HintSettingsView.xaml.cs">
       <DependentUpon>HintSettingsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GameCardsNewDB\Interface\SettingsViewsElements\MusicSettingsView.xaml.cs">
+      <DependentUpon>MusicSettingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GameCardsNewDB\Interface\SettingsViewsElements\SpeakSettingsView.xaml.cs">
       <DependentUpon>SpeakSettingsView.xaml</DependentUpon>
     </Compile>
@@ -399,6 +402,10 @@
     <Page Include="GameCardsNewDB\Interface\SettingsViewsElements\HintSettingsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GameCardsNewDB\Interface\SettingsViewsElements\MusicSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GameCardsNewDB\Interface\SettingsViewsElements\SpeakSettingsView.xaml">
       <Generator>MSBuild:Compile</Generator>
