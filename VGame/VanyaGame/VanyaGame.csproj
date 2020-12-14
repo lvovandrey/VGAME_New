@@ -783,6 +783,27 @@
     <Resource Include="GameCardsNewDB\Images\btn_settings.png" />
     <Resource Include="Images\book-icon.ico" />
     <Resource Include="book-icon.ico" />
+    <Content Include="GameCardsNewDB\Images\pictogramm\Add.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="GameCardsNewDB\Images\pictogramm\Delete.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="GameCardsNewDB\Images\pictogramm\Bullet-Arrow-Up.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="GameCardsNewDB\Images\pictogramm\Bullet-Add.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="GameCardsNewDB\Images\pictogramm\Bullet-Delete.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="GameCardsNewDB\Images\pictogramm\Bullet-Arrow-Down.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="GameCardsNewDB\Images\pictogramm\Folder-Explore.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\back.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

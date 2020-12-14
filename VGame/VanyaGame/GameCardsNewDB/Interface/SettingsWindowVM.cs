@@ -16,10 +16,12 @@ namespace VanyaGame.GameCardsNewDB.Interface
     public class SettingsWindowVM : INPCBase
     {
         SettingsWindow settingsWindow;
+        System.Windows.Controls.ListView musicFilenamesListView;
         #region CONSTRUCTOR
-        public SettingsWindowVM(SettingsWindow _settingsWindow)
+        public SettingsWindowVM(SettingsWindow _settingsWindow, System.Windows.Controls.ListView _musicFilenamesListView)
         {
             settingsWindow = _settingsWindow;
+            musicFilenamesListView = _musicFilenamesListView;
             RestoreSettingsCommand.Execute(null);
             settingsWindow.DataContext = this;
 
@@ -494,7 +496,56 @@ namespace VanyaGame.GameCardsNewDB.Interface
                 return openMusicFileInExplorerCommand ??
                   (openMusicFileInExplorerCommand = new RelayCommand(obj =>
                   {
+                      if (SelectedMusicInfo == null) return;
                       Miscellanea.OpenFileInExplorer(SelectedMusicInfo.FullFileName);
+                  }));
+            }
+        }
+
+        private RelayCommand upMusicFilenameCommand;
+        public RelayCommand UpMusicFilenameCommand
+        {
+            get
+            {
+                return upMusicFilenameCommand ??
+                  (upMusicFilenameCommand = new RelayCommand(obj =>
+                  {
+                      if (SelectedMusicInfo == null) return;
+                      var selected = SelectedMusicInfo.FullFileName;
+                      List<string> mf = new List<string>(MusicFilenames);
+                      var oldPos = mf.IndexOf(selected);
+                      if (oldPos == 0) return;
+                      string prevElement = mf[oldPos - 1];
+                      mf[oldPos - 1] = selected;
+                      mf[oldPos] = prevElement;
+                      Settings._MusicFilenames = new ObservableCollection<string>(mf);
+                      
+                      RefreshAllDependencyProperties();
+                      musicFilenamesListView.SelectedIndex = oldPos - 1;
+                  }));
+            }
+        }
+
+        private RelayCommand downMusicFilenameCommand;
+        public RelayCommand DownMusicFilenameCommand
+        {
+            get
+            {
+                return downMusicFilenameCommand ??
+                  (downMusicFilenameCommand = new RelayCommand(obj =>
+                  {
+                      if (SelectedMusicInfo == null) return;
+                      var selected = SelectedMusicInfo.FullFileName;
+                      List<string> mf = new List<string>(MusicFilenames);
+                      var oldPos = mf.IndexOf(selected);
+                      if (oldPos >= mf.Count-1) return;
+                      string nextElement = mf[oldPos + 1];
+                      mf[oldPos + 1] = selected;
+                      mf[oldPos] = nextElement;
+                      Settings._MusicFilenames = new ObservableCollection<string>(mf);
+                      
+                      RefreshAllDependencyProperties();
+                      musicFilenamesListView.SelectedIndex = oldPos + 1;
                   }));
             }
         }

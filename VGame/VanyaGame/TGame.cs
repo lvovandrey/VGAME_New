@@ -110,7 +110,7 @@ namespace VanyaGame
             if (Game.Sets.gameType == GameType.CardsNewDB)
             {
                 var SettingsWindow = new GameCardsNewDB.Interface.SettingsWindow();
-                var Settings = new GameCardsNewDB.Interface.SettingsWindowVM(SettingsWindow);
+                var Settings = new GameCardsNewDB.Interface.SettingsWindowVM(SettingsWindow, SettingsWindow.MusicSettings.MusicFilenamesListView);
                 SettingsWindow.Show();
             }
         }

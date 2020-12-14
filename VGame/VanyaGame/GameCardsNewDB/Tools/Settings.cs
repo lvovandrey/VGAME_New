@@ -231,6 +231,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
             set
             {
+                if (value == "Not Found") firstQuestionText = " ";
                 firstQuestionText = value;
             }
         }
@@ -240,10 +241,13 @@ namespace VanyaGame.GameCardsNewDB.Tools
         {
             get
             {
+                if (hintQuestionText == "Not Found")
+                    hintQuestionText = "";
                 return hintQuestionText;
             }
             set
             {
+                if (value == "Not Found") hintQuestionText = " ";
                 hintQuestionText = value;
             }
         }
@@ -259,6 +263,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
             set
             {
+                if (value == "Not Found") successTestText = " ";
                 successTestText = value;
             }
         }
@@ -274,6 +279,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
             set
             {
+                if (value == "Not Found") fallTestText = " ";
                 fallTestText = value;
             }
         }
@@ -560,7 +566,14 @@ namespace VanyaGame.GameCardsNewDB.Tools
 
         private static ObservableCollection<string>  UnpackObservableCollectionFromString(string str)
         {
-            return new ObservableCollection<string>(str.Split('|'));
+            var col = new ObservableCollection<string>(str.Split('|'));
+            var colactual = new ObservableCollection<string>();
+            foreach (var item in col)
+            {
+                if (item != "Not Found")
+                    colactual.Add(item);
+            }
+            return colactual;
         }
 
         public static string shuffleMusic = "True";

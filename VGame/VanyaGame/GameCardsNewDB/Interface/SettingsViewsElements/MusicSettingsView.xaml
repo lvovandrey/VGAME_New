@@ -16,6 +16,7 @@
                     <Label Content="Список файлов музыкального сопровождения" Margin="5 0 5 -1"/>
                     <ListView Margin="10 0 10 0"
                               Height="150"
+                              x:Name="MusicFilenamesListView"
                               ItemsSource="{Binding MusicInfos, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
                               SelectedItem="{Binding SelectedMusicInfo}">
                         <ListView.View>
@@ -33,9 +34,21 @@
                         </ListView.View>
                     </ListView>
                     <StackPanel Orientation="Horizontal" >
-                        <Button Content="+" Command="{Binding AddMusicFilenameCommand}" Width="30" Margin="10 5 5 5"/>
-                        <Button Content="-" Command="{Binding RemoveMusicFilenameCommand}" Width="30" Margin="5"/>
-                        <Button Content="К файлу..." Command="{Binding OpenMusicFileInExplorerCommand}" Width="60" Margin="5"/>
+                        <Button ToolTip="Добавить файл трека" Command="{Binding AddMusicFilenameCommand}" Width="32" Margin="10 5 5 5">
+                            <Image Source="/VanyaGame;component/GameCardsNewDB/Images/pictogramm/Bullet-Add.png" />
+                        </Button>
+                        <Button ToolTip="Удалить трек" Command="{Binding RemoveMusicFilenameCommand}" Width="32" Margin="5">
+                            <Image Source="/VanyaGame;component/GameCardsNewDB/Images/pictogramm/Bullet-Delete.png" />
+                        </Button>
+                        <Button ToolTip="Переместить вверх" Command="{Binding UpMusicFilenameCommand}" Width="32" Margin="25 5 5 5">
+                            <Image Source="/VanyaGame;component/GameCardsNewDB/Images/pictogramm/Bullet-Arrow-Up.png" />
+                        </Button>
+                        <Button ToolTip="Переместить вниз" Command="{Binding DownMusicFilenameCommand}" Width="32" Margin="5">
+                            <Image Source="/VanyaGame;component/GameCardsNewDB/Images/pictogramm/Bullet-Arrow-Down.png" />
+                        </Button>
+                        <Button ToolTip="К файлу..." Command="{Binding OpenMusicFileInExplorerCommand}" Width="32" Margin="25 5 5 5">
+                            <Image Source="/VanyaGame;component/GameCardsNewDB/Images/pictogramm/Folder-Explore.png" Width="20" />
+                        </Button>
                     </StackPanel>
                     <CheckBox IsChecked="{Binding ShuffleMusic}" 
                               Content="Проигрывать в случайном порядке" 
