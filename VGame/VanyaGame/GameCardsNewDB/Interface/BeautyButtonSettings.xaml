@@ -10,31 +10,11 @@
         
     </UserControl.Resources>
     <UserControl.Triggers>
-        <EventTrigger RoutedEvent="MouseEnter">
-            <EventTrigger.Actions>
-                <BeginStoryboard>
-                    <Storyboard TargetProperty="Opacity" TargetName="Img">
-                        <DoubleAnimation To="0.7" From="0.2"
-                                         Duration="0:0:0.2" />
-                    </Storyboard>
-                </BeginStoryboard>
-            </EventTrigger.Actions>
-        </EventTrigger>
-        <EventTrigger RoutedEvent="MouseLeave">
-            <EventTrigger.Actions>
-                <BeginStoryboard>
-                    <Storyboard TargetProperty="Opacity" TargetName="Img">
-                        <DoubleAnimation To="0.2" From="0.7"
-                                         Duration="0:0:0.6" />
-                    </Storyboard>
-                </BeginStoryboard>
-            </EventTrigger.Actions>
-        </EventTrigger>
 
         <EventTrigger RoutedEvent="MouseDown">
             <EventTrigger.Actions>
                 <BeginStoryboard>
-                    <Storyboard TargetProperty="Width" TargetName="Img">
+                    <Storyboard TargetProperty="Width" >
                         <DoubleAnimation To="60" From="70"
                                          Duration="0:0:0.1" />
                     </Storyboard>
@@ -45,7 +25,7 @@
         <EventTrigger RoutedEvent="MouseUp">
             <EventTrigger.Actions>
                 <BeginStoryboard>
-                    <Storyboard TargetProperty="Width" TargetName="Img">
+                    <Storyboard TargetProperty="Width" >
                         <DoubleAnimation To="70" From="60"
                                          Duration="0:0:0.1" />
                     </Storyboard>
@@ -53,16 +33,7 @@
             </EventTrigger.Actions>
         </EventTrigger>
 
-        <EventTrigger RoutedEvent="Loaded">
-            <EventTrigger.Actions>
-                <BeginStoryboard>
-                    <Storyboard TargetProperty="Opacity" TargetName="Img">
-                        <DoubleAnimation To="0.2" From="1"
-                                         Duration="0:0:0.1" />
-                    </Storyboard>
-                </BeginStoryboard>
-            </EventTrigger.Actions>
-        </EventTrigger>
+
     </UserControl.Triggers>
 
     <Grid>

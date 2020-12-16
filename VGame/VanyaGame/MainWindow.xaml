@@ -21,9 +21,12 @@
 
     <Window.Resources>
 
-        <ResourceDictionary Source="SliderStyleResDict1.xaml" />
-
-
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="SliderStyleResDict1.xaml" />
+                <ResourceDictionary Source="HidingElements.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Window.Resources>
 
 
@@ -113,8 +116,21 @@
 
             <WrapPanel ItemWidth="300" ItemHeight="300" Orientation="Horizontal"  x:Name="WrapPanelMain" Grid.Row="0" MaxWidth="1260" VerticalAlignment="Center" HorizontalAlignment="Center" >
             </WrapPanel>
-
-            <TextBlock Text="" FontFamily="Comic Sans MS" Panel.ZIndex="30000" Name="TextForCardTag" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,80,0,0" FontSize="32" Foreground="White" FontStyle="Italic"/>
+            
+            <TextBlock Text="" FontFamily="Comic Sans MS" 
+                       Style="{DynamicResource HidingElement}"
+                       Panel.ZIndex="30000" 
+                       Name="TextForCardTag" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Top" 
+                       Margin="0,80,0,0" 
+                       FontSize="32" 
+                       Foreground="White" 
+                       FontStyle="Italic">
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="2"/>
+                </TextBlock.Effect>
+            </TextBlock>
             <WrapPanel  VerticalAlignment="Top" Orientation="Horizontal" HorizontalAlignment="Center"  x:Name="StackPanelGame" Grid.Row="0" />
 
             <Slider Cursor="{DynamicResource PushCursor}" x:Name="MusicVolumeSlider" HorizontalAlignment="Left" Height="50" 
@@ -143,7 +159,13 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="120"/>
                 </Grid.RowDefinitions>
-                <GameCardsNewDB:BeautyButtonSettings MouseUp="SettingsWindowShowButtonClick" Height="70" Width="70" Opacity="1"  Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <GameCardsNewDB:BeautyButtonSettings 
+                    Style="{DynamicResource AlmostHidingElement}"
+                    MouseUp="SettingsWindowShowButtonClick" 
+                    Height="70" Width="70" Opacity="1"  
+                    Grid.Row="0" Grid.Column="0" 
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Top"/>
                 <Slider Cursor="{DynamicResource PushCursor}"  Grid.ColumnSpan="3" Grid.Row="0" Grid.Column="1" x:Name="VideoVolumeSlider" HorizontalAlignment="Left" Height="50" 
                     Value="{Binding level, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                     Margin="10,10,0,0" VerticalAlignment="Top" Width="245"  
