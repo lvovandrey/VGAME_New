@@ -7,21 +7,48 @@ using System.Linq;
 using System.Speech.Synthesis;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows;
+using System.Xml.Serialization;
 
 namespace VanyaGame.GameCardsNewDB.Tools
 {
 
-
-    public static class Settings
+    [Serializable]
+    public class Settings
     {
+        //Сделаем этот класс синглтоном
+        private static Settings instance;
+        private static object syncRoot = new object();
+
+        private Settings()
+        {
+            _TextToSpeachVoices = new SpeechSynthesizer().GetInstalledVoices(new CultureInfo("ru-RU"));
+            TTSVoice = _TextToSpeachVoices.First();
+            RestoreAllSettings();
+            
+        }
+
+        public static Settings GetInstance()
+        {
+            if (instance == null)
+            {
+                lock (syncRoot)
+                {
+                    if (instance == null)
+                        instance = new Settings();
+                }
+            }
+            return instance;
+        }
+
         /// <summary>
         /// Событие возникает когда изменяются настройки. На него рекомендуется вешать все изменения которые завязаны с настройками.
         /// </summary>
-        public static event Action SettingsChanged;
+        public event Action SettingsChanged;
 
-        public static string visualHintEnable = "True";
-        public static bool VisualHintEnable
+        [XmlIgnore]
+        public string visualHintEnable = "True";
+        public bool VisualHintEnable
         {
             get
             {
@@ -38,8 +65,9 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
-        public static string educationModeEnable = "True";
-        public static bool EducationModeEnable
+        [XmlIgnore]
+        public string educationModeEnable = "True";
+        public bool EducationModeEnable
         {
             get
             {
@@ -56,9 +84,9 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
-
-        public static string speakAgainCardNameDelay = "8";
-        public static double SpeakAgainCardNameDelay
+        [XmlIgnore]
+        public string speakAgainCardNameDelay = "8";
+        public double SpeakAgainCardNameDelay
         {
             get
             {
@@ -77,9 +105,9 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
-
-        public static string speakAgainCardNameTimePeriod = "5";
-        public static double SpeakAgainCardNameTimePeriod
+        [XmlIgnore]
+        public string speakAgainCardNameTimePeriod = "5";
+        public double SpeakAgainCardNameTimePeriod
         {
             get
             {
@@ -98,8 +126,9 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
-        public static string visualHintDelay = "15";
-        public static double VisualHintDelay
+        [XmlIgnore]
+        public string visualHintDelay = "15";
+        public double VisualHintDelay
         {
             get
             {
@@ -118,8 +147,9 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
-        public static string visualHintTimePeriod = "10";
-        public static double VisualHintTimePeriod
+        [XmlIgnore]
+        public string visualHintTimePeriod = "10";
+        public double VisualHintTimePeriod
         {
             get
             {
@@ -138,8 +168,9 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
-        public static string visualHintDuration = "1";
-        public static double VisualHintDuration
+        [XmlIgnore]
+        public string visualHintDuration = "1";
+        public double VisualHintDuration
         {
             get
             {
@@ -158,8 +189,9 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
-        public static string EducationvisualHintDelay = "3";
-        public static double EducationVisualHintDelay
+        [XmlIgnore]
+        public string EducationvisualHintDelay = "3";
+        public double EducationVisualHintDelay
         {
             get
             {
@@ -178,8 +210,9 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
-        public static string EducationvisualHintTimePeriod = "2";
-        public static double EducationVisualHintTimePeriod
+        [XmlIgnore]
+        public string EducationvisualHintTimePeriod = "2";
+        public double EducationVisualHintTimePeriod
         {
             get
             {
@@ -198,8 +231,9 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
-        public static string EducationvisualHintDuration = "1";
-        public static double EducationVisualHintDuration
+        [XmlIgnore]
+        public string EducationvisualHintDuration = "1";
+        public double EducationVisualHintDuration
         {
             get
             {
@@ -218,10 +252,9 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
-
-
-        private static string firstQuestionText = "";
-        public static string FirstQuestionText
+        [XmlIgnore]
+        private string firstQuestionText = "";
+        public string FirstQuestionText
         {
             get
             {
@@ -236,8 +269,9 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
-        private static string hintQuestionText = "";
-        public static string HintQuestionText
+        [XmlIgnore]
+        private string hintQuestionText = "";
+        public string HintQuestionText
         {
             get
             {
@@ -252,8 +286,9 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
-        private static string successTestText = "";
-        public static string SuccessTestText
+        [XmlIgnore]
+        private string successTestText = "";
+        public string SuccessTestText
         {
             get
             {
@@ -268,8 +303,9 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
-        private static string fallTestText = "";
-        public static string FallTestText
+        [XmlIgnore]
+        private string fallTestText = "";
+        public string FallTestText
         {
             get
             {
@@ -284,9 +320,9 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
-
-        public static string cardSize = "250";
-        public static double CardSize
+        [XmlIgnore]
+        public string cardSize = "250";
+        public double CardSize
         {
             get
             {
@@ -305,8 +341,9 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
-        public static string cardSuccesSize = "500";
-        public static double CardSuccesSize
+        [XmlIgnore]
+        public string cardSuccesSize = "500";
+        public double CardSuccesSize
         {
             get
             {
@@ -325,8 +362,9 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
-        public static string cardSuccesTime = "3";
-        public static double CardSuccesTime
+        [XmlIgnore]
+        public string cardSuccesTime = "3";
+        public double CardSuccesTime
         {
             get
             {
@@ -345,9 +383,9 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
-
-        static string attachedDBCardsFilename = "";
-        public static string AttachedDBCardsFilename
+        [XmlIgnore]
+        string attachedDBCardsFilename = "";
+        public string AttachedDBCardsFilename
         {
             get
             {
@@ -366,11 +404,9 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
-
-
-
-        public static string cardWrongPauseTime = "3";
-        public static double CardWrongPauseTime
+        [XmlIgnore]
+        public string cardWrongPauseTime = "3";
+        public double CardWrongPauseTime
         {
             get
             {
@@ -389,8 +425,9 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
-        public static string cardSuccesSpeakAgainTime = "3";
-        public static double CardSuccesSpeakAgainTime
+        [XmlIgnore]
+        public string cardSuccesSpeakAgainTime = "3";
+        public double CardSuccesSpeakAgainTime
         {
             get
             {
@@ -409,19 +446,10 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
-
-        private static ReadOnlyCollection<InstalledVoice> GetTTSVoices() 
-        {
-            var voices = new SpeechSynthesizer().GetInstalledVoices(new CultureInfo("ru-RU"));
-            TTSVoice = voices.First();
-
-           
-            return voices;
-        }
-
-
-        private static ReadOnlyCollection<InstalledVoice> _TextToSpeachVoices = GetTTSVoices();
-        public static ObservableCollection<InstalledVoice> TextToSpeachVoices
+        [XmlIgnore]
+        private ReadOnlyCollection<InstalledVoice> _TextToSpeachVoices;
+        [XmlIgnore]
+        public ObservableCollection<InstalledVoice> TextToSpeachVoices
         {
             get
             {
@@ -430,7 +458,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
         }
 
 
-        public static string TTSVoiceName
+        public string TTSVoiceName
         {
             get
             {
@@ -446,8 +474,10 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
-        private static InstalledVoice _TTSVoice;
-        public static InstalledVoice TTSVoice
+        [XmlIgnore]
+        private InstalledVoice _TTSVoice;
+        [XmlIgnore]
+        public InstalledVoice TTSVoice
         {
             get { return _TTSVoice; }
             set
@@ -456,9 +486,9 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
-
-        public static string _TTSVoiceRate = "0";
-        public static int TTSVoiceRate
+        [XmlIgnore]
+        public string _TTSVoiceRate = "0";
+        public int TTSVoiceRate
         {
             get
             {
@@ -477,8 +507,9 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
-        public static string _TTSVoiceSlowRate = "-2";
-        public static int TTSVoiceSlowRate
+        [XmlIgnore]
+        public string _TTSVoiceSlowRate = "-2";
+        public int TTSVoiceSlowRate
         {
             get
             {
@@ -497,8 +528,9 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
-        public static string _TTSVoiceVolume = "100";
-        public static int TTSVoiceVolume
+        [XmlIgnore]
+        public string _TTSVoiceVolume = "100";
+        public int TTSVoiceVolume
         {
             get
             {
@@ -517,10 +549,9 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
-
-
-        static string backgroundFilename = "";
-        public static string BackgroundFilename
+        [XmlIgnore]
+        string backgroundFilename = "";
+        public string BackgroundFilename
         {
             get
             {
@@ -539,10 +570,9 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
-
-
-        public static ObservableCollection<string> _MusicFilenames;
-        public static ObservableCollection<string> MusicFilenames
+        [XmlIgnore]
+        public ObservableCollection<string> _MusicFilenames;
+        public ObservableCollection<string> MusicFilenames
         {
             get
             {
@@ -550,34 +580,9 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
-
-        private static string PackObservableCollectionToString(ObservableCollection<string> collection)
-        {
-            string packedString = "";
-
-            if (collection.Count() == 0) { return packedString; }
-            packedString = collection.First();
-            for (int i = 1; i < collection.Count(); i++)
-            {
-                packedString += "|" + collection[i];
-            }
-            return packedString;
-        }
-
-        private static ObservableCollection<string>  UnpackObservableCollectionFromString(string str)
-        {
-            var col = new ObservableCollection<string>(str.Split('|'));
-            var colactual = new ObservableCollection<string>();
-            foreach (var item in col)
-            {
-                if (item != "Not Found")
-                    colactual.Add(item);
-            }
-            return colactual;
-        }
-
-        public static string shuffleMusic = "True";
-        public static bool ShuffleMusic
+        [XmlIgnore]
+        public string shuffleMusic = "True";
+        public bool ShuffleMusic
         {
             get
             {
@@ -594,8 +599,9 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
-        public static string repeatMusicPlaylist = "True";
-        public static bool RepeatMusicPlaylist
+        [XmlIgnore]
+        public string repeatMusicPlaylist = "True";
+        public bool RepeatMusicPlaylist
         {
             get
             {
@@ -611,7 +617,46 @@ namespace VanyaGame.GameCardsNewDB.Tools
                     repeatMusicPlaylist = "False";
             }
         }
-        static public void SaveAllSettings()
+
+        public string BackgroundGameOverFilename
+        {
+            get
+            {
+                return VanyaGame.Sets.Settings.GetInstance().BackgroundGameOverFilename;
+            }
+            set
+            {
+                VanyaGame.Sets.Settings.GetInstance().BackgroundGameOverFilename = value;
+            }
+        }
+
+        public string BackgroundMenuFilename
+        {
+            get
+            {
+                return VanyaGame.Sets.Settings.GetInstance().BackgroundMenuFilename;
+            }
+            set
+            {
+                VanyaGame.Sets.Settings.GetInstance().BackgroundMenuFilename = value;
+            }
+        }
+
+        public string BackgroundStartFilename
+        {
+            get
+            {
+                return VanyaGame.Sets.Settings.GetInstance().BackgroundStartFilename;
+            }
+            set
+            {
+                VanyaGame.Sets.Settings.GetInstance().BackgroundStartFilename = value;
+            }
+        }
+
+
+
+        public void SaveAllSettings()
         {
             ConfigurationTools.AddUpdateAppSettings("VisualHintEnable", visualHintEnable);
             ConfigurationTools.AddUpdateAppSettings("EducationModeEnable", educationModeEnable);
@@ -646,14 +691,33 @@ namespace VanyaGame.GameCardsNewDB.Tools
             ConfigurationTools.AddUpdateAppSettings("MusicFilenames", PackObservableCollectionToString(_MusicFilenames));
             ConfigurationTools.AddUpdateAppSettings("ShuffleMusic", shuffleMusic);
             ConfigurationTools.AddUpdateAppSettings("RepeatMusicPlaylist", repeatMusicPlaylist);
-  
-            VanyaGame.Sets.Settings.SaveAllSettings();
+
+            VanyaGame.Sets.Settings.GetInstance().SaveAllSettings();
 
             SettingsChanged?.Invoke();
         }
 
+        public void ExportSettingsToXML(string filename)
+        {
+            XmlSerializer formatter = new XmlSerializer(typeof(Settings));
+            using (FileStream fs = new FileStream(filename, FileMode.Create))
+            {
+                formatter.Serialize(fs, this);
+            }
+        }
 
-        static public void RestoreAllSettings()
+        public void ImportSettingsToXML(string filename)
+        {
+            XmlSerializer formatter = new XmlSerializer(typeof(Settings));
+            if (!File.Exists(filename)) { MessageBox.Show("Файл настроек " + filename + " не найден.", "Ошибка"); return; }
+            using (FileStream fs = new FileStream(filename, FileMode.Open))
+            {
+                instance = (Settings)formatter.Deserialize(fs);
+            }
+            if (instance == null) { MessageBox.Show("Ошибка открытия файла настроек. Десериализатор вернул null."); return; }
+        }
+
+        public void RestoreAllSettings()
         {
 
 
@@ -679,7 +743,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
             cardWrongPauseTime = ConfigurationTools.ReadSetting("CardWrongPauseTime");
             cardSuccesSpeakAgainTime = ConfigurationTools.ReadSetting("CardSuccesSpeakAgainTime");
             backgroundFilename = ConfigurationTools.ReadSetting("BackgroundFilename");
-   
+
             attachedDBCardsFilename = ConfigurationTools.ReadSetting("AttachedDBCardsFilename");
 
             TTSVoiceName = ConfigurationTools.ReadSetting("TTSVoiceName");
@@ -687,13 +751,38 @@ namespace VanyaGame.GameCardsNewDB.Tools
             _TTSVoiceSlowRate = ConfigurationTools.ReadSetting("TTSVoiceSlowRate");
             _TTSVoiceVolume = ConfigurationTools.ReadSetting("TTSVoiceVolume");
 
-            _MusicFilenames =  UnpackObservableCollectionFromString(ConfigurationTools.ReadSetting("MusicFilenames"));
+            _MusicFilenames = UnpackObservableCollectionFromString(ConfigurationTools.ReadSetting("MusicFilenames"));
             shuffleMusic = ConfigurationTools.ReadSetting("ShuffleMusic");
             repeatMusicPlaylist = ConfigurationTools.ReadSetting("RepeatMusicPlaylist");
 
-            VanyaGame.Sets.Settings.RestoreAllSettings();
+            VanyaGame.Sets.Settings.GetInstance().RestoreAllSettings();
 
             SettingsChanged?.Invoke();
+        }
+
+        private string PackObservableCollectionToString(ObservableCollection<string> collection)
+        {
+            string packedString = "";
+
+            if (collection.Count() == 0) { return packedString; }
+            packedString = collection.First();
+            for (int i = 1; i < collection.Count(); i++)
+            {
+                packedString += "|" + collection[i];
+            }
+            return packedString;
+        }
+
+        private ObservableCollection<string> UnpackObservableCollectionFromString(string str)
+        {
+            var col = new ObservableCollection<string>(str.Split('|'));
+            var colactual = new ObservableCollection<string>();
+            foreach (var item in col)
+            {
+                if (item != "Not Found")
+                    colactual.Add(item);
+            }
+            return colactual;
         }
     }
 }

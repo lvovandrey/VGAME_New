@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="VanyaGame.GameCardsNewDB.Interface.SettingsViewsElements.ImportExportSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VanyaGame.GameCardsNewDB.Interface.SettingsViewsElements"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <GroupBox Header="Импорт и экспорт настроек приложения" >
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+
+
+                <StackPanel HorizontalAlignment="Left">
+                    <Button Height="30" Width="300" Margin="20 20 20 0" Command="{Binding ImportSettingsFromXMLCommand}">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                            <Image Source="../../Images/pictogramm/Folder.png" Margin="-20 0 0 0"/>
+                            <TextBlock Text="Импортировать настройки из *.xml-файла" Margin="10 5 0 0"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Height="30" Width="300" Margin="20 20 20 0" Command="{Binding ExportSettingsToXMLCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/VanyaGame;component/GameCardsNewDB/Images/pictogramm/Disk.png"  Margin="-20 0 0 0"/>
+                            <TextBlock Text="Экспортировать настройки в *.xml-файл" Margin="10 5 0 0"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+
+            </ScrollViewer>
+        </GroupBox>
+    </Grid>
+</UserControl>

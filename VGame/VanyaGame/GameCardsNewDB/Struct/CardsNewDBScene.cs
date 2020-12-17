@@ -44,7 +44,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
 
         private void LoadSets()
         {
-            Settings.RestoreAllSettings();
+            Settings.GetInstance().RestoreAllSettings();
         }
 
         private void LoadContent()
@@ -56,7 +56,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
 
             for (int i = 0; i < cardsList.Count; i++)
             {
-                CardUnit c = new CardUnit(this, cardsList[i], Settings.CardSize);
+                CardUnit c = new CardUnit(this, cardsList[i], Settings.GetInstance().CardSize);
                 UnitsCol.AddUnit(c);
             }
         }
@@ -116,18 +116,18 @@ namespace VanyaGame.GameCardsNewDB.Struct
                     List<CardUnit> newUnitsShuffled = new ListShuffle<CardUnit>().Shuffle(UnitsCol.GetNewUnits());
                     CurUnit = newUnitsShuffled[0]; //UnitsCol.GetNewUnits().First();
                 }
-                Speak(Settings.FirstQuestionText + CurUnit.Card.SoundedText);
+                Speak(Settings.GetInstance().FirstQuestionText + CurUnit.Card.SoundedText);
 
                 needSpeakAgain = true;
                 needFlash = true;
 
-                speakAgainTimer = new Timer(SpeakAgain, null, (int)(1000 * Settings.SpeakAgainCardNameDelay), (int)(1000 * Settings.SpeakAgainCardNameTimePeriod));
+                speakAgainTimer = new Timer(SpeakAgain, null, (int)(1000 * Settings.GetInstance().SpeakAgainCardNameDelay), (int)(1000 * Settings.GetInstance().SpeakAgainCardNameTimePeriod));
 
-                if (Settings.VisualHintEnable)
-                    if (Settings.EducationModeEnable)
-                        flashTimer = new Timer(Flash, null, (int)(1000 * Settings.EducationVisualHintDelay), (int)(1000 * Settings.EducationVisualHintTimePeriod));
+                if (Settings.GetInstance().VisualHintEnable)
+                    if (Settings.GetInstance().EducationModeEnable)
+                        flashTimer = new Timer(Flash, null, (int)(1000 * Settings.GetInstance().EducationVisualHintDelay), (int)(1000 * Settings.GetInstance().EducationVisualHintTimePeriod));
                     else
-                        flashTimer = new Timer(Flash, null, (int)(1000 * Settings.VisualHintDelay), (int)(1000 * Settings.VisualHintTimePeriod));
+                        flashTimer = new Timer(Flash, null, (int)(1000 * Settings.GetInstance().VisualHintDelay), (int)(1000 * Settings.GetInstance().VisualHintTimePeriod));
 
 
                 Game.Owner.TextForCardTag.Text = "Тема: " + this.Name + ".  Надо показать: " + CurUnit.Card.Title;
@@ -145,7 +145,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
         {
             if (needSpeakAgain)
             {
-                SpeakSlow(Settings.HintQuestionText + CurUnit.Card.SoundedText);
+                SpeakSlow(Settings.GetInstance().HintQuestionText + CurUnit.Card.SoundedText);
             }
         }
 
@@ -158,12 +158,12 @@ namespace VanyaGame.GameCardsNewDB.Struct
                 var body = CurUnit.GetComponent<HaveBody>().Body as CardUnitElement;
 
                 TimeSpan period;
-                if (Settings.EducationModeEnable)
-                    period = TimeSpan.FromSeconds(Settings.EducationVisualHintDuration);
+                if (Settings.GetInstance().EducationModeEnable)
+                    period = TimeSpan.FromSeconds(Settings.GetInstance().EducationVisualHintDuration);
                 else
-                    period = TimeSpan.FromSeconds(Settings.VisualHintDuration);
+                    period = TimeSpan.FromSeconds(Settings.GetInstance().VisualHintDuration);
 
-                body.Dispatcher.Invoke(() => { body.Flash(period, Settings.CardSize); });
+                body.Dispatcher.Invoke(() => { body.Flash(period, Settings.GetInstance().CardSize); });
             }
         }
 
@@ -198,18 +198,18 @@ namespace VanyaGame.GameCardsNewDB.Struct
                 CurUnittmp.GetComponent<CardShower>().Hide(() => { });
 
                 CurUnit.GetComponent<UState>().newOld = NewOld.Old;
-                Speak(Settings.SuccessTestText + CurUnit.Card.SoundedText);
+                Speak(Settings.GetInstance().SuccessTestText + CurUnit.Card.SoundedText);
                 ToolsTimer.Delay(() =>
                 {
                     SpeakSlow(CurUnittmp.Card.SoundedText);
-                }, TimeSpan.FromSeconds(Settings.CardSuccesSpeakAgainTime));
+                }, TimeSpan.FromSeconds(Settings.GetInstance().CardSuccesSpeakAgainTime));
 
                 CurUnit = null;
 
                 Panel.SetZIndex(Game.Owner.WrapPanelBigCards, 30001);
                 var cu = CurUnittmp.DeepCopy();
-                cu.GetComponent<HaveBody>().Body.Height = Settings.CardSuccesSize;
-                cu.GetComponent<HaveBody>().Body.Width = Settings.CardSuccesSize;
+                cu.GetComponent<HaveBody>().Body.Height = Settings.GetInstance().CardSuccesSize;
+                cu.GetComponent<HaveBody>().Body.Width = Settings.GetInstance().CardSuccesSize;
 
                 HaveBox HB = new HaveBox("HaveBox", Game.Owner, Game.Owner.WrapPanelBigCards, cu);
                 cu.GetComponent<HiderShower>().Show(1, TimeSpan.FromSeconds(1), new Thickness(100), TimeSpan.FromSeconds(1));
@@ -217,7 +217,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
             }
             else
             {
-                Speak(Settings.FallTestText);
+                Speak(Settings.GetInstance().FallTestText);
 
             }
 
@@ -233,9 +233,9 @@ namespace VanyaGame.GameCardsNewDB.Struct
 
             TimeSpan CardPauseTime;
             if (IsHitSuccess)
-                CardPauseTime = TimeSpan.FromSeconds(Settings.CardSuccesTime);
+                CardPauseTime = TimeSpan.FromSeconds(Settings.GetInstance().CardSuccesTime);
             else
-                CardPauseTime = TimeSpan.FromSeconds(Settings.CardWrongPauseTime);
+                CardPauseTime = TimeSpan.FromSeconds(Settings.GetInstance().CardWrongPauseTime);
 
             ToolsTimer.Delay(() =>
             {
@@ -253,14 +253,14 @@ namespace VanyaGame.GameCardsNewDB.Struct
         {
             if (text == null) return;
             SpeechSynthesizer speaker = new SpeechSynthesizer();
-            if (Settings.TextToSpeachVoices.Count == 0)
+            if (Settings.GetInstance().TextToSpeachVoices.Count == 0)
             {
                 MessageBox.Show("В системе не установлены голоса для синтеза речи на русском языке. Установите пожалуйста, а то ничего не будет слышно.");
                 return;
             }
-            else speaker.SelectVoice(Settings.TTSVoice.VoiceInfo.Name);
-            speaker.Rate = Settings.TTSVoiceRate;
-            speaker.Volume = Settings.TTSVoiceVolume;
+            else speaker.SelectVoice(Settings.GetInstance().TTSVoice.VoiceInfo.Name);
+            speaker.Rate = Settings.GetInstance().TTSVoiceRate;
+            speaker.Volume = Settings.GetInstance().TTSVoiceVolume;
             speaker.SpeakAsync(text);
         }
 
@@ -268,14 +268,14 @@ namespace VanyaGame.GameCardsNewDB.Struct
         {
             if (text == null) return;
             SpeechSynthesizer speaker = new SpeechSynthesizer();
-            if (Settings.TextToSpeachVoices.Count == 0)
+            if (Settings.GetInstance().TextToSpeachVoices.Count == 0)
             {
                 MessageBox.Show("В системе не установлены голоса для синтеза речи на русском языке. Установите пожалуйста, а то ничего не будет слышно.");
                 return;
             }
-            else speaker.SelectVoice(Settings.TTSVoice.VoiceInfo.Name);
-            speaker.Rate = Settings.TTSVoiceSlowRate;
-            speaker.Volume = Settings.TTSVoiceVolume;
+            else speaker.SelectVoice(Settings.GetInstance().TTSVoice.VoiceInfo.Name);
+            speaker.Rate = Settings.GetInstance().TTSVoiceSlowRate;
+            speaker.Volume = Settings.GetInstance().TTSVoiceVolume;
             speaker.SpeakAsync(text);
         }
 

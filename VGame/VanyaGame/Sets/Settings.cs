@@ -8,13 +8,35 @@ using System.Windows;
 
 namespace VanyaGame.Sets
 {
-    public static class Settings
+    public class Settings
     {
+        //Сделаем этот класс синглтоном
+        private static Settings instance;
+        private static object syncRoot = new object();
 
-        public static event Action SettingsChanged;
+        private Settings()
+        {
+            RestoreAllSettings();
+        }
 
-        static string backgroundGameOverFilename = "";
-        public static string BackgroundGameOverFilename
+        public static Settings GetInstance()
+        {
+            if (instance == null)
+            {
+                lock (syncRoot)
+                {
+                    if (instance == null)
+                        instance = new Settings();
+                }
+            }
+            return instance;
+        }
+
+
+        public event Action SettingsChanged;
+
+        string backgroundGameOverFilename = "";
+        public string BackgroundGameOverFilename
         {
             get
             {
@@ -33,8 +55,8 @@ namespace VanyaGame.Sets
             }
         }
 
-        static string backgroundMenuFilename = "";
-        public static string BackgroundMenuFilename
+        string backgroundMenuFilename = "";
+        public string BackgroundMenuFilename
         {
             get
             {
@@ -53,8 +75,8 @@ namespace VanyaGame.Sets
             }
         }
 
-        static string backgroundStartFilename = "";
-        public static string BackgroundStartFilename
+        string backgroundStartFilename = "";
+        public string BackgroundStartFilename
         {
             get
             {
@@ -73,7 +95,7 @@ namespace VanyaGame.Sets
             }
         }
 
-        static public void SaveAllSettings()
+        public void SaveAllSettings()
         {
             ConfigurationTools.AddUpdateAppSettings("BackgroundGameOverFilename", backgroundGameOverFilename);
             ConfigurationTools.AddUpdateAppSettings("BackgroundMenuFilename", backgroundMenuFilename);
@@ -82,7 +104,7 @@ namespace VanyaGame.Sets
             SettingsChanged?.Invoke();
         }
 
-        static public void RestoreAllSettings()
+        public void RestoreAllSettings()
         {
             backgroundGameOverFilename = ConfigurationTools.ReadSetting("BackgroundGameOverFilename");
             backgroundMenuFilename = ConfigurationTools.ReadSetting("BackgroundMenuFilename");

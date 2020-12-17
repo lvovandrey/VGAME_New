@@ -38,9 +38,9 @@ namespace VanyaGame.GameCardsNewDB.Struct
 
         public static void LoadLevels()
         {
-            Settings.RestoreAllSettings();
+            Settings.GetInstance().RestoreAllSettings();
 
-            DBTools.LoadDB(new ObservableCollection<DB.RepositoryModel.Card>(), new ObservableCollection<DB.RepositoryModel.Level>(),  Settings.AttachedDBCardsFilename);
+            DBTools.LoadDB(new ObservableCollection<DB.RepositoryModel.Card>(), new ObservableCollection<DB.RepositoryModel.Level>(),  Settings.GetInstance().AttachedDBCardsFilename);
            
            
             Random random = new Random();
@@ -90,8 +90,8 @@ namespace VanyaGame.GameCardsNewDB.Struct
         {
             LoadMedia();
             LoadScenes();
-            if (Settings.ShuffleMusic) Game.Music.PlayRandom(Settings.RepeatMusicPlaylist);
-            else Game.Music.PlayInOrder(Settings.RepeatMusicPlaylist);
+            if (Settings.GetInstance().ShuffleMusic) Game.Music.PlayRandom(Settings.GetInstance().RepeatMusicPlaylist);
+            else Game.Music.PlayInOrder(Settings.GetInstance().RepeatMusicPlaylist);
             Game.Music.Pause();
 
             CurScene.GetComponent<Starter>().Start();
@@ -103,7 +103,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
         public void LoadMedia()
         {
             Game.Sound.LoadMediaFilesFromDir(Game.Sets.MainDir +  Sets.SoundDir + @"\");
-            Game.Music.LoadMediaFiles(new List<string>(Settings.MusicFilenames));
+            Game.Music.LoadMediaFiles(new List<string>(Settings.GetInstance().MusicFilenames));
         }
 
         /// <summary>
@@ -115,7 +115,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
         {
             try
             {
-                Game.LoadBackGround(Settings.BackgroundFilename);
+                Game.LoadBackGround(Settings.GetInstance().BackgroundFilename);
             }
             catch
             {

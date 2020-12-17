@@ -7,6 +7,7 @@ using System.Linq;
 using System.Speech.Synthesis;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Forms;
 using VanyaGame.Abstract;
 using VanyaGame.GameCardsNewDB.Tools;
@@ -38,122 +39,122 @@ namespace VanyaGame.GameCardsNewDB.Interface
 
         public bool VisualHintEnable
         {
-            get { return Settings.VisualHintEnable; }
-            set { Settings.VisualHintEnable = value; OnPropertyChanged("VisualHintEnable"); }
+            get { return Settings.GetInstance().VisualHintEnable; }
+            set { Settings.GetInstance().VisualHintEnable = value; OnPropertyChanged("VisualHintEnable"); }
         }
 
         public double SpeakAgainCardNameDelay
         {
-            get { return Settings.SpeakAgainCardNameDelay; }
-            set { Settings.SpeakAgainCardNameDelay = value; OnPropertyChanged("SpeakAgainCardNameDelay"); }
+            get { return Settings.GetInstance().SpeakAgainCardNameDelay; }
+            set { Settings.GetInstance().SpeakAgainCardNameDelay = value; OnPropertyChanged("SpeakAgainCardNameDelay"); }
         }
 
         public bool EducationModeEnable
         {
-            get { return Settings.EducationModeEnable; }
-            set { Settings.EducationModeEnable = value; OnPropertyChanged("EducationModeEnable"); }
+            get { return Settings.GetInstance().EducationModeEnable; }
+            set { Settings.GetInstance().EducationModeEnable = value; OnPropertyChanged("EducationModeEnable"); }
         }
 
         public double SpeakAgainCardNameTimePeriod
         {
-            get { return Settings.SpeakAgainCardNameTimePeriod; }
-            set { Settings.SpeakAgainCardNameTimePeriod = value; OnPropertyChanged("SpeakAgainCardNameTimePeriod"); }
+            get { return Settings.GetInstance().SpeakAgainCardNameTimePeriod; }
+            set { Settings.GetInstance().SpeakAgainCardNameTimePeriod = value; OnPropertyChanged("SpeakAgainCardNameTimePeriod"); }
         }
 
         public double VisualHintDelay
         {
-            get { return Settings.VisualHintDelay; }
-            set { Settings.VisualHintDelay = value; OnPropertyChanged("VisualHintDelay"); }
+            get { return Settings.GetInstance().VisualHintDelay; }
+            set { Settings.GetInstance().VisualHintDelay = value; OnPropertyChanged("VisualHintDelay"); }
         }
 
         public double VisualHintTimePeriod
         {
-            get { return Settings.VisualHintTimePeriod; }
-            set { Settings.VisualHintTimePeriod = value; OnPropertyChanged("VisualHintTimePeriod"); }
+            get { return Settings.GetInstance().VisualHintTimePeriod; }
+            set { Settings.GetInstance().VisualHintTimePeriod = value; OnPropertyChanged("VisualHintTimePeriod"); }
         }
 
         public double VisualHintDuration
         {
-            get { return Settings.VisualHintDuration; }
-            set { Settings.VisualHintDuration = value; OnPropertyChanged("VisualHintDuration"); }
+            get { return Settings.GetInstance().VisualHintDuration; }
+            set { Settings.GetInstance().VisualHintDuration = value; OnPropertyChanged("VisualHintDuration"); }
         }
 
         public double EducationVisualHintDelay
         {
-            get { return Settings.EducationVisualHintDelay; }
-            set { Settings.EducationVisualHintDelay = value; OnPropertyChanged("EducationVisualHintDelay"); }
+            get { return Settings.GetInstance().EducationVisualHintDelay; }
+            set { Settings.GetInstance().EducationVisualHintDelay = value; OnPropertyChanged("EducationVisualHintDelay"); }
         }
 
         public double EducationVisualHintTimePeriod
         {
-            get { return Settings.EducationVisualHintTimePeriod; }
-            set { Settings.EducationVisualHintTimePeriod = value; OnPropertyChanged("EducationVisualHintTimePeriod"); }
+            get { return Settings.GetInstance().EducationVisualHintTimePeriod; }
+            set { Settings.GetInstance().EducationVisualHintTimePeriod = value; OnPropertyChanged("EducationVisualHintTimePeriod"); }
         }
 
         public double EducationVisualHintDuration
         {
-            get { return Settings.EducationVisualHintDuration; }
-            set { Settings.EducationVisualHintDuration = value; OnPropertyChanged("EducationVisualHintDuration"); }
+            get { return Settings.GetInstance().EducationVisualHintDuration; }
+            set { Settings.GetInstance().EducationVisualHintDuration = value; OnPropertyChanged("EducationVisualHintDuration"); }
         }
 
 
 
         public string FirstQuestionText
         {
-            get { return Settings.FirstQuestionText; }
-            set { Settings.FirstQuestionText = value; OnPropertyChanged("FirstQuestionText"); }
+            get { return Settings.GetInstance().FirstQuestionText; }
+            set { Settings.GetInstance().FirstQuestionText = value; OnPropertyChanged("FirstQuestionText"); }
         }
 
         public string HintQuestionText
         {
-            get { return Settings.HintQuestionText; }
-            set { Settings.HintQuestionText = value; OnPropertyChanged("HintQuestionText"); }
+            get { return Settings.GetInstance().HintQuestionText; }
+            set { Settings.GetInstance().HintQuestionText = value; OnPropertyChanged("HintQuestionText"); }
         }
 
         public string SuccessTestText
         {
-            get { return Settings.SuccessTestText; }
-            set { Settings.SuccessTestText = value; OnPropertyChanged("SuccessTestText"); }
+            get { return Settings.GetInstance().SuccessTestText; }
+            set { Settings.GetInstance().SuccessTestText = value; OnPropertyChanged("SuccessTestText"); }
         }
 
         public string FallTestText
         {
-            get { return Settings.FallTestText; }
-            set { Settings.FallTestText = value; OnPropertyChanged("FallTestText"); }
+            get { return Settings.GetInstance().FallTestText; }
+            set { Settings.GetInstance().FallTestText = value; OnPropertyChanged("FallTestText"); }
         }
 
 
         public double CardSize
         {
-            get { return Settings.CardSize; }
-            set { Settings.CardSize = value; OnPropertyChanged("CardSize"); }
+            get { return Settings.GetInstance().CardSize; }
+            set { Settings.GetInstance().CardSize = value; OnPropertyChanged("CardSize"); }
         }
         public double CardSuccesSize
         {
-            get { return Settings.CardSuccesSize; }
-            set { Settings.CardSuccesSize = value; OnPropertyChanged("CardSuccesSize"); }
+            get { return Settings.GetInstance().CardSuccesSize; }
+            set { Settings.GetInstance().CardSuccesSize = value; OnPropertyChanged("CardSuccesSize"); }
         }
         public double CardSuccesTime
         {
-            get { return Settings.CardSuccesTime; }
-            set { Settings.CardSuccesTime = value; OnPropertyChanged("CardSuccesTime"); }
+            get { return Settings.GetInstance().CardSuccesTime; }
+            set { Settings.GetInstance().CardSuccesTime = value; OnPropertyChanged("CardSuccesTime"); }
         }
 
         public double CardWrongPauseTime
         {
-            get { return Settings.CardWrongPauseTime; }
-            set { Settings.CardWrongPauseTime = value; OnPropertyChanged("CardWrongPauseTime"); }
+            get { return Settings.GetInstance().CardWrongPauseTime; }
+            set { Settings.GetInstance().CardWrongPauseTime = value; OnPropertyChanged("CardWrongPauseTime"); }
         }
         public double CardSuccesSpeakAgainTime
         {
-            get { return Settings.CardSuccesSpeakAgainTime; }
-            set { Settings.CardSuccesSpeakAgainTime = value; OnPropertyChanged("CardSuccesSpeakAgainTime"); }
+            get { return Settings.GetInstance().CardSuccesSpeakAgainTime; }
+            set { Settings.GetInstance().CardSuccesSpeakAgainTime = value; OnPropertyChanged("CardSuccesSpeakAgainTime"); }
         }
 
         public string AttachedDBCardsFilename
         {
-            get { return Settings.AttachedDBCardsFilename; }
-            set { Settings.AttachedDBCardsFilename = value; OnPropertyChanged("AttachedDBCardsFilename"); }
+            get { return Settings.GetInstance().AttachedDBCardsFilename; }
+            set { Settings.GetInstance().AttachedDBCardsFilename = value; OnPropertyChanged("AttachedDBCardsFilename"); }
         }
 
 
@@ -162,7 +163,7 @@ namespace VanyaGame.GameCardsNewDB.Interface
         {
             get
             {
-                var voices = Settings.TextToSpeachVoices;
+                var voices = Settings.GetInstance().TextToSpeachVoices;
                 return new ObservableCollection<string>(from v in voices select v.VoiceInfo.Name);
             }
         }
@@ -172,13 +173,13 @@ namespace VanyaGame.GameCardsNewDB.Interface
         {
             get
             {
-                return Settings.TTSVoiceName;
+                return Settings.GetInstance().TTSVoiceName;
             }
             set
             {
                 if (TextToSpeachVoicesNames.Contains(value))
                 {
-                    Settings.TTSVoiceName = value;
+                    Settings.GetInstance().TTSVoiceName = value;
                     OnPropertyChanged("TTSVoiceName");
                 }
             }
@@ -187,45 +188,45 @@ namespace VanyaGame.GameCardsNewDB.Interface
 
         public int TTSVoiceRate
         {
-            get { return Settings.TTSVoiceRate; }
-            set { Settings.TTSVoiceRate = value; OnPropertyChanged("TTSVoiceRate"); }
+            get { return Settings.GetInstance().TTSVoiceRate; }
+            set { Settings.GetInstance().TTSVoiceRate = value; OnPropertyChanged("TTSVoiceRate"); }
         }
 
         public int TTSVoiceSlowRate
         {
-            get { return Settings.TTSVoiceSlowRate; }
-            set { Settings.TTSVoiceSlowRate = value; OnPropertyChanged("TTSVoiceSlowRate"); }
+            get { return Settings.GetInstance().TTSVoiceSlowRate; }
+            set { Settings.GetInstance().TTSVoiceSlowRate = value; OnPropertyChanged("TTSVoiceSlowRate"); }
         }
 
         public int TTSVoiceVolume
         {
-            get { return Settings.TTSVoiceVolume; }
-            set { Settings.TTSVoiceVolume = value; OnPropertyChanged("TTSVoiceVolume"); }
+            get { return Settings.GetInstance().TTSVoiceVolume; }
+            set { Settings.GetInstance().TTSVoiceVolume = value; OnPropertyChanged("TTSVoiceVolume"); }
         }
 
 
         public string BackgroundFilename
         {
-            get { return Settings.BackgroundFilename; }
-            set { Settings.BackgroundFilename = value; OnPropertyChanged("BackgroundFilename"); }
+            get { return Settings.GetInstance().BackgroundFilename; }
+            set { Settings.GetInstance().BackgroundFilename = value; OnPropertyChanged("BackgroundFilename"); }
         }
 
         public string BackgroundGameOverFilename
         {
-            get { return Sets.Settings.BackgroundGameOverFilename; }
-            set { Sets.Settings.BackgroundGameOverFilename = value; OnPropertyChanged("BackgroundGameOverFilename"); }
+            get { return Settings.GetInstance().BackgroundGameOverFilename; }
+            set { Settings.GetInstance().BackgroundGameOverFilename = value; OnPropertyChanged("BackgroundGameOverFilename"); }
         }
 
         public string BackgroundMenuFilename
         {
-            get { return Sets.Settings.BackgroundMenuFilename; }
-            set { Sets.Settings.BackgroundMenuFilename = value; OnPropertyChanged("BackgroundMenuFilename"); }
+            get { return Settings.GetInstance().BackgroundMenuFilename; }
+            set { Settings.GetInstance().BackgroundMenuFilename = value; OnPropertyChanged("BackgroundMenuFilename"); }
         }
 
         public string BackgroundStartFilename
         {
-            get { return Sets.Settings.BackgroundStartFilename; }
-            set { Sets.Settings.BackgroundStartFilename = value; OnPropertyChanged("BackgroundStartFilename"); }
+            get { return Settings.GetInstance().BackgroundStartFilename; }
+            set { Settings.GetInstance().BackgroundStartFilename = value; OnPropertyChanged("BackgroundStartFilename"); }
         }
 
 
@@ -248,7 +249,7 @@ namespace VanyaGame.GameCardsNewDB.Interface
         {
             get
             {
-                return Settings.MusicFilenames;
+                return Settings.GetInstance().MusicFilenames;
             }
         }
 
@@ -268,14 +269,14 @@ namespace VanyaGame.GameCardsNewDB.Interface
 
         public bool ShuffleMusic
         {
-            get { return Settings.ShuffleMusic; }
-            set { Settings.ShuffleMusic = value; OnPropertyChanged("ShuffleMusic"); }
+            get { return Settings.GetInstance().ShuffleMusic; }
+            set { Settings.GetInstance().ShuffleMusic = value; OnPropertyChanged("ShuffleMusic"); }
         }
 
         public bool RepeatMusicPlaylist
         {
-            get { return Settings.RepeatMusicPlaylist; }
-            set { Settings.RepeatMusicPlaylist = value; OnPropertyChanged("RepeatMusicPlaylist"); }
+            get { return Settings.GetInstance().RepeatMusicPlaylist; }
+            set { Settings.GetInstance().RepeatMusicPlaylist = value; OnPropertyChanged("RepeatMusicPlaylist"); }
         }
         
         #endregion
@@ -345,7 +346,7 @@ namespace VanyaGame.GameCardsNewDB.Interface
                 return saveSettingsCommand ??
                   (saveSettingsCommand = new RelayCommand(obj =>
                   {
-                      Settings.SaveAllSettings();
+                      Settings.GetInstance().SaveAllSettings();
                   }));
             }
         }
@@ -358,11 +359,64 @@ namespace VanyaGame.GameCardsNewDB.Interface
                 return restoreSettingsCommand ??
                   (restoreSettingsCommand = new RelayCommand(obj =>
                   {
-                      Settings.RestoreAllSettings();
+                      Settings.GetInstance().RestoreAllSettings();
                       RefreshAllDependencyProperties();
                   }));
             }
         }
+
+        private RelayCommand importSettingsFromXMLCommand;
+        public RelayCommand ImportSettingsFromXMLCommand
+        {
+            get
+            {
+                return importSettingsFromXMLCommand ??
+                  (importSettingsFromXMLCommand = new RelayCommand(obj =>
+                  {
+                      OpenFileDialog openFileDialog = new OpenFileDialog
+                      {
+                          Multiselect = false,
+                          Filter = "Файлы настроек xml (*.xml)|*.xml"
+                      };
+                      if (openFileDialog.ShowDialog() != DialogResult.OK) return;
+
+                      try
+                      {
+                          Settings.GetInstance().ImportSettingsToXML(@openFileDialog.FileName);
+                          RefreshAllDependencyProperties();
+                      }
+                      catch
+                      {
+                          System.Windows.MessageBox.Show("Ошибка открытия файла настроек");
+                      }
+
+                  }));
+            }
+        }
+
+        private RelayCommand exportSettingsToXMLCommand;
+        public RelayCommand ExportSettingsToXMLCommand
+        {
+            get
+            {
+                return exportSettingsToXMLCommand ??
+                  (exportSettingsToXMLCommand = new RelayCommand(obj =>
+                  {
+                      SaveFileDialog saveFileDialog = new SaveFileDialog
+                      {
+                          Filter = "Файлы настроек xml (*.xml)|*.xml"
+                      };
+                      if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
+                      if (File.Exists(@saveFileDialog.FileName))
+                      {
+                          MessageBoxResult res = System.Windows.MessageBox.Show("Перезаписать файл?", "Файл существует", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                          if (res == MessageBoxResult.No) return;
+                      }
+                      Settings.GetInstance().ExportSettingsToXML(@saveFileDialog.FileName);
+                  }));
+            }
+        }
+        
 
         private RelayCommand chooseAttachedDBCardsFilename;
         public RelayCommand ChooseAttachedDBCardsFilename
@@ -518,7 +572,7 @@ namespace VanyaGame.GameCardsNewDB.Interface
                       string prevElement = mf[oldPos - 1];
                       mf[oldPos - 1] = selected;
                       mf[oldPos] = prevElement;
-                      Settings._MusicFilenames = new ObservableCollection<string>(mf);
+                      Settings.GetInstance()._MusicFilenames = new ObservableCollection<string>(mf);
                       
                       RefreshAllDependencyProperties();
                       musicFilenamesListView.SelectedIndex = oldPos - 1;
@@ -542,7 +596,7 @@ namespace VanyaGame.GameCardsNewDB.Interface
                       string nextElement = mf[oldPos + 1];
                       mf[oldPos + 1] = selected;
                       mf[oldPos] = nextElement;
-                      Settings._MusicFilenames = new ObservableCollection<string>(mf);
+                      Settings.GetInstance()._MusicFilenames = new ObservableCollection<string>(mf);
                       
                       RefreshAllDependencyProperties();
                       musicFilenamesListView.SelectedIndex = oldPos + 1;

@@ -206,7 +206,6 @@ namespace VanyaGame
         public static void Create(MainWindow WND_Owner)
         {
 
-            VanyaGame.Sets.Settings.RestoreAllSettings();
             Owner = WND_Owner;
             RandomGenerator = new Random();
             Sets = new TGameSets();
@@ -306,12 +305,12 @@ namespace VanyaGame
 
         public static void GameOver() 
         {
-            LoadBackGround(VanyaGame.Sets.Settings.BackgroundGameOverFilename);
+            LoadBackGround(VanyaGame.Sets.Settings.GetInstance().BackgroundGameOverFilename);
         }
         public static void PreviewStart()
         {
            
-            LoadBackGround(VanyaGame.Sets.Settings.BackgroundStartFilename);
+            LoadBackGround(VanyaGame.Sets.Settings.GetInstance().BackgroundStartFilename);
 
             Owner.StartButton.Visibility = Visibility.Visible; Owner.StartButton.Opacity = 1;
 
@@ -373,7 +372,7 @@ namespace VanyaGame
 
         public static void PrevMenuShow()
         {
-            Game.LoadBackGround(VanyaGame.Sets.Settings.BackgroundMenuFilename);
+            Game.LoadBackGround(VanyaGame.Sets.Settings.GetInstance().BackgroundMenuFilename);
             Game.Owner.PreviewMenu.Visibility = Visibility.Visible;
         }
 

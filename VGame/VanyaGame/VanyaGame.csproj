@@ -77,6 +77,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
+    <Reference Include="Eco.Handles, Version=7.0.0.12776, Culture=neutral, PublicKeyToken=46a833be9e90de8c, processorArchitecture=MSIL">
+      <HintPath>..\packages\EcoCore.7.0.0.12776\lib\net40\Eco.Handles.dll</HintPath>
+    </Reference>
+    <Reference Include="Eco.Interfaces, Version=7.0.0.12776, Culture=neutral, PublicKeyToken=46a833be9e90de8c, processorArchitecture=MSIL">
+      <HintPath>..\packages\EcoCore.7.0.0.12776\lib\net40\Eco.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Eco.LinqExtender, Version=7.0.0.12776, Culture=neutral, PublicKeyToken=46a833be9e90de8c, processorArchitecture=MSIL">
+      <HintPath>..\packages\EcoCore.7.0.0.12776\lib\net40\Eco.LinqExtender.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -105,6 +114,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Printing" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.Speech" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -206,6 +216,9 @@
     </Compile>
     <Compile Include="GameCardsNewDB\Interface\SettingsViewsElements\HintSettingsView.xaml.cs">
       <DependentUpon>HintSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GameCardsNewDB\Interface\SettingsViewsElements\ImportExportSettingsView.xaml.cs">
+      <DependentUpon>ImportExportSettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="GameCardsNewDB\Interface\SettingsViewsElements\MusicSettingsView.xaml.cs">
       <DependentUpon>MusicSettingsView.xaml</DependentUpon>
@@ -338,6 +351,7 @@
     <Compile Include="Abstract\ComponentContainer.cs" />
     <Compile Include="Tools\ListShuffle.cs" />
     <Compile Include="Tools\Miscellanea.cs" />
+    <Compile Include="Tools\SerializeStatic.cs" />
     <Compile Include="TUserActivity.cs" />
     <Compile Include="Units\Components\DragAndDrop.cs" />
     <Compile Include="Units\Components\Update.cs" />
@@ -402,6 +416,10 @@
     <Page Include="GameCardsNewDB\Interface\SettingsViewsElements\HintSettingsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GameCardsNewDB\Interface\SettingsViewsElements\ImportExportSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GameCardsNewDB\Interface\SettingsViewsElements\MusicSettingsView.xaml">
       <SubType>Designer</SubType>
@@ -805,7 +823,11 @@
     <Content Include="GameCardsNewDB\Images\pictogramm\Bullet-Arrow-Down.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="GameCardsNewDB\Images\pictogramm\Disk.png" />
     <Content Include="GameCardsNewDB\Images\pictogramm\Folder-Explore.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="GameCardsNewDB\Images\pictogramm\Folder.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\back.jpg">
