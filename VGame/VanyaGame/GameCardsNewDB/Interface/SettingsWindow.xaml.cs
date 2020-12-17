@@ -53,5 +53,11 @@ namespace VanyaGame.GameCardsNewDB.Interface
             SettingsElements.Add("База данных", DBSettings);
             SettingsElements.Add("Музыка", MusicSettings);
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            Hide();
+        }
     }
 }

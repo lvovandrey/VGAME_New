@@ -6,8 +6,10 @@
         xmlns:el="clr-namespace:VanyaGame.GameCardsNewDB.Interface.SettingsViewsElements"
         xmlns:local="clr-namespace:VanyaGame.GameCardsNewDB.Interface"
         mc:Ignorable="d"
-        Title="Настройки" Height="400" Width="900" ResizeMode="NoResize"   WindowStartupLocation="CenterScreen" 
-        BorderThickness="1" BorderBrush="#FFB07220"  Loaded="Window_Loaded"       >
+        Title="Настройки" Height="400" Width="900" ResizeMode="NoResize"   
+        WindowStartupLocation="CenterScreen" 
+        BorderThickness="1" BorderBrush="#FFB07220"  Loaded="Window_Loaded"    
+        Closing="Window_Closing">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"/>

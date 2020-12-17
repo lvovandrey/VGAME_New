@@ -49,6 +49,7 @@ namespace VanyaGame
         public static GameVideo VideoVlc;
         public static GameVideo VideoWpf;
         public static  MainWindow Owner;
+        public static Window SettingsWindow;
         public static bool IsPlaying = false;
         public static TDrawEffects DrawEffects = new TDrawEffects();
         public static TUserActivity UserActivity = new TUserActivity();
@@ -97,22 +98,30 @@ namespace VanyaGame
         
         public static double TimeDiagnostic;
 
-        internal static void ShowSettingsWindow()
+
+        internal static void CreateSettingsWindow()
         {
 
             if (Game.Sets.gameType == GameType.CardsEasy)
             {
-                var SettingsWindow = new GameCardsEasyDB.Interface.SettingsWindow();
-                var Settings = new GameCardsEasyDB.Interface.SettingsWindowVM(SettingsWindow);
-                SettingsWindow.Show();
+                SettingsWindow = new GameCardsEasyDB.Interface.SettingsWindow();
+                var SW = SettingsWindow as GameCardsEasyDB.Interface.SettingsWindow;
+                SW.Owner = Owner;
+                new GameCardsEasyDB.Interface.SettingsWindowVM(SW);
             }
 
             if (Game.Sets.gameType == GameType.CardsNewDB)
             {
-                var SettingsWindow = new GameCardsNewDB.Interface.SettingsWindow();
-                var Settings = new GameCardsNewDB.Interface.SettingsWindowVM(SettingsWindow, SettingsWindow.MusicSettings.MusicFilenamesListView);
-                SettingsWindow.Show();
+                SettingsWindow = new GameCardsNewDB.Interface.SettingsWindow();
+                var SW = SettingsWindow as GameCardsNewDB.Interface.SettingsWindow;
+                SW.Owner = Owner;
+                new GameCardsNewDB.Interface.SettingsWindowVM(SW, SW.MusicSettings.MusicFilenamesListView);
             }
+        }
+
+        internal static void ShowSettingsWindow()
+        {
+                SettingsWindow?.Show();
         }
 
         public static void LoadLevels(string dir) 
@@ -214,6 +223,7 @@ namespace VanyaGame
             if (Owner.StartButton.GetType() == typeof(VanyaGame.GameCardsNewDB.Interface.BeautyButtonCardsNewDB))
                 Sets.gameType = GameType.CardsNewDB;
 
+            CreateSettingsWindow();
             mediaContainer = new GameMediaContainer();
 
             Player Snd = new PlayerWpf("PlayerSound", mediaContainer, Owner.MediaElementSound);
