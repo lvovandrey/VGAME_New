@@ -724,12 +724,6 @@ namespace VanyaGame.GameCardsNewDB.Tools
             if (instance == null) { MessageBox.Show("Ошибка открытия файла настроек. Десериализатор вернул null."); return; }
         }
 
-        private void ClearAllCollections()
-        {
-            _MusicFilenames = new ObservableCollection<string>();
-            instance._MusicFilenames = new ObservableCollection<string>();
-        }
-
         public void RestoreAllSettings()
         {
             visualHintEnable = ConfigurationTools.ReadSetting("VisualHintEnable");
