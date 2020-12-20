@@ -20,12 +20,17 @@ namespace VanyaGame.GameCardsNewDB.Tools
         private static Settings instance;
         private static object syncRoot = new object();
 
+        private Settings(bool NeedRestore)
+        {
+            _TextToSpeachVoices = new SpeechSynthesizer().GetInstalledVoices(new CultureInfo("ru-RU"));
+            TTSVoice = _TextToSpeachVoices.First();
+            if(NeedRestore) RestoreAllSettings();
+        }
+
         private Settings()
         {
             _TextToSpeachVoices = new SpeechSynthesizer().GetInstalledVoices(new CultureInfo("ru-RU"));
             TTSVoice = _TextToSpeachVoices.First();
-            RestoreAllSettings();
-            
         }
 
         public static Settings GetInstance()
@@ -35,7 +40,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
                 lock (syncRoot)
                 {
                     if (instance == null)
-                        instance = new Settings();
+                        instance = new Settings(true);
                 }
             }
             return instance;
@@ -570,8 +575,9 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
-        [XmlIgnore]
+        //[XmlIgnore]
         public ObservableCollection<string> _MusicFilenames;
+        [XmlIgnore]
         public ObservableCollection<string> MusicFilenames
         {
             get
@@ -712,15 +718,20 @@ namespace VanyaGame.GameCardsNewDB.Tools
             if (!File.Exists(filename)) { MessageBox.Show("Файл настроек " + filename + " не найден.", "Ошибка"); return; }
             using (FileStream fs = new FileStream(filename, FileMode.Open))
             {
-                instance = (Settings)formatter.Deserialize(fs);
+                var settings = (Settings)formatter.Deserialize(fs);
+                instance = settings;
             }
             if (instance == null) { MessageBox.Show("Ошибка открытия файла настроек. Десериализатор вернул null."); return; }
         }
 
+        private void ClearAllCollections()
+        {
+            _MusicFilenames = new ObservableCollection<string>();
+            instance._MusicFilenames = new ObservableCollection<string>();
+        }
+
         public void RestoreAllSettings()
         {
-
-
             visualHintEnable = ConfigurationTools.ReadSetting("VisualHintEnable");
             educationModeEnable = ConfigurationTools.ReadSetting("EducationModeEnable");
             speakAgainCardNameDelay = ConfigurationTools.ReadSetting("SpeakAgainCardNameDelay");
@@ -759,6 +770,8 @@ namespace VanyaGame.GameCardsNewDB.Tools
 
             SettingsChanged?.Invoke();
         }
+
+
 
         private string PackObservableCollectionToString(ObservableCollection<string> collection)
         {
