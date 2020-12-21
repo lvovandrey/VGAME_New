@@ -830,12 +830,15 @@
     <Content Include="GameCardsNewDB\Images\pictogramm\Folder.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Images\Accept.png" />
     <Content Include="Images\back.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="Images\no_image.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\Star.png" />
+    <Resource Include="Images\Cross.png" />
     <Content Include="Tools\vlcLib\axvlc.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -78,5 +78,20 @@
             </TextBlock.Effect>
             
         </TextBlock>
+
+        <Border BorderBrush="#FF103E29" BorderThickness="1"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="#33000000" Margin="4"  Grid.Row="1">
+            <Border.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock Text="Количество выполнений этого набора карточек"/>
+                    </StackPanel>
+                </ToolTip>
+            </Border.ToolTip>
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/VanyaGame;component/Images/Accept.png" Height="20" />
+                <TextBlock Text="{Binding LevelPassingsCount}" FontSize="16" FontFamily="Comic Sans MS" Foreground="White" Margin="2 -2 0 0"/>
+            </StackPanel>
+        </Border>
+
     </Grid>
 </UserControl>

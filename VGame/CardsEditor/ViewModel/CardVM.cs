@@ -132,9 +132,7 @@ namespace CardsEditor.ViewModel
             {
                 return detachCardToSelectedLevelCommand ?? (detachCardToSelectedLevelCommand = new RelayCommand(obj =>
                 {
-                    //var cardvm = obj as CardVM;
-                    //if (cardvm == null) return;
-                    _vm.SelectedLevelVM.DetachCardToSelectedLevel(this);
+                    _vm?.SelectedLevelVM?.DetachCardToSelectedLevel(this);
                 }));
             }
         }
@@ -146,9 +144,7 @@ namespace CardsEditor.ViewModel
             {
                 return attachCardToSelectedLevelCommand ?? (attachCardToSelectedLevelCommand = new RelayCommand(obj =>
                 {
-                    //var cardvm = obj as CardVM;
-                    //if (cardvm == null) return;
-                    _vm.SelectedLevelVM.AttachCardToSelectedLevel(this);
+                    _vm?.SelectedLevelVM?.AttachCardToSelectedLevel(this);
                 }));
             }
         }
