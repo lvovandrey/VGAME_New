@@ -40,6 +40,7 @@ namespace VanyaGame.PrevMenuNS
             Level = level;
             Text.Text = level.Sets.Description;
             TextToolTip.Text = level.Sets.Description;
+            DataContext = Level;
         }
 
         private void LoadImage(string ImgFilename)

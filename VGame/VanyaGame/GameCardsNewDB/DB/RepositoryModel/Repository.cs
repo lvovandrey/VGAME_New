@@ -60,14 +60,15 @@ namespace VanyaGame.GameCardsNewDB.DB.RepositoryModel
         private string _ImageAddress { get; set; }
         [NotMapped]
         private ObservableCollection<Card> _Cards { get; set; }
-
+        [NotMapped]
+        public ObservableCollection<LevelPassing> _LevelPassings { get; set; }
 
 
         public int Id { get; set; }
         public ObservableCollection<Card> Cards { get { return _Cards; } set { _Cards = value; OnPropertyChanged("Cards"); } }
         public string Name { get { return _Name; } set { _Name = value; OnPropertyChanged("Name"); } }
         public string ImageAddress { get { return _ImageAddress; } set { _ImageAddress = value; OnPropertyChanged("ImageAddress"); } }
-
+        public ObservableCollection<LevelPassing> LevelPassings { get { return _LevelPassings; } set { _LevelPassings = value; OnPropertyChanged("LevelPassings"); } }
 
         [NotMapped]
         public Uri Source
@@ -83,5 +84,17 @@ namespace VanyaGame.GameCardsNewDB.DB.RepositoryModel
                 OnPropertyChanged("ImageAddress");
             }
         }
+    }
+
+    public class LevelPassing : INPCBase
+    {
+        [NotMapped]
+        private string _DateAndTime { get; set; }
+        [NotMapped]
+        private bool _IsComplete { get; set; }
+
+        public int Id { get; set; }
+        public string DateAndTime { get { return _DateAndTime; } set { _DateAndTime = value; OnPropertyChanged("DateAndTime"); } }
+        public bool IsComplete { get { return _IsComplete; } set { _IsComplete = value; OnPropertyChanged("IsComplete"); } }
     }
 }

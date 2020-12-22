@@ -11,6 +11,7 @@ namespace VanyaGame.GameCardsNewDB.DB
 
         public DbSet<Card> Cards { get; set; }
         public DbSet<Level> Levels { get; set; }
+        public DbSet<LevelPassing> LevelPassings { get; set; }
     }
 
 

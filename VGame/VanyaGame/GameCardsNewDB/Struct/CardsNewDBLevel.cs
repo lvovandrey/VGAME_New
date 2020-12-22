@@ -10,7 +10,8 @@ using DBCardsModel = VanyaGame.DB.DBCardsRepositoryModel;
 using System.Collections.ObjectModel;
 using VanyaGame.GameCardsNewDB.Tools;
 using VanyaGame.GameCardsNewDB.DB;
-
+using VanyaGame.GameCardsNewDB.DB.RepositoryModel;
+using System.ComponentModel;
 
 namespace VanyaGame.GameCardsNewDB.Struct
 {
@@ -19,16 +20,19 @@ namespace VanyaGame.GameCardsNewDB.Struct
     /// Данный класс переопределяет функционал стандартного класса. 
     /// По умолчанию ничего не меняется - просто вызываются одноименные методы базового класса
     /// </summary>
-    public class CardsNewDBLevel : Level
+    public class CardsNewDBLevel : VanyaGame.Struct.Level, INotifyPropertyChanged
     {
         public DB.RepositoryModel.Level DbLevelRecord;
 
+        public ObservableCollection<LevelPassing> LevelPassings { get { return DbLevelRecord._LevelPassings; } set { DbLevelRecord._LevelPassings = value; OnPropertyChanged("LevelPassings"); } }
+        public int LevelPassingsCount { get {if (LevelPassings != null) return LevelPassings.Count; else return 0; } }
+        private LevelPassing CurLevelPassing;
 
-        public CardsNewDBLevel(DB.RepositoryModel.Level DbLevelRecord) : base()
+        public CardsNewDBLevel(DB.RepositoryModel.Level _DbLevelRecord) : base()
         {
-            this.DbLevelRecord = DbLevelRecord;
+            DbLevelRecord = DBTools.Context.Levels.Find(_DbLevelRecord.Id);
+            if (DbLevelRecord == null) DbLevelRecord = _DbLevelRecord;
             Sets = new LevelSets(this);
-            
            // Sets.Directory = "NONE";
 
             GetComponent<Loader>().LoadSets = LoadSets;
@@ -40,7 +44,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
         {
             Settings.GetInstance().RestoreAllSettings();
 
-            DBTools.LoadDB(new ObservableCollection<DB.RepositoryModel.Card>(), new ObservableCollection<DB.RepositoryModel.Level>(),  Settings.GetInstance().AttachedDBCardsFilename);
+            DBTools.LoadDB(new ObservableCollection<DB.RepositoryModel.Card>(), new ObservableCollection<DB.RepositoryModel.Level>(), new ObservableCollection<DB.RepositoryModel.LevelPassing>(),  Settings.GetInstance().AttachedDBCardsFilename);
            
            
             Random random = new Random();
@@ -56,7 +60,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
 
             foreach (var level in DB.DBTools.Levels)
             {
-                Level NewLevel = new CardsNewDBLevel(level);
+                VanyaGame.Struct.Level NewLevel = new CardsNewDBLevel(level);
                 Game.Levels.Enqueue(NewLevel);
             }
 
@@ -88,6 +92,10 @@ namespace VanyaGame.GameCardsNewDB.Struct
 
         private void Start()
         {
+            int id = DbLevelRecord.Id;
+            var RefreshedDbLevelRecord = DBTools.Context.Levels.Find(id);
+            if (RefreshedDbLevelRecord != null) DbLevelRecord = RefreshedDbLevelRecord;
+
             LoadMedia();
             LoadScenes();
             if (Settings.GetInstance().ShuffleMusic) Game.Music.PlayRandom(Settings.GetInstance().RepeatMusicPlaylist);
@@ -95,6 +103,11 @@ namespace VanyaGame.GameCardsNewDB.Struct
             Game.Music.Pause();
 
             CurScene.GetComponent<Starter>().Start();
+            CurLevelPassing = new LevelPassing() { DateAndTime = DateTime.Now.ToString() };
+            LevelPassings.Add(CurLevelPassing);
+            DBTools.Context.Entry(DbLevelRecord).State = System.Data.Entity.EntityState.Modified;
+            DBTools.Context.SaveChanges();
+            OnPropertyChanged("LevelPassingsCount");
         }
 
 
@@ -150,6 +163,9 @@ namespace VanyaGame.GameCardsNewDB.Struct
 
         private void End()
         {
+            CurLevelPassing.IsComplete = true;
+            DBTools.Context.Entry(DbLevelRecord).State = System.Data.Entity.EntityState.Modified;
+            DBTools.Context.SaveChanges();
             this.Scenes.Clear();
             Game.PrevMenuShow();
         }
@@ -180,7 +196,15 @@ namespace VanyaGame.GameCardsNewDB.Struct
             CurScene = Scenes[ScenesKeys[0]];
         }
 
+        #region mvvm
+        public event PropertyChangedEventHandler PropertyChanged;
 
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
 
     }
 }
