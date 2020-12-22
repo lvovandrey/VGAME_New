@@ -25,7 +25,7 @@ namespace CardsEditor.Model
         [NotMapped]
         private ObservableCollection<Level> _Levels { get; set; }
         [NotMapped]
-        private ObservableCollection<CardPassing> _CardPassings { get; set; }
+        private ObservableCollection<CardPassing> _CardPassings { get; set; } = new ObservableCollection<CardPassing>();
 
 
 

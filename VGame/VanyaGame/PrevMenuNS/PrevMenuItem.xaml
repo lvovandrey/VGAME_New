@@ -89,7 +89,11 @@
             </Border.ToolTip>
             <StackPanel Orientation="Horizontal">
                 <Image Source="/VanyaGame;component/Images/Accept.png" Height="20" />
-                <TextBlock Text="{Binding LevelPassingsCount}" FontSize="16" FontFamily="Comic Sans MS" Foreground="White" Margin="2 -2 0 0"/>
+                <TextBlock Text="{Binding LevelPassingsCount}" FontSize="16" FontFamily="Comic Sans MS" Foreground="White" Margin="2 -2 15 0"/>
+                <Image Source="/VanyaGame;component/Images/Cross.png" Height="20" />
+                <TextBlock Text="{Binding AvgCardsErrorsPercentInLast3LevelPassings, StringFormat= {}{0:P}}"   FontSize="16" FontFamily="Comic Sans MS" Foreground="White" Margin="2 -2 0 0"/>
+
+                
             </StackPanel>
         </Border>
 

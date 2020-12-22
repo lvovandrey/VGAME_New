@@ -24,7 +24,7 @@ namespace VanyaGame.GameCardsNewDB.DB.RepositoryModel
         [NotMapped]
         private ObservableCollection<Level> _Levels { get; set; }
         [NotMapped]
-        private ObservableCollection<CardPassing> _CardPassings { get; set; }
+        private ObservableCollection<CardPassing> _CardPassings { get; set; } = new ObservableCollection<CardPassing>();
 
 
         public int Id { get; set; }
@@ -95,7 +95,7 @@ namespace VanyaGame.GameCardsNewDB.DB.RepositoryModel
         [NotMapped]
         private bool _IsComplete { get; set; }
         [NotMapped]
-        private ObservableCollection<CardPassing> _CardPassings { get; set; }
+        private ObservableCollection<CardPassing> _CardPassings { get; set; } = new ObservableCollection<CardPassing>();
 
         public int Id { get; set; }
         public ObservableCollection<CardPassing> CardPassings { get { return _CardPassings; } set { _CardPassings = value; OnPropertyChanged("CardPassings"); } }

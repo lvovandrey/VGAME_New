@@ -16,7 +16,7 @@ namespace CardsEditor.Model
         [NotMapped]
         private bool _IsComplete { get; set; }
         [NotMapped]
-        private ObservableCollection<CardPassing> _CardPassings { get; set; }
+        private ObservableCollection<CardPassing> _CardPassings { get; set; } = new ObservableCollection<CardPassing>();
 
 
         public ObservableCollection<CardPassing> CardPassings { get { return _CardPassings; } set { _CardPassings = value; OnPropertyChanged("CardPassings"); } }
