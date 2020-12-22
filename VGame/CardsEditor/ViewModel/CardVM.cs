@@ -1,4 +1,5 @@
 ﻿using CardsEditor.Abstract;
+using CardsEditor.DB;
 using CardsEditor.Model;
 using Microsoft.Win32;
 using System;
@@ -64,6 +65,16 @@ namespace CardsEditor.ViewModel
                 if (_levels == null) return null;
                 _levelsvm = new ObservableCollection<LevelVM>(from l in _levels select new LevelVM(l, _vm));
                 return _levelsvm;
+            }
+        }
+
+        public int CountCardPassings 
+        {
+            get 
+            {
+                if (Card.CardPassings != null)
+                    return Card.CardPassings.Count;
+                else return 0;
             }
         }
 

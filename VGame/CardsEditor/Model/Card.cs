@@ -24,11 +24,14 @@ namespace CardsEditor.Model
         private string _SoundAddress { get; set; }
         [NotMapped]
         private ObservableCollection<Level> _Levels { get; set; }
+        [NotMapped]
+        private ObservableCollection<CardPassing> _CardPassings { get; set; }
 
 
 
         public int Id { get; set; }
         public ObservableCollection<Level> Levels { get { return _Levels; } set { _Levels = value; OnPropertyChanged("Levels"); } }
+        public ObservableCollection<CardPassing> CardPassings { get { return _CardPassings; } set { _CardPassings = value; OnPropertyChanged("CardPassings"); } }
         public string Title { get { return _Title; } set { _Title = value; OnPropertyChanged("Title"); } }
         public string SoundedText { get { return _SoundedText; } set { _SoundedText = value; OnPropertyChanged("SoundedText"); } }
         public string Description { get { return _Description; } set { _Description = value; OnPropertyChanged("Description"); } }

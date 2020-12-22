@@ -52,6 +52,7 @@
             </Label>
             <Label Content="{Binding SoundedText, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" FontSize="10"/>
             <Label Content="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" FontSize="10"/>
+            <TextBlock Text="{Binding CountCardPassings, StringFormat=Кол-во выполнений {0}}" Grid.Column="1" FontSize="10"/>
         </Grid>
     </Grid>
 </UserControl>

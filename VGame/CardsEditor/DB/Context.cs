@@ -13,6 +13,7 @@ namespace LevelSetsEditor.DB
         public DbSet<Card> Cards { get; set; }
         public DbSet<Level> Levels { get; set; }
         public DbSet<LevelPassing> LevelPassings { get; set; }
+        public DbSet<CardPassing> CardPassings { get; set; }
 
 
     }
