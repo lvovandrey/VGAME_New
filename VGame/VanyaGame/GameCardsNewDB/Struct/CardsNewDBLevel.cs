@@ -26,7 +26,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
 
         public ObservableCollection<LevelPassing> LevelPassings { get { return DbLevelRecord._LevelPassings; } set { DbLevelRecord._LevelPassings = value; OnPropertyChanged("LevelPassings"); } }
         public int LevelPassingsCount { get {if (LevelPassings != null) return LevelPassings.Count; else return 0; } }
-        private LevelPassing CurLevelPassing;
+        public LevelPassing CurLevelPassing;
 
         public CardsNewDBLevel(DB.RepositoryModel.Level _DbLevelRecord) : base()
         {

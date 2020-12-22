@@ -23,11 +23,13 @@ namespace VanyaGame.GameCardsNewDB.DB.RepositoryModel
         private string _SoundAddress { get; set; }
         [NotMapped]
         private ObservableCollection<Level> _Levels { get; set; }
-
+        [NotMapped]
+        private ObservableCollection<CardPassing> _CardPassings { get; set; }
 
 
         public int Id { get; set; }
         public ObservableCollection<Level> Levels { get { return _Levels; } set { _Levels = value; OnPropertyChanged("Levels"); } }
+        public ObservableCollection<CardPassing> CardPassings { get { return _CardPassings; } set { _CardPassings = value; OnPropertyChanged("CardPassings"); } }
         public string Title { get { return _Title; } set { _Title = value; OnPropertyChanged("Title"); } }
         public string SoundedText { get { return _SoundedText; } set { _SoundedText = value; OnPropertyChanged("SoundedText"); } }
         public string Description { get { return _Description; } set { _Description = value; OnPropertyChanged("Description"); } }
@@ -92,9 +94,24 @@ namespace VanyaGame.GameCardsNewDB.DB.RepositoryModel
         private string _DateAndTime { get; set; }
         [NotMapped]
         private bool _IsComplete { get; set; }
+        [NotMapped]
+        private ObservableCollection<CardPassing> _CardPassings { get; set; }
+
+        public int Id { get; set; }
+        public ObservableCollection<CardPassing> CardPassings { get { return _CardPassings; } set { _CardPassings = value; OnPropertyChanged("CardPassings"); } }
+        public string DateAndTime { get { return _DateAndTime; } set { _DateAndTime = value; OnPropertyChanged("DateAndTime"); } }
+        public bool IsComplete { get { return _IsComplete; } set { _IsComplete = value; OnPropertyChanged("IsComplete"); } }
+    }
+
+    public class CardPassing : INPCBase
+    {
+        [NotMapped]
+        private string _DateAndTime { get; set; }
+        [NotMapped]
+        private int _AttemptsNumber { get; set; }
 
         public int Id { get; set; }
         public string DateAndTime { get { return _DateAndTime; } set { _DateAndTime = value; OnPropertyChanged("DateAndTime"); } }
-        public bool IsComplete { get { return _IsComplete; } set { _IsComplete = value; OnPropertyChanged("IsComplete"); } }
+        public int AttemptsNumber { get { return _AttemptsNumber; } set { _AttemptsNumber = value; OnPropertyChanged("AttemptsNumber"); } }
     }
 }

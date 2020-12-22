@@ -37,6 +37,8 @@ namespace VanyaGame.GameCardsNewDB.DB
                 IEnumerable<Level> levels = Context.Levels.Include(p => p.Cards).ToList();
                 IEnumerable<Card> cards = Context.Cards.ToList();
                 IEnumerable<LevelPassing> levelPassings = Context.LevelPassings.ToList();
+                IEnumerable<CardPassing> cardPassings = Context.CardPassings.ToList();
+
 
                 foreach (Card c in cards)
                     _cards.Add(c);

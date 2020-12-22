@@ -26,6 +26,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
         private CardUnit CurUnit; //Текущая карточка, которую нужно озвучить и отгадать
         private bool ReadyToNextUnit;
         private CardsNewDBLevel numberDBLevel;
+        private CardPassing CurCardPassing;
 
 
         public CardsNewDBScene(CardsNewDBLevel _Level) : base(_Level, _Level.Sets.Name)
@@ -132,6 +133,12 @@ namespace VanyaGame.GameCardsNewDB.Struct
 
                 Game.Owner.TextForCardTag.Text = "Тема: " + this.Name + ".  Надо показать: " + CurUnit.Card.Title;
 
+                CurCardPassing = new CardPassing() { DateAndTime = DateTime.Now.ToString(), AttemptsNumber = 0 };
+                CurUnit.Card.CardPassings.Add(CurCardPassing);
+                ((CardsNewDBLevel)Level).CurLevelPassing.CardPassings.Add(CurCardPassing);
+                DBTools.Context.CardPassings.Add(CurCardPassing);
+                DBTools.Context.Entry(CurCardPassing).State = System.Data.Entity.EntityState.Modified;
+                DBTools.Context.SaveChanges();
             }
             else
             {
