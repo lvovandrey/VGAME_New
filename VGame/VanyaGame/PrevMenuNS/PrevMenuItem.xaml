@@ -14,7 +14,7 @@
         </Grid.Effect>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <Rectangle StrokeThickness="5" Fill="#335BB68D" Grid.RowSpan="2">
 
@@ -27,7 +27,9 @@
         </Rectangle>
         <!--<Rectangle Stroke="#FF878787" StrokeThickness="3" Fill="#07FFFFFF" Grid.RowSpan="1"/>-->
 
-        <Image Name="Img" Margin="10"  Source="/VanyaGame;component/Images/no_image.png"  Width="300" Height="200"  HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Stretch="Uniform" Cursor="{StaticResource HandPushCursor}" 
+        <Image Name="Img" Margin="5"  Source="/VanyaGame;component/Images/no_image.png" 
+               Width="300" Height="200"  HorizontalAlignment="Stretch"  
+               VerticalAlignment="Stretch" Stretch="Uniform" Cursor="{StaticResource HandPushCursor}" 
                MouseDown="Img_MouseDown" MouseUp="Img_MouseUp" MouseLeave="Img_MouseLeave" >
             <Image.Triggers>
                 <EventTrigger RoutedEvent="Image.PreviewMouseDown">
@@ -65,9 +67,10 @@
 
         </Image>
 
-        <TextBlock Name="Text" Grid.Row="1" Width="{Binding ElementName=Img, Path=Width}" VerticalAlignment="Stretch" TextAlignment="Center"
-               Text="Текст по умолчанию длинный очень очень длинный длинный длинный длинный длинный длинный" FontFamily="Comic Sans MS" FontSize="16" Margin="10,1,10,0"  
-                   TextWrapping="Wrap" TextTrimming="CharacterEllipsis" Foreground="White" FontStyle="Italic">
+        <TextBlock Name="Text" Grid.Row="1" Width="{Binding ElementName=Img, Path=Width}" VerticalAlignment="Stretch"
+               Text="Текст по умолчанию длинный очень очень длинный длинный длинный длинный длинный длинный" FontFamily="Comic Sans MS" Margin="10,1,10,0"  
+                   TextWrapping="Wrap" 
+                   TextTrimming="CharacterEllipsis" Foreground="White" FontStyle="Italic" TextAlignment="Center" FontSize="16">
             <TextBlock.ToolTip>
                 <ToolTip>
                     <TextBlock Name="TextToolTip" Text="Подсказка" FontSize="12"></TextBlock>
@@ -79,23 +82,32 @@
             
         </TextBlock>
 
-        <Border BorderBrush="#FF103E29" BorderThickness="1"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="#33000000" Margin="4"  Grid.Row="1">
-            <Border.ToolTip>
+        <Grid Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="-15 -15 4 4">
+            <Grid.ToolTip>
                 <ToolTip>
                     <StackPanel>
-                        <TextBlock Text="Количество выполнений этого набора карточек"/>
+                        <TextBlock Text="{Binding CardsCount, 
+                            StringFormat= Количество карточек в наборе - {0}}"/>
+                        <TextBlock Text="{Binding LevelPassingsCount, 
+                            StringFormat= Количество выполнений этого набора карточек - {0}}"/>
+                        <TextBlock Text="{Binding AvgCardsErrorsPercentInLast3LevelPassings, 
+                            StringFormat= Процент ошибок при последних трех выполнениях - {0:P}}"/>
                     </StackPanel>
                 </ToolTip>
-            </Border.ToolTip>
+            </Grid.ToolTip>
+        <Border BorderBrush="#FF103E29" BorderThickness="1"   Background="#33000000" Margin="14 14 0 0"  >
+            
             <StackPanel Orientation="Horizontal">
-                <Image Source="/VanyaGame;component/Images/Accept.png" Height="20" />
-                <TextBlock Text="{Binding LevelPassingsCount}" FontSize="16" FontFamily="Comic Sans MS" Foreground="White" Margin="2 -2 15 0"/>
-                <Image Source="/VanyaGame;component/Images/Cross.png" Height="20" />
-                <TextBlock Text="{Binding AvgCardsErrorsPercentInLast3LevelPassings, StringFormat= {}{0:P}}"   FontSize="16" FontFamily="Comic Sans MS" Foreground="White" Margin="2 -2 0 0"/>
+                <Image Source="/VanyaGame;component/Images/Cards.png" Height="15" />
+                <TextBlock Text="{Binding CardsCount}" FontSize="12" FontFamily="Comic Sans MS" Foreground="White" Margin="2 -2 15 0"/>
+                <Image Source="/VanyaGame;component/Images/Accept.png" Height="15" />
+                <TextBlock Text="{Binding LevelPassingsCount}" FontSize="12" FontFamily="Comic Sans MS" Foreground="White" Margin="2 -2 15 0"/>
+                <Image Source="/VanyaGame;component/Images/Cross.png" Height="15" />
+                <TextBlock Text="{Binding AvgCardsErrorsPercentInLast3LevelPassings, StringFormat= {}{0:P}}"   FontSize="12" FontFamily="Comic Sans MS" Foreground="White" Margin="2 -2 0 0"/>
 
                 
             </StackPanel>
         </Border>
-
+        </Grid>
     </Grid>
 </UserControl>
