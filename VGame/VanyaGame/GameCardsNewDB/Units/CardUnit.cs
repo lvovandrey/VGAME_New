@@ -21,7 +21,7 @@ namespace VanyaGame.GameCardsNewDB.Units
         public Scene Scene { get; set; }
         public event Action MouseClicked;
         public bool readyToReactionOnMouseDown= false;
-
+        
 
         public CardUnit(Scene scene, Card card, double size) : this(scene, card)
         {

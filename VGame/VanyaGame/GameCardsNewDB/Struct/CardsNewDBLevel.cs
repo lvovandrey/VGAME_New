@@ -10,7 +10,9 @@ using DBCardsModel = VanyaGame.DB.DBCardsRepositoryModel;
 using System.Collections.ObjectModel;
 using VanyaGame.GameCardsNewDB.Tools;
 using VanyaGame.GameCardsNewDB.DB;
-
+using VanyaGame.GameCardsNewDB.DB.RepositoryModel;
+using System.ComponentModel;
+using System.Linq;
 
 namespace VanyaGame.GameCardsNewDB.Struct
 {
@@ -19,17 +21,56 @@ namespace VanyaGame.GameCardsNewDB.Struct
     /// Данный класс переопределяет функционал стандартного класса. 
     /// По умолчанию ничего не меняется - просто вызываются одноименные методы базового класса
     /// </summary>
-    public class CardsNewDBLevel : Level
+    public class CardsNewDBLevel : VanyaGame.Struct.Level, INotifyPropertyChanged
     {
         public DB.RepositoryModel.Level DbLevelRecord;
 
+        public ObservableCollection<LevelPassing> LevelPassings { get { return DbLevelRecord._LevelPassings; } set { DbLevelRecord._LevelPassings = value; OnPropertyChanged("LevelPassings"); } }
+        public int LevelPassingsCount { get { if (LevelPassings != null) return LevelPassings.Count; else return 0; } }
+        public LevelPassing CurLevelPassing;
+        public int? CardsCount { get { return DbLevelRecord?.Cards?.Count; } }
+        public double AvgCardsErrorsPercentInLast3LevelPassings { get { return GetAvgCardsErrorsPercentInLast3LevelPassings(); } }
 
-        public CardsNewDBLevel(DB.RepositoryModel.Level DbLevelRecord) : base()
+        private double GetAvgCardsErrorsPercentInLast3LevelPassings()
         {
-            this.DbLevelRecord = DbLevelRecord;
+            var AllCardPassings = LevelPassings.Select(lp => new
+            {
+                CardPassings = lp.CardPassings,
+                DateAndTime = GetDateTime(lp.DateAndTime)
+            });
+
+            var Last3LevelPassings = AllCardPassings.OrderByDescending(lp => lp.DateAndTime).Take(3);
+
+            List<double> CardsErrorPercents = new List<double>();
+            foreach (var lp in Last3LevelPassings)
+            {
+                double cardsErrorsSumm = 0;
+                double cardsPassesSumm = 0;
+                foreach (var p in lp.CardPassings)
+                {
+                    cardsPassesSumm++;
+                    if (p.AttemptsNumber > 1) cardsErrorsSumm++;
+                }
+                if (cardsPassesSumm != 0)
+                    CardsErrorPercents.Add(cardsErrorsSumm / cardsPassesSumm);
+            }
+            if (CardsErrorPercents.Count > 0) return CardsErrorPercents.Average();
+            else return 0;
+        }
+
+        private DateTime GetDateTime(string dateAndTime)
+        {
+            DateTime dt;
+            if (DateTime.TryParse(dateAndTime, out dt)) return dt;
+            else return new DateTime(2000, 1, 1);
+        }
+
+        public CardsNewDBLevel(DB.RepositoryModel.Level _DbLevelRecord) : base()
+        {
+            DbLevelRecord = DBTools.Context.Levels.Find(_DbLevelRecord.Id);
+            if (DbLevelRecord == null) DbLevelRecord = _DbLevelRecord;
             Sets = new LevelSets(this);
-            
-           // Sets.Directory = "NONE";
+            // Sets.Directory = "NONE";
 
             GetComponent<Loader>().LoadSets = LoadSets;
             GetComponent<Loader>().LoadContent = LoadContent;
@@ -40,9 +81,9 @@ namespace VanyaGame.GameCardsNewDB.Struct
         {
             Settings.GetInstance().RestoreAllSettings();
 
-            DBTools.LoadDB(new ObservableCollection<DB.RepositoryModel.Card>(), new ObservableCollection<DB.RepositoryModel.Level>(),  Settings.GetInstance().AttachedDBCardsFilename);
-           
-           
+            DBTools.LoadDB(new ObservableCollection<DB.RepositoryModel.Card>(), new ObservableCollection<DB.RepositoryModel.Level>(), new ObservableCollection<DB.RepositoryModel.LevelPassing>(), Settings.GetInstance().AttachedDBCardsFilename);
+
+
             Random random = new Random();
 
             //Перемешиваем уровни  //что за алгоритм - хз - раньше работал вроде
@@ -56,7 +97,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
 
             foreach (var level in DB.DBTools.Levels)
             {
-                Level NewLevel = new CardsNewDBLevel(level);
+                VanyaGame.Struct.Level NewLevel = new CardsNewDBLevel(level);
                 Game.Levels.Enqueue(NewLevel);
             }
 
@@ -88,6 +129,18 @@ namespace VanyaGame.GameCardsNewDB.Struct
 
         private void Start()
         {
+            CurLevelPassing = new LevelPassing() { DateAndTime = DateTime.Now.ToString() };
+            LevelPassings.Add(CurLevelPassing);
+            DBTools.Context.Entry(DbLevelRecord).State = System.Data.Entity.EntityState.Modified;
+            DBTools.Context.SaveChanges();
+            OnPropertyChanged("LevelPassingsCount");
+            OnPropertyChanged("CardsCount");
+            OnPropertyChanged("AvgCardsErrorsPercentInLast3LevelPassings");
+
+            int id = DbLevelRecord.Id;
+            var RefreshedDbLevelRecord = DBTools.Context.Levels.Find(id);
+            if (RefreshedDbLevelRecord != null) DbLevelRecord = RefreshedDbLevelRecord;
+
             LoadMedia();
             LoadScenes();
             if (Settings.GetInstance().ShuffleMusic) Game.Music.PlayRandom(Settings.GetInstance().RepeatMusicPlaylist);
@@ -95,6 +148,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
             Game.Music.Pause();
 
             CurScene.GetComponent<Starter>().Start();
+
         }
 
 
@@ -102,7 +156,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
 
         public void LoadMedia()
         {
-            Game.Sound.LoadMediaFilesFromDir(Game.Sets.MainDir +  Sets.SoundDir + @"\");
+            Game.Sound.LoadMediaFilesFromDir(Game.Sets.MainDir + Sets.SoundDir + @"\");
             Game.Music.LoadMediaFiles(new List<string>(Settings.GetInstance().MusicFilenames));
         }
 
@@ -123,9 +177,9 @@ namespace VanyaGame.GameCardsNewDB.Struct
             }
         }
 
-  
+
         public int SceneNomer { get; private set; }
-       
+
         /// <summary>
         /// Переключение на следующую сцену
         /// </summary>
@@ -137,7 +191,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
             {
                 ScenesKeys.Add(Sc.Key);
             }
-            if ((SceneNomer <= ScenesKeys.Count-1) && (SceneNomer >= 0))
+            if ((SceneNomer <= ScenesKeys.Count - 1) && (SceneNomer >= 0))
             {
                 CurScene = Scenes[ScenesKeys[SceneNomer]];
                 CurScene.GetComponent<Starter>().Start();
@@ -150,6 +204,14 @@ namespace VanyaGame.GameCardsNewDB.Struct
 
         private void End()
         {
+            CurLevelPassing.IsComplete = true;
+            DBTools.Context.Entry(DbLevelRecord).State = System.Data.Entity.EntityState.Modified;
+            DBTools.Context.SaveChanges();
+
+            OnPropertyChanged("LevelPassingsCount");
+            OnPropertyChanged("CardsCount");
+            OnPropertyChanged("AvgCardsErrorsPercentInLast3LevelPassings");
+
             this.Scenes.Clear();
             Game.PrevMenuShow();
         }
@@ -180,7 +242,15 @@ namespace VanyaGame.GameCardsNewDB.Struct
             CurScene = Scenes[ScenesKeys[0]];
         }
 
+        #region mvvm
+        public event PropertyChangedEventHandler PropertyChanged;
 
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
 
     }
 }

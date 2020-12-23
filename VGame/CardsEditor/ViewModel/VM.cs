@@ -43,6 +43,7 @@ namespace CardsEditor.ViewModel
         MainWindow mainWindow;
         ObservableCollection<Card> _cards = new ObservableCollection<Card>();
         ObservableCollection<Level> _levels = new ObservableCollection<Level>();
+        ObservableCollection<LevelPassing> _levelPassings = new ObservableCollection<LevelPassing>();
         TTSSettingsWindow ttsSettingsWindow;
         #endregion
 
@@ -219,10 +220,11 @@ namespace CardsEditor.ViewModel
         }
 
         //позорный костыль для загрузки БД - так и не разобрался почему коллекция после выхода из статического метода не изменяется. а внутри меняется вроде.
-        public void init(ObservableCollection<Card> cards, ObservableCollection<Level> levels, Context Context)
+        public void init(ObservableCollection<Card> cards, ObservableCollection<Level> levels, ObservableCollection<LevelPassing> levelPassings, Context Context)
         {
             _cards = cards;
             _levels = levels;
+            _levelPassings = levelPassings;
             context = Context;
         }
 
@@ -329,7 +331,7 @@ namespace CardsEditor.ViewModel
                           if (saveFileDialog.ShowDialog() == DialogResult.OK)
                           {
                               DBFilename = saveFileDialog.FileName;
-                              bool res = DBTools.CreateDB(this, _cards, _levels, context, DBFilename);
+                              bool res = DBTools.CreateDB(this, _cards, _levels,_levelPassings, context, DBFilename);
                               if (!res)
                               {
                                   System.Windows.MessageBox.Show("Ошибка загрузки базы данных " + DBFilename, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -379,7 +381,7 @@ namespace CardsEditor.ViewModel
                           if (openFileDialog.ShowDialog() == DialogResult.OK)
                           {
                               DBFilename = @openFileDialog.FileName;
-                              bool res = DBTools.LoadDB(this, _cards, _levels, context, DBFilename);
+                              bool res = DBTools.LoadDB(this, _cards, _levels, _levelPassings, context, DBFilename);
                               if (!res)
                               {
                                   System.Windows.MessageBox.Show("Ошибка загрузки базы данных "+ DBFilename, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);

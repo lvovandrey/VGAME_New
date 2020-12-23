@@ -26,7 +26,8 @@ namespace VanyaGame.GameCardsNewDB.Struct
         private CardUnit CurUnit; //Текущая карточка, которую нужно озвучить и отгадать
         private bool ReadyToNextUnit;
         private CardsNewDBLevel numberDBLevel;
-
+        private CardPassing CurCardPassing;
+        private bool CurUnitAlreadyTasked = false; // Показывает в первый раз или нет данный юнит предъявляется для угадывания
 
         public CardsNewDBScene(CardsNewDBLevel _Level) : base(_Level, _Level.Sets.Name)
         {
@@ -129,15 +130,33 @@ namespace VanyaGame.GameCardsNewDB.Struct
                     else
                         flashTimer = new Timer(Flash, null, (int)(1000 * Settings.GetInstance().VisualHintDelay), (int)(1000 * Settings.GetInstance().VisualHintTimePeriod));
 
+                
+                SetNewCurCardPassing();
 
                 Game.Owner.TextForCardTag.Text = "Тема: " + this.Name + ".  Надо показать: " + CurUnit.Card.Title;
 
+                
             }
             else
             {
                 SceneEnded(this, (CardsNewDBLevel)Level);
             }
         }
+
+
+        bool UnitRepeat = false; // юнит уже предъявлялся (нужно чтобы понять что юнит уже предъявлялся)
+
+        private void SetNewCurCardPassing()
+        {
+            if (CurUnitAlreadyTasked) return;
+            CurCardPassing = new CardPassing() { DateAndTime = DateTime.Now.ToString(), AttemptsNumber = 0 };
+            CurUnit.Card.CardPassings.Add(CurCardPassing);
+            ((CardsNewDBLevel)Level).CurLevelPassing.CardPassings.Add(CurCardPassing);
+            DBTools.Context.CardPassings.Add(CurCardPassing);
+            DBTools.Context.SaveChanges();
+        }
+
+
 
         bool needSpeakAgain = false;
         Timer speakAgainTimer;
@@ -192,8 +211,13 @@ namespace VanyaGame.GameCardsNewDB.Struct
                 if ((u.GetComponent<Hit>().IsHited) && (CurUnit.Card.Title == u.Card.Title))
                     IsHitSuccess = true;
             }
+
+            CurCardPassing.AttemptsNumber++;
+            DBTools.Context.SaveChanges();
+
             if (IsHitSuccess)
             {
+                CurUnitAlreadyTasked = false;
                 Panel.SetZIndex(CurUnittmp.GetComponent<HaveBody>().Body, 1110);
                 CurUnittmp.GetComponent<CardShower>().Hide(() => { });
 
@@ -217,8 +241,8 @@ namespace VanyaGame.GameCardsNewDB.Struct
             }
             else
             {
+                CurUnitAlreadyTasked = true;
                 Speak(Settings.GetInstance().FallTestText);
-
             }
 
             foreach (var u in UnitsCol.GetAllUnits())

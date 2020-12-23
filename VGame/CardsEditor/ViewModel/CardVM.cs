@@ -1,4 +1,5 @@
 ﻿using CardsEditor.Abstract;
+using CardsEditor.DB;
 using CardsEditor.Model;
 using Microsoft.Win32;
 using System;
@@ -67,6 +68,16 @@ namespace CardsEditor.ViewModel
             }
         }
 
+        public int CountCardPassings 
+        {
+            get 
+            {
+                if (Card.CardPassings != null)
+                    return Card.CardPassings.Count;
+                else return 0;
+            }
+        }
+
         #endregion
 
         #region Methods
@@ -132,9 +143,7 @@ namespace CardsEditor.ViewModel
             {
                 return detachCardToSelectedLevelCommand ?? (detachCardToSelectedLevelCommand = new RelayCommand(obj =>
                 {
-                    //var cardvm = obj as CardVM;
-                    //if (cardvm == null) return;
-                    _vm.SelectedLevelVM.DetachCardToSelectedLevel(this);
+                    _vm?.SelectedLevelVM?.DetachCardToSelectedLevel(this);
                 }));
             }
         }
@@ -146,9 +155,7 @@ namespace CardsEditor.ViewModel
             {
                 return attachCardToSelectedLevelCommand ?? (attachCardToSelectedLevelCommand = new RelayCommand(obj =>
                 {
-                    //var cardvm = obj as CardVM;
-                    //if (cardvm == null) return;
-                    _vm.SelectedLevelVM.AttachCardToSelectedLevel(this);
+                    _vm?.SelectedLevelVM?.AttachCardToSelectedLevel(this);
                 }));
             }
         }
