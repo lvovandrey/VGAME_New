@@ -107,8 +107,8 @@ namespace CardsEditor.DB
     [Level_Id]  INTEGER,
 	[Card_Id]   INTEGER,
 	[Id]    INTEGER NOT NULL UNIQUE,
-    FOREIGN KEY([Level_Id]) REFERENCES [Levels]([Id]),
-	FOREIGN KEY([Card_Id]) REFERENCES [Cards]([Id]),
+    FOREIGN KEY([Level_Id]) REFERENCES [Levels]([Id]) ON DELETE CASCADE,
+	FOREIGN KEY([Card_Id]) REFERENCES [Cards]([Id]) ON DELETE CASCADE,
 	PRIMARY KEY([Id] AUTOINCREMENT)
 )";
                         command.CommandType = CommandType.Text;
@@ -123,7 +123,7 @@ namespace CardsEditor.DB
 	[IsComplete]    INTEGER NOT NULL,
 	[Level_Id]  INTEGER NOT NULL,
 	PRIMARY KEY([Id] AUTOINCREMENT),
-	FOREIGN KEY([Level_Id]) REFERENCES [Levels]([Id])
+	FOREIGN KEY([Level_Id]) REFERENCES [Levels]([Id]) ON DELETE CASCADE
 )";
                         command.CommandType = CommandType.Text;
                         command.ExecuteNonQuery();
