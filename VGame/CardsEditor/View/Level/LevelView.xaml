@@ -38,6 +38,7 @@
                     </Grid>
                     <GroupBox Header="Статистика выполнений по уровню" Margin="5 10 5 5" 
                           DataContext="{Binding LevelStatisticVM, UpdateSourceTrigger=PropertyChanged}">
+                        
                         <StackPanel>
                             <StackPanel Orientation="Horizontal" Margin="5 10 5 5">
                                 <TextBlock Text="Количество карточек в уровне: "/>
@@ -53,14 +54,19 @@
                                 <lvc:CartesianChart 
                                                 Series="{Binding FallsCountSeriesCollection}" 
                                                 LegendLocation="None"
-                                Height="200">
+                                                MinHeight="250">
                                     <lvc:CartesianChart.AxisX>
                                         <lvc:Axis Title="Номер выполнения"
+                                                  Foreground="Black"
+                                                  FontSize="14"
                                               Labels="{Binding FallsCountChartLabels}"></lvc:Axis>
                                     </lvc:CartesianChart.AxisX>
                                     <lvc:CartesianChart.AxisY>
-                                        <lvc:Axis Title="Кол-во ошибок при выполнении" 
-                                              LabelFormatter="{Binding FallsCountChartYFormatter}"></lvc:Axis>
+                                        <lvc:Axis Title="Кол-во ошибок" 
+                                              Foreground="Black"
+                                              FontSize="14"
+                                              LabelFormatter="{Binding FallsCountChartYFormatter}"
+                                              Labels="{Binding FallsCountChartYLabels}"></lvc:Axis>
                                     </lvc:CartesianChart.AxisY>
                                 </lvc:CartesianChart>
                             </StackPanel>

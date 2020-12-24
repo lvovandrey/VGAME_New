@@ -270,11 +270,12 @@ namespace CardsEditor.ViewModel
         //удаляем из БД тег
         private void RemoveLevel(object obj)
         {
+            if (obj == null) return;
+            ((LevelVM)obj).LevelStatisticVM.ClearLevelPassingsStatistic();
             Level t = ((LevelVM)obj).Level;
             _levels.Remove(t);
             context.Entry(t).State = EntityState.Deleted;
             context.SaveChanges();
-//            _Levelvms.Remove((LevelVM)obj);
 
             OnPropertyChanged("LevelVMs");
             OnPropertyChanged("SelectedCardLevelVMs");
@@ -306,6 +307,11 @@ namespace CardsEditor.ViewModel
         private bool IsDBLoaded(object obj)
         {
             return DBTools.IsDBLoaded;
+        }
+
+        public void OnPropertyChangedCardVMs()
+        {
+            OnPropertyChanged("CardVMs");
         }
 
         #endregion

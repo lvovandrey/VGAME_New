@@ -92,6 +92,11 @@ namespace CardsEditor.ViewModel
 
         #region Methods
 
+        internal void OnClearLevelStatisticsVM()
+        {
+            LevelStatisticVM = new LevelStatisticVM(_level, this, _vm);
+        }
+
         private void _cards_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             OnPropertyChanged("AttachedCardVMs");
@@ -132,6 +137,8 @@ namespace CardsEditor.ViewModel
                 }));
             }
         }
+
+
         #endregion
 
     }

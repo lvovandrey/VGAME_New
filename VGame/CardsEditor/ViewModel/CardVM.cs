@@ -30,6 +30,13 @@ namespace CardsEditor.ViewModel
         #endregion
 
         #region Properties
+        private CardStatisticVM _cardStatisticVM;
+        public CardStatisticVM CardStatisticVM
+        {
+            get { return _cardStatisticVM; }
+            set { _cardStatisticVM = value; OnPropertyChanged("CardStatisticVM"); }
+        }
+
         public Card Card
         {
             get { return _card; }
