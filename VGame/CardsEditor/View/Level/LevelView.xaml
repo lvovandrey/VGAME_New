@@ -4,37 +4,81 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CardsEditor.View.Level"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              xmlns:view ="clr-namespace:CardsEditor.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="800" d:DesignWidth="800">
     <Grid >
-        <GroupBox Header="Информация об уровне">
-            <StackPanel Orientation="Vertical">
-                <Border BorderBrush="LightGray" BorderThickness="1" Margin="10">
-                    <Image Source="{Binding ImageAdressURI}" MaxHeight="200" Height="200"/>
-                </Border>
-                <view:PropertyViewer  
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <GroupBox Header="Информация об уровне">
+                <StackPanel Orientation="Vertical">
+                    <Border BorderBrush="LightGray" BorderThickness="1" Margin="10">
+                        <Image Source="{Binding ImageAdressURI}" MaxHeight="200" Height="200"/>
+                    </Border>
+                    <view:PropertyViewer  
                     Margin="5"
                     x:Name="NamePropView"
                     DataContext="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                     Tag="Название"/>
 
-                <Grid Margin="5" Height="45">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="45"/>
-                    </Grid.ColumnDefinitions>
-                    <view:PropertyViewer  DataContext="{Binding ImageAddress, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    <Grid Margin="5" Height="45">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="45"/>
+                        </Grid.ColumnDefinitions>
+                        <view:PropertyViewer  DataContext="{Binding ImageAddress, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                Height="{Binding ElementName=NamePropView, Path=ActualHeight}"
                                                Tag="Изображение"/>
-                    <Button ToolTip="Выбрать изображение" 
+                        <Button ToolTip="Выбрать изображение" 
                                 Grid.Column="1"
                                  MaxHeight="36" MaxWidth="36" 
                                 Command="{Binding OpenImageFileCommand}" >
-                        <Image Source="/CardsEditor;component/Images/Folder-Picture.png"/>
-                    </Button>
-                </Grid>
-            </StackPanel>
-        </GroupBox>
+                            <Image Source="/CardsEditor;component/Images/Folder-Picture.png"/>
+                        </Button>
+                    </Grid>
+                    <GroupBox Header="Статистика выполнений по уровню" Margin="5 10 5 5" 
+                          DataContext="{Binding LevelStatisticVM, UpdateSourceTrigger=PropertyChanged}">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="5 10 5 5">
+                                <TextBlock Text="Количество карточек в уровне: "/>
+                                <TextBlock Text="{Binding CardsCount}"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Margin="5">
+                                <TextBlock Text="Количество выполнений уровня: "/>
+                                <TextBlock Text="{Binding LevelPassingsCount}"/>
+                            </StackPanel>
+                            <StackPanel Margin="5 5 5 21">
+                                <TextBlock Text="График количества ошибок"/>
+                                <lvc:CartesianChart 
+                                                Series="{Binding FallsCountSeriesCollection}" 
+                                                LegendLocation="None"
+                                Height="200">
+                                    <lvc:CartesianChart.AxisX>
+                                        <lvc:Axis Title="Номер выполнения"
+                                              Labels="{Binding FallsCountChartLabels}"></lvc:Axis>
+                                    </lvc:CartesianChart.AxisX>
+                                    <lvc:CartesianChart.AxisY>
+                                        <lvc:Axis Title="Кол-во ошибок при выполнении" 
+                                              LabelFormatter="{Binding FallsCountChartYFormatter}"></lvc:Axis>
+                                    </lvc:CartesianChart.AxisY>
+                                </lvc:CartesianChart>
+                            </StackPanel>
+                            <Button Height="30"  
+                                Width="120"  Margin="5" Style="{x:Null}"
+                                ToolTip ="Сбросить всю статистику выполнений по этому уровню"
+                                Command="{Binding ClearLevelPassingsStatisticCommand}">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <Image  Margin="-20 0 0 0" Source="/CardsEditor;component/Images/Delete.png"/>
+                                    <TextBlock Text="Обнулить" Margin="15 5 0 0"/>
+                                </StackPanel>
+                            </Button>
+
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+
+            </GroupBox>
+        </ScrollViewer>
     </Grid>
 </UserControl>

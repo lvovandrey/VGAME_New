@@ -18,6 +18,7 @@ namespace CardsEditor.ViewModel
             _level = level;
             _vm = vm;
             _cards.CollectionChanged += _cards_CollectionChanged;
+            _levelStatisticVM = new LevelStatisticVM(_level, this, _vm);
         }
 
 
@@ -29,6 +30,13 @@ namespace CardsEditor.ViewModel
         #endregion
 
         #region Properties
+        private LevelStatisticVM _levelStatisticVM;
+        public LevelStatisticVM LevelStatisticVM
+        {
+            get { return _levelStatisticVM; }
+            set { _levelStatisticVM = value; OnPropertyChanged("LevelStatisticVM"); }
+        }
+
         public Level Level
         {
             get { return _level; }
