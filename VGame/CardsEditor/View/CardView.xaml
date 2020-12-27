@@ -3,12 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:CardsEditor.View"
+             xmlns:local="clr-namespace:CardsEditor.View" 
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              xmlns:lvl="clr-namespace:CardsEditor.View.Level"
+             xmlns:el="clr-namespace:CardsEditor.View.Elements"
               mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="600" >
+             d:DesignHeight="1800" d:DesignWidth="600" >
     <Grid >
-        <StackPanel>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
             <GroupBox Header="Информация о карточке"  >
                 <StackPanel Orientation="Vertical">
                     <Border BorderBrush="LightGray" BorderThickness="1" Margin="5 10 5 10">
@@ -65,10 +67,62 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
+                    <Expander DataContext="{Binding CardStatisticsVM, UpdateSourceTrigger=PropertyChanged}"  IsExpanded="True" Header="Статистика выполнений" HorizontalAlignment="Stretch" Margin="5">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="5 10 5 5">
+                                <TextBlock Text="Общее количество выполнений: "/>
+                                <TextBlock Text="{Binding CardPassingsCount}"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Margin="5">
+                                <TextBlock Text="Общее количество ошибок: "/>
+                                <TextBlock Text="{Binding LevelPassingsCount}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="5">
+                                <TextBlock Text="Процент ошибок за последние "/>
+                                <el:PropertyViewer_IntNums_UpDown 
+                                    Tag="" Width="100" 
+                                    DataContext="{Binding InterestsPassingsCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                <TextBlock Text=" выполнений: "/>
+                                <TextBlock Text="{Binding FallsOnLastNPassingsCount}"/>
+                            </StackPanel>
+                            <StackPanel Margin="5 5 5 21">
+                                <TextBlock Text="График количества попыток"/>
+                                <lvc:CartesianChart 
+                                                Series="{Binding AttemptsNumberSeriesCollection}" 
+                                                LegendLocation="None"
+                                                MinHeight="250">
+                                    <lvc:CartesianChart.AxisX>
+                                        <lvc:Axis Title="Номер выполнения"
+                                                  Foreground="Black"
+                                                  FontSize="14"
+                                              Labels="{Binding AttemptsChartLabels}"></lvc:Axis>
+                                    </lvc:CartesianChart.AxisX>
+                                    <lvc:CartesianChart.AxisY>
+                                        <lvc:Axis Title="Кол-во попыток" 
+                                              Foreground="Black"
+                                              FontSize="14"
+                                              LabelFormatter="{Binding AttemptsChartYFormatter}"
+                                              Labels="{Binding AttemptsChartYLabels}"></lvc:Axis>
+                                    </lvc:CartesianChart.AxisY>
+                                </lvc:CartesianChart>
+                            </StackPanel>
+                            <Button Height="30"  
+                                Width="120"  Margin="5" Style="{x:Null}"
+                                ToolTip ="Сбросить всю статистику выполнений по этому уровню"
+                                Command="{Binding ClearCardPassingsStatisticCommand}">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <Image  Margin="-20 0 0 0" Source="/CardsEditor;component/Images/Delete.png"/>
+                                    <TextBlock Text="Обнулить" Margin="15 5 0 0"/>
+                                </StackPanel>
+                            </Button>
+
+                        </StackPanel>
+                    </Expander>
 
                 </StackPanel>
             </GroupBox>
-        </StackPanel>
+        </ScrollViewer>
     </Grid>
 </UserControl>
 

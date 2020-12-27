@@ -69,29 +69,26 @@ namespace CardsEditor.ViewModel
         }
 
 
-        //private SeriesCollection fallsCountSeriesCollection;
-        //public SeriesCollection FallsCountSeriesCollection
-        //{
-        //    get
-        //    {
-        //        var FallsCounts = levelPassingFalls.Select(f => (double)f.FallsCount);
-        //        Brush brush = new SolidColorBrush(Colors.DarkOrange);
-        //        brush.Opacity = 0.5;
-        //        fallsCountSeriesCollection = new SeriesCollection
-        //        {
+        private SeriesCollection attemptsNumberSeriesCollection;
+        public SeriesCollection AttemptsNumberSeriesCollection
+        {
+            get
+            {
+                var AttemptsNumbers = _card.CardPassings.Select(a => (double)a.AttemptsNumber);
 
-        //            new StackedAreaSeries
-        //        {
-        //            Values = new ChartValues<double> (FallsCounts),
-        //            LineSmoothness = 0 , Foreground = Brushes.Black, Fill = brush, PointForeground=Brushes.Black,
-        //            Title="Ошибки",
-        //            LabelPoint = point => levelPassingFalls[(int)point.X].DateTime
-        //    }
-        //};
-        //        return fallsCountSeriesCollection;
-        //    }
-        //    set { fallsCountSeriesCollection = value; OnPropertyChanged("FallsCountSeriesCollection"); }
-        //}
+                attemptsNumberSeriesCollection = new SeriesCollection
+                {
+
+                    new StackedAreaSeries
+                    {   
+                    Values = new ChartValues<double> (AttemptsNumbers),
+                    LineSmoothness = 0 , Foreground = Brushes.Black, PointForeground=Brushes.Black,
+                    Title="Кол-во попыток" }
+                };
+                return attemptsNumberSeriesCollection;
+            }
+            set { attemptsNumberSeriesCollection = value; OnPropertyChanged("AttemptsNumberSeriesCollection"); }
+        }
 
 
 
@@ -131,20 +128,21 @@ namespace CardsEditor.ViewModel
         //    }
         //}
 
-        //public int MaxFallsCount
-        //{
-        //    get
-        //    {
-        //        if (levelPassingFalls == null || levelPassingFalls.Count == 0) return 0;
-        //        return (int)levelPassingFalls.Select(f => (double)f.FallsCount).Max();
-        //    }
-        //}
+        public int MaxAttempts
+        {
+            get
+            {
+                if (_card == null || _card.CardPassings==null || _card.CardPassings.Count == 0) return 0;
+                var AttemptsNumbers = _card.CardPassings.Select(a => (double)a.AttemptsNumber);
+                return (int)AttemptsNumbers.Max();
+            }
+        }
 
-        //public string[] FallsCountChartLabels => Enumerable.Range(1, levelPassingFalls.Count).Select(v => v.ToString()).ToArray();
-        //public string[] FallsCountChartYLabels => Enumerable.Range(0, MaxFallsCount + 1).Select(v => v.ToString()).ToArray();
+        public string[] AttemptsChartLabels => Enumerable.Range(1, (int)TotalFallsCount).Select(v => v.ToString()).ToArray();
+        public string[] AttemptsChartYLabels => Enumerable.Range(0, MaxAttempts + 1).Select(v => v.ToString()).ToArray();
 
 
-        //public Func<double, string> FallsCountChartYFormatter { get { return value => value.ToString(); } }
+        public Func<double, string> AttemptsChartYFormatter { get { return value => value.ToString(); } }
 
 
         #endregion
@@ -152,34 +150,34 @@ namespace CardsEditor.ViewModel
 
         #region Commands
 
-        private RelayCommand clearLevelPassingsStatisticCommand;
-        public RelayCommand ClearLevelPassingsStatisticCommand
+        private RelayCommand clearCardPassingsStatisticCommand;
+        public RelayCommand ClearCardPassingsStatisticCommand
         {
             get
             {
-                return clearLevelPassingsStatisticCommand ?? (clearLevelPassingsStatisticCommand = new RelayCommand(obj =>
+                return clearCardPassingsStatisticCommand ?? (clearCardPassingsStatisticCommand = new RelayCommand(obj =>
                 {
-                    if (MessageBox.Show("Вы уверены что хотите полностью сбросить статистику для этого уровня?", "Сброс статистики", MessageBoxButton.YesNo) == MessageBoxResult.No) return;
-                    ClearLevelPassingsStatistic();
+                    if (MessageBox.Show("Вы уверены что хотите полностью сбросить статистику для этой карточки?", "Сброс статистики", MessageBoxButton.YesNo) == MessageBoxResult.No) return;
+                    ClearCardPassingsStatistic();
                 }));
             }
         }
 
-        internal void ClearLevelPassingsStatistic()
+        internal void ClearCardPassingsStatistic()
         {
-            if (_level == null || _level.LevelPassings == null) return;
-            foreach (var lp in _level.LevelPassings.ToArray())
-            {
-                if (lp.CardPassings != null)
-                    foreach (var cp in lp.CardPassings.ToArray())
-                    {
-                        DBTools.Context.Entry(cp).State = System.Data.Entity.EntityState.Deleted;
-                    }
-                DBTools.Context.Entry(lp).State = System.Data.Entity.EntityState.Deleted;
-            }
-            DBTools.Context.SaveChanges();
-            _levelVM.OnClearLevelStatisticsVM();
-            _vm.OnPropertyChangedCardVMs();
+            //if (_level == null || _level.LevelPassings == null) return;
+            //foreach (var lp in _level.LevelPassings.ToArray())
+            //{
+            //    if (lp.CardPassings != null)
+            //        foreach (var cp in lp.CardPassings.ToArray())
+            //        {
+            //            DBTools.Context.Entry(cp).State = System.Data.Entity.EntityState.Deleted;
+            //        }
+            //    DBTools.Context.Entry(lp).State = System.Data.Entity.EntityState.Deleted;
+            //}
+            //DBTools.Context.SaveChanges();
+            //_levelVM.OnClearLevelStatisticsVM();
+            //_vm.OnPropertyChangedCardVMs();
         }
         #endregion
     }
