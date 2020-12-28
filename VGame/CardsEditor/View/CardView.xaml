@@ -14,63 +14,95 @@
             <GroupBox Header="Информация о карточке"  >
                 <StackPanel Orientation="Vertical">
                     <Border BorderBrush="LightGray" BorderThickness="1" Margin="5 10 5 10">
-                        <Image Source="{Binding ImageAdressURI}" MaxHeight="200" Height="200"></Image>
+                        <Grid>
+                            <Image Source="{Binding ImageAdressURI}" MaxHeight="200" Height="200"/>
+                            <TextBlock Text="{Binding Title}" 
+                                       HorizontalAlignment="Right" 
+                                       VerticalAlignment="Top"
+                                       FontSize="20"
+                                       Margin="5">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect Color="White" BlurRadius="3" ShadowDepth="2"/>
+                                </TextBlock.Effect>
+                            </TextBlock>
+                        </Grid>
                     </Border>
-                    <local:PropertyViewer  DataContext="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Название" Margin="5 0 5 10"/>
-                    <local:PropertyViewer  DataContext="{Binding Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Описание" Margin="5" x:Name="DescriptionPropView"/>
-                    <Grid Margin="5" Height="45">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="45"/>
-                            <ColumnDefinition Width="45"/>
-                        </Grid.ColumnDefinitions>
-                        <local:PropertyViewer  DataContext="{Binding SoundedText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                    <Expander Header="Основные параметры" 
+                              IsExpanded="True" BorderThickness="2" 
+                              BorderBrush="LightBlue" Margin="5">
+                        <StackPanel>
+                            <local:PropertyViewer  
+                                DataContext="{Binding Title, 
+                                UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                Tag="Название" Margin="5 10 5 0"/>
+                            <local:PropertyViewer  
+                                DataContext="{Binding Description, 
+                                UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                Tag="Описание" Margin="5 10 5 0" x:Name="DescriptionPropView"/>
+                            <Grid Margin="5 0 5 0" Height="45">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="45"/>
+                                    <ColumnDefinition Width="45"/>
+                                </Grid.ColumnDefinitions>
+                                <local:PropertyViewer  DataContext="{Binding SoundedText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                                Height="{Binding ElementName=DescriptionPropView, Path=ActualHeight}" Tag="Произносимое слово"/>
-                        <Button Grid.Column="1"
+                                <Button Grid.Column="1"
                                 ToolTip="Копировать сюда из названия" 
                                 Command="{Binding CopyTitleToSoundedTextCommand, ConverterParameter= SoundedText}" 
                                 MaxHeight="36" MaxWidth="36">
-                            <Image Source="/CardsEditor;component/Images/Page-Copy.png"/>
-                        </Button>
-                        <Button  Grid.Column="2"
+                                    <Image Source="/CardsEditor;component/Images/Page-Copy.png"/>
+                                </Button>
+                                <Button  Grid.Column="2"
                                  Command="{Binding SoundedTextSpeakCommand, ConverterParameter= SoundedText}" 
                                  MaxHeight="36" MaxWidth="36" 
                                  ToolTip="Прослушать" >
-                            <Image Source="/CardsEditor;component/Images/Sound.png"/>
-                        </Button>
+                                    <Image Source="/CardsEditor;component/Images/Sound.png"/>
+                                </Button>
 
-                    </Grid>
-                    <local:PropertyViewer  DataContext="{Binding SoundAddress, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="Звуковой файл" IsEnabled="False"  Margin="5"/>
-                    <Grid Margin="5" Height="45">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="45"/>
-                        </Grid.ColumnDefinitions>
-                        <local:PropertyViewer  DataContext="{Binding ImageAddress, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                            </Grid>
+                            <local:PropertyViewer  
+                                DataContext="{Binding SoundAddress, 
+                                UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                Tag="Звуковой файл" IsEnabled="False"  Margin="5 0 5 0"/>
+                            <Grid Margin="5 0 5 0" Height="45">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="45"/>
+                                </Grid.ColumnDefinitions>
+                                <local:PropertyViewer  DataContext="{Binding ImageAddress, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                Height="{Binding ElementName=DescriptionPropView, Path=ActualHeight}"
                                                Tag="Изображение"/>
-                        <Button ToolTip="Выбрать изображение" 
+                                <Button ToolTip="Выбрать изображение" 
                                 Grid.Column="1"
                                  MaxHeight="36" MaxWidth="36" 
                                 Command="{Binding OpenImageFileCommand}" >
-                            <Image Source="/CardsEditor;component/Images/Folder-Picture.png"/>
-                        </Button>
-                    </Grid>
-                    <TextBlock Text="Уровни, в которых имеется эта карточка:" Margin="10 20 10 5"/>
-                    <ListBox ItemsSource="{Binding Path=AttachedLevelsVMs, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                                    <Image Source="/CardsEditor;component/Images/Folder-Picture.png"/>
+                                </Button>
+                            </Grid>
+                            <TextBlock Text="Уровни, в которых имеется эта карточка:" 
+                                       Margin="10 5 10 5" 
+                                       FontWeight="Bold"/>
+                            <ListBox 
+                                ItemsSource="{Binding Path=AttachedLevelsVMs, 
+                                UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                              Height="150" 
+                                Margin="5 0 5 5"
                              ScrollViewer.VerticalScrollBarVisibility="Visible" 
                              ScrollViewer.CanContentScroll="False">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate >
-                                <lvl:MinLevelItemListView HorizontalAlignment="Stretch"/>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate >
+                                        <lvl:MinLevelItemListView HorizontalAlignment="Stretch"/>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </Expander>
                     <Expander
-                        IsExpanded="True" 
-                        Header="Статистика" HorizontalAlignment="Stretch" Margin="5">
-                        <TabControl>
+                        BorderThickness="2" BorderBrush="LightBlue" 
+                        Header="Статистика" 
+                        HorizontalAlignment="Stretch" Margin="5">
+                        <TabControl Margin="5 10 5 5">
                             <TabItem Header="Для этой карточки">
                                 <StackPanel>
                                     <StackPanel Orientation="Horizontal" Margin="5 10 5 5">
@@ -128,54 +160,44 @@
                                 <StackPanel>
                                     <StackPanel Orientation="Horizontal" Margin="5 10 5 5">
                                         <TextBlock Text="Общее количество выполнений: "/>
-                                        <TextBlock Text="{Binding CardStatisticVM.SameTitleCardPassingsCount}"/>
+                                        <TextBlock Text="{Binding CardStatisticVM.SameTitleCardsStatisticVM.CardPassingsCount}"/>
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal" Margin="5">
                                         <TextBlock Text="Общее количество ошибок: "/>
-                                        <TextBlock Text="{Binding CardStatisticVM.SameTitleTotalFallsCount}"/>
+                                        <TextBlock Text="{Binding CardStatisticVM.SameTitleCardsStatisticVM.TotalFallsCount}"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Margin="5">
                                         <TextBlock Text="Процент ошибок за последние "/>
                                         <el:PropertyViewer_IntNums_UpDown 
                                     Style="{x:Null}"
                                     Tag="" Width="100" 
-                                    DataContext="{Binding CardStatisticVM.SameTitleInterestsPassingsCount,
+                                    DataContext="{Binding CardStatisticVM.SameTitleCardsStatisticVM.InterestsPassingsCount,
                                             UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                                         <TextBlock Text=" выполнений: "/>
-                                        <TextBlock Text="{Binding CardStatisticVM.SameTitleFallsOnLastNPassingsCount}"/>
+                                        <TextBlock Text="{Binding CardStatisticVM.SameTitleCardsStatisticVM.FallsOnLastNPassingsCount}"/>
                                     </StackPanel>
                                     <StackPanel Margin="5 5 5 21">
                                         <TextBlock Text="График количества попыток"/>
                                         <lvc:CartesianChart 
-                                                Series="{Binding CardStatisticVM.SameTitleAttemptsNumberSeriesCollection}" 
+                                                Series="{Binding CardStatisticVM.SameTitleCardsStatisticVM.AttemptsNumberSeriesCollection}" 
                                                 LegendLocation="None"
                                                 MinHeight="250">
                                             <lvc:CartesianChart.AxisX>
                                                 <lvc:Axis Title="Номер выполнения"
                                                   Foreground="Black"
                                                   FontSize="14"
-                                              Labels="{Binding CardStatisticVM.SameTitleAttemptsChartLabels}"></lvc:Axis>
+                                              Labels="{Binding CardStatisticVM.SameTitleCardsStatisticVM.AttemptsChartLabels}"></lvc:Axis>
                                             </lvc:CartesianChart.AxisX>
                                             <lvc:CartesianChart.AxisY>
                                                 <lvc:Axis Title="Кол-во попыток" 
                                               Foreground="Black"
                                               FontSize="14"
-                                              LabelFormatter="{Binding CardStatisticVM.SameTitleAttemptsChartYFormatter}"
-                                              Labels="{Binding CardStatisticVM.SameTitleAttemptsChartYLabels}"></lvc:Axis>
+                                              LabelFormatter="{Binding CardStatisticVM.SameTitleCardsStatisticVM.AttemptsChartYFormatter}"
+                                              Labels="{Binding CardStatisticVM.SameTitleCardsStatisticVM.AttemptsChartYLabels}"></lvc:Axis>
                                             </lvc:CartesianChart.AxisY>
                                         </lvc:CartesianChart>
                                     </StackPanel>
-                                    <Button Height="30"  
-                                Width="120"  Margin="5" Style="{x:Null}"
-                                ToolTip ="Сбросить всю статистику выполнений по этому уровню"
-                                Command="{Binding CardStatisticVM.SameTitleClearCardPassingsStatisticCommand}">
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                            <Image  Margin="-20 0 0 0" Source="/CardsEditor;component/Images/Delete.png"/>
-                                            <TextBlock Text="Обнулить" Margin="15 5 0 0"/>
-                                        </StackPanel>
-                                    </Button>
-
                                 </StackPanel>
                             </TabItem>
                         </TabControl>
