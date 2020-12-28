@@ -21,6 +21,7 @@ namespace CardsEditor.ViewModel
         {
             _card = card;
             _vm = vm;
+            _cardStatisticVM = new CardStatisticVM(card, this, vm);
         }
         #endregion
 

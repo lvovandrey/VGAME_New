@@ -24,6 +24,7 @@ namespace CardsEditor.ViewModel
             _card = card;
             _vm = vm;
             _cardVM = cardVM;
+            InterestsPassingsCount = 3;
         }
 
 
@@ -39,7 +40,7 @@ namespace CardsEditor.ViewModel
         #region Properties
 
         public int? CardPassingsCount { get { return _card?.CardPassings?.Count(); } }
-        public int? TotalFallsCount { get { return CalcTotalFallsCount(); } }
+        public int TotalFallsCount { get { return CalcTotalFallsCount(); } }
 
         private int CalcTotalFallsCount()
         {
@@ -52,17 +53,38 @@ namespace CardsEditor.ViewModel
             return count;
         }
 
-        public int? FallsOnLastNPassingsCount { get { return 3; } }
+        public int? FallsOnLastNPassingsCount { get { return GetFallsOnLastNPassingsCount(InterestsPassingsCount); } }
 
-        private int? interestsPassingsCount;
-        public int? InterestsPassingsCount
+        private int GetFallsOnLastNPassingsCount(int N)
+        {
+            if (N < 1) return 0;
+            var AllAttemptsNumbers = _card.CardPassings.Select(cp => new
+            {
+                AttemptsNumber = cp.AttemptsNumber,
+                DateAndTime = GetDateTime(cp.DateAndTime)
+            });
+
+            return AllAttemptsNumbers.OrderByDescending(lp => lp.DateAndTime).Take(N).Where(n => n.AttemptsNumber > 1).Count();
+        }
+
+        private DateTime GetDateTime(string dateAndTime)
+        {
+            DateTime dt;
+            if (DateTime.TryParse(dateAndTime, out dt)) return dt;
+            else return new DateTime(2000, 1, 1);
+        }
+
+        private int interestsPassingsCount;
+        public int InterestsPassingsCount
         {
             get { return interestsPassingsCount; }
             set
             {
+                if (CardPassingsCount == null) interestsPassingsCount = 0;
                 if (value > CardPassingsCount)
-                    interestsPassingsCount = CardPassingsCount;
-                if (value < 1) interestsPassingsCount = 1;
+                    interestsPassingsCount = (int)CardPassingsCount;
+                else if (value < 1) interestsPassingsCount = 1;
+                else interestsPassingsCount = value;
                 OnPropertyChanged("FallsOnLastNPassingsCount");
                 OnPropertyChanged("InterestsPassingsCount");
             }
@@ -79,10 +101,10 @@ namespace CardsEditor.ViewModel
                 attemptsNumberSeriesCollection = new SeriesCollection
                 {
 
-                    new StackedAreaSeries
-                    {   
+                    new ColumnSeries
+                    {
                     Values = new ChartValues<double> (AttemptsNumbers),
-                    LineSmoothness = 0 , Foreground = Brushes.Black, PointForeground=Brushes.Black,
+                    Foreground = Brushes.Black,
                     Title="Кол-во попыток" }
                 };
                 return attemptsNumberSeriesCollection;
@@ -92,53 +114,17 @@ namespace CardsEditor.ViewModel
 
 
 
-        //class LevelPassingFalls
-        //{
-        //    public LevelPassingFalls(string dateTime, int fallsCount, int cardsCount)
-        //    {
-        //        DateTime = dateTime;
-        //        FallsCount = fallsCount;
-        //        CardsCount = cardsCount;
-        //    }
-        //    public string DateTime;
-        //    public int FallsCount;
-        //    public int CardsCount;
-        //    public double FallsPercent { get { if (CardsCount > 0) return (double)FallsCount / CardsCount; else return 0; } }
-
-        //}
-
-        //private List<LevelPassingFalls> levelPassingFalls
-        //{
-        //    get
-        //    {
-
-        //        var levelPassingFalls = new List<LevelPassingFalls>();
-        //        if (_level != null && _level.LevelPassings != null)
-        //            foreach (var lvlPassing in _level.LevelPassings)
-        //            {
-        //                LevelPassingFalls levelPassingFall = new LevelPassingFalls(lvlPassing.DateAndTime, 0, lvlPassing.CardPassings.Count);
-        //                if (lvlPassing.CardPassings != null)
-        //                    foreach (var cardPassing in lvlPassing.CardPassings)
-        //                    {
-        //                        if (cardPassing.AttemptsNumber > 1) levelPassingFall.FallsCount++;
-        //                    }
-        //                levelPassingFalls.Add(levelPassingFall);
-        //            }
-        //        return levelPassingFalls;
-        //    }
-        //}
-
         public int MaxAttempts
         {
             get
             {
-                if (_card == null || _card.CardPassings==null || _card.CardPassings.Count == 0) return 0;
+                if (_card == null || _card.CardPassings == null || _card.CardPassings.Count == 0) return 0;
                 var AttemptsNumbers = _card.CardPassings.Select(a => (double)a.AttemptsNumber);
                 return (int)AttemptsNumbers.Max();
             }
         }
 
-        public string[] AttemptsChartLabels => Enumerable.Range(1, (int)TotalFallsCount).Select(v => v.ToString()).ToArray();
+        public string[] AttemptsChartLabels => Enumerable.Range(1, (int)CardPassingsCount).Select(v => v.ToString()).ToArray();
         public string[] AttemptsChartYLabels => Enumerable.Range(0, MaxAttempts + 1).Select(v => v.ToString()).ToArray();
 
 

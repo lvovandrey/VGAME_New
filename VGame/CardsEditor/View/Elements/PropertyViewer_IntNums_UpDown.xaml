@@ -18,12 +18,14 @@
                          Text="{Binding ElementName=This, Path=DataContext, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                 <StackPanel>
                     <Button
+                        Style="{x:Null}"
                         Width="20"
                         Height="10" Click="ButtonUp_Click"
                         Margin="0" FontSize="9" Padding="0 -3 0 0">
                         +
                     </Button>
                     <Button
+                        Style="{x:Null}"
                         Width="20"
                         Height="10"
                         Margin="0"
