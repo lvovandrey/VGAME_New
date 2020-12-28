@@ -1,9 +1,11 @@
 ﻿using CardsEditor.Abstract;
+using CardsEditor.DB;
 using LevelSetsEditor.DB;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,5 +57,16 @@ namespace CardsEditor.Model
             }
         }
 
+
+        public static void DeleteCardFromDB(Card card)
+        {
+            Context context = DBTools.Context;
+            foreach (var cp in card.CardPassings.ToArray())
+            {
+                DBTools.Context.Entry(cp).State = System.Data.Entity.EntityState.Deleted;
+            }
+            context.Entry(card).State = EntityState.Deleted;
+            context.SaveChanges();
+        }
     }
 }

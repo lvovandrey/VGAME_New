@@ -89,6 +89,10 @@ namespace CardsEditor.ViewModel
         #endregion
 
         #region Methods
+        internal void OnClearCardStatisticsVM()
+        {
+            CardStatisticVM = new CardStatisticVM(_card, this, _vm);
+        }
         #endregion
 
         #region Commands

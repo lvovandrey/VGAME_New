@@ -458,9 +458,8 @@ namespace CardsEditor.ViewModel
                           if (SelectedCardVM == null) return;
 
                           Card card = SelectedCardVM.Card;
-                          context.Entry(card).State = EntityState.Deleted;
-                          context.SaveChanges();
 
+                          Card.DeleteCardFromDB(card);
                           _cards.Remove(card);
                           OnPropertyChanged("CardVMs");
                           SelectedCardVM = CardVMs.FirstOrDefault();

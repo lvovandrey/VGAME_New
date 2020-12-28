@@ -151,19 +151,14 @@ namespace CardsEditor.ViewModel
 
         internal void ClearCardPassingsStatistic()
         {
-            //if (_level == null || _level.LevelPassings == null) return;
-            //foreach (var lp in _level.LevelPassings.ToArray())
-            //{
-            //    if (lp.CardPassings != null)
-            //        foreach (var cp in lp.CardPassings.ToArray())
-            //        {
-            //            DBTools.Context.Entry(cp).State = System.Data.Entity.EntityState.Deleted;
-            //        }
-            //    DBTools.Context.Entry(lp).State = System.Data.Entity.EntityState.Deleted;
-            //}
-            //DBTools.Context.SaveChanges();
-            //_levelVM.OnClearLevelStatisticsVM();
-            //_vm.OnPropertyChangedCardVMs();
+            if (_card == null || _card.CardPassings == null) return;
+            foreach (var cp in _card.CardPassings.ToArray())
+            {
+                DBTools.Context.Entry(cp).State = System.Data.Entity.EntityState.Deleted;
+            }
+            DBTools.Context.SaveChanges();
+            _cardVM.OnClearCardStatisticsVM();
+            _vm.OnPropertyChangedCardVMs();
         }
         #endregion
     }
