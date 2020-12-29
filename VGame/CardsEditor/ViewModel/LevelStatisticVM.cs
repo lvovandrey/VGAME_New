@@ -56,7 +56,7 @@ namespace CardsEditor.ViewModel
                     Values = new ChartValues<double> (FallsCounts),
                     LineSmoothness = 0 , Foreground = Brushes.Black, Fill = brush, PointForeground=Brushes.Black,
                     Title="Ошибки",
-                    LabelPoint = point => levelPassingFalls[(int)point.X].DateTime
+                    LabelPoint = point => levelPassingFalls[(int)point.X].FallsCount + "   Время:" + levelPassingFalls[(int)point.X].DateTime
             }
         };
                 return fallsCountSeriesCollection;

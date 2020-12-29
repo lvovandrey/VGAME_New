@@ -11,6 +11,7 @@
         <ListBox SelectedItem="{Binding SelectedCardVM,UpdateSourceTrigger=PropertyChanged}" 
                  ItemsSource="{Binding Path=CardVMs, UpdateSourceTrigger=PropertyChanged,
                  Mode=OneWay}"
+                 HorizontalContentAlignment="Stretch"
                  Grid.Row="1" Grid.ColumnSpan="12" 
                  ScrollViewer.VerticalScrollBarVisibility="Visible" 
                  ScrollViewer.CanContentScroll="False" >

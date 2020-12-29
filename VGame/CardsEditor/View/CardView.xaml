@@ -89,7 +89,8 @@
                              Height="150" 
                                 Margin="5 0 5 5"
                              ScrollViewer.VerticalScrollBarVisibility="Visible" 
-                             ScrollViewer.CanContentScroll="False">
+                             ScrollViewer.CanContentScroll="False"
+                                HorizontalContentAlignment="Stretch">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate >
                                         <lvl:MinLevelItemListView HorizontalAlignment="Stretch"/>
@@ -140,7 +141,20 @@
                                               Foreground="Black"
                                               FontSize="14"
                                               LabelFormatter="{Binding CardStatisticVM.AttemptsChartYFormatter}"
-                                              Labels="{Binding CardStatisticVM.AttemptsChartYLabels}"></lvc:Axis>
+                                              Labels="{Binding CardStatisticVM.AttemptsChartYLabels}">
+                                                    <lvc:Axis.Sections>
+                                                        <lvc:AxisSection Value="1" SectionWidth="50" Label="Ошибки">
+                                                            <lvc:AxisSection.Fill>
+                                                                <SolidColorBrush Color="#FFFF3535" Opacity=".4"></SolidColorBrush>
+                                                            </lvc:AxisSection.Fill>
+                                                        </lvc:AxisSection>
+                                                        <lvc:AxisSection Value="0" SectionWidth="1" Label="Без ошибок">
+                                                            <lvc:AxisSection.Fill>
+                                                                <SolidColorBrush Color="Green" Opacity=".4"></SolidColorBrush>
+                                                            </lvc:AxisSection.Fill>
+                                                        </lvc:AxisSection>
+                                                    </lvc:Axis.Sections>
+                                                </lvc:Axis>
                                             </lvc:CartesianChart.AxisY>
                                         </lvc:CartesianChart>
                                     </StackPanel>
@@ -194,7 +208,20 @@
                                               Foreground="Black"
                                               FontSize="14"
                                               LabelFormatter="{Binding CardStatisticVM.SameTitleCardsStatisticVM.AttemptsChartYFormatter}"
-                                              Labels="{Binding CardStatisticVM.SameTitleCardsStatisticVM.AttemptsChartYLabels}"></lvc:Axis>
+                                              Labels="{Binding CardStatisticVM.SameTitleCardsStatisticVM.AttemptsChartYLabels}">
+                                                    <lvc:Axis.Sections>
+                                                        <lvc:AxisSection Value="1" SectionWidth="50" Label="Ошибки">
+                                                            <lvc:AxisSection.Fill>
+                                                                <SolidColorBrush Color="#FFFF3535" Opacity=".4"></SolidColorBrush>
+                                                            </lvc:AxisSection.Fill>
+                                                        </lvc:AxisSection>
+                                                        <lvc:AxisSection Value="0" SectionWidth="1" Label="Без ошибок">
+                                                            <lvc:AxisSection.Fill>
+                                                                <SolidColorBrush Color="Green" Opacity=".4"></SolidColorBrush>
+                                                            </lvc:AxisSection.Fill>
+                                                        </lvc:AxisSection>
+                                                    </lvc:Axis.Sections>
+                                                </lvc:Axis>
                                             </lvc:CartesianChart.AxisY>
                                         </lvc:CartesianChart>
                                     </StackPanel>

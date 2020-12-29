@@ -30,6 +30,7 @@
         <ListBox SelectedItem="{Binding SelectedLevelVM,UpdateSourceTrigger=PropertyChanged}" 
                  ItemsSource="{Binding Path=LevelVMs, UpdateSourceTrigger=PropertyChanged,
                  Mode=OneWay}"
+                 HorizontalContentAlignment="Stretch"
                  Grid.Row="1" Grid.ColumnSpan="12" 
                  ScrollViewer.VerticalScrollBarVisibility="Visible" 
                  ScrollViewer.CanContentScroll="False">

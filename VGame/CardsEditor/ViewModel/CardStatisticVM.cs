@@ -114,7 +114,7 @@ namespace CardsEditor.ViewModel
                     Values = new ChartValues<double> (AttemptsNumbers),
                     Foreground = Brushes.Black,
                     Title="Кол-во попыток",
-                    LabelPoint = point => _card.CardPassings[(int)point.X].DateAndTime
+                    LabelPoint = point => _card.CardPassings[(int)point.X].AttemptsNumber.ToString() + " Время: " + _card.CardPassings[(int)point.X].DateAndTime
                     }
                 };
                 return attemptsNumberSeriesCollection;
