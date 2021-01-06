@@ -301,30 +301,7 @@ namespace CardsEditor.ViewModel
 
         #region Commands
 
-        //private RelayCommand clearCardPassingsStatisticCommand;
-        //public RelayCommand ClearCardPassingsStatisticCommand
-        //{
-        //    get
-        //    {
-        //        return clearCardPassingsStatisticCommand ?? (clearCardPassingsStatisticCommand = new RelayCommand(obj =>
-        //        {
-        //            if (MessageBox.Show("Вы уверены что хотите полностью сбросить статистику для этой карточки?", "Сброс статистики", MessageBoxButton.YesNo) == MessageBoxResult.No) return;
-        //            ClearCardPassingsStatistic();
-        //        }));
-        //    }
-        //}
 
-        //internal void ClearCardPassingsStatistic()
-        //{
-        //    if (_card == null || _card.CardPassings == null) return;
-        //    foreach (var cp in _card.CardPassings.ToArray())
-        //    {
-        //        DBTools.Context.Entry(cp).State = System.Data.Entity.EntityState.Deleted;
-        //    }
-        //    DBTools.Context.SaveChanges();
-        //    _cardVM.OnClearCardStatisticsVM();
-        //    _vm.OnPropertyChangedCardVMs();
-        //}
         #endregion
     }
 }

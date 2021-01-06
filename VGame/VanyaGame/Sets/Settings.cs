@@ -8,6 +8,12 @@ using System.Windows;
 
 namespace VanyaGame.Sets
 {
+    public enum VideoPlayerType 
+    { 
+        wpf,
+        vlc
+    }
+
     public class Settings
     {
         //Сделаем этот класс синглтоном
@@ -94,6 +100,66 @@ namespace VanyaGame.Sets
                 backgroundStartFilename = value;
             }
         }
+
+        #region GeneralSettings
+        string videoPlayerType = "wpf";
+        VideoPlayerType VideoPlayerType 
+        {
+            get
+            {
+                if (videoPlayerType == "" || videoPlayerType == "Not Found")
+                    videoPlayerType = "wpf";
+                VideoPlayerType tmpvideoPlayerType = VideoPlayerType.wpf;
+                Enum.TryParse(videoPlayerType, out tmpvideoPlayerType);
+                return tmpvideoPlayerType;
+            }
+            set
+            {
+                videoPlayerType = value.ToString("G");
+            }
+        }
+
+        string appDir = "";
+        public string AppDir
+        {
+            get
+            {
+                if (appDir == "" || appDir == "Not Found")
+                    appDir = Environment.CurrentDirectory;
+                return appDir;
+            }
+            set
+            {
+                if (!Directory.Exists(value))
+                {
+                    MessageBox.Show("Нужно выбрать существующую директорию размещения основной программы");
+                    return;
+                }
+                appDir = value;
+            }
+        }
+
+        string defaultVideo = "";
+        public string DefaultVideo
+        {
+            get
+            {
+                if (defaultVideo == "" || defaultVideo == "Not Found")
+                    defaultVideo = Path.Combine(AppDir+"default.wmv");
+                return defaultVideo;
+            }
+            set
+            {
+                if (!File.Exists(value) && Path.GetExtension(value)!=".wmv")
+                {
+                    MessageBox.Show("Нужно выбрать существующий видеофайл с расширением .wmv для указания видеофайла, проигрываемого по умолчанию");
+                    return;
+                }
+                defaultVideo = value;
+            }
+        }
+        #endregion
+
 
         public void SaveAllSettings()
         {

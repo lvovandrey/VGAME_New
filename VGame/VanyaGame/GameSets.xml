@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <sets>
-  <maindir>j:\1.VANYA GAME\LEVELS\VanjaGame</maindir>
+  <!--<maindir>j:\1.VANYA GAME\LEVELS\VanjaGame</maindir>
   <InterfaceDir>j:\1.VANYA GAME\LEVELS\VanjaGame\interface</InterfaceDir>
   <InterfaceDirCurVersion>J:\1.VANYA GAME\LEVELS\VanjaGame\interface\CardsEasyDB</InterfaceDirCurVersion>
   <InterfaceBackgroundDir>J:\1.VANYA GAME\LEVELS\VanjaGame\interface\CardsEasyDB\backgrounds</InterfaceBackgroundDir>
   <InterfaceControlsDir>J:\1.VANYA GAME\LEVELS\VanjaGame\interface\CardsEasyDB\controls</InterfaceControlsDir>
   <InterfaceUnitsDir>J:\1.VANYA GAME\LEVELS\VanjaGame\interface\CardsEasyDB\units</InterfaceUnitsDir>
   <DefaultVideo>\default.wmv</DefaultVideo>
-  <videoplayer>vlc</videoplayer>
+  <videoplayer>vlc</videoplayer>-->
 </sets>

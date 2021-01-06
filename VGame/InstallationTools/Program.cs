@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CardsEditor.Model
+namespace InstallationTools
 {
-    public static class Settings
+    class Program
     {
-
+        static void Main(string[] args)
+        {
+        }
     }
 }

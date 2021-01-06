@@ -112,7 +112,6 @@
     <Compile Include="Model\CardPassing.cs" />
     <Compile Include="Model\Level.cs" />
     <Compile Include="Model\LevelPassing.cs" />
-    <Compile Include="Model\Settings.cs" />
     <Compile Include="Tools\ConfigurationTools.cs" />
     <Compile Include="ViewModel\CardStatisticVM.cs" />
     <Compile Include="ViewModel\CardVM.cs" />

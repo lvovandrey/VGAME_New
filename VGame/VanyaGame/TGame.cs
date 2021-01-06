@@ -55,6 +55,7 @@ namespace VanyaGame
         public static TUserActivity UserActivity = new TUserActivity();
 
         public static DBmainTools DBTools = new DBmainTools();
+        public static GameType gameType = GameType.None;
 
         private static ComponentContainer mediaContainer;
 
@@ -102,7 +103,7 @@ namespace VanyaGame
         internal static void CreateSettingsWindow()
         {
 
-            if (Game.Sets.gameType == GameType.CardsEasy)
+            if (gameType == GameType.CardsEasy)
             {
                 SettingsWindow = new GameCardsEasyDB.Interface.SettingsWindow();
                 var SW = SettingsWindow as GameCardsEasyDB.Interface.SettingsWindow;
@@ -110,7 +111,7 @@ namespace VanyaGame
                 new GameCardsEasyDB.Interface.SettingsWindowVM(SW);
             }
 
-            if (Game.Sets.gameType == GameType.CardsNewDB)
+            if (gameType == GameType.CardsNewDB)
             {
                 SettingsWindow = new GameCardsNewDB.Interface.SettingsWindow();
                 var SW = SettingsWindow as GameCardsNewDB.Interface.SettingsWindow;
@@ -126,14 +127,14 @@ namespace VanyaGame
 
         public static void LoadLevels(string dir) 
         {
-            if (Game.Sets.gameType == GameType.NumberDB)
+            if (gameType == GameType.NumberDB)
             {
                 DBTools = new DBmainTools();
                 NumberDBLevel.LoadLevels(DBTools);
                 return;
             }
 
-            if (Game.Sets.gameType == GameType.CardsEasy)
+            if (gameType == GameType.CardsEasy)
             {
                 DBTools = new DBmainTools();
                 CardsEasyDBLevel.LoadLevels(DBTools);
@@ -142,7 +143,7 @@ namespace VanyaGame
                 return;
             }
 
-            if (Game.Sets.gameType == GameType.CardsNewDB)
+            if (gameType == GameType.CardsNewDB)
             {
                 CardsNewDBLevel.LoadLevels();
                 return;
@@ -169,7 +170,7 @@ namespace VanyaGame
             {
                 string Level_dir_short = Level_dir.Replace(dir, "");
                 Level NewLevel = null;
-                if (Game.Sets.gameType == GameType.Number)
+                if (gameType == GameType.Number)
                 {
                     NewLevel = new NumberLevel(Level_dir_short);
                 }
@@ -211,16 +212,16 @@ namespace VanyaGame
             Sets = new TGameSets();
 
             if (Owner.StartButton.GetType() == typeof(VanyaGame.GameNumber.Interface.BeautyButtonNumber))
-                Sets.gameType = GameType.Number;
+                gameType = GameType.Number;
 
             if (Owner.StartButton.GetType() == typeof(VanyaGame.GameNumberDB.Interface.BeautyButtonNumberDB))
-                Sets.gameType = GameType.NumberDB;
+                gameType = GameType.NumberDB;
 
             if (Owner.StartButton.GetType() == typeof(VanyaGame.GameCardsEasyDB.Interface.BeautyButtonCardsEasyDB))
-                Sets.gameType = GameType.CardsEasy;
+                gameType = GameType.CardsEasy;
 
             if (Owner.StartButton.GetType() == typeof(VanyaGame.GameCardsNewDB.Interface.BeautyButtonCardsNewDB))
-                Sets.gameType = GameType.CardsNewDB;
+                gameType = GameType.CardsNewDB;
 
             CreateSettingsWindow();
             mediaContainer = new GameMediaContainer();
@@ -325,16 +326,16 @@ namespace VanyaGame
         static void StartButton_MouseUp(object sender, RoutedEventArgs e)
         {
             if (sender.GetType() == typeof(VanyaGame.GameNumber.Interface.BeautyButtonNumber))
-                Sets.gameType = GameType.Number;
+                gameType = GameType.Number;
 
             if (sender.GetType() == typeof(VanyaGame.GameNumberDB.Interface.BeautyButtonNumberDB))
-                Sets.gameType = GameType.NumberDB;
+                gameType = GameType.NumberDB;
 
             if (sender.GetType() == typeof(VanyaGame.GameCardsEasyDB.Interface.BeautyButtonCardsEasyDB))
-                Sets.gameType = GameType.CardsEasy;
+                gameType = GameType.CardsEasy;
 
             if (sender.GetType() == typeof(VanyaGame.GameCardsNewDB.Interface.BeautyButtonCardsNewDB))
-                Sets.gameType = GameType.CardsNewDB;
+                gameType = GameType.CardsNewDB;
 
             ToolsTimer.Delay(() =>
             {
@@ -352,9 +353,9 @@ namespace VanyaGame
                     if (Level.Sets.PreviewType == "local")
                     {
                         //                        filename = Game.Sets.MainDir + Level.Sets.Directory + Level.Sets.InterfaceDir + @"\preview.jpg";
-                        if (Sets.gameType == GameType.CardsEasy)
+                        if (gameType == GameType.CardsEasy)
                             filename = ((CardsEasyDBLevel)Level).Sets.PreviewURL;
-                        if (Sets.gameType == GameType.CardsNewDB)
+                        if (gameType == GameType.CardsNewDB)
                             filename = ((CardsNewDBLevel)Level).Sets.PreviewURL;
                     }
                     if (Level.Sets.PreviewType == "youtube")
@@ -391,32 +392,32 @@ namespace VanyaGame
 
     public class TGameSets
     {
-        public bool DebugMode;
-        public GameType gameType = GameType.None;
-        public string MainDir;
-        public string VideoPlayer;
-        public string InterfaceDir;
-        public string InterfaceDirCurVersion;
-        public string InterfaceBackgroundDir;
-        public string InterfaceControlsDir;
-        public string InterfaceUnitsDir;
-        public string DefaultVideo = @"\default.wmv";
+        //public bool DebugMode;
+        
+        //public string MainDir;
+        //public string VideoPlayer;
+        //public string InterfaceDir;
+        //public string InterfaceDirCurVersion;
+        //public string InterfaceBackgroundDir;
+        //public string InterfaceControlsDir;
+        //public string InterfaceUnitsDir;
+        //public string DefaultVideo = @"\default.wmv";
 
-        public int LevelsCount; //Количество уровней
-        public TGameSets():base()
-        {
-            MainDir = XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "maindir");  
-            VideoPlayer = XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "videoplayer");
-            InterfaceDir = XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "InterfaceDir"); 
-            InterfaceDirCurVersion = XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "InterfaceDirCurVersion"); 
-            InterfaceBackgroundDir= XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "InterfaceBackgroundDir");
-            InterfaceControlsDir = XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "InterfaceControlsDir");
-            InterfaceUnitsDir = XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "InterfaceUnitsDir");
-            DefaultVideo = XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "DefaultVideo");
-            LevelsCount = 0;
-            DebugMode = true;
-        }
-        public double InterfaceDefaultOpacity = 0;
+        //public int LevelsCount; //Количество уровней
+        //public TGameSets():base()
+        //{
+        //    MainDir = XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "maindir");  
+        //    VideoPlayer = XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "videoplayer");
+        //    InterfaceDir = XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "InterfaceDir"); 
+        //    InterfaceDirCurVersion = XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "InterfaceDirCurVersion"); 
+        //    InterfaceBackgroundDir= XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "InterfaceBackgroundDir");
+        //    InterfaceControlsDir = XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "InterfaceControlsDir");
+        //    InterfaceUnitsDir = XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "InterfaceUnitsDir");
+        //    DefaultVideo = XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "DefaultVideo");
+        //    LevelsCount = 0;
+        //    DebugMode = true;
+        //}
+        //public double InterfaceDefaultOpacity = 0;
     }
 
 
