@@ -520,7 +520,7 @@ namespace VanyaGame
             Img.BeginAnimation(FrameworkElement.OpacityProperty, null);
 
             DoubleAnimation A = new DoubleAnimation();
-            A.From = Game.Sets.InterfaceDefaultOpacity;
+            A.From = 0;
             A.To = 1;
             A.Duration = TimeSpan.FromSeconds(0.2);
             Img.BeginAnimation(FrameworkElement.OpacityProperty, A);
@@ -531,7 +531,7 @@ namespace VanyaGame
 
             DoubleAnimation A = new DoubleAnimation();
             A.From = 1;
-            A.To = Game.Sets.InterfaceDefaultOpacity;
+            A.To = 0;
             A.Duration = TimeSpan.FromSeconds(0.5);
             Img.BeginAnimation(FrameworkElement.OpacityProperty, A);
         }

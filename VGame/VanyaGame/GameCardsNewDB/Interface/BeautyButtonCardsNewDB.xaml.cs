@@ -30,35 +30,27 @@ namespace VanyaGame.GameCardsNewDB.Interface
 
         private void Img_MouseDown(object sender, MouseButtonEventArgs e)
         {
-           // this.Img.Source = new BitmapImage(new Uri("pack://application:,,,/1.GameNumber/Images/btn_start2.png"));
-            var uri = new Uri("pack://application:,,,/1.GameNumber/Images/HandPushDown.cur");
+            var uri = new Uri("pack://application:,,,/Images/HandPushDown.cur");
             var stream = Application.GetResourceStream(uri).Stream;
             var cursor = new Cursor(stream);
             Img.Cursor = cursor;
-            //    AddDropShadowEffect(Img, 10, 20, 80);
         }
 
         private void Img_MouseLeave(object sender, MouseEventArgs e)
         {
-            //if (!isFlieing)
-            //    this.Img.Source = new BitmapImage(new Uri("pack://application:,,,/1.GameNumber/Images/btn_start.png"));
-
-
         }
 
         private void Img_MouseUp(object sender, MouseButtonEventArgs e)
         {
             isFlieing = true;
 
-            //this.Img.Source = new BitmapImage(new Uri("pack://application:,,,/1.GameNumber/Images/btn_start3.png"));
-            var uri = new Uri("pack://application:,,,/1.GameNumber/Images/HandPush.cur");
+            var uri = new Uri("pack://application:,,,/Images/HandPush.cur");
             var stream = Application.GetResourceStream(uri).Stream;
             var cursor = new Cursor(stream);
             Img.Cursor = cursor;
 
-
             Storyboard s = (Storyboard)TryFindResource("AnimationHide");
-            s.Begin();  // Start animation}
+            s.Begin();  // Start animation
         }
 
 
@@ -66,8 +58,7 @@ namespace VanyaGame.GameCardsNewDB.Interface
         {
             if (!isFlieing)
             {
-                //this.Img.Source = new BitmapImage(new Uri("pack://application:,,,/1.GameNumber/Images/btn_start1.png"));
-                var uri = new Uri("pack://application:,,,/1.GameNumber/Images/HandPush.cur");
+                var uri = new Uri("pack://application:,,,/Images/HandPush.cur");
                 var stream = Application.GetResourceStream(uri).Stream;
                 var cursor = new Cursor(stream);
                 Img.Cursor = cursor;

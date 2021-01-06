@@ -35,7 +35,6 @@
                 <GradientStop Color="#FF423A09" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <Button Panel.ZIndex="5000"  x:Name="DB_button" Content="Показать БД" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="300,300,0,0" Width="100" Height="50" Click="DB_button_Click" Visibility="Collapsed"/>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>

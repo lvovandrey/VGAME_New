@@ -213,6 +213,9 @@
     <Compile Include="GameCardsNewDB\Struct\CardsNewDBIteration.cs" />
     <Compile Include="GameCardsNewDB\Struct\CardsNewDBLevel.cs" />
     <Compile Include="GameCardsNewDB\Struct\CardsNewDBScene.cs" />
+    <Compile Include="Struct\IterationSets.cs" />
+    <Compile Include="Struct\LevelSets.cs" />
+    <Compile Include="Struct\SceneSets.cs" />
     <Compile Include="Tools\ConfigurationTools.cs" />
     <Compile Include="GameCardsNewDB\Tools\InfoWindow.cs" />
     <Compile Include="GameCardsNewDB\Tools\Settings.cs" />

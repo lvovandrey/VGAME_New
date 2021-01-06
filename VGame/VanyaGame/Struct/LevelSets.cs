@@ -1,5 +1,6 @@
 ﻿using System;
 using VanyaGame.Abstract;
+using VanyaGame.Sets;
 
 namespace VanyaGame.Struct
 {
@@ -21,7 +22,7 @@ namespace VanyaGame.Struct
             }
             set
             {
-                if (System.IO.Directory.Exists(Game.Sets.MainDir + value + @"\"))
+                if (System.IO.Directory.Exists(Settings.GetInstance().AppDir + value + @"\"))
                 {
                     dir = value;
                 }

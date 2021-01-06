@@ -172,31 +172,7 @@ namespace VanyaGame
         }
 
         SqlConnection sqlConnection;
-        private async void DB_button_Click(object sender, RoutedEventArgs e)
-        {
-            string DBpath = Game.Sets.MainDir + @"\data\DatabaseKeyboard.mdf";
-            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + DBpath + @";Integrated Security=True";
-            sqlConnection = new SqlConnection(connectionString);
-            await sqlConnection.OpenAsync();
-
-            SqlDataReader sqlReader = null;
-            SqlCommand command = new SqlCommand("SELECT * FROM [KeyCoordinates]", sqlConnection);
-            try
-            {
-                 sqlReader = await command.ExecuteReaderAsync();
-                while (await sqlReader.ReadAsync())
-                {
-                    Game.Msg(Convert.ToString(sqlReader["Id"] + " " + sqlReader["Key"] + " " + sqlReader["x"] + " " + sqlReader["y"]));
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message.ToString(), ex.Source.ToString(), MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            finally {
-                if (sqlReader != null) { sqlReader.Close(); }
-            }
-        }
+        
 
         private void MyWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -210,9 +186,6 @@ namespace VanyaGame
         {
             Game.VideoPlayerSet(Game.VideoVlc);
 
-            //Vlc.vlcPlayer.MediaPlayer.VlcLibDirectory = new System.IO.DirectoryInfo(@"c:\Program Files\VideoLAN\VLC\"); //@Environment.CurrentDirectory + @"\Tools\vlcLib\");
-            //Vlc.vlcPlayer.MediaPlayer.EndInit();
-            //Vlc.vlcPlayer.MediaPlayer.Play(new Uri(@"http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"));
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
