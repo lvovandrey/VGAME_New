@@ -13,6 +13,7 @@ using VanyaGame.Media.Abstract;
 using VanyaGame.Abstract;
 using VanyaGame.DB;
 using VanyaGame.GameCardsNewDB.Struct;
+using VanyaGame.Sets;
 
 namespace VanyaGame
 {
@@ -37,7 +38,6 @@ namespace VanyaGame
     public static class Game
     {
         public static Random RandomGenerator;
-        public static TGameSets Sets;
         public static Queue<Level> Levels = new Queue<Level>();
         public static Level Level;
         public static GameSound Sound;
@@ -113,36 +113,12 @@ namespace VanyaGame
                 SettingsWindow?.Show();
         }
 
-        public static void LoadLevels(string dir) 
+        public static void LoadLevels() 
         {
             if (gameType == GameType.CardsNewDB)
             {
                 CardsNewDBLevel.LoadLevels();
                 return;
-            }
-
-
-
-            string dir_ = dir + @"\";
-            string[] Level_dirs = Directory.GetDirectories(dir_, "Level*");
-            
-            //Random random = new Random();
-
-            ////Перемешиваем уровни
-            //for (int i = Level_dirs.Length - 1; i >= 1; i--)
-            //{
-            //    int j = random.Next(i + 1);
-            //    // обменять значения data[j] и data[i]
-            //    string temp = Level_dirs[j];
-            //    Level_dirs[j] = Level_dirs[i];
-            //    Level_dirs[i] = temp;
-            //}
-            
-            foreach (string Level_dir in Level_dirs)
-            {
-                string Level_dir_short = Level_dir.Replace(dir, "");
-                Level NewLevel = null;
-                Levels.Enqueue(NewLevel);
             }
         }
 
@@ -176,7 +152,6 @@ namespace VanyaGame
 
             Owner = WND_Owner;
             RandomGenerator = new Random();
-            Sets = new TGameSets();
 
             if (Owner.StartButton.GetType() == typeof(VanyaGame.GameCardsNewDB.Interface.BeautyButtonCardsNewDB))
                 gameType = GameType.CardsNewDB;
@@ -203,11 +178,11 @@ namespace VanyaGame
             Game.Owner.MusicVolumeSlider.DataContext = Music.volume;
             Music.MediaGUI.UIMediaHide();
 
-            if (Sets.VideoPlayer == "vlc")
+            if (Settings.GetInstance().VideoPlayerType == VideoPlayerType.vlc)
             {
                 VideoPlayerSet(VideoVlc);
             }
-            if (Sets.VideoPlayer == "wpf")
+            if (Settings.GetInstance().VideoPlayerType == VideoPlayerType.wpf)
             {
                 VideoPlayerSet(VideoWpf);
             }
@@ -248,11 +223,6 @@ namespace VanyaGame
 
                 Level.GetComponent<Loader>().Load();
                 Level.GetComponent<Starter>().Start();
-
-
-
-
-                // Level.Start();
             }
             else
             {
@@ -288,7 +258,7 @@ namespace VanyaGame
 
             ToolsTimer.Delay(() =>
             {
-                Game.LoadLevels(Game.Sets.MainDir);
+                Game.LoadLevels();
 
                 TDrawEffects.BlurHide((FrameworkElement)Game.Owner.StartButton, 0.1, 0, () =>
                 {
@@ -298,7 +268,7 @@ namespace VanyaGame
                 foreach (Level Level in Game.Levels)
                 {
                     Level.GetComponent<Loader>().LoadSets();
-                    string filename = Game.Sets.MainDir + @"\default.jpg";
+                    string filename = Settings.GetInstance().DefaultImage;
                     if (Level.Sets.PreviewType == "local")
                     {
                         if (gameType == GameType.CardsNewDB)
@@ -307,7 +277,7 @@ namespace VanyaGame
                     if (Level.Sets.PreviewType == "youtube")
                     {
                         try { filename = YouTubeUrlSupplier.YoutubeGet.GetImage(Level.Sets.BaseVideoFilename); }
-                        catch { filename = Game.Sets.MainDir + @"\default.jpg"; Level.Sets.PreviewType = "local"; }
+                        catch { filename = Settings.GetInstance().DefaultImage; Level.Sets.PreviewType = "local"; }
                     }
 
                     PrevMenuItem NewItem = new PrevMenuNS.PrevMenuItem(filename, Level, "youtube");
@@ -336,35 +306,7 @@ namespace VanyaGame
     
     }
 
-    public class TGameSets
-    {
-        //public bool DebugMode;
-        
-        //public string MainDir;
-        //public string VideoPlayer;
-        //public string InterfaceDir;
-        //public string InterfaceDirCurVersion;
-        //public string InterfaceBackgroundDir;
-        //public string InterfaceControlsDir;
-        //public string InterfaceUnitsDir;
-        //public string DefaultVideo = @"\default.wmv";
-
-        //public int LevelsCount; //Количество уровней
-        //public TGameSets():base()
-        //{
-        //    MainDir = XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "maindir");  
-        //    VideoPlayer = XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "videoplayer");
-        //    InterfaceDir = XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "InterfaceDir"); 
-        //    InterfaceDirCurVersion = XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "InterfaceDirCurVersion"); 
-        //    InterfaceBackgroundDir= XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "InterfaceBackgroundDir");
-        //    InterfaceControlsDir = XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "InterfaceControlsDir");
-        //    InterfaceUnitsDir = XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "InterfaceUnitsDir");
-        //    DefaultVideo = XMLTools.LoadFromXML(Directory.GetCurrentDirectory() + @"\GameSets.xml", "DefaultVideo");
-        //    LevelsCount = 0;
-        //    DebugMode = true;
-        //}
-        //public double InterfaceDefaultOpacity = 0;
-    }
+  
 
 
 }

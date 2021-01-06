@@ -103,7 +103,7 @@ namespace VanyaGame.Sets
 
         #region GeneralSettings
         string videoPlayerType = "wpf";
-        VideoPlayerType VideoPlayerType 
+        public VideoPlayerType VideoPlayerType 
         {
             get
             {
@@ -158,6 +158,28 @@ namespace VanyaGame.Sets
                 defaultVideo = value;
             }
         }
+
+        string defaultImage = "";
+        public string DefaultImage
+        {
+            get
+            {
+                if (defaultImage == "" || defaultImage == "Not Found")
+                    defaultImage = Path.Combine(AppDir + "default.jpg");
+                return defaultImage;
+            }
+            set
+            {
+                if (!File.Exists(value) && Path.GetExtension(value) != ".jpg")
+                {
+                    MessageBox.Show("Нужно выбрать существующий файл изображения с расширением .jpg для указания изображения по умолчанию (отображается если нет другого изображения)");
+                    return;
+                }
+                defaultImage = value;
+            }
+        }
+        
+        
         #endregion
 
 

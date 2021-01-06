@@ -156,7 +156,6 @@ namespace VanyaGame.GameCardsNewDB.Struct
 
         public void LoadMedia()
         {
-            Game.Sound.LoadMediaFilesFromDir(Game.Sets.MainDir + Sets.SoundDir + @"\");
             Game.Music.LoadMediaFiles(new List<string>(Settings.GetInstance().MusicFilenames));
         }
 
