@@ -189,6 +189,11 @@ namespace VanyaGame.Sets
             ConfigurationTools.AddUpdateAppSettings("BackgroundMenuFilename", backgroundMenuFilename);
             ConfigurationTools.AddUpdateAppSettings("BackgroundStartFilename", backgroundStartFilename);
 
+            ConfigurationTools.AddUpdateAppSettings("VideoPlayerType", videoPlayerType);
+            ConfigurationTools.AddUpdateAppSettings("AppDir", appDir);
+            ConfigurationTools.AddUpdateAppSettings("DefaultVideo", defaultVideo);
+            ConfigurationTools.AddUpdateAppSettings("DefaultImage", defaultImage);
+
             SettingsChanged?.Invoke();
         }
 
@@ -197,6 +202,11 @@ namespace VanyaGame.Sets
             backgroundGameOverFilename = ConfigurationTools.ReadSetting("BackgroundGameOverFilename");
             backgroundMenuFilename = ConfigurationTools.ReadSetting("BackgroundMenuFilename");
             backgroundStartFilename = ConfigurationTools.ReadSetting("BackgroundStartFilename");
+
+            videoPlayerType = ConfigurationTools.ReadSetting("VideoPlayerType");
+            appDir = ConfigurationTools.ReadSetting("AppDir");
+            defaultVideo = ConfigurationTools.ReadSetting("DefaultVideo");
+            defaultImage = ConfigurationTools.ReadSetting("DefaultImage");
 
             SettingsChanged?.Invoke();
         }
