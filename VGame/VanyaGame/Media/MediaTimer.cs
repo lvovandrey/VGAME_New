@@ -24,15 +24,15 @@ namespace VanyaGame.Media
         {
             TimeSpan t = new TimeSpan(0, 0, 0, 0, 100);
 
-            Tools.CreateAndStart_DispatcherTimer(ref timer, TimerTick, t);
+            ToolsClass.CreateAndStart_DispatcherTimer(ref timer, TimerTick, t);
         }
         public void Stop()
         {
-            Tools.StopAndNull_DispatcherTimer(ref timer);
+            ToolsClass.StopAndNull_DispatcherTimer(ref timer);
         }
         public void Pause()
         {
-            Tools.StopAndNull_DispatcherTimer(ref timer);
+            ToolsClass.StopAndNull_DispatcherTimer(ref timer);
         }
 
     }

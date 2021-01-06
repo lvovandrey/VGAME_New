@@ -4,11 +4,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:VanyaGame" 
-        xmlns:GameNumber="clr-namespace:VanyaGame.GameNumber.Interface" 
-        xmlns:GameNumberDB="clr-namespace:VanyaGame.GameNumberDB.Interface" 
-        xmlns:GameCardsEasyDB="clr-namespace:VanyaGame.GameCardsEasyDB.Interface"
         xmlns:GameCardsNewDB ="clr-namespace:VanyaGame.GameCardsNewDB.Interface"
-        xmlns:GGG="clr-namespace:VanyaGame.GameCardsEasyDB.Units"
         xmlns:Interface ="clr-namespace:VanyaGame.Interface"
         x:Name="MyWindow" x:Class="VanyaGame.MainWindow"
         
@@ -82,9 +78,6 @@
 
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
                         <GameCardsNewDB:BeautyButtonCardsNewDB x:Name="StartButton"  Height="250" Visibility="Visible" Margin="20"/>
-                        <GameCardsEasyDB:BeautyButtonCardsEasyDB x:Name="StartButton1"  Height="250" Visibility="Collapsed" Margin="20"/>
-                        <GameNumberDB:BeautyButtonNumberDB x:Name="StartButton2" Height="250" Visibility="Collapsed" Margin="20"/>
-                        <GameNumber:BeautyButtonNumber x:Name="StartButton3" Height="250" Visibility="Collapsed" Margin="20"/>
                     </StackPanel>
                     <Button Name="VIDEOTEST" Content="VLC" Width ="200" Height="30" HorizontalAlignment="Left" Click="VIDEOTEST_Click" Opacity="0"/>
                     <Interface:VlcWrap x:Name="Vlc" Margin="0,70,0,100" Visibility="Hidden"/>

@@ -245,8 +245,6 @@ namespace VanyaGame
 
             /// ??? двойной вызов с ImageBegin_MouseUp   
             Owner.StartButton.MouseUp += StartButton_MouseUp;
-            Owner.StartButton2.MouseUp += StartButton_MouseUp;
-            Owner.StartButton3.MouseUp += StartButton_MouseUp;
         }
 
 
@@ -269,16 +267,9 @@ namespace VanyaGame
                 {
                     Level.GetComponent<Loader>().LoadSets();
                     string filename = Settings.GetInstance().DefaultImage;
-                    if (Level.Sets.PreviewType == "local")
-                    {
+
                         if (gameType == GameType.CardsNewDB)
                             filename = ((CardsNewDBLevel)Level).Sets.PreviewURL;
-                    }
-                    if (Level.Sets.PreviewType == "youtube")
-                    {
-                        try { filename = YouTubeUrlSupplier.YoutubeGet.GetImage(Level.Sets.BaseVideoFilename); }
-                        catch { filename = Settings.GetInstance().DefaultImage; Level.Sets.PreviewType = "local"; }
-                    }
 
                     PrevMenuItem NewItem = new PrevMenuNS.PrevMenuItem(filename, Level, "youtube");
                     Owner.PreviewMenu.AddItem(NewItem, ItemClick);

@@ -69,8 +69,6 @@ namespace VanyaGame.GameCardsNewDB.Struct
         {
             DbLevelRecord = DBTools.Context.Levels.Find(_DbLevelRecord.Id);
             if (DbLevelRecord == null) DbLevelRecord = _DbLevelRecord;
-            Sets = new LevelSets(this);
-            // Sets.Directory = "NONE";
 
             GetComponent<Loader>().LoadSets = LoadSets;
             GetComponent<Loader>().LoadContent = LoadContent;

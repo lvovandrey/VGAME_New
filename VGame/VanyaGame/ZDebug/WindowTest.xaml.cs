@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using VanyaGame.GameNumber.Interface;
-using VanyaGame.GameNumber.Units;
 using VanyaGame.Units;
 using VanyaGame.Units.Components;
 using YouTubeUrlSupplier;

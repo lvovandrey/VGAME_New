@@ -51,7 +51,7 @@ namespace VanyaGame.Media
             }
             foreach (FrameworkElement UI in UICollection)
             {
-                ToolsTimer.Delay(() => { TDrawEffects.UIOpacityChange(UI, 0, Game.Sets.InterfaceDefaultOpacity, 1); }, new TimeSpan(0, 0, 0, 1, 500));
+                ToolsTimer.Delay(() => { TDrawEffects.UIOpacityChange(UI, 0, 0, 1); }, new TimeSpan(0, 0, 0, 1, 500));
             }
 
         }
@@ -87,7 +87,7 @@ namespace VanyaGame.Media
                 if (!IsMouseOverUI())
                     foreach (FrameworkElement UI in UICollection)
                     {
-                        TDrawEffects.UIOpacityChange(UI, UI.Opacity, Game.Sets.InterfaceDefaultOpacity, 2);
+                        TDrawEffects.UIOpacityChange(UI, UI.Opacity, 0, 2);
                     }
             }, new TimeSpan(0, 0, 2));
         }

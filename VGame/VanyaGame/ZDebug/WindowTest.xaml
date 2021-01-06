@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VanyaGame.ZDebug"
         xmlns:interface ="clr-namespace:VanyaGame.Interface"
-        xmlns:numbers ="clr-namespace:VanyaGame.GameNumber.Units"
         mc:Ignorable="d"
         Title="WindowTest" Height="600" Width="800">
     <Grid x:Name="GridMain" >

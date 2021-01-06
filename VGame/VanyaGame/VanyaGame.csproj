@@ -245,11 +245,8 @@
     <Compile Include="Struct\Components\Starter.cs" />
     <Compile Include="Struct\Components\State.cs" />
     <Compile Include="Struct\Iteration.cs" />
-    <Compile Include="Struct\IterationSets.cs" />
     <Compile Include="Struct\Level.cs" />
-    <Compile Include="Struct\LevelSets.cs" />
     <Compile Include="Struct\Scene.cs" />
-    <Compile Include="Struct\SceneSets.cs" />
     <Compile Include="PrevMenuNS\PrevMenu.xaml.cs">
       <DependentUpon>PrevMenu.xaml</DependentUpon>
     </Compile>

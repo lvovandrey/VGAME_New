@@ -53,7 +53,7 @@ namespace VanyaGame
         }
     }
     
-    public static class Tools
+    public static class ToolsClass
     {
 
         /// <summary>

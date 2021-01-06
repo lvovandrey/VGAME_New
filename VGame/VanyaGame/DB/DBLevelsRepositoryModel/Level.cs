@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Windows;
-using VanyaGame.GameNumberDB.Tools;
+using VanyaGame.Tools;
 using YouTubeUrlSupplier;
 
 namespace VanyaGame.DB.DBLevelsRepositoryModel
@@ -223,7 +223,7 @@ namespace VanyaGame.DB.DBLevelsRepositoryModel
             YoutubePreview = vidInfo.ImageUrl;
             this.VideoInfo.Preview.Source = new Uri(vidInfo.ImageUrl);
             
-            this.VideoInfo.Preview.Size = PictHelper.GetPictureSize(this.VideoInfo.Preview.Source);
+            this.VideoInfo.Preview.Size = VanyaGame.Tools.PictHelper.GetPictureSize(this.VideoInfo.Preview.Source);
             //this.VideoInfo.Preview.Size =  new System.Drawing.Size(480, 360);
 
             this.VideoInfo.Preview.Type = PreviewType.youtube;
