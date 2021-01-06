@@ -161,6 +161,7 @@ namespace VanyaGame.Sets
         #endregion
 
 
+
         public void SaveAllSettings()
         {
             ConfigurationTools.AddUpdateAppSettings("BackgroundGameOverFilename", backgroundGameOverFilename);
