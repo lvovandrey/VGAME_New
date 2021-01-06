@@ -267,6 +267,7 @@
     <Compile Include="Abstract\ComponentContainer.cs" />
     <Compile Include="Tools\ListShuffle.cs" />
     <Compile Include="Tools\Miscellanea.cs" />
+    <Compile Include="Tools\PictHelper.cs" />
     <Compile Include="Tools\SerializeStatic.cs" />
     <Compile Include="TUserActivity.cs" />
     <Compile Include="Units\Components\DragAndDrop.cs" />
