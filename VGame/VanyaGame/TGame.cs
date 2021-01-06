@@ -6,14 +6,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.IO;
 using VanyaGame.PrevMenuNS;
-using VanyaGame.GameNumber.Struct;
 using VanyaGame.Struct;
 using VanyaGame.Struct.Components;
 using VanyaGame.Media;
 using VanyaGame.Media.Abstract;
 using VanyaGame.Abstract;
-using VanyaGame.GameNumberDB.Struct;
-using VanyaGame.GameCardsEasyDB.Struct;
 using VanyaGame.DB;
 using VanyaGame.GameCardsNewDB.Struct;
 
@@ -102,15 +99,6 @@ namespace VanyaGame
 
         internal static void CreateSettingsWindow()
         {
-
-            if (gameType == GameType.CardsEasy)
-            {
-                SettingsWindow = new GameCardsEasyDB.Interface.SettingsWindow();
-                var SW = SettingsWindow as GameCardsEasyDB.Interface.SettingsWindow;
-                SW.Owner = Owner;
-                new GameCardsEasyDB.Interface.SettingsWindowVM(SW);
-            }
-
             if (gameType == GameType.CardsNewDB)
             {
                 SettingsWindow = new GameCardsNewDB.Interface.SettingsWindow();
@@ -127,22 +115,6 @@ namespace VanyaGame
 
         public static void LoadLevels(string dir) 
         {
-            if (gameType == GameType.NumberDB)
-            {
-                DBTools = new DBmainTools();
-                NumberDBLevel.LoadLevels(DBTools);
-                return;
-            }
-
-            if (gameType == GameType.CardsEasy)
-            {
-                DBTools = new DBmainTools();
-                CardsEasyDBLevel.LoadLevels(DBTools);
-                
-
-                return;
-            }
-
             if (gameType == GameType.CardsNewDB)
             {
                 CardsNewDBLevel.LoadLevels();
@@ -170,11 +142,6 @@ namespace VanyaGame
             {
                 string Level_dir_short = Level_dir.Replace(dir, "");
                 Level NewLevel = null;
-                if (gameType == GameType.Number)
-                {
-                    NewLevel = new NumberLevel(Level_dir_short);
-                }
-
                 Levels.Enqueue(NewLevel);
             }
         }
@@ -210,15 +177,6 @@ namespace VanyaGame
             Owner = WND_Owner;
             RandomGenerator = new Random();
             Sets = new TGameSets();
-
-            if (Owner.StartButton.GetType() == typeof(VanyaGame.GameNumber.Interface.BeautyButtonNumber))
-                gameType = GameType.Number;
-
-            if (Owner.StartButton.GetType() == typeof(VanyaGame.GameNumberDB.Interface.BeautyButtonNumberDB))
-                gameType = GameType.NumberDB;
-
-            if (Owner.StartButton.GetType() == typeof(VanyaGame.GameCardsEasyDB.Interface.BeautyButtonCardsEasyDB))
-                gameType = GameType.CardsEasy;
 
             if (Owner.StartButton.GetType() == typeof(VanyaGame.GameCardsNewDB.Interface.BeautyButtonCardsNewDB))
                 gameType = GameType.CardsNewDB;
@@ -325,15 +283,6 @@ namespace VanyaGame
          //??? двойной вызов с ImageBegin_MouseUp   
         static void StartButton_MouseUp(object sender, RoutedEventArgs e)
         {
-            if (sender.GetType() == typeof(VanyaGame.GameNumber.Interface.BeautyButtonNumber))
-                gameType = GameType.Number;
-
-            if (sender.GetType() == typeof(VanyaGame.GameNumberDB.Interface.BeautyButtonNumberDB))
-                gameType = GameType.NumberDB;
-
-            if (sender.GetType() == typeof(VanyaGame.GameCardsEasyDB.Interface.BeautyButtonCardsEasyDB))
-                gameType = GameType.CardsEasy;
-
             if (sender.GetType() == typeof(VanyaGame.GameCardsNewDB.Interface.BeautyButtonCardsNewDB))
                 gameType = GameType.CardsNewDB;
 
@@ -352,9 +301,6 @@ namespace VanyaGame
                     string filename = Game.Sets.MainDir + @"\default.jpg";
                     if (Level.Sets.PreviewType == "local")
                     {
-                        //                        filename = Game.Sets.MainDir + Level.Sets.Directory + Level.Sets.InterfaceDir + @"\preview.jpg";
-                        if (gameType == GameType.CardsEasy)
-                            filename = ((CardsEasyDBLevel)Level).Sets.PreviewURL;
                         if (gameType == GameType.CardsNewDB)
                             filename = ((CardsNewDBLevel)Level).Sets.PreviewURL;
                     }

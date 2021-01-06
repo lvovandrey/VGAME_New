@@ -157,9 +157,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="1.GameNumber\Units\Components\NumberShower.cs" />
-    <Compile Include="2.GameNumberDB\Data\DBKeyboardTools.cs" />
-    <Compile Include="2.GameNumberDB\Data\XMLTools.cs" />
     <Compile Include="Abstract\INPCBase.cs" />
     <Compile Include="Abstract\RelayCommand.cs" />
     <Compile Include="DB\Context.cs" />
@@ -172,30 +169,7 @@
     <Compile Include="DB\DBLevelsRepositoryModel\VideoInfo.cs" />
     <Compile Include="DB\DBLevelsRepositoryModel\VideoSegment.cs" />
     <Compile Include="DB\DBLevelsRepositoryModel\WebBrowserModel.cs" />
-    <Compile Include="2.GameNumberDB\Interface\BeautyButtonNumberDB.xaml.cs">
-      <DependentUpon>BeautyButtonNumberDB.xaml</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="2.GameNumberDB\Interface\Keyboard.cs" />
-    <Compile Include="2.GameNumberDB\Interface\KeyboardClickAnimation.xaml.cs">
-      <DependentUpon>KeyboardClickAnimation.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="2.GameNumberDB\Interface\KeyboardElement.xaml.cs">
-      <DependentUpon>KeyboardElement.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="2.GameNumberDB\Interface\PaperGrid.xaml.cs">
-      <DependentUpon>PaperGrid.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="2.GameNumberDB\Struct\NumberDBIteration.cs" />
-    <Compile Include="2.GameNumberDB\Struct\NumberDBLevel.cs" />
-    <Compile Include="2.GameNumberDB\Struct\NumberDBScene.cs" />
     <Compile Include="DB\ConvertDBTools.cs" />
-    <Compile Include="2.GameNumberDB\Tools\PictHelper.cs" />
-    <Compile Include="2.GameNumberDB\Units\Components\NumberShower.cs" />
-    <Compile Include="2.GameNumberDB\Units\NumberElement.xaml.cs">
-      <DependentUpon>NumberElement.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="2.GameNumberDB\Units\NumberUnit.cs" />
     <Compile Include="GameCardsNewDB\DB\RepositoryModel\Context.cs" />
     <Compile Include="GameCardsNewDB\DB\RepositoryModel\DBTools.cs" />
     <Compile Include="GameCardsNewDB\DB\RepositoryModel\Repository.cs" />
@@ -247,39 +221,6 @@
       <DependentUpon>CardUnitElement.xaml</DependentUpon>
     </Compile>
     <Compile Include="GameCardsNewDB\Units\Components\CardShower.cs" />
-    <Compile Include="GameCardsEasyDB\Interface\Elements\PropertyViewer_DoubleNums_UpDown.xaml.cs">
-      <DependentUpon>PropertyViewer_DoubleNums_UpDown.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="GameCardsEasyDB\Interface\SettingsViewsElements\DBSettingsView.xaml.cs">
-      <DependentUpon>DBSettingsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="GameCardsEasyDB\Interface\SettingsViewsElements\HintSettingsView.xaml.cs">
-      <DependentUpon>HintSettingsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="GameCardsEasyDB\Interface\SettingsViewsElements\SpeakSettingsView.xaml.cs">
-      <DependentUpon>SpeakSettingsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="GameCardsEasyDB\Interface\SettingsViewsElements\ViewSettingsView.xaml.cs">
-      <DependentUpon>ViewSettingsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="GameCardsEasyDB\Interface\SettingsWindow.xaml.cs">
-      <DependentUpon>SettingsWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="GameCardsEasyDB\Interface\SettingsWindowVM.cs" />
-    <Compile Include="GameCardsEasyDB\Struct\CardsEasyDBIteration.cs" />
-    <Compile Include="GameCardsEasyDB\Struct\CardsEasyDBLevel.cs" />
-    <Compile Include="GameCardsEasyDB\Struct\NumberDBScene.cs" />
-    <Compile Include="GameCardsEasyDB\Tools\ConfigurationTools.cs" />
-    <Compile Include="GameCardsEasyDB\Tools\InfoWindow.cs" />
-    <Compile Include="GameCardsEasyDB\Tools\Settings.cs" />
-    <Compile Include="GameCardsEasyDB\Units\Components\CardShower.cs" />
-    <Compile Include="GameCardsEasyDB\Units\CardUnitElement.xaml.cs">
-      <DependentUpon>CardUnitElement.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="GameCardsEasyDB\Units\CardUnit.cs" />
-    <Compile Include="GameCardsEasyDB\Interface\BeautyButtonCardsEasyDB.xaml.cs">
-      <DependentUpon>BeautyButtonCardsEasyDB.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Interface\VlcWrap.xaml.cs">
       <DependentUpon>VlcWrap.xaml</DependentUpon>
     </Compile>
@@ -299,11 +240,6 @@
     <Compile Include="Struct\Components\UnitsCollection.cs" />
     <Compile Include="Struct\Components\UserActivity.cs" />
     <Compile Include="Struct\CreatorOfObjects.cs" />
-    <Compile Include="1.GameNumber\Interface\Keyboard.cs" />
-    <Compile Include="1.GameNumber\Struct\NumberIteration.cs" />
-    <Compile Include="1.GameNumber\Struct\NumberLevel.cs" />
-    <Compile Include="1.GameNumber\Struct\NumberScene.cs" />
-    <Compile Include="1.GameNumber\Tools\TDrawEffects.cs" />
     <Compile Include="Struct\Components\Iterations.cs" />
     <Compile Include="Struct\Components\Loader.cs" />
     <Compile Include="Struct\Components\Starter.cs" />
@@ -314,26 +250,6 @@
     <Compile Include="Struct\LevelSets.cs" />
     <Compile Include="Struct\Scene.cs" />
     <Compile Include="Struct\SceneSets.cs" />
-    <Compile Include="1.GameNumber\Struct\NumberCreatorOfObjects.cs" />
-    <Compile Include="1.GameNumber\Interface\KeyboardClickAnimation.xaml.cs">
-      <DependentUpon>KeyboardClickAnimation.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="1.GameNumber\Interface\PaperGrid.xaml.cs">
-      <DependentUpon>PaperGrid.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="1.GameNumber\Interface\BeautyButtonNumber.xaml.cs">
-      <DependentUpon>BeautyButtonNumber.xaml</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="1.GameNumber\Units\NumberElement.xaml.cs">
-      <DependentUpon>NumberElement.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="1.GameNumber\Interface\KeyboardElement.xaml.cs">
-      <DependentUpon>KeyboardElement.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="1.GameNumber\Units\NumberUnit.cs" />
-    <Compile Include="1.GameNumber\Data\DBKeyboardTools.cs" />
-    <Compile Include="1.GameNumber\Data\XMLTools.cs" />
     <Compile Include="PrevMenuNS\PrevMenu.xaml.cs">
       <DependentUpon>PrevMenu.xaml</DependentUpon>
     </Compile>
@@ -372,27 +288,6 @@
     <Compile Include="ZDebug\WindowTest.xaml.cs">
       <DependentUpon>WindowTest.xaml</DependentUpon>
     </Compile>
-    <Page Include="2.GameNumberDB\Interface\BeautyButtonNumberDB.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Page>
-    <Page Include="2.GameNumberDB\Interface\KeyboardClickAnimation.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="2.GameNumberDB\Interface\KeyboardElement.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="2.GameNumberDB\Interface\PaperGrid.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="2.GameNumberDB\Units\NumberElement.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="GameCardsNewDB\Interface\BeautyButtonCardsNewDB.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -445,38 +340,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="GameCardsEasyDB\Interface\Elements\PropertyViewer_DoubleNums_UpDown.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="GameCardsEasyDB\Interface\SettingsViewsElements\DBSettingsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="GameCardsEasyDB\Interface\SettingsViewsElements\HintSettingsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="GameCardsEasyDB\Interface\SettingsViewsElements\SpeakSettingsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="GameCardsEasyDB\Interface\SettingsViewsElements\ViewSettingsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="GameCardsEasyDB\Interface\SettingsWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="GameCardsEasyDB\Units\CardUnitElement.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="GameCardsEasyDB\Interface\BeautyButtonCardsEasyDB.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="HidingElements.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -500,27 +363,6 @@
       <SubType>Code</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Page Include="1.GameNumber\Interface\KeyboardClickAnimation.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="1.GameNumber\Interface\PaperGrid.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="1.GameNumber\Interface\BeautyButtonNumber.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Page>
-    <Page Include="1.GameNumber\Units\NumberElement.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="1.GameNumber\Interface\KeyboardElement.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="PrevMenuNS\PrevMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -712,77 +554,11 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="1.GameNumber\Images\4.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="1.GameNumber\Images\btn_start.png" />
-    <Resource Include="1.GameNumber\Images\btn_start1.png" />
-    <Resource Include="1.GameNumber\Images\btn_start2.png" />
-    <Resource Include="1.GameNumber\Images\btn_start3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="1.GameNumber\Images\HandPrint.png" />
-    <Resource Include="1.GameNumber\Images\keyboard.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="1.GameNumber\Images\Paper.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\logo.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="1.GameNumber\Data\DatabaseKeyboard.mdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="1.GameNumber\Data\DatabaseKeyboard_log.ldf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <DependentUpon>DatabaseKeyboard.mdf</DependentUpon>
-    </Content>
-    <Content Include="2.GameNumberDB\Data\DatabaseKeyboard.mdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="2.GameNumberDB\Data\DatabaseKeyboard_log.ldf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <DependentUpon>DatabaseKeyboard.mdf</DependentUpon>
-    </Content>
-    <Resource Include="2.GameNumberDB\Images\4.png" />
-    <Resource Include="2.GameNumberDB\Images\btn_start.png" />
-    <Resource Include="2.GameNumberDB\Images\btn_start1.png" />
-    <Resource Include="2.GameNumberDB\Images\btn_start2.png" />
-    <Resource Include="2.GameNumberDB\Images\btn_start3.png" />
-    <Resource Include="2.GameNumberDB\Images\Hand.cur">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="2.GameNumberDB\Images\Hand1.cur">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="2.GameNumberDB\Images\HandPrint.png" />
-    <Resource Include="2.GameNumberDB\Images\HandPush.cur">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="2.GameNumberDB\Images\HandPushDown.cur" />
-    <Resource Include="2.GameNumberDB\Images\keyboard.png" />
-    <Resource Include="2.GameNumberDB\Images\Paper.png" />
-    <Resource Include="GameCardsEasyDB\Images\4.png" />
-    <Resource Include="GameCardsEasyDB\Images\btn_start.png" />
-    <Resource Include="GameCardsEasyDB\Images\btn_start1.png" />
-    <Resource Include="GameCardsEasyDB\Images\btn_start2.png" />
-    <Resource Include="GameCardsEasyDB\Images\btn_start3.png" />
-    <Resource Include="GameCardsEasyDB\Images\Hand.cur">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="GameCardsEasyDB\Images\Hand1.cur">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="GameCardsEasyDB\Images\HandPrint.png" />
-    <Resource Include="GameCardsEasyDB\Images\HandPush.cur">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="GameCardsEasyDB\Images\HandPushDown.cur" />
-    <Resource Include="GameCardsEasyDB\Images\keyboard.png" />
-    <Resource Include="GameCardsEasyDB\Images\Paper.png" />
     <Resource Include="GameCardsNewDB\Images\4.png" />
     <Resource Include="GameCardsNewDB\Images\btn_start.png" />
     <Resource Include="GameCardsNewDB\Images\btn_start1.png" />
@@ -1935,16 +1711,6 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Resource Include="1.GameNumber\Images\HandPushDown.cur" />
-    <Resource Include="1.GameNumber\Images\HandPush.cur">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="1.GameNumber\Images\Hand1.cur">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="1.GameNumber\Images\Hand.cur">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
