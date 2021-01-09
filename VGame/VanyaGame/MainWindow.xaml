@@ -8,12 +8,12 @@
         xmlns:Interface ="clr-namespace:VanyaGame.Interface"
         x:Name="MyWindow" x:Class="VanyaGame.MainWindow"
         
-        Title="MainWindow" Height="720" Width="1000" MouseMove="MyWindow_MouseMove" 
-        SizeChanged="MyWindow_SizeChanged" KeyDown="MyWindow_KeyDown" 
+        Title="MainWindow" Height="720" Width="1000" 
+
         WindowStartupLocation="CenterScreen" Cursor="{DynamicResource HandCursor}" Loaded="MyWindow_Loaded" 
-        WindowStyle="None" WindowState="Maximized" PreviewMouseDown="MyWindow_PreviewMouseDown" 
-        Closing="MyWindow_Closing"  
-        PreviewMouseUp="MyWindow_PreviewMouseUp" PreviewMouseMove="MyWindow_PreviewMouseMove" Icon="Images\book-icon.ico" PreviewMouseWheel="MyWindow_PreviewMouseWheel" >
+        WindowStyle="None" WindowState="Maximized" 
+         
+        Icon="Images\book-icon.ico" PreviewMouseWheel="MyWindow_PreviewMouseWheel" >
 
     <Window.Resources>
 
@@ -46,7 +46,7 @@
                         <DropShadowEffect ShadowDepth="21" Opacity="0.685" Color="#FF030038" BlurRadius="23"/>
                     </Image.Effect>
                 </Image>
-                <Button x:Name="BtnNextLevel" Visibility="Hidden"  Content="NEXT LEVEL"  HorizontalAlignment="Center" Height="59"  VerticalAlignment="Center" Width="164" Click="BtnNextLevel_Click" Canvas.Left="410" Canvas.Top="208"/>
+               
                 <TextBox Panel.ZIndex="15" x:Name="TxtBlock" Opacity="0.0" ScrollViewer.VerticalScrollBarVisibility="Visible" HorizontalAlignment="Right" Height="685" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="10" Canvas.Left="743" Canvas.Top="10" Visibility="Visible"/>
                 <Label  HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FFFF0909">
                     <Label.Effect>
@@ -55,7 +55,7 @@
                 </Label>
 
                 <MediaElement x:Name="MediaElementSound" HorizontalAlignment="Left" Height="35" Margin="448,519,0,0" VerticalAlignment="Top" Width="35" LoadedBehavior="Manual"/>
-                <MediaElement x:Name="MediaElementMusic" HorizontalAlignment="Left" Height="38" Margin="359,519,0,0" VerticalAlignment="Top" Width="41" LoadedBehavior="Manual" MediaEnded="MediaElementMusic_MediaEnded" Volume="0.1"/>
+                <MediaElement x:Name="MediaElementMusic" HorizontalAlignment="Left" Height="38" Margin="359,519,0,0" VerticalAlignment="Top" Width="41" LoadedBehavior="Manual"  Volume="0.1"/>
                 <Grid x:Name="GridVideo" VerticalAlignment="Stretch"  HorizontalAlignment="Stretch" >
 
 
@@ -72,13 +72,13 @@
                             </Label.Effect>
                         </Label>
                     </StackPanel>
-                    <MediaElement x:Name="MediaElementVideo" HorizontalAlignment="Center" VerticalAlignment="Center" LoadedBehavior="Manual" Stretch="Fill" Opacity="0.1" KeyDown="MediaElementVideo_KeyDown"  />
+                    <MediaElement x:Name="MediaElementVideo" HorizontalAlignment="Center" VerticalAlignment="Center" LoadedBehavior="Manual" Stretch="Fill" Opacity="0.1"  />
 
 
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
                         <GameCardsNewDB:BeautyButtonCardsNewDB x:Name="StartButton"  Height="250" Visibility="Visible" Margin="20"/>
                     </StackPanel>
-                    <Button Name="VIDEOTEST" Content="VLC" Width ="200" Height="30" HorizontalAlignment="Left" Click="VIDEOTEST_Click" Opacity="0"/>
+                    
                     <Interface:VlcWrap x:Name="Vlc" Margin="0,70,0,100" Visibility="Hidden"/>
 
                     <Label x:Name="Label1_Copy" Content="/////////////////////////////" Visibility="Visible" HorizontalAlignment="Left" Margin="13,74,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FFFF0909" Panel.ZIndex="2" Opacity="0" RenderTransformOrigin="0.391,1.851">
@@ -257,7 +257,7 @@
 
 
 
-                <Button Content="MediaElement" HorizontalAlignment="Left" Margin="0,310,0,0" Grid.Row="1" VerticalAlignment="Top" Width="200" Click="Button_Click" Grid.ColumnSpan="2" Height="35" Opacity="0"/>
+                
                 <Label x:Name="L1" Content="Label" HorizontalAlignment="Left" Margin="10,282,0,0" Grid.Row="1" VerticalAlignment="Top" Width="218" Grid.ColumnSpan="3" Opacity="0"/>
 
             </Grid>

@@ -23,7 +23,6 @@ namespace VanyaGame
             MyWindow.MediaElementMusic.MediaEnded += Game.UserActivity.MediaElementMusic_MediaEnded;
             MyWindow.SizeChanged += Game.UserActivity.MyWindow_SizeChanged;
             MyWindow.PreviewKeyDown += Game.UserActivity.MyWindow_PreviewKeyDown;
-            MyWindow.BtnNextLevel.Click += Game.UserActivity.BtnNextLevel_Click;
             MyWindow.PreviewMouseDown += Game.UserActivity.PreviewMouseDown;
             MyWindow.PreviewMouseUp += Game.UserActivity.PreviewMouseUp;
 
@@ -31,79 +30,16 @@ namespace VanyaGame
             Game.PreviewStart();
         }
 
-        #region События в окне
-        private void MyWindow_MouseMove(object sender, MouseEventArgs e)
-        {
-            
-        }
-        
-        private void MediaElementMusic_MediaEnded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void MyWindow_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-
-        }
-
-        private void MyWindow_KeyDown(object sender, KeyEventArgs e)
-        {
-
-        }
-        #endregion
-
-        private void BtnNextLevel_Click(object sender, RoutedEventArgs e)
-        {
-
-
-        }
-
-        private void MediaElementVideo_KeyDown(object sender, KeyEventArgs e)
-        {
-
-        }
-
-        private void MyWindow_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (Game.HasCursor)
-            {
-                if (Game.Level != null)
-                    if (Game.Level.CurScene != null)
-                        if (Game.Level.CurScene.Sets != null) { }
-                           // ВКЛЮЧИТЬ КУРСОР 2
-                                // Game.Owner.Cursor = Game.Level.CurScene.Sets.Cursor2;
-            }
-        }
-
-        private void MyWindow_PreviewMouseUp(object sender, MouseButtonEventArgs e)
-        {
-            if (Game.HasCursor)
-            {
-                if (Game.Level != null)
-                    if (Game.Level.CurScene != null)
-                        if (Game.Level.CurScene.Sets != null) { }
-                            // ВКЛЮЧИТЬ КУРСОР 1
-                            //Game.Owner.Cursor = Game.Level.CurScene.Sets.Cursor;
-            }
-        }
-
-        private void VolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-           // Label1.Content = Game.Music.player.Volume + " " + Game.Sound.player.Volume + " " + Game.CurVideo.player.Volume;
-        }
 
         private void Image_MouseEnter(object sender, MouseEventArgs e)
         {
             Game.CurVideo.MediaGUI.UIMediaShowFull();
-//            TDrawEffects.ShowUI_MouseEnter((FrameworkElement)sender);
         }
 
 
         private void Image_MouseLeave(object sender, MouseEventArgs e)
         {
             Game.CurVideo.MediaGUI.UIMediaHideNotFull();
-            ///TDrawEffects.HideUI_MouseDown((FrameworkElement)sender);
         }
 
         
@@ -140,11 +76,6 @@ namespace VanyaGame
             Game.CurVideo.PlayBtnClick();
         }
 
-        private void MyWindow_PreviewMouseMove(object sender, MouseEventArgs e)
-        {
-
-        }
-
         private void MusicVolumeSlider_MouseEnter(object sender, MouseEventArgs e)
         {
             TDrawEffects.ShowUI_MouseEnter((FrameworkElement)sender);
@@ -155,10 +86,6 @@ namespace VanyaGame
             TDrawEffects.HideUI_MouseDown((FrameworkElement)sender);
         }
 
-        private void Grid_PreviewMouseMove(object sender, MouseEventArgs e)
-        {
-
-        }
 
         private void MyWindow_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
@@ -169,32 +96,6 @@ namespace VanyaGame
             if (e.Delta < 0)
                 for (int i = 1; i < 5; i++)
                     PreviewMenu.Scroll.LineDown();
-        }
-
-        SqlConnection sqlConnection;
-        
-
-        private void MyWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            if (sqlConnection != null && sqlConnection.State!= ConnectionState.Closed)
-            {
-                sqlConnection.Close();
-            }
-        }
-
-        private void VIDEOTEST_Click(object sender, RoutedEventArgs e)
-        {
-            Game.VideoPlayerSet(Game.VideoVlc);
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            //            Vlc.vlcPlayer.MediaPlayer.Position += 0.1f;
-            // L1.Content = Vlc.vlcPlayer.MediaPlayer.Time.ToString(); //Vlc.vlcPlayer.MediaPlayer.Position.ToString();
-            //L1.Content= TimeSpan.FromMilliseconds(Vlc.vlcPlayer.MediaPlayer.Length).ToString();
-            //L1.Content = Vlc.vlcPlayer.MediaPlayer.Audio.Volume;
-            Game.VideoPlayerSet(Game.VideoWpf);
         }
 
         private void SettingsWindowShowButtonClick(object sender, MouseButtonEventArgs e)
