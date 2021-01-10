@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,10 +10,23 @@ namespace InstallationTools
 {
     class Program
     {
+        static Dictionary<string, string> ValidAppSettings = new Dictionary<string, string>();
+        static string AppConfigFilename;
+        static string AppDir;
         static void Main(string[] args)
         {
+            if (args.Length < 1) Console.WriteLine("Настройка конфигурационных файлов невозможна... придется Вам самим настраивать приложение (картинки фона и т.п. выбирать)");
+           
+            AppConfigFilename = args[0];
+            AppDir = args[1];
+            ValidAppSettings.Add("BackgroundStartFilename", Path.Combine(AppDir,"Images", "NewBack.jpg"));
+            ValidAppSettings.Add("BackgroundMenuFilename", Path.Combine(AppDir, "Images", "back.jpg"));
+            ValidAppSettings.Add("BackgroundGameOverFilename", Path.Combine(AppDir, "Images", "back.jpg"));
+            ValidAppSettings.Add("MusicFilenames", Path.Combine(AppDir, "Music", "Music.mp3"));
+            ValidAppSettings.Add("AttachedDBCardsFilename", Path.Combine(AppDir, "Data", "Fruits.db"));
+
             Console.WriteLine("Настройка конфигурационных файлов...");
-//            if (args.Length > 1)
+//           
                 ConfigurateFiles(@"c:\1.config", "");
         }
 
