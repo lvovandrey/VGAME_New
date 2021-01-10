@@ -165,14 +165,6 @@ namespace VanyaGame
             Sound = new GameSound(ref Snd);
             Music = new GameMusic(ref Msc);
 
-            Player Vdovlc = new PlayerVlc("PlayerVideoVlc", mediaContainer, Owner.Vlc);
-            VideoVlc = new GameVideo(ref Vdovlc);
-
-            Player Vdowpf = new PlayerWpf("PlayerVideoWpf", mediaContainer, Owner.MediaElementVideo);
-            VideoWpf = new GameVideo(ref Vdowpf);
-
-            CurVideo = new GameVideo(ref Vdowpf);
-
 
             Music.MediaGUI.Add(Owner.MusicVolumeSlider);
             Game.Owner.MusicVolumeSlider.DataContext = Music.volume;
@@ -180,10 +172,15 @@ namespace VanyaGame
 
             if (Settings.GetInstance().VideoPlayerType == VideoPlayerType.vlc)
             {
+                Player Vdovlc = new PlayerVlc("PlayerVideoVlc", mediaContainer, Owner.Vlc);
+                VideoVlc = new GameVideo(ref Vdovlc);
                 VideoPlayerSet(VideoVlc);
             }
             if (Settings.GetInstance().VideoPlayerType == VideoPlayerType.wpf)
             {
+                Player Vdowpf = new PlayerWpf("PlayerVideoWpf", mediaContainer, Owner.MediaElementVideo);
+                VideoWpf = new GameVideo(ref Vdowpf);
+                CurVideo = new GameVideo(ref Vdowpf);
                 VideoPlayerSet(VideoWpf);
             }
 
