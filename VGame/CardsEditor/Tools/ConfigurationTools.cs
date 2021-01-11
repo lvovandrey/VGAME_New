@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,18 @@ namespace CardsEditor.Tools
 {
     public static class ConfigurationTools
     {
+
+        public static string _settingsFilename;
+        public static string SettingsFilename
+        {
+            get
+            {
+                if (_settingsFilename == "" || !File.Exists(_settingsFilename))
+                    _settingsFilename = ReadSetting("SettingsFilename");
+                return _settingsFilename;
+            }
+        }
+
 
         public static string ReadSetting(string key)
         {
@@ -49,5 +62,7 @@ namespace CardsEditor.Tools
                 MessageBox.Show("Error writing app settings");
             }
         }
+    
+        
     }
 }

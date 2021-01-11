@@ -135,6 +135,7 @@
     <Compile Include="Model\Level.cs" />
     <Compile Include="Model\LevelPassing.cs" />
     <Compile Include="Tools\ConfigurationTools.cs" />
+    <Compile Include="Tools\Settings.cs" />
     <Compile Include="ViewModel\CardStatisticVM.cs" />
     <Compile Include="ViewModel\CardVM.cs" />
     <Compile Include="ViewModel\LevelStatisticVM.cs" />

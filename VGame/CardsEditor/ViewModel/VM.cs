@@ -27,8 +27,8 @@ namespace CardsEditor.ViewModel
             mainWindow = _mainWindow;
             mainWindow.DataContext = this;
 
-            SetTTSVoices();
-            RestoreAllSettings();
+            Settings.GetInstance().SetTTSVoices();
+            Settings.GetInstance().RestoreAllSettings();
 
             ttsSettingsWindow = new TTSSettingsWindow();
             ttsSettingsWindow.Owner = mainWindow;
@@ -119,105 +119,14 @@ namespace CardsEditor.ViewModel
         }
 
 
-        private ReadOnlyCollection<InstalledVoice> _TextToSpeachVoices;
-        public ObservableCollection<InstalledVoice> TextToSpeachVoices
+        
 
-        {
-            get
-            {
-                return new ObservableCollection<InstalledVoice>(_TextToSpeachVoices);
-            }
-        }
-
-        private string TTSVoiceName 
-        {
-            get 
-            {
-               return _TTSVoice.VoiceInfo.Name;
-            }
-            set 
-            {
-                var TextToSpeachVoicesNames = from v in TextToSpeachVoices select v.VoiceInfo.Name;
-                if(TextToSpeachVoicesNames.Contains(value))
-                {
-                    TTSVoice = (from v in TextToSpeachVoices where (v.VoiceInfo.Name == value) select v).First();
-                }
-            }
-        }
-
-        private InstalledVoice _TTSVoice;
-        public InstalledVoice TTSVoice
-        {
-            get { return _TTSVoice; }
-            set 
-            { 
-                _TTSVoice = value;
-                OnPropertyChanged("TTSVoice");
-                ConfigurationTools.AddUpdateAppSettings("TTSVoiceName", TTSVoiceName);
-            }
-        }
-
-        private int _TTSVoiceRate = 0;
-        public int TTSVoiceRate
-        { 
-            get { return _TTSVoiceRate; }
-            set
-            {
-                if (value <= 10 && value >= -10)
-                {
-                    _TTSVoiceRate = value;
-                    OnPropertyChanged("TTSVoiceRate");
-                    ConfigurationTools.AddUpdateAppSettings("TTSVoiceRate", TTSVoiceRate.ToString());
-                }
-            }
-        }
-
-        private int _TTSVoiceVolume = 100;
-        public int TTSVoiceVolume
-        {
-            get { return _TTSVoiceVolume; }
-            set
-            {
-                if (value <= 100 && value >= 0)
-                {
-                    _TTSVoiceVolume = value;
-                    OnPropertyChanged("TTSVoiceVolume");
-                    ConfigurationTools.AddUpdateAppSettings("TTSVoiceVolume", TTSVoiceVolume.ToString());
-                }
-            }
-        }
 
         #endregion
 
         #region Methods
 
-        public void SaveAllSettings()
-        {
-            ConfigurationTools.AddUpdateAppSettings("TTSVoiceName", TTSVoiceName);
-            ConfigurationTools.AddUpdateAppSettings("TTSVoiceRate", TTSVoiceRate.ToString());
-            ConfigurationTools.AddUpdateAppSettings("TTSVoiceVolume", TTSVoiceVolume.ToString());
-        }
-
-        public void RestoreAllSettings()
-        {
-            TTSVoiceName = ConfigurationTools.ReadSetting("TTSVoiceName");
-            int.TryParse(ConfigurationTools.ReadSetting("TTSVoiceRate"), out _TTSVoiceRate);
-            int.TryParse(ConfigurationTools.ReadSetting("TTSVoiceVolume"), out _TTSVoiceVolume);
-        }
-
-
-        private void SetTTSVoices()
-        {
-            SpeechSynthesizer speaker = new SpeechSynthesizer();
-            _TextToSpeachVoices = speaker.GetInstalledVoices(new CultureInfo("ru-RU"));
-            if (_TextToSpeachVoices.Count == 0)
-            {
-                System.Windows.MessageBox.Show("В Windows не установлены голоса для синтеза речи на русском языке. Установите пожалуйста, а то ничего не будет слышно. Гуглить по запросам TTS SAPI 5, MS Speach Platform ");
-                _TTSVoice = null;
-                return;
-            }
-            _TTSVoice = _TextToSpeachVoices[0];
-        }
+        
 
         //позорный костыль для загрузки БД - так и не разобрался почему коллекция после выхода из статического метода не изменяется. а внутри меняется вроде.
         public void init(ObservableCollection<Card> cards, ObservableCollection<Level> levels, ObservableCollection<LevelPassing> levelPassings, Context Context)
