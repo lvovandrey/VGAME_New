@@ -151,18 +151,6 @@
     </Reference>
     <Reference Include="UIAutomationProvider" />
     <Reference Include="UIAutomationTypes" />
-    <Reference Include="Vlc.DotNet.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=84529da31f4eb963, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vlc.DotNet.Core.2.2.1\lib\net45\Vlc.DotNet.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Vlc.DotNet.Core.Interops, Version=2.2.1.0, Culture=neutral, PublicKeyToken=84529da31f4eb963, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vlc.DotNet.Core.Interops.2.2.1\lib\net45\Vlc.DotNet.Core.Interops.dll</HintPath>
-    </Reference>
-    <Reference Include="Vlc.DotNet.Forms, Version=2.2.1.0, Culture=neutral, PublicKeyToken=84529da31f4eb963, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vlc.DotNet.Forms.2.2.1\lib\net45\Vlc.DotNet.Forms.dll</HintPath>
-    </Reference>
-    <Reference Include="Vlc.DotNet.Wpf, Version=2.2.1.0, Culture=neutral, PublicKeyToken=84529da31f4eb963, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vlc.DotNet.Wpf.2.2.1\lib\net45\Vlc.DotNet.Wpf.dll</HintPath>
-    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -235,6 +223,7 @@
     <Compile Include="GameCardsNewDB\Struct\CardsNewDBIteration.cs" />
     <Compile Include="GameCardsNewDB\Struct\CardsNewDBLevel.cs" />
     <Compile Include="GameCardsNewDB\Struct\CardsNewDBScene.cs" />
+    <Compile Include="Interface\Empty.cs" />
     <Compile Include="Struct\IterationSets.cs" />
     <Compile Include="Struct\LevelSets.cs" />
     <Compile Include="Struct\SceneSets.cs" />
@@ -246,16 +235,12 @@
       <DependentUpon>CardUnitElement.xaml</DependentUpon>
     </Compile>
     <Compile Include="GameCardsNewDB\Units\Components\CardShower.cs" />
-    <Compile Include="Interface\VlcWrap.xaml.cs">
-      <DependentUpon>VlcWrap.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Media\Abstract\Player.cs" />
     <Compile Include="Media\GameMedia.cs" />
     <Compile Include="Media\Abstract\IPlayer.cs" />
     <Compile Include="Media\GameMediaContainer.cs" />
     <Compile Include="Media\MediaControllers.cs" />
     <Compile Include="Media\MediaTimer.cs" />
-    <Compile Include="Media\PlayerVlc.cs" />
     <Compile Include="Media\PlayerWpf.cs" />
     <Compile Include="Media\Time.cs" />
     <Compile Include="Media\Volume.cs" />
@@ -364,10 +349,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="HidingElements.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Interface\VlcWrap.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

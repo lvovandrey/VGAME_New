@@ -170,12 +170,7 @@ namespace VanyaGame
             Game.Owner.MusicVolumeSlider.DataContext = Music.volume;
             Music.MediaGUI.UIMediaHide();
 
-            if (Settings.GetInstance().VideoPlayerType == VideoPlayerType.vlc)
-            {
-                Player Vdovlc = new PlayerVlc("PlayerVideoVlc", mediaContainer, Owner.Vlc);
-                VideoVlc = new GameVideo(ref Vdovlc);
-                VideoPlayerSet(VideoVlc);
-            }
+
             if (Settings.GetInstance().VideoPlayerType == VideoPlayerType.wpf)
             {
                 Player Vdowpf = new PlayerWpf("PlayerVideoWpf", mediaContainer, Owner.MediaElementVideo);

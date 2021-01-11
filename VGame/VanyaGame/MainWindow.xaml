@@ -5,9 +5,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:VanyaGame" 
         xmlns:GameCardsNewDB ="clr-namespace:VanyaGame.GameCardsNewDB.Interface"
-        xmlns:Interface ="clr-namespace:VanyaGame.Interface"
-        x:Name="MyWindow" x:Class="VanyaGame.MainWindow"
-        
+        x:Name="MyWindow" x:Class="VanyaGame.MainWindow"        
         Title="MainWindow" Height="720" Width="1000" 
 
         WindowStartupLocation="CenterScreen" Cursor="{DynamicResource HandCursor}" Loaded="MyWindow_Loaded" 
@@ -64,9 +62,9 @@
                                Background="{x:Null}" Panel.ZIndex="2">
 
                         <Label x:Name="Label1" 
-                           Content="Нажмите Esc для выхода из игры&#xA;Нажмите F для пропуска видео" 
+                           Content="Нажмите Esc для выхода" 
                            Visibility="Visible" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Top" 
-                               Background="{x:Null}" Foreground="#FFFF0909" Panel.ZIndex="2" Opacity="0.5">
+                               Background="{x:Null}" Foreground="#FFFF0909" Panel.ZIndex="2" >
                             <Label.Effect>
                                 <DropShadowEffect Color="#FFB9FF00" BlurRadius="1" ShadowDepth="1"/>
                             </Label.Effect>
@@ -79,7 +77,7 @@
                         <GameCardsNewDB:BeautyButtonCardsNewDB x:Name="StartButton"  Height="250" Visibility="Visible" Margin="20"/>
                     </StackPanel>
                     
-                    <Interface:VlcWrap x:Name="Vlc" Margin="0,70,0,100" Visibility="Hidden"/>
+
 
                     <Label x:Name="Label1_Copy" Content="/////////////////////////////" Visibility="Visible" HorizontalAlignment="Left" Margin="13,74,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FFFF0909" Panel.ZIndex="2" Opacity="0" RenderTransformOrigin="0.391,1.851">
                         <Label.Effect>
@@ -195,9 +193,9 @@
                 </Slider>
 
                 <Grid x:Name="GridVlcBlackBackgrnd" Visibility="{Binding ElementName=Vlc, Path=Visibility}" Panel.ZIndex="-10" 
-                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Background="Black"/>
+                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" />
                 <Grid x:Name="GridVlcBlackBackgrnd2" Visibility="{Binding ElementName=Vlc, Path=Visibility}" Panel.ZIndex="-10" 
-                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Background="Black"/>
+                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" />
 
                 <Image Cursor="{DynamicResource PushCursor}" Grid.Row="2" x:Name="BackImgButton" Grid.Column="0" Height="64" Source="Images/prev.png"  HorizontalAlignment="Right"  
                   VerticalAlignment="Bottom"                     Opacity="1" Margin="23"
