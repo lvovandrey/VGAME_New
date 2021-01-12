@@ -14,7 +14,7 @@ using System.Xml.Serialization;
 namespace CardsEditor.Tools
 {
     [Serializable]
-    public class Settings: INPCBase
+    public class Settings : INPCBase
     {
 
         //Сделаем этот класс синглтоном
@@ -23,9 +23,8 @@ namespace CardsEditor.Tools
 
         private Settings(bool NeedRestore)
         {
-            _TextToSpeachVoices = new SpeechSynthesizer().GetInstalledVoices(new CultureInfo("ru-RU"));
-            TTSVoice = _TextToSpeachVoices.First();
-            if (NeedRestore) RestoreAllSettings();
+            SetTTSVoices();
+            if (NeedRestore) ImportSettingsToXML(ConfigurationTools.SettingsFilename);
         }
 
         private Settings()
@@ -59,14 +58,18 @@ namespace CardsEditor.Tools
         }
 
 
-        public string TTSVoiceName
+        [XmlIgnore]
+        public string _TTSVoiceName
         {
             get
             {
-                return _TTSVoice.VoiceInfo.Name;
+                if (_TTSVoice != null)
+                    return _TTSVoice.VoiceInfo.Name;
+                else return "None";
             }
             set
             {
+                if (TextToSpeachVoices == null) return;
                 var TextToSpeachVoicesNames = from v in TextToSpeachVoices select v.VoiceInfo.Name;
                 if (TextToSpeachVoicesNames.Contains(value))
                 {
@@ -74,6 +77,19 @@ namespace CardsEditor.Tools
                 }
             }
         }
+
+        public string TTSVoiceName
+        {
+            get
+            {
+                return _TTSVoiceName;
+            }
+            set
+            {
+                _TTSVoiceName = value;
+            }
+        }
+
 
         [XmlIgnore]
         private InstalledVoice _TTSVoice;
@@ -101,7 +117,7 @@ namespace CardsEditor.Tools
             {
                 if (value < -10 || value > 10)
                 {
-                    InfoWindow.Show("Темп речи должен быть целым числом от -10 до 10");
+                    MessageBox.Show("Темп речи должен быть целым числом от -10 до 10");
                     return;
                 }
                 _TTSVoiceRate = value.ToString();
@@ -129,11 +145,14 @@ namespace CardsEditor.Tools
             }
         }
 
-       
+
         public void ExportSettingsToXML(string filename)
         {
+            if (!Directory.Exists(Path.GetDirectoryName(filename)))
+                Directory.CreateDirectory(Path.GetDirectoryName(filename));
+
             XmlSerializer formatter = new XmlSerializer(typeof(Settings));
-            using (FileStream fs = new FileStream(filename, FileMode.Create))
+            using (FileStream fs = new FileStream(filename, FileMode.OpenOrCreate))
             {
                 formatter.Serialize(fs, this);
             }
@@ -142,13 +161,31 @@ namespace CardsEditor.Tools
         public void ImportSettingsToXML(string filename)
         {
             XmlSerializer formatter = new XmlSerializer(typeof(Settings));
-            if (!File.Exists(filename)) { MessageBox.Show("Файл настроек " + filename + " не найден.", "Ошибка"); return; }
-            using (FileStream fs = new FileStream(filename, FileMode.Open))
+            if (!File.Exists(filename))
             {
-                var settings = (Settings)formatter.Deserialize(fs);
-                instance = settings;
+                if (MessageBox.Show("Файл настроек " + filename + " не найден. Создать пустой файл настроек с этим именем?", "Ошибка", MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.Yes)
+                {
+
+                }
+                return;
             }
-            if (instance == null) { MessageBox.Show("Ошибка открытия файла настроек. Десериализатор вернул null."); return; }
+            try
+            {
+                using (FileStream fs = new FileStream(filename, FileMode.Open))
+                {
+                    var settings = (Settings)formatter.Deserialize(fs);
+                    instance = settings;
+                }
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show("Ошибка открытия файла настроек. Ошибка открытия файла." + e.Message);
+            }
+            finally
+            {
+                if (instance == null)
+                { MessageBox.Show("Ошибка открытия файла настроек. Десериализатор вернул null."); }
+            }
         }
 
 

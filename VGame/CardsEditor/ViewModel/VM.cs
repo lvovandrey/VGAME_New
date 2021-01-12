@@ -28,7 +28,6 @@ namespace CardsEditor.ViewModel
             mainWindow.DataContext = this;
 
             Settings.GetInstance().SetTTSVoices();
-            Settings.GetInstance().RestoreAllSettings();
 
             ttsSettingsWindow = new TTSSettingsWindow();
             ttsSettingsWindow.Owner = mainWindow;
@@ -119,14 +118,52 @@ namespace CardsEditor.ViewModel
         }
 
 
-        
+        public ObservableCollection<string> TextToSpeachVoicesNames
+        {
+            get
+            {
+                var voices = Settings.GetInstance().TextToSpeachVoices;
+                return new ObservableCollection<string>(from v in voices select v.VoiceInfo.Name);
+            }
+        }
+
+
+        public string TTSVoiceName
+        {
+            get
+            {
+                return Settings.GetInstance().TTSVoiceName;
+            }
+            set
+            {
+                if (TextToSpeachVoicesNames.Contains(value))
+                {
+                    Settings.GetInstance().TTSVoiceName = value;
+                    OnPropertyChanged("TTSVoiceName");
+                }
+            }
+        }
+
+
+        public int TTSVoiceRate
+        {
+            get { return Settings.GetInstance().TTSVoiceRate; }
+            set { Settings.GetInstance().TTSVoiceRate = value; OnPropertyChanged("TTSVoiceRate"); }
+        }
+
+        public int TTSVoiceVolume
+        {
+            get { return Settings.GetInstance().TTSVoiceVolume; }
+            set { Settings.GetInstance().TTSVoiceVolume = value; OnPropertyChanged("TTSVoiceVolume"); }
+        }
+
 
 
         #endregion
 
         #region Methods
 
-        
+
 
         //позорный костыль для загрузки БД - так и не разобрался почему коллекция после выхода из статического метода не изменяется. а внутри меняется вроде.
         public void init(ObservableCollection<Card> cards, ObservableCollection<Level> levels, ObservableCollection<LevelPassing> levelPassings, Context Context)
@@ -419,7 +456,19 @@ namespace CardsEditor.ViewModel
             }
         }
 
+        private RelayCommand tTSSettingsSaveCommand;
+        public RelayCommand TTSSettingsSaveCommand
 
+        {
+            get
+            {
+                return tTSSettingsSaveCommand ?? (tTSSettingsSaveCommand = new RelayCommand(obj =>
+                {
+                    Settings.GetInstance().ExportSettingsToXML(ConfigurationTools.SettingsFilename);
+                }));
+            }
+        }
+        
 
 
         #endregion

@@ -126,8 +126,8 @@ namespace CardsEditor.ViewModel
                 {
                     if (SoundedText == null) return;
                     SpeechSynthesizer speaker = new SpeechSynthesizer();
-                    if(_vm.TTSVoice == null) MessageBox.Show("Не выбран голос для синтеза речи на русском языке. Выберите пожалуйста, а то ничего не будет слышно.");
-                    speaker.SelectVoice(_vm.TTSVoice.VoiceInfo.Name);
+                    if(_vm.TTSVoiceName == "" || _vm.TTSVoiceName==null) MessageBox.Show("Не выбран голос для синтеза речи на русском языке. Выберите пожалуйста, а то ничего не будет слышно.");
+                    speaker.SelectVoice(_vm.TTSVoiceName);
                     speaker.Rate = _vm.TTSVoiceRate;
                     Console.WriteLine(_vm.TTSVoiceRate);
                     speaker.Volume = _vm.TTSVoiceVolume;

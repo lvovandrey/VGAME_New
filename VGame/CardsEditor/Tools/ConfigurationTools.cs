@@ -12,13 +12,20 @@ namespace CardsEditor.Tools
     public static class ConfigurationTools
     {
 
-        public static string _settingsFilename;
+        private static string _settingsFilename;
         public static string SettingsFilename
         {
             get
             {
                 if (_settingsFilename == "" || !File.Exists(_settingsFilename))
                     _settingsFilename = ReadSetting("SettingsFilename");
+
+                if (_settingsFilename == "")
+                {
+                    var fileName = Path.Combine(@"C:\\VGame", "VGameConfig.xml");
+                    AddUpdateAppSettings("SettingsFilename", fileName);
+                    _settingsFilename = fileName;
+                }
                 return _settingsFilename;
             }
         }

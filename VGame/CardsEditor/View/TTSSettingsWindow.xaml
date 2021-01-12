@@ -23,6 +23,7 @@
             <el:PropertyViewer_IntNums_UpDown Tag="Громкость" DataContext="{Binding TTSVoiceVolume, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="0 20 0 0"/>
 
         </StackPanel>
+        <Button Content="Сохранить" Width="70" Height="25" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20" Command="{Binding TTSSettingsSaveCommand}" />
         <Button Content="ОК" Width="50" Height="25" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="20" Click="Button_Click" />
     </Grid>
 </Window>
