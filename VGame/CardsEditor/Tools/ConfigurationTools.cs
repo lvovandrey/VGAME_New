@@ -22,7 +22,7 @@ namespace CardsEditor.Tools
 
                 if (_settingsFilename == "")
                 {
-                    var fileName = Path.Combine(@"C:\\VGame", "VGameConfig.xml");
+                    var fileName = Path.Combine(@"C:\VGame", "VGameConfig.xml");
                     AddUpdateAppSettings("SettingsFilename", fileName);
                     _settingsFilename = fileName;
                 }

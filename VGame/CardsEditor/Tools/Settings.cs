@@ -152,7 +152,7 @@ namespace CardsEditor.Tools
                 Directory.CreateDirectory(Path.GetDirectoryName(filename));
 
             XmlSerializer formatter = new XmlSerializer(typeof(Settings));
-            using (FileStream fs = new FileStream(filename, FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream(filename, FileMode.Create))
             {
                 formatter.Serialize(fs, this);
             }
@@ -165,7 +165,7 @@ namespace CardsEditor.Tools
             {
                 if (MessageBox.Show("Файл настроек " + filename + " не найден. Создать пустой файл настроек с этим именем?", "Ошибка", MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.Yes)
                 {
-
+                    ExportSettingsToXML(filename);
                 }
                 return;
             }
