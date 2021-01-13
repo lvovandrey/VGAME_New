@@ -27,12 +27,15 @@ namespace CardsEditor.ViewModel
             mainWindow = _mainWindow;
             mainWindow.DataContext = this;
 
-            Settings.SettingsChanged += Settings_SettingsChanged;
-            Settings.GetInstance().SetTTSVoices();
-
             ttsSettingsWindow = new TTSSettingsWindow();
             ttsSettingsWindow.Owner = mainWindow;
             ttsSettingsWindow.DataContext = this;
+
+            Settings.SettingsChanged += Settings_SettingsChanged;
+            Settings.GetInstance().SetTTSVoices();
+            Settings.GetInstance().ImportSettingsToXML(ConfigurationTools.SettingsFilename);
+
+
         }
 
 

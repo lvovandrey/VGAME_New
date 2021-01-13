@@ -7,6 +7,7 @@ using VanyaGame.Struct;
 using System.IO;
 using VanyaGame.GameCardsNewDB.DB.RepositoryModel;
 using VanyaGame.GameCardsNewDB.Units.Components;
+using VanyaGame.Tools;
 
 namespace VanyaGame.GameCardsNewDB.Units
 {
@@ -49,9 +50,7 @@ namespace VanyaGame.GameCardsNewDB.Units
 
             if (System.IO.File.Exists(card.ImageAddress))
             {
-                ((CardUnitElement)B.Body).Img.Source = new BitmapImage(new Uri(card.ImageAddress));
-               // ((CardUnitElement)B.Body).Img.Width = 100;
-
+                ((CardUnitElement)B.Body).Img.Source = PictHelper.GetBitmapImage(new Uri(card.ImageAddress));
             }
             else
             {
@@ -117,7 +116,7 @@ namespace VanyaGame.GameCardsNewDB.Units
 
             if (System.IO.File.Exists(Card.ImageAddress))
             {
-                ((CardUnitElement)B.Body).Img.Source = new BitmapImage(new Uri(Card.ImageAddress));
+                ((CardUnitElement)B.Body).Img.Source = PictHelper.GetBitmapImage(new Uri(Card.ImageAddress));
             }
             else
             {

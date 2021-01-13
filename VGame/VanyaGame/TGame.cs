@@ -14,6 +14,7 @@ using VanyaGame.Abstract;
 using VanyaGame.DB;
 using VanyaGame.GameCardsNewDB.Struct;
 using VanyaGame.Sets;
+using VanyaGame.Tools;
 
 namespace VanyaGame
 {
@@ -189,7 +190,7 @@ namespace VanyaGame
         public static void LoadBackGround(string BackgroundFilename)
         {
             ImageBrush im = new ImageBrush();
-            im.ImageSource =  new BitmapImage(new Uri(BackgroundFilename));
+            im.ImageSource = PictHelper.GetBitmapImage(new Uri(BackgroundFilename));
             Owner.GridMain.Background = im;
         }
 
@@ -200,7 +201,7 @@ namespace VanyaGame
         public static void LoadPreview(string Filename)
         {
 //            System.Drawing.Bitmap myBitmap = new System.Drawing.Bitmap(@Filename);
-            Owner.PrevImg.Source = new BitmapImage(new Uri(Filename));// Imaging.CreateBitmapSourceFromBitmap(myBitmap);
+            Owner.PrevImg.Source = PictHelper.GetBitmapImage(new Uri(Filename));// Imaging.CreateBitmapSourceFromBitmap(myBitmap);
         }
 
 

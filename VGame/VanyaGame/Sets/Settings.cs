@@ -47,7 +47,7 @@ namespace VanyaGame.Sets
             get
             {
                 if (backgroundGameOverFilename == "" || backgroundGameOverFilename == "Not Found")
-                    backgroundGameOverFilename = @"J:\1.VANYA GAME\LEVELS\VanjaGame\interface\back.jpg";
+                    backgroundGameOverFilename = AppDir + @"\Images\back.jpg";
                 return backgroundGameOverFilename;
             }
             set
@@ -67,7 +67,7 @@ namespace VanyaGame.Sets
             get
             {
                 if (backgroundMenuFilename == "" || backgroundMenuFilename == "Not Found")
-                    backgroundMenuFilename = @"J:\1.VANYA GAME\LEVELS\VanjaGame\interface\back.jpg";
+                    backgroundMenuFilename = AppDir + @"\Images\back.jpg";
                 return backgroundMenuFilename;
             }
             set
@@ -87,7 +87,7 @@ namespace VanyaGame.Sets
             get
             {
                 if (backgroundStartFilename == "" || backgroundStartFilename == "Not Found")
-                    backgroundStartFilename = @"J:\1.VANYA GAME\LEVELS\VanjaGame\interface\back.jpg";
+                    backgroundStartFilename = AppDir + @"\Images\NewBack.jpg";
                 return backgroundStartFilename;
             }
             set
@@ -145,7 +145,7 @@ namespace VanyaGame.Sets
             get
             {
                 if (defaultVideo == "" || defaultVideo == "Not Found")
-                    defaultVideo = Path.Combine(AppDir+"default.wmv");
+                    defaultVideo = Path.Combine(AppDir, "default.wmv");
                 return defaultVideo;
             }
             set
@@ -165,7 +165,7 @@ namespace VanyaGame.Sets
             get
             {
                 if (defaultImage == "" || defaultImage == "Not Found")
-                    defaultImage = Path.Combine(AppDir + "default.jpg");
+                    defaultImage = Path.Combine(AppDir, @"Images\default.jpg");
                 return defaultImage;
             }
             set

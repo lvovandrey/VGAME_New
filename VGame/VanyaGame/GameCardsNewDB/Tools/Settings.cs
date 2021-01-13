@@ -395,7 +395,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
             get
             {
                 if (attachedDBCardsFilename == "" || attachedDBCardsFilename == "Not Found")
-                    attachedDBCardsFilename = @"C:\Users\Professional\TestBackupDB\CardsDBInsects.mdf";
+                    attachedDBCardsFilename = VanyaGame.Sets.Settings.GetInstance().AppDir + @"\Data\Fruits.db";
                 return attachedDBCardsFilename;
             }
             set
@@ -561,7 +561,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
             get
             {
                 if (backgroundFilename == "" || backgroundFilename == "Not Found")
-                    backgroundFilename = @"J:\1.VANYA GAME\LEVELS\VanjaGame\interface\back.jpg";
+                    backgroundFilename = VanyaGame.Sets.Settings.GetInstance().AppDir + @"\Images\back.jpg";
                 return backgroundFilename;
             }
             set

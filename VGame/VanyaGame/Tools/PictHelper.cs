@@ -6,6 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Windows.Media.Imaging;
 using System.Windows;
 
 namespace VanyaGame.Tools
@@ -60,6 +61,32 @@ namespace VanyaGame.Tools
             }
 
             return size;
+        }
+
+        public static BitmapImage GetBitmapImage(Uri uri)
+        {
+            BitmapImage bitmapImage = new BitmapImage();
+            BitmapImage tmpBitmapImage;
+            try
+            {
+                tmpBitmapImage = new BitmapImage(uri);
+                bitmapImage = tmpBitmapImage;
+            }
+            catch
+            {
+                try
+                {
+                    tmpBitmapImage = new BitmapImage(new Uri(VanyaGame.Sets.Settings.GetInstance().DefaultImage));
+                    bitmapImage = tmpBitmapImage;
+                    return bitmapImage;
+                }
+                catch 
+                {
+                    return bitmapImage;
+                }
+
+            }
+            return bitmapImage;
         }
     }
 }

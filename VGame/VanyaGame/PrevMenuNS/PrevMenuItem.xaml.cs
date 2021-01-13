@@ -6,6 +6,7 @@ using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using VanyaGame.Struct;
+using VanyaGame.Tools;
 
 namespace VanyaGame.PrevMenuNS
 {
@@ -31,7 +32,7 @@ namespace VanyaGame.PrevMenuNS
         {
             if (ImgFilename == "" || ImgFilename == null) return;
             if (ImgType == "youtube")
-                Img.Source = new BitmapImage(new Uri(@ImgFilename));
+                Img.Source = PictHelper.GetBitmapImage(new Uri(@ImgFilename));
             else
                 LoadImage(ImgFilename);
         }

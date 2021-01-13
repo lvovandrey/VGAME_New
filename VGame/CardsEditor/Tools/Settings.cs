@@ -21,18 +21,10 @@ namespace CardsEditor.Tools
         private static Settings instance;
         private static object syncRoot = new object();
 
-        private Settings(bool NeedRestore)
-        {
-            SetTTSVoices();
-            if (NeedRestore) ImportSettingsToXML(ConfigurationTools.SettingsFilename);
-        }
-
-
 
         private Settings()
         {
-            _TextToSpeachVoices = new SpeechSynthesizer().GetInstalledVoices(new CultureInfo("ru-RU"));
-            TTSVoice = _TextToSpeachVoices.First();
+            SetTTSVoices();
         }
 
         public static Settings GetInstance()
@@ -42,7 +34,7 @@ namespace CardsEditor.Tools
                 lock (syncRoot)
                 {
                     if (instance == null)
-                        instance = new Settings(true);
+                        instance = new Settings();
                 }
             }
             Console.WriteLine(instance.GetHashCode());
