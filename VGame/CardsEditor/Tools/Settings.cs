@@ -27,6 +27,8 @@ namespace CardsEditor.Tools
             if (NeedRestore) ImportSettingsToXML(ConfigurationTools.SettingsFilename);
         }
 
+
+
         private Settings()
         {
             _TextToSpeachVoices = new SpeechSynthesizer().GetInstalledVoices(new CultureInfo("ru-RU"));
@@ -43,8 +45,12 @@ namespace CardsEditor.Tools
                         instance = new Settings(true);
                 }
             }
+            Console.WriteLine(instance.GetHashCode());
             return instance;
+
         }
+
+        public static event Action SettingsChanged;
 
         [XmlIgnore]
         private ReadOnlyCollection<InstalledVoice> _TextToSpeachVoices;
@@ -156,6 +162,7 @@ namespace CardsEditor.Tools
             {
                 formatter.Serialize(fs, this);
             }
+            
         }
 
         public void ImportSettingsToXML(string filename)
@@ -185,6 +192,7 @@ namespace CardsEditor.Tools
             {
                 if (instance == null)
                 { MessageBox.Show("Ошибка открытия файла настроек. Десериализатор вернул null."); }
+                SettingsChanged?.Invoke();
             }
         }
 

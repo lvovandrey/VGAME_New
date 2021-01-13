@@ -12,18 +12,13 @@
     <Grid>
         <StackPanel Margin="20">
             <Label Content="Голос синтезатора речи (TTS)"/>
-            <ComboBox ItemsSource="{Binding TextToSpeachVoices}" SelectedItem="{Binding TTSVoice}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding VoiceInfo.Name}"/>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
+            <ComboBox ItemsSource="{Binding TextToSpeachVoicesNames}" SelectedItem="{Binding TTSVoiceName}"/>
             <el:PropertyViewer_IntNums_UpDown Tag="Темп речи" DataContext="{Binding TTSVoiceRate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="0 20 0 0"/>
             <el:PropertyViewer_IntNums_UpDown Tag="Громкость" DataContext="{Binding TTSVoiceVolume, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="0 20 0 0"/>
 
         </StackPanel>
         <Button Content="Сохранить" Width="70" Height="25" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20" Command="{Binding TTSSettingsSaveCommand}" />
+        <Button Content="Открыть" Width="70" Height="25" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="20" Command="{Binding TTSSettingsLoadCommand}" />
         <Button Content="ОК" Width="50" Height="25" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="20" Click="Button_Click" />
     </Grid>
 </Window>

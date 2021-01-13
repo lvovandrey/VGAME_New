@@ -27,12 +27,15 @@ namespace CardsEditor.ViewModel
             mainWindow = _mainWindow;
             mainWindow.DataContext = this;
 
+            Settings.SettingsChanged += Settings_SettingsChanged;
             Settings.GetInstance().SetTTSVoices();
 
             ttsSettingsWindow = new TTSSettingsWindow();
             ttsSettingsWindow.Owner = mainWindow;
             ttsSettingsWindow.DataContext = this;
         }
+
+
 
 
         #endregion
@@ -117,7 +120,6 @@ namespace CardsEditor.ViewModel
             }
         }
 
-
         public ObservableCollection<string> TextToSpeachVoicesNames
         {
             get
@@ -126,7 +128,6 @@ namespace CardsEditor.ViewModel
                 return new ObservableCollection<string>(from v in voices select v.VoiceInfo.Name);
             }
         }
-
 
         public string TTSVoiceName
         {
@@ -143,7 +144,6 @@ namespace CardsEditor.ViewModel
                 }
             }
         }
-
 
         public int TTSVoiceRate
         {
@@ -162,7 +162,13 @@ namespace CardsEditor.ViewModel
         #endregion
 
         #region Methods
-
+        private void Settings_SettingsChanged()
+        {
+            OnPropertyChanged("TextToSpeachVoicesNames");
+            OnPropertyChanged("TTSVoiceName");
+            OnPropertyChanged("TTSVoiceRate");
+            OnPropertyChanged("TTSVoiceVolume");
+        }
 
 
         //позорный костыль для загрузки БД - так и не разобрался почему коллекция после выхода из статического метода не изменяется. а внутри меняется вроде.
@@ -465,6 +471,19 @@ namespace CardsEditor.ViewModel
                 return tTSSettingsSaveCommand ?? (tTSSettingsSaveCommand = new RelayCommand(obj =>
                 {
                     Settings.GetInstance().ExportSettingsToXML(ConfigurationTools.SettingsFilename);
+                }));
+            }
+        }
+
+        private RelayCommand tTSSettingsLoadCommand;
+        public RelayCommand TTSSettingsLoadCommand
+
+        {
+            get
+            {
+                return tTSSettingsLoadCommand ?? (tTSSettingsLoadCommand = new RelayCommand(obj =>
+                {
+                    Settings.GetInstance().ImportSettingsToXML(ConfigurationTools.SettingsFilename);
                 }));
             }
         }
