@@ -9,6 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardsEditor", "CardsEditor\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstallationTools", "InstallationTools\InstallationTools.csproj", "{9C7FD438-00BE-4264-B16B-AC5C7F626740}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2D137AB9-E851-4074-AA19-485A009D03D3}"
+	ProjectSection(SolutionItems) = preProject
+		InstallationInnoScript.iss = InstallationInnoScript.iss
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

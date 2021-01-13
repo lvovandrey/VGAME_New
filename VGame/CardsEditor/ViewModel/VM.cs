@@ -34,8 +34,6 @@ namespace CardsEditor.ViewModel
             Settings.SettingsChanged += Settings_SettingsChanged;
             Settings.GetInstance().SetTTSVoices();
             Settings.GetInstance().ImportSettingsToXML(ConfigurationTools.SettingsFilename);
-
-
         }
 
 
