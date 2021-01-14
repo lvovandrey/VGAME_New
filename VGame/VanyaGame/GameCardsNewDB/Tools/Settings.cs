@@ -23,8 +23,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
         private Settings()
         {
             _MusicFilenames = new ObservableCollection<string>();
-            _TextToSpeachVoices = new SpeechSynthesizer().GetInstalledVoices(new CultureInfo("ru-RU"));
-            TTSVoice = _TextToSpeachVoices.First();
+            SetTTSVoices();
         }
 
         public static Settings GetInstance()
@@ -461,7 +460,10 @@ namespace VanyaGame.GameCardsNewDB.Tools
         {
             get
             {
-                return _TTSVoice.VoiceInfo.Name;
+                string name = "";
+                if (_TTSVoice != null)
+                    name = _TTSVoice.VoiceInfo.Name;
+                return name;
             }
             set
             {
@@ -577,7 +579,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
             get
             {
                 if (_MusicFilenames == null || _MusicFilenames.Count < 1)
-                    _MusicFilenames = new ObservableCollection<string>(new List<string>{ VanyaGame.Sets.Settings.GetInstance().AppDir + @"\Music\Music.mp3" });
+                    _MusicFilenames = new ObservableCollection<string>(new List<string> { VanyaGame.Sets.Settings.GetInstance().AppDir + @"\Music\Music.mp3" });
                 return _MusicFilenames;
             }
         }
@@ -717,7 +719,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
             XmlSerializer formatter = new XmlSerializer(typeof(Settings));
             if (!File.Exists(filename))
             {
-                if (MessageBox.Show("Файл настроек " + filename + " не найден. Создать пустой файл настроек с этим именем?", "Ошибка", 
+                if (MessageBox.Show("Файл настроек " + filename + " не найден. Создать пустой файл настроек с этим именем?", "Ошибка",
                     MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.Yes)
                 {
                     ExportSettingsToXML(filename);
@@ -748,7 +750,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
         {
             ExportSettingsToXML(ConfigurationTools.SettingsFilename);
         }
-                
+
         internal void RestoreAllSettings()
         {
             ImportSettingsFromXML(ConfigurationTools.SettingsFilename);
@@ -796,7 +798,18 @@ namespace VanyaGame.GameCardsNewDB.Tools
         //    SettingsChanged?.Invoke();
         //}
 
-
+        public void SetTTSVoices()
+        {
+            SpeechSynthesizer speaker = new SpeechSynthesizer();
+            _TextToSpeachVoices = speaker.GetInstalledVoices(new CultureInfo("ru-RU"));
+            if (_TextToSpeachVoices.Count == 0)
+            {
+                System.Windows.MessageBox.Show("В Windows не установлены голоса для синтеза речи на русском языке. Установите пожалуйста, а то ничего не будет слышно. Гуглить по запросам TTS SAPI 5, MS Speach Platform ");
+                _TTSVoice = null;
+                return;
+            }
+            _TTSVoice = _TextToSpeachVoices[0];
+        }
 
         private string PackObservableCollectionToString(ObservableCollection<string> collection)
         {
