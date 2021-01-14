@@ -23,8 +23,9 @@ namespace VanyaGame.GameCardsNewDB.Interface
         {
             settingsWindow = _settingsWindow;
             musicFilenamesListView = _musicFilenamesListView;
-            RestoreSettingsCommand.Execute(null);
             settingsWindow.DataContext = this;
+            Settings.GetInstance().ImportSettingsFromXML(ConfigurationTools.SettingsFilename);
+            RefreshAllDependencyProperties();
 
             settingsWindow.Loaded += SettingsWindowView_Loaded;
             settingsWindow.Activated += SettingsWindowView_Activated;
@@ -284,12 +285,12 @@ namespace VanyaGame.GameCardsNewDB.Interface
         #region METHODS
         private void SettingsWindowView_Activated(object sender, EventArgs e)
         {
-            //           RestoreSettingsCommand.Execute(null);
+            
         }
 
         private void SettingsWindowView_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            RestoreSettingsCommand.Execute(null);
+            
         }
 
         private void RefreshAllDependencyProperties()
@@ -351,19 +352,19 @@ namespace VanyaGame.GameCardsNewDB.Interface
             }
         }
 
-        private RelayCommand restoreSettingsCommand;
-        public RelayCommand RestoreSettingsCommand
-        {
-            get
-            {
-                return restoreSettingsCommand ??
-                  (restoreSettingsCommand = new RelayCommand(obj =>
-                  {
-                      Settings.GetInstance().RestoreAllSettings();
-                      RefreshAllDependencyProperties();
-                  }));
-            }
-        }
+        //private RelayCommand restoreSettingsCommand;
+        //public RelayCommand RestoreSettingsCommand
+        //{
+        //    get
+        //    {
+        //        return restoreSettingsCommand ??
+        //          (restoreSettingsCommand = new RelayCommand(obj =>
+        //          {
+        //              Settings.GetInstance().RestoreAllSettings();
+        //              RefreshAllDependencyProperties();
+        //          }));
+        //    }
+        //}
 
         private RelayCommand importSettingsFromXMLCommand;
         public RelayCommand ImportSettingsFromXMLCommand
@@ -382,7 +383,7 @@ namespace VanyaGame.GameCardsNewDB.Interface
 
                       try
                       {
-                          Settings.GetInstance().ImportSettingsToXML(@openFileDialog.FileName);
+                          Settings.GetInstance().ImportSettingsFromXML(@openFileDialog.FileName);
                           RefreshAllDependencyProperties();
                       }
                       catch

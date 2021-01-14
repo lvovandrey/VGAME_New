@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,25 @@ namespace VanyaGame
 {
     public static class ConfigurationTools
     {
+
+        private static string _settingsFilename;
+        public static string SettingsFilename
+        {
+            get
+            {
+                if (_settingsFilename == "" || !File.Exists(_settingsFilename))
+                    _settingsFilename = ReadSetting("SettingsFilename");
+
+                if (_settingsFilename == "")
+                {
+                    var fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "VGame", "VGame.Config.xml");
+                    AddUpdateAppSettings("SettingsFilename", fileName);
+                    _settingsFilename = fileName;
+                }
+                return _settingsFilename;
+            }
+        }
+
 
         public static string ReadSetting(string key)
         {

@@ -20,13 +20,6 @@ namespace VanyaGame.GameCardsNewDB.Tools
         private static Settings instance;
         private static object syncRoot = new object();
 
-        private Settings(bool NeedRestore)
-        {
-            _TextToSpeachVoices = new SpeechSynthesizer().GetInstalledVoices(new CultureInfo("ru-RU"));
-            TTSVoice = _TextToSpeachVoices.First();
-            if(NeedRestore) RestoreAllSettings();
-        }
-
         private Settings()
         {
             _TextToSpeachVoices = new SpeechSynthesizer().GetInstalledVoices(new CultureInfo("ru-RU"));
@@ -40,7 +33,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
                 lock (syncRoot)
                 {
                     if (instance == null)
-                        instance = new Settings(true);
+                        instance = new Settings();
                 }
             }
             return instance;
@@ -662,108 +655,131 @@ namespace VanyaGame.GameCardsNewDB.Tools
 
 
 
-        public void SaveAllSettings()
-        {
-            ConfigurationTools.AddUpdateAppSettings("VisualHintEnable", visualHintEnable);
-            ConfigurationTools.AddUpdateAppSettings("EducationModeEnable", educationModeEnable);
-            ConfigurationTools.AddUpdateAppSettings("SpeakAgainCardNameDelay", speakAgainCardNameDelay);
-            ConfigurationTools.AddUpdateAppSettings("SpeakAgainCardNameTimePeriod", speakAgainCardNameTimePeriod);
-            ConfigurationTools.AddUpdateAppSettings("VisualHintDelay", visualHintDelay);
-            ConfigurationTools.AddUpdateAppSettings("VisualHintTimePeriod", visualHintTimePeriod);
-            ConfigurationTools.AddUpdateAppSettings("VisualHintDuration", visualHintDuration);
-            ConfigurationTools.AddUpdateAppSettings("EducationVisualHintDelay", EducationvisualHintDelay);
-            ConfigurationTools.AddUpdateAppSettings("EducationVisualHintTimePeriod", EducationvisualHintTimePeriod);
-            ConfigurationTools.AddUpdateAppSettings("EducationVisualHintDuration", EducationvisualHintDuration);
+        //public void SaveAllSettings()
+        //{
+        //    ConfigurationTools.AddUpdateAppSettings("VisualHintEnable", visualHintEnable);
+        //    ConfigurationTools.AddUpdateAppSettings("EducationModeEnable", educationModeEnable);
+        //    ConfigurationTools.AddUpdateAppSettings("SpeakAgainCardNameDelay", speakAgainCardNameDelay);
+        //    ConfigurationTools.AddUpdateAppSettings("SpeakAgainCardNameTimePeriod", speakAgainCardNameTimePeriod);
+        //    ConfigurationTools.AddUpdateAppSettings("VisualHintDelay", visualHintDelay);
+        //    ConfigurationTools.AddUpdateAppSettings("VisualHintTimePeriod", visualHintTimePeriod);
+        //    ConfigurationTools.AddUpdateAppSettings("VisualHintDuration", visualHintDuration);
+        //    ConfigurationTools.AddUpdateAppSettings("EducationVisualHintDelay", EducationvisualHintDelay);
+        //    ConfigurationTools.AddUpdateAppSettings("EducationVisualHintTimePeriod", EducationvisualHintTimePeriod);
+        //    ConfigurationTools.AddUpdateAppSettings("EducationVisualHintDuration", EducationvisualHintDuration);
 
-            ConfigurationTools.AddUpdateAppSettings("FirstQuestionText", FirstQuestionText);
-            ConfigurationTools.AddUpdateAppSettings("HintQuestionText", HintQuestionText);
-            ConfigurationTools.AddUpdateAppSettings("SuccessTestText", SuccessTestText);
-            ConfigurationTools.AddUpdateAppSettings("FallTestText", FallTestText);
+        //    ConfigurationTools.AddUpdateAppSettings("FirstQuestionText", FirstQuestionText);
+        //    ConfigurationTools.AddUpdateAppSettings("HintQuestionText", HintQuestionText);
+        //    ConfigurationTools.AddUpdateAppSettings("SuccessTestText", SuccessTestText);
+        //    ConfigurationTools.AddUpdateAppSettings("FallTestText", FallTestText);
 
-            ConfigurationTools.AddUpdateAppSettings("CardSize", cardSize);
-            ConfigurationTools.AddUpdateAppSettings("CardSuccesSize", cardSuccesSize);
-            ConfigurationTools.AddUpdateAppSettings("CardSuccesTime", cardSuccesTime);
-            ConfigurationTools.AddUpdateAppSettings("CardWrongPauseTime", cardWrongPauseTime);
-            ConfigurationTools.AddUpdateAppSettings("CardSuccesSpeakAgainTime", cardSuccesSpeakAgainTime);
-            ConfigurationTools.AddUpdateAppSettings("BackgroundFilename", backgroundFilename);
+        //    ConfigurationTools.AddUpdateAppSettings("CardSize", cardSize);
+        //    ConfigurationTools.AddUpdateAppSettings("CardSuccesSize", cardSuccesSize);
+        //    ConfigurationTools.AddUpdateAppSettings("CardSuccesTime", cardSuccesTime);
+        //    ConfigurationTools.AddUpdateAppSettings("CardWrongPauseTime", cardWrongPauseTime);
+        //    ConfigurationTools.AddUpdateAppSettings("CardSuccesSpeakAgainTime", cardSuccesSpeakAgainTime);
+        //    ConfigurationTools.AddUpdateAppSettings("BackgroundFilename", backgroundFilename);
 
-            ConfigurationTools.AddUpdateAppSettings("AttachedDBCardsFilename", attachedDBCardsFilename);
+        //    ConfigurationTools.AddUpdateAppSettings("AttachedDBCardsFilename", attachedDBCardsFilename);
 
-            ConfigurationTools.AddUpdateAppSettings("TTSVoiceName", TTSVoiceName);
-            ConfigurationTools.AddUpdateAppSettings("TTSVoiceRate", _TTSVoiceRate);
-            ConfigurationTools.AddUpdateAppSettings("TTSVoiceSlowRate", _TTSVoiceSlowRate);
-            ConfigurationTools.AddUpdateAppSettings("TTSVoiceVolume", _TTSVoiceVolume);
+        //    ConfigurationTools.AddUpdateAppSettings("TTSVoiceName", TTSVoiceName);
+        //    ConfigurationTools.AddUpdateAppSettings("TTSVoiceRate", _TTSVoiceRate);
+        //    ConfigurationTools.AddUpdateAppSettings("TTSVoiceSlowRate", _TTSVoiceSlowRate);
+        //    ConfigurationTools.AddUpdateAppSettings("TTSVoiceVolume", _TTSVoiceVolume);
 
-            ConfigurationTools.AddUpdateAppSettings("MusicFilenames", PackObservableCollectionToString(_MusicFilenames));
-            ConfigurationTools.AddUpdateAppSettings("ShuffleMusic", shuffleMusic);
-            ConfigurationTools.AddUpdateAppSettings("RepeatMusicPlaylist", repeatMusicPlaylist);
+        //    ConfigurationTools.AddUpdateAppSettings("MusicFilenames", PackObservableCollectionToString(_MusicFilenames));
+        //    ConfigurationTools.AddUpdateAppSettings("ShuffleMusic", shuffleMusic);
+        //    ConfigurationTools.AddUpdateAppSettings("RepeatMusicPlaylist", repeatMusicPlaylist);
 
-            VanyaGame.Sets.Settings.GetInstance().SaveAllSettings();
+        //    VanyaGame.Sets.Settings.GetInstance().SaveAllSettings();
 
-            SettingsChanged?.Invoke();
-        }
+        //    SettingsChanged?.Invoke();
+        //}
 
         public void ExportSettingsToXML(string filename)
         {
+            if (!Directory.Exists(Path.GetDirectoryName(filename)))
+                Directory.CreateDirectory(Path.GetDirectoryName(filename));
+
             XmlSerializer formatter = new XmlSerializer(typeof(Settings));
             using (FileStream fs = new FileStream(filename, FileMode.Create))
             {
                 formatter.Serialize(fs, this);
             }
+
         }
 
-        public void ImportSettingsToXML(string filename)
+        public void ImportSettingsFromXML(string filename)
         {
             XmlSerializer formatter = new XmlSerializer(typeof(Settings));
-            if (!File.Exists(filename)) { MessageBox.Show("Файл настроек " + filename + " не найден.", "Ошибка"); return; }
-            using (FileStream fs = new FileStream(filename, FileMode.Open))
+            if (!File.Exists(filename))
             {
-                var settings = (Settings)formatter.Deserialize(fs);
-                instance = settings;
+                if (MessageBox.Show("Файл настроек " + filename + " не найден. Создать пустой файл настроек с этим именем?", "Ошибка", MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.Yes)
+                {
+                    ExportSettingsToXML(filename);
+                }
+                return;
             }
-            if (instance == null) { MessageBox.Show("Ошибка открытия файла настроек. Десериализатор вернул null."); return; }
+            try
+            {
+                using (FileStream fs = new FileStream(filename, FileMode.Open))
+                {
+                    var settings = (Settings)formatter.Deserialize(fs);
+                    instance = settings;
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Ошибка открытия файла настроек. Ошибка открытия файла." + e.Message);
+            }
+            finally
+            {
+                if (instance == null)
+                { MessageBox.Show("Ошибка открытия файла настроек. Десериализатор вернул null."); }
+                SettingsChanged?.Invoke();
+            }
         }
 
-        public void RestoreAllSettings()
-        {
-            visualHintEnable = ConfigurationTools.ReadSetting("VisualHintEnable");
-            educationModeEnable = ConfigurationTools.ReadSetting("EducationModeEnable");
-            speakAgainCardNameDelay = ConfigurationTools.ReadSetting("SpeakAgainCardNameDelay");
-            speakAgainCardNameTimePeriod = ConfigurationTools.ReadSetting("SpeakAgainCardNameTimePeriod");
-            visualHintDelay = ConfigurationTools.ReadSetting("VisualHintDelay");
-            visualHintTimePeriod = ConfigurationTools.ReadSetting("VisualHintTimePeriod");
-            visualHintDuration = ConfigurationTools.ReadSetting("VisualHintDuration");
-            EducationvisualHintDelay = ConfigurationTools.ReadSetting("EducationVisualHintDelay");
-            EducationvisualHintTimePeriod = ConfigurationTools.ReadSetting("EducationVisualHintTimePeriod");
-            EducationvisualHintDuration = ConfigurationTools.ReadSetting("EducationVisualHintDuration");
+        //public void RestoreAllSettings()
+        //{
+        //    visualHintEnable = ConfigurationTools.ReadSetting("VisualHintEnable");
+        //    educationModeEnable = ConfigurationTools.ReadSetting("EducationModeEnable");
+        //    speakAgainCardNameDelay = ConfigurationTools.ReadSetting("SpeakAgainCardNameDelay");
+        //    speakAgainCardNameTimePeriod = ConfigurationTools.ReadSetting("SpeakAgainCardNameTimePeriod");
+        //    visualHintDelay = ConfigurationTools.ReadSetting("VisualHintDelay");
+        //    visualHintTimePeriod = ConfigurationTools.ReadSetting("VisualHintTimePeriod");
+        //    visualHintDuration = ConfigurationTools.ReadSetting("VisualHintDuration");
+        //    EducationvisualHintDelay = ConfigurationTools.ReadSetting("EducationVisualHintDelay");
+        //    EducationvisualHintTimePeriod = ConfigurationTools.ReadSetting("EducationVisualHintTimePeriod");
+        //    EducationvisualHintDuration = ConfigurationTools.ReadSetting("EducationVisualHintDuration");
 
-            FirstQuestionText = ConfigurationTools.ReadSetting("FirstQuestionText");
-            HintQuestionText = ConfigurationTools.ReadSetting("HintQuestionText");
-            SuccessTestText = ConfigurationTools.ReadSetting("SuccessTestText");
-            FallTestText = ConfigurationTools.ReadSetting("FallTestText");
+        //    FirstQuestionText = ConfigurationTools.ReadSetting("FirstQuestionText");
+        //    HintQuestionText = ConfigurationTools.ReadSetting("HintQuestionText");
+        //    SuccessTestText = ConfigurationTools.ReadSetting("SuccessTestText");
+        //    FallTestText = ConfigurationTools.ReadSetting("FallTestText");
 
-            cardSize = ConfigurationTools.ReadSetting("CardSize");
-            cardSuccesSize = ConfigurationTools.ReadSetting("CardSuccesSize");
-            cardSuccesTime = ConfigurationTools.ReadSetting("CardSuccesTime");
-            cardWrongPauseTime = ConfigurationTools.ReadSetting("CardWrongPauseTime");
-            cardSuccesSpeakAgainTime = ConfigurationTools.ReadSetting("CardSuccesSpeakAgainTime");
-            backgroundFilename = ConfigurationTools.ReadSetting("BackgroundFilename");
+        //    cardSize = ConfigurationTools.ReadSetting("CardSize");
+        //    cardSuccesSize = ConfigurationTools.ReadSetting("CardSuccesSize");
+        //    cardSuccesTime = ConfigurationTools.ReadSetting("CardSuccesTime");
+        //    cardWrongPauseTime = ConfigurationTools.ReadSetting("CardWrongPauseTime");
+        //    cardSuccesSpeakAgainTime = ConfigurationTools.ReadSetting("CardSuccesSpeakAgainTime");
+        //    backgroundFilename = ConfigurationTools.ReadSetting("BackgroundFilename");
 
-            attachedDBCardsFilename = ConfigurationTools.ReadSetting("AttachedDBCardsFilename");
+        //    attachedDBCardsFilename = ConfigurationTools.ReadSetting("AttachedDBCardsFilename");
 
-            TTSVoiceName = ConfigurationTools.ReadSetting("TTSVoiceName");
-            _TTSVoiceRate = ConfigurationTools.ReadSetting("TTSVoiceRate");
-            _TTSVoiceSlowRate = ConfigurationTools.ReadSetting("TTSVoiceSlowRate");
-            _TTSVoiceVolume = ConfigurationTools.ReadSetting("TTSVoiceVolume");
+        //    TTSVoiceName = ConfigurationTools.ReadSetting("TTSVoiceName");
+        //    _TTSVoiceRate = ConfigurationTools.ReadSetting("TTSVoiceRate");
+        //    _TTSVoiceSlowRate = ConfigurationTools.ReadSetting("TTSVoiceSlowRate");
+        //    _TTSVoiceVolume = ConfigurationTools.ReadSetting("TTSVoiceVolume");
 
-            _MusicFilenames = UnpackObservableCollectionFromString(ConfigurationTools.ReadSetting("MusicFilenames"));
-            shuffleMusic = ConfigurationTools.ReadSetting("ShuffleMusic");
-            repeatMusicPlaylist = ConfigurationTools.ReadSetting("RepeatMusicPlaylist");
+        //    _MusicFilenames = UnpackObservableCollectionFromString(ConfigurationTools.ReadSetting("MusicFilenames"));
+        //    shuffleMusic = ConfigurationTools.ReadSetting("ShuffleMusic");
+        //    repeatMusicPlaylist = ConfigurationTools.ReadSetting("RepeatMusicPlaylist");
 
-            VanyaGame.Sets.Settings.GetInstance().RestoreAllSettings();
+        //    VanyaGame.Sets.Settings.GetInstance().RestoreAllSettings();
 
-            SettingsChanged?.Invoke();
-        }
+        //    SettingsChanged?.Invoke();
+        //}
 
 
 
