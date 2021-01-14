@@ -21,10 +21,12 @@ namespace VanyaGame.GameCardsNewDB.Interface
         #region CONSTRUCTOR
         public SettingsWindowVM(SettingsWindow _settingsWindow, System.Windows.Controls.ListView _musicFilenamesListView)
         {
+            Settings.GetInstance().ImportSettingsFromXML(ConfigurationTools.SettingsFilename);
+
             settingsWindow = _settingsWindow;
             musicFilenamesListView = _musicFilenamesListView;
             settingsWindow.DataContext = this;
-            Settings.GetInstance().ImportSettingsFromXML(ConfigurationTools.SettingsFilename);
+            
             RefreshAllDependencyProperties();
 
             settingsWindow.Loaded += SettingsWindowView_Loaded;
@@ -242,7 +244,10 @@ namespace VanyaGame.GameCardsNewDB.Interface
         {
             get
             {
-                return new ObservableCollection<MusicInfo>(from m in MusicFilenames select new MusicInfo(m));
+                var musicInfos = new ObservableCollection<MusicInfo>();
+                if (MusicFilenames?.Count>0)
+                    musicInfos = new ObservableCollection<MusicInfo>(from m in MusicFilenames select new MusicInfo(m));
+                return musicInfos;
             }
         }
 

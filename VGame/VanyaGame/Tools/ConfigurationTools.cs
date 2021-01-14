@@ -20,7 +20,7 @@ namespace VanyaGame
                 if (_settingsFilename == "" || !File.Exists(_settingsFilename))
                     _settingsFilename = ReadSetting("SettingsFilename");
 
-                if (_settingsFilename == "")
+                if (_settingsFilename == "" || !File.Exists(_settingsFilename))
                 {
                     var fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "VGame", "VGame.Config.xml");
                     AddUpdateAppSettings("SettingsFilename", fileName);

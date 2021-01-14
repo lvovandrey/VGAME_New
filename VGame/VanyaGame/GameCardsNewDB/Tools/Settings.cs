@@ -22,6 +22,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
 
         private Settings()
         {
+            _MusicFilenames = new ObservableCollection<string>();
             _TextToSpeachVoices = new SpeechSynthesizer().GetInstalledVoices(new CultureInfo("ru-RU"));
             TTSVoice = _TextToSpeachVoices.First();
         }
@@ -45,7 +46,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
         public event Action SettingsChanged;
 
         [XmlIgnore]
-        public string visualHintEnable = "True";
+        public string visualHintEnable = "False";
         public bool VisualHintEnable
         {
             get
@@ -64,7 +65,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
         }
 
         [XmlIgnore]
-        public string educationModeEnable = "True";
+        public string educationModeEnable = "False";
         public bool EducationModeEnable
         {
             get
@@ -575,6 +576,8 @@ namespace VanyaGame.GameCardsNewDB.Tools
         {
             get
             {
+                if (_MusicFilenames == null || _MusicFilenames.Count < 1)
+                    _MusicFilenames = new ObservableCollection<string>(new List<string>{ VanyaGame.Sets.Settings.GetInstance().AppDir + @"\Music\Music.mp3" });
                 return _MusicFilenames;
             }
         }
@@ -714,7 +717,8 @@ namespace VanyaGame.GameCardsNewDB.Tools
             XmlSerializer formatter = new XmlSerializer(typeof(Settings));
             if (!File.Exists(filename))
             {
-                if (MessageBox.Show("Файл настроек " + filename + " не найден. Создать пустой файл настроек с этим именем?", "Ошибка", MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.Yes)
+                if (MessageBox.Show("Файл настроек " + filename + " не найден. Создать пустой файл настроек с этим именем?", "Ошибка", 
+                    MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.Yes)
                 {
                     ExportSettingsToXML(filename);
                 }
@@ -739,6 +743,17 @@ namespace VanyaGame.GameCardsNewDB.Tools
                 SettingsChanged?.Invoke();
             }
         }
+
+        internal void SaveAllSettings()
+        {
+            ExportSettingsToXML(ConfigurationTools.SettingsFilename);
+        }
+                
+        internal void RestoreAllSettings()
+        {
+            ImportSettingsFromXML(ConfigurationTools.SettingsFilename);
+        }
+
 
         //public void RestoreAllSettings()
         //{
