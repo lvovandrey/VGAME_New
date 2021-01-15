@@ -125,7 +125,7 @@ namespace VanyaGame.Sets
             get
             {
                 if (localAppDataDir == "" || localAppDataDir == "Not Found")
-                    localAppDataDir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                    localAppDataDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "VGame");
                 return localAppDataDir;
             }
             set

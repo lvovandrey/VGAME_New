@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Speech.Synthesis;
+using System.Globalization;
 
 namespace InstallationTools
 {
@@ -36,15 +38,48 @@ namespace InstallationTools
             ValidAppSettings.Add("BackgroundGameOverFilename", Path.Combine(AppDataDir, "Images", "back.jpg"));
             ValidAppSettings.Add("AttachedDBCardsFilename", Path.Combine(AppDataDir, "Data", "Fruits.db"));
 
-            Console.WriteLine("Настройка конфигурационных файлов...");
+            Console.Write("Настройка конфигурационных файлов...          ");
             ConfigurateFiles(AppConfigFilename, ValidAppSettings);
 
-            Console.WriteLine("Настройка записей о музыкальных файлах...");
+            Console.Write("Настройка записей о музыкальных файлах...          ");
             ConfigurateMusicFiles(AppConfigFilename, Path.Combine(AppDataDir, "Music", "Music.mp3"), "_MusicFilenames");
 
-            Console.WriteLine("Настройка тестовой базы данных с примерами карточек...");
+            Console.Write("Настройка тестовой базы данных с примерами карточек...");
             DBRewrite(DefaultDbFilename, DBCardsImagesDir, DBCardsImagesDir);
 
+            Console.Write("Проверка наличия движка Text-to-Speech (преобразования текста в речь) и голосов..");
+            VoicesCheck();
+        }
+
+        private static void VoicesCheck()
+        {
+            try
+            {
+                SpeechSynthesizer speaker = new SpeechSynthesizer();
+                var _TextToSpeachVoices = speaker.GetInstalledVoices(new CultureInfo("ru-RU"));
+                if (_TextToSpeachVoices == null || _TextToSpeachVoices.Count == 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("В Windows не установлены голоса для синтеза речи на русском языке. Установите пожалуйста, а то ничего не будет слышно. Гуглить по запросам TTS SAPI 5, MS Speach Platform. Развернутая справка по установке голосов - в руководстве программы");
+                    Console.ResetColor();
+                    return;
+                }
+
+                if (_TextToSpeachVoices.Count > 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("ОК.  В системе установлено {0} голосов. По умолчанию используется голос {1}", _TextToSpeachVoices.Count, _TextToSpeachVoices[0].VoiceInfo.Name);
+                    Console.ResetColor();
+                    return;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Не удалось определить наличие средств синтеза речи в вашей Windows. Ошибка:"+ e.Message);
+                Console.WriteLine("Гуглить по запросам TTS SAPI 5, MS Speach Platform. Развернутая справка по установке голосов - в руководстве программы.");
+                Console.ResetColor();
+            }
         }
 
         private static void DBRewrite(string filename, string dBCardsImagesDir, string dBLevelsImagesDir)
@@ -63,10 +98,15 @@ namespace InstallationTools
                 }
 
                 CardsEditor.DB.DBTools.Context.SaveChanges();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("OK");
+                Console.ResetColor();
             }
-            catch
+            catch(Exception e)
             {
-                Console.WriteLine("Ошибка перезаписи базы данных.");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Ошибка перезаписи базы данных: "+ e.Message+ "   InnerException: " + e.InnerException.Message);
+                Console.ResetColor();
             }
         }
 
@@ -89,10 +129,15 @@ namespace InstallationTools
                     }
                 }
                 xDoc.Save(filename);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("OK"); 
+                Console.ResetColor();
             }
             catch (Exception e)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Ошибка настройки конфигурационного файла: " + e.Message);
+                Console.ResetColor();
             }
         }
 
@@ -117,10 +162,15 @@ namespace InstallationTools
                     }
                 }
                 xDoc.Save(configFilename);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("OK");
+                Console.ResetColor();
             }
             catch (Exception e)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Ошибка настройки конфигурационного файла: " + e.Message);
+                Console.ResetColor();
             }
         }
     }
