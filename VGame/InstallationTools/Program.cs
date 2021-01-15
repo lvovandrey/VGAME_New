@@ -13,11 +13,12 @@ namespace InstallationTools
     {
         static Dictionary<string, string> ValidAppSettings = new Dictionary<string, string>();
         static string AppConfigFilename;
+        static string CardsEditorConfigFilename;
         static string AppDir;
         static string DbFilename;
         static void Main(string[] args)
         {
-            if (args.Length < 2)
+            if (args.Length < 3)
             {
                 Console.WriteLine("Настройка конфигурационных файлов невозможна... придется Вам самим настраивать приложение (картинки фона и т.п. выбирать, базу данных создавать новую). Нажмите любую клавишу для продолжения.");
                 Console.ReadKey();
@@ -25,7 +26,8 @@ namespace InstallationTools
             }
             AppConfigFilename = args[0];
             AppDir = args[1];
-            DbFilename = args[2];
+            CardsEditorConfigFilename = args[2];
+            DbFilename = args[3];
 
             Console.WriteLine(AppConfigFilename + " " + AppDir + " " + DbFilename);
             Console.ReadKey();

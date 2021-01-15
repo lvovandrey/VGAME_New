@@ -17,10 +17,8 @@ namespace CardsEditor.Tools
         {
             get
             {
-                if (_settingsFilename == "" || !File.Exists(_settingsFilename))
-                    _settingsFilename = ReadSetting("SettingsFilename");
 
-                if (_settingsFilename == "")
+                if (_settingsFilename == "" || !File.Exists(_settingsFilename))
                 {
                     var fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "VGame", "CardEditor.Config.xml");
                     AddUpdateAppSettings("SettingsFilename", fileName);
