@@ -8,6 +8,7 @@ using System.Speech.Synthesis;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace VanyaGame.GameCardsNewDB.Tools
@@ -578,8 +579,6 @@ namespace VanyaGame.GameCardsNewDB.Tools
         {
             get
             {
-                if (_MusicFilenames == null || _MusicFilenames.Count < 1)
-                    _MusicFilenames = new ObservableCollection<string>(new List<string> { VanyaGame.Sets.Settings.GetInstance().LocalAppDataDir + @"\Music\Music.mp3" });
                 return _MusicFilenames;
             }
         }
@@ -723,6 +722,8 @@ namespace VanyaGame.GameCardsNewDB.Tools
                     MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.Yes)
                 {
                     ExportSettingsToXML(filename);
+                    ConfigurateMusicFiles();
+                    SettingsChanged?.Invoke();
                 }
                 return;
             }
@@ -732,6 +733,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
                 {
                     var settings = (Settings)formatter.Deserialize(fs);
                     instance = settings;
+                    SettingsChanged?.Invoke();
                 }
             }
             catch (Exception e)
@@ -797,6 +799,41 @@ namespace VanyaGame.GameCardsNewDB.Tools
 
         //    SettingsChanged?.Invoke();
         //}
+
+        void ConfigurateMusicFiles()
+        {
+            try
+            {
+                string AppDataDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "VGame");
+                string configFilename = Path.Combine(AppDataDir, "VGame.Config.xml");
+                string musicFilename = Path.Combine(AppDataDir, "Music", "Music.mp3");
+                string musicFilesNode = "MusicFilenames";
+
+                XmlDocument xDoc = new XmlDocument();
+                xDoc.Load(configFilename);
+                XmlElement xRoot = xDoc.DocumentElement;
+
+                foreach (XmlNode xnode in xRoot)
+                {
+                    if (xnode.Name == musicFilesNode)
+                    {
+                        xnode.RemoveAll();
+                        XmlElement stringElem = xDoc.CreateElement("string");
+                        XmlText stringText = xDoc.CreateTextNode(musicFilename);
+                        stringElem.AppendChild(stringText);
+                        xnode.AppendChild(stringElem);
+                        break;
+                    }
+                }
+                xDoc.Save(configFilename);
+                if (MusicFilenames.Count == 0)
+                    MusicFilenames.Add(musicFilename);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Файлы музыки не добавлены. Ошибка настройки конфигурационного файла: " + e.Message);
+            }
+        }
 
         public void SetTTSVoices()
         {

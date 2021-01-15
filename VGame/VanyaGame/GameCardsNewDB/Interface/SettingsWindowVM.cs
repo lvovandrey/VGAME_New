@@ -21,8 +21,9 @@ namespace VanyaGame.GameCardsNewDB.Interface
         #region CONSTRUCTOR
         public SettingsWindowVM(SettingsWindow _settingsWindow, System.Windows.Controls.ListView _musicFilenamesListView)
         {
+            Settings.GetInstance().SettingsChanged += SettingsWindowVM_SettingsChanged;
             Settings.GetInstance().ImportSettingsFromXML(ConfigurationTools.SettingsFilename);
-
+            
             settingsWindow = _settingsWindow;
             musicFilenamesListView = _musicFilenamesListView;
             settingsWindow.DataContext = this;
@@ -31,7 +32,12 @@ namespace VanyaGame.GameCardsNewDB.Interface
 
             settingsWindow.Loaded += SettingsWindowView_Loaded;
             settingsWindow.Activated += SettingsWindowView_Activated;
+            
+        }
 
+        private void SettingsWindowVM_SettingsChanged()
+        {
+            RefreshAllDependencyProperties();
         }
         #endregion
 
@@ -290,7 +296,7 @@ namespace VanyaGame.GameCardsNewDB.Interface
         #region METHODS
         private void SettingsWindowView_Activated(object sender, EventArgs e)
         {
-            
+            RefreshAllDependencyProperties();
         }
 
         private void SettingsWindowView_Loaded(object sender, System.Windows.RoutedEventArgs e)
@@ -298,7 +304,7 @@ namespace VanyaGame.GameCardsNewDB.Interface
             
         }
 
-        private void RefreshAllDependencyProperties()
+        public void RefreshAllDependencyProperties()
         {
             OnPropertyChanged("VisualHintEnable");
             OnPropertyChanged("EducationModeEnable");

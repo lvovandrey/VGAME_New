@@ -42,7 +42,7 @@ namespace InstallationTools
             ConfigurateFiles(AppConfigFilename, ValidAppSettings);
 
             Console.Write("Настройка записей о музыкальных файлах...          ");
-            ConfigurateMusicFiles(AppConfigFilename, Path.Combine(AppDataDir, "Music", "Music.mp3"), "_MusicFilenames");
+            ConfigurateMusicFiles(AppConfigFilename, Path.Combine(AppDataDir, "Music", "Music.mp3"), "MusicFilenames");
 
             Console.Write("Настройка тестовой базы данных с примерами карточек...");
             DBRewrite(DefaultDbFilename, DBCardsImagesDir, DBCardsImagesDir);

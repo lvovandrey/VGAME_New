@@ -33,6 +33,7 @@ namespace VanyaGame.GameCardsNewDB.Interface
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            ((SettingsWindowVM)DataContext).RefreshAllDependencyProperties();
             string ElementUsefulName = ((ListBoxItem)e.AddedItems[0]).Content.ToString();
             SettingsElementShow(ElementUsefulName);
         }
