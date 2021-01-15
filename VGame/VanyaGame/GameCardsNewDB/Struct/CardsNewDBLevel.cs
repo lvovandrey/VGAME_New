@@ -155,7 +155,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
 
         public void LoadMedia()
         {
-            Game.Music.LoadMediaFiles(new List<string>(Settings.GetInstance().MusicFilenames));
+            Game.Music.LoadMediaFiles(new List<string>(Settings.GetInstance()._MusicFilenames));
         }
 
         /// <summary>

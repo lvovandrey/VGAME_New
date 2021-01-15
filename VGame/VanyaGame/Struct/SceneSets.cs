@@ -17,7 +17,7 @@ namespace VanyaGame.Struct
             }
             set
             {
-                string path = Settings.GetInstance().AppDataDir + Level.Sets.Directory + value + @"\";
+                string path = Settings.GetInstance().LocalAppDataDir + Level.Sets.Directory + value + @"\";
                 if (System.IO.Directory.Exists(path))
                 {
                     dir = value;

@@ -95,7 +95,7 @@ namespace VanyaGame.Media
             OnEnded = null;
         }
 
-       
+
         public void Play(string MediaName)
         {
             if (!Media.ContainsKey(MediaName)) return;
@@ -239,7 +239,8 @@ namespace VanyaGame.Media
             foreach (string f in filenames)
             {
                 string tmp = System.IO.Path.GetFileNameWithoutExtension(f);
-                Media.Add(tmp, f);
+                if (!Media.ContainsKey(tmp))
+                    Media.Add(tmp, f);
                 OrderedMediaKeys.Add(tmp);
             }
         }

@@ -47,7 +47,7 @@ namespace VanyaGame.Sets
             get
             {
                 if (backgroundGameOverFilename == "" || backgroundGameOverFilename == "Not Found")
-                    backgroundGameOverFilename = AppDataDir + @"\Images\back.jpg";
+                    backgroundGameOverFilename = LocalAppDataDir + @"\Images\back.jpg";
                 return backgroundGameOverFilename;
             }
             set
@@ -67,7 +67,7 @@ namespace VanyaGame.Sets
             get
             {
                 if (backgroundMenuFilename == "" || backgroundMenuFilename == "Not Found")
-                    backgroundMenuFilename = AppDataDir + @"\Images\back.jpg";
+                    backgroundMenuFilename = LocalAppDataDir + @"\Images\back.jpg";
                 return backgroundMenuFilename;
             }
             set
@@ -87,7 +87,7 @@ namespace VanyaGame.Sets
             get
             {
                 if (backgroundStartFilename == "" || backgroundStartFilename == "Not Found")
-                    backgroundStartFilename = AppDataDir + @"\Images\NewBack.jpg";
+                    backgroundStartFilename = LocalAppDataDir + @"\Images\NewBack.jpg";
                 return backgroundStartFilename;
             }
             set
@@ -119,25 +119,46 @@ namespace VanyaGame.Sets
             }
         }
 
-        string appDataDir = "";
-        public string AppDataDir
+        string localAppDataDir = "";
+        public string LocalAppDataDir
         {
             get
             {
-                if (appDataDir == "" || appDataDir == "Not Found")
-                    appDataDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "VGame");
-                return appDataDir;
+                if (localAppDataDir == "" || localAppDataDir == "Not Found")
+                    localAppDataDir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                return localAppDataDir;
             }
             set
             {
                 if (!Directory.Exists(value))
                 {
-                    MessageBox.Show("Нужно выбрать существующую директорию размещения данных программы");
+                    MessageBox.Show("Нужно выбрать существующую директорию размещения основной программы");
                     return;
                 }
-                appDataDir = value;
+                localAppDataDir = value;
             }
         }
+
+        string appDir = "";
+        public string AppDir
+        {
+            get
+            {
+                if (appDir == "" || appDir == "Not Found")
+                    appDir = Environment.CurrentDirectory;
+                return appDir;
+            }
+            set
+            {
+                if (!Directory.Exists(value))
+                {
+                    MessageBox.Show("Нужно выбрать существующую директорию размещения основной программы");
+                    return;
+                }
+                appDir = value;
+            }
+        }
+
 
         string defaultVideo = "";
         public string DefaultVideo
@@ -145,7 +166,7 @@ namespace VanyaGame.Sets
             get
             {
                 if (defaultVideo == "" || defaultVideo == "Not Found")
-                    defaultVideo = Path.Combine(AppDataDir, @"Video\default.wmv"); 
+                    defaultVideo = Path.Combine(LocalAppDataDir,"Video", "default.wmv");
                 return defaultVideo;
             }
             set
@@ -165,7 +186,7 @@ namespace VanyaGame.Sets
             get
             {
                 if (defaultImage == "" || defaultImage == "Not Found")
-                    defaultImage = Path.Combine(AppDataDir, @"Images\default.jpg");
+                    defaultImage = Path.Combine(LocalAppDataDir, @"Images\default.jpg");
                 return defaultImage;
             }
             set
@@ -190,7 +211,7 @@ namespace VanyaGame.Sets
             ConfigurationTools.AddUpdateAppSettings("BackgroundStartFilename", backgroundStartFilename);
 
             ConfigurationTools.AddUpdateAppSettings("VideoPlayerType", videoPlayerType);
-            ConfigurationTools.AddUpdateAppSettings("AppDir", appDataDir);
+            ConfigurationTools.AddUpdateAppSettings("AppDir", localAppDataDir);
             ConfigurationTools.AddUpdateAppSettings("DefaultVideo", defaultVideo);
             ConfigurationTools.AddUpdateAppSettings("DefaultImage", defaultImage);
 
@@ -204,7 +225,7 @@ namespace VanyaGame.Sets
             backgroundStartFilename = ConfigurationTools.ReadSetting("BackgroundStartFilename");
 
             videoPlayerType = ConfigurationTools.ReadSetting("VideoPlayerType");
-            appDataDir = ConfigurationTools.ReadSetting("AppDir");
+            localAppDataDir = ConfigurationTools.ReadSetting("AppDir");
             defaultVideo = ConfigurationTools.ReadSetting("DefaultVideo");
             defaultImage = ConfigurationTools.ReadSetting("DefaultImage");
 

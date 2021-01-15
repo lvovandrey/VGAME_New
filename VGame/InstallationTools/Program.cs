@@ -12,28 +12,23 @@ namespace InstallationTools
     class Program
     {
         static Dictionary<string, string> ValidAppSettings = new Dictionary<string, string>();
-        static Dictionary<string, string> ValidCardsEditorSettings = new Dictionary<string, string>();
         static string AppConfigFilename;
         static string CardsEditorConfigFilename;
         static string AppDataDir;
         static string DefaultDbFilename;
+        static string DBCardsImagesDir;
         static void Main(string[] args)
         {
-            if (args.Length < 3)
-            {
-                Console.WriteLine("Настройка конфигурационных файлов невозможна... придется Вам самим настраивать приложение (картинки фона и т.п. выбирать, базу данных создавать новую). Нажмите любую клавишу для продолжения.");
-                Console.ReadKey();
-                return;
-            }
-            AppConfigFilename = args[0];
-            CardsEditorConfigFilename = args[1];
-            AppDataDir = args[2];
-            DefaultDbFilename = args[3];
+            AppDataDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "VGame");
+            AppConfigFilename = Path.Combine(AppDataDir, "VGame","VGame.Config.xml");
+            CardsEditorConfigFilename = Path.Combine(AppDataDir, "VGame", "CardsEditor.Config.xml");
+            DefaultDbFilename = Path.Combine(AppDataDir, "VGame", "Data", "Fruits.db");
+            DBCardsImagesDir = Path.Combine(AppDataDir, "Images", "Fruits");
 
             Console.WriteLine("Файл настроек VGame: {0} \n Файл настроек CardsEditor: {1} \n Папка хранения данных: {2} \n Тестовая БД: {3}",
                 AppConfigFilename, CardsEditorConfigFilename, AppDataDir, DefaultDbFilename);
             Console.ReadKey();
-            string DBCardsImagesDir = Path.Combine(AppDataDir, "Images", "Fruits");
+           
 
             ValidAppSettings.Add("BackgroundFilename", Path.Combine(AppDataDir, "Images", "back.jpg"));
             ValidAppSettings.Add("BackgroundStartFilename", Path.Combine(AppDataDir, "Images", "NewBack.jpg"));
