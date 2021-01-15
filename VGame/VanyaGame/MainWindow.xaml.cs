@@ -18,6 +18,7 @@ namespace VanyaGame
 
         private void MyWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            this.Hide();
             Game.Create(this);
             MyWindow.MouseMove += Game.UserActivity.MyWindow_MouseMove;
             MyWindow.MediaElementMusic.MediaEnded += Game.UserActivity.MediaElementMusic_MediaEnded;
@@ -26,7 +27,7 @@ namespace VanyaGame
             MyWindow.PreviewMouseDown += Game.UserActivity.PreviewMouseDown;
             MyWindow.PreviewMouseUp += Game.UserActivity.PreviewMouseUp;
 
-
+            this.Show();
             Game.PreviewStart();
         }
 

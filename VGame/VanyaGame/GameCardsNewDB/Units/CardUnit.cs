@@ -54,7 +54,13 @@ namespace VanyaGame.GameCardsNewDB.Units
             }
             else
             {
-                MessageBox.Show("Файл изображения не найден:  " + card.ImageAddress);
+                if (System.IO.File.Exists(Sets.Settings.GetInstance().DefaultImage))
+                {
+                    ((CardUnitElement)B.Body).Img.Source = 
+                        PictHelper.GetBitmapImage(new Uri(Sets.Settings.GetInstance().DefaultImage));
+                }
+                else
+                    MessageBox.Show("Файл изображения не найден:  " + card.ImageAddress);
             }
 
            
@@ -120,7 +126,13 @@ namespace VanyaGame.GameCardsNewDB.Units
             }
             else
             {
-                MessageBox.Show("Файл изображения не найден:  " + Card.ImageAddress);
+                if (System.IO.File.Exists(Sets.Settings.GetInstance().DefaultImage))
+                {
+                    ((CardUnitElement)B.Body).Img.Source =
+                        PictHelper.GetBitmapImage(new Uri(Sets.Settings.GetInstance().DefaultImage));
+                }
+                else
+                    MessageBox.Show("Файл изображения не найден:  " + Card.ImageAddress);
             }
 
             ShowComp = new HiderShower("HiderShower", newcardunit);
