@@ -277,11 +277,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
         {
             if (text == null) return;
             SpeechSynthesizer speaker = new SpeechSynthesizer();
-            if (Settings.GetInstance().TextToSpeachVoices.Count == 0)
-            {
-                MessageBox.Show("В системе не установлены голоса для синтеза речи на русском языке. Установите пожалуйста, а то ничего не будет слышно.");
-                return;
-            }
+            if (Settings.GetInstance().TextToSpeachVoices.Count == 0) return;
             else speaker.SelectVoice(Settings.GetInstance().TTSVoice.VoiceInfo.Name);
             speaker.Rate = Settings.GetInstance().TTSVoiceRate;
             speaker.Volume = Settings.GetInstance().TTSVoiceVolume;
@@ -292,11 +288,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
         {
             if (text == null) return;
             SpeechSynthesizer speaker = new SpeechSynthesizer();
-            if (Settings.GetInstance().TextToSpeachVoices.Count == 0)
-            {
-                MessageBox.Show("В системе не установлены голоса для синтеза речи на русском языке. Установите пожалуйста, а то ничего не будет слышно.");
-                return;
-            }
+            if (Settings.GetInstance().TextToSpeachVoices.Count == 0) return; 
             else speaker.SelectVoice(Settings.GetInstance().TTSVoice.VoiceInfo.Name);
             speaker.Rate = Settings.GetInstance().TTSVoiceSlowRate;
             speaker.Volume = Settings.GetInstance().TTSVoiceVolume;

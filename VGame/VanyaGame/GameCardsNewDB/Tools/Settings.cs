@@ -388,7 +388,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
             get
             {
                 if (attachedDBCardsFilename == "" || attachedDBCardsFilename == "Not Found")
-                    attachedDBCardsFilename = VanyaGame.Sets.Settings.GetInstance().AppDir + @"\Data\Fruits.db";
+                    attachedDBCardsFilename = VanyaGame.Sets.Settings.GetInstance().AppDataDir + @"\Data\Fruits.db";
                 return attachedDBCardsFilename;
             }
             set
@@ -557,7 +557,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
             get
             {
                 if (backgroundFilename == "" || backgroundFilename == "Not Found")
-                    backgroundFilename = VanyaGame.Sets.Settings.GetInstance().AppDir + @"\Images\back.jpg";
+                    backgroundFilename = VanyaGame.Sets.Settings.GetInstance().AppDataDir + @"\Images\back.jpg";
                 return backgroundFilename;
             }
             set
@@ -579,7 +579,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
             get
             {
                 if (_MusicFilenames == null || _MusicFilenames.Count < 1)
-                    _MusicFilenames = new ObservableCollection<string>(new List<string> { VanyaGame.Sets.Settings.GetInstance().AppDir + @"\Music\Music.mp3" });
+                    _MusicFilenames = new ObservableCollection<string>(new List<string> { VanyaGame.Sets.Settings.GetInstance().AppDataDir + @"\Music\Music.mp3" });
                 return _MusicFilenames;
             }
         }

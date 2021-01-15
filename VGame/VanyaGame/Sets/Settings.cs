@@ -47,7 +47,7 @@ namespace VanyaGame.Sets
             get
             {
                 if (backgroundGameOverFilename == "" || backgroundGameOverFilename == "Not Found")
-                    backgroundGameOverFilename = AppDir + @"\Images\back.jpg";
+                    backgroundGameOverFilename = AppDataDir + @"\Images\back.jpg";
                 return backgroundGameOverFilename;
             }
             set
@@ -67,7 +67,7 @@ namespace VanyaGame.Sets
             get
             {
                 if (backgroundMenuFilename == "" || backgroundMenuFilename == "Not Found")
-                    backgroundMenuFilename = AppDir + @"\Images\back.jpg";
+                    backgroundMenuFilename = AppDataDir + @"\Images\back.jpg";
                 return backgroundMenuFilename;
             }
             set
@@ -87,7 +87,7 @@ namespace VanyaGame.Sets
             get
             {
                 if (backgroundStartFilename == "" || backgroundStartFilename == "Not Found")
-                    backgroundStartFilename = AppDir + @"\Images\NewBack.jpg";
+                    backgroundStartFilename = AppDataDir + @"\Images\NewBack.jpg";
                 return backgroundStartFilename;
             }
             set
@@ -119,23 +119,23 @@ namespace VanyaGame.Sets
             }
         }
 
-        string appDir = "";
-        public string AppDir
+        string appDataDir = "";
+        public string AppDataDir
         {
             get
             {
-                if (appDir == "" || appDir == "Not Found")
-                    appDir = Environment.CurrentDirectory;
-                return appDir;
+                if (appDataDir == "" || appDataDir == "Not Found")
+                    appDataDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "VGame");
+                return appDataDir;
             }
             set
             {
                 if (!Directory.Exists(value))
                 {
-                    MessageBox.Show("Нужно выбрать существующую директорию размещения основной программы");
+                    MessageBox.Show("Нужно выбрать существующую директорию размещения данных программы");
                     return;
                 }
-                appDir = value;
+                appDataDir = value;
             }
         }
 
@@ -145,7 +145,7 @@ namespace VanyaGame.Sets
             get
             {
                 if (defaultVideo == "" || defaultVideo == "Not Found")
-                    defaultVideo = Path.Combine(AppDir, "default.wmv");
+                    defaultVideo = Path.Combine(AppDataDir, @"Video\default.wmv"); 
                 return defaultVideo;
             }
             set
@@ -165,7 +165,7 @@ namespace VanyaGame.Sets
             get
             {
                 if (defaultImage == "" || defaultImage == "Not Found")
-                    defaultImage = Path.Combine(AppDir, @"Images\default.jpg");
+                    defaultImage = Path.Combine(AppDataDir, @"Images\default.jpg");
                 return defaultImage;
             }
             set
@@ -190,7 +190,7 @@ namespace VanyaGame.Sets
             ConfigurationTools.AddUpdateAppSettings("BackgroundStartFilename", backgroundStartFilename);
 
             ConfigurationTools.AddUpdateAppSettings("VideoPlayerType", videoPlayerType);
-            ConfigurationTools.AddUpdateAppSettings("AppDir", appDir);
+            ConfigurationTools.AddUpdateAppSettings("AppDir", appDataDir);
             ConfigurationTools.AddUpdateAppSettings("DefaultVideo", defaultVideo);
             ConfigurationTools.AddUpdateAppSettings("DefaultImage", defaultImage);
 
@@ -204,7 +204,7 @@ namespace VanyaGame.Sets
             backgroundStartFilename = ConfigurationTools.ReadSetting("BackgroundStartFilename");
 
             videoPlayerType = ConfigurationTools.ReadSetting("VideoPlayerType");
-            appDir = ConfigurationTools.ReadSetting("AppDir");
+            appDataDir = ConfigurationTools.ReadSetting("AppDir");
             defaultVideo = ConfigurationTools.ReadSetting("DefaultVideo");
             defaultImage = ConfigurationTools.ReadSetting("DefaultImage");
 

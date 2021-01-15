@@ -22,7 +22,7 @@ namespace VanyaGame.Struct
             }
             set
             {
-                if (System.IO.Directory.Exists(Settings.GetInstance().AppDir + value + @"\"))
+                if (System.IO.Directory.Exists(Settings.GetInstance().AppDataDir + value + @"\"))
                 {
                     dir = value;
                 }

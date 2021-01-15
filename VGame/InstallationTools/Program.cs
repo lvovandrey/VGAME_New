@@ -12,10 +12,11 @@ namespace InstallationTools
     class Program
     {
         static Dictionary<string, string> ValidAppSettings = new Dictionary<string, string>();
+        static Dictionary<string, string> ValidCardsEditorSettings = new Dictionary<string, string>();
         static string AppConfigFilename;
         static string CardsEditorConfigFilename;
-        static string AppDir;
-        static string DbFilename;
+        static string AppDataDir;
+        static string DefaultDbFilename;
         static void Main(string[] args)
         {
             if (args.Length < 3)
@@ -25,26 +26,29 @@ namespace InstallationTools
                 return;
             }
             AppConfigFilename = args[0];
-            AppDir = args[1];
-            CardsEditorConfigFilename = args[2];
-            DbFilename = args[3];
+            CardsEditorConfigFilename = args[1];
+            AppDataDir = args[2];
+            DefaultDbFilename = args[3];
 
-            Console.WriteLine(AppConfigFilename + " " + AppDir + " " + DbFilename);
+            Console.WriteLine("Файл настроек VGame: {0} \n Файл настроек CardsEditor: {1} \n Папка хранения данных: {2} \n Тестовая БД: {3}",
+                AppConfigFilename, CardsEditorConfigFilename, AppDataDir, DefaultDbFilename);
             Console.ReadKey();
-            string DBCardsImagesDir = Path.Combine(AppDir, "Images", "Fruits");
+            string DBCardsImagesDir = Path.Combine(AppDataDir, "Images", "Fruits");
 
-            //ValidAppSettings.Add("BackgroundFilename", Path.Combine(AppDir, "Images", "back.jpg"));
-            //ValidAppSettings.Add("BackgroundStartFilename", Path.Combine(AppDir, "Images", "NewBack.jpg"));
-            //ValidAppSettings.Add("BackgroundMenuFilename", Path.Combine(AppDir, "Images", "back.jpg"));
-            //ValidAppSettings.Add("BackgroundGameOverFilename", Path.Combine(AppDir, "Images", "back.jpg"));
-            //ValidAppSettings.Add("MusicFilenames", Path.Combine(AppDir, "Music", "Music.mp3"));
-            //ValidAppSettings.Add("AttachedDBCardsFilename", Path.Combine(AppDir, "Data", "Fruits.db"));
+            ValidAppSettings.Add("BackgroundFilename", Path.Combine(AppDataDir, "Images", "back.jpg"));
+            ValidAppSettings.Add("BackgroundStartFilename", Path.Combine(AppDataDir, "Images", "NewBack.jpg"));
+            ValidAppSettings.Add("BackgroundMenuFilename", Path.Combine(AppDataDir, "Images", "back.jpg"));
+            ValidAppSettings.Add("BackgroundGameOverFilename", Path.Combine(AppDataDir, "Images", "back.jpg"));
+            ValidAppSettings.Add("AttachedDBCardsFilename", Path.Combine(AppDataDir, "Data", "Fruits.db"));
 
-            //Console.WriteLine("Настройка конфигурационных файлов...");
-            //ConfigurateFiles(AppConfigFilename, ValidAppSettings);
+            Console.WriteLine("Настройка конфигурационных файлов...");
+            ConfigurateFiles(AppConfigFilename, ValidAppSettings);
 
-            Console.WriteLine("Настройка базы данных по-умолчанию...");
-            DBRewrite(DbFilename, DBCardsImagesDir, DBCardsImagesDir);
+            Console.WriteLine("Настройка записей о музыкальных файлах...");
+            ConfigurateMusicFiles(AppConfigFilename, Path.Combine(AppDataDir, "Music", "Music.mp3"), "_MusicFilenames");
+
+            Console.WriteLine("Настройка тестовой базы данных с примерами карточек...");
+            DBRewrite(DefaultDbFilename, DBCardsImagesDir, DBCardsImagesDir);
 
         }
 
@@ -65,7 +69,7 @@ namespace InstallationTools
 
                 CardsEditor.DB.DBTools.Context.SaveChanges();
             }
-            catch 
+            catch
             {
                 Console.WriteLine("Ошибка перезаписи базы данных.");
             }
@@ -78,37 +82,50 @@ namespace InstallationTools
                 XmlDocument xDoc = new XmlDocument();
                 xDoc.Load(filename);
                 XmlElement xRoot = xDoc.DocumentElement;
-                // обход всех узлов в корневом элементе
+
                 foreach (XmlNode xnode in xRoot)
                 {
-                    // получаем атрибут name
-                    if (xnode.Name == "appSettings")
+                    foreach (var setting in validAppSettings)
                     {
-                        foreach (XmlNode childnode in xnode.ChildNodes)
+                        if (xnode.Name == setting.Key)
                         {
-                            if (childnode.Attributes.Count > 0)
-                            {
-                                XmlNode attrkey = childnode.Attributes.GetNamedItem("key");
-
-                                foreach (var appsettings in validAppSettings)
-                                {
-                                    if (attrkey != null && attrkey.Value == appsettings.Key)
-                                    {
-                                        XmlNode attrval = childnode.Attributes.GetNamedItem("value");
-                                        if (attrval != null)
-                                            attrval.Value = appsettings.Value;
-                                    }
-                                }
-
-                            }
+                            xnode.InnerText = setting.Value;
                         }
                     }
                 }
                 xDoc.Save(filename);
             }
-            catch (Exception e) 
+            catch (Exception e)
             {
-                Console.WriteLine("Ошибка настройки конфигурационного файла: "+ e.Message);
+                Console.WriteLine("Ошибка настройки конфигурационного файла: " + e.Message);
+            }
+        }
+
+        static void ConfigurateMusicFiles(string configFilename, string musicFilename, string musicFilesNode)
+        {
+            try
+            {
+                XmlDocument xDoc = new XmlDocument();
+                xDoc.Load(configFilename);
+                XmlElement xRoot = xDoc.DocumentElement;
+
+                foreach (XmlNode xnode in xRoot)
+                {
+                    if (xnode.Name == musicFilesNode)
+                    {
+                        xnode.RemoveAll();
+                        XmlElement stringElem = xDoc.CreateElement("string");
+                        XmlText stringText = xDoc.CreateTextNode(musicFilename);
+                        stringElem.AppendChild(stringText);
+                        xnode.AppendChild(stringElem);
+                        break;
+                    }
+                }
+                xDoc.Save(configFilename);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Ошибка настройки конфигурационного файла: " + e.Message);
             }
         }
     }
