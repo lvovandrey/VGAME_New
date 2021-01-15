@@ -32,20 +32,20 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: "I:\VGame\Union\VanyaGame.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "I:\VGame\Union\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "NET Framework 4.7.2.exe"; DestDir: "{tmp}"; Flags: deleteafterinstall; Check: not IsRequiredDotNetDetectedSilence
+Source: "I:\VGame\Resourses\*"; DestDir: "{localappdata}\VGame"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "I:\VGame\InstallationTools\*"; DestDir: "{tmp}"; Flags: ignoreversion recursesubdirs createallsubdirs deleteafterinstall
-
+Source: "I:\VGame\dotNet4.5.exe"; DestDir: "{tmp}"; Check: IsRequiredDotNetDetectedSilence; Flags: ignoreversion deleteafterinstall
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\VanyaGame.exe"
 Name: "{group}\Редактор БД карточек"; Filename: "{app}\CardsEditor.exe"
+Name: "{group}\Удалить VGame"; Filename: "{uninstallexe}"; IconFilename: "{app}\uninstall-icon.ico"
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\VanyaGame.exe"; Tasks: desktopicon
 Name: "{commondesktop}\Редактор БД карточек"; Filename: "{app}\CardsEditor.exe"; Tasks: desktopicon
-Name: "{group}\Удалить VGame"; Filename: "{uninstallexe}"; IconFilename: "{app}\uninstall-icon.ico"
 
 [Run]
-Filename: "{tmp}\NET Framework 4.7.2.exe"; Check: not IsRequiredDotNetDetected
-Filename: "{tmp}\InstallationTools.exe"; Parameters: """{app}\VanyaGame.exe.Config"" ""{app}"" ""{app}\Data\Fruits.db"""
+Filename: "{tmp}\dotNet4.5.exe"; Check: IsRequiredDotNetDetected
+Filename: "{tmp}\InstallationTools.exe"; Parameters: """{localappdata}\VGame\VGame.Config.xml"" ""{localappdata}\VGame\CardsEditor.Config.xml"" ""{localappdata}\VGame"" ""{localappdata}\VGame\Data\Fruits.db"""
 
 [Code]
 //-----------------------------------------------------------------------------
@@ -121,18 +121,18 @@ end;
 function IsRequiredDotNetDetected(): boolean;
 begin
 
-  if not IsDotNetDetected('v4.5', 461814) then
+  if not IsDotNetDetected('v4.5', 378389) then
     begin
-    if MsgBox('{#MyAppName} требует установки Microsoft .NET Framework 4.7.2 Full Profile.'#13#13
+    if MsgBox('{#MyAppName} требует установки Microsoft .NET Framework 4.5'#13#13
               'На Вашем компьютере данный пакет не установлен.'#13#13
-              'Вы можете установить его с помощью данного инсталлятора сейчас или позже самостоятельно'#13#13
-              'Установить .NET Framework 4.7.2 прямо сейчас? ', mbConfirmation, MB_YESNO) = IDYES then
+              'Вы можете установить его с помощью данного инсталлятора сейчас или позже самостоятельно с сайта Microsoft.'#13#13
+              'Установить .NET Framework 4.5 прямо сейчас? ', mbConfirmation, MB_YESNO) = IDYES then
         begin
-            result:= false;
+            result:= true;
             Exit;
         end;       
    end; 
-   result := true;
+   result := false;
 end;
 
 //-----------------------------------------------------------------------------
@@ -140,7 +140,7 @@ end;
 //-----------------------------------------------------------------------------
 function IsRequiredDotNetDetectedSilence(): boolean;
 begin
-  result:= IsDotNetDetected('v4.5', 461814); 
+  result:= not IsDotNetDetected('v4.5', 378389); 
 end;
 
 //-----------------------------------------------------------------------------
