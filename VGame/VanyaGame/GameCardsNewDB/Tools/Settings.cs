@@ -717,7 +717,8 @@ namespace VanyaGame.GameCardsNewDB.Tools
             XmlSerializer formatter = new XmlSerializer(typeof(Settings));
             if (!File.Exists(filename))
             {
-                if (MessageBox.Show("Файл настроек " + filename + " не найден. Создать пустой файл настроек с этим именем?", "Ошибка", 
+                if (MessageBox.Show("Вероятно это первый запуск программы. Файл настроек не найден. Создать файл настроек по умолчанию? (Рекомендуется ответить ДА)", 
+                    "Создание файла настройки", 
                     MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.Yes)
                 {
                     ExportSettingsToXML(filename);

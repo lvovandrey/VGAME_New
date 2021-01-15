@@ -31,15 +31,15 @@ namespace InstallationTools
             Console.ReadKey();
             string DBCardsImagesDir = Path.Combine(AppDir, "Images", "Fruits");
 
-            ValidAppSettings.Add("BackgroundFilename", Path.Combine(AppDir, "Images", "back.jpg"));
-            ValidAppSettings.Add("BackgroundStartFilename", Path.Combine(AppDir, "Images", "NewBack.jpg"));
-            ValidAppSettings.Add("BackgroundMenuFilename", Path.Combine(AppDir, "Images", "back.jpg"));
-            ValidAppSettings.Add("BackgroundGameOverFilename", Path.Combine(AppDir, "Images", "back.jpg"));
-            ValidAppSettings.Add("MusicFilenames", Path.Combine(AppDir, "Music", "Music.mp3"));
-            ValidAppSettings.Add("AttachedDBCardsFilename", Path.Combine(AppDir, "Data", "Fruits.db"));
+            //ValidAppSettings.Add("BackgroundFilename", Path.Combine(AppDir, "Images", "back.jpg"));
+            //ValidAppSettings.Add("BackgroundStartFilename", Path.Combine(AppDir, "Images", "NewBack.jpg"));
+            //ValidAppSettings.Add("BackgroundMenuFilename", Path.Combine(AppDir, "Images", "back.jpg"));
+            //ValidAppSettings.Add("BackgroundGameOverFilename", Path.Combine(AppDir, "Images", "back.jpg"));
+            //ValidAppSettings.Add("MusicFilenames", Path.Combine(AppDir, "Music", "Music.mp3"));
+            //ValidAppSettings.Add("AttachedDBCardsFilename", Path.Combine(AppDir, "Data", "Fruits.db"));
 
-            Console.WriteLine("Настройка конфигурационных файлов...");
-            ConfigurateFiles(AppConfigFilename, ValidAppSettings);
+            //Console.WriteLine("Настройка конфигурационных файлов...");
+            //ConfigurateFiles(AppConfigFilename, ValidAppSettings);
 
             Console.WriteLine("Настройка базы данных по-умолчанию...");
             DBRewrite(DbFilename, DBCardsImagesDir, DBCardsImagesDir);
