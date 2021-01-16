@@ -22,12 +22,12 @@ namespace InstallationTools
         static void Main(string[] args)
         {
             AppDataDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "VGame");
-            AppConfigFilename = Path.Combine(AppDataDir, "VGame","VGame.Config.xml");
-            CardsEditorConfigFilename = Path.Combine(AppDataDir, "VGame", "CardsEditor.Config.xml");
-            DefaultDbFilename = Path.Combine(AppDataDir, "VGame", "Data", "Fruits.db");
+            AppConfigFilename = Path.Combine(AppDataDir, "VGame.Config.xml");
+            CardsEditorConfigFilename = Path.Combine(AppDataDir, "CardsEditor.Config.xml");
+            DefaultDbFilename = Path.Combine(AppDataDir, "Data", "Fruits.db");
             DBCardsImagesDir = Path.Combine(AppDataDir, "Images", "Fruits");
 
-            Console.WriteLine("Файл настроек VGame: {0} \n Файл настроек CardsEditor: {1} \n Папка хранения данных: {2} \n Тестовая БД: {3}",
+            Console.WriteLine("Файл настроек VGame: {0} \n Файл настроек CardsEditor: {1} \n Папка хранения данных: {2} \n Тестовая БД: {3} \n Нажмите любую клавишу",
                 AppConfigFilename, CardsEditorConfigFilename, AppDataDir, DefaultDbFilename);
             Console.ReadKey();
            
@@ -49,6 +49,11 @@ namespace InstallationTools
 
             Console.Write("Проверка наличия движка Text-to-Speech (преобразования текста в речь) и голосов..");
             VoicesCheck();
+
+            Console.WriteLine("Если не было сообщений об ошибках (красным цветом), все в порядке. Если такие сообщения были - " +
+                "сделайте скриншот экрана или фотографию, или запишите сообщение об ошибки и отошлите разработчику на почту lvovandrey@mail.ru   \n " +
+                " Для продолжения установки нажмите любую клавишу)");
+            Console.ReadKey();
         }
 
         private static void VoicesCheck()
@@ -60,7 +65,9 @@ namespace InstallationTools
                 if (_TextToSpeachVoices == null || _TextToSpeachVoices.Count == 0)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("В Windows не установлены голоса для синтеза речи на русском языке. Установите пожалуйста, а то ничего не будет слышно. Гуглить по запросам TTS SAPI 5, MS Speach Platform. Развернутая справка по установке голосов - в руководстве программы");
+                    Console.WriteLine("В Windows не установлены голоса для синтеза речи на русском языке. Установите пожалуйста, " +
+                        "а то ничего не будет слышно. Гуглить по запросам TTS SAPI 5, MS Speach Platform. " +
+                        "Развернутая справка по установке голосов - в руководстве программы");
                     Console.ResetColor();
                     return;
                 }

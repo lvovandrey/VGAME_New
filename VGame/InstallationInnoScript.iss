@@ -22,6 +22,8 @@ OutputBaseFilename=setup1
 SetupIconFile=C:\Users\Professional\Pictures\book-icon.ico
 Compression=lzma
 SolidCompression=yes
+UninstallDisplayIcon={app}\uninstall-icon.ico
+UninstallDisplayName ={#MyAppName}
 
 [Languages]
 Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
@@ -46,6 +48,9 @@ Name: "{commondesktop}\Редактор БД карточек"; Filename: "{app}\CardsEditor.exe";
 [Run]
 Filename: "{tmp}\dotNet4.5.exe"; Check: IsRequiredDotNetDetected
 Filename: "{tmp}\InstallationTools.exe"; Parameters: """{localappdata}\VGame\VGame.Config.xml"" ""{localappdata}\VGame\CardsEditor.Config.xml"" ""{localappdata}\VGame"" ""{localappdata}\VGame\Data\Fruits.db"""
+
+[UninstallDelete]
+Type: filesandordirs; Name: "{localappdata}\VGame\*"
 
 [Code]
 //-----------------------------------------------------------------------------
