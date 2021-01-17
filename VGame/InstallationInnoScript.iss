@@ -49,7 +49,7 @@ Name: "{commondesktop}\Редактор БД карточек"; Filename: "{app}\CardsEditor.exe";
 
 [Run]
 Filename: "{tmp}\dotNet4.5.exe"; Check: IsRequiredDotNetDetected
-Filename: "{tmp}\RS26_00.msi"; Tasks: ttsvoice
+Filename: "msiexec.exe"; Parameters: "/i ""{tmp}\RS26_00.msi"" /qb"; WorkingDir: {tmp};
 Filename: "{tmp}\InstallationTools.exe"; Parameters: """{localappdata}\VGame\VGame.Config.xml"" ""{localappdata}\VGame\CardsEditor.Config.xml"" ""{localappdata}\VGame"" ""{localappdata}\VGame\Data\Fruits.db"""
 
 [UninstallDelete]
