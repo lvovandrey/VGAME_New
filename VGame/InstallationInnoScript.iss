@@ -30,7 +30,7 @@ Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
-Name: "ttsvoice"; Description: "Установка голоса Katerina от ScanSoft (довольно низкокачественный, но ставится почти везде)"
+Name: "ttsvoice"; Description: "Установка голоса Katerina от ScanSoft - только для ознакомления (довольно низкокачественный, но ставится почти везде. Рекомендую позже посмотреть другие голоса для синтеза речи)"
 
 [Files]
 Source: "I:\VGame\Union\VanyaGame.exe"; DestDir: "{app}"; Flags: ignoreversion
