@@ -44,7 +44,7 @@
                         <DropShadowEffect ShadowDepth="21" Opacity="0.685" Color="#FF030038" BlurRadius="23"/>
                     </Image.Effect>
                 </Image>
-               
+
                 <TextBox Panel.ZIndex="15" x:Name="TxtBlock" Opacity="0.0" ScrollViewer.VerticalScrollBarVisibility="Visible" HorizontalAlignment="Right" Height="685" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="10" Canvas.Left="743" Canvas.Top="10" Visibility="Visible"/>
                 <Label  HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FFFF0909">
                     <Label.Effect>
@@ -61,6 +61,12 @@
                     <StackPanel HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Top" 
                                Background="{x:Null}" Panel.ZIndex="2">
 
+                        <Image Width="40" Height="40" 
+                               HorizontalAlignment="Right" 
+                               Source="Images/Cross.png" 
+                               PreviewMouseUp="Close_PreviewMouseUp"
+                              Style="{DynamicResource AlmostHidingElement}"/>
+
                         <Label x:Name="Label1" 
                            Content="Нажмите Esc для выхода" 
                            Visibility="Visible" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Top" 
@@ -69,6 +75,7 @@
                                 <DropShadowEffect Color="#FFB9FF00" BlurRadius="1" ShadowDepth="1"/>
                             </Label.Effect>
                         </Label>
+
                     </StackPanel>
                     <MediaElement x:Name="MediaElementVideo" HorizontalAlignment="Center" VerticalAlignment="Center" LoadedBehavior="Manual" Stretch="Fill" Opacity="0.1"  />
 
@@ -76,7 +83,7 @@
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
                         <GameCardsNewDB:BeautyButtonCardsNewDB x:Name="StartButton"  Height="250" Visibility="Visible" Margin="20"/>
                     </StackPanel>
-                    
+
 
 
                     <Label x:Name="Label1_Copy" Content="/////////////////////////////" Visibility="Visible" HorizontalAlignment="Left" Margin="13,74,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FFFF0909" Panel.ZIndex="2" Opacity="0" RenderTransformOrigin="0.391,1.851">
@@ -106,7 +113,7 @@
 
             <WrapPanel ItemWidth="300" ItemHeight="300" Orientation="Horizontal"  x:Name="WrapPanelMain" Grid.Row="0" MaxWidth="1260" VerticalAlignment="Center" HorizontalAlignment="Center" >
             </WrapPanel>
-            
+
             <TextBlock Text="" FontFamily="Comic Sans MS" 
                        Style="{DynamicResource HidingElement}"
                        Panel.ZIndex="30000" 
@@ -255,7 +262,7 @@
 
 
 
-                
+
                 <Label x:Name="L1" Content="Label" HorizontalAlignment="Left" Margin="10,282,0,0" Grid.Row="1" VerticalAlignment="Top" Width="218" Grid.ColumnSpan="3" Opacity="0"/>
 
             </Grid>

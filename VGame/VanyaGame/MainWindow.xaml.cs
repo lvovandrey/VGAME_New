@@ -103,6 +103,14 @@ namespace VanyaGame
         {
             Game.ShowSettingsWindow();
         }
+
+
+
+        private void Close_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
     }
 
 

@@ -30,13 +30,15 @@ Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
+Name: "ttsvoice"; Description: "Установка голоса Katerina от ScanSoft (довольно низкокачественный, но ставится почти везде)"
 
 [Files]
 Source: "I:\VGame\Union\VanyaGame.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "I:\VGame\Union\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "I:\VGame\Resourses\*"; DestDir: "{localappdata}\VGame"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "I:\VGame\InstallationTools\*"; DestDir: "{tmp}"; Flags: ignoreversion recursesubdirs createallsubdirs deleteafterinstall
-Source: "I:\VGame\dotNet4.5.exe"; DestDir: "{tmp}"; Check: IsRequiredDotNetDetectedSilence; Flags: ignoreversion deleteafterinstall
+Source: "I:\VGame\dotNet4.5.exe"; DestDir: "{tmp}"; Flags: ignoreversion deleteafterinstall; Check: IsRequiredDotNetDetectedSilence
+Source: "I:\VGame\RS26_00.msi"; DestDir: "{tmp}"; Flags: ignoreversion deleteafterinstall;
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\VanyaGame.exe"
@@ -47,6 +49,7 @@ Name: "{commondesktop}\Редактор БД карточек"; Filename: "{app}\CardsEditor.exe";
 
 [Run]
 Filename: "{tmp}\dotNet4.5.exe"; Check: IsRequiredDotNetDetected
+Filename: "{tmp}\RS26_00.msi"; Tasks: ttsvoice
 Filename: "{tmp}\InstallationTools.exe"; Parameters: """{localappdata}\VGame\VGame.Config.xml"" ""{localappdata}\VGame\CardsEditor.Config.xml"" ""{localappdata}\VGame"" ""{localappdata}\VGame\Data\Fruits.db"""
 
 [UninstallDelete]
