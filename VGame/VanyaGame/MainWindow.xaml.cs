@@ -111,6 +111,10 @@ namespace VanyaGame
             Environment.Exit(0);
         }
 
+        private void StopLevel_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            Game.Level.Abort();
+        }
     }
 
 

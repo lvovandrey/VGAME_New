@@ -15,7 +15,7 @@
             <EventTrigger.Actions>
                 <BeginStoryboard>
                     <Storyboard TargetProperty="Width" >
-                        <DoubleAnimation To="60" From="70"
+                        <DoubleAnimation To="55" From="60"
                                          Duration="0:0:0.1" />
                     </Storyboard>
                 </BeginStoryboard>
@@ -26,7 +26,7 @@
             <EventTrigger.Actions>
                 <BeginStoryboard>
                     <Storyboard TargetProperty="Width" >
-                        <DoubleAnimation To="70" From="60"
+                        <DoubleAnimation To="60" From="55"
                                          Duration="0:0:0.1" />
                     </Storyboard>
                 </BeginStoryboard>

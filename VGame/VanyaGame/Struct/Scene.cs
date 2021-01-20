@@ -22,5 +22,9 @@ namespace VanyaGame.Struct
 
         }
 
+        public virtual void Abort()
+        { 
+        
+        }
     }
 }

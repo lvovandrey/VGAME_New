@@ -28,6 +28,9 @@ namespace VanyaGame.GameCardsNewDB.Struct
         private CardsNewDBLevel numberDBLevel;
         private CardPassing CurCardPassing;
         private bool CurUnitAlreadyTasked = false; // Показывает в первый раз или нет данный юнит предъявляется для угадывания
+        private bool IsAborted = false;
+
+        SpeechSynthesizer speaker = new SpeechSynthesizer();
 
         public CardsNewDBScene(CardsNewDBLevel _Level) : base(_Level, _Level.Sets.Name)
         {
@@ -84,6 +87,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
 
         private void NextNumber()
         {
+            if (IsAborted) return;
             Panel.SetZIndex(Game.Owner.WrapPanelMain, 30000);
 
             if (UnitsCol.GetNewUnits().Count > 0)
@@ -172,6 +176,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
         Timer flashTimer;
         private void Flash(object obj)
         {
+            if (IsAborted) return;
             if (needFlash)
             {
                 var body = CurUnit.GetComponent<HaveBody>().Body as CardUnitElement;
@@ -189,6 +194,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
 
         private void U_MouseClicked()
         {
+            if (IsAborted) return;
             needSpeakAgain = false;
             if (speakAgainTimer != null)
             {
@@ -263,10 +269,12 @@ namespace VanyaGame.GameCardsNewDB.Struct
 
             ToolsTimer.Delay(() =>
             {
+                if (IsAborted) return;
                 Panel.SetZIndex(CurUnittmp.GetComponent<HaveBody>().Body, 1110);
                 CurUnittmp.GetComponent<CardShower>().Hide(() => { });
                 ToolsTimer.Delay(() =>
                 {
+                    if (IsAborted) return;
                     Game.Owner.WrapPanelBigCards.Children.Clear();
                     NextNumber();
                 }, TimeSpan.FromSeconds(1));
@@ -276,7 +284,9 @@ namespace VanyaGame.GameCardsNewDB.Struct
         private void Speak(string text)
         {
             if (text == null) return;
-            SpeechSynthesizer speaker = new SpeechSynthesizer();
+            speaker?.Pause();
+            speaker?.Resume();
+            speaker = new SpeechSynthesizer();
             if (Settings.GetInstance().TextToSpeachVoices.Count == 0) return;
             else speaker.SelectVoice(Settings.GetInstance().TTSVoice.VoiceInfo.Name);
             speaker.Rate = Settings.GetInstance().TTSVoiceRate;
@@ -287,7 +297,9 @@ namespace VanyaGame.GameCardsNewDB.Struct
         private void SpeakSlow(string text)
         {
             if (text == null) return;
-            SpeechSynthesizer speaker = new SpeechSynthesizer();
+            speaker?.Pause();
+            speaker?.Resume();
+            speaker = new SpeechSynthesizer();
             if (Settings.GetInstance().TextToSpeachVoices.Count == 0) return; 
             else speaker.SelectVoice(Settings.GetInstance().TTSVoice.VoiceInfo.Name);
             speaker.Rate = Settings.GetInstance().TTSVoiceSlowRate;
@@ -318,11 +330,22 @@ namespace VanyaGame.GameCardsNewDB.Struct
             Game.Music.Pause();
             Game.Owner.WrapPanelMain.Children.Clear();
 
+            speakAgainTimer?.Dispose();
+            flashTimer?.Dispose();
+
             level.NextScene();
 
 
         }
 
+        public override void Abort()
+        {
+            Game.Owner.WrapPanelBigCards.Children.Clear();
+            speaker?.Pause();
+            speaker?.Resume();
+            IsAborted = true;
+            SceneEnded(this,(CardsNewDBLevel)Level);
+        }
 
     }
 }

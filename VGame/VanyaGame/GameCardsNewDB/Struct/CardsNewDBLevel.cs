@@ -147,7 +147,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
             Game.Music.Pause();
 
             CurScene.GetComponent<Starter>().Start();
-
+            Game.Owner.AbortLevelButton.Visibility = Visibility.Visible;
         }
 
 
@@ -196,13 +196,13 @@ namespace VanyaGame.GameCardsNewDB.Struct
             }
             else if (SceneNomer > ScenesKeys.Count - 1)
             {
-                End();
+                End(true);
             }
         }
 
-        private void End()
+        private void End(bool IsLevelComplete)
         {
-            CurLevelPassing.IsComplete = true;
+            CurLevelPassing.IsComplete = IsLevelComplete;
             DBTools.Context.Entry(DbLevelRecord).State = System.Data.Entity.EntityState.Modified;
             DBTools.Context.SaveChanges();
 
@@ -212,6 +212,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
 
             this.Scenes.Clear();
             Game.PrevMenuShow();
+            Game.Owner.AbortLevelButton.Visibility = Visibility.Collapsed;
         }
 
 
@@ -238,6 +239,14 @@ namespace VanyaGame.GameCardsNewDB.Struct
             }
 
             CurScene = Scenes[ScenesKeys[0]];
+        }
+
+
+        public override void Abort()
+        {
+            SceneNomer = int.MaxValue;
+            CurScene.Abort();
+            End(false);
         }
 
         #region mvvm

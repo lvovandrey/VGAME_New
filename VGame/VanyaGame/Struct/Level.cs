@@ -28,6 +28,10 @@ namespace VanyaGame.Struct
             Scenes.Add(sceneName, scene);
         }
 
+        public virtual void Abort()
+        { 
+            
+        }
 
     }
 }
