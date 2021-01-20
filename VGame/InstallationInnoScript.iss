@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "VGame"
-#define MyAppVersion "1.0"
+#define MyAppVersion "1.0.0.1"
 #define MyAppPublisher "Lvov A.A."
 #define MyAppExeName "VanyaGame.exe"
 
@@ -17,8 +17,8 @@ AppVersion={#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
-OutputDir=I:\VGameOutput
-OutputBaseFilename=setup1
+OutputDir=I:\VGame
+OutputBaseFilename=VGameSetup_{#MyAppVersion}
 SetupIconFile=C:\Users\Professional\Pictures\book-icon.ico
 Compression=lzma
 SolidCompression=yes
@@ -30,7 +30,7 @@ Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
-Name: "ttsvoice"; Description: "Установка голоса Katerina от ScanSoft - только для ознакомления (довольно низкокачественный, но ставится почти везде. Рекомендую позже посмотреть другие голоса для синтеза речи)"
+Name: "ttsvoice"; Description: "Установка голоса Elena от RHVoice (распространяется бесплатно по лицензии GPL v3)"
 
 [Files]
 Source: "I:\VGame\Union\VanyaGame.exe"; DestDir: "{app}"; Flags: ignoreversion
@@ -38,7 +38,7 @@ Source: "I:\VGame\Union\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdir
 Source: "I:\VGame\Resourses\*"; DestDir: "{localappdata}\VGame"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "I:\VGame\InstallationTools\*"; DestDir: "{tmp}"; Flags: ignoreversion recursesubdirs createallsubdirs deleteafterinstall
 Source: "I:\VGame\dotNet4.5.exe"; DestDir: "{tmp}"; Flags: ignoreversion deleteafterinstall; Check: IsRequiredDotNetDetectedSilence
-Source: "I:\VGame\RS26_00.msi"; DestDir: "{tmp}"; Flags: ignoreversion deleteafterinstall;
+Source: "I:\VGame\RHVoice-voice-Russian-Elena-v4.2.9-setup.exe"; DestDir: "{tmp}"; Flags: ignoreversion deleteafterinstall;  Tasks: ttsvoice
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\VanyaGame.exe"
@@ -49,7 +49,7 @@ Name: "{commondesktop}\Редактор БД карточек"; Filename: "{app}\CardsEditor.exe";
 
 [Run]
 Filename: "{tmp}\dotNet4.5.exe"; Check: IsRequiredDotNetDetected
-Filename: "msiexec.exe"; Parameters: "/i ""{tmp}\RS26_00.msi"" /qb"; WorkingDir: {tmp};
+Filename: "{tmp}\RHVoice-voice-Russian-Elena-v4.2.9-setup.exe"; Tasks: ttsvoice
 Filename: "{tmp}\InstallationTools.exe"; Parameters: """{localappdata}\VGame\VGame.Config.xml"" ""{localappdata}\VGame\CardsEditor.Config.xml"" ""{localappdata}\VGame"" ""{localappdata}\VGame\Data\Fruits.db"""
 
 [UninstallDelete]
