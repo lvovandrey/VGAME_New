@@ -616,6 +616,25 @@ namespace VanyaGame.GameCardsNewDB.Interface
             }
         }
 
+        private RelayCommand restoreDefaultSettingsCommand;
+        public RelayCommand RestoreDefaultSettingsCommand
+        {
+            get
+            {
+                return restoreDefaultSettingsCommand ??
+                  (restoreDefaultSettingsCommand = new RelayCommand(obj =>
+                  {
+                      var res = System.Windows.MessageBox.Show("Будут восстановлены все настройки по умолчанию. " +
+                          "Текущие настройки будут утрачены (рекомендуется предварительно экспортировать текущие настройки). \n \n" +
+                          "Вы уверены, что хотите сбросить все настройки?","Сброс настроек", (MessageBoxButton)MessageBoxButtons.YesNo, (MessageBoxImage)MessageBoxIcon.Warning);
+                      if (res == MessageBoxResult.No) return;
+                      Settings.GetInstance().RestoreDefaultSettings();
+                      SaveSettingsCommand.Execute(null);
+                      RefreshAllDependencyProperties();
+                  }));
+            }
+        }
+        
 
         #endregion
 

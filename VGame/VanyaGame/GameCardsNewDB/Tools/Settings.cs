@@ -748,6 +748,14 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
+        internal void RestoreDefaultSettings()
+        {
+            var settings = new Settings();
+            instance = settings;
+            instance.ConfigurateMusicFiles();
+            SettingsChanged?.Invoke();
+        }
+
         internal void SaveAllSettings()
         {
             ExportSettingsToXML(ConfigurationTools.SettingsFilename);

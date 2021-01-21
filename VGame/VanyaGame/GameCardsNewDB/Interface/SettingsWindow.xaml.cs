@@ -53,13 +53,14 @@ namespace VanyaGame.GameCardsNewDB.Interface
             SettingsElements.Add("Вид", ViewSettings);
             SettingsElements.Add("База данных", DBSettings);
             SettingsElements.Add("Музыка", MusicSettings);
-            SettingsElements.Add("Импорт/экспорт настроек", ImportExportSettings);
+            SettingsElements.Add("Управление настройками", ImportExportSettings);
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = true;
             Hide();
+            Game.Owner.Activate();
         }
     }
 }

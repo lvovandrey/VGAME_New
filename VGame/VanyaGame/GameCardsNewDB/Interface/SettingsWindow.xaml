@@ -30,7 +30,7 @@
                 <ListBoxItem >Вид</ListBoxItem>
                 <ListBoxItem >База данных</ListBoxItem>
                 <ListBoxItem >Музыка</ListBoxItem>
-                <ListBoxItem >Импорт/экспорт настроек</ListBoxItem>
+                <ListBoxItem >Управление настройками</ListBoxItem>
             </ListBox>
         </StackPanel>
         <el:HintSettingsView Grid.Row="0" Grid.Column="1" x:Name="HintSettins"/>
