@@ -8,7 +8,8 @@
         x:Name="MyWindow" x:Class="VanyaGame.MainWindow"        
         Title="MainWindow" Height="720" Width="1000" 
 
-        WindowStartupLocation="CenterScreen" Cursor="{DynamicResource HandCursor}" Loaded="MyWindow_Loaded" 
+        WindowStartupLocation="CenterScreen" 
+        Cursor="{DynamicResource HandCursor}" Loaded="MyWindow_Loaded" 
         WindowStyle="None" WindowState="Maximized" 
          
         Icon="Images\book-icon.ico" PreviewMouseWheel="MyWindow_PreviewMouseWheel" >
@@ -66,7 +67,12 @@
                                HorizontalAlignment="Right" 
                                Source="Images/Cross.png" 
                                PreviewMouseUp="Close_PreviewMouseUp"
-                               Style="{DynamicResource AlmostHidingElement}"/>
+                               Style="{DynamicResource AlmostHidingElement}"
+                               Cursor="{DynamicResource PushCursor}">
+                            <Image.Effect>
+                                <DropShadowEffect Color="#2D000000" ShadowDepth="2" BlurRadius="6"/>
+                            </Image.Effect>
+                        </Image>
 
 
                         <Image Width="40" Height="40"
@@ -84,7 +90,11 @@
 
 
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-                        <GameCardsNewDB:BeautyButtonCardsNewDB x:Name="StartButton"  Height="250" Visibility="Visible" Margin="20"/>
+                        <GameCardsNewDB:BeautyButtonCardsNewDB 
+                            x:Name="StartButton"  
+                            Height="250" Width="250" 
+                            Visibility="Visible" 
+                            Margin="20"/>
                     </StackPanel>
 
 

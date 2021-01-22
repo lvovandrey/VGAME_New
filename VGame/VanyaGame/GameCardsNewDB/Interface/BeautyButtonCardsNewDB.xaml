@@ -5,9 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:VanyaGame.Interface"
                 mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300"
+             PreviewMouseDown="MouseDown" 
+             PreviewMouseUp="MouseUp"
+             Cursor="{DynamicResource PushCursor}">
     <UserControl.Resources>
 
+        <Cursor x:Key="HandCursor">pack://application:,,,/Images/Hand.cur</Cursor>
+        <Cursor x:Key="PushCursor">pack://application:,,,/Images/HandPush.cur</Cursor>
+        
         <Storyboard x:Key="AnimationHide">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="Img">
                 <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
@@ -51,8 +57,12 @@
         </EventTrigger>
     </UserControl.Triggers>
 
-    <Grid>
-        <Image Name="Img" Source="pack://application:,,,/GameCardsNewDB/Images/btn_startNew.png" MouseDown="Img_MouseDown" MouseEnter="Img_MouseEnter"  MouseUp="Img_MouseUp" MouseLeave="Img_MouseLeave" RenderTransformOrigin="0.5,0.5"  >
+    <Grid Width="250" Height="250" Background="#00008000" >
+
+
+        <Image Name="Img" 
+               Source="pack://application:,,,/GameCardsNewDB/Images/btn_startNew.png" 
+               RenderTransformOrigin="0.5,0.5"  >
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -61,7 +71,6 @@
                     <TranslateTransform/>
                 </TransformGroup>
             </Image.RenderTransform>
-
         </Image>
     </Grid>
 </UserControl>

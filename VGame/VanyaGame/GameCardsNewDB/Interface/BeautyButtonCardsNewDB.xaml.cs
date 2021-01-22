@@ -28,7 +28,7 @@ namespace VanyaGame.GameCardsNewDB.Interface
 
         bool isFlieing = false;
 
-        private void Img_MouseDown(object sender, MouseButtonEventArgs e)
+        private void MouseDown(object sender, MouseButtonEventArgs e)
         {
             var uri = new Uri("pack://application:,,,/Images/HandPushDown.cur");
             var stream = Application.GetResourceStream(uri).Stream;
@@ -36,11 +36,8 @@ namespace VanyaGame.GameCardsNewDB.Interface
             Img.Cursor = cursor;
         }
 
-        private void Img_MouseLeave(object sender, MouseEventArgs e)
-        {
-        }
 
-        private void Img_MouseUp(object sender, MouseButtonEventArgs e)
+        private void MouseUp(object sender, MouseButtonEventArgs e)
         {
             isFlieing = true;
 
@@ -54,16 +51,7 @@ namespace VanyaGame.GameCardsNewDB.Interface
         }
 
 
-        private void Img_MouseEnter(object sender, MouseEventArgs e)
-        {
-            if (!isFlieing)
-            {
-                var uri = new Uri("pack://application:,,,/Images/HandPush.cur");
-                var stream = Application.GetResourceStream(uri).Stream;
-                var cursor = new Cursor(stream);
-                Img.Cursor = cursor;
-            }
-        }
+
 
 
     }
