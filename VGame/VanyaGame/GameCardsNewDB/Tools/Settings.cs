@@ -383,6 +383,8 @@ namespace VanyaGame.GameCardsNewDB.Tools
         }
 
         [XmlIgnore]
+        private string defaultDBCardsFilename => VanyaGame.Sets.Settings.GetInstance().LocalAppDataDir + @"\Data\Fruits.db";
+        [XmlIgnore]
         string attachedDBCardsFilename = "";
         public string AttachedDBCardsFilename
         {
@@ -657,49 +659,6 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
-
-
-        //public void SaveAllSettings()
-        //{
-        //    ConfigurationTools.AddUpdateAppSettings("VisualHintEnable", visualHintEnable);
-        //    ConfigurationTools.AddUpdateAppSettings("EducationModeEnable", educationModeEnable);
-        //    ConfigurationTools.AddUpdateAppSettings("SpeakAgainCardNameDelay", speakAgainCardNameDelay);
-        //    ConfigurationTools.AddUpdateAppSettings("SpeakAgainCardNameTimePeriod", speakAgainCardNameTimePeriod);
-        //    ConfigurationTools.AddUpdateAppSettings("VisualHintDelay", visualHintDelay);
-        //    ConfigurationTools.AddUpdateAppSettings("VisualHintTimePeriod", visualHintTimePeriod);
-        //    ConfigurationTools.AddUpdateAppSettings("VisualHintDuration", visualHintDuration);
-        //    ConfigurationTools.AddUpdateAppSettings("EducationVisualHintDelay", EducationvisualHintDelay);
-        //    ConfigurationTools.AddUpdateAppSettings("EducationVisualHintTimePeriod", EducationvisualHintTimePeriod);
-        //    ConfigurationTools.AddUpdateAppSettings("EducationVisualHintDuration", EducationvisualHintDuration);
-
-        //    ConfigurationTools.AddUpdateAppSettings("FirstQuestionText", FirstQuestionText);
-        //    ConfigurationTools.AddUpdateAppSettings("HintQuestionText", HintQuestionText);
-        //    ConfigurationTools.AddUpdateAppSettings("SuccessTestText", SuccessTestText);
-        //    ConfigurationTools.AddUpdateAppSettings("FallTestText", FallTestText);
-
-        //    ConfigurationTools.AddUpdateAppSettings("CardSize", cardSize);
-        //    ConfigurationTools.AddUpdateAppSettings("CardSuccesSize", cardSuccesSize);
-        //    ConfigurationTools.AddUpdateAppSettings("CardSuccesTime", cardSuccesTime);
-        //    ConfigurationTools.AddUpdateAppSettings("CardWrongPauseTime", cardWrongPauseTime);
-        //    ConfigurationTools.AddUpdateAppSettings("CardSuccesSpeakAgainTime", cardSuccesSpeakAgainTime);
-        //    ConfigurationTools.AddUpdateAppSettings("BackgroundFilename", backgroundFilename);
-
-        //    ConfigurationTools.AddUpdateAppSettings("AttachedDBCardsFilename", attachedDBCardsFilename);
-
-        //    ConfigurationTools.AddUpdateAppSettings("TTSVoiceName", TTSVoiceName);
-        //    ConfigurationTools.AddUpdateAppSettings("TTSVoiceRate", _TTSVoiceRate);
-        //    ConfigurationTools.AddUpdateAppSettings("TTSVoiceSlowRate", _TTSVoiceSlowRate);
-        //    ConfigurationTools.AddUpdateAppSettings("TTSVoiceVolume", _TTSVoiceVolume);
-
-        //    ConfigurationTools.AddUpdateAppSettings("MusicFilenames", PackObservableCollectionToString(_MusicFilenames));
-        //    ConfigurationTools.AddUpdateAppSettings("ShuffleMusic", shuffleMusic);
-        //    ConfigurationTools.AddUpdateAppSettings("RepeatMusicPlaylist", repeatMusicPlaylist);
-
-        //    VanyaGame.Sets.Settings.GetInstance().SaveAllSettings();
-
-        //    SettingsChanged?.Invoke();
-        //}
-
         public void ExportSettingsToXML(string filename)
         {
             if (!Directory.Exists(Path.GetDirectoryName(filename)))
@@ -746,6 +705,11 @@ namespace VanyaGame.GameCardsNewDB.Tools
                 { MessageBox.Show("Ошибка открытия файла настроек. Десериализатор вернул null."); }
                 SettingsChanged?.Invoke();
             }
+        }
+
+        internal void OpenDefaultDB()
+        {
+            AttachedDBCardsFilename = defaultDBCardsFilename;
         }
 
         internal void RestoreDefaultSettings()

@@ -143,6 +143,52 @@ namespace CardsEditor.Tools
             }
         }
 
+        [XmlIgnore]
+        string localAppDataDir = "";
+        [XmlIgnore]
+        public string LocalAppDataDir
+        {
+            get
+            {
+                if (localAppDataDir == "" || localAppDataDir == "Not Found")
+                    localAppDataDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "VGame");
+                return localAppDataDir;
+            }
+            private set
+            {
+                if (!Directory.Exists(value))
+                {
+                    MessageBox.Show("Нужно выбрать существующую директорию размещения основной программы");
+                    return;
+                }
+                localAppDataDir = value;
+            }
+        }
+
+        [XmlIgnore]
+        string appDir = "";
+        [XmlIgnore]
+        public string AppDir
+        {
+            get
+            {
+                if (appDir == "" || appDir == "Not Found")
+                    appDir = Environment.CurrentDirectory;
+                return appDir;
+            }
+            private set
+            {
+                if (!Directory.Exists(value))
+                {
+                    MessageBox.Show("Нужно выбрать существующую директорию размещения основной программы");
+                    return;
+                }
+                appDir = value;
+            }
+        }
+
+        [XmlIgnore]
+        public string DefaultDBCardsFilename => LocalAppDataDir + @"\Data\Fruits.db";
 
         public void ExportSettingsToXML(string filename)
         {

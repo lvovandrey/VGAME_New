@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -53,11 +54,11 @@ namespace CardsEditor.ViewModel
         #region Properties
 
         public string DBFilename
-        { 
-            get 
+        {
+            get
             {
                 return Path.GetFileName(DBTools.DBFilename);
-            } 
+            }
         }
 
         private ObservableCollection<CardVM> _cardvms { get; set; }
@@ -77,7 +78,7 @@ namespace CardsEditor.ViewModel
         {
             get
             {
-                _Levelvms = new ObservableCollection<LevelVM>(from t in _levels select new LevelVM(t,this));
+                _Levelvms = new ObservableCollection<LevelVM>(from t in _levels select new LevelVM(t, this));
                 return _Levelvms;
             }
         }
@@ -198,7 +199,7 @@ namespace CardsEditor.ViewModel
         private Card AddCard(string title, string soundedText, string imageAddress, string description)
         {
             Random random = new Random();
-            Card c = new Card() { Id = _cards.Count + 1, Title = title, SoundedText= soundedText,  ImageAddress = imageAddress, Description = description };
+            Card c = new Card() { Id = _cards.Count + 1, Title = title, SoundedText = soundedText, ImageAddress = imageAddress, Description = description };
             _cards.Add(c);
             context.Cards.Add(c);
             context.SaveChanges();
@@ -209,9 +210,9 @@ namespace CardsEditor.ViewModel
         //создаем и добавляем в БД новый тег
         private Level AddLevel(object obj)
         {
-           // if (SelectedCardVM == null) return null;
+            // if (SelectedCardVM == null) return null;
 
-            Level t = new Level() { Id = _levels.Count + 1, Name = "Level " + (_levels.Count + 1).ToString(), Cards = new ObservableCollection<Card>()};
+            Level t = new Level() { Id = _levels.Count + 1, Name = "Level " + (_levels.Count + 1).ToString(), Cards = new ObservableCollection<Card>() };
             _levels.Add(t);
             context.Levels.Add(t);
             context.SaveChanges();
@@ -242,6 +243,9 @@ namespace CardsEditor.ViewModel
                 openFileDialog.Filter = "Файлы изображений (*.bmp, *.jpg, *.png)|*.bmp;*.jpg;*.png";
                 openFileDialog.Title = "Открыть свое изображение для карточки";
                 openFileDialog.Multiselect = true;
+                string dir = obj as string;
+                if (dir != null && Directory.Exists(dir))
+                    openFileDialog.InitialDirectory = dir;
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     Filenames = @openFileDialog.FileNames;
@@ -290,7 +294,7 @@ namespace CardsEditor.ViewModel
                           if (saveFileDialog.ShowDialog() == DialogResult.OK)
                           {
                               DBFilename = saveFileDialog.FileName;
-                              bool res = DBTools.CreateDB(this, _cards, _levels,_levelPassings, context, DBFilename);
+                              bool res = DBTools.CreateDB(this, _cards, _levels, _levelPassings, context, DBFilename);
                               if (!res)
                               {
                                   System.Windows.MessageBox.Show("Ошибка загрузки базы данных " + DBFilename, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -309,9 +313,9 @@ namespace CardsEditor.ViewModel
             }
         }
 
-        
 
-            private RelayCommand сreateCardsFromImageFilesCommand;
+
+        private RelayCommand сreateCardsFromImageFilesCommand;
         public RelayCommand CreateCardsFromImageFilesCommand
         {
             get
@@ -343,7 +347,7 @@ namespace CardsEditor.ViewModel
                               bool res = DBTools.LoadDB(this, _cards, _levels, _levelPassings, context, DBFilename);
                               if (!res)
                               {
-                                  System.Windows.MessageBox.Show("Ошибка загрузки базы данных "+ DBFilename, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                                  System.Windows.MessageBox.Show("Ошибка загрузки базы данных " + DBFilename, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                                   return;
                               }
                               mainWindow.DataContext = this;
@@ -488,7 +492,75 @@ namespace CardsEditor.ViewModel
                 }));
             }
         }
-        
+
+
+        private RelayCommand openDefaultDBCommand;
+        public RelayCommand OpenDefaultDBCommand
+
+        {
+            get
+            {
+                return openDefaultDBCommand ?? (openDefaultDBCommand = new RelayCommand(obj =>
+                {
+                    string DBFilename = "";
+                    if (IsDBLoaded(null))
+                        if (System.Windows.MessageBox.Show("Вы уверены что хотите открыть БД по умолчанию " +
+                            "(несохраненные данные в текущей БД будут потеряны)?",
+                            "Открыть БД по умолчанию",
+                            (MessageBoxButton)MessageBoxButtons.YesNo,
+                            (MessageBoxImage)MessageBoxIcon.Warning) == MessageBoxResult.No) return;
+
+
+                    DBFilename = Settings.GetInstance().DefaultDBCardsFilename;
+                    bool res = DBTools.LoadDB(this, _cards, _levels, _levelPassings, context, DBFilename);
+                    if (!res)
+                    {
+                        System.Windows.MessageBox.Show("Ошибка загрузки базы данных " + DBFilename, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    mainWindow.DataContext = this;
+                    OnPropertyChanged("CardVMs");
+                    OnPropertyChanged("LevelVMs");
+                    OnPropertyChanged("DBFilename");
+
+                }));
+            }
+        }
+
+        private RelayCommand openAppDataFolderCommand;
+        public RelayCommand OpenAppDataFolderCommand
+
+        {
+            get
+            {
+                return openAppDataFolderCommand ?? (openAppDataFolderCommand = new RelayCommand(obj =>
+                {
+                    if (Directory.Exists(Settings.GetInstance().LocalAppDataDir))
+                        Process.Start("explorer.exe", Settings.GetInstance().LocalAppDataDir);
+                    else
+                        System.Windows.MessageBox.Show("Папка с данными программы не найдена: "
+                            + Settings.GetInstance().LocalAppDataDir,
+                            "Директория отуствует",
+                            MessageBoxButton.OK,
+                            (MessageBoxImage)MessageBoxIcon.Error);
+                }));
+            }
+        }
+
+
+        private RelayCommand createCardsFromImagesOfDefaultDBCommand;
+        public RelayCommand CreateCardsFromImagesOfDefaultDBCommand
+
+        {
+            get
+            {
+                return createCardsFromImagesOfDefaultDBCommand ?? (createCardsFromImagesOfDefaultDBCommand = new RelayCommand
+                    (obj =>
+                {
+                    CreateCardsFromImageFilesCommand.Execute(Settings.GetInstance().LocalAppDataDir);
+                }, IsDBLoaded));
+            }
+        }
 
 
         #endregion

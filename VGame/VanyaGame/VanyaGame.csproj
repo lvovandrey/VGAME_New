@@ -392,6 +392,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Resource Include="GameCardsNewDB\Images\pictogramm\Application-Form-Delete.png" />
+    <Content Include="GameCardsNewDB\Images\pictogramm\Database-Refresh.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Video\default.wmv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

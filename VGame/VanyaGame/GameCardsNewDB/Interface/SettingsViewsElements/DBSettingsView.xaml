@@ -22,6 +22,14 @@
                                 VerticalAlignment="Top"
                                 Command="{Binding ChooseAttachedDBCardsFilename}"/>
                     </StackPanel>
+
+                    <Button Height="28" Width="220" Margin="10 10 10 0" Command="{Binding OpenDefaultDBCommand}"
+                            HorizontalAlignment="Left">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/VanyaGame;component/GameCardsNewDB/Images/pictogramm/Database-Refresh.png"  Margin="-22 0 0 0"/>
+                            <TextBlock Text="Открыть БД по умолчанию" Margin="10 3 0 0"/>
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
 
             </ScrollViewer>

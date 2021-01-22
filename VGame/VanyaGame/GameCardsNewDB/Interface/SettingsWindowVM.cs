@@ -634,7 +634,21 @@ namespace VanyaGame.GameCardsNewDB.Interface
                   }));
             }
         }
-        
+
+        private RelayCommand openDefaultDBCommand;
+        public RelayCommand OpenDefaultDBCommand
+        {
+            get
+            {
+                return openDefaultDBCommand ??
+                  (openDefaultDBCommand = new RelayCommand(obj =>
+                  {
+                      Settings.GetInstance().OpenDefaultDB();
+                      RefreshAllDependencyProperties();
+                  }));
+            }
+        }
+       
 
         #endregion
 
