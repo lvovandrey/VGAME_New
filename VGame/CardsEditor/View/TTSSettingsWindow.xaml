@@ -8,14 +8,32 @@
         mc:Ignorable="d"
         WindowStyle="ToolWindow" 
         WindowStartupLocation="CenterOwner"
-        Title="    Выбор голоса для озвучки" Height="250" Width="400" Closing="Window_Closing">
+        Title="    Выбор голоса для озвучки" Height="280" Width="400" Closing="Window_Closing">
     <Grid>
         <StackPanel Margin="20">
             <Label Content="Голос синтезатора речи (TTS)"/>
             <ComboBox ItemsSource="{Binding TextToSpeachVoicesNames}" SelectedItem="{Binding TTSVoiceName}"/>
-            <el:PropertyViewer_IntNums_UpDown Tag="Темп речи" DataContext="{Binding TTSVoiceRate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="0 20 0 0"/>
-            <el:PropertyViewer_IntNums_UpDown Tag="Громкость" DataContext="{Binding TTSVoiceVolume, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="0 20 0 0"/>
 
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <Slider Width="150" Height="35"
+                            Value="{Binding TTSVoiceRate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                            Maximum="10"
+                            Minimum="-10"
+                            TickPlacement="Both"/>
+                <el:PropertyViewer_IntNums_UpDown Margin="10 10 10 15"
+                                                         Tag="Темп речи" 
+                                                         DataContext="{Binding TTSVoiceRate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <Slider Width="150" Height="25"
+                            Value="{Binding TTSVoiceVolume, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                            Maximum="100"
+                            Minimum="0"/>
+                <el:PropertyViewer_IntNums_UpDown Margin="10 10 10 15"
+                                                         Tag="Громкость" 
+                                                         DataContext="{Binding TTSVoiceVolume, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+            </StackPanel>
         </StackPanel>
         <Button Content="OK" Width="50" Height="25" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="20" Click="Button_Click" Command="{Binding TTSSettingsSaveCommand}" />
     </Grid>

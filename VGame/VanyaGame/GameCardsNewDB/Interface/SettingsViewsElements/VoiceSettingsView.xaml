@@ -19,16 +19,38 @@
                               SelectedItem="{Binding TTSVoiceName}">
 
                     </ComboBox>
-                    <el:PropertyViewer_IntNums_UpDown Margin="10 10 10 15"
+                    <StackPanel Orientation="Horizontal">
+                        <Slider Width="150" Height="35"
+                            Value="{Binding TTSVoiceRate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                            Maximum="10"
+                            Minimum="-10"
+                            TickPlacement="Both"/>
+                        <el:PropertyViewer_IntNums_UpDown Margin="10 10 10 15"
                                                          Tag="Темп речи" 
                                                          DataContext="{Binding TTSVoiceRate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                    <el:PropertyViewer_IntNums_UpDown Margin="10 10 10 15"
+
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Slider Width="150" Height="35"
+                            Value="{Binding TTSVoiceSlowRate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                            Maximum="10"
+                            Minimum="-10"
+                            TickPlacement="Both"/>
+                        <el:PropertyViewer_IntNums_UpDown Margin="10 10 10 15"
                                                          Tag="Медленный темп речи (используется при повторении)" 
                                                          DataContext="{Binding TTSVoiceSlowRate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                    <el:PropertyViewer_IntNums_UpDown Margin="10 10 10 15"
+                    </StackPanel>
+
+
+                    <StackPanel Orientation="Horizontal">
+                        <Slider Width="200" Height="25"
+                            Value="{Binding TTSVoiceVolume, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                            Maximum="100"
+                            Minimum="0"/>
+                        <el:PropertyViewer_IntNums_UpDown Margin="10 10 10 15"
                                                          Tag="Громкость" 
                                                          DataContext="{Binding TTSVoiceVolume, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-
+                    </StackPanel>
                 </StackPanel>
 
             </ScrollViewer>
