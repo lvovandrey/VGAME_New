@@ -73,6 +73,9 @@
                                 <DropShadowEffect Color="#2D000000" ShadowDepth="2" BlurRadius="6"/>
                             </Image.Effect>
                         </Image>
+                        
+                        
+                        
 
 
                         <Image Width="40" Height="40"
@@ -176,9 +179,9 @@
                 <GameCardsNewDB:BeautyButtonSettings 
                     Style="{DynamicResource AlmostHidingElement}"
                     MouseUp="SettingsWindowShowButtonClick" 
-                    Height="60" Width="60" Opacity="1"  
+                    Height="65" Width="65" Opacity="1"  
                     Grid.Row="0" Grid.Column="0" 
-                    HorizontalAlignment="Left" 
+                    HorizontalAlignment="Center" Margin="-40 -5 0 0"
                     VerticalAlignment="Top"/>
                 <Slider Cursor="{DynamicResource PushCursor}"  Grid.ColumnSpan="3" Grid.Row="0" Grid.Column="1" x:Name="VideoVolumeSlider" HorizontalAlignment="Left" Height="50" 
                     Value="{Binding level, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 

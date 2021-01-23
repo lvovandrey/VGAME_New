@@ -9,39 +9,33 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace VanyaGame.GameCardsNewDB.Interface
+namespace VanyaGame.Interface
 {
     /// <summary>
-    /// Логика взаимодействия для BeautyButtonCardsNewDB.xaml
+    /// Interaction logic for BeautyButtonCloseApp.xaml
     /// </summary>
-    public partial class BeautyButtonSettings : UserControl
+    public partial class BeautyButtonCloseApp : UserControl
     {
-        public BeautyButtonSettings()
+        public BeautyButtonCloseApp()
         {
             InitializeComponent();
         }
-
         bool isFlieing = false;
 
         private void Img_MouseDown(object sender, MouseButtonEventArgs e)
         {
-           // this.Img.Source = new BitmapImage(new Uri("pack://application:,,,/1.GameNumber/Images/btn_start2.png"));
             var uri = new Uri("pack://application:,,,/Images/HandPushDown.cur");
             var stream = Application.GetResourceStream(uri).Stream;
             var cursor = new Cursor(stream);
             Img.Cursor = cursor;
-            //    AddDropShadowEffect(Img, 10, 20, 80);
         }
 
         private void Img_MouseLeave(object sender, MouseEventArgs e)
         {
-            //if (!isFlieing)
-            //    this.Img.Source = new BitmapImage(new Uri("pack://application:,,,/1.GameNumber/Images/btn_start.png"));
             var uri = new Uri("pack://application:,,,/Images/HandPush.cur");
             var stream = Application.GetResourceStream(uri).Stream;
             var cursor = new Cursor(stream);
@@ -71,8 +65,5 @@ namespace VanyaGame.GameCardsNewDB.Interface
                 Img.Cursor = cursor;
             }
         }
-
-
     }
 }
-
