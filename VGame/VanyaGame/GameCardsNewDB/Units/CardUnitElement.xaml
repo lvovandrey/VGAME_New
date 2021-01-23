@@ -3,11 +3,30 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" Width="280" Height="280" Cursor="{DynamicResource PushCursor}" MouseDown="Img_MouseDown" MouseUp="Img_MouseUp" MouseLeave="Img_MouseLeave">
+             mc:Ignorable="d" Width="280" Height="280"
+             PreviewMouseDown="MouseDown"
+             PreviewMouseUp="MouseUp"
+             MouseLeave="UserControl_MouseLeave"
+             MouseEnter="UserControl_MouseEnter"
+             Cursor="{DynamicResource PushCursor}">
     <UserControl.Resources>
         <Cursor x:Key="HandCursor">pack://application:,,,/Images/Hand.cur</Cursor>
         <Cursor x:Key="PushCursor">pack://application:,,,/Images/HandPush.cur</Cursor>
+        <Cursor x:Key="PushDownCursor">pack://application:,,,/Images/HandPushDown.cur</Cursor>
+
+        <Storyboard x:Key="HideSB" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Img">
+            <DoubleAnimation  To="0.1" Duration="0:0:0.3" />
+        </Storyboard>
+        <Storyboard x:Key="Hide6SB" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Img">
+            <DoubleAnimation  To="0.6"
+                             Duration="0:0:0.3" />
+        </Storyboard>
+        <Storyboard x:Key="ShowSB" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Img">
+            <DoubleAnimation To="1"
+                             Duration="0:0:0.3" />
+        </Storyboard>
     </UserControl.Resources>
+
     <Grid>
         <Grid Name="Grd" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Background="#3FE0E0E0">
             <Grid.Effect>
@@ -21,46 +40,12 @@
                     <TranslateTransform X="0"/>
                 </TransformGroup>
             </Grid.RenderTransform>
-            <Rectangle Stroke="#FF878787" StrokeThickness="3" Fill="#07FFFFFF" Stretch="UniformToFill">
 
-            </Rectangle>
+            <Rectangle Stroke="#FF878787" StrokeThickness="3" Fill="#07FFFFFF" Stretch="UniformToFill"/>
 
-
-            <Image Name="Img"   Source="pack://application:,,,/1.GameNumber/Images/4.png" Stretch="Uniform" 
+            <Image Name="Img"   Source="pack://application:,,,/GameCardsNewDB/Images/4.png" Stretch="Uniform" 
                RenderTransformOrigin="0.5,0.5"  Margin="10"  Panel.ZIndex="35000">
-                <Image.Triggers>
-                    <EventTrigger RoutedEvent="Image.PreviewMouseDown">
-                        <EventTrigger.Actions>
-                            <BeginStoryboard>
-                                <Storyboard TargetProperty="Opacity" TargetName="Img">
-                                    <DoubleAnimation  To="0.1"
-                             
-                             Duration="0:0:0.3" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger.Actions>
-                    </EventTrigger>
-                    <EventTrigger RoutedEvent="Image.MouseEnter">
-                        <EventTrigger.Actions>
-                            <BeginStoryboard>
-                                <Storyboard TargetProperty="Opacity" TargetName="Img">
-                                    <DoubleAnimation  To="0.6"
-                             Duration="0:0:0.3" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger.Actions>
-                    </EventTrigger>
-                    <EventTrigger RoutedEvent="Image.MouseLeave">
-                        <EventTrigger.Actions>
-                            <BeginStoryboard>
-                                <Storyboard TargetProperty="Opacity" TargetName="Img">
-                                    <DoubleAnimation To="1"
-                             Duration="0:0:0.3" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger.Actions>
-                    </EventTrigger>
-                </Image.Triggers>
+
 
             </Image>
 
@@ -75,6 +60,10 @@
             </Rectangle>
 
             <Label x:Name="Lbl" Content="" Opacity="0"/>
+
+
+
+
         </Grid>
     </Grid>
 </UserControl>

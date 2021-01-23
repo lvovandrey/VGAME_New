@@ -28,32 +28,43 @@ namespace VanyaGame.GameCardsNewDB.Units
             InitializeComponent();
         }
 
-        private void Img_MouseDown(object sender, MouseButtonEventArgs e)
+        private void UserControl_MouseLeave(object sender, MouseEventArgs e)
         {
-            var uri = new Uri("Images/HandPushDown.cur", UriKind.Relative);
-            var stream = Application.GetResourceStream(uri).Stream;
-            var cursor = new Cursor(stream);
-            Img.Cursor = cursor;
-            //    AddDropShadowEffect(Img, 10, 20, 80);
-
+            Storyboard s = (Storyboard)TryFindResource("ShowSB");
+            s.Begin();
         }
 
-        private void Img_MouseUp(object sender, MouseButtonEventArgs e)
+        private void UserControl_MouseEnter(object sender, MouseEventArgs e)
         {
-            var uri = new Uri("Images/HandPush.cur", UriKind.Relative);
-            var stream = Application.GetResourceStream(uri).Stream;
-            var cursor = new Cursor(stream);
-            Img.Cursor = cursor;
-
+            Storyboard s = (Storyboard)TryFindResource("Hide6SB");
+            s.Begin();
         }
 
-        private void Img_MouseLeave(object sender, MouseEventArgs e)
+        private void MouseDown(object sender, MouseButtonEventArgs e)
         {
-            var uri = new Uri("Images/HandPush.cur", UriKind.Relative);
+            Console.WriteLine("!!!!!!!!!!!!!!!!Down");
+            var uri = new Uri("pack://application:,,,/Images/HandPushDown.cur");
             var stream = Application.GetResourceStream(uri).Stream;
             var cursor = new Cursor(stream);
-            Img.Cursor = cursor;
+            Cursor = cursor;
+
+            Storyboard s = (Storyboard)TryFindResource("HideSB");
+            s.Begin();
         }
+
+
+        private void MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            Console.WriteLine("!!!!!!!!!!!!!!!! UP");
+            var uri = new Uri("pack://application:,,,/Images/HandPush.cur");
+            var stream = Application.GetResourceStream(uri).Stream;
+            var cursor = new Cursor(stream);
+            Cursor = cursor;
+
+            Storyboard s = (Storyboard)TryFindResource("Hide6SB");
+            s.Begin();
+        }
+
 
         public void Flash(TimeSpan Period, double Size)
         {
@@ -72,5 +83,7 @@ namespace VanyaGame.GameCardsNewDB.Units
             FlashedRect.BeginAnimation(Button.WidthProperty, AW);
             FlashedRect.BeginAnimation(Button.HeightProperty, AH);
         }
+
+
     }
 }

@@ -15,7 +15,8 @@
         <Cursor x:Key="PushCursor">pack://application:,,,/Images/HandPush.cur</Cursor>
         
         <Storyboard x:Key="AnimationHide">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="Img">
+            <DoubleAnimationUsingKeyFrames 
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="Img">
                 <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0.3"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="1.7"/>
