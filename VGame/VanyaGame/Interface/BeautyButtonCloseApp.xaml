@@ -11,8 +11,8 @@
         <EventTrigger RoutedEvent="MouseDown">
             <EventTrigger.Actions>
                 <BeginStoryboard>
-                    <Storyboard TargetProperty="Width" >
-                        <DoubleAnimation To="55" From="65"
+                    <Storyboard TargetProperty="Width" Storyboard.TargetName="Img" >
+                        <DoubleAnimation To="37" From="45"
                                          Duration="0:0:0.1" />
                     </Storyboard>
                 </BeginStoryboard>
@@ -22,8 +22,8 @@
         <EventTrigger RoutedEvent="MouseUp">
             <EventTrigger.Actions>
                 <BeginStoryboard>
-                    <Storyboard TargetProperty="Width" >
-                        <DoubleAnimation To="65" From="55"
+                    <Storyboard TargetProperty="Width" Storyboard.TargetName="Img">
+                        <DoubleAnimation To="45" From="37"
                                          Duration="0:0:0.1" />
                     </Storyboard>
                 </BeginStoryboard>
@@ -33,8 +33,8 @@
         <EventTrigger RoutedEvent="MouseLeave">
             <EventTrigger.Actions>
                 <BeginStoryboard>
-                    <Storyboard TargetProperty="Width" >
-                        <DoubleAnimation To="65"
+                    <Storyboard TargetProperty="Width" Storyboard.TargetName="Img">
+                        <DoubleAnimation To="45"
                                          Duration="0:0:0.1" />
                     </Storyboard>
                 </BeginStoryboard>
@@ -43,8 +43,9 @@
 
     </UserControl.Triggers>
 
-    <Grid>
+    <Grid Width="45" Height="45">
         <Image Name="Img" Source="/VanyaGame;component/Images/Cross.png"
+               Width="45"  Stretch="Uniform"
                MouseDown="Img_MouseDown" 
                MouseEnter="Img_MouseEnter"  
                MouseUp="Img_MouseUp" 
@@ -61,11 +62,6 @@
                     <TranslateTransform/>
                 </TransformGroup>
             </Image.RenderTransform>
-            <Image.ToolTip>
-                <ToolTip>
-                    Настройки
-                </ToolTip>
-            </Image.ToolTip>
         </Image>
     </Grid>
 </UserControl>

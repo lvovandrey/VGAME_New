@@ -5,6 +5,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:VanyaGame" 
         xmlns:GameCardsNewDB ="clr-namespace:VanyaGame.GameCardsNewDB.Interface"
+        xmlns:Interface="clr-namespace:VanyaGame.Interface"
         x:Name="MyWindow" x:Class="VanyaGame.MainWindow"        
         Title="MainWindow" Height="720" Width="1000" 
 
@@ -62,7 +63,15 @@
                     <StackPanel HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Top" 
                                Background="{x:Null}" Panel.ZIndex="2">
 
-                        <Image Width="40" Height="40" 
+
+                        <Interface:BeautyButtonCloseApp
+                               Width="55" Height="55" 
+                               Margin="0 0 0 0"
+                               HorizontalAlignment="Right" 
+                            ToolTip="Выход"
+                               PreviewMouseUp="Close_PreviewMouseUp"
+                               Style="{DynamicResource AlmostHidingElement}"/>
+                        <!--<Image Width="40" Height="40" 
                                Margin="0 10 10 0"
                                HorizontalAlignment="Right" 
                                Source="Images/Cross.png" 
@@ -72,13 +81,22 @@
                             <Image.Effect>
                                 <DropShadowEffect Color="#2D000000" ShadowDepth="2" BlurRadius="6"/>
                             </Image.Effect>
-                        </Image>
-                        
-                        
-                        
+                        </Image>-->
+
+                        <Interface:BeautyButtonLevelAbort
+                               Width="55" Height="55" 
+                               Margin="0 0 0 0"
+                               HorizontalAlignment="Right" 
+                               x:Name="AbortLevelButton"
+                               Visibility="Collapsed"
+                               ToolTip="Прервать уровень"
+                               PreviewMouseUp="StopLevel_PreviewMouseUp"
+                               Style="{DynamicResource AlmostHidingElement}"/>
 
 
-                        <Image Width="40" Height="40"
+
+
+                        <!--<Image Width="40" Height="40"
                                Margin="0 10 10 0"
                                HorizontalAlignment="Right" 
                                x:Name="AbortLevelButton"
@@ -86,7 +104,7 @@
                                PreviewMouseUp="StopLevel_PreviewMouseUp" 
                                Style="{DynamicResource AlmostHidingElement}"
                                ToolTip="Прервать уровень"
-                               Visibility="Collapsed"/>
+                               Visibility="Collapsed"/>-->
 
                     </StackPanel>
                     <MediaElement x:Name="MediaElementVideo" HorizontalAlignment="Center" VerticalAlignment="Center" LoadedBehavior="Manual" Stretch="Fill" Opacity="0.1"  />
