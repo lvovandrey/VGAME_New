@@ -406,6 +406,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Resource Include="GameCardsNewDB\Images\pictogramm\Application-Form-Delete.png" />
+    <Resource Include="GameCardsNewDB\Images\pictogramm\Arrow-Refresh.png" />
     <Content Include="GameCardsNewDB\Images\pictogramm\Database-Refresh.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -50,6 +50,13 @@ namespace VanyaGame.GameCardsNewDB.Interface
             s.Begin();  // Start animation
         }
 
+        public void Reload()
+        {
+            this.BeginAnimation(FrameworkElement.OpacityProperty, null);
+            Img.BeginAnimation(FrameworkElement.OpacityProperty, null);
+            this.Opacity = 1;
+            Img.Opacity = 1;
+        }
 
 
 

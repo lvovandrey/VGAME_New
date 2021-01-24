@@ -44,6 +44,12 @@ namespace VanyaGame.PrevMenuNS
             Items.Remove(Item);
             WrapContainer.Children.Remove(Item);
         }
-        
+
+        public void RemoveAllItems()
+        {
+            Items.Clear();
+            WrapContainer.Children.Clear();
+        }
+
     }
 }

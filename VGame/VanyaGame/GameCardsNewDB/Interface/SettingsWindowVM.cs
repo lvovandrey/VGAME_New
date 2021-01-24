@@ -648,7 +648,21 @@ namespace VanyaGame.GameCardsNewDB.Interface
                   }));
             }
         }
-       
+
+        
+        private RelayCommand reloadGameCommand;
+        public RelayCommand ReloadGameCommand
+        {
+            get
+            {
+                return reloadGameCommand ??
+                  (reloadGameCommand = new RelayCommand(obj =>
+                  {
+                      SaveSettingsCommand.Execute(null);
+                      Game.ReloadGame();
+                  }));
+            }
+        }
 
         #endregion
 

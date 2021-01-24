@@ -41,6 +41,21 @@
         <el:MusicSettingsView Grid.Row="0" Grid.Column="1" Visibility="Hidden" x:Name="MusicSettings"/>
         <el:ImportExportSettingsView Grid.Row="0" Grid.Column="1" Visibility="Hidden" x:Name="ImportExportSettings" />
 
+        <Button Height="24" 
+                Grid.Row="1" 
+                Grid.Column="1" 
+                Width="150" 
+                Margin="5 0 5 0" 
+                Command="{Binding ReloadGameCommand}"
+                Click="Button_Click_1"
+                            HorizontalAlignment="Left">
+            <StackPanel Orientation="Horizontal">
+                <Image 
+                    Source="/VanyaGame;component/GameCardsNewDB/Images/pictogramm/Arrow-Refresh.png"  
+                    Margin="0 0 0 0"/>
+                <TextBlock Text="Перезагрузить игру" Margin="5 1 0 0"/>
+            </StackPanel>
+        </Button>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="1" Margin="0 0 10 0">
             <Button Command="{Binding SaveSettingsCommand}" Click="Button_Click_1" Margin="0 3 10 3" Padding="10 0 10 0">Применить</Button>
             <Button Click="Button_Click_1"   Margin="0 3 0 3" Padding="10 0 10 0" >Отмена</Button>

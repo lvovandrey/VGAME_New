@@ -148,6 +148,17 @@ namespace VanyaGame
             Game.Msg("VideoPlayer change");
         }
 
+        internal static void ReloadGame()
+        {
+            Level?.Abort();
+            Owner.PreviewMenu.RemoveAllItems();
+            LoadBackGround(VanyaGame.Sets.Settings.GetInstance().BackgroundStartFilename);
+            Owner.StartButton.Visibility = Visibility.Visible; 
+            Owner.StartButton.Opacity = 1;
+            Game.Owner.PreviewMenu.Visibility = Visibility.Collapsed;
+        }
+
+
         public static void Create(MainWindow WND_Owner)
         {
 
@@ -287,7 +298,7 @@ namespace VanyaGame
                     Level.GetComponent<Starter>().Start();
             }
         }
-    
+
     }
 
   
