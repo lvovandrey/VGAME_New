@@ -74,24 +74,7 @@
                             ToolTip="Выход"
                                PreviewMouseUp="Close_PreviewMouseUp"
                                Style="{DynamicResource AlmostHidingElement}"/>
-                        <!--<Interface:BeautyButtonCloseApp
-                               Width="55" Height="55" 
-                               Margin="0 0 0 0"
-                               HorizontalAlignment="Right" 
-                            ToolTip="Выход"
-                               PreviewMouseUp="Close_PreviewMouseUp"
-                               Style="{DynamicResource AlmostHidingElement}"/>-->
-                        <!--<Image Width="40" Height="40" 
-                               Margin="0 10 10 0"
-                               HorizontalAlignment="Right" 
-                               Source="Images/Cross.png" 
-                               PreviewMouseUp="Close_PreviewMouseUp"
-                               Style="{DynamicResource AlmostHidingElement}"
-                               Cursor="{DynamicResource PushCursor}">
-                            <Image.Effect>
-                                <DropShadowEffect Color="#2D000000" ShadowDepth="2" BlurRadius="6"/>
-                            </Image.Effect>
-                        </Image>-->
+
                         <Interface:BeautyButton
                             BaseSize="45"
                             SmallSize="30"
@@ -104,28 +87,6 @@
                                ToolTip="Прервать уровень"
                                PreviewMouseUp="StopLevel_PreviewMouseUp"
                                Style="{DynamicResource AlmostHidingElement}"/>
-                        <!--<Interface:BeautyButtonLevelAbort
-                               Width="55" Height="55" 
-                               Margin="0 0 0 0"
-                               HorizontalAlignment="Right" 
-                               x:Name="AbortLevelButton"
-                               Visibility="Collapsed"
-                               ToolTip="Прервать уровень"
-                               PreviewMouseUp="StopLevel_PreviewMouseUp"
-                               Style="{DynamicResource AlmostHidingElement}"/>-->
-
-
-
-
-                        <!--<Image Width="40" Height="40"
-                               Margin="0 10 10 0"
-                               HorizontalAlignment="Right" 
-                               x:Name="AbortLevelButton"
-                               Source="GameCardsNewDB/Images/pictogramm/Delete.png" 
-                               PreviewMouseUp="StopLevel_PreviewMouseUp" 
-                               Style="{DynamicResource AlmostHidingElement}"
-                               ToolTip="Прервать уровень"
-                               Visibility="Collapsed"/>-->
 
                     </StackPanel>
                     <MediaElement x:Name="MediaElementVideo" HorizontalAlignment="Center" VerticalAlignment="Center" LoadedBehavior="Manual" Stretch="Fill" Opacity="0.1"  />
@@ -139,24 +100,6 @@
                             Margin="20"/>
                     </StackPanel>
 
-
-
-                    <Label x:Name="Label1_Copy" Content="/////////////////////////////" Visibility="Visible" HorizontalAlignment="Left" Margin="13,74,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FFFF0909" Panel.ZIndex="2" Opacity="0" RenderTransformOrigin="0.391,1.851">
-                        <Label.Effect>
-                            <DropShadowEffect Color="#FFB9FF00" BlurRadius="1" ShadowDepth="1"/>
-                        </Label.Effect>
-                    </Label>
-                    <Label x:Name="Label1_Copy2" Content="/////////////////////////////" Visibility="Visible" HorizontalAlignment="Left" Margin="13,90,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FFFF0909" Panel.ZIndex="2" Opacity="0" RenderTransformOrigin="0.391,1.851">
-                        <Label.Effect>
-                            <DropShadowEffect Color="#FFB9FF00" BlurRadius="1" ShadowDepth="1"/>
-                        </Label.Effect>
-                    </Label>
-                    <Label x:Name="Label1_Copy3" Visibility="Visible" HorizontalAlignment="Left" Margin="13,109,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FFFF0909" Panel.ZIndex="2" Opacity="0" RenderTransformOrigin="0.391,1.851">
-                        <Label.Effect>
-                            <DropShadowEffect Color="#FFB9FF00" BlurRadius="1" ShadowDepth="1"/>
-                        </Label.Effect>
-
-                    </Label>
                 </Grid>
 
 

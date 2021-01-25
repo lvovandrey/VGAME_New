@@ -71,7 +71,6 @@ namespace VanyaGame.Media
 
         private void OnTimerTick(object sender, EventArgs e)
         {
-            Game.Owner.Label1_Copy3.Content = player.Position.ToString("g");
             timer.timeInSec = player.Position.TotalSeconds;
             if (player.Position > timer_.TimeEnd)
             {
