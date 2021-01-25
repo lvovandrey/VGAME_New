@@ -21,6 +21,9 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="SliderStyleResDict1.xaml" />
                 <ResourceDictionary Source="HidingElements.xaml"/>
+                <ResourceDictionary>
+                    <local:WrapPanelMainWidthConverter x:Key="WrapPanelMainWidthConverter"/>
+                </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -145,7 +148,15 @@
             <WrapPanel Orientation="Horizontal"  x:Name="WrapPanelBigCards" Grid.Row="0" Margin="50 50 50 0" VerticalAlignment="Center" HorizontalAlignment="Center" >
             </WrapPanel>
 
-            <WrapPanel ItemWidth="300" ItemHeight="300" Orientation="Horizontal"  x:Name="WrapPanelMain" Grid.Row="0" MaxWidth="1260" VerticalAlignment="Center" HorizontalAlignment="Center" >
+            <WrapPanel 
+                Orientation="Horizontal"  
+                x:Name="WrapPanelMain" 
+                Grid.Row="0" 
+                MaxWidth="{Binding ElementName=MyWindow, 
+                Path=ActualWidth, 
+                Converter={StaticResource WrapPanelMainWidthConverter}}" 
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Center" >
             </WrapPanel>
 
             <StackPanel Orientation="Horizontal" 

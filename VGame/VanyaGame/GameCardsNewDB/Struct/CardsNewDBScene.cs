@@ -74,9 +74,22 @@ namespace VanyaGame.GameCardsNewDB.Struct
                 u.MouseClicked += U_MouseClicked;
             Game.Owner.TextForCardTag.Text = this.Name;
 
-            NextNumber();
+            NextUnit();
             SceneStarted(this);
             Game.UserActivity.UserDoSomethingEvent += UserDoSomething;
+            ConfigureUnitsAndUnitBoxSizes();
+        }
+
+        private void ConfigureUnitsAndUnitBoxSizes()
+        {
+            if (UnitsCol.GetAllUnits().Count > 0)
+            {
+                double sqrt = Math.Ceiling(Math.Sqrt((double)(UnitsCol.GetAllUnits().Count)));
+                if (sqrt > 2) sqrt++;
+                Game.Owner.WrapPanelMain.ItemWidth = UnitsCol.GetAllUnits().FirstOrDefault().GetComponent<HaveBody>().Body.Width + Settings.GetInstance().CardMargin;
+                Game.Owner.WrapPanelMain.ItemHeight = UnitsCol.GetAllUnits().FirstOrDefault().GetComponent<HaveBody>().Body.Height + Settings.GetInstance().CardMargin;
+                Game.Owner.WrapPanelMain.Width = Game.Owner.WrapPanelMain.ItemWidth * sqrt + 30;
+            }
         }
 
         private void UserDoSomething(MouseEventArgs mouse, MouseButtonEventArgs mousebutton, KeyEventArgs key)
@@ -85,7 +98,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
         }
 
 
-        private void NextNumber()
+        private void NextUnit()
         {
             if (IsAborted) return;
             Panel.SetZIndex(Game.Owner.WrapPanelMain, 30000);
@@ -276,7 +289,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
                 {
                     if (IsAborted) return;
                     Game.Owner.WrapPanelBigCards.Children.Clear();
-                    NextNumber();
+                    NextUnit();
                 }, TimeSpan.FromSeconds(1));
             }, CardPauseTime);
         }

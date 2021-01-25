@@ -138,6 +138,13 @@ namespace VanyaGame.GameCardsNewDB.Interface
             get { return Settings.GetInstance().CardSize; }
             set { Settings.GetInstance().CardSize = value; OnPropertyChanged("CardSize"); }
         }
+        
+        public double CardMargin
+        {
+            get { return Settings.GetInstance().CardMargin; }
+            set { Settings.GetInstance().CardMargin = value; OnPropertyChanged("CardMargin"); }
+        }
+
         public double CardSuccesSize
         {
             get { return Settings.GetInstance().CardSuccesSize; }
@@ -322,7 +329,8 @@ namespace VanyaGame.GameCardsNewDB.Interface
             OnPropertyChanged("SuccessTestText");
             OnPropertyChanged("FallTestText");
 
-            OnPropertyChanged("CardSize");
+            OnPropertyChanged("CardSize"); 
+            OnPropertyChanged("CardMargin");
             OnPropertyChanged("CardSuccesSize");
             OnPropertyChanged("CardSuccesTime");
             OnPropertyChanged("CardWrongPauseTime");

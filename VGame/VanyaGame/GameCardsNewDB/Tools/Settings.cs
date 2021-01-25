@@ -340,6 +340,28 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
+
+        [XmlIgnore]
+        public string cardMargin = "30";
+        public double CardMargin
+        {
+            get
+            {
+                double s = 30;
+                if (double.TryParse(cardMargin, out s)) return s;
+                else return 30;
+            }
+            set
+            {
+                if (value <= 0 || value > 300)
+                {
+                    InfoWindow.Show("Зазор между карточками должен быть положительным числом от 0.001 до 300");
+                    return;
+                }
+                cardMargin = value.ToString();
+            }
+        }
+
         [XmlIgnore]
         public string cardSuccesSize = "500";
         public double CardSuccesSize
@@ -729,48 +751,6 @@ namespace VanyaGame.GameCardsNewDB.Tools
         {
             ImportSettingsFromXML(ConfigurationTools.SettingsFilename);
         }
-
-
-        //public void RestoreAllSettings()
-        //{
-        //    visualHintEnable = ConfigurationTools.ReadSetting("VisualHintEnable");
-        //    educationModeEnable = ConfigurationTools.ReadSetting("EducationModeEnable");
-        //    speakAgainCardNameDelay = ConfigurationTools.ReadSetting("SpeakAgainCardNameDelay");
-        //    speakAgainCardNameTimePeriod = ConfigurationTools.ReadSetting("SpeakAgainCardNameTimePeriod");
-        //    visualHintDelay = ConfigurationTools.ReadSetting("VisualHintDelay");
-        //    visualHintTimePeriod = ConfigurationTools.ReadSetting("VisualHintTimePeriod");
-        //    visualHintDuration = ConfigurationTools.ReadSetting("VisualHintDuration");
-        //    EducationvisualHintDelay = ConfigurationTools.ReadSetting("EducationVisualHintDelay");
-        //    EducationvisualHintTimePeriod = ConfigurationTools.ReadSetting("EducationVisualHintTimePeriod");
-        //    EducationvisualHintDuration = ConfigurationTools.ReadSetting("EducationVisualHintDuration");
-
-        //    FirstQuestionText = ConfigurationTools.ReadSetting("FirstQuestionText");
-        //    HintQuestionText = ConfigurationTools.ReadSetting("HintQuestionText");
-        //    SuccessTestText = ConfigurationTools.ReadSetting("SuccessTestText");
-        //    FallTestText = ConfigurationTools.ReadSetting("FallTestText");
-
-        //    cardSize = ConfigurationTools.ReadSetting("CardSize");
-        //    cardSuccesSize = ConfigurationTools.ReadSetting("CardSuccesSize");
-        //    cardSuccesTime = ConfigurationTools.ReadSetting("CardSuccesTime");
-        //    cardWrongPauseTime = ConfigurationTools.ReadSetting("CardWrongPauseTime");
-        //    cardSuccesSpeakAgainTime = ConfigurationTools.ReadSetting("CardSuccesSpeakAgainTime");
-        //    backgroundFilename = ConfigurationTools.ReadSetting("BackgroundFilename");
-
-        //    attachedDBCardsFilename = ConfigurationTools.ReadSetting("AttachedDBCardsFilename");
-
-        //    TTSVoiceName = ConfigurationTools.ReadSetting("TTSVoiceName");
-        //    _TTSVoiceRate = ConfigurationTools.ReadSetting("TTSVoiceRate");
-        //    _TTSVoiceSlowRate = ConfigurationTools.ReadSetting("TTSVoiceSlowRate");
-        //    _TTSVoiceVolume = ConfigurationTools.ReadSetting("TTSVoiceVolume");
-
-        //    _MusicFilenames = UnpackObservableCollectionFromString(ConfigurationTools.ReadSetting("MusicFilenames"));
-        //    shuffleMusic = ConfigurationTools.ReadSetting("ShuffleMusic");
-        //    repeatMusicPlaylist = ConfigurationTools.ReadSetting("RepeatMusicPlaylist");
-
-        //    VanyaGame.Sets.Settings.GetInstance().RestoreAllSettings();
-
-        //    SettingsChanged?.Invoke();
-        //}
 
         void ConfigurateMusicFiles()
         {

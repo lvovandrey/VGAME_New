@@ -18,6 +18,9 @@
                             <el:PropertyViewer_DoubleNums_UpDown DataContext="{Binding CardSize, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                                          Tag="Размер карточек"
                                                          Margin="5"/>
+                            <el:PropertyViewer_DoubleNums_UpDown DataContext="{Binding CardMargin, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                                         Tag="Зазоры между карточками"
+                                                         Margin="5"/>
                             <el:PropertyViewer_DoubleNums_UpDown DataContext="{Binding CardSuccesSize, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                                          Tag="Размер увеличенной карточки после правильного ответа"
                                                          Margin="5"/>
