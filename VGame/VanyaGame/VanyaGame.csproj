@@ -220,6 +220,9 @@
     <Compile Include="GameCardsNewDB\Struct\CardsNewDBIteration.cs" />
     <Compile Include="GameCardsNewDB\Struct\CardsNewDBLevel.cs" />
     <Compile Include="GameCardsNewDB\Struct\CardsNewDBScene.cs" />
+    <Compile Include="Interface\BeautyButton.xaml.cs">
+      <DependentUpon>BeautyButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Interface\BeautyButtonCloseApp.xaml.cs">
       <DependentUpon>BeautyButtonCloseApp.xaml</DependentUpon>
     </Compile>
@@ -352,6 +355,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="HidingElements.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Interface\BeautyButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
