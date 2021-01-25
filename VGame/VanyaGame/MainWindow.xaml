@@ -158,7 +158,7 @@
 
                     </Label>
                 </Grid>
-                <Grid HorizontalAlignment="Left" Height="100" Margin="656,461,0,0" VerticalAlignment="Top" Width="100"/>
+
 
             </Grid>
             <Grid Grid.Row="0" x:Name="GridMain" VerticalAlignment="Stretch" Panel.ZIndex="0" HorizontalAlignment="Stretch" />

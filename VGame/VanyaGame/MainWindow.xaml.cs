@@ -21,7 +21,7 @@ namespace VanyaGame
         private void MyWindow_Loaded(object sender, RoutedEventArgs e)
         {
             this.Hide();
-            Game.Create(this);
+            Game.Create(this, GameType.CardsNewDB);
             MyWindow.MouseMove += Game.UserActivity.MyWindow_MouseMove;
             MyWindow.MediaElementMusic.MediaEnded += Game.UserActivity.MediaElementMusic_MediaEnded;
             MyWindow.SizeChanged += Game.UserActivity.MyWindow_SizeChanged;

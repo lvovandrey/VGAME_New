@@ -186,9 +186,6 @@
     <Compile Include="GameCardsNewDB\Interface\Elements\PropertyViewer_DoubleNums_UpDown.xaml.cs">
       <DependentUpon>PropertyViewer_DoubleNums_UpDown.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GameCardsNewDB\Interface\BeautyButtonSettings.xaml.cs">
-      <DependentUpon>BeautyButtonSettings.xaml</DependentUpon>
-    </Compile>
     <Compile Include="GameCardsNewDB\Interface\Elements\PropertyViewer_IntNums_UpDown.xaml.cs">
       <DependentUpon>PropertyViewer_IntNums_UpDown.xaml</DependentUpon>
     </Compile>
@@ -222,12 +219,6 @@
     <Compile Include="GameCardsNewDB\Struct\CardsNewDBScene.cs" />
     <Compile Include="Interface\BeautyButton.xaml.cs">
       <DependentUpon>BeautyButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Interface\BeautyButtonCloseApp.xaml.cs">
-      <DependentUpon>BeautyButtonCloseApp.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Interface\BeautyButtonLevelAbort.xaml.cs">
-      <DependentUpon>BeautyButtonLevelAbort.xaml</DependentUpon>
     </Compile>
     <Compile Include="Interface\Empty.cs" />
     <Compile Include="Struct\IterationSets.cs" />
@@ -310,10 +301,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="GameCardsNewDB\Interface\BeautyButtonSettings.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="GameCardsNewDB\Interface\Elements\PropertyViewer_IntNums_UpDown.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -359,14 +346,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Interface\BeautyButton.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Interface\BeautyButtonCloseApp.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Interface\BeautyButtonLevelAbort.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

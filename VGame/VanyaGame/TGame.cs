@@ -160,14 +160,13 @@ namespace VanyaGame
         }
 
 
-        public static void Create(MainWindow WND_Owner)
+        public static void Create(MainWindow WND_Owner, GameType GameType)
         {
 
             Owner = WND_Owner;
             RandomGenerator = new Random();
 
-            if (Owner.StartButton.GetType() == typeof(VanyaGame.GameCardsNewDB.Interface.BeautyButtonCardsNewDB))
-                gameType = GameType.CardsNewDB;
+            gameType = GameType;
 
             CreateSettingsWindow();
             mediaContainer = new GameMediaContainer();
@@ -256,8 +255,6 @@ namespace VanyaGame
          //??? двойной вызов с ImageBegin_MouseUp   
         static void StartButton_MouseUp(object sender, RoutedEventArgs e)
         {
-            if (sender.GetType() == typeof(VanyaGame.GameCardsNewDB.Interface.BeautyButtonCardsNewDB))
-                gameType = GameType.CardsNewDB;
 
             ToolsTimer.Delay(() =>
             {
