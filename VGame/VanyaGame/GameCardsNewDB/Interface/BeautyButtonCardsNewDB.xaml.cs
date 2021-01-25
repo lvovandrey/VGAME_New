@@ -54,8 +54,11 @@ namespace VanyaGame.GameCardsNewDB.Interface
         {
             this.BeginAnimation(FrameworkElement.OpacityProperty, null);
             Img.BeginAnimation(FrameworkElement.OpacityProperty, null);
+            Visibility = Visibility.Visible;
+            Opacity = 1;
+            Storyboard s = (Storyboard)TryFindResource("AnimationShow");
+            s.Begin();  // Start animation
             this.Opacity = 1;
-            Img.Opacity = 1;
         }
 
 

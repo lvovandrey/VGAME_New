@@ -152,9 +152,10 @@ namespace VanyaGame
         {
             Level?.Abort();
             Owner.PreviewMenu.RemoveAllItems();
+            Levels.Clear();
             LoadBackGround(VanyaGame.Sets.Settings.GetInstance().BackgroundStartFilename);
-            Owner.StartButton.Visibility = Visibility.Visible; 
-            Owner.StartButton.Opacity = 1;
+
+            Owner.StartButton.Reload();
             Game.Owner.PreviewMenu.Visibility = Visibility.Collapsed;
         }
 
