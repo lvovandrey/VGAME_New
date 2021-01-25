@@ -33,7 +33,16 @@ namespace VanyaGame.Interface
         public ImageSource ImgSource { get; set; }
 
 
+        public static readonly DependencyProperty BaseSizeProperty = DependencyProperty.Register("BaseSize",
+        typeof(double), typeof(BeautyButton), new FrameworkPropertyMetadata());
 
+        public double BaseSize { get; set; }
+
+        public static readonly DependencyProperty SmallSizeProperty = DependencyProperty.Register("SmallSize",
+        typeof(double), typeof(BeautyButton), new FrameworkPropertyMetadata());
+        public double SmallSize { get; set; }
+
+        #region Mouse
         bool isFlieing = false;
 
         private void Img_MouseDown(object sender, MouseButtonEventArgs e)
@@ -75,5 +84,6 @@ namespace VanyaGame.Interface
                 Img.Cursor = cursor;
             }
         }
+        #endregion
     }
 }

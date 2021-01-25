@@ -12,7 +12,13 @@
             <EventTrigger.Actions>
                 <BeginStoryboard>
                     <Storyboard TargetProperty="Width" Storyboard.TargetName="Img" >
-                        <DoubleAnimation To="37" From="45"
+                        <DoubleAnimation To="{Binding SmallSize}" From="{Binding BaseSize}"
+                                         Duration="0:0:0.1" />
+                    </Storyboard>
+                </BeginStoryboard>
+                <BeginStoryboard>
+                    <Storyboard TargetProperty="Height" Storyboard.TargetName="Img" >
+                        <DoubleAnimation To="{Binding SmallSize}" From="{Binding BaseSize}"
                                          Duration="0:0:0.1" />
                     </Storyboard>
                 </BeginStoryboard>
@@ -23,7 +29,13 @@
             <EventTrigger.Actions>
                 <BeginStoryboard>
                     <Storyboard TargetProperty="Width" Storyboard.TargetName="Img">
-                        <DoubleAnimation To="45" From="37"
+                        <DoubleAnimation To="{Binding BaseSize}" From="{Binding SmallSize}"
+                                         Duration="0:0:0.1" />
+                    </Storyboard>
+                </BeginStoryboard>
+                <BeginStoryboard>
+                    <Storyboard TargetProperty="Height" Storyboard.TargetName="Img">
+                        <DoubleAnimation To="{Binding BaseSize}" From="{Binding SmallSize}"
                                          Duration="0:0:0.1" />
                     </Storyboard>
                 </BeginStoryboard>
@@ -34,7 +46,13 @@
             <EventTrigger.Actions>
                 <BeginStoryboard>
                     <Storyboard TargetProperty="Width" Storyboard.TargetName="Img">
-                        <DoubleAnimation To="45"
+                        <DoubleAnimation To="{Binding BaseSize}"
+                                         Duration="0:0:0.1" />
+                    </Storyboard>
+                </BeginStoryboard>
+                <BeginStoryboard>
+                    <Storyboard TargetProperty="Height" Storyboard.TargetName="Img">
+                        <DoubleAnimation To="{Binding BaseSize}"
                                          Duration="0:0:0.1" />
                     </Storyboard>
                 </BeginStoryboard>
@@ -43,9 +61,9 @@
 
     </UserControl.Triggers>
 
-    <Grid Width="45" Height="45">
+    <Grid Width="{Binding BaseSize}" Height="{Binding BaseSize}">
         <Image Name="Img" Source="{Binding ImgSource}"
-               Width="45"  Stretch="Uniform"
+               Width="{Binding BaseSize, Mode=OneTime}" Height="{Binding BaseSize, Mode=OneTime}"  Stretch="Uniform"
                MouseDown="Img_MouseDown" 
                MouseEnter="Img_MouseEnter"  
                MouseUp="Img_MouseUp" 
