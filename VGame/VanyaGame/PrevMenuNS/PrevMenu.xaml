@@ -6,10 +6,9 @@
              xmlns:prevNS="clr-namespace:VanyaGame.PrevMenuNS"
              mc:Ignorable="d" 
              >
-    <Grid >
-        <ScrollViewer x:Name="Scroll">
+    <Grid>
+        <ScrollViewer x:Name="Scroll" VerticalScrollBarVisibility="Auto">
             <WrapPanel x:Name="WrapContainer" HorizontalAlignment="Center"   >
-                <!--<prevNS:PrevMenuItem HorizontalAlignment="Stretch" Margin="10"></prevNS:PrevMenuItem>-->
             </WrapPanel>
         </ScrollViewer>
     </Grid>

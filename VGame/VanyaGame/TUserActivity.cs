@@ -79,14 +79,12 @@ namespace VanyaGame
                 if(Game.CurVideo.IsPaused) Game.CurVideo.Play();
                 else Game.CurVideo.Pause();
                 Game.CurVideo.MediaGUI.UIMediaShowAndHideFull();
-                TDrawEffects.PushUI_MouseDown((FrameworkElement)Game.Owner.PlayImgButton);
                 e.Handled = true;
             }
             if (e.Key == Key.Enter)
             {
                 Game.CurVideo.Play();
                 Game.CurVideo.MediaGUI.UIMediaShowAndHideFull();
-                TDrawEffects.PushUI_MouseDown((FrameworkElement)Game.Owner.PlayImgButton);
                 e.Handled = true;
             }
             if (e.Key == Key.F)
@@ -101,14 +99,12 @@ namespace VanyaGame
             {
                 Game.CurVideo.Rewind(new TimeSpan(0, 0, 5), true);
                 Game.CurVideo.MediaGUI.UIMediaShowAndHideFull();
-                TDrawEffects.PushUI_MouseDown((FrameworkElement)Game.Owner.BackImgButton);
                 e.Handled = true;
             }
             if (e.Key == Key.Right)
             {
                 Game.CurVideo.Rewind(new TimeSpan(0, 0, 5), false);
                 Game.CurVideo.MediaGUI.UIMediaShowAndHideFull();
-                TDrawEffects.PushUI_MouseDown((FrameworkElement)Game.Owner.NextImgButton);
                 e.Handled = true;
             }
 
@@ -131,7 +127,6 @@ namespace VanyaGame
         {
             if (Game.CurVideo.IsPlaying || Game.CurVideo.IsPaused)
             {
-                Game.Owner.VideoVolumeSlider.Value += VolumeLevelAddition;
                 Game.CurVideo.MediaGUI.UIMediaShowAndHideFull();
             }
             else

@@ -47,47 +47,19 @@
                       VerticalAlignment="Stretch"  
                       HorizontalAlignment="Stretch" >
 
-                    <StackPanel HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Top" 
-                               Background="{x:Null}" Panel.ZIndex="2">
 
-                        <Interface:BeautyButton
-                            BaseSize="45"
-                            SmallSize="30"
-                            Width="55" Height="55" 
-                            ImgSource="Images/Cross.png"
-                            ToolTip="Выход"
-                               PreviewMouseUp="Close_PreviewMouseUp"
-                               Style="{DynamicResource AlmostHidingElement}"/>
-
-                        <Interface:BeautyButton
-                            BaseSize="45"
-                            SmallSize="30"
-                            Width="55" Height="55"
-                            ImgSource="Images/Delete.png"
-                               Margin="0 0 0 0"
-                               HorizontalAlignment="Right" 
-                               x:Name="AbortLevelButton"
-                               Visibility="Collapsed"
-                               ToolTip="Прервать уровень"
-                               PreviewMouseUp="StopLevel_PreviewMouseUp"
-                               Style="{DynamicResource AlmostHidingElement}"/>
-
-                    </StackPanel>
                     <MediaElement x:Name="MediaElementVideo" HorizontalAlignment="Center" VerticalAlignment="Center" LoadedBehavior="Manual" Stretch="Fill" Opacity="0.1"  />
 
 
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-                        <GameCardsNewDB:BeautyButtonCardsNewDB 
-                            x:Name="StartButton"  
-                            Height="250" Width="250" 
-                            Visibility="Visible" 
-                            Margin="20"/>
+
                     </StackPanel>
 
                 </Grid>
 
 
             </Grid>
+
             <Grid Grid.Row="0" 
                   x:Name="GridMain" 
                   VerticalAlignment="Stretch"
@@ -128,34 +100,18 @@
                         <DropShadowEffect ShadowDepth="2"/>
                     </TextBlock.Effect>
                 </TextBlock>
-
             </StackPanel>
+
             <WrapPanel  VerticalAlignment="Top" 
                         Orientation="Horizontal" 
                         HorizontalAlignment="Center"  
                         x:Name="StackPanelGame" 
                         Grid.Row="0" />
-
-            <Slider Cursor="{DynamicResource PushCursor}" 
-                    x:Name="MusicVolumeSlider" 
-                    HorizontalAlignment="Left" 
-                    Height="50" 
-            	    Value="{Binding level, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-            	    Margin="100,10,0,0" 
-                    VerticalAlignment="Top" 
-                    Width="245" 
-                    MouseLeave="MusicVolumeSlider_MouseLeave" 
-                    MouseEnter="MusicVolumeSlider_MouseEnter" 
-                    Opacity="0.5"
-                    Maximum="100"  
-                    Panel.ZIndex="10"
-                    Style="{DynamicResource SliderStyle1}" >
-                <Slider.Effect>
-                    <DropShadowEffect Color="#7F000000" ShadowDepth="5" Opacity="0.3"/>
-                </Slider.Effect>
-            </Slider>
-
-
+            
+            <PrevMenuNS:PrevMenu x:Name="PreviewMenu" 
+                                 Panel.ZIndex="11" 
+                                 Visibility="Collapsed" 
+                                 Margin="0 40 0 60"/>
 
             <Grid x:Name="GridInteface" Panel.ZIndex="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.ColumnDefinitions>
@@ -182,123 +138,63 @@
                             PreviewMouseUp="SettingsWindowShowButtonClick"
                             Style="{DynamicResource AlmostHidingElement}"/>
 
-                <Slider Cursor="{DynamicResource PushCursor}"  
-                        Grid.ColumnSpan="3" 
-                        Grid.Row="0" 
-                        Grid.Column="1" 
-                        x:Name="VideoVolumeSlider" 
-                        HorizontalAlignment="Left" 
-                        Height="50"  
-                        Value="{Binding level, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                    Margin="10,10,0,0" VerticalAlignment="Top" Width="245"  
-                    MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave"                        
+                <Slider x:Name="MusicVolumeSlider" 
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Cursor="{DynamicResource PushCursor}" 
+                    HorizontalAlignment="Left" 
+                    Height="50" 
+            	    Value="{Binding level, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+            	    VerticalAlignment="Top" 
+                    Width="245" 
+                    MouseLeave="MusicVolumeSlider_MouseLeave" 
+                    MouseEnter="MusicVolumeSlider_MouseEnter" 
                     Opacity="0.5"
-                    Maximum="100"  Panel.ZIndex="10"
-                    Style="{DynamicResource SliderStyle1}">
+                    Maximum="100"  
+                    Panel.ZIndex="10"
+                    Style="{DynamicResource SliderStyle1}" >
                     <Slider.Effect>
                         <DropShadowEffect Color="#7F000000" ShadowDepth="5" Opacity="0.3"/>
                     </Slider.Effect>
                 </Slider>
 
-                <Label Visibility="Hidden" Content="Ждите..." Grid.Row="2" Grid.Column="2" x:Name="LabelWait" HorizontalAlignment="Center" 
-                       VerticalAlignment="Center" FontSize="36" Panel.ZIndex="1000" MinWidth="3"  >
-                    <Label.Foreground>
-                        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                            <GradientStop Color="White" Offset="1"/>
-                            <GradientStop Color="WhiteSmoke" Offset="0.009"/>
-                            <GradientStop Color="#FFFEFEFE" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Label.Foreground>
-                </Label>
+                <GameCardsNewDB:BeautyButtonCardsNewDB x:Name="StartButton" 
+                                                       Grid.Row="1" Grid.ColumnSpan="4"
+                                                       Height="250" Width="250"
+                                                       Visibility="Visible"/>
 
-                <Slider Cursor="{DynamicResource PushCursor}" Grid.Row="2" Grid.Column="2" x:Name="VideoTimeSlider"
-            	Value="{Binding timeInSec, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-            	Style="{DynamicResource SliderStyle_Video}"
-                HorizontalAlignment="Stretch" Width="Auto"
-            	 Opacity="1"
-            	Maximum="100" VerticalAlignment="Bottom" Margin="17,0,17,32"               
-                MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave"
-                PreviewMouseUp="VideoTimeSlider_PreviewMouseUp" PreviewMouseDown="VideoTimeSlider_PreviewMouseDown" Background="{x:Null}" >
-                    <Slider.Effect>
-                        <DropShadowEffect x:Name="DropShadowSliderTime" BlurRadius="15" ShadowDepth="2" Color="#9A000000"/>
-                    </Slider.Effect>
-                </Slider>
+                <StackPanel HorizontalAlignment="Right" 
+                            Grid.Column="3"
+                            Grid.RowSpan="2"
+                            Margin="0,0,0,0" 
+                            VerticalAlignment="Top" 
+                            Background="{x:Null}" 
+                            Panel.ZIndex="2">
 
-                <Grid x:Name="GridVlcBlackBackgrnd" Visibility="{Binding ElementName=Vlc, Path=Visibility}" Panel.ZIndex="-10" 
-                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" />
-                <Grid x:Name="GridVlcBlackBackgrnd2" Visibility="{Binding ElementName=Vlc, Path=Visibility}" Panel.ZIndex="-10" 
-                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" />
+                    <Interface:BeautyButton
+                            BaseSize="45"
+                            SmallSize="30"
+                            Width="55" Height="55" 
+                            ImgSource="Images/Cross.png"
+                            ToolTip="Выход"
+                               PreviewMouseUp="Close_PreviewMouseUp"
+                               Style="{DynamicResource AlmostHidingElement}"/>
 
-                <Image Cursor="{DynamicResource PushCursor}" Grid.Row="2" x:Name="BackImgButton" Grid.Column="0" Height="64" Source="Images/prev.png"  HorizontalAlignment="Right"  
-                  VerticalAlignment="Bottom"                     Opacity="1" Margin="23"
-                 Panel.ZIndex="10"           
-                  MouseDown="Image_MouseDown" MouseUp="BackImgButton_MouseUp"
-                       MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave"
-                 RenderTransformOrigin="0.5,0.5"  >
-                    <Image.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleY="-1" ScaleX="1"/>
-                            <SkewTransform AngleY="0" AngleX="0"/>
-                            <RotateTransform Angle="-180"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Image.RenderTransform>
-                    <Image.Effect>
-                        <DropShadowEffect x:Name="DropShadowPrev" BlurRadius="15" ShadowDepth="2" Color="#9A000000" Direction="225"/>
-                    </Image.Effect>
-                </Image>
-                <Image Cursor="{DynamicResource PushCursor}"  x:Name="PlayImgButton" Grid.Row="2" Grid.Column="1" Height="64" Source="Images/BtnPlay.png"  HorizontalAlignment="Right"  
-                 Margin="23" VerticalAlignment="Bottom"                     Opacity="1"
-                 Panel.ZIndex="10"         
-                 MouseDown="Image_MouseDown" MouseUp="PlayImgButton_MouseUp" 
-                   MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave">
+                    <Interface:BeautyButton
+                            BaseSize="45"
+                            SmallSize="30"
+                            Width="55" Height="55"
+                            ImgSource="Images/Delete.png"
+                               Margin="0 0 0 0"
+                               HorizontalAlignment="Right" 
+                               x:Name="AbortLevelButton"
+                               Visibility="Collapsed"
+                               ToolTip="Прервать уровень"
+                               PreviewMouseUp="StopLevel_PreviewMouseUp"
+                               Style="{DynamicResource AlmostHidingElement}"/>
 
-                    <Image.Effect>
-                        <DropShadowEffect x:Name="DropShadowPlay" BlurRadius="15" ShadowDepth="2" Color="#9A000000" Direction="225"/>
-                    </Image.Effect>
-                </Image>
-
-                <Image Cursor="{DynamicResource PushCursor}" x:Name="NextImgButton" Grid.Row="2" Grid.Column="3" Height="64" Source="Images/prev.png"  HorizontalAlignment="Right"  
-                   Margin="23" VerticalAlignment="Bottom"                     Opacity="1"
-                   Panel.ZIndex="10"         MouseDown="Image_MouseDown" MouseUp="NextImgButton_MouseUp" 
-                       MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave">
-                    <Image.Effect>
-                        <DropShadowEffect x:Name="DropShadowNext" BlurRadius="15" ShadowDepth="2" Color="#9A000000"/>
-                    </Image.Effect>
-                </Image>
-
-                <TextBlock Name="TextVideoDescription" Grid.Row="0" Grid.Column="2" Visibility="{Binding ElementName=VideoTimeSlider, Path=Visibility}" 
-                           Opacity="{Binding ElementName=VideoTimeSlider,Path=Opacity}" VerticalAlignment="Top" Height="51"
-                    Text="Текст по умолчанию длинный очень очень длинный длинный длинный длинный длинный длинный длинный длинный длинный длинный длинный" FontFamily="Arial"
-                           FontSize="22" Margin="200,23,200,0"  TextWrapping="Wrap" TextTrimming="CharacterEllipsis" TextAlignment="Center">
-                    <TextBlock.Foreground>
-                        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                            <GradientStop Color="White" Offset="1"/>
-                            <GradientStop Color="WhiteSmoke" Offset="0.009"/>
-                            <GradientStop Color="#FFFEFEFE" Offset="1"/>
-                        </LinearGradientBrush>
-                    </TextBlock.Foreground>
-                    <TextBlock.ToolTip>
-                        <ToolTip>
-                            <TextBlock Name="TextToolTip" Text="Подсказка" FontSize="12"></TextBlock>
-                        </ToolTip>
-                    </TextBlock.ToolTip>
-                </TextBlock>
-
-
-
-
-                <Label x:Name="L1" Content="Label" HorizontalAlignment="Left" Margin="10,282,0,0" Grid.Row="1" VerticalAlignment="Top" Width="218" Grid.ColumnSpan="3" Opacity="0"/>
-
+                </StackPanel>
             </Grid>
-
-
-            <PrevMenuNS:PrevMenu x:Name="PreviewMenu" Panel.ZIndex="11" Visibility="Collapsed" Margin="0 40 0 60"/>
-
-
         </Grid>
-
-
-
     </Grid>
 </Window>

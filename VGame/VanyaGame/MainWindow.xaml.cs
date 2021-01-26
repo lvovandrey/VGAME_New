@@ -51,33 +51,8 @@ namespace VanyaGame
             TDrawEffects.PushUI_MouseDown((FrameworkElement)sender);
         }
 
-        private void NextImgButton_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            Game.CurVideo.Rewind(new TimeSpan(0, 0, 5), false);
-        }
-
-        private void BackImgButton_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            Game.CurVideo.Rewind(new TimeSpan(0, 0, 5), true);
-        }
 
 
-
-        private void VideoTimeSlider_PreviewMouseUp(object sender, MouseButtonEventArgs e)
-        {
-            Game.CurVideo.player.Position = new TimeSpan(0, 0, (int)VideoTimeSlider.Value);
-            Game.CurVideo.Play();
-        }
-
-        private void VideoTimeSlider_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Game.CurVideo.Pause();
-        }
-
-        private void PlayImgButton_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            Game.CurVideo.PlayBtnClick();
-        }
 
         private void MusicVolumeSlider_MouseEnter(object sender, MouseEventArgs e)
         {

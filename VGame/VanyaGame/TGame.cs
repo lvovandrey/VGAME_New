@@ -121,18 +121,6 @@ namespace VanyaGame
                 return; }
             gameVideo.MediaGUI.Clear();
 
-
-            gameVideo.MediaGUI.Add(Owner.BackImgButton);
-            gameVideo.MediaGUI.Add(Owner.NextImgButton);
-            gameVideo.MediaGUI.Add(Owner.VideoVolumeSlider);
-            gameVideo.MediaGUI.Add(Owner.VideoTimeSlider);
-            gameVideo.MediaGUI.Add(Owner.PlayImgButton);
-
-            gameVideo.SliderTimer = Owner.VideoTimeSlider;
-            gameVideo.PlayBtn = Owner.PlayImgButton;
-            Game.Owner.VideoVolumeSlider.DataContext = gameVideo.volume;
-            Game.Owner.VideoTimeSlider.DataContext = gameVideo.timer;
-            
             CurVideo = gameVideo;
             CurVideo.MediaGUI.UIMediaHide();
         }
