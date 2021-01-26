@@ -28,105 +28,70 @@
                 <GradientStop Color="#FF423A09" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Panel.ZIndex="1">
-                <MediaElement x:Name="MediaElementSound" 
-                              Height="15"
-                              Width="15" 
-                              LoadedBehavior="Manual"/>
-                <MediaElement x:Name="MediaElementMusic" 
-                              Width="15"
-                              Height="15" 
-                              LoadedBehavior="Manual"  
-                              Volume="0.1"/>
-                <Grid x:Name="GridVideo" 
-                      VerticalAlignment="Stretch"  
-                      HorizontalAlignment="Stretch" >
+
+        <MediaElement x:Name="MediaElementSound" 
+                      Height="15" Width="15" 
+                      LoadedBehavior="Manual"/>
+        <MediaElement x:Name="MediaElementMusic" 
+                      Width="15" Height="15" 
+                      LoadedBehavior="Manual"  
+                      Volume="0.1"/>
+        <MediaElement x:Name="MediaElementVideo" 
+                      HorizontalAlignment="Center" 
+                      VerticalAlignment="Center" 
+                      LoadedBehavior="Manual" 
+                      Stretch="Fill" 
+                      Opacity="0.1"  />
+
+        <WrapPanel x:Name="WrapPanelBigCards" 
+                   Margin="50 50 50 0" 
+                   VerticalAlignment="Center" 
+                   HorizontalAlignment="Center" />
+
+        <WrapPanel Orientation="Horizontal"  
+                   x:Name="WrapPanelMain" 
+                   MaxWidth="{Binding ElementName=MyWindow, Path=ActualWidth}" 
+                   VerticalAlignment="Center" 
+                   HorizontalAlignment="Center" />
 
 
-                    <MediaElement x:Name="MediaElementVideo" HorizontalAlignment="Center" VerticalAlignment="Center" LoadedBehavior="Manual" Stretch="Fill" Opacity="0.1"  />
-
-
-                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-
-                    </StackPanel>
-
-                </Grid>
-
-
-            </Grid>
-
-            <Grid Grid.Row="0" 
-                  x:Name="GridMain" 
-                  VerticalAlignment="Stretch"
-                  HorizontalAlignment="Stretch"
-                  Panel.ZIndex="0"  />
-
-            <WrapPanel x:Name="WrapPanelBigCards" 
-                       Orientation="Horizontal"  
-                       Grid.Row="0" 
-                       Margin="50 50 50 0" 
-                       VerticalAlignment="Center" 
-                       HorizontalAlignment="Center" >
-            </WrapPanel>
-
-            <WrapPanel 
-                Orientation="Horizontal"  
-                x:Name="WrapPanelMain" 
-                Grid.Row="0" 
-                MaxWidth="{Binding ElementName=MyWindow, 
-                Path=ActualWidth}" 
-                VerticalAlignment="Center" 
-                HorizontalAlignment="Center" >
-            </WrapPanel>
-
-            <StackPanel Orientation="Horizontal" 
-                        Panel.ZIndex="30000" 
-                        HorizontalAlignment="Center" 
-                        VerticalAlignment="Top" 
-                        Margin="0,80,0,0" 
-                        Style="{DynamicResource HidingElement}">
-                <TextBlock Text="" FontFamily="Comic Sans MS" 
+        <StackPanel Orientation="Horizontal" 
+                    Panel.ZIndex="30000" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Top" 
+                    Margin="0,80,0,0" 
+                    Style="{DynamicResource HidingElement}">
+            <TextBlock Name="TextForCardTag" 
+                       Text="" FontFamily="Comic Sans MS" 
                        Panel.ZIndex="30000" 
-                       Name="TextForCardTag" 
                        FontSize="32" 
                        Foreground="White" 
                        FontStyle="Italic">
-                    <TextBlock.Effect>
-                        <DropShadowEffect ShadowDepth="2"/>
-                    </TextBlock.Effect>
-                </TextBlock>
-            </StackPanel>
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="2"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </StackPanel>
 
-            <WrapPanel  VerticalAlignment="Top" 
-                        Orientation="Horizontal" 
-                        HorizontalAlignment="Center"  
-                        x:Name="StackPanelGame" 
-                        Grid.Row="0" />
-            
-            <PrevMenuNS:PrevMenu x:Name="PreviewMenu" 
-                                 Panel.ZIndex="11" 
-                                 Visibility="Collapsed" 
-                                 Margin="0 40 0 60"/>
+        <PrevMenuNS:PrevMenu x:Name="PreviewMenu" 
+                             Panel.ZIndex="11" 
+                             Visibility="Collapsed" 
+                             Margin="0 40 0 60"/>
 
-            <Grid x:Name="GridInteface" Panel.ZIndex="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition x:Name="Col1" Width="100"/>
-                    <ColumnDefinition  Width="100"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="100"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="130"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="120"/>
-                </Grid.RowDefinitions>
+        <Grid x:Name="GridInteface" Panel.ZIndex="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="Col1" Width="100"/>
+                <ColumnDefinition  Width="100"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="130"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="120"/>
+            </Grid.RowDefinitions>
 
-                <Interface:BeautyButton
+            <Interface:BeautyButton
                             BaseSize="65"
                             SmallSize="50"
                             ImgSource="GameCardsNewDB/Images/btn_settings.png"
@@ -138,7 +103,7 @@
                             PreviewMouseUp="SettingsWindowShowButtonClick"
                             Style="{DynamicResource AlmostHidingElement}"/>
 
-                <Slider x:Name="MusicVolumeSlider" 
+            <Slider x:Name="MusicVolumeSlider" 
                     Grid.Column="1"
                     Grid.ColumnSpan="2"
                     Cursor="{DynamicResource PushCursor}" 
@@ -153,39 +118,32 @@
                     Maximum="100"  
                     Panel.ZIndex="10"
                     Style="{DynamicResource SliderStyle1}" >
-                    <Slider.Effect>
-                        <DropShadowEffect Color="#7F000000" ShadowDepth="5" Opacity="0.3"/>
-                    </Slider.Effect>
-                </Slider>
+                <Slider.Effect>
+                    <DropShadowEffect Color="#7F000000" ShadowDepth="5" Opacity="0.3"/>
+                </Slider.Effect>
+            </Slider>
 
-                <GameCardsNewDB:BeautyButtonCardsNewDB x:Name="StartButton" 
+            <GameCardsNewDB:BeautyButtonCardsNewDB x:Name="StartButton" 
                                                        Grid.Row="1" Grid.ColumnSpan="4"
                                                        Height="250" Width="250"
                                                        Visibility="Visible"/>
 
-                <StackPanel HorizontalAlignment="Right" 
-                            Grid.Column="3"
-                            Grid.RowSpan="2"
-                            Margin="0,0,0,0" 
-                            VerticalAlignment="Top" 
-                            Background="{x:Null}" 
+            <StackPanel     Grid.Column="3" Grid.RowSpan="2"
+                            VerticalAlignment="Top" HorizontalAlignment="Right"  
                             Panel.ZIndex="2">
 
-                    <Interface:BeautyButton
+                <Interface:BeautyButton
                             BaseSize="45"
                             SmallSize="30"
                             Width="55" Height="55" 
                             ImgSource="Images/Cross.png"
                             ToolTip="Выход"
-                               PreviewMouseUp="Close_PreviewMouseUp"
-                               Style="{DynamicResource AlmostHidingElement}"/>
+                            PreviewMouseUp="Close_PreviewMouseUp"
+                            Style="{DynamicResource AlmostHidingElement}"/>
 
-                    <Interface:BeautyButton
-                            BaseSize="45"
-                            SmallSize="30"
-                            Width="55" Height="55"
-                            ImgSource="Images/Delete.png"
-                               Margin="0 0 0 0"
+                <Interface:BeautyButton BaseSize="45" SmallSize="30"
+                               Width="55" Height="55"
+                               ImgSource="Images/Delete.png"
                                HorizontalAlignment="Right" 
                                x:Name="AbortLevelButton"
                                Visibility="Collapsed"
@@ -193,8 +151,7 @@
                                PreviewMouseUp="StopLevel_PreviewMouseUp"
                                Style="{DynamicResource AlmostHidingElement}"/>
 
-                </StackPanel>
-            </Grid>
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>

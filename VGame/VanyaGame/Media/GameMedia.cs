@@ -323,7 +323,7 @@ namespace VanyaGame.Media
         public GameVideo(ref Player _player)
             : base(ref _player)
         {
-            OwnGrid = Game.Owner.GridVideo;
+            OwnGrid = Game.Owner.BaseGrid;
             onStateChangeEvent += OnStateChange;
         }
 

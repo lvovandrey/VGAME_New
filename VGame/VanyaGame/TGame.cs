@@ -179,7 +179,7 @@ namespace VanyaGame
         {
             ImageBrush im = new ImageBrush();
             im.ImageSource = PictHelper.GetBitmapImage(new Uri(BackgroundFilename));
-            Owner.GridMain.Background = im;
+            Owner.BaseGrid.Background = im;
         }
 
         /// <summary>
