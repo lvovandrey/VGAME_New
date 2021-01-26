@@ -78,22 +78,12 @@ namespace VanyaGame
                     //это альтернативная затычка
                     Game.Owner.Cursor = Cursors.Hand;
                 }
-                   // ПРИСВОИТЬ КУРСОР!!!!
-                   // Game.Owner.Cursor = Level.CurScene.Sets.Cursor;
                 else Game.Owner.Cursor = Cursors.None;
             }
         }
 
         
 
-        public static void Msg(string s)
-        {
-          Owner.TxtBlock.Text += "\r\n" + s; 
-        }
-        public static void MsgClear()
-        {
-            Owner.TxtBlock.Text = "";
-        }
         
         public static double TimeDiagnostic;
 
@@ -145,7 +135,6 @@ namespace VanyaGame
             
             CurVideo = gameVideo;
             CurVideo.MediaGUI.UIMediaHide();
-            Game.Msg("VideoPlayer change");
         }
 
         internal static void ReloadGame()
@@ -206,17 +195,6 @@ namespace VanyaGame
         }
 
         /// <summary>
-        /// Грузит в ImgPrev окна владельца Owner превью из картинки
-        /// </summary>
-        /// <param name="BackgroundFilename">Путь к файлу картинки на диске</param>
-        public static void LoadPreview(string Filename)
-        {
-//            System.Drawing.Bitmap myBitmap = new System.Drawing.Bitmap(@Filename);
-            Owner.PrevImg.Source = PictHelper.GetBitmapImage(new Uri(Filename));// Imaging.CreateBitmapSourceFromBitmap(myBitmap);
-        }
-
-
-        /// <summary>
         /// Переключает игру на следующий уровень
         /// </summary>
         public static void NextLevel()
@@ -231,7 +209,6 @@ namespace VanyaGame
             else
             {
                 GameOver();
-                Msg("GAME OVER");
             }
         }
 
