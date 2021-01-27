@@ -221,6 +221,10 @@
       <DependentUpon>BeautyButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Interface\Empty.cs" />
+    <Compile Include="Interface\RoundProgressBarSimple.xaml.cs">
+      <DependentUpon>RoundProgressBarSimple.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\RoundProgressPathConverter.cs" />
     <Compile Include="Struct\IterationSets.cs" />
     <Compile Include="Struct\LevelSets.cs" />
     <Compile Include="Struct\SceneSets.cs" />
@@ -346,6 +350,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Interface\BeautyButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Interface\RoundProgressBarSimple.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Interface\RoundProgressBarStyleDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
