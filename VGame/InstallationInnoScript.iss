@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "VGame"
-#define MyAppVersion "1.0.0.1"
+#define MyAppVersion "1.0.0.2"
 #define MyAppPublisher "Lvov A.A."
 #define MyAppExeName "VanyaGame.exe"
 
@@ -17,6 +17,7 @@ AppVersion={#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
+LicenseFile=License.rtf
 OutputDir=I:\VGame
 OutputBaseFilename=VGameSetup_{#MyAppVersion}
 SetupIconFile=C:\Users\Professional\Pictures\book-icon.ico

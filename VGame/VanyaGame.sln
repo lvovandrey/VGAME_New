@@ -12,6 +12,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2D137AB9-E851-4074-AA19-485A009D03D3}"
 	ProjectSection(SolutionItems) = preProject
 		InstallationInnoScript.iss = InstallationInnoScript.iss
+		License.rtf = License.rtf
 	EndProjectSection
 EndProject
 Global
