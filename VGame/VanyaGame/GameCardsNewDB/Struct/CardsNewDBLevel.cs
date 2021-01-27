@@ -14,6 +14,7 @@ using VanyaGame.GameCardsNewDB.DB.RepositoryModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using VanyaGame.PrevMenuNS;
 
 namespace VanyaGame.GameCardsNewDB.Struct
 {
@@ -79,13 +80,32 @@ namespace VanyaGame.GameCardsNewDB.Struct
 
         private static async Task<bool> LoadDBAsync()
         {
+            Console.WriteLine("StartLoading DB");
+
             Game.Owner.Dispatcher.Invoke(() => { Game.Owner.ProgressBarLoadDB.Visibility = Visibility.Visible; }); 
             bool result =  await Task.Run(() => DBTools.LoadDB(new ObservableCollection<DB.RepositoryModel.Card>(), 
                                                        new ObservableCollection<DB.RepositoryModel.Level>(), 
                                                        new ObservableCollection<DB.RepositoryModel.LevelPassing>(), 
                                                        Settings.GetInstance().AttachedDBCardsFilename));
             Game.Owner.Dispatcher.Invoke(() => { Game.Owner.ProgressBarLoadDB.Visibility = Visibility.Collapsed; });
+            Console.WriteLine("End Loading DB");
             return result;
+        }
+
+        public static void AddLevelsInPrevMenu() 
+        {
+            Console.WriteLine("Add levels in PrevMenu");
+            foreach (VanyaGame.Struct.Level Level in Game.Levels)
+            {
+                Level.GetComponent<Loader>().LoadSets();
+                string filename = VanyaGame.Sets.Settings.GetInstance().DefaultImage;
+
+                if (Game.gameType == GameType.CardsNewDB)
+                    filename = ((CardsNewDBLevel)Level).Sets.PreviewURL;
+
+                PrevMenuItem NewItem = new PrevMenuNS.PrevMenuItem(filename, Level, "youtube");
+                Game.Owner.PreviewMenu.AddItem(NewItem, Game.ItemClick);
+            }
         }
 
         public static async void LoadLevels()
@@ -106,13 +126,15 @@ namespace VanyaGame.GameCardsNewDB.Struct
             //    DB.Levels[j] = DB.Levels[i];
             //    DB.Levels[i] = tmpLevel;
             //}
-
+            Console.WriteLine("Repack Levels");
             foreach (var level in DB.DBTools.Levels)
             {
                 VanyaGame.Struct.Level NewLevel = new CardsNewDBLevel(level);
                 Game.Levels.Enqueue(NewLevel);
             }
+            Console.WriteLine("End repack Levels");
 
+            AddLevelsInPrevMenu();
         }
 
 

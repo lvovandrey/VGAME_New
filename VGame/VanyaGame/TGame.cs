@@ -230,17 +230,7 @@ namespace VanyaGame
                     ((FrameworkElement)Game.Owner.StartButton).BeginAnimation(FrameworkElement.OpacityProperty, null);
                     Game.PrevMenuShow();
                 });
-                foreach (Level Level in Game.Levels)
-                {
-                    Level.GetComponent<Loader>().LoadSets();
-                    string filename = Settings.GetInstance().DefaultImage;
 
-                        if (gameType == GameType.CardsNewDB)
-                            filename = ((CardsNewDBLevel)Level).Sets.PreviewURL;
-
-                    PrevMenuItem NewItem = new PrevMenuNS.PrevMenuItem(filename, Level, "youtube");
-                    Owner.PreviewMenu.AddItem(NewItem, ItemClick);
-                }
             }, TimeSpan.FromSeconds(1.5));
 
         }
