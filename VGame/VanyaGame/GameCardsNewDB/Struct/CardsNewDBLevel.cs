@@ -13,6 +13,7 @@ using VanyaGame.GameCardsNewDB.DB;
 using VanyaGame.GameCardsNewDB.DB.RepositoryModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace VanyaGame.GameCardsNewDB.Struct
 {
@@ -76,14 +77,26 @@ namespace VanyaGame.GameCardsNewDB.Struct
             GetComponent<Starter>().StartElements.Add(Start);
         }
 
-        public static void LoadLevels()
+        private static async Task<bool> LoadDBAsync()
+        {
+            Game.Owner.Dispatcher.Invoke(() => { Game.Owner.ProgressBarLoadDB.Visibility = Visibility.Visible; }); 
+            bool result =  await Task.Run(() => DBTools.LoadDB(new ObservableCollection<DB.RepositoryModel.Card>(), 
+                                                       new ObservableCollection<DB.RepositoryModel.Level>(), 
+                                                       new ObservableCollection<DB.RepositoryModel.LevelPassing>(), 
+                                                       Settings.GetInstance().AttachedDBCardsFilename));
+            Game.Owner.Dispatcher.Invoke(() => { Game.Owner.ProgressBarLoadDB.Visibility = Visibility.Collapsed; });
+            return result;
+        }
+
+        public static async void LoadLevels()
         {
             Settings.GetInstance().RestoreAllSettings();
 
-            DBTools.LoadDB(new ObservableCollection<DB.RepositoryModel.Card>(), new ObservableCollection<DB.RepositoryModel.Level>(), new ObservableCollection<DB.RepositoryModel.LevelPassing>(), Settings.GetInstance().AttachedDBCardsFilename);
+            await LoadDBAsync();
+             //DBTools.LoadDB(new ObservableCollection<DB.RepositoryModel.Card>(), new ObservableCollection<DB.RepositoryModel.Level>(), new ObservableCollection<DB.RepositoryModel.LevelPassing>(), Settings.GetInstance().AttachedDBCardsFilename);
 
 
-            Random random = new Random();
+             Random random = new Random();
 
             //Перемешиваем уровни  //что за алгоритм - хз - раньше работал вроде
             //for (int i = DB.Levels.Count - 1; i >= 1; i--)

@@ -128,21 +128,23 @@
                                                        Grid.Row="1" Grid.ColumnSpan="4"
                                                        Height="250" Width="250"
                                                        Visibility="Visible"/>
-            <Grid Margin="100 100 0 0" Grid.RowSpan="10" Grid.ColumnSpan="10" HorizontalAlignment="Left">
+            <Grid Visibility="Collapsed" x:Name="ProgressBarLoadDB" 
+                  Margin="100 100 0 0" Grid.RowSpan="10" Grid.ColumnSpan="10" 
+                  HorizontalAlignment="Left">
                 <Grid.Effect>
-                    <DropShadowEffect/>
+                    <DropShadowEffect ShadowDepth="3"/>
                 </Grid.Effect>
                 <TextBlock Text="{Binding ElementName=TestSlider,Path=Value, StringFormat={}{0:P0}}"
                            HorizontalAlignment="Center" VerticalAlignment="Center"
                            FontSize="18" Foreground="White" >
 
                 </TextBlock>
-                <ProgressBar Value="{Binding ElementName=TestSlider,Path=Value}" 
+                <ProgressBar Value="0" 
+                             IsIndeterminate="True"
                              Maximum="1" HorizontalAlignment="Center" VerticalAlignment="Center" 
                              Height="100" Width="100" 
                              Style="{DynamicResource RoundProgressBarStyle}"
                              Foreground="#FFED1C24" Background="#FFEBB249"/>
-                <Slider x:Name="TestSlider" Maximum="1" Minimum="0" SmallChange="0.01"/>
             </Grid>
 
 

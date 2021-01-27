@@ -5,6 +5,7 @@ using System.Linq;
 using System.Data.Entity;
 using VanyaGame.GameCardsNewDB.DB.RepositoryModel;
 using VanyaGame.DB;
+using System.Threading.Tasks;
 
 namespace VanyaGame.GameCardsNewDB.DB
 {
@@ -62,8 +63,5 @@ namespace VanyaGame.GameCardsNewDB.DB
             }
             return !error;
         }
-
-      
-
     }
 }
