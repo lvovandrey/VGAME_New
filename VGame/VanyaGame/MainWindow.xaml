@@ -128,15 +128,16 @@
                                                        Grid.Row="1" Grid.ColumnSpan="4"
                                                        Height="250" Width="250"
                                                        Visibility="Visible"/>
-            <Grid Visibility="Collapsed" x:Name="ProgressBarLoadDB" 
-                  Margin="100 100 0 0" Grid.RowSpan="10" Grid.ColumnSpan="10" 
-                  HorizontalAlignment="Left">
-                <Grid.Effect>
+            <Grid  x:Name="ProgressBarLoadDB" 
+                   Visibility="Collapsed"
+                  Grid.Row="1" Grid.ColumnSpan="4" 
+                  Height="350" Width="350">
+            <Grid.Effect>
                     <DropShadowEffect ShadowDepth="3"/>
                 </Grid.Effect>
-                <TextBlock Text="{Binding ElementName=TestSlider,Path=Value, StringFormat={}{0:P0}}"
+                <TextBlock Text="Загрузка базы данных..." Margin="0 -150 0 0"
                            HorizontalAlignment="Center" VerticalAlignment="Center"
-                           FontSize="18" Foreground="White" >
+                           FontSize="18" Foreground="#FFEBB249"  >
 
                 </TextBlock>
                 <ProgressBar Value="0" 
@@ -146,6 +147,7 @@
                              Style="{DynamicResource RoundProgressBarStyle}"
                              Foreground="#FFED1C24" Background="#FFEBB249"/>
             </Grid>
+
 
 
             <StackPanel     Grid.Column="3" Grid.RowSpan="2"

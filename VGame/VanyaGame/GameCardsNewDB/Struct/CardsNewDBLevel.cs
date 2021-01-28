@@ -113,8 +113,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
             Settings.GetInstance().RestoreAllSettings();
 
             await LoadDBAsync();
-             //DBTools.LoadDB(new ObservableCollection<DB.RepositoryModel.Card>(), new ObservableCollection<DB.RepositoryModel.Level>(), new ObservableCollection<DB.RepositoryModel.LevelPassing>(), Settings.GetInstance().AttachedDBCardsFilename);
-
+            
 
              Random random = new Random();
 
