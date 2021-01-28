@@ -21,10 +21,6 @@ namespace VanyaGame.DB
         public DbSet<Preview> Previews { get; set; }
         public DbSet<Scene> Scenes { get; set; }
         public DbSet<VideoSegment> VideoSegments { get; set; }
-
-
-
-
     }
 
 

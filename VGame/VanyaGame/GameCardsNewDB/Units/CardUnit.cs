@@ -48,7 +48,7 @@ namespace VanyaGame.GameCardsNewDB.Units
 
             B = new HaveBody("HaveBody", this, new CardUnitElement());
 
-            if (System.IO.File.Exists(card.ImageAddress))
+            if (System.IO.File.Exists(card.ImageAddress) || Miscellanea.UrlExists(card.ImageAddress))
             {
                 ((CardUnitElement)B.Body).Img.Source = PictHelper.GetBitmapImage(new Uri(card.ImageAddress));
             }
@@ -120,7 +120,7 @@ namespace VanyaGame.GameCardsNewDB.Units
 
             B = new HaveBody("HaveBody", newcardunit, new CardUnitElement());
 
-            if (System.IO.File.Exists(Card.ImageAddress))
+            if (System.IO.File.Exists(Card.ImageAddress) || Miscellanea.UrlExists(Card.ImageAddress))
             {
                 ((CardUnitElement)B.Body).Img.Source = PictHelper.GetBitmapImage(new Uri(Card.ImageAddress));
             }
