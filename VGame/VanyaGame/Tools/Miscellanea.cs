@@ -39,6 +39,12 @@ namespace VanyaGame
         }
 
 
+
+        //------------------------------------------------------------------------------------------//
+        //Методы UrlExists, ExtractCharsetAndMimeType и PrepareRequest                              // 
+        //позаимстовованы из источника https://www.sql.ru/forum/656765/sushhestvovanie-fayla-po-url //
+        // Благодарю пользователя Nisus                                                             //
+
         public static Boolean UrlExists(string url)
         {
             string mimeType = null;
