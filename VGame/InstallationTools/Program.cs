@@ -1,5 +1,4 @@
-﻿using LevelSetsEditor.DB;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,6 +7,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Speech.Synthesis;
 using System.Globalization;
+using CardsGameNewDBRepository;
 
 namespace InstallationTools
 {
@@ -120,18 +120,18 @@ namespace InstallationTools
         {
             try
             {
-                CardsEditor.DB.DBTools.LoadDB(filename);
-                foreach (var card in CardsEditor.DB.DBTools.Context.Cards)
+                DBTools.LoadDB(filename);
+                foreach (var card in DBTools.Context.Cards)
                 {
                     card.ImageAddress = Path.Combine(dBCardsImagesDir, Path.GetFileName(card.ImageAddress));
                 }
 
-                foreach (var level in CardsEditor.DB.DBTools.Context.Levels)
+                foreach (var level in DBTools.Context.Levels)
                 {
                     level.ImageAddress = Path.Combine(dBLevelsImagesDir, Path.GetFileName(level.ImageAddress));
                 }
 
-                CardsEditor.DB.DBTools.Context.SaveChanges();
+                DBTools.Context.SaveChanges();
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("OK");
                 Console.ResetColor();

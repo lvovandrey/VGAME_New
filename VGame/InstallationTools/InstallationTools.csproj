@@ -88,20 +88,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstract\INPCBase.cs" />
-    <Compile Include="Abstract\RelayCommand.cs" />
-    <Compile Include="DB\Card.cs" />
-    <Compile Include="DB\CardPassing.cs" />
-    <Compile Include="DB\Context.cs" />
-    <Compile Include="DB\DBTools.cs" />
-    <Compile Include="DB\Level.cs" />
-    <Compile Include="DB\LevelPassing.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CardsGameNewDBRepository\CardsGameNewDBRepository.csproj">
+      <Project>{f0de30df-6be3-4a3c-a721-5ec78a87950f}</Project>
+      <Name>CardsGameNewDBRepository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
