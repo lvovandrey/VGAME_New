@@ -1,26 +1,24 @@
-﻿using CardsEditor.Model;
-using CardsEditor.ViewModel;
-using LevelSetsEditor.DB;
+﻿using CardsGameNewDBRepository.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Entity;
-using System.Data.SQLite;
-using System.Data.Common;
 using System.Data;
+using System.Data.Common;
+using System.Data.SQLite;
+using System.Linq;
+using System.Data.Entity;
 
-namespace CardsEditor.DB
+namespace CardsGameNewDBRepository
 {
+    public delegate void DBInitCallback(ObservableCollection<Card> cards, ObservableCollection<Level> levels, ObservableCollection<LevelPassing> levelPassings, Context Context);
+
     public class DBTools
     {
         public static bool IsDBLoaded = false;
         public static string DBFilename = "";
         public static Context Context;
 
-        public static bool LoadDB(VM vm, ObservableCollection<Card> _cards, ObservableCollection<Level> _levels, ObservableCollection<LevelPassing> _levelPassings, Context context, string _DBFilename)
+        public static bool LoadDB(DBInitCallback DBInitCallback, ObservableCollection<Card> _cards, ObservableCollection<Level> _levels, ObservableCollection<LevelPassing> _levelPassings, Context context, string _DBFilename)
         {
             bool error = false;
             try
@@ -48,8 +46,7 @@ namespace CardsEditor.DB
 
 
 
-
-                vm.init(_cards, _levels, _levelPassings, context);
+                DBInitCallback(_cards, _levels, _levelPassings, context);
                 IsDBLoaded = true;
                 DBFilename = _DBFilename;
             }
@@ -62,7 +59,7 @@ namespace CardsEditor.DB
         }
 
 
-        public static bool CreateDB(VM vm, ObservableCollection<Card> _cards, ObservableCollection<Level> _levels, ObservableCollection<LevelPassing> _levelPassings, Context context, string _DBFilename)
+        public static bool CreateDB(DBInitCallback DBInitCallback, ObservableCollection<Card> _cards, ObservableCollection<Level> _levels, ObservableCollection<LevelPassing> _levelPassings, Context context, string _DBFilename)
         {
             bool error = false;
             try
@@ -146,7 +143,7 @@ namespace CardsEditor.DB
                     }
                 }
 
-                LoadDB(vm, _cards, _levels, _levelPassings, context, _DBFilename);
+                LoadDB(DBInitCallback,_cards, _levels, _levelPassings, context, _DBFilename);
             }
             catch (Exception e)
             {

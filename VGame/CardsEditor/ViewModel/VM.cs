@@ -1,20 +1,14 @@
-﻿using CardsEditor.Abstract;
-using CardsEditor.DB;
-using CardsEditor.Model;
-using CardsEditor.Tools;
+﻿using CardsEditor.Tools;
 using CardsEditor.View;
-using LevelSetsEditor.DB;
+using CardsGameNewDBRepository;
+using CardsGameNewDBRepository.Model;
+using MVVMRealization;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Speech.Synthesis;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 
@@ -294,7 +288,7 @@ namespace CardsEditor.ViewModel
                           if (saveFileDialog.ShowDialog() == DialogResult.OK)
                           {
                               DBFilename = saveFileDialog.FileName;
-                              bool res = DBTools.CreateDB(this, _cards, _levels, _levelPassings, context, DBFilename);
+                              bool res = DBTools.CreateDB(init, _cards, _levels, _levelPassings, context, DBFilename);
                               if (!res)
                               {
                                   System.Windows.MessageBox.Show("Ошибка загрузки базы данных " + DBFilename, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -344,7 +338,7 @@ namespace CardsEditor.ViewModel
                           if (openFileDialog.ShowDialog() == DialogResult.OK)
                           {
                               DBFilename = @openFileDialog.FileName;
-                              bool res = DBTools.LoadDB(this, _cards, _levels, _levelPassings, context, DBFilename);
+                              bool res = DBTools.LoadDB(init, _cards, _levels, _levelPassings, context, DBFilename);
                               if (!res)
                               {
                                   System.Windows.MessageBox.Show("Ошибка загрузки базы данных " + DBFilename, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -512,7 +506,7 @@ namespace CardsEditor.ViewModel
 
 
                     DBFilename = Settings.GetInstance().DefaultDBCardsFilename;
-                    bool res = DBTools.LoadDB(this, _cards, _levels, _levelPassings, context, DBFilename);
+                    bool res = DBTools.LoadDB(init, _cards, _levels, _levelPassings, context, DBFilename);
                     if (!res)
                     {
                         System.Windows.MessageBox.Show("Ошибка загрузки базы данных " + DBFilename, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace CardsEditor.Abstract
+namespace MVVMRealization
 {
     public class RelayCommand : ICommand
     {

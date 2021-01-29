@@ -1,12 +1,9 @@
-﻿using CardsEditor.Abstract;
-using CardsEditor.Model;
+﻿using CardsGameNewDBRepository.Model;
 using Microsoft.Win32;
+using MVVMRealization;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CardsEditor.ViewModel
 {

@@ -1,11 +1,9 @@
-﻿using CardsEditor.Model;
+﻿using CardsGameNewDBRepository.Model;
 using System.Data.Entity;
 using System.Data.SQLite;
 
-
-namespace LevelSetsEditor.DB
+namespace CardsGameNewDBRepository
 {
-
     public class Context : DbContext
     {
         public Context(string connectionString) : base(new SQLiteConnection(connectionString), true) { }

@@ -1,18 +1,13 @@
-﻿using CardsEditor.Abstract;
-using CardsEditor.DB;
-using CardsEditor.Model;
+﻿using CardsGameNewDBRepository;
+using CardsGameNewDBRepository.Model;
 using LiveCharts;
 using LiveCharts.Wpf;
+using MVVMRealization;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Markup;
 using System.Windows.Media;
-using System.Xml;
 
 namespace CardsEditor.ViewModel
 {
