@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CardsGameNewDBRepository;
+using CardsGameNewDBRepository.Model;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -11,12 +13,11 @@ using System.Windows.Threading;
 using VanyaGame.GameCardsNewDB.Tools;
 using VanyaGame.GameCardsNewDB.Units;
 using VanyaGame.GameCardsNewDB.Units.Components;
-using VanyaGame.GameCardsNewDB.DB;
 using VanyaGame.Struct;
 using VanyaGame.Struct.Components;
 using VanyaGame.ToolsShuffle;
 using VanyaGame.Units.Components;
-using VanyaGame.GameCardsNewDB.DB.RepositoryModel;
+
 
 namespace VanyaGame.GameCardsNewDB.Struct
 {

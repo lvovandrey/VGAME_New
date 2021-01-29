@@ -2,19 +2,17 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
-using VanyaGame.DB;
 using VanyaGame.Struct;
 using VanyaGame.Struct.Components;
-using DBModel = VanyaGame.DB.DBLevelsRepositoryModel;
-using DBCardsModel = VanyaGame.DB.DBCardsRepositoryModel;
 using System.Collections.ObjectModel;
 using VanyaGame.GameCardsNewDB.Tools;
-using VanyaGame.GameCardsNewDB.DB;
-using VanyaGame.GameCardsNewDB.DB.RepositoryModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using VanyaGame.PrevMenuNS;
+using Model = CardsGameNewDBRepository.Model;
+using CardsGameNewDBRepository.Model;
+using CardsGameNewDBRepository;
 
 namespace VanyaGame.GameCardsNewDB.Struct
 {
@@ -25,9 +23,14 @@ namespace VanyaGame.GameCardsNewDB.Struct
     /// </summary>
     public class CardsNewDBLevel : VanyaGame.Struct.Level, INotifyPropertyChanged
     {
-        public DB.RepositoryModel.Level DbLevelRecord;
+        public Model.Level DbLevelRecord;
 
-        public ObservableCollection<LevelPassing> LevelPassings { get { return DbLevelRecord._LevelPassings; } set { DbLevelRecord._LevelPassings = value; OnPropertyChanged("LevelPassings"); } }
+        public ObservableCollection<LevelPassing> LevelPassings { get 
+            {
+                if (DbLevelRecord._LevelPassings == null) DbLevelRecord._LevelPassings = new ObservableCollection<LevelPassing>();
+                return DbLevelRecord._LevelPassings; 
+            } 
+            set { DbLevelRecord._LevelPassings = value; OnPropertyChanged("LevelPassings"); } }
         public int LevelPassingsCount { get { if (LevelPassings != null) return LevelPassings.Count; else return 0; } }
         public LevelPassing CurLevelPassing;
         public int? CardsCount { get { return DbLevelRecord?.Cards?.Count; } }
@@ -67,7 +70,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
             else return new DateTime(2000, 1, 1);
         }
 
-        public CardsNewDBLevel(DB.RepositoryModel.Level _DbLevelRecord) : base()
+        public CardsNewDBLevel(Model.Level _DbLevelRecord) : base()
         {
             DbLevelRecord = DBTools.Context.Levels.Find(_DbLevelRecord.Id);
             if (DbLevelRecord == null) DbLevelRecord = _DbLevelRecord;
@@ -83,9 +86,9 @@ namespace VanyaGame.GameCardsNewDB.Struct
             Console.WriteLine("StartLoading DB");
 
             Game.Owner.Dispatcher.Invoke(() => { Game.Owner.ProgressBarLoadDB.Visibility = Visibility.Visible; }); 
-            bool result =  await Task.Run(() => DBTools.LoadDB(new ObservableCollection<DB.RepositoryModel.Card>(), 
-                                                       new ObservableCollection<DB.RepositoryModel.Level>(), 
-                                                       new ObservableCollection<DB.RepositoryModel.LevelPassing>(), 
+            bool result =  await Task.Run(() => DBTools.LoadDB(new ObservableCollection<Model.Card>(), 
+                                                       new ObservableCollection<Model.Level>(), 
+                                                       new ObservableCollection<Model.LevelPassing>(), 
                                                        Settings.GetInstance().AttachedDBCardsFilename));
             Game.Owner.Dispatcher.Invoke(() => { Game.Owner.ProgressBarLoadDB.Visibility = Visibility.Collapsed; });
             Console.WriteLine("End Loading DB");
@@ -126,7 +129,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
             //    DB.Levels[i] = tmpLevel;
             //}
             Console.WriteLine("Repack Levels");
-            foreach (var level in DB.DBTools.Levels)
+            foreach (var level in DBTools.Context.Levels)
             {
                 VanyaGame.Struct.Level NewLevel = new CardsNewDBLevel(level);
                 Game.Levels.Enqueue(NewLevel);

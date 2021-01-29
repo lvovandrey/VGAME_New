@@ -11,7 +11,6 @@ using VanyaGame.Struct.Components;
 using VanyaGame.Media;
 using VanyaGame.Media.Abstract;
 using VanyaGame.Abstract;
-using VanyaGame.DB;
 using VanyaGame.GameCardsNewDB.Struct;
 using VanyaGame.Sets;
 using VanyaGame.Tools;
@@ -52,7 +51,6 @@ namespace VanyaGame
         public static TDrawEffects DrawEffects = new TDrawEffects();
         public static TUserActivity UserActivity = new TUserActivity();
 
-        public static DBmainTools DBTools = new DBmainTools();
         public static GameType gameType = GameType.None;
 
         private static ComponentContainer mediaContainer;

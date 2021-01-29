@@ -164,19 +164,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Abstract\INPCBase.cs" />
-    <Compile Include="Abstract\RelayCommand.cs" />
-    <Compile Include="DB\Context.cs" />
-    <Compile Include="DB\DBCardsRepositoryModel\Card.cs" />
-    <Compile Include="DB\DBCardsRepositoryModel\Tag.cs" />
-    <Compile Include="DB\DBmainTools.cs" />
-    <Compile Include="DB\DBLevelsRepositoryModel\Level.cs" />
-    <Compile Include="DB\DBLevelsRepositoryModel\Preview.cs" />
-    <Compile Include="DB\DBLevelsRepositoryModel\Scene.cs" />
-    <Compile Include="DB\DBLevelsRepositoryModel\VideoInfo.cs" />
-    <Compile Include="DB\DBLevelsRepositoryModel\VideoSegment.cs" />
-    <Compile Include="DB\DBLevelsRepositoryModel\WebBrowserModel.cs" />
-    <Compile Include="DB\ConvertDBTools.cs" />
     <Compile Include="GameCardsNewDB\DB\RepositoryModel\Context.cs" />
     <Compile Include="GameCardsNewDB\DB\RepositoryModel\DBTools.cs" />
     <Compile Include="GameCardsNewDB\DB\RepositoryModel\Repository.cs" />
@@ -1646,7 +1633,16 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\CardsGameNewDBRepository\CardsGameNewDBRepository.csproj">
+      <Project>{F0DE30DF-6BE3-4A3C-A721-5EC78A87950F}</Project>
+      <Name>CardsGameNewDBRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MVVMRealization\MVVMRealization.csproj">
+      <Project>{0BB085B8-39BA-4A18-B76B-DD5945E90006}</Project>
+      <Name>MVVMRealization</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net45\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net45\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
