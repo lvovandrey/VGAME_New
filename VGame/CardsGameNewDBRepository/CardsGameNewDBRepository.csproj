@@ -64,6 +64,7 @@
     <Compile Include="Model\CardPassing.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="DBTools.cs" />
+    <Compile Include="Model\Attempt.cs" />
     <Compile Include="Model\Level.cs" />
     <Compile Include="Model\LevelPassing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

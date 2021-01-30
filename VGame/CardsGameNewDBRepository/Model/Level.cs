@@ -14,7 +14,7 @@ namespace CardsGameNewDBRepository.Model
         [NotMapped]
         private ObservableCollection<Card> _Cards { get; set; }
         [NotMapped]
-        public ObservableCollection<LevelPassing> _LevelPassings { get; set; }
+        public ObservableCollection<LevelPassing> _LevelPassings { get; set; } = new ObservableCollection<LevelPassing>();
 
 
 
