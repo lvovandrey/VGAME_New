@@ -158,6 +158,22 @@ namespace CardsGameNewDBRepository
                         command.CommandType = CommandType.Text;
                         command.ExecuteNonQuery();
                     }
+
+                    using (SQLiteCommand command = new SQLiteCommand(connection))
+                    {
+                        command.CommandText = @"CREATE TABLE [CardPassings] (
+    [Id]    INTEGER NOT NULL UNIQUE,
+    [AttemptsNumber]    INTEGER NOT NULL,
+	[DateAndTime]   TEXT,
+	[Card_Id]   INTEGER NOT NULL,
+	[LevelPassing_Id]   INTEGER NOT NULL,
+	PRIMARY KEY([Id] AUTOINCREMENT),
+	FOREIGN KEY([Card_Id]) REFERENCES Cards(Id) ON DELETE CASCADE,
+	FOREIGN KEY([LevelPassing_Id]) REFERENCES [LevelPassings]([Id]) ON DELETE CASCADE
+)";
+                        command.CommandType = CommandType.Text;
+                        command.ExecuteNonQuery();
+                    }
                 }
 
                 LoadDB(DBInitCallback,_cards, _levels, _levelPassings, context, _DBFilename);
@@ -174,6 +190,44 @@ namespace CardsGameNewDBRepository
         {
             void DBInitCallbackMoq(ObservableCollection<Card> cards, ObservableCollection<Level> levels, ObservableCollection<LevelPassing> levelPassings, Context Context) { }
             return CreateDB(DBInitCallbackMoq, _cards, _levels, _levelPassings, Context, _DBFilename);
+        }
+
+        public static bool EasyCreateDB(string _DBFilename)
+        {
+            bool error = false;
+            try
+            {
+
+                
+                Context = new Context(@"Data Source=" + _DBFilename);
+
+                IEnumerable<Level> levels = context.Levels.Include(p => p.Cards).ToList();
+                IEnumerable<Card> cards = context.Cards.ToList();
+                IEnumerable<LevelPassing> levelPassings = context.LevelPassings.ToList();
+                IEnumerable<CardPassing> cardPassings = context.CardPassings.ToList();
+
+
+                foreach (Card c in cards)
+                    _cards.Add(c);
+
+                foreach (Level t in levels)
+                    _levels.Add(t);
+
+                foreach (LevelPassing l in levelPassings)
+                    _levelPassings.Add(l);
+
+
+
+                DBInitCallback(_cards, _levels, _levelPassings, context);
+                IsDBLoaded = true;
+                DBFilename = _DBFilename;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                error = true;
+            }
+            return !error;
         }
     }
 }

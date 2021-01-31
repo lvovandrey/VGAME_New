@@ -16,12 +16,17 @@ namespace CardsGameNewDBRepository.Model
         private string _DateAndTimeEnd { get; set; }
         [NotMapped]
         private Card _AskedCard { get; set; }
+        [NotMapped]
+        private Card _AnswerCard  { get; set; }
+        [NotMapped]
+        public bool IsMistake { get { if (_AskedCard != null && _AnswerCard != null) return _AnswerCard.Id != _AskedCard.Id; else return false; } }
+
 
         public int Id { get; set; }
         public string DateAndTimeBegin { get { return _DateAndTimeBegin; } set { _DateAndTimeBegin = value; OnPropertyChanged("DateAndTimeBegin"); } }
         public string DateAndTimeEnd { get { return _DateAndTimeEnd; } set { _DateAndTimeEnd = value; OnPropertyChanged("DateAndTimeEnd"); } }
 
-        public Card AskedCard { get { return _AskedCard; } set { _AskedCard = value; OnPropertyChanged("SaidCard"); } }
-        public Card AnswerCard { get { return _AskedCard; } set { _AskedCard = value; OnPropertyChanged("SaidCard"); } }
+        public Card AskedCard { get { return _AskedCard; } set { _AskedCard = value; OnPropertyChanged("AskedCard"); } }
+        public Card AnswerCard { get { return _AnswerCard; } set { _AnswerCard = value; OnPropertyChanged("AnswerCard"); } }
     }
 }

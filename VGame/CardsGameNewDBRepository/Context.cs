@@ -12,7 +12,6 @@ namespace CardsGameNewDBRepository
         public DbSet<Level> Levels { get; set; }
         public DbSet<LevelPassing> LevelPassings { get; set; }
         public DbSet<CardPassing> CardPassings { get; set; }
-
-
+        public DbSet<Attempt> Attempts { get; set; }
     }
 }
