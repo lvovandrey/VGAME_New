@@ -1,4 +1,5 @@
 ﻿using CardsGameNewDBRepository.Model;
+using SQLite.CodeFirst;
 using System.Data.Entity;
 using System.Data.SQLite;
 
@@ -13,5 +14,11 @@ namespace CardsGameNewDBRepository
         public DbSet<LevelPassing> LevelPassings { get; set; }
         public DbSet<CardPassing> CardPassings { get; set; }
         public DbSet<Attempt> Attempts { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            var sqliteConnectionInitializer = new SqliteCreateDatabaseIfNotExists<Context>(modelBuilder);
+            Database.SetInitializer(sqliteConnectionInitializer);
+        }
     }
 }

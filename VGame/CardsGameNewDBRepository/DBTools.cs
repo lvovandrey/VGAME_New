@@ -200,27 +200,13 @@ namespace CardsGameNewDBRepository
 
                 
                 Context = new Context(@"Data Source=" + _DBFilename);
+                Card card = new Card();
+                Context.Cards.Add(card);
+                Context.SaveChanges();
+                Context.Cards.Remove(card);
+                Context.SaveChanges();
 
-                IEnumerable<Level> levels = context.Levels.Include(p => p.Cards).ToList();
-                IEnumerable<Card> cards = context.Cards.ToList();
-                IEnumerable<LevelPassing> levelPassings = context.LevelPassings.ToList();
-                IEnumerable<CardPassing> cardPassings = context.CardPassings.ToList();
-
-
-                foreach (Card c in cards)
-                    _cards.Add(c);
-
-                foreach (Level t in levels)
-                    _levels.Add(t);
-
-                foreach (LevelPassing l in levelPassings)
-                    _levelPassings.Add(l);
-
-
-
-                DBInitCallback(_cards, _levels, _levelPassings, context);
-                IsDBLoaded = true;
-                DBFilename = _DBFilename;
+                LoadDB(_DBFilename);
             }
             catch (Exception e)
             {

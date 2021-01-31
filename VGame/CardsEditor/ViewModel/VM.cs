@@ -307,6 +307,41 @@ namespace CardsEditor.ViewModel
             }
         }
 
+        private RelayCommand easyCreateBDCommand;
+        public RelayCommand EasyCreateBDCommand
+        {
+            get
+            {
+                return easyCreateBDCommand ??
+                  (easyCreateBDCommand = new RelayCommand(obj =>
+                  {
+
+                      string DBFilename = "";
+                      using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                      {
+                          saveFileDialog.Filter = "Файлы базы данных(*.db)|*.db";
+                          saveFileDialog.ValidateNames = false;
+                          if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                          {
+                              DBFilename = saveFileDialog.FileName;
+                              bool res = DBTools.EasyCreateDB(DBFilename);
+                              if (!res)
+                              {
+                                  System.Windows.MessageBox.Show("Ошибка загрузки базы данных " + DBFilename, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                                  return;
+                              }
+                              mainWindow.DataContext = this;
+                              OnPropertyChanged("CardVMs");
+                              OnPropertyChanged("LevelVMs");
+                              OnPropertyChanged("DBFilename");
+                          }
+                      }
+
+
+
+                  }));
+            }
+        }
 
 
         private RelayCommand сreateCardsFromImageFilesCommand;
