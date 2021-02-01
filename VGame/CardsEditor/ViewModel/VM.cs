@@ -402,10 +402,24 @@ namespace CardsEditor.ViewModel
                                   System.Windows.MessageBox.Show("Ошибка загрузки базы данных " + DBFilename, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                                   return;
                               }
+
+                              if (!DBTools.IsDBStructureOK())
+                              {
+                                  var r = System.Windows.MessageBox.Show("Структура БД устарела или повреждена " + DBFilename + "\n Попробовать исправить?", "Ошибка", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                                  if (r == MessageBoxResult.Yes)
+                                  {
+                                      if (DBTools.UpdateAndAddTableAttemptToDB(DBFilename))
+                                          System.Windows.MessageBox.Show("Структура БД успешно обновлена" + DBFilename, "Обновление структуры БД", MessageBoxButton.OK, MessageBoxImage.Information);
+                                      else
+                                          System.Windows.MessageBox.Show("Структуру БД не удалось исправить " + DBFilename, "Обновление структуры БД", MessageBoxButton.OK, MessageBoxImage.Error);
+                                  }
+                              }
                               mainWindow.DataContext = this;
                               OnPropertyChanged("CardVMs");
                               OnPropertyChanged("LevelVMs");
                               OnPropertyChanged("DBFilename");
+                              
+                              
                           }
                       }
 
@@ -574,7 +588,6 @@ namespace CardsEditor.ViewModel
                     OnPropertyChanged("CardVMs");
                     OnPropertyChanged("LevelVMs");
                     OnPropertyChanged("DBFilename");
-
                 }));
             }
         }

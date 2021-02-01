@@ -7,6 +7,8 @@ using System.Data.Common;
 using System.Data.SQLite;
 using System.Linq;
 using System.Data.Entity;
+using System.Windows;
+using System.IO;
 
 namespace CardsGameNewDBRepository
 {
@@ -226,5 +228,73 @@ namespace CardsGameNewDBRepository
             }
             return !error;
         }
+
+
+        public static bool IsDBStructureOK()
+        {
+            return IsDBTableExist("Cards")
+            && IsDBTableExist("Levels")
+            && IsDBTableExist("LevelPassings") 
+            && IsDBTableExist("CardPassings")
+            && IsDBTableExist("Attempts");
+        }
+
+        public static bool IsDBTableExist(string tableName)
+        {
+            try
+            {
+                return Context.Database
+                     .SqlQuery<string>(@"SELECT name FROM sqlite_master WHERE type='table' AND name='" + tableName + "';")
+                     .SingleOrDefault() != null;
+            }
+            catch 
+            {
+                MessageBox.Show("Ошибка обращения к базе данных " + DBFilename, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+        }
+
+        public static bool UpdateAndAddTableAttemptToDB(string _DBFilename)
+        {
+            if (IsDBTableExist("Attempts")) return false;
+            bool error = false;
+            try
+            {
+
+                if (!File.Exists(_DBFilename)) return false;
+                
+                SQLiteFactory factory = (SQLiteFactory)DbProviderFactories.GetFactory("System.Data.SQLite");
+                using (SQLiteConnection connection = (SQLiteConnection)factory.CreateConnection())
+                {
+                    connection.ConnectionString = "Data Source = " + _DBFilename;
+                    connection.Open();
+
+                    using (SQLiteCommand command = new SQLiteCommand(connection))
+                    {
+                        command.CommandText = @"CREATE TABLE [Attempts] 
+                                             ([Id] INTEGER PRIMARY KEY, 
+                                              [DateAndTimeBegin] nvarchar, 
+                                              [DateAndTimeEnd] nvarchar, 
+                                              [CardPassing_Id] int, 
+                                              [AnswerCard_Id] int, 
+                                              [AskedCard_Id] int, 
+                                              FOREIGN KEY (CardPassing_Id) REFERENCES [CardPassings](Id), 
+                                              FOREIGN KEY (AnswerCard_Id) REFERENCES [Cards](Id), 
+                                              FOREIGN KEY (AskedCard_Id) REFERENCES [Cards](Id))";
+                        command.CommandType = CommandType.Text;
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                error = true;
+            }
+            return !error;
+        }
+
+
     }
 }
+
