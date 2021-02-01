@@ -37,11 +37,34 @@ namespace CardsEditor.ViewModel
         #endregion
 
         #region Fields
-        Context context;
         MainWindow mainWindow;
-        ObservableCollection<Card> _cards = new ObservableCollection<Card>();
-        ObservableCollection<Level> _levels = new ObservableCollection<Level>();
-        ObservableCollection<LevelPassing> _levelPassings = new ObservableCollection<LevelPassing>();
+        ObservableCollection<Card> _cards 
+        { 
+            get 
+            {
+                if (IsDBLoaded(null))
+                    return new ObservableCollection<Card>(DBTools.Context.Cards.ToList());
+                else return new ObservableCollection<Card>();
+            } 
+        }
+        ObservableCollection<Level> _levels
+        {
+            get
+            {
+                if (IsDBLoaded(null))
+                    return new ObservableCollection<Level>(DBTools.Context.Levels.ToList());
+                else return new ObservableCollection<Level>();
+            }       
+        }
+        ObservableCollection<LevelPassing> _levelPassings
+        {
+            get
+            {
+                if (IsDBLoaded(null))
+                    return new ObservableCollection<LevelPassing>(DBTools.Context.LevelPassings.ToList());
+                else return new ObservableCollection<LevelPassing>();
+            }
+        }
         TTSSettingsWindow ttsSettingsWindow;
         #endregion
 
@@ -168,13 +191,13 @@ namespace CardsEditor.ViewModel
 
 
         //позорный костыль для загрузки БД - так и не разобрался почему коллекция после выхода из статического метода не изменяется. а внутри меняется вроде.
-        public void init(ObservableCollection<Card> cards, ObservableCollection<Level> levels, ObservableCollection<LevelPassing> levelPassings, Context Context)
-        {
-            _cards = cards;
-            _levels = levels;
-            _levelPassings = levelPassings;
-            context = Context;
-        }
+        //public void init(ObservableCollection<Card> cards, ObservableCollection<Level> levels, ObservableCollection<LevelPassing> levelPassings, Context Context)
+        //{
+        //    _cards = cards;
+        //    _levels = levels;
+        //    _levelPassings = levelPassings;
+        //    context = Context;
+        //}
 
         //создаем и добавляем в БД новую каточку
         private Card AddCard(object obj)
@@ -184,8 +207,8 @@ namespace CardsEditor.ViewModel
             c.Description = "Описание";
             c.SoundedText = "Пустой текст";
             _cards.Add(c);
-            context.Cards.Add(c);
-            context.SaveChanges();
+            DBTools.Context.Cards.Add(c);
+            DBTools.Context.SaveChanges();
             OnPropertyChanged("CardVMs");
             return c;
         }
@@ -195,8 +218,8 @@ namespace CardsEditor.ViewModel
             Random random = new Random();
             Card c = new Card() { Id = _cards.Count + 1, Title = title, SoundedText = soundedText, ImageAddress = imageAddress, Description = description };
             _cards.Add(c);
-            context.Cards.Add(c);
-            context.SaveChanges();
+            DBTools.Context.Cards.Add(c);
+            DBTools.Context.SaveChanges();
             OnPropertyChanged("CardVMs");
             return c;
         }
@@ -208,8 +231,8 @@ namespace CardsEditor.ViewModel
 
             Level t = new Level() { Id = _levels.Count + 1, Name = "Level " + (_levels.Count + 1).ToString(), Cards = new ObservableCollection<Card>() };
             _levels.Add(t);
-            context.Levels.Add(t);
-            context.SaveChanges();
+            DBTools.Context.Levels.Add(t);
+            DBTools.Context.SaveChanges();
             OnPropertyChanged("LevelVMs");
             OnPropertyChanged("SelectedCardLevelVMs");
             return t;
@@ -222,8 +245,8 @@ namespace CardsEditor.ViewModel
             ((LevelVM)obj).LevelStatisticVM.ClearLevelPassingsStatistic();
             Level t = ((LevelVM)obj).Level;
             _levels.Remove(t);
-            context.Entry(t).State = EntityState.Deleted;
-            context.SaveChanges();
+            DBTools.Context.Entry(t).State = EntityState.Deleted;
+            DBTools.Context.SaveChanges();
 
             OnPropertyChanged("LevelVMs");
             OnPropertyChanged("SelectedCardLevelVMs");
@@ -288,7 +311,7 @@ namespace CardsEditor.ViewModel
                           if (saveFileDialog.ShowDialog() == DialogResult.OK)
                           {
                               DBFilename = saveFileDialog.FileName;
-                              bool res = DBTools.CreateDB(init, _cards, _levels, _levelPassings, context, DBFilename);
+                              bool res = DBTools.EasyCreateDB(DBFilename);
                               if (!res)
                               {
                                   System.Windows.MessageBox.Show("Ошибка загрузки базы данных " + DBFilename, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -324,7 +347,7 @@ namespace CardsEditor.ViewModel
                           if (saveFileDialog.ShowDialog() == DialogResult.OK)
                           {
                               DBFilename = saveFileDialog.FileName;
-                              bool res = DBTools.EasyCreateDB(init, DBFilename);
+                              bool res = DBTools.EasyCreateDB( DBFilename);
                               if (!res)
                               {
                                   System.Windows.MessageBox.Show("Ошибка загрузки базы данных " + DBFilename, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -373,7 +396,7 @@ namespace CardsEditor.ViewModel
                           if (openFileDialog.ShowDialog() == DialogResult.OK)
                           {
                               DBFilename = @openFileDialog.FileName;
-                              bool res = DBTools.LoadDB(init, _cards, _levels, _levelPassings, context, DBFilename);
+                              bool res = DBTools.LoadDB(DBFilename);
                               if (!res)
                               {
                                   System.Windows.MessageBox.Show("Ошибка загрузки базы данных " + DBFilename, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -419,10 +442,10 @@ namespace CardsEditor.ViewModel
                       {
 
                           foreach (Card c in _cards)
-                              context.Entry(c).State = EntityState.Modified;
+                              DBTools.Context.Entry(c).State = EntityState.Modified;
                           foreach (Level t in _levels)
-                              context.Entry(t).State = EntityState.Modified;
-                          context.SaveChanges();
+                              DBTools.Context.Entry(t).State = EntityState.Modified;
+                          DBTools.Context.SaveChanges();
                           OnPropertyChanged("CardVMs");
                           OnPropertyChanged("LevelVMs");
                       }
@@ -541,7 +564,7 @@ namespace CardsEditor.ViewModel
 
 
                     DBFilename = Settings.GetInstance().DefaultDBCardsFilename;
-                    bool res = DBTools.LoadDB(init, _cards, _levels, _levelPassings, context, DBFilename);
+                    bool res = DBTools.LoadDB(DBFilename);
                     if (!res)
                     {
                         System.Windows.MessageBox.Show("Ошибка загрузки базы данных " + DBFilename, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);

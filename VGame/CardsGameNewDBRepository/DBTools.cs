@@ -18,7 +18,7 @@ namespace CardsGameNewDBRepository
         public static string DBFilename = "";
         public static Context Context;
 
-        public static bool LoadDB(DBInitCallback DBInitCallback, ObservableCollection<Card> _cards, ObservableCollection<Level> _levels, ObservableCollection<LevelPassing> _levelPassings, Context context, string _DBFilename)
+        private static bool LoadDB(DBInitCallback DBInitCallback, ObservableCollection<Card> _cards, ObservableCollection<Level> _levels, ObservableCollection<LevelPassing> _levelPassings, Context context, string _DBFilename)
         {
             bool error = false;
             try
@@ -57,18 +57,18 @@ namespace CardsGameNewDBRepository
             return !error;
         }
 
-        public static bool LoadDB(ObservableCollection<Card> _cards, ObservableCollection<Level> _levels, ObservableCollection<LevelPassing> _levelPassings, Context context, string _DBFilename)
+        private static bool LoadDB(ObservableCollection<Card> _cards, ObservableCollection<Level> _levels, ObservableCollection<LevelPassing> _levelPassings, Context context, string _DBFilename)
         {
             void DBInitCallbackMoq(ObservableCollection<Card> cards, ObservableCollection<Level> levels, ObservableCollection<LevelPassing> levelPassings, Context Context) { }
             return LoadDB(DBInitCallbackMoq, _cards, _levels, _levelPassings, Context, _DBFilename);
         }
 
-        public static bool LoadDB(DBInitCallback dBInitCallback, string _DBFilename)
+        private static bool LoadDB(DBInitCallback dBInitCallback, string _DBFilename)
         {
             return LoadDB(dBInitCallback, new ObservableCollection<Card>(), new ObservableCollection<Level>(), new ObservableCollection<LevelPassing>(), Context, _DBFilename);
         }
 
-        public static bool LoadDB(ObservableCollection<Card> _cards, ObservableCollection<Level> _levels, ObservableCollection<LevelPassing> _levelPassings, string _DBFilename)
+        private static bool LoadDB(ObservableCollection<Card> _cards, ObservableCollection<Level> _levels, ObservableCollection<LevelPassing> _levelPassings, string _DBFilename)
         {
             void DBInitCallbackMoq(ObservableCollection<Card> cards, ObservableCollection<Level> levels, ObservableCollection<LevelPassing> levelPassings, Context Context) { }
             return LoadDB(DBInitCallbackMoq, _cards, _levels, _levelPassings, Context, _DBFilename);
@@ -80,7 +80,7 @@ namespace CardsGameNewDBRepository
             return LoadDB(DBInitCallbackMoq, new ObservableCollection<Card>(), new ObservableCollection<Level>(), new ObservableCollection<LevelPassing>(), Context, _DBFilename);
         }
 
-        public static bool CreateDB(DBInitCallback DBInitCallback, ObservableCollection<Card> _cards, ObservableCollection<Level> _levels, ObservableCollection<LevelPassing> _levelPassings, Context context, string _DBFilename)
+        private static bool CreateDB(DBInitCallback DBInitCallback, ObservableCollection<Card> _cards, ObservableCollection<Level> _levels, ObservableCollection<LevelPassing> _levelPassings, Context context, string _DBFilename)
         {
             bool error = false;
             try
@@ -190,13 +190,20 @@ namespace CardsGameNewDBRepository
             return !error;
         }
 
-        public static bool CreateDB(ObservableCollection<Card> _cards, ObservableCollection<Level> _levels, ObservableCollection<LevelPassing> _levelPassings, Context context, string _DBFilename)
+        private static bool CreateDB(ObservableCollection<Card> _cards, ObservableCollection<Level> _levels, ObservableCollection<LevelPassing> _levelPassings, Context context, string _DBFilename)
         {
             void DBInitCallbackMoq(ObservableCollection<Card> cards, ObservableCollection<Level> levels, ObservableCollection<LevelPassing> levelPassings, Context Context) { }
             return CreateDB(DBInitCallbackMoq, _cards, _levels, _levelPassings, Context, _DBFilename);
         }
 
-        public static bool EasyCreateDB(DBInitCallback dBInitCallback, string _DBFilename)
+
+        public static bool EasyCreateDB(string _DBFilename)
+        {
+            void DBInitCallbackMoq(ObservableCollection<Card> cards, ObservableCollection<Level> levels, ObservableCollection<LevelPassing> levelPassings, Context Context) { }
+            return EasyCreateDB(DBInitCallbackMoq, _DBFilename);
+        }
+
+        private static bool EasyCreateDB(DBInitCallback dBInitCallback, string _DBFilename)
         {
             bool error = false;
             try

@@ -86,10 +86,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
             Console.WriteLine("StartLoading DB");
 
             Game.Owner.Dispatcher.Invoke(() => { Game.Owner.ProgressBarLoadDB.Visibility = Visibility.Visible; }); 
-            bool result =  await Task.Run(() => DBTools.LoadDB(new ObservableCollection<Model.Card>(), 
-                                                       new ObservableCollection<Model.Level>(), 
-                                                       new ObservableCollection<Model.LevelPassing>(), 
-                                                       Settings.GetInstance().AttachedDBCardsFilename));
+            bool result =  await Task.Run(() => DBTools.LoadDB(Settings.GetInstance().AttachedDBCardsFilename));
             Game.Owner.Dispatcher.Invoke(() => { Game.Owner.ProgressBarLoadDB.Visibility = Visibility.Collapsed; });
             Console.WriteLine("End Loading DB");
             return result;
