@@ -51,16 +51,16 @@ namespace InstallationTools
             }
             try
             {
-                Console.Write("Настройка конфигурационных файлов...                                          ");
+                Console.Write(" Настройка конфигурационных файлов...                                          ");
                 res = res & ConfigurateFiles(AppConfigFilename, ValidAppSettings);
 
-                Console.Write("Настройка записей о музыкальных файлах...                                     ");
+                Console.Write(" Настройка записей о музыкальных файлах...                                     ");
                 res = res & ConfigurateMusicFiles(AppConfigFilename, Path.Combine(AppDataDir, "Music", "Music.mp3"), "MusicFilenames");
 
-                Console.Write("Настройка тестовой базы данных с примерами карточек...                        ");
+                Console.Write(" Настройка тестовой базы данных с примерами карточек...                        ");
                 res = res & DBRewrite(DefaultDbFilename, DBCardsImagesDir, DBCardsImagesDir);
 
-                Console.Write("Проверка средств Text-to-Speech (преобразования текста в речь) и голосов...   ");
+                Console.Write(" Проверка средств Text-to-Speech (преобразования текста в речь) и голосов...   ");
                 res = res & VoicesCheck();
             }
             catch (Exception e)
@@ -99,7 +99,7 @@ namespace InstallationTools
                 if (_TextToSpeachVoices.Count > 0)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("ОК");
+                    Console.WriteLine("[  ОК  ]");
                     Console.WriteLine("В системе установлено {0} голосов. По умолчанию используется голос {1}", _TextToSpeachVoices.Count, _TextToSpeachVoices[0].VoiceInfo.Name);
                     Console.ResetColor();
                     return true;
@@ -133,7 +133,7 @@ namespace InstallationTools
 
                 DBTools.Context.SaveChanges();
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("OK");
+                Console.WriteLine("[  ОК  ]");
                 Console.ResetColor();
                 return true;
             }
@@ -170,7 +170,7 @@ namespace InstallationTools
                 }
                 xDoc.Save(filename);
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("OK");
+                Console.WriteLine("[  ОК  ]");
                 Console.ResetColor();
                 return true;
             }
@@ -205,7 +205,7 @@ namespace InstallationTools
                 }
                 xDoc.Save(configFilename);
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("OK");
+                Console.WriteLine("[  ОК  ]");
                 Console.ResetColor();
                 return true;
             }
