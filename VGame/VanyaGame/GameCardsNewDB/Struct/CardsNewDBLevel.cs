@@ -86,7 +86,24 @@ namespace VanyaGame.GameCardsNewDB.Struct
             Console.WriteLine("StartLoading DB");
 
             Game.Owner.Dispatcher.Invoke(() => { Game.Owner.ProgressBarLoadDB.Visibility = Visibility.Visible; }); 
-            bool result =  await Task.Run(() => DBTools.LoadDB(Settings.GetInstance().AttachedDBCardsFilename));
+            bool result =  await Task.Run(() =>
+            {
+                string DBFilename = Settings.GetInstance().AttachedDBCardsFilename;
+                bool res = DBTools.LoadDB(DBFilename);
+                if (res == false) return false;
+                if (!DBTools.IsDBStructureOK())
+                {
+                    var r = MessageBox.Show("Структура БД устарела или повреждена " + DBFilename + "\n Попробовать исправить?", "Ошибка", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                    if (r == MessageBoxResult.Yes)
+                    {
+                        if (DBTools.UpdateAndAddTableAttemptToDB(DBFilename))
+                            MessageBox.Show("Структура БД успешно обновлена" + DBFilename, "Обновление структуры БД", MessageBoxButton.OK, MessageBoxImage.Information);
+                        else
+                            MessageBox.Show("Структуру БД не удалось исправить " + DBFilename, "Обновление структуры БД", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                return true;
+            });
             Game.Owner.Dispatcher.Invoke(() => { Game.Owner.ProgressBarLoadDB.Visibility = Visibility.Collapsed; });
             Console.WriteLine("End Loading DB");
             return result;
@@ -112,8 +129,12 @@ namespace VanyaGame.GameCardsNewDB.Struct
         {
             Settings.GetInstance().RestoreAllSettings();
 
-            await LoadDBAsync();
-            
+            bool res = await LoadDBAsync();
+            if (!res) 
+            {
+                MessageBox.Show("Не удалось загрузить базу данных " + Settings.GetInstance().AttachedDBCardsFilename, "Ошибка загрузки БД", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
              Random random = new Random();
 

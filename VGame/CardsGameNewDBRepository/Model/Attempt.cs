@@ -19,7 +19,7 @@ namespace CardsGameNewDBRepository.Model
         [NotMapped]
         private Card _AnswerCard  { get; set; }
         [NotMapped]
-        public bool IsMistake { get { if (_AskedCard != null && _AnswerCard != null) return _AnswerCard.Id != _AskedCard.Id; else return false; } }
+        public bool IsMistake { get { if (_AskedCard != null && _AnswerCard != null) return _AnswerCard.Title != _AskedCard.Title; else return false; } }
 
 
         public int Id { get; set; }

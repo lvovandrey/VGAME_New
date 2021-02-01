@@ -28,6 +28,8 @@ namespace VanyaGame.GameCardsNewDB.Struct
         private bool ReadyToNextUnit;
         private CardsNewDBLevel numberDBLevel;
         private CardPassing CurCardPassing;
+        private Attempt CurAttempt;
+
         private bool CurUnitAlreadyTasked = false; // Показывает в первый раз или нет данный юнит предъявляется для угадывания
         private bool IsAborted = false;
 
@@ -70,7 +72,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
 
         private void Start()
         {
-           
+
             foreach (var u in UnitsCol.GetAllUnits())
                 u.MouseClicked += U_MouseClicked;
             Game.Owner.TextForCardTag.Text = this.Name;
@@ -101,6 +103,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
 
         private void NextUnit()
         {
+            
             if (IsAborted) return;
             Panel.SetZIndex(Game.Owner.WrapPanelMain, 30000);
 
@@ -148,12 +151,13 @@ namespace VanyaGame.GameCardsNewDB.Struct
                     else
                         flashTimer = new Timer(Flash, null, (int)(1000 * Settings.GetInstance().VisualHintDelay), (int)(1000 * Settings.GetInstance().VisualHintTimePeriod));
 
-                
+
                 SetNewCurCardPassing();
 
                 Game.Owner.TextForCardTag.Text = "Тема: " + this.Name + ".  Надо показать: " + CurUnit.Card.Title;
 
-                
+
+
             }
             else
             {
@@ -168,12 +172,18 @@ namespace VanyaGame.GameCardsNewDB.Struct
         {
             if (CurUnitAlreadyTasked) return;
             CurCardPassing = new CardPassing() { DateAndTime = DateTime.Now.ToString(), AttemptsNumber = 0 };
+            SetNewCurAttempt();
             CurUnit.Card.CardPassings.Add(CurCardPassing);
             ((CardsNewDBLevel)Level).CurLevelPassing.CardPassings.Add(CurCardPassing);
             DBTools.Context.CardPassings.Add(CurCardPassing);
             DBTools.Context.SaveChanges();
         }
 
+        private void SetNewCurAttempt()
+        {
+            CurAttempt = new Attempt() { AskedCard = CurUnit.Card, DateAndTimeBegin = DateTime.Now.ToString() };
+            CurCardPassing.Attempts.Add(CurAttempt);
+        }
 
 
         bool needSpeakAgain = false;
@@ -224,12 +234,18 @@ namespace VanyaGame.GameCardsNewDB.Struct
             bool IsHitSuccess = false;
             var CurUnittmp = CurUnit;
 
+            CardUnit HitedUnit=null;
+
             foreach (var u in UnitsCol.GetAllUnits())
             {
                 u.GetComponent<CardShower>().Show(() => { ReadyToNextUnit = true; });
                 u.readyToReactionOnMouseDown = false;
-                if ((u.GetComponent<Hit>().IsHited) && (CurUnit.Card.Title == u.Card.Title))
-                    IsHitSuccess = true;
+                if (u.GetComponent<Hit>().IsHited)
+                {
+                    HitedUnit = u;
+                    if (CurUnit.Card.Title == u.Card.Title)
+                        IsHitSuccess = true;
+                }
             }
 
             CurCardPassing.AttemptsNumber++;
@@ -264,6 +280,11 @@ namespace VanyaGame.GameCardsNewDB.Struct
                 CurUnitAlreadyTasked = true;
                 Speak(Settings.GetInstance().FallTestText);
             }
+
+            CurAttempt.AnswerCard = HitedUnit?.Card;
+            CurAttempt.DateAndTimeEnd = DateTime.Now.ToString();
+            CurCardPassing.AttemptsNumber++;
+            DBTools.Context.SaveChanges();
 
             foreach (var u in UnitsCol.GetAllUnits())
             {
@@ -314,7 +335,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
             speaker?.Pause();
             speaker?.Resume();
             speaker = new SpeechSynthesizer();
-            if (Settings.GetInstance().TextToSpeachVoices.Count == 0) return; 
+            if (Settings.GetInstance().TextToSpeachVoices.Count == 0) return;
             else speaker.SelectVoice(Settings.GetInstance().TTSVoice.VoiceInfo.Name);
             speaker.Rate = Settings.GetInstance().TTSVoiceSlowRate;
             speaker.Volume = Settings.GetInstance().TTSVoiceVolume;
@@ -358,7 +379,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
             speaker?.Pause();
             speaker?.Resume();
             IsAborted = true;
-            SceneEnded(this,(CardsNewDBLevel)Level);
+            SceneEnded(this, (CardsNewDBLevel)Level);
         }
 
     }
