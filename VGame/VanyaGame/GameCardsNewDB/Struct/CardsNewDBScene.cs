@@ -248,8 +248,6 @@ namespace VanyaGame.GameCardsNewDB.Struct
                 }
             }
 
-            CurCardPassing.AttemptsNumber++;
-            DBTools.Context.SaveChanges();
 
             if (IsHitSuccess)
             {
@@ -273,18 +271,26 @@ namespace VanyaGame.GameCardsNewDB.Struct
 
                 HaveBox HB = new HaveBox("HaveBox", Game.Owner, Game.Owner.WrapPanelBigCards, cu);
                 cu.GetComponent<HiderShower>().Show(1, TimeSpan.FromSeconds(1), new Thickness(100), TimeSpan.FromSeconds(1));
-
+                CurAttempt.AnswerCard = HitedUnit?.Card;
+                CurAttempt.DateAndTimeEnd = DateTime.Now.ToString();
+                CurCardPassing.AttemptsNumber++;
+                DBTools.Context.SaveChanges();
             }
             else
             {
+                CurAttempt.AnswerCard = HitedUnit?.Card;
+                CurAttempt.DateAndTimeEnd = DateTime.Now.ToString();
+                DBTools.Context.SaveChanges();
+
+                CurCardPassing.AttemptsNumber++;
+                SetNewCurAttempt();
+                DBTools.Context.SaveChanges();
+
                 CurUnitAlreadyTasked = true;
                 Speak(Settings.GetInstance().FallTestText);
             }
 
-            CurAttempt.AnswerCard = HitedUnit?.Card;
-            CurAttempt.DateAndTimeEnd = DateTime.Now.ToString();
-            CurCardPassing.AttemptsNumber++;
-            DBTools.Context.SaveChanges();
+
 
             foreach (var u in UnitsCol.GetAllUnits())
             {
