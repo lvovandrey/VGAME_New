@@ -20,68 +20,6 @@ namespace CardsGameNewDBRepository
         public static string DBFilename = "";
         public static Context Context;
 
-        private static bool LoadDB(DBInitCallback DBInitCallback, ObservableCollection<Card> _cards, ObservableCollection<Level> _levels, ObservableCollection<LevelPassing> _levelPassings, Context context, string _DBFilename)
-        {
-            bool error = false;
-            try
-            {
-                _cards = new ObservableCollection<Card>();
-                _levels = new ObservableCollection<Level>();
-                _levelPassings = new ObservableCollection<LevelPassing>();
-                context = new Context(@"Data Source=" + _DBFilename);
-                Context = context;
-
-                IEnumerable<Level> levels = context.Levels.Include(p => p.Cards).ToList();
-                IEnumerable<Card> cards = context.Cards.ToList();
-                IEnumerable<LevelPassing> levelPassings = context.LevelPassings.ToList();
-                IEnumerable<CardPassing> cardPassings = context.CardPassings.ToList();
-                IEnumerable<Attempt> attempts = context.Attempts.ToList();
-
-                foreach (Card c in cards)
-                    _cards.Add(c);
-
-                foreach (Level t in levels)
-                    _levels.Add(t);
-
-                foreach (LevelPassing l in levelPassings)
-                    _levelPassings.Add(l);
-
-
-                DBInitCallback(_cards, _levels, _levelPassings, context);
-                IsDBLoaded = true;
-                DBFilename = _DBFilename;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                error = true;
-            }
-            return !error;
-        }
-
-        private static bool LoadDB(ObservableCollection<Card> _cards, ObservableCollection<Level> _levels, ObservableCollection<LevelPassing> _levelPassings, Context context, string _DBFilename)
-        {
-            void DBInitCallbackMoq(ObservableCollection<Card> cards, ObservableCollection<Level> levels, ObservableCollection<LevelPassing> levelPassings, Context Context) { }
-            return LoadDB(DBInitCallbackMoq, _cards, _levels, _levelPassings, Context, _DBFilename);
-        }
-
-        private static bool LoadDB(DBInitCallback dBInitCallback, string _DBFilename)
-        {
-            return LoadDB(dBInitCallback, new ObservableCollection<Card>(), new ObservableCollection<Level>(), new ObservableCollection<LevelPassing>(), Context, _DBFilename);
-        }
-
-        private static bool LoadDB(ObservableCollection<Card> _cards, ObservableCollection<Level> _levels, ObservableCollection<LevelPassing> _levelPassings, string _DBFilename)
-        {
-            void DBInitCallbackMoq(ObservableCollection<Card> cards, ObservableCollection<Level> levels, ObservableCollection<LevelPassing> levelPassings, Context Context) { }
-            return LoadDB(DBInitCallbackMoq, _cards, _levels, _levelPassings, Context, _DBFilename);
-        }
-
-        public static bool LoadDB(string _DBFilename)
-        {
-            void DBInitCallbackMoq(ObservableCollection<Card> cards, ObservableCollection<Level> levels, ObservableCollection<LevelPassing> levelPassings, Context Context) { }
-            return LoadDB(DBInitCallbackMoq, new ObservableCollection<Card>(), new ObservableCollection<Level>(), new ObservableCollection<LevelPassing>(), Context, _DBFilename);
-        }
-
         public static bool LoadDBEx(string _DBFilename)
         {
             bool error = false;
@@ -119,8 +57,7 @@ namespace CardsGameNewDBRepository
             return !error;
         }
 
-
-        private static bool CreateDB(DBInitCallback DBInitCallback, ObservableCollection<Card> _cards, ObservableCollection<Level> _levels, ObservableCollection<LevelPassing> _levelPassings, Context context, string _DBFilename)
+        public static bool CreateDBEx(string _DBFilename)
         {
             bool error = false;
             try
@@ -220,7 +157,7 @@ namespace CardsGameNewDBRepository
                     }
                 }
 
-                LoadDB(DBInitCallback, _cards, _levels, _levelPassings, context, _DBFilename);
+                LoadDBEx(_DBFilename);
             }
             catch (Exception e)
             {
@@ -230,20 +167,7 @@ namespace CardsGameNewDBRepository
             return !error;
         }
 
-        private static bool CreateDB(ObservableCollection<Card> _cards, ObservableCollection<Level> _levels, ObservableCollection<LevelPassing> _levelPassings, Context context, string _DBFilename)
-        {
-            void DBInitCallbackMoq(ObservableCollection<Card> cards, ObservableCollection<Level> levels, ObservableCollection<LevelPassing> levelPassings, Context Context) { }
-            return CreateDB(DBInitCallbackMoq, _cards, _levels, _levelPassings, Context, _DBFilename);
-        }
-
-
-        public static bool EasyCreateDB(string _DBFilename)
-        {
-            void DBInitCallbackMoq(ObservableCollection<Card> cards, ObservableCollection<Level> levels, ObservableCollection<LevelPassing> levelPassings, Context Context) { }
-            return EasyCreateDB(DBInitCallbackMoq, _DBFilename);
-        }
-
-        private static bool EasyCreateDB(DBInitCallback dBInitCallback, string _DBFilename)
+        public static bool EasyCreateDBEx(string _DBFilename)
         {
             bool error = false;
             try
@@ -251,13 +175,13 @@ namespace CardsGameNewDBRepository
 
 
                 Context = new Context(@"Data Source=" + _DBFilename);
-                Card card = new Card();
-                Context.Cards.Add(card);
-                Context.SaveChanges();
-                Context.Cards.Remove(card);
+                //Card card = new Card();
+                //Context.Cards.Add(card);
+                //Context.SaveChanges();
+                //Context.Cards.Remove(card);
                 Context.SaveChanges();
 
-                LoadDB(dBInitCallback, _DBFilename);
+                LoadDBEx(_DBFilename);
             }
             catch (Exception e)
             {
@@ -266,7 +190,6 @@ namespace CardsGameNewDBRepository
             }
             return !error;
         }
-
 
         public static bool IsDBStructureOK()
         {

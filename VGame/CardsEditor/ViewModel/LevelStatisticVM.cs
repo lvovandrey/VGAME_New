@@ -136,9 +136,14 @@ namespace CardsEditor.ViewModel
             if (_level == null || _level.LevelPassings == null) return;
             foreach (var lp in _level.LevelPassings.ToArray())
             {
-                if (lp.CardPassings != null)
+                if (lp.CardPassings != null) 
                     foreach (var cp in lp.CardPassings.ToArray())
                     {
+                        if (cp.Attempts != null)
+                            foreach (var a in cp.Attempts.ToArray())
+                            {
+                                DBTools.Context.Entry(a).State = System.Data.Entity.EntityState.Deleted;
+                            }
                         DBTools.Context.Entry(cp).State = System.Data.Entity.EntityState.Deleted;
                     }
                 DBTools.Context.Entry(lp).State = System.Data.Entity.EntityState.Deleted;
