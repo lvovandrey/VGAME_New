@@ -188,7 +188,7 @@ namespace CardsEditor.ViewModel
         #region Constructors
         public SameTitleCardsStatisticVM(Card card, CardVM cardVM, VM vm, CardStatisticVM cardStatisticVM)
         {
-      //      _card = card;
+            _card = card;
             _vm = vm;
             _cardVM = cardVM;
             _cardStatisticVM = cardStatisticVM;
@@ -201,7 +201,7 @@ namespace CardsEditor.ViewModel
         #endregion
 
         #region Fields
-       // Card _card;
+        Card _card;
         VM _vm;
         CardVM _cardVM;
         CardStatisticVM _cardStatisticVM;
@@ -296,6 +296,17 @@ namespace CardsEditor.ViewModel
                 if (CardPassings == null || CardPassings.Count == 0) return 0;
                 var AttemptsNumbers = CardPassings.Select(a => (double)a.AttemptsNumber);
                 return (int)AttemptsNumbers.Max();
+            }
+        }
+
+        public string MostFrequentConfusedCard
+        {
+            get
+            {
+                var AllCards = DBTools.Context.Cards.Where(c => c.Title == _card.Title);
+                var AllAttempts = AllCards?.SelectMany(c => c.CardPassings)?.SelectMany(cp => cp.Attempts)?.Where(a => a.IsMistake)?.GroupBy(a => a.AnswerCard.Title)?.OrderByDescending(a => a.Count());
+                string F = AllAttempts?.FirstOrDefault()?.Key;
+                return F;
             }
         }
 

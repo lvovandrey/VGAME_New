@@ -195,6 +195,10 @@
                                         <TextBlock Text=" выполнений: "/>
                                         <TextBlock Text="{Binding CardStatisticVM.SameTitleCardsStatisticVM.FallsOnLastNPassingsCount}"/>
                                     </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="5">
+                                        <TextBlock Text="Чаще всего путают с: "/>
+                                        <TextBlock Text="{Binding CardStatisticVM.SameTitleCardsStatisticVM.MostFrequentConfusedCard}"/>
+                                    </StackPanel>
                                     <StackPanel Margin="5 5 5 21">
                                         <TextBlock Text="График количества попыток"/>
                                         <lvc:CartesianChart 
