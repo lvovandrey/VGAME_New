@@ -129,6 +129,16 @@ namespace CardsEditor.ViewModel
             }
         }
 
+        public string MostFrequentConfusedCard
+        {
+            get 
+            {
+                var AllAttempts = _card?.CardPassings?.SelectMany(cp => cp.Attempts)?.Where(a => a.IsMistake)?.GroupBy(a => a.AnswerCard.Title)?.OrderByDescending(a=>a.Count());
+                string F = AllAttempts?.FirstOrDefault()?.Key;
+                return F;
+            }
+        }
+
         public string[] AttemptsChartLabels => Enumerable.Range(1, (int)CardPassingsCount).Select(v => v.ToString()).ToArray();
         public string[] AttemptsChartYLabels => Enumerable.Range(0, MaxAttempts + 1).Select(v => v.ToString()).ToArray();
 
