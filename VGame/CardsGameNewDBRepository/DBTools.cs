@@ -35,7 +35,7 @@ namespace CardsGameNewDBRepository
                 IEnumerable<Card> cards = context.Cards.ToList();
                 IEnumerable<LevelPassing> levelPassings = context.LevelPassings.ToList();
                 IEnumerable<CardPassing> cardPassings = context.CardPassings.ToList();
-
+                IEnumerable<Attempt> attempts = context.Attempts.ToList();
 
                 foreach (Card c in cards)
                     _cards.Add(c);

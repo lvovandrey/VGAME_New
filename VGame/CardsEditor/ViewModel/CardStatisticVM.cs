@@ -159,7 +159,6 @@ namespace CardsEditor.ViewModel
             if (_card == null || _card.CardPassings == null) return;
             foreach (var cp in _card.CardPassings.ToArray())
             {
-
                 foreach (var a in cp.Attempts.ToArray())
                 {
                     DBTools.Context.Entry(a).State = System.Data.Entity.EntityState.Deleted;
