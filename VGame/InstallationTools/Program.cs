@@ -120,7 +120,7 @@ namespace InstallationTools
         {
             try
             {
-                DBTools.LoadDBEx(filename);
+                DBTools.LoadDB(filename);
                 foreach (var card in DBTools.Context.Cards)
                 {
                     card.ImageAddress = Path.Combine(dBCardsImagesDir, Path.GetFileName(card.ImageAddress));

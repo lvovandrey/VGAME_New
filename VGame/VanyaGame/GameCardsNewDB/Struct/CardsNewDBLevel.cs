@@ -89,7 +89,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
             bool result =  await Task.Run(() =>
             {
                 string DBFilename = Settings.GetInstance().AttachedDBCardsFilename;
-                bool res = DBTools.LoadDBEx(DBFilename);
+                bool res = DBTools.LoadDB(DBFilename);
                 if (res == false) return false;
                 return true;
             });

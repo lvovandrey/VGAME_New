@@ -311,7 +311,7 @@ namespace CardsEditor.ViewModel
                           if (saveFileDialog.ShowDialog() == DialogResult.OK)
                           {
                               DBFilename = saveFileDialog.FileName;
-                              bool res = DBTools.EasyCreateDBEx(DBFilename);
+                              bool res = DBTools.CreateDBOnCodeFirst(DBFilename);
                               if (!res)
                               {
                                   System.Windows.MessageBox.Show("Ошибка загрузки базы данных " + DBFilename, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -347,7 +347,7 @@ namespace CardsEditor.ViewModel
                           if (saveFileDialog.ShowDialog() == DialogResult.OK)
                           {
                               DBFilename = saveFileDialog.FileName;
-                              bool res = DBTools.EasyCreateDBEx( DBFilename);
+                              bool res = DBTools.CreateDBOnCodeFirst( DBFilename);
                               if (!res)
                               {
                                   System.Windows.MessageBox.Show("Ошибка загрузки базы данных " + DBFilename, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -396,7 +396,7 @@ namespace CardsEditor.ViewModel
                           if (openFileDialog.ShowDialog() == DialogResult.OK)
                           {
                               DBFilename = @openFileDialog.FileName;
-                              bool res = DBTools.LoadDBEx(DBFilename);
+                              bool res = DBTools.LoadDB(DBFilename);
                               if (!res)
                               {
                                   System.Windows.MessageBox.Show("Ошибка загрузки базы данных " + DBFilename, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -567,7 +567,7 @@ namespace CardsEditor.ViewModel
 
 
                     DBFilename = Settings.GetInstance().DefaultDBCardsFilename;
-                    bool res = DBTools.LoadDBEx(DBFilename);
+                    bool res = DBTools.LoadDB(DBFilename);
                     if (!res)
                     {
                         System.Windows.MessageBox.Show("Ошибка загрузки базы данных " + DBFilename, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);

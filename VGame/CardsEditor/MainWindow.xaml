@@ -40,12 +40,6 @@
                     </MenuItem.Icon>
                 </MenuItem>
 
-                <MenuItem Header="Создать БД иначе..."
-                          Command="{Binding EasyCreateBDCommand}">
-                    <MenuItem.Icon>
-                        <Image Source="Images/Database-Add.png" />
-                    </MenuItem.Icon>
-                </MenuItem>
                 <MenuItem Header="Открыть БД..." 
                           Command="{Binding OpenBDCommand}">
                     <MenuItem.Icon>

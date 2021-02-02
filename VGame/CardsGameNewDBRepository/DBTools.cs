@@ -20,7 +20,7 @@ namespace CardsGameNewDBRepository
         public static string DBFilename = "";
         public static Context Context;
 
-        public static bool LoadDBEx(string _DBFilename)
+        public static bool LoadDB(string _DBFilename)
         {
             bool error = false;
             try
@@ -57,7 +57,31 @@ namespace CardsGameNewDBRepository
             return !error;
         }
 
-        public static bool CreateDBEx(string _DBFilename)
+        public static bool CreateDBOnCodeFirst(string _DBFilename)
+        {
+            bool error = false;
+            try
+            {
+
+
+                Context = new Context(@"Data Source=" + _DBFilename);
+                //Card card = new Card();
+                //Context.Cards.Add(card);
+                //Context.SaveChanges();
+                //Context.Cards.Remove(card);
+                Context.SaveChanges();
+
+                LoadDB(_DBFilename);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                error = true;
+            }
+            return !error;
+        }
+
+        public static bool CreateDBOnSQLCommands(string _DBFilename)
         {
             bool error = false;
             try
@@ -157,31 +181,7 @@ namespace CardsGameNewDBRepository
                     }
                 }
 
-                LoadDBEx(_DBFilename);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                error = true;
-            }
-            return !error;
-        }
-
-        public static bool EasyCreateDBEx(string _DBFilename)
-        {
-            bool error = false;
-            try
-            {
-
-
-                Context = new Context(@"Data Source=" + _DBFilename);
-                //Card card = new Card();
-                //Context.Cards.Add(card);
-                //Context.SaveChanges();
-                //Context.Cards.Remove(card);
-                Context.SaveChanges();
-
-                LoadDBEx(_DBFilename);
+                LoadDB(_DBFilename);
             }
             catch (Exception e)
             {
