@@ -89,19 +89,8 @@ namespace VanyaGame.GameCardsNewDB.Struct
             bool result =  await Task.Run(() =>
             {
                 string DBFilename = Settings.GetInstance().AttachedDBCardsFilename;
-                bool res = DBTools.LoadDB(DBFilename);
+                bool res = DBTools.LoadDBEx(DBFilename);
                 if (res == false) return false;
-                if (!DBTools.IsDBStructureOK())
-                {
-                    var r = MessageBox.Show("Структура БД устарела или повреждена " + DBFilename + "\n Попробовать исправить?", "Ошибка", MessageBoxButton.YesNo, MessageBoxImage.Error);
-                    if (r == MessageBoxResult.Yes)
-                    {
-                        if (DBTools.UpdateAndAddTableAttemptToDB(DBFilename))
-                            MessageBox.Show("Структура БД успешно обновлена" + DBFilename, "Обновление структуры БД", MessageBoxButton.OK, MessageBoxImage.Information);
-                        else
-                            MessageBox.Show("Структуру БД не удалось исправить " + DBFilename, "Обновление структуры БД", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                }
                 return true;
             });
             Game.Owner.Dispatcher.Invoke(() => { Game.Owner.ProgressBarLoadDB.Visibility = Visibility.Collapsed; });

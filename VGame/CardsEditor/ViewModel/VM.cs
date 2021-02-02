@@ -396,24 +396,13 @@ namespace CardsEditor.ViewModel
                           if (openFileDialog.ShowDialog() == DialogResult.OK)
                           {
                               DBFilename = @openFileDialog.FileName;
-                              bool res = DBTools.LoadDB(DBFilename);
+                              bool res = DBTools.LoadDBEx(DBFilename);
                               if (!res)
                               {
                                   System.Windows.MessageBox.Show("Ошибка загрузки базы данных " + DBFilename, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                                   return;
                               }
 
-                              if (!DBTools.IsDBStructureOK())
-                              {
-                                  var r = System.Windows.MessageBox.Show("Структура БД устарела или повреждена " + DBFilename + "\n Попробовать исправить?", "Ошибка", MessageBoxButton.YesNo, MessageBoxImage.Error);
-                                  if (r == MessageBoxResult.Yes)
-                                  {
-                                      if (DBTools.UpdateAndAddTableAttemptToDB(DBFilename))
-                                          System.Windows.MessageBox.Show("Структура БД успешно обновлена" + DBFilename, "Обновление структуры БД", MessageBoxButton.OK, MessageBoxImage.Information);
-                                      else
-                                          System.Windows.MessageBox.Show("Структуру БД не удалось исправить " + DBFilename, "Обновление структуры БД", MessageBoxButton.OK, MessageBoxImage.Error);
-                                  }
-                              }
                               mainWindow.DataContext = this;
                               OnPropertyChanged("CardVMs");
                               OnPropertyChanged("LevelVMs");
@@ -578,12 +567,15 @@ namespace CardsEditor.ViewModel
 
 
                     DBFilename = Settings.GetInstance().DefaultDBCardsFilename;
-                    bool res = DBTools.LoadDB(DBFilename);
+                    bool res = DBTools.LoadDBEx(DBFilename);
                     if (!res)
                     {
                         System.Windows.MessageBox.Show("Ошибка загрузки базы данных " + DBFilename, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
+
+
+
                     mainWindow.DataContext = this;
                     OnPropertyChanged("CardVMs");
                     OnPropertyChanged("LevelVMs");

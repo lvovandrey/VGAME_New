@@ -82,6 +82,44 @@ namespace CardsGameNewDBRepository
             return LoadDB(DBInitCallbackMoq, new ObservableCollection<Card>(), new ObservableCollection<Level>(), new ObservableCollection<LevelPassing>(), Context, _DBFilename);
         }
 
+        public static bool LoadDBEx(string _DBFilename)
+        {
+            bool error = false;
+            try
+            {
+                Context = new Context(@"Data Source=" + _DBFilename);
+
+                if (!DBTools.IsDBStructureOK())
+                {
+                    var r = System.Windows.MessageBox.Show("Структура БД устарела или повреждена " + _DBFilename + "\n Попробовать исправить?", "Ошибка", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                    if (r == MessageBoxResult.Yes)
+                    {
+                        if (DBTools.UpdateAndAddTableAttemptToDB(_DBFilename))
+                            System.Windows.MessageBox.Show("Структура БД успешно обновлена" + _DBFilename, "Обновление структуры БД", MessageBoxButton.OK, MessageBoxImage.Information);
+                        else
+                            System.Windows.MessageBox.Show("Структуру БД не удалось исправить " + _DBFilename, "Обновление структуры БД", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+
+
+                IEnumerable<Level> levels = Context.Levels.Include(p => p.Cards).ToList();
+                IEnumerable<Card> cards = Context.Cards.ToList();
+                IEnumerable<LevelPassing> levelPassings = Context.LevelPassings.ToList();
+                IEnumerable<CardPassing> cardPassings = Context.CardPassings.ToList();
+                IEnumerable<Attempt> attempts = Context.Attempts.ToList();
+
+                IsDBLoaded = true;
+                DBFilename = _DBFilename;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                error = true;
+            }
+            return !error;
+        }
+
+
         private static bool CreateDB(DBInitCallback DBInitCallback, ObservableCollection<Card> _cards, ObservableCollection<Level> _levels, ObservableCollection<LevelPassing> _levelPassings, Context context, string _DBFilename)
         {
             bool error = false;
