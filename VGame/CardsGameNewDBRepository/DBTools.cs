@@ -32,7 +32,7 @@ namespace CardsGameNewDBRepository
                     var r = System.Windows.MessageBox.Show("Структура БД устарела или повреждена " + _DBFilename + "\n Попробовать исправить?", "Ошибка", MessageBoxButton.YesNo, MessageBoxImage.Error);
                     if (r == MessageBoxResult.Yes)
                     {
-                        if (DBTools.UpdateAndAddTableAttemptToDB(_DBFilename))
+                        if (DBTools.UniversalUpdateDB(_DBFilename))
                             System.Windows.MessageBox.Show("Структура БД успешно обновлена" + _DBFilename, "Обновление структуры БД", MessageBoxButton.OK, MessageBoxImage.Information);
                         else
                             System.Windows.MessageBox.Show("Структуру БД не удалось исправить " + _DBFilename, "Обновление структуры БД", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -98,38 +98,38 @@ namespace CardsGameNewDBRepository
                     using (SQLiteCommand command = new SQLiteCommand(connection))
                     {
                         command.CommandText = @"CREATE TABLE [Cards] (
-	[Id]	INTEGER NOT NULL UNIQUE,
-	[Title]	TEXT,
-	[SoundedText]	TEXT,
-	[Description]	TEXT,
-	[ImageAddress]	TEXT,
-	[SoundAddress]	TEXT,
-	PRIMARY KEY([Id] AUTOINCREMENT)
-)";
+	                                        [Id]	INTEGER NOT NULL UNIQUE,
+	                                        [Title]	TEXT,
+	                                        [SoundedText]	TEXT,
+	                                        [Description]	TEXT,
+	                                        [ImageAddress]	TEXT,
+	                                        [SoundAddress]	TEXT,
+	                                        PRIMARY KEY([Id] AUTOINCREMENT)
+                                            )";
                         command.CommandType = CommandType.Text;
                         command.ExecuteNonQuery();
                     }
                     using (SQLiteCommand command = new SQLiteCommand(connection))
                     {
                         command.CommandText = @"CREATE TABLE [Levels] (
-    [Id]    INTEGER NOT NULL UNIQUE, 
-    [Name]  TEXT,
-	[ImageAddress]  TEXT,
-	PRIMARY KEY([Id] AUTOINCREMENT)
-)";
+                                            [Id]    INTEGER NOT NULL UNIQUE, 
+                                            [Name]  TEXT,
+	                                        [ImageAddress]  TEXT,
+	                                        PRIMARY KEY([Id] AUTOINCREMENT)
+                                            )";
                         command.CommandType = CommandType.Text;
                         command.ExecuteNonQuery();
                     }
                     using (SQLiteCommand command = new SQLiteCommand(connection))
                     {
                         command.CommandText = @"CREATE TABLE [LevelCards] (
-    [Level_Id]  INTEGER,
-	[Card_Id]   INTEGER,
-	[Id]    INTEGER NOT NULL UNIQUE,
-    FOREIGN KEY([Level_Id]) REFERENCES [Levels]([Id]) ON DELETE CASCADE,
-	FOREIGN KEY([Card_Id]) REFERENCES [Cards]([Id]) ON DELETE CASCADE,
-	PRIMARY KEY([Id] AUTOINCREMENT)
-)";
+                                            [Level_Id]  INTEGER,
+	                                        [Card_Id]   INTEGER,
+	                                        [Id]    INTEGER NOT NULL UNIQUE,
+                                            FOREIGN KEY([Level_Id]) REFERENCES [Levels]([Id]) ON DELETE CASCADE,
+	                                        FOREIGN KEY([Card_Id]) REFERENCES [Cards]([Id]) ON DELETE CASCADE,
+	                                        PRIMARY KEY([Id] AUTOINCREMENT)
+                                            )";
                         command.CommandType = CommandType.Text;
                         command.ExecuteNonQuery();
                     }
@@ -137,13 +137,13 @@ namespace CardsGameNewDBRepository
                     using (SQLiteCommand command = new SQLiteCommand(connection))
                     {
                         command.CommandText = @"CREATE TABLE [LevelPassings] (
-    [Id]    INTEGER NOT NULL UNIQUE,
-    [DateAndTime]   TEXT NOT NULL,
-	[IsComplete]    INTEGER NOT NULL,
-	[Level_Id]  INTEGER NOT NULL,
-	PRIMARY KEY([Id] AUTOINCREMENT),
-	FOREIGN KEY([Level_Id]) REFERENCES [Levels]([Id]) ON DELETE CASCADE
-)";
+                                            [Id]    INTEGER NOT NULL UNIQUE,
+                                            [DateAndTime]   TEXT NOT NULL,
+	                                        [IsComplete]    INTEGER NOT NULL,
+	                                        [Level_Id]  INTEGER NOT NULL,
+	                                        PRIMARY KEY([Id] AUTOINCREMENT),
+	                                        FOREIGN KEY([Level_Id]) REFERENCES [Levels]([Id]) ON DELETE CASCADE
+                                            )";
                         command.CommandType = CommandType.Text;
                         command.ExecuteNonQuery();
                     }
@@ -151,31 +151,31 @@ namespace CardsGameNewDBRepository
                     using (SQLiteCommand command = new SQLiteCommand(connection))
                     {
                         command.CommandText = @"CREATE TABLE [CardPassings] (
-    [Id]    INTEGER NOT NULL UNIQUE,
-    [AttemptsNumber]    INTEGER NOT NULL,
-	[DateAndTime]   TEXT,
-	[Card_Id]   INTEGER NOT NULL,
-	[LevelPassing_Id]   INTEGER NOT NULL,
-	PRIMARY KEY([Id] AUTOINCREMENT),
-	FOREIGN KEY([Card_Id]) REFERENCES Cards(Id) ON DELETE CASCADE,
-	FOREIGN KEY([LevelPassing_Id]) REFERENCES [LevelPassings]([Id]) ON DELETE CASCADE
-)";
+                                            [Id]    INTEGER NOT NULL UNIQUE,
+                                            [AttemptsNumber]    INTEGER NOT NULL,
+	                                        [DateAndTime]   TEXT,
+	                                        [Card_Id]   INTEGER NOT NULL,
+	                                        [LevelPassing_Id]   INTEGER NOT NULL,
+	                                        PRIMARY KEY([Id] AUTOINCREMENT),
+	                                        FOREIGN KEY([Card_Id]) REFERENCES Cards(Id) ON DELETE CASCADE,
+	                                        FOREIGN KEY([LevelPassing_Id]) REFERENCES [LevelPassings]([Id]) ON DELETE CASCADE
+                                            )";
                         command.CommandType = CommandType.Text;
                         command.ExecuteNonQuery();
                     }
 
                     using (SQLiteCommand command = new SQLiteCommand(connection))
                     {
-                        command.CommandText = @"CREATE TABLE [CardPassings] (
-    [Id]    INTEGER NOT NULL UNIQUE,
-    [AttemptsNumber]    INTEGER NOT NULL,
-	[DateAndTime]   TEXT,
-	[Card_Id]   INTEGER NOT NULL,
-	[LevelPassing_Id]   INTEGER NOT NULL,
-	PRIMARY KEY([Id] AUTOINCREMENT),
-	FOREIGN KEY([Card_Id]) REFERENCES Cards(Id) ON DELETE CASCADE,
-	FOREIGN KEY([LevelPassing_Id]) REFERENCES [LevelPassings]([Id]) ON DELETE CASCADE
-)";
+                        command.CommandText = @"CREATE TABLE [Attempts] 
+                                             ([Id] INTEGER PRIMARY KEY, 
+                                              [DateAndTimeBegin] nvarchar, 
+                                              [DateAndTimeEnd] nvarchar, 
+                                              [CardPassing_Id] int, 
+                                              [AnswerCard_Id] int, 
+                                              [AskedCard_Id] int, 
+                                              FOREIGN KEY (CardPassing_Id) REFERENCES [CardPassings](Id), 
+                                              FOREIGN KEY (AnswerCard_Id) REFERENCES [Cards](Id), 
+                                              FOREIGN KEY (AskedCard_Id) REFERENCES [Cards](Id))";
                         command.CommandType = CommandType.Text;
                         command.ExecuteNonQuery();
                     }
@@ -195,7 +195,7 @@ namespace CardsGameNewDBRepository
         {
             return IsDBTableExist("Cards")
             && IsDBTableExist("Levels")
-            && IsDBTableExist("LevelPassings") 
+            && IsDBTableExist("LevelPassings")
             && IsDBTableExist("CardPassings")
             && IsDBTableExist("Attempts");
         }
@@ -208,22 +208,101 @@ namespace CardsGameNewDBRepository
                      .SqlQuery<string>(@"SELECT name FROM sqlite_master WHERE type='table' AND name='" + tableName + "';")
                      .SingleOrDefault() != null;
             }
-            catch 
+            catch
             {
                 MessageBox.Show("Ошибка обращения к базе данных " + DBFilename, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
         }
 
-        public static bool UpdateAndAddTableAttemptToDB(string _DBFilename)
+        public static bool UniversalUpdateDB(string _DBFilename)
         {
-            if (IsDBTableExist("Attempts")) return false;
+            if (!File.Exists(_DBFilename)) return false;
+            bool result = true;
+
+            if (!IsDBTableExist("Cards"))
+            {
+                result &= TrySQLiteCommandExecute(_DBFilename,
+                                         @"CREATE TABLE [Cards] (
+	                                    [Id]	INTEGER NOT NULL UNIQUE,
+	                                    [Title]	TEXT,
+	                                    [SoundedText]	TEXT,
+	                                    [Description]	TEXT,
+	                                    [ImageAddress]	TEXT,
+	                                    [SoundAddress]	TEXT,
+	                                    PRIMARY KEY([Id] AUTOINCREMENT)
+                                        )");
+            }
+            if (!IsDBTableExist("Levels"))
+            {
+                result &= TrySQLiteCommandExecute(_DBFilename,
+                                        @"CREATE TABLE [Levels] (
+                                        [Id]    INTEGER NOT NULL UNIQUE, 
+                                        [Name]  TEXT,
+	                                    [ImageAddress]  TEXT,
+	                                    PRIMARY KEY([Id] AUTOINCREMENT)
+                                        )");
+            }
+            if (!IsDBTableExist("LevelCards"))
+            {
+                result &= TrySQLiteCommandExecute(_DBFilename,
+                                        @"CREATE TABLE [LevelCards] (
+                                        [Level_Id]  INTEGER,
+	                                    [Card_Id]   INTEGER,
+	                                    [Id]    INTEGER NOT NULL UNIQUE,
+                                        FOREIGN KEY([Level_Id]) REFERENCES [Levels]([Id]) ON DELETE CASCADE,
+	                                    FOREIGN KEY([Card_Id]) REFERENCES [Cards]([Id]) ON DELETE CASCADE,
+	                                    PRIMARY KEY([Id] AUTOINCREMENT)
+                                        )");
+
+            }
+            if (!IsDBTableExist("LevelPassings"))
+            {
+                result &= TrySQLiteCommandExecute(_DBFilename,
+                                        @"CREATE TABLE [LevelPassings] (
+                                        [Id]    INTEGER NOT NULL UNIQUE,
+                                        [DateAndTime]   TEXT NOT NULL,
+	                                    [IsComplete]    INTEGER NOT NULL,
+	                                    [Level_Id]  INTEGER NOT NULL,
+	                                    PRIMARY KEY([Id] AUTOINCREMENT),
+	                                    FOREIGN KEY([Level_Id]) REFERENCES [Levels]([Id]) ON DELETE CASCADE
+                                        )");
+            }
+            if (!IsDBTableExist("CardPassings"))
+            {
+                result &= TrySQLiteCommandExecute(_DBFilename,
+                                        @"CREATE TABLE [CardPassings] (
+                                        [Id]    INTEGER NOT NULL UNIQUE,
+                                        [AttemptsNumber]    INTEGER NOT NULL,
+	                                    [DateAndTime]   TEXT,
+	                                    [Card_Id]   INTEGER NOT NULL,
+	                                    [LevelPassing_Id]   INTEGER NOT NULL,
+	                                    PRIMARY KEY([Id] AUTOINCREMENT),
+	                                    FOREIGN KEY([Card_Id]) REFERENCES Cards(Id) ON DELETE CASCADE,
+	                                    FOREIGN KEY([LevelPassing_Id]) REFERENCES [LevelPassings]([Id]) ON DELETE CASCADE
+                                        )");
+            }
+            if (!IsDBTableExist("Attempts"))
+            {
+                result &= TrySQLiteCommandExecute(_DBFilename,
+                                        @"CREATE TABLE [Attempts] 
+                                        ([Id] INTEGER PRIMARY KEY, 
+                                        [DateAndTimeBegin] nvarchar, 
+                                        [DateAndTimeEnd] nvarchar, 
+                                        [CardPassing_Id] int, 
+                                        [AnswerCard_Id] int, 
+                                        [AskedCard_Id] int, 
+                                        FOREIGN KEY (CardPassing_Id) REFERENCES [CardPassings](Id), 
+                                        FOREIGN KEY (AnswerCard_Id) REFERENCES [Cards](Id), 
+                                        FOREIGN KEY (AskedCard_Id) REFERENCES [Cards](Id))");
+            }
+            return result;
+        }
+        public static bool TrySQLiteCommandExecute(string _DBFilename, string CommandText)
+        {
             bool error = false;
             try
             {
-
-                if (!File.Exists(_DBFilename)) return false;
-                
                 SQLiteFactory factory = (SQLiteFactory)DbProviderFactories.GetFactory("System.Data.SQLite");
                 using (SQLiteConnection connection = (SQLiteConnection)factory.CreateConnection())
                 {
@@ -232,16 +311,7 @@ namespace CardsGameNewDBRepository
 
                     using (SQLiteCommand command = new SQLiteCommand(connection))
                     {
-                        command.CommandText = @"CREATE TABLE [Attempts] 
-                                             ([Id] INTEGER PRIMARY KEY, 
-                                              [DateAndTimeBegin] nvarchar, 
-                                              [DateAndTimeEnd] nvarchar, 
-                                              [CardPassing_Id] int, 
-                                              [AnswerCard_Id] int, 
-                                              [AskedCard_Id] int, 
-                                              FOREIGN KEY (CardPassing_Id) REFERENCES [CardPassings](Id), 
-                                              FOREIGN KEY (AnswerCard_Id) REFERENCES [Cards](Id), 
-                                              FOREIGN KEY (AskedCard_Id) REFERENCES [Cards](Id))";
+                        command.CommandText = @CommandText;
                         command.CommandType = CommandType.Text;
                         command.ExecuteNonQuery();
                     }
@@ -253,6 +323,27 @@ namespace CardsGameNewDBRepository
                 error = true;
             }
             return !error;
+        }
+
+        public static bool UpdateAndAddTableAttemptToDB(string _DBFilename)
+        {
+            if (IsDBTableExist("Attempts")) return true;
+
+            if (!File.Exists(_DBFilename)) return true;
+
+            if (!TrySQLiteCommandExecute(_DBFilename,
+                                         @"CREATE TABLE [Attempts] 
+                                             ([Id] INTEGER PRIMARY KEY, 
+                                              [DateAndTimeBegin] nvarchar, 
+                                              [DateAndTimeEnd] nvarchar, 
+                                              [CardPassing_Id] int, 
+                                              [AnswerCard_Id] int, 
+                                              [AskedCard_Id] int, 
+                                              FOREIGN KEY (CardPassing_Id) REFERENCES [CardPassings](Id), 
+                                              FOREIGN KEY (AnswerCard_Id) REFERENCES [Cards](Id), 
+                                              FOREIGN KEY (AskedCard_Id) REFERENCES [Cards](Id))"))
+                return false;
+            else return true;
         }
 
 
