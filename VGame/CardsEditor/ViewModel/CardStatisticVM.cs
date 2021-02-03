@@ -133,7 +133,7 @@ namespace CardsEditor.ViewModel
         {
             get 
             {
-                var AllAttempts = _card?.CardPassings?.SelectMany(cp => cp.Attempts)?.Where(a => a.IsMistake)?.GroupBy(a => a.AnswerCard.Title)?.OrderByDescending(a=>a.Count());
+                var AllAttempts = _card?.CardPassings?.SelectMany(cp => cp.Attempts)?.ToList().Where(a => a.IsMistake)?.GroupBy(a => a.AnswerCard.Title)?.OrderByDescending(a=>a.Count());
                 string F = AllAttempts?.FirstOrDefault()?.Key;
                 return F;
             }
@@ -304,7 +304,7 @@ namespace CardsEditor.ViewModel
             get
             {
                 var AllCards = DBTools.Context.Cards.Where(c => c.Title == _card.Title);
-                var AllAttempts = AllCards?.SelectMany(c => c.CardPassings)?.SelectMany(cp => cp.Attempts)?.Where(a => a.IsMistake)?.GroupBy(a => a.AnswerCard.Title)?.OrderByDescending(a => a.Count());
+                var AllAttempts = AllCards?.SelectMany(c => c.CardPassings)?.SelectMany(cp => cp.Attempts)?.ToList().Where(a => a.IsMistake)?.GroupBy(a => a.AnswerCard.Title)?.OrderByDescending(a => a.Count());
                 string F = AllAttempts?.FirstOrDefault()?.Key;
                 return F;
             }
