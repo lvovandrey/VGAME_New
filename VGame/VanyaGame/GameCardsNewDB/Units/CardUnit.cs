@@ -132,7 +132,16 @@ namespace VanyaGame.GameCardsNewDB.Units
 
             if (System.IO.File.Exists(Card.ImageAddress) || Miscellanea.UrlExists(Card.ImageAddress))
             {
-                ((CardUnitElement)B.Body).Img.Source = PictHelper.GetBitmapImage(new Uri(Card.ImageAddress));
+                if (Path.GetExtension(Card.ImageAddress) == ".gif")
+                {
+                    var image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri(Card.ImageAddress);
+                    image.EndInit();
+                    ImageBehavior.SetAnimatedSource(((CardUnitElement)B.Body).Img, image);
+                }
+                else
+                    ((CardUnitElement)B.Body).Img.Source = PictHelper.GetBitmapImage(new Uri(Card.ImageAddress));
             }
             else
             {
