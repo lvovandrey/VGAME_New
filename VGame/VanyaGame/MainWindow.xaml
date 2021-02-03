@@ -4,6 +4,7 @@
         xmlns:PrevMenuNS="clr-namespace:VanyaGame.PrevMenuNS" 
         xmlns:GameCardsNewDB ="clr-namespace:VanyaGame.GameCardsNewDB.Interface"
         xmlns:Interface="clr-namespace:VanyaGame.Interface"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
         x:Name="MyWindow" x:Class="VanyaGame.MainWindow"        
         Title="MainWindow" Height="720" Width="1000" 
         WindowStartupLocation="CenterScreen" 
@@ -128,6 +129,13 @@
                                                        Grid.Row="1" Grid.ColumnSpan="4"
                                                        Height="250" Width="250"
                                                        Visibility="Visible"/>
+
+            <Image gif:ImageBehavior.AnimatedSource="Images/Delete.png" 
+                   
+                   Margin="-500 0 0 0"
+                   Grid.Row="1" Grid.ColumnSpan="4"
+                   Height="100" Width="100" Panel.ZIndex="32000"/>
+
             <Grid  x:Name="ProgressBarLoadDB" 
                    Visibility="Collapsed"
                   Grid.Row="1" Grid.ColumnSpan="4" 

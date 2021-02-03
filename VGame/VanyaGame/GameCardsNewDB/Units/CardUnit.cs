@@ -8,6 +8,7 @@ using System.IO;
 using VanyaGame.GameCardsNewDB.Units.Components;
 using VanyaGame.Tools;
 using CardsGameNewDBRepository.Model;
+using WpfAnimatedGif;
 
 namespace VanyaGame.GameCardsNewDB.Units
 {
@@ -21,8 +22,8 @@ namespace VanyaGame.GameCardsNewDB.Units
         public Card Card { get; set; }
         public Scene Scene { get; set; }
         public event Action MouseClicked;
-        public bool readyToReactionOnMouseDown= false;
-        
+        public bool readyToReactionOnMouseDown = false;
+
 
         public CardUnit(Scene scene, Card card, double size) : this(scene, card)
         {
@@ -50,24 +51,33 @@ namespace VanyaGame.GameCardsNewDB.Units
 
             if (System.IO.File.Exists(card.ImageAddress) || Miscellanea.UrlExists(card.ImageAddress))
             {
-                ((CardUnitElement)B.Body).Img.Source = PictHelper.GetBitmapImage(new Uri(card.ImageAddress));
+                if (Path.GetExtension(card.ImageAddress) == ".gif")
+                {
+                    var image = new BitmapImage();
+                    image.BeginInit();
+                    image.UriSource = new Uri(card.ImageAddress);
+                    image.EndInit();
+                    ImageBehavior.SetAnimatedSource(((CardUnitElement)B.Body).Img, image);
+                }
+                else
+                    ((CardUnitElement)B.Body).Img.Source = PictHelper.GetBitmapImage(new Uri(card.ImageAddress));
             }
             else
             {
                 if (System.IO.File.Exists(Sets.Settings.GetInstance().DefaultImage))
                 {
-                    ((CardUnitElement)B.Body).Img.Source = 
+                    ((CardUnitElement)B.Body).Img.Source =
                         PictHelper.GetBitmapImage(new Uri(Sets.Settings.GetInstance().DefaultImage));
                 }
                 else
                     MessageBox.Show("Файл изображения не найден:  " + card.ImageAddress);
             }
 
-           
-         //   M = new Moveable("Moveable", this);
+
+            //   M = new Moveable("Moveable", this);
 
 
-         //   DaD = new DragAndDrop("DragAndDrop", this);
+            //   DaD = new DragAndDrop("DragAndDrop", this);
             ShowComp = new HiderShower("HiderShower", this);
             cardShower = new CardShower("CardShower", this);
             InGS = new OLDInGameStruct("InGameStruct", this, Scene);
@@ -91,7 +101,7 @@ namespace VanyaGame.GameCardsNewDB.Units
 
         public CardUnit DeepCopy()
         {
-            var newcardunit =  new CardUnit(Scene, Card);
+            var newcardunit = new CardUnit(Scene, Card);
 
 
             newcardunit.Components.Remove("HaveBody");
@@ -99,9 +109,9 @@ namespace VanyaGame.GameCardsNewDB.Units
             newcardunit.Components.Remove("DragAndDrop");
             newcardunit.Components.Remove("Moveable");
             newcardunit.Components.Remove("HiderShower");
-            newcardunit.Components.Remove("CardShower"); 
-            
-            newcardunit.Components.Remove("InGameStruct"); 
+            newcardunit.Components.Remove("CardShower");
+
+            newcardunit.Components.Remove("InGameStruct");
             newcardunit.Components.Remove("UState");
             newcardunit.Components.Remove("Hit");
 
@@ -149,7 +159,7 @@ namespace VanyaGame.GameCardsNewDB.Units
 
             return newcardunit;
         }
-        
+
 
 
 
