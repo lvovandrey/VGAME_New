@@ -24,6 +24,8 @@ namespace VanyaGame.GameCardsNewDB.Units
         public event Action MouseClicked;
         public bool readyToReactionOnMouseDown = false;
 
+        private ImageAnimationController GifController;
+
 
         public CardUnit(Scene scene, Card card, double size) : this(scene, card)
         {
@@ -58,6 +60,7 @@ namespace VanyaGame.GameCardsNewDB.Units
                     image.UriSource = new Uri(card.ImageAddress);
                     image.EndInit();
                     ImageBehavior.SetAnimatedSource(((CardUnitElement)B.Body).Img, image);
+                    GifController = ImageBehavior.GetAnimationController(((CardUnitElement)B.Body).Img);
                 }
                 else
                     ((CardUnitElement)B.Body).Img.Source = PictHelper.GetBitmapImage(new Uri(card.ImageAddress));
@@ -88,6 +91,29 @@ namespace VanyaGame.GameCardsNewDB.Units
 
             B.Body.PreviewMouseLeftButtonDown += Body_PreviewMouseLeftButtonDown;
         }
+
+        public void UnloadImage()
+        {
+
+
+
+            if (Path.GetExtension(Card.ImageAddress) == ".gif")
+            {
+                var image = new BitmapImage();
+                image.BeginInit();
+                image.UriSource = new Uri("pack://application:,,,/Images/simpleGif.gif");
+                image.EndInit();
+                ImageBehavior.SetAnimatedSource(((CardUnitElement)GetComponent<HaveBody>().Body).Img, image);
+
+//                GifController = ImageBehavior.GetAnimationController(((CardUnitElement)B.Body).Img);
+            }
+            else
+                ((CardUnitElement)GetComponent<HaveBody>().Body).Img.Source = PictHelper.GetBitmapImage(new Uri("pack://application:,,,/Images/simpleGif.gif"));
+
+            GifController?.Dispose();
+            GC.Collect();
+        }
+
 
         private void Body_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {

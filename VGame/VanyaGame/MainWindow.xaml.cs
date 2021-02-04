@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Data;
 using System.Globalization;
+using VanyaGame.GameCardsNewDB.Tools;
 
 namespace VanyaGame
 {
@@ -31,8 +32,10 @@ namespace VanyaGame
 
             this.Show();
             Game.PreviewStart();
-        }
 
+            mc = new MemoryCounter();
+        }
+        MemoryCounter mc;
 
         private void Image_MouseEnter(object sender, MouseEventArgs e)
         {

@@ -254,6 +254,11 @@ namespace VanyaGame.GameCardsNewDB.Struct
             OnPropertyChanged("CardsCount");
             OnPropertyChanged("AvgCardsErrorsPercentInLast3LevelPassings");
 
+            foreach (var scene in Scenes)
+            {
+                ((CardsNewDBScene)scene.Value).UnitsUnload();
+            }
+
             this.Scenes.Clear();
             Game.PrevMenuShow();
             Game.Owner.AbortLevelButton.Visibility = Visibility.Collapsed;

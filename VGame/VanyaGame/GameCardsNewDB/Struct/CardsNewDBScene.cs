@@ -49,6 +49,14 @@ namespace VanyaGame.GameCardsNewDB.Struct
             ReadyToNextUnit = true;
         }
 
+        public void UnitsUnload()
+        {
+            foreach (var unit in UnitsCol.GetAllUnits())
+            {
+                unit.UnloadImage();
+            }
+        }
+
         private void LoadSets()
         {
             Settings.GetInstance().RestoreAllSettings();

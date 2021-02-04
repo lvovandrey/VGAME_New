@@ -207,6 +207,7 @@
     <Compile Include="GameCardsNewDB\Struct\CardsNewDBIteration.cs" />
     <Compile Include="GameCardsNewDB\Struct\CardsNewDBLevel.cs" />
     <Compile Include="GameCardsNewDB\Struct\CardsNewDBScene.cs" />
+    <Compile Include="GameCardsNewDB\Tools\MemoryCounter.cs" />
     <Compile Include="Interface\BeautyButton.xaml.cs">
       <DependentUpon>BeautyButton.xaml</DependentUpon>
     </Compile>
@@ -405,7 +406,12 @@
     <Resource Include="Images\Delete.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\earth.gif" />
+    <Resource Include="Images\earth.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\simpleGif.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Content Include="Video\default.wmv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
