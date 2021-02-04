@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace VanyaGame.GameCardsNewDB.Tools
 {
@@ -12,25 +13,30 @@ namespace VanyaGame.GameCardsNewDB.Tools
     {
         private PerformanceCounter cpuCounter;
         private PerformanceCounter ramCounter;
+        Timer timer;
         public MemoryCounter()
         {
+            int num = 0;
             InitialiseCPUCounter();
             InitializeRAMCounter();
             // устанавливаем метод обратного вызова
             TimerCallback tm = new TimerCallback(updateTimer_Tick);
             // создаем таймер
-            Timer timer = new Timer(tm, this, 0, 1000);
+            timer = new Timer(tm, num, 0, 600);
+
         }
 
-        Timer timer;
+        
 
-        private void updateTimer_Tick(object sender)
+        private void updateTimer_Tick(object obj)
         {
-            Console.WriteLine( "CPU Usage: " +
+            Console.Write( "CPU Usage: " +
             Convert.ToInt32(cpuCounter.NextValue()).ToString() +
-            "%");
+            "%          ");
 
             Console.WriteLine(Convert.ToInt32(ramCounter.NextValue()).ToString() + "Mb");
+            var memoryUsed = GC.GetTotalMemory(true);
+            Console.WriteLine("Memory Used: {0} megabytes", (memoryUsed / 1024f) / 1024f);
         }
 
 
