@@ -30,12 +30,14 @@ namespace VanyaGame
             MyWindow.PreviewMouseDown += Game.UserActivity.PreviewMouseDown;
             MyWindow.PreviewMouseUp += Game.UserActivity.PreviewMouseUp;
 
-            this.Show();
+            
             Game.PreviewStart();
-
+            this.Show();
             mc = new MemoryCounter();
         }
         MemoryCounter mc;
+
+
 
         private void Image_MouseEnter(object sender, MouseEventArgs e)
         {
