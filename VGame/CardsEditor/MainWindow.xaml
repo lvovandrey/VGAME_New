@@ -52,6 +52,9 @@
                         <Image Source="Images/Disk-Multiple.png" />
                     </MenuItem.Icon>
                 </MenuItem>
+                <MenuItem Header="Последние...">
+                    <MenuItem></MenuItem>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="Карточки">
                 <MenuItem Header="Создать карточки из файлов изображений..."

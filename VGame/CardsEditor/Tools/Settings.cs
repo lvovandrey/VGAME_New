@@ -24,6 +24,7 @@ namespace CardsEditor.Tools
 
         private Settings()
         {
+            _RecentlyOpenFilenames = new ObservableCollection<string>();
             SetTTSVoices();
         }
 
@@ -43,6 +44,16 @@ namespace CardsEditor.Tools
         }
 
         public static event Action SettingsChanged;
+
+        [XmlIgnore]
+        public ObservableCollection<string> _RecentlyOpenFilenames;
+        public ObservableCollection<string> RecentlyOpenFilenames
+        {
+            get
+            {
+                return _RecentlyOpenFilenames;
+            }
+        }
 
         [XmlIgnore]
         private ReadOnlyCollection<InstalledVoice> _TextToSpeachVoices;
