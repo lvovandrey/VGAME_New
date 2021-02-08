@@ -14,6 +14,7 @@ namespace VanyaGame.Struct
         public string Name { get; private set; }
         public Dictionary<string, Scene> Scenes { get; protected set; }
         public Scene CurScene { get; protected set; }
+        public bool IsAborted { get; set; }
 
         public Level()
         {

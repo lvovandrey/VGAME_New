@@ -239,7 +239,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
             }
         }
 
-        public bool IsAborted { get; private set; }
+        
 
         public int SceneNomer { get; private set; }
 
@@ -294,6 +294,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
         /// </summary>
         public void LoadScenes()
         {
+            if (IsAborted) return;
             if (Scenes.Count == 0) Scenes.Add("Scene 1", new CardsNewDBScene(this));
 
 
@@ -318,6 +319,10 @@ namespace VanyaGame.GameCardsNewDB.Struct
             SceneNomer = int.MaxValue;
             CurScene?.Abort();
             End(false);
+            ToolsTimer.Delay(() =>
+            {
+                IsAborted = false;
+            }, TimeSpan.FromSeconds(0.5));
         }
 
         #region mvvm

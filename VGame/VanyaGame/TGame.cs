@@ -243,9 +243,11 @@ namespace VanyaGame
         {
             if (Game.Levels.Count > 0)
             {
+                    
                     Game.Level = ((PrevMenuItem)sender).Level;
-                    ((PrevMenuItem)sender).Level.GetComponent<Loader>().Load();
+                    Level.IsAborted = false;
                     Game.Owner.PreviewMenu.Visibility = Visibility.Collapsed;
+                    ((PrevMenuItem)sender).Level.GetComponent<Loader>().Load();
                     Level.GetComponent<Starter>().Start();
             }
         }
