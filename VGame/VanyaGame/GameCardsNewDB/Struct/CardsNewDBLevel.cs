@@ -25,12 +25,15 @@ namespace VanyaGame.GameCardsNewDB.Struct
     {
         public Model.Level DbLevelRecord;
 
-        public ObservableCollection<LevelPassing> LevelPassings { get 
+        public ObservableCollection<LevelPassing> LevelPassings
+        {
+            get
             {
                 if (DbLevelRecord._LevelPassings == null) DbLevelRecord._LevelPassings = new ObservableCollection<LevelPassing>();
-                return DbLevelRecord._LevelPassings; 
-            } 
-            set { DbLevelRecord._LevelPassings = value; OnPropertyChanged("LevelPassings"); } }
+                return DbLevelRecord._LevelPassings;
+            }
+            set { DbLevelRecord._LevelPassings = value; OnPropertyChanged("LevelPassings"); }
+        }
         public int LevelPassingsCount { get { if (LevelPassings != null) return LevelPassings.Count; else return 0; } }
         public LevelPassing CurLevelPassing;
         public int? CardsCount { get { return DbLevelRecord?.Cards?.Count; } }
@@ -85,20 +88,20 @@ namespace VanyaGame.GameCardsNewDB.Struct
         {
             Console.WriteLine("StartLoading DB");
 
-            Game.Owner.Dispatcher.Invoke(() => { Game.Owner.ProgressBarLoadDB.Visibility = Visibility.Visible; }); 
-            bool result =  await Task.Run(() =>
-            {
-                string DBFilename = Settings.GetInstance().AttachedDBCardsFilename;
-                bool res = DBTools.LoadDB(DBFilename);
-                if (res == false) return false;
-                return true;
-            });
+            Game.Owner.Dispatcher.Invoke(() => { Game.Owner.ProgressBarLoadDB.Visibility = Visibility.Visible; });
+            bool result = await Task.Run(() =>
+           {
+               string DBFilename = Settings.GetInstance().AttachedDBCardsFilename;
+               bool res = DBTools.LoadDB(DBFilename);
+               if (res == false) return false;
+               return true;
+           });
             Game.Owner.Dispatcher.Invoke(() => { Game.Owner.ProgressBarLoadDB.Visibility = Visibility.Collapsed; });
             Console.WriteLine("End Loading DB");
             return result;
         }
 
-        public static void AddLevelsInPrevMenu() 
+        public static void AddLevelsInPrevMenu()
         {
             Console.WriteLine("Add levels in PrevMenu");
             foreach (VanyaGame.Struct.Level Level in Game.Levels)
@@ -119,13 +122,13 @@ namespace VanyaGame.GameCardsNewDB.Struct
             Settings.GetInstance().RestoreAllSettings();
 
             bool res = await LoadDBAsync();
-            if (!res) 
+            if (!res)
             {
                 MessageBox.Show("Не удалось загрузить базу данных " + Settings.GetInstance().AttachedDBCardsFilename, "Ошибка загрузки БД", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-             Random random = new Random();
+            Random random = new Random();
 
             //Перемешиваем уровни  //что за алгоритм - хз - раньше работал вроде
             //for (int i = DB.Levels.Count - 1; i >= 1; i--)
@@ -167,6 +170,19 @@ namespace VanyaGame.GameCardsNewDB.Struct
 
         private void LoadContent()
         {
+            int MemoryUsedMb = (int)(GC.GetTotalMemory(true) / 1_048_576);
+            var ReqMemory = (int)(MemoryCounter.CalculateRequiredMemoryForLevel(this) / 1_048_576);
+            Console.WriteLine(ReqMemory.ToString() + "Mb нужно для этого уровня. Всего получится " + (MemoryUsedMb+ReqMemory).ToString()+ "Mb");
+            
+            if (!MemoryCounter.IsEnoughtMemoryForLevelLoad(this))
+            {
+                var res = MessageBox.Show("Возможно не хватит памяти (или выделяемая память ограничена версией ОС или приложения) чтобы загрузить этот уровень. " +
+                                           "При загрузке уровня игра может \"вылететь\". Продолжить все равно?",
+                                           "Слишком большой уровень",
+                                           MessageBoxButton.YesNo,
+                                           MessageBoxImage.Warning);
+                if (res == MessageBoxResult.No) this.Abort();
+            }
             LoadBackground();
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -12,60 +13,63 @@ namespace VanyaGame.GameCardsNewDB.Tools
 {
     public class MemoryCounter
     {
-        private PerformanceCounter cpuCounter;
-        private PerformanceCounter ramCounter;
-        Timer timer;
-        public MemoryCounter()
-        {
-            int num = 0;
-            InitialiseCPUCounter();
-            InitializeRAMCounter();
-            // устанавливаем метод обратного вызова
-            TimerCallback tm = new TimerCallback(updateTimer_Tick);
-            // создаем таймер
-            timer = new Timer(tm, num, 0, 600);
 
+        public static bool IsEnoughtMemoryForLevelLoad(GameCardsNewDB.Struct.CardsNewDBLevel level)
+        {
+            int MaxMemoryMb;
+            double SafetyFactor = 1.2;
+            double RequiredMemoryMb = CalculateRequiredMemoryForLevel(level) / 1_048_576;
+            var ramCounter = new PerformanceCounter("Memory", "Available MBytes", true);
+            int MemoryAvalableMb = Convert.ToInt32(ramCounter.NextValue());
+
+            if (Is64Bit)
+                MaxMemoryMb = 4096;
+            else
+                MaxMemoryMb = 1024;
+            MemoryAvalableMb = MemoryAvalableMb > MaxMemoryMb ? MaxMemoryMb : MemoryAvalableMb;
+
+            return MemoryAvalableMb > SafetyFactor * (RequiredMemoryMb);
         }
 
-        private static bool IsEnoughtMemoryForLevelLoad(GameCardsNewDB.Struct.CardsNewDBLevel level) 
+        public static double CalculateRequiredMemoryForLevel(GameCardsNewDB.Struct.CardsNewDBLevel level)
         {
-           // double ImgMemoryKoef = 
+            double ImgMemoryKoef = 34;
+            double BmpMemoryKoef = 2.5;
+            double GifMemoryKoef = 80;
 
-            return true;
+            double RequiredMemory = 0;
+
+            foreach (var card in level.DbLevelRecord.Cards)
+            {
+                string filename = Sets.Settings.GetInstance().DefaultImage;
+                if (File.Exists(card.ImageAddress)) filename = card.ImageAddress;
+                if (!File.Exists(filename)) continue;
+
+                long FileSize = new FileInfo(filename).Length;
+                switch (Path.GetExtension(filename))
+                {
+                    case ".jpg":
+                    case ".png":
+                        RequiredMemory += ImgMemoryKoef * FileSize;
+                        break;
+                    case ".bmp":
+                        RequiredMemory += BmpMemoryKoef * FileSize;
+                        break;
+                    case ".gif":
+                        RequiredMemory += GifMemoryKoef * FileSize;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return RequiredMemory;
         }
 
         public static bool Is64Bit
         {
 
             get { return Marshal.SizeOf(typeof(IntPtr)) == 8; }
-        }
-
-        private void updateTimer_Tick(object obj)
-        {
-            string AppBitness = Is64Bit ? "x64" : "x86";
-            Console.Write( "CPU Usage: " +
-            Convert.ToInt32(cpuCounter.NextValue()).ToString() +
-            "%          "+ AppBitness +"        ");
-
-            Console.WriteLine(Convert.ToInt32(ramCounter.NextValue()).ToString() + "Mb");
-            var memoryUsed = GC.GetTotalMemory(true);
-            Console.WriteLine("Memory Used: {0} megabytes", (memoryUsed / 1024f) / 1024f);
-        }
-
-
-        private void InitialiseCPUCounter()
-        {
-            cpuCounter = new PerformanceCounter(
-            "Processor",
-            "% Processor Time",
-            "_Total",
-            true
-            );
-        }
-
-        private void InitializeRAMCounter()
-        {
-            ramCounter = new PerformanceCounter("Memory", "Available MBytes", true);
         }
     }
 }
