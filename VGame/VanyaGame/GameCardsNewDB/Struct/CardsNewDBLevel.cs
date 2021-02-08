@@ -181,13 +181,17 @@ namespace VanyaGame.GameCardsNewDB.Struct
                                            "Слишком большой уровень",
                                            MessageBoxButton.YesNo,
                                            MessageBoxImage.Warning);
-                if (res == MessageBoxResult.No) this.Abort();
+                if (res == MessageBoxResult.No)
+                {
+                    this.Abort(); return;
+                }
             }
             LoadBackground();
         }
 
         private void Start()
         {
+            if (IsAborted) return;
             CurLevelPassing = new LevelPassing() { DateAndTime = DateTime.Now.ToString() };
             LevelPassings.Add(CurLevelPassing);
             DBTools.Context.Entry(DbLevelRecord).State = System.Data.Entity.EntityState.Modified;
@@ -235,6 +239,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
             }
         }
 
+        public bool IsAborted { get; private set; }
 
         public int SceneNomer { get; private set; }
 
@@ -262,7 +267,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
 
         private void End(bool IsLevelComplete)
         {
-            CurLevelPassing.IsComplete = IsLevelComplete;
+            if(CurLevelPassing!=null) CurLevelPassing.IsComplete = IsLevelComplete;
             DBTools.Context.Entry(DbLevelRecord).State = System.Data.Entity.EntityState.Modified;
             DBTools.Context.SaveChanges();
 
@@ -309,8 +314,9 @@ namespace VanyaGame.GameCardsNewDB.Struct
 
         public override void Abort()
         {
+            IsAborted = true;
             SceneNomer = int.MaxValue;
-            CurScene.Abort();
+            CurScene?.Abort();
             End(false);
         }
 
