@@ -170,9 +170,9 @@ namespace VanyaGame.GameCardsNewDB.Struct
 
         private void LoadContent()
         {
-            int MemoryUsedMb = (int)(GC.GetTotalMemory(true) / 1_048_576);
+           
             var ReqMemory = (int)(MemoryCounter.CalculateRequiredMemoryForLevel(this) / 1_048_576);
-            Console.WriteLine(ReqMemory.ToString() + "Mb нужно для этого уровня. Всего получится " + (MemoryUsedMb+ReqMemory).ToString()+ "Mb");
+            Console.WriteLine(ReqMemory.ToString() + "Mb нужно для этого уровня");
             
             if (!MemoryCounter.IsEnoughtMemoryForLevelLoad(this))
             {
