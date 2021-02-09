@@ -62,6 +62,27 @@ namespace VanyaGame.GameCardsNewDB.Units
                     ImageBehavior.SetAnimatedSource(((CardUnitElement)B.Body).Img, image);
                     GifController = ImageBehavior.GetAnimationController(((CardUnitElement)B.Body).Img);
                 }
+                if (Path.GetExtension(card.ImageAddress) == ".wmv")
+                {
+                    ((CardUnitElement)B.Body).Img.Visibility = System.Windows.Visibility.Collapsed;
+                    var ME = new MediaElement()
+                    {
+                        Source = new Uri(card.ImageAddress),
+                        LoadedBehavior = MediaState.Manual,
+                        Margin = new Thickness(10)
+                    };
+                    ME.Loaded+= (s, e) =>
+                    {
+                        ME.Position = TimeSpan.Zero;
+                        ME.Play();
+                    };
+                    ME.MediaEnded += (s, e) => 
+                    {
+                        ME.Position = TimeSpan.Zero;
+                        ME.Play();
+                    };
+                    ((CardUnitElement)B.Body).Grd.Children.Add(ME);
+                }
                 else
                     ((CardUnitElement)B.Body).Img.Source = PictHelper.GetBitmapImage(new Uri(card.ImageAddress));
             }
