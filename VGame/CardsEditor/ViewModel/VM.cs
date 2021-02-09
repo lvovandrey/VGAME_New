@@ -261,7 +261,7 @@ namespace CardsEditor.ViewModel
             string[] Filenames = new string[] { };
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.Filter = "Файлы изображений (*.bmp, *.jpg, *.png, *.gif)|*.bmp;*.jpg;*.png;*.gif";
+                openFileDialog.Filter = "Файлы изображений и видео (*.bmp, *.jpg, *.png, *.gif, *.wmv, *.avi)|*.bmp;*.jpg;*.png;*.gif;*.wmv;*.avi";
                 openFileDialog.Title = "Открыть свое изображение для карточки";
                 openFileDialog.Multiselect = true;
                 string dir = obj as string;

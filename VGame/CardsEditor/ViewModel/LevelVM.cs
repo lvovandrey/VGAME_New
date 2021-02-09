@@ -127,7 +127,7 @@ namespace CardsEditor.ViewModel
                 {
                     OpenFileDialog openFileDialog = new OpenFileDialog();
                     openFileDialog.Filter = "Файлы изображений (*.bmp, *.jpg, *.png, *.gif)|*.bmp;*.jpg;*.png;*.gif";
-                    openFileDialog.Title = "Открыть свое изображение для карточки";
+                    openFileDialog.Title = "Открыть свое изображение для уровня";
                     if (openFileDialog.ShowDialog() == true)
                         ImageAddress = @openFileDialog.FileName;
 

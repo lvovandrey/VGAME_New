@@ -45,10 +45,8 @@
             <Rectangle Stroke="#FF878787" StrokeThickness="3" Fill="#07FFFFFF" Stretch="UniformToFill"/>
 
             <Image Name="Img" Source="pack://application:,,,/GameCardsNewDB/Images/4.png" Stretch="Uniform" 
-               RenderTransformOrigin="0.5,0.5"  Margin="10"  Panel.ZIndex="35000">
-
-
-            </Image>
+                          RenderTransformOrigin="0.5,0.5"  
+                          Margin="10"  Panel.ZIndex="35000"/>
 
             <Rectangle x:Name="FlashedRect" Opacity="1" Panel.ZIndex="35001" Width="0" Height="0">
                 <Rectangle.Fill>

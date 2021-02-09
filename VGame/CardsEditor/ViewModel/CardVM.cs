@@ -101,7 +101,7 @@ namespace CardsEditor.ViewModel
                 return openImageFileCommand ?? (openImageFileCommand = new RelayCommand(obj =>
                 {
                     OpenFileDialog openFileDialog = new OpenFileDialog();
-                    openFileDialog.Filter = "Файлы изображений (*.bmp, *.jpg, *.png, *.gif)|*.bmp;*.jpg;*.png;*.gif";
+                    openFileDialog.Filter = "Файлы изображений и видео (*.bmp, *.jpg, *.png, *.gif, *.wmv, *.avi)|*.bmp;*.jpg;*.png;*.gif;*.wmv;*.avi";
                     openFileDialog.Title = "Открыть свое изображение для карточки";
                     if (openFileDialog.ShowDialog() == true)
                     {
