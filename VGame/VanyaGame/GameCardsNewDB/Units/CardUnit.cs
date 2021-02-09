@@ -31,6 +31,7 @@ namespace VanyaGame.GameCardsNewDB.Units
         {
             ((CardUnitElement)this.GetComponent<HaveBody>().Body).Width = size;
             ((CardUnitElement)this.GetComponent<HaveBody>().Body).Height = size;
+            ((CardUnitElement)this.GetComponent<HaveBody>().Body).CardUnit = this;
         }
 
         private CardUnit(Scene scene, Card card)

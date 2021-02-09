@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using System.Threading;
+using VanyaGame.GameCardsNewDB.Units.Components;
 
 namespace VanyaGame.GameCardsNewDB.Units
 {
@@ -28,16 +29,20 @@ namespace VanyaGame.GameCardsNewDB.Units
             InitializeComponent();
         }
 
+        public CardUnit CardUnit;
+
         private void UserControl_MouseLeave(object sender, MouseEventArgs e)
         {
             Storyboard s = (Storyboard)TryFindResource("ShowSB");
             s.Begin();
+            CardUnit?.GetComponent<VideoInCard>()?.MouseLeave();
         }
 
         private void UserControl_MouseEnter(object sender, MouseEventArgs e)
         {
             Storyboard s = (Storyboard)TryFindResource("Hide6SB");
             s.Begin();
+            CardUnit?.GetComponent<VideoInCard>()?.MouseEnter();
         }
 
         private void MouseDown(object sender, MouseButtonEventArgs e)

@@ -50,8 +50,6 @@ namespace VanyaGame.GameCardsNewDB.Units.Components
                 ME.Position = TimeSpan.Zero;
                 ME.Play();
             };
-            ME.MouseEnter += ME_MouseEnter;
-            ME.MouseLeave += ME_MouseLeave;
             ME.MediaEnded += (s, e) =>
             {
                 ME.Position = TimeSpan.Zero;
@@ -66,9 +64,9 @@ namespace VanyaGame.GameCardsNewDB.Units.Components
             Panel.Children.Add(ME);
         }
 
-        private void ME_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        public void MouseLeave()
         {
-            ME.BeginAnimation(FrameworkElement.OpacityProperty, null);
+            if (ME == null) return;
             DoubleAnimation animation = new DoubleAnimation();
             animation.From = ME.Opacity;
             animation.To = 1;
@@ -76,9 +74,9 @@ namespace VanyaGame.GameCardsNewDB.Units.Components
             ME.BeginAnimation(FrameworkElement.OpacityProperty, animation);
         }
 
-        private void ME_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        public void MouseEnter()
         {
-            ME.BeginAnimation(FrameworkElement.OpacityProperty, null);
+            if (ME == null) return;
             DoubleAnimation animation = new DoubleAnimation();
             animation.From = ME.Opacity;
             animation.To = 0.6;
