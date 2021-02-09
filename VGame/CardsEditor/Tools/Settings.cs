@@ -202,6 +202,9 @@ namespace CardsEditor.Tools
 
         [XmlIgnore]
         public string DefaultDBCardsFilename => LocalAppDataDir + @"\Data\Fruits.db";
+        [XmlIgnore]
+        public double MaxImageFileLenghtInMb => 2;
+
 
         public void ExportSettingsToXML(string filename)
         {

@@ -4,6 +4,7 @@ using CardsGameNewDBRepository;
 using CardsGameNewDBRepository.Model;
 using MVVMRealization;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Diagnostics;
@@ -270,6 +271,8 @@ namespace CardsEditor.ViewModel
                 {
                     Filenames = @openFileDialog.FileNames;
                     if (Filenames.Length < 1) return;
+                    if (!IsBigFilesCheckOk(Filenames)) return; 
+                    //добавление выбранных файлов
                     foreach (var filename in Filenames)
                     {
                         AddCard(Path.GetFileNameWithoutExtension(filename),
@@ -279,8 +282,36 @@ namespace CardsEditor.ViewModel
                     OnPropertyChanged("CardVMs");
                 }
             }
-
         }
+
+        public static bool IsBigFilesCheckOk(string[] Filenames)
+        {
+            //определение наличия файлов большого размера
+            Dictionary<string, double> BigLenghtFiles = new Dictionary<string, double>();
+            foreach (var filename in Filenames)
+            {
+                if (!File.Exists(filename)) continue;
+                var lenghtMb = ((double)(new FileInfo(filename)).Length)/ (1024 * 1024);
+                if (lenghtMb > Settings.GetInstance().MaxImageFileLenghtInMb) BigLenghtFiles.Add(Path.GetFileName(filename), lenghtMb);
+            }
+            if (BigLenghtFiles.Count > 0)
+            {
+                string BigLenghtFilesString = "";
+                foreach (var BigLenghtFile in BigLenghtFiles)
+                {
+                    BigLenghtFilesString += BigLenghtFile.Key + " : " + BigLenghtFile.Value.ToString("0.0") + " Мб\n";
+                }
+                if (System.Windows.MessageBox.Show("Некоторые файлы изображений очень большие, что может замедлить работу, " +
+                                                   "вызвать недостаток оперативной памяти, в том числе в ходе " +
+                                                   "игры при выборе уровня с большим количеством крупных файлов:\n\n" +
+                                                   BigLenghtFilesString + "\nВсе равно открыть указанные файлы?",
+                                                   "Очень большие файлы",
+                                                   (MessageBoxButton)MessageBoxButtons.YesNo,
+                                                   (MessageBoxImage)MessageBoxIcon.Information) == MessageBoxResult.No) return false;
+            }
+            return true;
+        }
+
         private bool IsDBLoaded(object obj)
         {
             return DBTools.IsDBLoaded;

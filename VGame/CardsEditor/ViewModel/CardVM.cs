@@ -71,9 +71,9 @@ namespace CardsEditor.ViewModel
             }
         }
 
-        public int CountCardPassings 
+        public int CountCardPassings
         {
-            get 
+            get
             {
                 if (Card.CardPassings != null)
                     return Card.CardPassings.Count;
@@ -104,8 +104,11 @@ namespace CardsEditor.ViewModel
                     openFileDialog.Filter = "Файлы изображений (*.bmp, *.jpg, *.png, *.gif)|*.bmp;*.jpg;*.png;*.gif";
                     openFileDialog.Title = "Открыть свое изображение для карточки";
                     if (openFileDialog.ShowDialog() == true)
+                    {
+                        if (!VM.IsBigFilesCheckOk(new string[] { @openFileDialog.FileName }))
+                            return;
                         ImageAddress = @openFileDialog.FileName;
-
+                    }
                 }));
             }
         }
@@ -121,7 +124,7 @@ namespace CardsEditor.ViewModel
                 {
                     if (SoundedText == null) return;
                     SpeechSynthesizer speaker = new SpeechSynthesizer();
-                    if(_vm.TTSVoiceName == "" || _vm.TTSVoiceName==null) MessageBox.Show("Не выбран голос для синтеза речи на русском языке. Выберите пожалуйста, а то ничего не будет слышно.");
+                    if (_vm.TTSVoiceName == "" || _vm.TTSVoiceName == null) MessageBox.Show("Не выбран голос для синтеза речи на русском языке. Выберите пожалуйста, а то ничего не будет слышно.");
                     speaker.SelectVoice(_vm.TTSVoiceName);
                     speaker.Rate = _vm.TTSVoiceRate;
                     Console.WriteLine(_vm.TTSVoiceRate);
