@@ -36,7 +36,9 @@ namespace CardsEditor
         public void RefreshRecentlyFilesMenu() 
         {
             RecentlyFilesMenuItem.Items.Clear();
-            int i=0;
+            RecentlyFilesMenuItem.Items.Add(new MenuItem() { Header = "Очистить", Command = vm.ClearRecentlyBDCommand});
+            RecentlyFilesMenuItem.Items.Add(new Separator());
+            int i =0;
             var filenames =new List<string>(Settings.GetInstance().RecentlyOpenFilenames);
             filenames.Reverse();
             foreach (var filename in filenames)

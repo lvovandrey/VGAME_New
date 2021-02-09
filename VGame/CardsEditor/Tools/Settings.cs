@@ -265,14 +265,20 @@ namespace CardsEditor.Tools
         {
             if (_RecentlyOpenFilenames.Contains(dBFilename)) 
             {
-                string tmp = _RecentlyOpenFilenames.Last();
-                _RecentlyOpenFilenames[_RecentlyOpenFilenames.IndexOf(dBFilename)] = tmp;
-                _RecentlyOpenFilenames[_RecentlyOpenFilenames.IndexOf(tmp)] = dBFilename;
+                _RecentlyOpenFilenames.Remove(dBFilename);
+                _RecentlyOpenFilenames.Add(dBFilename);
                 return;
             }
             _RecentlyOpenFilenames.Add(dBFilename);
             while (_RecentlyOpenFilenames.Count > 10)
                 _RecentlyOpenFilenames.Remove(_RecentlyOpenFilenames.First());
+            ExportSettingsToXML(ConfigurationTools.SettingsFilename);
+        }
+
+        public void ClearRecentlyDBFilename()
+        {
+            _RecentlyOpenFilenames.Clear();
+            ExportSettingsToXML(ConfigurationTools.SettingsFilename);
         }
     }
 }

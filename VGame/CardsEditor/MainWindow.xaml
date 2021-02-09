@@ -52,9 +52,8 @@
                         <Image Source="Images/Disk-Multiple.png" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Последние..." x:Name="RecentlyFilesMenuItem">
-                    <MenuItem></MenuItem>
-                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Последние..." x:Name="RecentlyFilesMenuItem"/>
             </MenuItem>
             <MenuItem Header="Карточки">
                 <MenuItem Header="Создать карточки из файлов изображений..."

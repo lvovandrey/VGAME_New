@@ -291,7 +291,7 @@ namespace CardsEditor.ViewModel
             OnPropertyChanged("CardVMs");
         }
 
-        public  void OnWindowClosing()
+        public void OnWindowClosing()
         {
             Settings.GetInstance().ExportSettingsToXML(ConfigurationTools.SettingsFilename);
         }
@@ -450,6 +450,25 @@ namespace CardsEditor.ViewModel
                       OnPropertyChanged("LevelVMs");
                       OnPropertyChanged("DBFilename");
                       Settings.GetInstance().AddRecentlyDBFilename(DBFilename);
+                      mainWindow.RefreshRecentlyFilesMenu();
+                  }));
+            }
+        }
+
+
+        private RelayCommand clearRecentlyBDCommand;
+        public RelayCommand ClearRecentlyBDCommand
+        {
+            get
+            {
+                return clearRecentlyBDCommand ??
+                  (clearRecentlyBDCommand = new RelayCommand(obj =>
+                  {
+                      mainWindow.DataContext = this;
+                      OnPropertyChanged("CardVMs");
+                      OnPropertyChanged("LevelVMs");
+                      OnPropertyChanged("DBFilename");
+                      Settings.GetInstance().ClearRecentlyDBFilename();
                       mainWindow.RefreshRecentlyFilesMenu();
                   }));
             }
