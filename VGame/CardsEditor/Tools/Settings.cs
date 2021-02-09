@@ -55,6 +55,8 @@ namespace CardsEditor.Tools
             }
         }
 
+
+
         [XmlIgnore]
         private ReadOnlyCollection<InstalledVoice> _TextToSpeachVoices;
         [XmlIgnore]
@@ -257,6 +259,12 @@ namespace CardsEditor.Tools
                 return;
             }
             _TTSVoice = _TextToSpeachVoices[0];
+        }
+
+        public void AddRecentlyDBFilename(string dBFilename)
+        {
+            if (_RecentlyOpenFilenames.Contains(dBFilename)) return;
+            _RecentlyOpenFilenames.Add(dBFilename);
         }
     }
 }

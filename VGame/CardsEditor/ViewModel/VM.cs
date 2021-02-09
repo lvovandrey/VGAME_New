@@ -38,14 +38,14 @@ namespace CardsEditor.ViewModel
 
         #region Fields
         MainWindow mainWindow;
-        ObservableCollection<Card> _cards 
-        { 
-            get 
+        ObservableCollection<Card> _cards
+        {
+            get
             {
                 if (IsDBLoaded(null))
                     return new ObservableCollection<Card>(DBTools.Context.Cards.ToList());
                 else return new ObservableCollection<Card>();
-            } 
+            }
         }
         ObservableCollection<Level> _levels
         {
@@ -54,8 +54,11 @@ namespace CardsEditor.ViewModel
                 if (IsDBLoaded(null))
                     return new ObservableCollection<Level>(DBTools.Context.Levels.ToList());
                 else return new ObservableCollection<Level>();
-            }       
+            }
         }
+
+
+
         ObservableCollection<LevelPassing> _levelPassings
         {
             get
@@ -288,6 +291,10 @@ namespace CardsEditor.ViewModel
             OnPropertyChanged("CardVMs");
         }
 
+        public  void OnWindowClosing()
+        {
+            Settings.GetInstance().ExportSettingsToXML(ConfigurationTools.SettingsFilename);
+        }
         #endregion
 
         #region Commands
@@ -347,7 +354,7 @@ namespace CardsEditor.ViewModel
                           if (saveFileDialog.ShowDialog() == DialogResult.OK)
                           {
                               DBFilename = saveFileDialog.FileName;
-                              bool res = DBTools.CreateDBOnCodeFirst( DBFilename);
+                              bool res = DBTools.CreateDBOnCodeFirst(DBFilename);
                               if (!res)
                               {
                                   System.Windows.MessageBox.Show("Ошибка загрузки базы данных " + DBFilename, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -407,13 +414,43 @@ namespace CardsEditor.ViewModel
                               OnPropertyChanged("CardVMs");
                               OnPropertyChanged("LevelVMs");
                               OnPropertyChanged("DBFilename");
-                              
-                              
+                              Settings.GetInstance().AddRecentlyDBFilename(DBFilename);
+                              mainWindow.RefreshRecentlyFilesMenu();
                           }
                       }
 
 
 
+                  }));
+            }
+        }
+
+        private RelayCommand openRecentlyBDCommand;
+        public RelayCommand OpenRecentlyBDCommand
+        {
+            get
+            {
+                return openRecentlyBDCommand ??
+                  (openRecentlyBDCommand = new RelayCommand(obj =>
+                  {
+
+                      string DBFilename = "";
+
+                      DBFilename = obj.ToString();
+                      if (!File.Exists(DBFilename) || Path.GetExtension(DBFilename) != ".db") return;
+                      bool res = DBTools.LoadDB(DBFilename);
+                      if (!res)
+                      {
+                          System.Windows.MessageBox.Show("Ошибка загрузки базы данных " + DBFilename, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                          return;
+                      }
+
+                      mainWindow.DataContext = this;
+                      OnPropertyChanged("CardVMs");
+                      OnPropertyChanged("LevelVMs");
+                      OnPropertyChanged("DBFilename");
+                      Settings.GetInstance().AddRecentlyDBFilename(DBFilename);
+                      mainWindow.RefreshRecentlyFilesMenu();
                   }));
             }
         }

@@ -1,4 +1,5 @@
-﻿using CardsEditor.ViewModel;
+﻿using CardsEditor.Tools;
+using CardsEditor.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,20 @@ namespace CardsEditor
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             vm = new VM(this);
+            RefreshRecentlyFilesMenu();
+        }
+        public void RefreshRecentlyFilesMenu() 
+        {
+            RecentlyFilesMenuItem.Items.Clear();
+            foreach (var filename in Settings.GetInstance().RecentlyOpenFilenames)
+            {
+                RecentlyFilesMenuItem.Items.Add(new MenuItem() { Header = filename , Command=vm.OpenRecentlyBDCommand, CommandParameter=filename});
+            }
+        }
 
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            vm.OnWindowClosing();
         }
     }
 }

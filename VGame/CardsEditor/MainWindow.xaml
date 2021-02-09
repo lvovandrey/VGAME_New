@@ -9,7 +9,7 @@
         xmlns:cardattach="clr-namespace:CardsEditor.View.CardsAttachLevel"
         mc:Ignorable="d"
         Title="{Binding DBFilename, StringFormat=Редактор БД карточек и уровней           {0}}" 
-        Height="800" Width="850" Loaded="Window_Loaded">
+        Height="800" Width="850" Loaded="Window_Loaded" Closing="Window_Closing">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Button.Background" Value="{x:Null}" />
@@ -52,7 +52,7 @@
                         <Image Source="Images/Disk-Multiple.png" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Последние...">
+                <MenuItem Header="Последние..." x:Name="RecentlyFilesMenuItem">
                     <MenuItem></MenuItem>
                 </MenuItem>
             </MenuItem>
