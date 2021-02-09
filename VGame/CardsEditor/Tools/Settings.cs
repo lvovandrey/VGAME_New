@@ -263,8 +263,16 @@ namespace CardsEditor.Tools
 
         public void AddRecentlyDBFilename(string dBFilename)
         {
-            if (_RecentlyOpenFilenames.Contains(dBFilename)) return;
+            if (_RecentlyOpenFilenames.Contains(dBFilename)) 
+            {
+                string tmp = _RecentlyOpenFilenames.Last();
+                _RecentlyOpenFilenames[_RecentlyOpenFilenames.IndexOf(dBFilename)] = tmp;
+                _RecentlyOpenFilenames[_RecentlyOpenFilenames.IndexOf(tmp)] = dBFilename;
+                return;
+            }
             _RecentlyOpenFilenames.Add(dBFilename);
+            while (_RecentlyOpenFilenames.Count > 10)
+                _RecentlyOpenFilenames.Remove(_RecentlyOpenFilenames.First());
         }
     }
 }
