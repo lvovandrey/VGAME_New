@@ -39,7 +39,8 @@ namespace VanyaGame.GameCardsNewDB.Units
             Scene = scene;
 
             HaveBody B;
-
+            HaveBox haveBox;
+            VideoInCard videoInCard;
             CheckedSymbol ChS;
             DragAndDrop DaD;
             Moveable M;
@@ -50,6 +51,7 @@ namespace VanyaGame.GameCardsNewDB.Units
             Hit hit;
 
             B = new HaveBody("HaveBody", this, new CardUnitElement());
+            videoInCard = new VideoInCard("VideoInCard", this, ((CardUnitElement)B.Body).ContentGrid);
 
             if (System.IO.File.Exists(card.ImageAddress) || Miscellanea.UrlExists(card.ImageAddress))
             {
@@ -62,26 +64,10 @@ namespace VanyaGame.GameCardsNewDB.Units
                     ImageBehavior.SetAnimatedSource(((CardUnitElement)B.Body).Img, image);
                     GifController = ImageBehavior.GetAnimationController(((CardUnitElement)B.Body).Img);
                 }
-                if (Path.GetExtension(card.ImageAddress) == ".wmv")
+                else if (Path.GetExtension(card.ImageAddress) == ".wmv")
                 {
                     ((CardUnitElement)B.Body).Img.Visibility = System.Windows.Visibility.Collapsed;
-                    var ME = new MediaElement()
-                    {
-                        Source = new Uri(card.ImageAddress),
-                        LoadedBehavior = MediaState.Manual,
-                        Margin = new Thickness(10)
-                    };
-                    ME.Loaded+= (s, e) =>
-                    {
-                        ME.Position = TimeSpan.Zero;
-                        ME.Play();
-                    };
-                    ME.MediaEnded += (s, e) => 
-                    {
-                        ME.Position = TimeSpan.Zero;
-                        ME.Play();
-                    };
-                    ((CardUnitElement)B.Body).Grd.Children.Add(ME);
+                    videoInCard.Run(card.ImageAddress);
                 }
                 else
                     ((CardUnitElement)B.Body).Img.Source = PictHelper.GetBitmapImage(new Uri(card.ImageAddress));
@@ -97,11 +83,6 @@ namespace VanyaGame.GameCardsNewDB.Units
                     MessageBox.Show("Файл изображения не найден:  " + card.ImageAddress);
             }
 
-
-            //   M = new Moveable("Moveable", this);
-
-
-            //   DaD = new DragAndDrop("DragAndDrop", this);
             ShowComp = new HiderShower("HiderShower", this);
             cardShower = new CardShower("CardShower", this);
             InGS = new OLDInGameStruct("InGameStruct", this, Scene);
@@ -115,9 +96,6 @@ namespace VanyaGame.GameCardsNewDB.Units
 
         public void UnloadImage()
         {
-
-
-
             if (Path.GetExtension(Card.ImageAddress) == ".gif")
             {
                 var image = new BitmapImage();
@@ -125,8 +103,10 @@ namespace VanyaGame.GameCardsNewDB.Units
                 image.UriSource = new Uri("pack://application:,,,/Images/simpleGif.gif");
                 image.EndInit();
                 ImageBehavior.SetAnimatedSource(((CardUnitElement)GetComponent<HaveBody>().Body).Img, image);
-
-//                GifController = ImageBehavior.GetAnimationController(((CardUnitElement)B.Body).Img);
+            }
+            else if (Path.GetExtension(Card.ImageAddress) == ".wmv")
+            {
+                GetComponent<VideoInCard>().Delete();
             }
             else
                 ((CardUnitElement)GetComponent<HaveBody>().Body).Img.Source = PictHelper.GetBitmapImage(new Uri("pack://application:,,,/Images/simpleGif.gif"));
@@ -152,6 +132,7 @@ namespace VanyaGame.GameCardsNewDB.Units
 
 
             newcardunit.Components.Remove("HaveBody");
+            newcardunit.Components.Remove("VideoInCard");
             newcardunit.Components.Remove("CheckedSymbol");
             newcardunit.Components.Remove("DragAndDrop");
             newcardunit.Components.Remove("Moveable");
@@ -164,8 +145,9 @@ namespace VanyaGame.GameCardsNewDB.Units
 
 
 
-            HaveBody B;
 
+            HaveBody B;
+            VideoInCard videoInCard;
             CheckedSymbol ChS;
             DragAndDrop DaD;
             Moveable M;
@@ -176,6 +158,7 @@ namespace VanyaGame.GameCardsNewDB.Units
             Hit hit;
 
             B = new HaveBody("HaveBody", newcardunit, new CardUnitElement());
+            videoInCard = new VideoInCard("VideoInCard", newcardunit, ((CardUnitElement)B.Body).ContentGrid);
 
             if (System.IO.File.Exists(Card.ImageAddress) || Miscellanea.UrlExists(Card.ImageAddress))
             {
@@ -186,6 +169,11 @@ namespace VanyaGame.GameCardsNewDB.Units
                     image.UriSource = new Uri(Card.ImageAddress);
                     image.EndInit();
                     ImageBehavior.SetAnimatedSource(((CardUnitElement)B.Body).Img, image);
+                }
+                else if (Path.GetExtension(Card.ImageAddress) == ".wmv")
+                {
+                    ((CardUnitElement)B.Body).Img.Visibility = System.Windows.Visibility.Collapsed;
+                    videoInCard.Run(Card.ImageAddress);
                 }
                 else
                     ((CardUnitElement)B.Body).Img.Source = PictHelper.GetBitmapImage(new Uri(Card.ImageAddress));
