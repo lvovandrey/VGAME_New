@@ -1,8 +1,10 @@
-﻿using CardsGameNewDBRepository.Model;
+﻿using CardsEditor.Tools;
+using CardsGameNewDBRepository.Model;
 using Microsoft.Win32;
 using MVVMRealization;
 using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Speech.Synthesis;
 using System.Windows;
@@ -43,7 +45,11 @@ namespace CardsEditor.ViewModel
         public string Title { get { return Card.Title; } set { Card.Title = value; OnPropertyChanged("Title"); } }
         public string SoundedText { get { return Card.SoundedText; } set { Card.SoundedText = value; OnPropertyChanged("SoundedText"); } }
         public string Description { get { return Card.Description; } set { Card.Description = value; OnPropertyChanged("Description"); } }
-        public string ImageAddress { get { return Card.ImageAddress; } set { Card.ImageAddress = value; OnPropertyChanged("ImageAddress"); OnPropertyChanged("ImageAdressURI"); } }
+        public string ImageAddress { get { return Card.ImageAddress; } set { Card.ImageAddress = value; OnPropertyChanged("ImageAddress"); 
+                OnPropertyChanged("ImageAdressURI");
+                OnPropertyChanged("VideoAdressURI");
+                OnPropertyChanged("VideoVisibility");
+            } }
         public string SoundAddress { get { return Card.SoundAddress; } set { Card.SoundAddress = value; OnPropertyChanged("SoundAddress"); } }
 
 
@@ -51,10 +57,34 @@ namespace CardsEditor.ViewModel
         {
             get
             {
-                if (Card.ImageAddress == null)
-                    return new Uri(@"C:\1.jpg");
-                else
+                string extention = Path.GetExtension(Card.ImageAddress);
+                if (Card.ImageAddress != null && (extention == ".jpg" || extention == ".bmp" || extention == ".png" || extention == ".gif"))
                     return new Uri(Card.ImageAddress);
+                else if (Card.ImageAddress != null && (extention == ".avi" || extention == ".wmv"))
+                    return null;
+                else
+                    return new Uri(Settings.GetInstance().DefaultImageFilename);
+            }
+        }
+
+        public Uri VideoAdressURI
+        {
+            get
+            {
+                string extention = Path.GetExtension(Card.ImageAddress);
+
+                if (Card.ImageAddress != null && (extention == ".avi" || extention == ".wmv"))
+                    return new Uri(Card.ImageAddress);
+                else
+                    return null;
+            }
+        }
+        public Visibility VideoVisibility 
+        {
+            get 
+            {
+                if (VideoAdressURI != null) return Visibility.Visible;
+                else return Visibility.Collapsed;
             }
         }
 

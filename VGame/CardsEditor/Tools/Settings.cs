@@ -203,6 +203,8 @@ namespace CardsEditor.Tools
         [XmlIgnore]
         public string DefaultDBCardsFilename => LocalAppDataDir + @"\Data\Fruits.db";
         [XmlIgnore]
+        public string DefaultImageFilename => Path.Combine(LocalAppDataDir, @"Images\default.jpg");
+        [XmlIgnore]
         public double MaxImageFileLenghtInMb => 2;
 
 

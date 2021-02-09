@@ -15,7 +15,13 @@
                 <StackPanel Orientation="Vertical">
                     <Border BorderBrush="LightGray" BorderThickness="1" Margin="5 10 5 10">
                         <Grid>
-                            <Image Source="{Binding ImageAdressURI}" MaxHeight="200" Height="200"/>
+                            <MediaElement x:Name="MediaElement" 
+                                          Source="{Binding VideoAdressURI}" 
+                                          MaxHeight="200" Height="200"
+                                          Visibility="{Binding VideoVisibility}"/>
+                            <Image x:Name="Image" 
+                                          Source="{Binding ImageAdressURI}" 
+                                          MaxHeight="200" Height="200"/>
                             <TextBlock Text="{Binding Title}" 
                                        HorizontalAlignment="Right" 
                                        VerticalAlignment="Top"
