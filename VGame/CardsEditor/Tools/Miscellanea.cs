@@ -5,6 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
+using DirectShowLib;
+using DirectShowLib.DES;
+using System.Runtime.InteropServices;
+using System.IO;
 
 namespace CardsEditor.Tools
 {
@@ -44,5 +48,37 @@ namespace CardsEditor.Tools
             Vertical, // |
             Horizontal // ——
         }
+
+
+        public static int GetVideoBitRate(string FileName)
+        {
+            int bitrate = 400_000;
+            try
+            {
+                var mediaDet = (IMediaDet)new MediaDet();
+                DsError.ThrowExceptionForHR(mediaDet.put_Filename(FileName));
+
+                // retrieve some measurements from the video
+                double frameRate;
+                mediaDet.get_FrameRate(out frameRate);
+
+                var mediaType = new AMMediaType();
+                mediaDet.get_StreamMediaType(mediaType);
+                var videoInfo = (VideoInfoHeader)Marshal.PtrToStructure(mediaType.formatPtr, typeof(VideoInfoHeader));
+                DsUtils.FreeAMMediaType(mediaType);
+                var width = videoInfo.BmiHeader.Width;
+                var height = videoInfo.BmiHeader.Height;
+                bitrate = videoInfo.BitRate;
+            }
+            catch 
+            {
+                Console.WriteLine("Ошибка определения битрейта");
+                return bitrate;
+            }
+            return bitrate;
+        }
+
+
+
     }
 }

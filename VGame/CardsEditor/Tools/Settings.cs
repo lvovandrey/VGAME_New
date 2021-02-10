@@ -210,6 +210,8 @@ namespace CardsEditor.Tools
         
         [XmlIgnore]
         public double MaxImageFileLenghtInMb => 2;
+        [XmlIgnore]
+        public int MaxVideoFileBitrate => 900_000;
 
 
         public void ExportSettingsToXML(string filename)

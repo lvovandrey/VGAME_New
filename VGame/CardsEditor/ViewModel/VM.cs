@@ -271,7 +271,7 @@ namespace CardsEditor.ViewModel
                 {
                     Filenames = @openFileDialog.FileNames;
                     if (Filenames.Length < 1) return;
-                    if (!IsBigFilesCheckOk(Filenames)) return; 
+                    if (!IsBigImageFilesCheckOk(Filenames)) return;
                     //добавление выбранных файлов
                     foreach (var filename in Filenames)
                     {
@@ -284,14 +284,47 @@ namespace CardsEditor.ViewModel
             }
         }
 
-        public static bool IsBigFilesCheckOk(string[] Filenames)
+        public static bool IsBigVideoFilesCheckOk(string[] Filenames)
         {
+
+            //определение наличия файлов большого размера
+            Dictionary<string, double> BigBitrateFiles = new Dictionary<string, double>();
+            foreach (var filename in Filenames)
+            {
+                var ext = Path.GetExtension(filename);
+                if (!File.Exists(filename) && (ext != ".avi" || ext != ".wmv")) continue;
+                var Bitrate = Miscellanea.GetVideoBitRate(filename);
+                if (Bitrate > Settings.GetInstance().MaxVideoFileBitrate) BigBitrateFiles.Add(Path.GetFileName(filename), Bitrate/1024);
+            }
+            if (BigBitrateFiles.Count > 0)
+            {
+                string BigLenghtFilesString = "";
+                foreach (var BigLenghtFile in BigBitrateFiles)
+                {
+                    BigLenghtFilesString += BigLenghtFile.Key + " : " + BigLenghtFile.Value.ToString("0") + "kbps\n";
+                }
+                if (System.Windows.MessageBox.Show("Некоторые файлы видео имеют очень высокий битрейт (большое разрешение, частоту и т.п.)," +
+                                                   " что может замедлить работу, " +
+                                                   "вызвать недостаток оперативной памяти, в том числе в ходе " +
+                                                   "игры при выборе уровня с большим количеством таких файлов:\n\n" +
+                                                   BigLenghtFilesString + "\nВсе равно открыть указанные файлы?",
+                                                   "Очень большие файлы",
+                                                   (MessageBoxButton)MessageBoxButtons.YesNo,
+                                                   (MessageBoxImage)MessageBoxIcon.Information) == MessageBoxResult.No) return false;
+            }
+            return true;
+        }
+
+        public static bool IsBigImageFilesCheckOk(string[] Filenames)
+        {
+
             //определение наличия файлов большого размера
             Dictionary<string, double> BigLenghtFiles = new Dictionary<string, double>();
             foreach (var filename in Filenames)
             {
-                if (!File.Exists(filename)) continue;
-                var lenghtMb = ((double)(new FileInfo(filename)).Length)/ (1024 * 1024);
+                var ext = Path.GetExtension(filename);
+                if (!File.Exists(filename) || ext == ".avi" || ext == ".wmv") continue;
+                var lenghtMb = ((double)(new FileInfo(filename)).Length) / (1024 * 1024);
                 if (lenghtMb > Settings.GetInstance().MaxImageFileLenghtInMb) BigLenghtFiles.Add(Path.GetFileName(filename), lenghtMb);
             }
             if (BigLenghtFiles.Count > 0)
