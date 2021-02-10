@@ -69,6 +69,16 @@ namespace CardsEditor.Tools
                 var width = videoInfo.BmiHeader.Width;
                 var height = videoInfo.BmiHeader.Height;
                 bitrate = videoInfo.BitRate;
+
+                if (bitrate != 0) return bitrate;
+
+                double mediaLength;
+                mediaDet.get_StreamLength(out mediaLength);
+                var frameCount = (int)(frameRate * mediaLength);
+                var duration = frameCount / frameRate;
+
+                bitrate = (int)((new FileInfo(FileName)).Length / duration);
+                if (bitrate == 0) return 400_000;
             }
             catch 
             {

@@ -271,7 +271,7 @@ namespace CardsEditor.ViewModel
                 {
                     Filenames = @openFileDialog.FileNames;
                     if (Filenames.Length < 1) return;
-                    if (!IsBigImageFilesCheckOk(Filenames)) return;
+                    if (!IsBigImageFilesCheckOk(Filenames) || !IsBigVideoFilesCheckOk(Filenames)) return;
                     //добавление выбранных файлов
                     foreach (var filename in Filenames)
                     {

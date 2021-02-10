@@ -152,7 +152,7 @@ namespace CardsEditor.ViewModel
                     openFileDialog.Title = "Открыть свое изображение для карточки";
                     if (openFileDialog.ShowDialog() == true)
                     {
-                        if (!VM.IsBigImageFilesCheckOk(new string[] { @openFileDialog.FileName }))
+                        if (!VM.IsBigImageFilesCheckOk(new string[] { @openFileDialog.FileName }) || !VM.IsBigVideoFilesCheckOk(new string[] { @openFileDialog.FileName }))
                             return;
                         ImageAddress = @openFileDialog.FileName;
                     }
