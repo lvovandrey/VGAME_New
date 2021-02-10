@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Net;
+using DirectShowLib;
+using DirectShowLib.DES;
+using System.Runtime.InteropServices;
 
 namespace VanyaGame
 {
@@ -105,6 +108,37 @@ namespace VanyaGame
                 | DecompressionMethods.GZip;
             req.MaximumAutomaticRedirections = 5;
             return req;
+        }
+
+        //-------------------------------------------------------------------------------------------------//
+        //Код метода GetVideoBitRate частично                                                              // 
+        //позаимстовован из источника  https://stackoverflow.com/questions/6215185/getting-length-of-video //
+        // Благодарю пользователя nZeus                                                                    //
+        public static int GetVideoBitRate(string FileName)
+        {
+            int bitrate = 400_000;
+            try
+            {
+                var mediaDet = (IMediaDet)new MediaDet();
+                DsError.ThrowExceptionForHR(mediaDet.put_Filename(FileName));
+
+                double frameRate;
+                mediaDet.get_FrameRate(out frameRate);
+
+                double mediaLength;
+                mediaDet.get_StreamLength(out mediaLength);
+                var frameCount = (int)(frameRate * mediaLength);
+                var duration = frameCount / frameRate;
+
+                bitrate = (int)((new FileInfo(FileName)).Length / duration);
+                if (bitrate <= 0 || bitrate>10_000_000) return 400_000;
+            }
+            catch
+            {
+                Console.WriteLine("Ошибка определения битрейта");
+                return bitrate;
+            }
+            return bitrate;
         }
 
     }

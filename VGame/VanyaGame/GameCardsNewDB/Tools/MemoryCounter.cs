@@ -36,15 +36,21 @@ namespace VanyaGame.GameCardsNewDB.Tools
             double ImgMemoryKoef = 34;
             double BmpMemoryKoef = 2.5;
             double GifMemoryKoef = 80;
+            double VideoBitrateKoef = 10;
+            double MediaElementMemoryLenght = 10*1024*1024;
+            double MaxVideoLenght;
+            if(Is64Bit) MaxVideoLenght = 90 * 1024 * 1024;
+            else MaxVideoLenght = 60 * 1024 * 1024;
 
             double RequiredMemory = 0;
 
             foreach (var card in level.DbLevelRecord.Cards)
             {
                 string filename = Sets.Settings.GetInstance().DefaultImage;
+
                 if (File.Exists(card.ImageAddress)) filename = card.ImageAddress;
                 if (!File.Exists(filename)) continue;
-
+                string ext = Path.GetExtension(filename);
                 long FileSize = new FileInfo(filename).Length;
                 switch (Path.GetExtension(filename))
                 {
@@ -57,6 +63,13 @@ namespace VanyaGame.GameCardsNewDB.Tools
                         break;
                     case ".gif":
                         RequiredMemory += GifMemoryKoef * FileSize;
+                        break;
+                    case ".avi":
+                    case ".wmv":
+                        var bitrate = Miscellanea.GetVideoBitRate(filename);
+                        var tmpsize = (long)(MediaElementMemoryLenght + VideoBitrateKoef * bitrate);
+                        RequiredMemory += tmpsize;
+                        Console.WriteLine(filename+" bitrate="+ bitrate/1024 + "  Size="+ (tmpsize / (1024*1024)).ToString());
                         break;
                     default:
                         break;
@@ -71,5 +84,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
 
             get { return Marshal.SizeOf(typeof(IntPtr)) == 8; }
         }
+
+
     }
 }

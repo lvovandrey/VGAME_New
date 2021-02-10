@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Forms;
 using DirectShowLib;
 using DirectShowLib.DES;
-using System.Runtime.InteropServices;
+//using System.Runtime.InteropServices;
 using System.IO;
 
 namespace CardsEditor.Tools
@@ -50,6 +50,10 @@ namespace CardsEditor.Tools
         }
 
 
+        //-------------------------------------------------------------------------------------------------//
+        //Код метода GetVideoBitRate частично                                                              // 
+        //позаимстовован из источника  https://stackoverflow.com/questions/6215185/getting-length-of-video //
+        // Благодарю пользователя nZeus                                                                    //
         public static int GetVideoBitRate(string FileName)
         {
             int bitrate = 400_000;
@@ -58,7 +62,6 @@ namespace CardsEditor.Tools
                 var mediaDet = (IMediaDet)new MediaDet();
                 DsError.ThrowExceptionForHR(mediaDet.put_Filename(FileName));
 
-                // retrieve some measurements from the video
                 double frameRate;
                 mediaDet.get_FrameRate(out frameRate);
 
