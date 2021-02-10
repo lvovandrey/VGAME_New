@@ -106,6 +106,7 @@
     <Reference Include="System.Data.SQLite.Linq, Version=1.0.113.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SQLite.Linq.1.0.113.0\lib\net45\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Speech" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -127,6 +128,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Tools\ConfigurationTools.cs" />
+    <Compile Include="Tools\Miscellanea.cs" />
     <Compile Include="Tools\Settings.cs" />
     <Compile Include="ViewModel\CardStatisticVM.cs" />
     <Compile Include="ViewModel\CardVM.cs" />

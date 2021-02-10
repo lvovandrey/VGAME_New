@@ -24,5 +24,25 @@ namespace CardsEditor.View
         {
             InitializeComponent();
         }
+
+        private void MediaElement_Loaded(object sender, RoutedEventArgs e)
+        {
+            MediaElement.Position = TimeSpan.Zero;
+            MediaElement.Play();
+            isPlaying = true;
+        }
+
+        private bool isPlaying;
+        private void MediaElement_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (isPlaying) { MediaElement.Pause(); isPlaying = false; }
+            else { MediaElement.Play(); isPlaying = true; }
+        }
+
+        private void MediaElement_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            MediaElement.Position = TimeSpan.Zero;
+            isPlaying = false;
+        }
     }
 }

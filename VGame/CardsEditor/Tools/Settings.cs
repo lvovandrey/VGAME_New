@@ -205,6 +205,10 @@ namespace CardsEditor.Tools
         [XmlIgnore]
         public string DefaultImageFilename => Path.Combine(LocalAppDataDir, @"Images\default.jpg");
         [XmlIgnore]
+        public string VideoPictogrammImageFilename => Path.Combine(LocalAppDataDir, @"Images\Movies.png");
+
+        
+        [XmlIgnore]
         public double MaxImageFileLenghtInMb => 2;
 
 

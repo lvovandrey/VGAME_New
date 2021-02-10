@@ -61,9 +61,26 @@ namespace CardsEditor.ViewModel
                 if (Card.ImageAddress != null && (extention == ".jpg" || extention == ".bmp" || extention == ".png" || extention == ".gif"))
                     return new Uri(Card.ImageAddress);
                 else if (Card.ImageAddress != null && (extention == ".avi" || extention == ".wmv"))
-                    return null;
+                    return new Uri(Settings.GetInstance().VideoPictogrammImageFilename); 
                 else
                     return new Uri(Settings.GetInstance().DefaultImageFilename);
+            }
+        }
+
+        public double ImageHeight 
+        {
+            get 
+            {
+                string filename = ImageAdressURI.LocalPath;
+                string extention = Path.GetExtension(filename);
+                if (File.Exists(filename) && (extention == ".jpg" || extention == ".bmp" || extention == ".png" || extention == ".gif"))
+                    using (System.Drawing.Image objImage = System.Drawing.Image.FromFile(filename))
+                    {
+                        if (objImage.Height <= 40 && objImage.Width <= 40)
+                            return Miscellanea.PixelsToPoints(objImage.Height, Miscellanea.LengthDirection.Vertical);
+                        else return 500;
+                    }
+                else return 0;
             }
         }
 

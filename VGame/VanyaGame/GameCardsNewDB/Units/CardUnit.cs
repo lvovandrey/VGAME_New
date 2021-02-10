@@ -65,7 +65,7 @@ namespace VanyaGame.GameCardsNewDB.Units
                     ImageBehavior.SetAnimatedSource(((CardUnitElement)B.Body).Img, image);
                     GifController = ImageBehavior.GetAnimationController(((CardUnitElement)B.Body).Img);
                 }
-                else if (Path.GetExtension(card.ImageAddress) == ".wmv")
+                else if (Path.GetExtension(card.ImageAddress) == ".wmv" || Path.GetExtension(Card.ImageAddress) == ".avi")
                 {
                     ((CardUnitElement)B.Body).Img.Visibility = System.Windows.Visibility.Collapsed;
                     videoInCard.Run(card.ImageAddress);
@@ -105,7 +105,7 @@ namespace VanyaGame.GameCardsNewDB.Units
                 image.EndInit();
                 ImageBehavior.SetAnimatedSource(((CardUnitElement)GetComponent<HaveBody>().Body).Img, image);
             }
-            else if (Path.GetExtension(Card.ImageAddress) == ".wmv")
+            else if (Path.GetExtension(Card.ImageAddress) == ".wmv" || Path.GetExtension(Card.ImageAddress) == ".avi")
             {
                 GetComponent<VideoInCard>().Delete();
             }
@@ -171,7 +171,7 @@ namespace VanyaGame.GameCardsNewDB.Units
                     image.EndInit();
                     ImageBehavior.SetAnimatedSource(((CardUnitElement)B.Body).Img, image);
                 }
-                else if (Path.GetExtension(Card.ImageAddress) == ".wmv")
+                else if (Path.GetExtension(Card.ImageAddress) == ".wmv" || Path.GetExtension(Card.ImageAddress) == ".avi")
                 {
                     ((CardUnitElement)B.Body).Img.Visibility = System.Windows.Visibility.Collapsed;
                     videoInCard.Run(Card.ImageAddress);

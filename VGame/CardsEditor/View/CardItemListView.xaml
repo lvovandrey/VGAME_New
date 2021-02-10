@@ -31,7 +31,7 @@
             </Grid.Background>
         </Grid>
 
-        <Image Source="{Binding ImageAdressURI, UpdateSourceTrigger=PropertyChanged}" Margin="5">
+        <Image Source="{Binding ImageAdressURI, UpdateSourceTrigger=PropertyChanged}" Margin="5" MaxHeight="40" Height="{Binding ImageHeight}">
             <Image.Effect>
                 <DropShadowEffect ShadowDepth="0"/>
             </Image.Effect>
@@ -42,7 +42,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="25"/>
+                <RowDefinition Height="28"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Label Content="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2" FontSize="14">

@@ -14,14 +14,23 @@
             <GroupBox Header="Информация о карточке"  >
                 <StackPanel Orientation="Vertical">
                     <Border BorderBrush="LightGray" BorderThickness="1" Margin="5 10 5 10">
-                        <Grid>
+                        <Grid Height="300">                            
+                            <Image x:Name="Image" 
+                                          Source="{Binding ImageAdressURI}"
+                                          MaxHeight="300" 
+                                          Height="{Binding ImageHeight}"/>
+                            
                             <MediaElement x:Name="MediaElement" 
                                           Source="{Binding VideoAdressURI}" 
-                                          MaxHeight="200" Height="200"
-                                          Visibility="{Binding VideoVisibility}"/>
-                            <Image x:Name="Image" 
-                                          Source="{Binding ImageAdressURI}" 
-                                          MaxHeight="200" Height="200"/>
+                                          MaxHeight="300" 
+                                          Visibility="{Binding VideoVisibility}" 
+                                          LoadedBehavior="Manual"
+                                          Loaded="MediaElement_Loaded" 
+                                          MouseUp="MediaElement_MouseUp"
+                                          
+                                          Volume="0" MediaEnded="MediaElement_MediaEnded"
+                                          />
+
                             <TextBlock Text="{Binding Title}" 
                                        HorizontalAlignment="Right" 
                                        VerticalAlignment="Top"
