@@ -24,5 +24,10 @@ namespace VanyaGame.GameCardsNewDB.Interface.SettingsViewsElements
         {
             InitializeComponent();
         }
+
+        private void Label_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (((Label)sender).DataContext == null) return;
+        }
     }
 }
