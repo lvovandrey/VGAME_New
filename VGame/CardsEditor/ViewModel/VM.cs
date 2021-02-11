@@ -363,8 +363,6 @@ namespace CardsEditor.ViewModel
 
         #region Commands
 
-
-
         private RelayCommand сreateBDCommand;
         public RelayCommand CreateBDCommand
         {
@@ -392,6 +390,8 @@ namespace CardsEditor.ViewModel
                               OnPropertyChanged("CardVMs");
                               OnPropertyChanged("LevelVMs");
                               OnPropertyChanged("DBFilename");
+                              Settings.GetInstance().AddRecentlyDBFilename(DBFilename);
+                              mainWindow.RefreshRecentlyFilesMenu();
                           }
                       }
 
@@ -428,6 +428,8 @@ namespace CardsEditor.ViewModel
                               OnPropertyChanged("CardVMs");
                               OnPropertyChanged("LevelVMs");
                               OnPropertyChanged("DBFilename");
+                              Settings.GetInstance().AddRecentlyDBFilename(DBFilename);
+                              mainWindow.RefreshRecentlyFilesMenu();
                           }
                       }
 
@@ -436,7 +438,6 @@ namespace CardsEditor.ViewModel
                   }));
             }
         }
-
 
         private RelayCommand сreateCardsFromImageFilesCommand;
         public RelayCommand CreateCardsFromImageFilesCommand
@@ -447,8 +448,6 @@ namespace CardsEditor.ViewModel
                   (сreateCardsFromImageFilesCommand = new RelayCommand(CreateCardsFromImageFiles, IsDBLoaded));
             }
         }
-
-
 
         private RelayCommand openBDCommand;
         public RelayCommand OpenBDCommand
@@ -519,7 +518,6 @@ namespace CardsEditor.ViewModel
             }
         }
 
-
         private RelayCommand clearRecentlyBDCommand;
         public RelayCommand ClearRecentlyBDCommand
         {
@@ -551,9 +549,6 @@ namespace CardsEditor.ViewModel
             }
         }
 
-
-
-
         private RelayCommand saveCommand;
         public RelayCommand SaveCommand
         {
@@ -576,8 +571,6 @@ namespace CardsEditor.ViewModel
             }
         }
 
-
-
         private RelayCommand removeCardCommand;
         public RelayCommand RemoveCardCommand
         {
@@ -599,8 +592,6 @@ namespace CardsEditor.ViewModel
                   }, IsDBLoaded));
             }
         }
-
-
 
         private RelayCommand addLevelCommand;
         public RelayCommand AddLevelCommand
@@ -626,7 +617,6 @@ namespace CardsEditor.ViewModel
                 }, IsDBLoaded));
             }
         }
-
 
         private RelayCommand tTSChangeCommand;
         public RelayCommand TTSChangeCommand
@@ -668,7 +658,6 @@ namespace CardsEditor.ViewModel
             }
         }
 
-
         private RelayCommand openDefaultDBCommand;
         public RelayCommand OpenDefaultDBCommand
 
@@ -694,12 +683,12 @@ namespace CardsEditor.ViewModel
                         return;
                     }
 
-
-
                     mainWindow.DataContext = this;
                     OnPropertyChanged("CardVMs");
                     OnPropertyChanged("LevelVMs");
                     OnPropertyChanged("DBFilename");
+                    Settings.GetInstance().AddRecentlyDBFilename(DBFilename);
+                    mainWindow.RefreshRecentlyFilesMenu();
                 }));
             }
         }
@@ -723,7 +712,6 @@ namespace CardsEditor.ViewModel
                 }));
             }
         }
-
 
         private RelayCommand createCardsFromImagesOfDefaultDBCommand;
         public RelayCommand CreateCardsFromImagesOfDefaultDBCommand
