@@ -116,7 +116,7 @@ namespace VanyaGame
         // Благодарю пользователя nZeus                                                                    //
         public static int GetVideoBitRate(string FileName)
         {
-            int bitrate = 400_000;
+            int bitrate = 900_000;
             try
             {
                 var mediaDet = (IMediaDet)new MediaDet();
@@ -131,7 +131,7 @@ namespace VanyaGame
                 var duration = frameCount / frameRate;
 
                 bitrate = (int)((new FileInfo(FileName)).Length / duration);
-                if (bitrate <= 0 || bitrate>10_000_000) return 400_000;
+                if (bitrate <= 0 || bitrate>100_000_000) return 400_000;
             }
             catch
             {

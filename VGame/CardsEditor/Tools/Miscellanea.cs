@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Forms;
 using DirectShowLib;
 using DirectShowLib.DES;
-//using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 using System.IO;
 
 namespace CardsEditor.Tools

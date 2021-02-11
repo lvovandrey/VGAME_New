@@ -17,18 +17,20 @@ namespace VanyaGame.GameCardsNewDB.Tools
         public static bool IsEnoughtMemoryForLevelLoad(GameCardsNewDB.Struct.CardsNewDBLevel level)
         {
             int MaxMemoryMb;
-            double SafetyFactor = 1.2;
-            double RequiredMemoryMb = CalculateRequiredMemoryForLevel(level) / 1_048_576;
+            double SafetyFactor = 1.3;
+            double RequiredMemoryMb = SafetyFactor * CalculateRequiredMemoryForLevel(level) / 1_048_576;
             var ramCounter = new PerformanceCounter("Memory", "Available MBytes", true);
-            int MemoryAvalableMb = Convert.ToInt32(ramCounter.NextValue());
+            double MemoryAvalableMb = Convert.ToDouble(ramCounter.NextValue());
 
             if (Is64Bit)
                 MaxMemoryMb = 4096;
             else
                 MaxMemoryMb = 1024;
-            MemoryAvalableMb = MemoryAvalableMb > MaxMemoryMb ? MaxMemoryMb : MemoryAvalableMb;
+            var MemoryUsedNow = (double)(Process.GetCurrentProcess().WorkingSet64) / 1048576;
 
-            return MemoryAvalableMb > SafetyFactor * (RequiredMemoryMb);
+            if (MemoryUsedNow + RequiredMemoryMb > MaxMemoryMb || RequiredMemoryMb > MemoryAvalableMb) return false;
+            else return true;
+
         }
 
         public static double CalculateRequiredMemoryForLevel(GameCardsNewDB.Struct.CardsNewDBLevel level)
@@ -36,11 +38,11 @@ namespace VanyaGame.GameCardsNewDB.Tools
             double ImgMemoryKoef = 34;
             double BmpMemoryKoef = 2.5;
             double GifMemoryKoef = 80;
-            double VideoBitrateKoef = 10;
-            double MediaElementMemoryLenght = 10*1024*1024;
-            double MaxVideoLenght;
-            if(Is64Bit) MaxVideoLenght = 90 * 1024 * 1024;
-            else MaxVideoLenght = 60 * 1024 * 1024;
+            double VideoBitrateKoef = 40;
+            double MediaElementMemoryLenght = 20 * 1024 * 1024;
+            //double MaxVideoLenght;
+            //if(Is64Bit) MaxVideoLenght = 90 * 1024 * 1024;
+            //else MaxVideoLenght = 60 * 1024 * 1024;
 
             double RequiredMemory = 0;
 
@@ -69,7 +71,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
                         var bitrate = Miscellanea.GetVideoBitRate(filename);
                         var tmpsize = (long)(MediaElementMemoryLenght + VideoBitrateKoef * bitrate);
                         RequiredMemory += tmpsize;
-                        Console.WriteLine(filename+" bitrate="+ bitrate/1024 + "  Size="+ (tmpsize / (1024*1024)).ToString());
+                        Console.WriteLine(filename + " bitrate=" + bitrate / 1024 + "  Size=" + (tmpsize / (1024 * 1024)).ToString());
                         break;
                     default:
                         break;
