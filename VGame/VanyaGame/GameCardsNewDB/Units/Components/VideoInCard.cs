@@ -47,11 +47,13 @@ namespace VanyaGame.GameCardsNewDB.Units.Components
             };
             ME.Loaded += (s, e) =>
             {
+                if (ME == null) return;
                 ME.Position = TimeSpan.Zero;
-                ME.Play();
+                ME?.Play();
             };
             ME.MediaEnded += (s, e) =>
             {
+                if (ME == null) return;
                 ME.Position = TimeSpan.Zero;
                 ME.Play();
             };
@@ -86,6 +88,7 @@ namespace VanyaGame.GameCardsNewDB.Units.Components
 
         public void Delete()
         {
+            if (ME == null) return;
             ME.Stop();
             Panel.Children.Remove(ME);
             ME = null;
