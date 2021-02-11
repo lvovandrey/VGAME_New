@@ -39,7 +39,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
             double BmpMemoryKoef = 2.5;
             double GifMemoryKoef = 80;
             double VideoBitrateKoef = 40;
-            double MediaElementMemoryLenght = 20 * 1024 * 1024;
+            double MediaElementMemoryLenght = 40 * 1024 * 1024;
             //double MaxVideoLenght;
             //if(Is64Bit) MaxVideoLenght = 90 * 1024 * 1024;
             //else MaxVideoLenght = 60 * 1024 * 1024;
