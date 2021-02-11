@@ -27,32 +27,26 @@
 
                     <StackPanel Margin="10 10 10 0" >
                         <TextBlock Text="Недавние" />
-                        <Label Content="SOMETHING">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="PreviewMouseDown" >
-                                    <i:InvokeCommandAction 
-                                                    Command="{Binding OpenDBFromRecentlyFilenames}"
-                                                    CommandParameter="{Binding}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </Label>
-                        <ListView ItemsSource="{Binding RecentlyOpenDBFilenames}" 
-                                 Height="180"
-                                 >
-                            <ListBox.ItemTemplate>
+                        <ItemsControl ItemsSource="{Binding RecentlyOpenDBFilenames}" 
+                                 Height="180">
+                            <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <Label Content="{Binding}">
                                         <i:Interaction.Triggers>
-                                            <i:EventTrigger EventName="PreviewMouseDown" >
+                                            <i:EventTrigger EventName="MouseDown" >
                                                 <i:InvokeCommandAction 
-                                                    Command="{Binding OpenDBFromRecentlyFilenames}"
+                                                    Command="{Binding 
+                                                    RelativeSource={RelativeSource 
+                                                    Mode=FindAncestor, 
+                                                    AncestorType={x:Type ItemsControl}}, 
+                                                    Path=OpenDBFromRecentlyFilenames}"
                                                     CommandParameter="{Binding}"/>
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
                                     </Label>
                                 </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListView>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </StackPanel>
                     <Button Height="28" Width="220" Margin="10 10 10 0" Command="{Binding OpenDefaultDBCommand}"
                             HorizontalAlignment="Left">
