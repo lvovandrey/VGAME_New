@@ -24,6 +24,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
         private Settings()
         {
             _MusicFilenames = new ObservableCollection<string>();
+            _RecentlyOpenFilenames = new ObservableCollection<string>();
             SetTTSVoices();
         }
 
@@ -44,6 +45,16 @@ namespace VanyaGame.GameCardsNewDB.Tools
         /// Событие возникает когда изменяются настройки. На него рекомендуется вешать все изменения которые завязаны с настройками.
         /// </summary>
         public event Action SettingsChanged;
+
+        [XmlIgnore]
+        public ObservableCollection<string> _RecentlyOpenFilenames;
+        public ObservableCollection<string> RecentlyOpenFilenames
+        {
+            get
+            {
+                return _RecentlyOpenFilenames;
+            }
+        }
 
         [XmlIgnore]
         public string visualHintEnable = "False";
@@ -823,6 +834,26 @@ namespace VanyaGame.GameCardsNewDB.Tools
                     colactual.Add(item);
             }
             return colactual;
+        }
+
+        public void AddRecentlyDBFilename(string dBFilename)
+        {
+            if (_RecentlyOpenFilenames.Contains(dBFilename))
+            {
+                _RecentlyOpenFilenames.Remove(dBFilename);
+                _RecentlyOpenFilenames.Add(dBFilename);
+                return;
+            }
+            _RecentlyOpenFilenames.Add(dBFilename);
+            while (_RecentlyOpenFilenames.Count > 10)
+                _RecentlyOpenFilenames.Remove(_RecentlyOpenFilenames.First());
+            ExportSettingsToXML(ConfigurationTools.SettingsFilename);
+        }
+
+        public void ClearRecentlyDBFilename()
+        {
+            _RecentlyOpenFilenames.Clear();
+            ExportSettingsToXML(ConfigurationTools.SettingsFilename);
         }
     }
 }

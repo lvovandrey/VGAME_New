@@ -24,16 +24,16 @@ namespace VanyaGame.GameCardsNewDB.Interface
         {
             Settings.GetInstance().SettingsChanged += SettingsWindowVM_SettingsChanged;
             Settings.GetInstance().ImportSettingsFromXML(ConfigurationTools.SettingsFilename);
-            
+
             settingsWindow = _settingsWindow;
             musicFilenamesListView = _musicFilenamesListView;
             settingsWindow.DataContext = this;
-            
+
             RefreshAllDependencyProperties();
 
             settingsWindow.Loaded += SettingsWindowView_Loaded;
             settingsWindow.Activated += SettingsWindowView_Activated;
-            
+
         }
 
         private void SettingsWindowVM_SettingsChanged()
@@ -139,7 +139,7 @@ namespace VanyaGame.GameCardsNewDB.Interface
             get { return Settings.GetInstance().CardSize; }
             set { Settings.GetInstance().CardSize = value; OnPropertyChanged("CardSize"); }
         }
-        
+
         public double CardMargin
         {
             get { return Settings.GetInstance().CardMargin; }
@@ -174,6 +174,10 @@ namespace VanyaGame.GameCardsNewDB.Interface
             set { Settings.GetInstance().AttachedDBCardsFilename = value; OnPropertyChanged("AttachedDBCardsFilename"); }
         }
 
+        public ObservableCollection<string> RecentlyOpenDBFilenames
+        {
+            get { return Settings.GetInstance().RecentlyOpenFilenames; }
+        }
 
 
         public ObservableCollection<string> TextToSpeachVoicesNames
@@ -259,7 +263,7 @@ namespace VanyaGame.GameCardsNewDB.Interface
             get
             {
                 var musicInfos = new ObservableCollection<MusicInfo>();
-                if (MusicFilenames?.Count>0)
+                if (MusicFilenames?.Count > 0)
                     musicInfos = new ObservableCollection<MusicInfo>(from m in MusicFilenames select new MusicInfo(m));
                 return musicInfos;
             }
@@ -298,7 +302,7 @@ namespace VanyaGame.GameCardsNewDB.Interface
             get { return Settings.GetInstance().RepeatMusicPlaylist; }
             set { Settings.GetInstance().RepeatMusicPlaylist = value; OnPropertyChanged("RepeatMusicPlaylist"); }
         }
-        
+
         #endregion
 
         #region METHODS
@@ -309,7 +313,7 @@ namespace VanyaGame.GameCardsNewDB.Interface
 
         private void SettingsWindowView_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            
+
         }
 
         public void RefreshAllDependencyProperties()
@@ -330,7 +334,7 @@ namespace VanyaGame.GameCardsNewDB.Interface
             OnPropertyChanged("SuccessTestText");
             OnPropertyChanged("FallTestText");
 
-            OnPropertyChanged("CardSize"); 
+            OnPropertyChanged("CardSize");
             OnPropertyChanged("CardMargin");
             OnPropertyChanged("CardSuccesSize");
             OnPropertyChanged("CardSuccesTime");
@@ -343,6 +347,7 @@ namespace VanyaGame.GameCardsNewDB.Interface
             OnPropertyChanged("BackgroundStartFilename");
 
             OnPropertyChanged("AttachedDBCardsFilename");
+            OnPropertyChanged("RecentlyOpenDBFilenames");
 
             OnPropertyChanged("TextToSpeachVoicesNames");
             OnPropertyChanged("TTSVoiceName");
@@ -437,7 +442,7 @@ namespace VanyaGame.GameCardsNewDB.Interface
                   }));
             }
         }
-        
+
 
         private RelayCommand chooseAttachedDBCardsFilename;
         public RelayCommand ChooseAttachedDBCardsFilename
@@ -454,11 +459,30 @@ namespace VanyaGame.GameCardsNewDB.Interface
                           if (openFileDialog.ShowDialog() == DialogResult.OK)
                           {
                               AttachedDBCardsFilename = @openFileDialog.FileName;
+                              Settings.GetInstance().AddRecentlyDBFilename(AttachedDBCardsFilename);
+                              OnPropertyChanged("RecentlyOpenDBFilenames");
                           }
                       }
                   }));
             }
         }
+        private RelayCommand openDBFromRecentlyFilenames;
+        public RelayCommand OpenDBFromRecentlyFilenames
+        {
+            get
+            {
+                return openDBFromRecentlyFilenames ??
+                  (openDBFromRecentlyFilenames = new RelayCommand(obj =>
+                  {
+                      var filename = obj as string;
+                      if (filename == null || !File.Exists(filename)) return;
+                      AttachedDBCardsFilename = filename;
+                      Settings.GetInstance().AddRecentlyDBFilename(AttachedDBCardsFilename);
+                      OnPropertyChanged("RecentlyOpenDBFilenames");
+                  }));
+            }
+        }
+
 
 
         private string ChooseFilename(string CurFilename, string filter, string title)
@@ -594,7 +618,7 @@ namespace VanyaGame.GameCardsNewDB.Interface
                       mf[oldPos - 1] = selected;
                       mf[oldPos] = prevElement;
                       Settings.GetInstance()._MusicFilenames = new ObservableCollection<string>(mf);
-                      
+
                       RefreshAllDependencyProperties();
                       musicFilenamesListView.SelectedIndex = oldPos - 1;
                   }));
@@ -613,12 +637,12 @@ namespace VanyaGame.GameCardsNewDB.Interface
                       var selected = SelectedMusicInfo.FullFileName;
                       List<string> mf = new List<string>(MusicFilenames);
                       var oldPos = mf.IndexOf(selected);
-                      if (oldPos >= mf.Count-1) return;
+                      if (oldPos >= mf.Count - 1) return;
                       string nextElement = mf[oldPos + 1];
                       mf[oldPos + 1] = selected;
                       mf[oldPos] = nextElement;
                       Settings.GetInstance()._MusicFilenames = new ObservableCollection<string>(mf);
-                      
+
                       RefreshAllDependencyProperties();
                       musicFilenamesListView.SelectedIndex = oldPos + 1;
                   }));
@@ -635,7 +659,7 @@ namespace VanyaGame.GameCardsNewDB.Interface
                   {
                       var res = System.Windows.MessageBox.Show("Будут восстановлены все настройки по умолчанию. " +
                           "Текущие настройки будут утрачены (рекомендуется предварительно экспортировать текущие настройки). \n \n" +
-                          "Вы уверены, что хотите сбросить все настройки?","Сброс настроек", (MessageBoxButton)MessageBoxButtons.YesNo, (MessageBoxImage)MessageBoxIcon.Warning);
+                          "Вы уверены, что хотите сбросить все настройки?", "Сброс настроек", (MessageBoxButton)MessageBoxButtons.YesNo, (MessageBoxImage)MessageBoxIcon.Warning);
                       if (res == MessageBoxResult.No) return;
                       Settings.GetInstance().RestoreDefaultSettings();
                       SaveSettingsCommand.Execute(null);
@@ -658,7 +682,7 @@ namespace VanyaGame.GameCardsNewDB.Interface
             }
         }
 
-        
+
         private RelayCommand reloadGameCommand;
         public RelayCommand ReloadGameCommand
         {
