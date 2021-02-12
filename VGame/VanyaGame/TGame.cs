@@ -14,6 +14,7 @@ using VanyaGame.Abstract;
 using VanyaGame.GameCardsNewDB.Struct;
 using VanyaGame.Sets;
 using VanyaGame.Tools;
+using VanyaGame.GameCardsNewDB.Interface;
 
 namespace VanyaGame
 {
@@ -145,6 +146,8 @@ namespace VanyaGame
 
             CreateSettingsWindow();
             mediaContainer = new GameMediaContainer();
+
+            Owner.DataContext = new MainWindowVM((SettingsWindowVM)SettingsWindow.DataContext);
 
             Player Snd = new PlayerWpf("PlayerSound", mediaContainer, Owner.MediaElementSound);
             Player Msc = new PlayerWpf("PlayerMusic", mediaContainer, Owner.MediaElementSound);

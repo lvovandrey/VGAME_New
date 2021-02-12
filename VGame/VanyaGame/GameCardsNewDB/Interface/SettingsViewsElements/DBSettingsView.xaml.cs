@@ -53,7 +53,7 @@ namespace VanyaGame.GameCardsNewDB.Interface.SettingsViewsElements
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+           return DependencyProperty.UnsetValue;
         }
 
         public static T FindAncestor<T>(DependencyObject from) where T : class

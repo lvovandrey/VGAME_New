@@ -496,7 +496,6 @@ namespace VanyaGame.GameCardsNewDB.Interface
                       var filename = obj as string;
                       if (filename == null || !File.Exists(filename)) return;
                       AttachedDBCardsFilename = filename;
-                      Settings.GetInstance().AddRecentlyDBFilename(AttachedDBCardsFilename);
                       OnPropertyChanged("RecentlyOpenDBFilenames");
                   }));
             }

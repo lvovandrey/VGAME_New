@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Windows.Data;
 using System.Globalization;
 using VanyaGame.GameCardsNewDB.Tools;
+using System.IO;
 
 namespace VanyaGame
 {
@@ -30,7 +31,6 @@ namespace VanyaGame
             MyWindow.PreviewMouseDown += Game.UserActivity.PreviewMouseDown;
             MyWindow.PreviewMouseUp += Game.UserActivity.PreviewMouseUp;
 
-            
             Game.PreviewStart();
             this.Show();
             mc = new MemoryCounter();
@@ -50,7 +50,7 @@ namespace VanyaGame
             Game.CurVideo.MediaGUI.UIMediaHideNotFull();
         }
 
-        
+
         private void Image_MouseDown(object sender, MouseButtonEventArgs e)
         {
             TDrawEffects.PushUI_MouseDown((FrameworkElement)sender);
@@ -72,10 +72,10 @@ namespace VanyaGame
 
         private void MyWindow_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
-          if(PreviewMenu.Visibility == Visibility.Visible)  
-            if (e.Delta > 0)
-                for(int i = 1;i<5;i++)
-                    PreviewMenu.Scroll.LineUp();
+            if (PreviewMenu.Visibility == Visibility.Visible)
+                if (e.Delta > 0)
+                    for (int i = 1; i < 5; i++)
+                        PreviewMenu.Scroll.LineUp();
             if (e.Delta < 0)
                 for (int i = 1; i < 5; i++)
                     PreviewMenu.Scroll.LineDown();
@@ -97,5 +97,10 @@ namespace VanyaGame
         {
             Game.Level.Abort();
         }
+
+
     }
+
+
 }
+

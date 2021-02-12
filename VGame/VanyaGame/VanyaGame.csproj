@@ -179,6 +179,9 @@
     <Compile Include="GameCardsNewDB\DB\RepositoryModel\Context.cs" />
     <Compile Include="GameCardsNewDB\DB\RepositoryModel\DBTools.cs" />
     <Compile Include="GameCardsNewDB\DB\RepositoryModel\Repository.cs" />
+    <Compile Include="GameCardsNewDB\Interface\AttachedDBFilenameView.xaml.cs">
+      <DependentUpon>AttachedDBFilenameView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GameCardsNewDB\Interface\BeautyButtonCardsNewDB.xaml.cs">
       <DependentUpon>BeautyButtonCardsNewDB.xaml</DependentUpon>
     </Compile>
@@ -188,6 +191,7 @@
     <Compile Include="GameCardsNewDB\Interface\Elements\PropertyViewer_IntNums_UpDown.xaml.cs">
       <DependentUpon>PropertyViewer_IntNums_UpDown.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GameCardsNewDB\Interface\MainWindowVM.cs" />
     <Compile Include="GameCardsNewDB\Interface\SettingsViewsElements\DBSettingsView.xaml.cs">
       <DependentUpon>DBSettingsView.xaml</DependentUpon>
     </Compile>
@@ -298,6 +302,10 @@
     <Compile Include="ZDebug\WindowTest.xaml.cs">
       <DependentUpon>WindowTest.xaml</DependentUpon>
     </Compile>
+    <Page Include="GameCardsNewDB\Interface\AttachedDBFilenameView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GameCardsNewDB\Interface\BeautyButtonCardsNewDB.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
