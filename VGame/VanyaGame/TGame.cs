@@ -47,7 +47,7 @@ namespace VanyaGame
         public static GameVideo VideoVlc;
         public static GameVideo VideoWpf;
         public static  MainWindow Owner;
-        public static Window SettingsWindow;
+        public static SettingsWindow SettingsWindow;
         public static bool IsPlaying = false;
         public static TDrawEffects DrawEffects = new TDrawEffects();
         public static TUserActivity UserActivity = new TUserActivity();

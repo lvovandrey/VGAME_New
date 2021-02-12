@@ -38,7 +38,8 @@ namespace VanyaGame.GameCardsNewDB.Interface
             SettingsElementShow(ElementUsefulName);
         }
 
-        private void SettingsElementShow(string ElementUsefulName)
+
+        public void SettingsElementShow(string ElementUsefulName)
         {
             foreach (var element in SettingsElements)
                 element.Value.Visibility = Visibility.Hidden;

@@ -24,5 +24,19 @@ namespace VanyaGame.GameCardsNewDB.Interface
             { _settingsWindowVM = value; OnPropertyChanged("SettingsWindowVM"); }
         }
 
+
+        private RelayCommand openSettingsWindowOnDBSettings;
+        public RelayCommand OpenSettingsWindowOnDBSettings
+        {
+            get
+            {
+                return openSettingsWindowOnDBSettings ??
+                  (openSettingsWindowOnDBSettings = new RelayCommand(obj =>
+                  {
+                      Game.ShowSettingsWindow();
+                      Game.SettingsWindow.SettingsElementShow("База данных");
+                  }));
+            }
+        }
     }
 }

@@ -11,10 +11,9 @@
     <UserControl.Resources>
         <local:ListItemToPositionConverter x:Key="listItemToPositionConverter"/>
         <Style TargetType="TextBlock" x:Key="LinkStyle">
-            <Setter Property="TextBlock.TextDecorations" Value="Underline" />
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="FontWeight" Value="Bold" />
+                    <Setter Property="TextBlock.TextDecorations" Value="Underline" />
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -49,7 +48,7 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <TextBlock FontWeight="{Binding ElementName=qqq, Path=FontWeight}"  Text="{Binding 
+                                        <TextBlock TextDecorations="{Binding ElementName=qqq, Path=TextDecorations}"  Text="{Binding 
                                             RelativeSource={RelativeSource Mode=FindAncestor, 
                                             AncestorType={x:Type Grid}}, 
                                             Converter={StaticResource listItemToPositionConverter}}"/>

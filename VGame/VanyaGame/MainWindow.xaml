@@ -125,11 +125,12 @@
                 </Slider.Effect>
             </Slider>
 
-            <GameCardsNewDB:AttachedDBFilenameView 
+            <GameCardsNewDB:AttachedDBFilenameView
+                           Visibility="{Binding ElementName=StartButton, Path=Visibility}"
+                            x:Name="AttachedDBFilenameView"
                             Grid.Column="2" 
-                            DataContext="{Binding SettingsWindowVM.AttachedDBCardsFilename}"
                             HorizontalAlignment="Center"
-                            Margin="-100 20 0 0"/>
+                            Margin="-100 -50 0 0"/>
 
 
             <GameCardsNewDB:BeautyButtonCardsNewDB x:Name="StartButton" 
