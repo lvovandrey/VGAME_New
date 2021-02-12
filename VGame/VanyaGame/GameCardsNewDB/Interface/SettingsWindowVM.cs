@@ -176,11 +176,11 @@ namespace VanyaGame.GameCardsNewDB.Interface
 
         public List<string> RecentlyOpenDBFilenames
         {
-            get 
+            get
             {
                 var list = Settings.GetInstance().RecentlyOpenFilenames.ToList();
                 list.Reverse();
-                return list; 
+                return list;
             }
         }
 
@@ -464,13 +464,27 @@ namespace VanyaGame.GameCardsNewDB.Interface
                           if (openFileDialog.ShowDialog() == DialogResult.OK)
                           {
                               AttachedDBCardsFilename = @openFileDialog.FileName;
-                              Settings.GetInstance().AddRecentlyDBFilename(AttachedDBCardsFilename);
-                              OnPropertyChanged("RecentlyOpenDBFilenames");
                           }
                       }
                   }));
             }
         }
+        private RelayCommand clearRecentlyOpenDBFilenamesCommand;
+        public RelayCommand ClearRecentlyOpenDBFilenamesCommand
+        {
+            get
+            {
+                return clearRecentlyOpenDBFilenamesCommand ??
+                  (clearRecentlyOpenDBFilenamesCommand = new RelayCommand(obj =>
+                  {
+                      Settings.GetInstance().RecentlyOpenFilenames.Clear();
+                      SaveSettingsCommand.Execute(null);
+                      OnPropertyChanged("RecentlyOpenDBFilenames");
+                  }));
+            }
+        }
+
+
         private RelayCommand openDBFromRecentlyFilenames;
         public RelayCommand OpenDBFromRecentlyFilenames
         {

@@ -13,6 +13,7 @@ using VanyaGame.PrevMenuNS;
 using Model = CardsGameNewDBRepository.Model;
 using CardsGameNewDBRepository.Model;
 using CardsGameNewDBRepository;
+using VanyaGame.GameCardsNewDB.Interface;
 
 namespace VanyaGame.GameCardsNewDB.Struct
 {
@@ -145,7 +146,8 @@ namespace VanyaGame.GameCardsNewDB.Struct
                 Game.Levels.Enqueue(NewLevel);
             }
             Console.WriteLine("End repack Levels");
-
+            Settings.GetInstance().AddRecentlyDBFilename(Settings.GetInstance().AttachedDBCardsFilename);
+            ((SettingsWindowVM)Game.SettingsWindow.DataContext).RefreshAllDependencyProperties();
             AddLevelsInPrevMenu();
         }
 

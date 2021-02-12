@@ -36,9 +36,9 @@
                                 Command="{Binding ChooseAttachedDBCardsFilename}"/>
                     </StackPanel>
 
-                    <StackPanel Margin="10 10 10 0" >
+                    <StackPanel Margin="10 0 10 0" >
 
-                        <TextBlock Text="Недавние" />
+                        <TextBlock Text="Последние загруженные:" Margin="5" />
                         <ItemsControl ItemsSource="{Binding RecentlyOpenDBFilenames}" 
                                  Height="180" >
                             <ItemsControl.ItemTemplate>
@@ -48,16 +48,13 @@
                                             <ColumnDefinition Width="20"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <!--<TextBlock Grid.Column="0" Text="{Binding 
-                                            RelativeSource={RelativeSource TemplatedParent}, 
-                                            Path=TemplatedParent.(ItemsControl.AlternationIndex)}"/>-->
 
-                                        <TextBlock Text="{Binding 
+                                        <TextBlock FontWeight="{Binding ElementName=qqq, Path=FontWeight}"  Text="{Binding 
                                             RelativeSource={RelativeSource Mode=FindAncestor, 
                                             AncestorType={x:Type Grid}}, 
                                             Converter={StaticResource listItemToPositionConverter}}"/>
 
-                                        <TextBlock Grid.Column="1" Text="{Binding}" 
+                                        <TextBlock Grid.Column="1" Text="{Binding}" x:Name="qqq"
                                                    Style="{StaticResource LinkStyle}"/>
                                         <i:Interaction.Triggers>
                                             <i:EventTrigger EventName="MouseDown" >
@@ -74,13 +71,22 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                     </StackPanel>
-                    <Button Height="28" Width="220" Margin="10 10 10 0" Command="{Binding OpenDefaultDBCommand}"
+                    <StackPanel Orientation="Horizontal">
+                        <Button Height="28" Width="180" Margin="10 5 10 0" Command="{Binding ClearRecentlyOpenDBFilenamesCommand}"
                             HorizontalAlignment="Left">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="/VanyaGame;component/GameCardsNewDB/Images/pictogramm/Database-Refresh.png"  Margin="-22 0 0 0"/>
-                            <TextBlock Text="Открыть БД по умолчанию" Margin="10 3 0 0"/>
-                        </StackPanel>
-                    </Button>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/VanyaGame;component/GameCardsNewDB/Images/pictogramm/Delete.png"  Margin="-22 0 0 0"/>
+                                <TextBlock Text="Очистить последние" Margin="10 3 0 0"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Height="28" Width="220" Margin="10 5 10 0" Command="{Binding OpenDefaultDBCommand}"
+                            HorizontalAlignment="Left">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/VanyaGame;component/GameCardsNewDB/Images/pictogramm/Database-Refresh.png"  Margin="-22 0 0 0"/>
+                                <TextBlock Text="Открыть БД по умолчанию" Margin="10 3 0 0"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
                 </StackPanel>
 
             </ScrollViewer>
