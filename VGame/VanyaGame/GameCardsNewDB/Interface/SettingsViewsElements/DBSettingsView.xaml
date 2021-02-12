@@ -8,6 +8,17 @@
              x:Name="ThisUserControl"
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="800">
+    <UserControl.Resources>
+        <local:ListItemToPositionConverter x:Key="listItemToPositionConverter"/>
+        <Style TargetType="TextBlock" x:Key="LinkStyle">
+            <Setter Property="TextBlock.TextDecorations" Value="Underline" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="FontWeight" Value="Bold" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <GroupBox Header="Базы данных" >
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
@@ -29,10 +40,25 @@
 
                         <TextBlock Text="Недавние" />
                         <ItemsControl ItemsSource="{Binding RecentlyOpenDBFilenames}" 
-                                 Height="180">
+                                 Height="180" >
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Label Content="{Binding}" FontStyle="Oblique">
+                                    <Grid Cursor="Hand" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <!--<TextBlock Grid.Column="0" Text="{Binding 
+                                            RelativeSource={RelativeSource TemplatedParent}, 
+                                            Path=TemplatedParent.(ItemsControl.AlternationIndex)}"/>-->
+
+                                        <TextBlock Text="{Binding 
+                                            RelativeSource={RelativeSource Mode=FindAncestor, 
+                                            AncestorType={x:Type Grid}}, 
+                                            Converter={StaticResource listItemToPositionConverter}}"/>
+
+                                        <TextBlock Grid.Column="1" Text="{Binding}" 
+                                                   Style="{StaticResource LinkStyle}"/>
                                         <i:Interaction.Triggers>
                                             <i:EventTrigger EventName="MouseDown" >
                                                 <i:InvokeCommandAction 
@@ -42,7 +68,8 @@
                                                     CommandParameter="{Binding}"/>
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
-                                    </Label>
+                                    </Grid>
+   
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>

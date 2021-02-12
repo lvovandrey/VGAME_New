@@ -174,9 +174,14 @@ namespace VanyaGame.GameCardsNewDB.Interface
             set { Settings.GetInstance().AttachedDBCardsFilename = value; OnPropertyChanged("AttachedDBCardsFilename"); }
         }
 
-        public ObservableCollection<string> RecentlyOpenDBFilenames
+        public List<string> RecentlyOpenDBFilenames
         {
-            get { return Settings.GetInstance().RecentlyOpenFilenames; }
+            get 
+            {
+                var list = Settings.GetInstance().RecentlyOpenFilenames.ToList();
+                list.Reverse();
+                return list; 
+            }
         }
 
 
