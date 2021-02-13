@@ -230,6 +230,7 @@
       <DependentUpon>RoundProgressBarSimple.xaml</DependentUpon>
     </Compile>
     <Compile Include="Interface\RoundProgressPathConverter.cs" />
+    <Compile Include="Sets\Settings.cs" />
     <Compile Include="Tools\ConfigurationTools.cs" />
     <Compile Include="GameCardsNewDB\Tools\InfoWindow.cs" />
     <Compile Include="GameCardsNewDB\Tools\Settings.cs" />
