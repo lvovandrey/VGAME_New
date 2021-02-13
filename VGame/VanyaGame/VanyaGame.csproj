@@ -230,9 +230,6 @@
       <DependentUpon>RoundProgressBarSimple.xaml</DependentUpon>
     </Compile>
     <Compile Include="Interface\RoundProgressPathConverter.cs" />
-    <Compile Include="Struct\IterationSets.cs" />
-    <Compile Include="Struct\LevelSets.cs" />
-    <Compile Include="Struct\SceneSets.cs" />
     <Compile Include="Tools\ConfigurationTools.cs" />
     <Compile Include="GameCardsNewDB\Tools\InfoWindow.cs" />
     <Compile Include="GameCardsNewDB\Tools\Settings.cs" />
@@ -251,18 +248,6 @@
     <Compile Include="Media\Time.cs" />
     <Compile Include="Media\Volume.cs" />
     <Compile Include="Sets\Settings.cs" />
-    <Compile Include="Struct\Components\CursorSets.cs" />
-    <Compile Include="Struct\Components\InnerVideoSets.cs" />
-    <Compile Include="Struct\Components\UnitsCollection.cs" />
-    <Compile Include="Struct\Components\UserActivity.cs" />
-    <Compile Include="Struct\CreatorOfObjects.cs" />
-    <Compile Include="Struct\Components\Iterations.cs" />
-    <Compile Include="Struct\Components\Loader.cs" />
-    <Compile Include="Struct\Components\Starter.cs" />
-    <Compile Include="Struct\Components\State.cs" />
-    <Compile Include="Struct\Iteration.cs" />
-    <Compile Include="Struct\Level.cs" />
-    <Compile Include="Struct\Scene.cs" />
     <Compile Include="PrevMenuNS\PrevMenu.xaml.cs">
       <DependentUpon>PrevMenu.xaml</DependentUpon>
     </Compile>
@@ -274,31 +259,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Struct\StructComponentContainer.cs" />
     <Compile Include="TDrawEffects.cs" />
-    <Compile Include="Abstract\Component.cs" />
-    <Compile Include="Abstract\ComponentContainer.cs" />
     <Compile Include="Tools\ListShuffle.cs" />
     <Compile Include="Tools\Miscellanea.cs" />
     <Compile Include="Tools\PictHelper.cs" />
     <Compile Include="Tools\SerializeStatic.cs" />
     <Compile Include="TUserActivity.cs" />
-    <Compile Include="Units\Components\DragAndDrop.cs" />
-    <Compile Include="Units\Components\Update.cs" />
-    <Compile Include="Units\Components\UState.cs" />
-    <Compile Include="Units\Components\EMPTY_TEMPLATE.cs" />
-    <Compile Include="Units\Components\HaveBody.cs" />
-    <Compile Include="Units\Components\HaveBox.cs" />
-    <Compile Include="Units\Components\CheckedSymbol.cs" />
-    <Compile Include="Units\Components\HiderShower.cs" />
-    <Compile Include="Units\Components\Hit.cs" />
-    <Compile Include="Units\Components\OLDInGameStruct.cs" />
-    <Compile Include="Units\Components\UNUSEDKeyboardController.cs" />
-    <Compile Include="Units\Components\Moveable.cs" />
-    <Compile Include="Units\Components\UInfo.cs" />
-    <Compile Include="Abstract\IComponent.cs" />
-    <Compile Include="Abstract\IComponentContainer.cs" />
-    <Compile Include="Units\Unit.cs" />
     <Compile Include="ZDebug\WindowTest.xaml.cs">
       <DependentUpon>WindowTest.xaml</DependentUpon>
     </Compile>
