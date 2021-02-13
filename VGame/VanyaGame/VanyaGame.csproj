@@ -247,7 +247,6 @@
     <Compile Include="Media\PlayerWpf.cs" />
     <Compile Include="Media\Time.cs" />
     <Compile Include="Media\Volume.cs" />
-    <Compile Include="Sets\Settings.cs" />
     <Compile Include="PrevMenuNS\PrevMenu.xaml.cs">
       <DependentUpon>PrevMenu.xaml</DependentUpon>
     </Compile>

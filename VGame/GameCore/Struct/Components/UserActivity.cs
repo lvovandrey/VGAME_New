@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Input;
-using VanyaGame.Abstract;
+using VGameCore.Abstract;
 
-namespace VanyaGame.Struct.Components
+namespace VGameCore.Struct.Components
 {
      
     /// <summary>

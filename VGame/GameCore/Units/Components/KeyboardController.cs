@@ -1,4 +1,4 @@
-﻿namespace VanyaGame.Units.Components
+﻿namespace VGameCore.Units.Components
 {
     public class KeyboardController : Component
     {

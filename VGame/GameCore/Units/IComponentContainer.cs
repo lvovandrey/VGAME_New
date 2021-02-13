@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VanyaGame.Units
+namespace VGameCore.Units
 {
 
     public interface IComponentContainer

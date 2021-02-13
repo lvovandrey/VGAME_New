@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using VanyaGame.Abstract;
+using VGameCore.Abstract;
 
-namespace VanyaGame.Units
+namespace VGameCore.Units
 {
     public class Unit : ComponentContainer
     {

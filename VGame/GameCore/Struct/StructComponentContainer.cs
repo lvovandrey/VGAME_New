@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using VanyaGame.Abstract;
+using VGameCore.Abstract;
 
-namespace VanyaGame.Struct
+namespace VGameCore.Struct
 {
     public class StructComponentContainer : IComponentContainer, IDisposable
     {

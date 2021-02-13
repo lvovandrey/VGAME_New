@@ -1,7 +1,7 @@
-﻿using VanyaGame.Abstract;
-using VanyaGame.Struct;
+﻿using VGameCore.Abstract;
+using VGameCore.Struct;
 
-namespace VanyaGame.Units.Components
+namespace VGameCore.Units.Components
 {
     public class OLDInGameStruct: Component
     {

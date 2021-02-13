@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using VanyaGame.Abstract;
+using VGameCore.Abstract;
 
-namespace VanyaGame.Struct.Components
+namespace VGameCore.Struct.Components
 {
     public class Iterations : Component
     {

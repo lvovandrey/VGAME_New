@@ -1,6 +1,6 @@
-﻿using VanyaGame.Abstract;
+﻿using VGameCore.Abstract;
 
-namespace VanyaGame.Struct
+namespace VGameCore.Struct
 {
     public class IterationSets : ComponentContainer
     {

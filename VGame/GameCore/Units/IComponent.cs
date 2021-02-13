@@ -1,4 +1,4 @@
-﻿namespace VanyaGame.Units
+﻿namespace VGameCore.Units
 {
     public interface IComponent
     {

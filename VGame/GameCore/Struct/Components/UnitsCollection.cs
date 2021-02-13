@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using VanyaGame.Abstract;
-using VanyaGame.Units;
-using VanyaGame.Units.Components;
+using VGameCore.Abstract;
+using VGameCore.Units;
+using VGameCore.Units.Components;
 using System.Collections;
 
-namespace VanyaGame.Struct.Components
+namespace VGameCore.Struct.Components
 {
     public class UnitsCollection<U> : Component where U : Unit
     {

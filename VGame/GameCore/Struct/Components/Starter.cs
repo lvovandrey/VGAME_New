@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using VanyaGame.Abstract;
+using VGameCore.Abstract;
 
-namespace VanyaGame.Struct.Components
+namespace VGameCore.Struct.Components
 {
     /// <summary>
     /// Определяет порядок и подключает методы для старта структурного элемента игры (уровня). Абстрактный стартер "уровня"

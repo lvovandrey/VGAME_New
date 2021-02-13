@@ -1,7 +1,7 @@
 ﻿using System.Windows;
-using VanyaGame.Abstract;
+using VGameCore.Abstract;
 
-namespace VanyaGame.Units.Components
+namespace VGameCore.Units.Components
 {
     public class HaveBody: Component
     {

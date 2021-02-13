@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace VanyaGame.Abstract
+namespace VGameCore.Abstract
 {
     public abstract class ComponentContainer: IComponentContainer,IDisposable
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VanyaGame.Abstract
+namespace VGameCore.Abstract
 {
     public abstract class Component: IComponent, IDisposable
     {

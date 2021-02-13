@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VanyaGame.Abstract;
-using VanyaGame.Struct.Components;
+using VGameCore.Abstract;
+using VGameCore.Struct.Components;
 
-namespace VanyaGame.Struct
+namespace VGameCore.Struct
 {
     public abstract class Iteration : StructComponentContainer
     {

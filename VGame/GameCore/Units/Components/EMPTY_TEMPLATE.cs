@@ -1,6 +1,6 @@
-﻿using VanyaGame.Abstract;
+﻿using VGameCore.Abstract;
 
-namespace VanyaGame.Units.Components
+namespace VGameCore.Units.Components
 {
     public class EMPTY_TEMPLATE : Component
     {

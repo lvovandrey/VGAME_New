@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using VanyaGame.Abstract;
+using VGameCore.Abstract;
 
-namespace VanyaGame.Units.Components
+namespace VGameCore.Units.Components
 {
     /// <summary>
     /// Определяет UI-контейнер в который может помещаться элемент

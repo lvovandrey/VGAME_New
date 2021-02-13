@@ -1,7 +1,7 @@
 ﻿using System;
-using VanyaGame.Abstract;
+using VGameCore.Abstract;
 
-namespace VanyaGame.Struct.Components
+namespace VGameCore.Struct.Components
 {
     public enum VideoType {local, net, youtube, ipcam, unknown}
 

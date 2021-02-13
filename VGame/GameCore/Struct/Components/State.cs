@@ -1,6 +1,6 @@
-﻿using VanyaGame.Abstract;
+﻿using VGameCore.Abstract;
 
-namespace VanyaGame.Struct.Components
+namespace VGameCore.Struct.Components
 {
     // НА БУДУЩЕЕ ПОДУМАТЬ ЧТОБЫ РЕАЛИЗОВАТЬ ПРИ НЕОБХОДИМОСТИ ТУТ ПАТТЕРН "СОСТОЯНИЕ"
 

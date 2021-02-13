@@ -2,9 +2,9 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
-using VanyaGame.Abstract;
+using VGameCore.Abstract;
 
-namespace VanyaGame.Units.Components
+namespace VGameCore.Units.Components
 {
     /// <summary>
     /// Компонент отвечает за анимацию при появлении и исчезновении контейнера. 

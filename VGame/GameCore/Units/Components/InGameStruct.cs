@@ -1,6 +1,6 @@
-﻿using VanyaGame.LevelsStruct;
+﻿using VGameCore.LevelsStruct;
 
-namespace VanyaGame.Units.Components
+namespace VGameCore.Units.Components
 {
     public class InGameStruct: Component
     {

@@ -1,7 +1,7 @@
 ﻿using System;
-using VanyaGame.Abstract;
+using VGameCore.Abstract;
 
-namespace VanyaGame.Struct.Components
+namespace VGameCore.Struct.Components
 {
     /// <summary>
     /// Определяет методы загрузки настроек и содержимого. Абстрактный загрузчик "уровня"

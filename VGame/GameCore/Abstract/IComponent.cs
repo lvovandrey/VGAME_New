@@ -1,4 +1,4 @@
-﻿namespace VanyaGame.Abstract
+﻿namespace VGameCore.Abstract
 {
     public interface IComponent
     {

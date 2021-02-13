@@ -1,6 +1,6 @@
-﻿using VanyaGame.Abstract;
+﻿using VGameCore.Abstract;
 
-namespace VanyaGame.Units.Components
+namespace VGameCore.Units.Components
 {
     public enum NewOld { New, Old }
     public enum Visibility { Empty, Collapse, Hidden, Visible }

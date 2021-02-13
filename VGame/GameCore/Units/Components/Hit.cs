@@ -1,6 +1,6 @@
-﻿using VanyaGame.Abstract;
+﻿using VGameCore.Abstract;
 
-namespace VanyaGame.Units.Components
+namespace VGameCore.Units.Components
 {
     /// <summary>
     /// Определяет "попадание" в юнит. В принципе здесь нужно только свойство - сейчас юнит "прострелен" или нет. Также может использоваться как маркер

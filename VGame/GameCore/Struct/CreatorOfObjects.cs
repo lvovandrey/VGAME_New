@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using VanyaGame.Struct;
-using VanyaGame.Units;
+using VGameCore.Struct;
+using VGameCore.Units;
 
-namespace VanyaGame.Behaviour
+namespace VGameCore.Behaviour
 {
 
     /// <summary>

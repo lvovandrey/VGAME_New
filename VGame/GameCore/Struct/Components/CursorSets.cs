@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Input;
-using VanyaGame.Abstract;
+using VGameCore.Abstract;
 
-namespace VanyaGame.Struct.Components
+namespace VGameCore.Struct.Components
 {
     /// <summary>
     /// Инкапсулирует информацию и методы связанные с настройкой в сцене (или уровне) курсора

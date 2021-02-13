@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading;
 using System.Windows.Threading;
-using VanyaGame.Abstract;
+using VGameCore.Abstract;
 
-namespace VanyaGame.Units.Components
+namespace VGameCore.Units.Components
 {
     public class Update : Component
     {

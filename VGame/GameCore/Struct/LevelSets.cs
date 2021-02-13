@@ -1,8 +1,8 @@
 ﻿using System;
-using VanyaGame.Abstract;
-using VanyaGame.Sets;
+using VGameCore.Abstract;
+using VGameCore.Sets;
 
-namespace VanyaGame.Struct
+namespace VGameCore.Struct
 {
     public class LevelSets : ComponentContainer
     {
