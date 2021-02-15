@@ -7,12 +7,12 @@ using System.Windows.Threading;
 using System.Xml;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
-using VanyaGame.Units;
-using VanyaGame.Units.Components;
-using VanyaGame.Struct;
-using VanyaGame.Struct.Components;
+using VGameCore.Units;
+using VGameCore.Units.Components;
+using VGameCore.Struct;
+using VGameCore.Struct.Components;
 
-namespace VanyaGame
+namespace VGameCore
 {
     public delegate void DelegateTimerTick(object sender, EventArgs e);
 

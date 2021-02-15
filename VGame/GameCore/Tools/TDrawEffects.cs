@@ -3,15 +3,15 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 
-namespace VanyaGame
+namespace VGameCore
 {
     public partial class TDrawEffects
     {
 
-        public static Point GeneratePosition(Rect Limits)
+        public static Point GeneratePosition(Rect Limits, Random RandomGenerator)
         {
-            int x = Game.RandomGenerator.Next((int)Limits.Left, (int)Limits.Width + (int)Limits.Left);
-            int y = Game.RandomGenerator.Next((int)Limits.Top, (int)Limits.Height + (int)Limits.Top);
+            int x = RandomGenerator.Next((int)Limits.Left, (int)Limits.Width + (int)Limits.Left);
+            int y = RandomGenerator.Next((int)Limits.Top, (int)Limits.Height + (int)Limits.Top);
             Point value = new Point(x, y);
             return value;
         }
@@ -31,7 +31,7 @@ namespace VanyaGame
         }
         
         
-        public static void Delay(FrameworkElement UI, double delay, VoidDelegate EndingMethod)
+        public static void Delay(FrameworkElement UI, double delay, Action EndingMethod)
         {
             DoubleAnimation buttonAnimation = new DoubleAnimation();
             buttonAnimation.From = UI.Opacity;
@@ -45,7 +45,7 @@ namespace VanyaGame
             UI.BeginAnimation(FrameworkElement.OpacityProperty, buttonAnimation);
         }
         
-        public static void BlurShow(FrameworkElement UI, double timeInSec, double delay, VoidDelegate EndingMethod)
+        public static void BlurShow(FrameworkElement UI, double timeInSec, double delay, Action EndingMethod)
         {
             UI.Visibility = Visibility.Visible;
             Show(UI);
@@ -65,7 +65,7 @@ namespace VanyaGame
             };
             UI.BeginAnimation(FrameworkElement.OpacityProperty, buttonAnimation);
         }
-        public static void BlurHide(FrameworkElement UI, double timeInSec, double delay,  VoidDelegate EndingMethod)
+        public static void BlurHide(FrameworkElement UI, double timeInSec, double delay,  Action EndingMethod)
         {
             DoubleAnimation buttonAnimation = new DoubleAnimation();
             buttonAnimation.From = UI.Opacity;
@@ -134,7 +134,7 @@ namespace VanyaGame
             UI.BeginAnimation(FrameworkElement.HeightProperty, A2);
             UI.BeginAnimation(FrameworkElement.MarginProperty, ta);
         }
-        public static void Zoom(FrameworkElement UI, double ZoomBeg, double ZoomEnd, double timeInSec, VoidDelegate EndingMethod) 
+        public static void Zoom(FrameworkElement UI, double ZoomBeg, double ZoomEnd, double timeInSec, Action EndingMethod) 
         {
             DoubleAnimation A = new DoubleAnimation();
             A.From = UI.ActualWidth * ZoomBeg;
@@ -281,7 +281,7 @@ namespace VanyaGame
             UI.BeginAnimation(FrameworkElement.MarginProperty, ta);
         }
 
-        public static void MoveTo(FrameworkElement UI, double x, double y, double timeInSec, VoidDelegate EndingMethod)
+        public static void MoveTo(FrameworkElement UI, double x, double y, double timeInSec, Action EndingMethod)
         {
             // Анимация margin
             ThicknessAnimation ta = new ThicknessAnimation();
@@ -369,7 +369,7 @@ namespace VanyaGame
             };            
             UI.BeginAnimation(MediaElement.OpacityProperty, A);
         }
-        public static void SlowDifferOpacity(FrameworkElement UI, double opacity, double timeInSec, double beginTimeInSec, VoidDelegate AnimationCompleted)
+        public static void SlowDifferOpacity(FrameworkElement UI, double opacity, double timeInSec, double beginTimeInSec, Action AnimationCompleted)
         {
             DoubleAnimation A = new DoubleAnimation();
             A.From = UI.Opacity;

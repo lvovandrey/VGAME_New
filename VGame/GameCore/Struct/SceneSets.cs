@@ -1,6 +1,7 @@
 ﻿using System;
+using System.IO;
 using VGameCore.Abstract;
-using VGameCore.Sets;
+
 
 namespace VGameCore.Struct
 {
@@ -17,7 +18,7 @@ namespace VGameCore.Struct
             }
             set
             {
-                string path = Settings.GetInstance().LocalAppDataDir + Level.Sets.Directory + value + @"\";
+                string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "VGame") + Level.Sets.Directory + value + @"\";
                 if (System.IO.Directory.Exists(path))
                 {
                     dir = value;

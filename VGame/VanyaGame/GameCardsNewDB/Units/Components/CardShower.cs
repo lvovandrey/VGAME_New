@@ -28,7 +28,7 @@ namespace VanyaGame.GameCardsNewDB.Units.Components
         #endregion
 
         #region methods
-        public event VoidDelegate Complete;
+        public event Action Complete;
 
         public void ResetCompleteSubscriptions()
         {
@@ -36,7 +36,7 @@ namespace VanyaGame.GameCardsNewDB.Units.Components
             Complete += NumberShower_Complete;
         }
 
-        public void Show(VoidDelegate complete)
+        public void Show(Action complete)
         {
             TimeSpan t = TimeSpan.FromSeconds(0.5);
 
@@ -55,7 +55,7 @@ namespace VanyaGame.GameCardsNewDB.Units.Components
             
         }
 
-        public void Hide(VoidDelegate complete)
+        public void Hide(Action complete)
         {
             
 

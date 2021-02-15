@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace GameCore
 {
-    public delegate void VoidDelegate();
+    public delegate void Action();
     public delegate bool BoolDelegate();
     public delegate object FullFreeDelegate(params object[] vs);
     public delegate void TUserDoSomething(MouseEventArgs mouse, MouseButtonEventArgs mousebutton, KeyEventArgs key);

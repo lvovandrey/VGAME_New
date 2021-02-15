@@ -257,7 +257,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="TDrawEffects.cs" />
+    <Compile Include="Sets\Settings.cs" />
+    <Compile Include="Tools\ConfigurationTools.cs" />
     <Compile Include="Tools\ListShuffle.cs" />
     <Compile Include="Tools\Miscellanea.cs" />
     <Compile Include="Tools\PictHelper.cs" />
@@ -367,7 +368,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Other.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

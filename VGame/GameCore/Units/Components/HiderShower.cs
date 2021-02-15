@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
-using VanyaGame;
+using VGameCore;
 using VGameCore.Abstract;
 
 namespace VGameCore.Units.Components

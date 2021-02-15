@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
-using VanyaGame;
+using VGameCore;
 using VGameCore.Abstract;
 
 namespace VGameCore.Struct.Components

@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace VGameCore
+namespace VanyaGame
 {
     public static class ConfigurationTools
     {
