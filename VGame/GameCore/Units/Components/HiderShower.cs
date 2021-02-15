@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
+using VanyaGame;
 using VGameCore.Abstract;
 
 namespace VGameCore.Units.Components
@@ -34,7 +35,7 @@ namespace VGameCore.Units.Components
 
         #region methods
 
-        public event VoidDelegate Complete;
+        public event Action Complete;
 
         /// <summary>
         /// Очищаем подписку на событие Complete. При этом обработчик "по умолчанию" остается

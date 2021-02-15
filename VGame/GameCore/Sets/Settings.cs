@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace VanyaGame.Sets
+namespace VGameCore.Sets
 {
     public enum VideoPlayerType 
     { 

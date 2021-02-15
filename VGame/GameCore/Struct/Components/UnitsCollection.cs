@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using VGameCore.Abstract;
 using VGameCore.Units;
 using VGameCore.Units.Components;
 using System.Collections;
@@ -142,7 +141,7 @@ namespace VGameCore.Struct.Components
             return Units.First();
         }
 
-        public void Shuffle()
+        public void Shuffle(Random RandomGenerator)
         {
 
            
@@ -150,8 +149,8 @@ namespace VGameCore.Struct.Components
             for (int x = 0; x < 1000; x++)
             {
 
-                int i = Game.RandomGenerator.Next(0,Units.Count);
-                int j = Game.RandomGenerator.Next(0,Units.Count);
+                int i = RandomGenerator.Next(0,Units.Count);
+                int j = RandomGenerator.Next(0,Units.Count);
                 // обменять значения data[j] и data[i]
                 var temp = Units[j];
                 Units[j] = Units[i];

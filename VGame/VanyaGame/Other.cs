@@ -34,7 +34,7 @@ namespace VanyaGame
 
     public static class ToolsTimer 
     {
-        public static void Delay(VoidDelegate Complete, TimeSpan Interval)
+        public static void Delay(Action Complete, TimeSpan Interval)
         {
             System.Windows.Threading.DispatcherTimer ToolTimer = new System.Windows.Threading.DispatcherTimer();
 

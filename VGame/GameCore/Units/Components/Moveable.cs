@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using VanyaGame;
 using VGameCore.Abstract;
 
 namespace VGameCore.Units.Components

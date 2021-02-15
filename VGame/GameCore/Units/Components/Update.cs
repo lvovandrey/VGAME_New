@@ -34,7 +34,7 @@ namespace VGameCore.Units.Components
         #endregion
 
         #region methods
-        public event VoidDelegate Up;
+        public event Action Up;
 
         private void StartCicle()
         {

@@ -23,12 +23,12 @@ namespace VGameCore.Struct.Components
         /// <summary>
         /// Загрузка настроек
         /// </summary>
-        public VoidDelegate LoadSets { get; set; }
+        public Action LoadSets { get; set; }
 
         /// <summary>
         /// Загрузка элементов (контента, изображений и проч)
         /// </summary>
-        public VoidDelegate LoadContent { get; set; }
+        public Action LoadContent { get; set; }
 
         #endregion
 

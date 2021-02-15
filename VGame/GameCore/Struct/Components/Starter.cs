@@ -14,7 +14,7 @@ namespace VGameCore.Struct.Components
         {
             if (Container.GetComponent<State>() == null)
                 throw new Exception("Have no component State in contaier");
-            StartElements = new List<VoidDelegate>();
+            StartElements = new List<Action>();
         }
         #endregion
 
@@ -25,7 +25,7 @@ namespace VGameCore.Struct.Components
         /// <summary>
         /// Набор директив для последовательного старта множества абстрактных элементов.
         /// </summary>
-        public List<VoidDelegate> StartElements { get; set; }
+        public List<Action> StartElements { get; set; }
         #endregion
 
         #region methods
@@ -37,7 +37,7 @@ namespace VGameCore.Struct.Components
             if (StartElements.Count < 1)
                 throw new Exception("Have no Starts metods in Starter-compontent");
 
-            foreach (VoidDelegate start in StartElements)
+            foreach (Action start in StartElements)
                 start();
             Container.GetComponent<State>().value = StructState.Started;
         }
