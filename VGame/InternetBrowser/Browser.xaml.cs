@@ -33,7 +33,16 @@ namespace InternetBrowser
 
 
             WebBrowserVM = new WebBrowserVM(MyBrowser);
+            LifespanHandler life = new LifespanHandler();
+            MyBrowser.LifeSpanHandler = life;
+            life.popup_request += life_popup_request;
             MyBrowser.DataContext = WebBrowserVM;
+        }
+
+        private void life_popup_request(string obj) 
+        {
+            Dispatcher.Invoke(() => { WebBrowserVM.CurURL = obj; });
+             
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

@@ -63,6 +63,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LifespanHandler.cs" />
     <Compile Include="WebBrowserModel.cs" />
     <Compile Include="WebBrowserVM.cs" />
     <Page Include="Browser.xaml">
