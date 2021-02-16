@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVMRealization", "MVVMReal
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameCore", "GameCore\GameCore.csproj", "{9487620B-35F4-48F9-8506-BFD97E27F5E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternetBrowser", "InternetBrowser\InternetBrowser.csproj", "{1C100B66-CC6A-47A1-BA6C-14B557FAA07E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -104,6 +106,18 @@ Global
 		{9487620B-35F4-48F9-8506-BFD97E27F5E2}.Release|x64.Build.0 = Release|Any CPU
 		{9487620B-35F4-48F9-8506-BFD97E27F5E2}.Release|x86.ActiveCfg = Release|Any CPU
 		{9487620B-35F4-48F9-8506-BFD97E27F5E2}.Release|x86.Build.0 = Release|Any CPU
+		{1C100B66-CC6A-47A1-BA6C-14B557FAA07E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C100B66-CC6A-47A1-BA6C-14B557FAA07E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C100B66-CC6A-47A1-BA6C-14B557FAA07E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1C100B66-CC6A-47A1-BA6C-14B557FAA07E}.Debug|x64.Build.0 = Debug|Any CPU
+		{1C100B66-CC6A-47A1-BA6C-14B557FAA07E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1C100B66-CC6A-47A1-BA6C-14B557FAA07E}.Debug|x86.Build.0 = Debug|Any CPU
+		{1C100B66-CC6A-47A1-BA6C-14B557FAA07E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C100B66-CC6A-47A1-BA6C-14B557FAA07E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C100B66-CC6A-47A1-BA6C-14B557FAA07E}.Release|x64.ActiveCfg = Release|Any CPU
+		{1C100B66-CC6A-47A1-BA6C-14B557FAA07E}.Release|x64.Build.0 = Release|Any CPU
+		{1C100B66-CC6A-47A1-BA6C-14B557FAA07E}.Release|x86.ActiveCfg = Release|Any CPU
+		{1C100B66-CC6A-47A1-BA6C-14B557FAA07E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
