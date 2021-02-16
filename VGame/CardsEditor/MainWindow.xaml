@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CardsEditor"
         xmlns:view="clr-namespace:CardsEditor.View"
+        xmlns:browser="clr-namespace:InternetBrowser;assembly=InternetBrowser"
         xmlns:viewlvl="clr-namespace:CardsEditor.View.Level"
         xmlns:cardattach="clr-namespace:CardsEditor.View.CardsAttachLevel"
         mc:Ignorable="d"
@@ -168,7 +169,11 @@
 
                 </Grid>
             </TabItem>
-
+            <TabItem Header="Браузер">
+                <Grid>
+                    <browser:Browser/>
+                </Grid>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

@@ -18,14 +18,14 @@ namespace InternetBrowser
     /// <summary>
     /// Interaction logic for UserControl1.xaml
     /// </summary>
-    public partial class UserControl1 : UserControl
+    public partial class Browser : UserControl
     {
         public WebBrowserVM WebBrowserVM;
-        public UserControl1()
+        public Browser()
         {
             InitializeComponent();
-            WebBrowserVM = new WebBrowserVM(Browser);
-            Browser.DataContext = WebBrowserVM;
+            WebBrowserVM = new WebBrowserVM(MyBrowser);
+            MyBrowser.DataContext = WebBrowserVM;
         }
     }
 }

@@ -65,12 +65,12 @@
   <ItemGroup>
     <Compile Include="WebBrowserModel.cs" />
     <Compile Include="WebBrowserVM.cs" />
-    <Page Include="UserControl1.xaml">
+    <Page Include="Browser.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="UserControl1.xaml.cs">
-      <DependentUpon>UserControl1.xaml</DependentUpon>
+    <Compile Include="Browser.xaml.cs">
+      <DependentUpon>Browser.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
