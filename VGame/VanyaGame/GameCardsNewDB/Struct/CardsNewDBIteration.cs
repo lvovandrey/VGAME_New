@@ -7,6 +7,7 @@ using VGameCore.Struct;
 using VGameCore.Struct.Components;
 using VGameCore.Units;
 using VGameCore.Units.Components;
+using VGameCore.Abstract;
 
 namespace VanyaGame.GameCardsNewDB.Struct
 {

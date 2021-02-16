@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
-using VGameCore.Abstract;
-using VGameCore.Units.Components;
+using VGameCore.Units;
 
 namespace VanyaGame.GameCardsNewDB.Units.Components
 {

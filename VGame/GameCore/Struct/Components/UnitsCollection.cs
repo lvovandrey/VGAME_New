@@ -4,15 +4,16 @@ using System.Collections.Generic;
 using VGameCore.Units;
 using VGameCore.Units.Components;
 using System.Collections;
+using VGameCore.Abstract;
 
 namespace VGameCore.Struct.Components
 {
-    public class UnitsCollection<U> : Component where U : Unit
+    public class UnitsCollection<U> : Abstract.Component where U : Unit
     {
 
 
         #region constructors
-        public UnitsCollection(string name, IComponentContainer container) : base(name, container)
+        public UnitsCollection(string name, Abstract.IComponentContainer container) : base(name, container)
         {
             Units = new List<U>();
         }

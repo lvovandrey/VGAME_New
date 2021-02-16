@@ -11,7 +11,7 @@ namespace VanyaGame.GameCardsNewDB.Units.Components
     /// <summary>
     /// Определяет специфичные для Number методы показывания и исчезновения элементов с экрана
     /// </summary>
-    class CardShower : VGameCore.Abstract.Component
+    class CardShower : VGameCore.Units.Component
     {
         #region constructors
         public CardShower(string name, IComponentContainer container) : base(name, container)
