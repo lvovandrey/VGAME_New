@@ -53,9 +53,9 @@ namespace VGameCore.Struct.Components
     public class UserActivity : Component
     {
         #region constructors
-        public UserActivity(string name, IComponentContainer container) : base(name, container)
+        public UserActivity(string name, IComponentContainer container, TUserDoSomething UserDoSomethingEvent) : base(name, container)
         {
-            Game.UserActivity.UserDoSomethingEvent += UserDoSomethingEvent;
+           UserDoSomethingEvent += OnUserDoSomethingEvent;
         }
 
 
@@ -78,7 +78,7 @@ namespace VGameCore.Struct.Components
         /// <param name="mouse">Состояние мыши</param>
         /// <param name="mousebutton">Нажатая клавиша мыши</param>
         /// <param name="key">Нажатая клавиша клавиатуры</param>
-        private void UserDoSomethingEvent(MouseEventArgs mouse, MouseButtonEventArgs mousebutton, KeyEventArgs key)
+        private void OnUserDoSomethingEvent(MouseEventArgs mouse, MouseButtonEventArgs mousebutton, KeyEventArgs key)
         {
             foreach (UserActivityCommand R in Reactions)
                 if (R.ConditionExecution(mouse, mousebutton, key))

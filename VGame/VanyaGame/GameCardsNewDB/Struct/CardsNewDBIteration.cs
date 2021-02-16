@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Threading;
 using VanyaGame.GameCardsNewDB.Units;
-using VanyaGame.Struct;
-using VanyaGame.Struct.Components;
-using VanyaGame.Units;
-using VanyaGame.Units.Components;
+using VGameCore.Struct;
+using VGameCore.Struct.Components;
+using VGameCore.Units;
+using VGameCore.Units.Components;
 
 namespace VanyaGame.GameCardsNewDB.Struct
 {

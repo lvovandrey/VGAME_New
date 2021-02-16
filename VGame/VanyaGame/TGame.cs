@@ -6,15 +6,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.IO;
 using VanyaGame.PrevMenuNS;
-using VanyaGame.Struct;
-using VanyaGame.Struct.Components;
+using VGameCore;
+using VGameCore.Struct;
+using VGameCore.Struct.Components;
 using VanyaGame.Media;
 using VanyaGame.Media.Abstract;
-using VanyaGame.Abstract;
+using VGameCore.Abstract;
 using VanyaGame.GameCardsNewDB.Struct;
 using VanyaGame.Sets;
 using VanyaGame.Tools;
 using VanyaGame.GameCardsNewDB.Interface;
+using GameCore;
 
 namespace VanyaGame
 {

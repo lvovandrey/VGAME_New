@@ -2,8 +2,8 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using VanyaGame.Units.Components;
-using VanyaGame.Struct;
+using VGameCore.Units.Components;
+using VGameCore.Struct;
 using System.IO;
 using VanyaGame.GameCardsNewDB.Units.Components;
 using VanyaGame.Tools;
@@ -16,7 +16,7 @@ namespace VanyaGame.GameCardsNewDB.Units
 
 
 
-    public class CardUnit : VanyaGame.Units.Unit
+    public class CardUnit : VGameCore.Units.Unit
     {
         public Panel Box { get; set; }
         public Card Card { get; set; }

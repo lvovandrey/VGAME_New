@@ -13,15 +13,15 @@ using System.Windows.Threading;
 using VanyaGame.GameCardsNewDB.Tools;
 using VanyaGame.GameCardsNewDB.Units;
 using VanyaGame.GameCardsNewDB.Units.Components;
-using VanyaGame.Struct;
-using VanyaGame.Struct.Components;
+using VGameCore.Struct;
+using VGameCore.Struct.Components;
 using VanyaGame.ToolsShuffle;
-using VanyaGame.Units.Components;
-
+using VGameCore.Units.Components;
+using VGameCore;
 
 namespace VanyaGame.GameCardsNewDB.Struct
 {
-    public class CardsNewDBScene : VanyaGame.Struct.Scene
+    public class CardsNewDBScene : VGameCore.Struct.Scene
     {
         private UnitsCollection<CardUnit> UnitsCol; //For easy call this component 
         private CardUnit CurUnit; //Текущая карточка, которую нужно озвучить и отгадать
@@ -119,7 +119,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
             {
 
                 Game.Owner.WrapPanelMain.Children.Clear();
-                UnitsCol.Shuffle();
+                UnitsCol.Shuffle(Game.RandomGenerator);
                 var AllUnitsShuffled = new ListShuffle<CardUnit>().Shuffle(UnitsCol.GetAllUnits());
                 foreach (var u in AllUnitsShuffled)
                 {

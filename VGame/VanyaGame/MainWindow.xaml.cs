@@ -7,6 +7,8 @@ using System.Windows.Data;
 using System.Globalization;
 using VanyaGame.GameCardsNewDB.Tools;
 using System.IO;
+using GameCore;
+using VGameCore;
 
 namespace VanyaGame
 {

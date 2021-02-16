@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using VanyaGame.Units;
-using VanyaGame.Units.Components;
+using VGameCore.Units;
+using VGameCore.Units.Components;
 
 
 namespace VanyaGame.ZDebug

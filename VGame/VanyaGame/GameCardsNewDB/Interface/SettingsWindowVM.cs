@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
-using VanyaGame.Abstract;
+using VGameCore.Abstract;
 using VanyaGame.GameCardsNewDB.Tools;
 
 namespace VanyaGame.GameCardsNewDB.Interface

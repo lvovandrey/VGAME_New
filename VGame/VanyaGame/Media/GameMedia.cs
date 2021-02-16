@@ -9,7 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using VanyaGame.Media.Abstract;
-using VanyaGame.Struct.Components;
+using VGameCore.Struct.Components;
 using VanyaGame.Tools;
 
 namespace VanyaGame.Media

@@ -1630,6 +1630,10 @@
       <Project>{F0DE30DF-6BE3-4A3C-A721-5EC78A87950F}</Project>
       <Name>CardsGameNewDBRepository</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GameCore\GameCore.csproj">
+      <Project>{9487620b-35f4-48f9-8506-bfd97e27f5e2}</Project>
+      <Name>GameCore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MVVMRealization\MVVMRealization.csproj">
       <Project>{0BB085B8-39BA-4A18-B76B-DD5945E90006}</Project>
       <Name>MVVMRealization</Name>

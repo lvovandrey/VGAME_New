@@ -1,6 +1,8 @@
-﻿using System;
+﻿using GameCore;
+using System;
 using System.Windows;
 using System.Windows.Input;
+using VGameCore;
 
 namespace VanyaGame
 {

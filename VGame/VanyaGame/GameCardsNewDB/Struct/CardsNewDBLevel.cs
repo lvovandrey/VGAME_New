@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
-using VanyaGame.Struct;
-using VanyaGame.Struct.Components;
+using VGameCore.Struct;
+using VGameCore.Struct.Components;
 using System.Collections.ObjectModel;
 using VanyaGame.GameCardsNewDB.Tools;
 using System.ComponentModel;
@@ -14,6 +14,8 @@ using Model = CardsGameNewDBRepository.Model;
 using CardsGameNewDBRepository.Model;
 using CardsGameNewDBRepository;
 using VanyaGame.GameCardsNewDB.Interface;
+using GameCore;
+using VGameCore;
 
 namespace VanyaGame.GameCardsNewDB.Struct
 {
@@ -22,7 +24,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
     /// Данный класс переопределяет функционал стандартного класса. 
     /// По умолчанию ничего не меняется - просто вызываются одноименные методы базового класса
     /// </summary>
-    public class CardsNewDBLevel : VanyaGame.Struct.Level, INotifyPropertyChanged
+    public class CardsNewDBLevel : VGameCore.Struct.Level, INotifyPropertyChanged
     {
         public Model.Level DbLevelRecord;
 
@@ -105,7 +107,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
         public static void AddLevelsInPrevMenu()
         {
             Console.WriteLine("Add levels in PrevMenu");
-            foreach (VanyaGame.Struct.Level Level in Game.Levels)
+            foreach (VGameCore.Struct.Level Level in Game.Levels)
             {
                 Level.GetComponent<Loader>().LoadSets();
                 string filename = VanyaGame.Sets.Settings.GetInstance().DefaultImage;
@@ -142,7 +144,7 @@ namespace VanyaGame.GameCardsNewDB.Struct
             Console.WriteLine("Repack Levels");
             foreach (var level in DBTools.Context.Levels)
             {
-                VanyaGame.Struct.Level NewLevel = new CardsNewDBLevel(level);
+                VGameCore.Struct.Level NewLevel = new CardsNewDBLevel(level);
                 Game.Levels.Enqueue(NewLevel);
             }
             Console.WriteLine("End repack Levels");

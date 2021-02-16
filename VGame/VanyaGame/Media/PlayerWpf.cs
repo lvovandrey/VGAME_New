@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
-using VanyaGame.Abstract;
+using VGameCore.Abstract;
 using VanyaGame.Media.Abstract;
+using VGameCore;
 
 namespace VanyaGame.Media
 {

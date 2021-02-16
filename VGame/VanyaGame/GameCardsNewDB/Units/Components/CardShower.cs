@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Windows;
-using VanyaGame.Abstract;
-using VanyaGame.Units;
-using VanyaGame.Units.Components;
+using VGameCore;
+using VGameCore.Abstract;
+using VGameCore.Units;
+using VGameCore.Units.Components;
+using IComponentContainer = VGameCore.Units.IComponentContainer;
 
 namespace VanyaGame.GameCardsNewDB.Units.Components
 {
     /// <summary>
     /// Определяет специфичные для Number методы показывания и исчезновения элементов с экрана
     /// </summary>
-    class CardShower : Component
+    class CardShower : VGameCore.Abstract.Component
     {
         #region constructors
         public CardShower(string name, IComponentContainer container) : base(name, container)
