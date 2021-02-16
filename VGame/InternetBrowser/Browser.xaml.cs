@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CefSharp.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,9 +24,31 @@ namespace InternetBrowser
         public WebBrowserVM WebBrowserVM;
         public Browser()
         {
+            CefSettings settings = new CefSettings();
+            settings.CachePath = @"C:\CEFcookies";
+            CefSharp.Cef.Initialize(settings);
+
             InitializeComponent();
+
+
+
             WebBrowserVM = new WebBrowserVM(MyBrowser);
             MyBrowser.DataContext = WebBrowserVM;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            WebBrowserVM.CurURL = TextURL.Text;
+        }
+
+        private void TextURL_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter) WebBrowserVM.CurURL = TextURL.Text;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            WebBrowserVM.CurURL = "Youtube.com";
         }
     }
 }

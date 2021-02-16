@@ -8,6 +8,39 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <cef:ChromiumWebBrowser x:Name="MyBrowser"/>
+        <DockPanel>
+            <Grid Name="GridBrowser" DockPanel.Dock="Top">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="150"/>
+
+                </Grid.ColumnDefinitions>
+                <Button Content="{Binding txt}" Style="{x:Null}"
+                                Margin="5" Grid.Column="0" />
+                <Button Content="NEW LVL" Margin="5" Grid.Column="1"
+                                 Style="{x:Null}" />
+                <TextBox Name="TextURL"  
+                         Grid.Column="2"
+                         Text="{Binding Address, ElementName=MyBrowser, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
+                         Margin="5" FontSize="16" KeyDown="TextURL_KeyDown" />
+                <Button Content="GO!" Margin="5" Grid.Column="3" Click="Button_Click" Style="{x:Null}" />
+
+
+                <Button Content="&lt;" Command="{Binding WebBrowser.BackCommand, ElementName=MyBrowser}" Style="{x:Null}" Margin="5" Grid.Column="4" />
+                <Button Content="&gt;" Command="{Binding WebBrowser.ForwardCommand, ElementName=MyBrowser}" Style="{x:Null}"  Margin="5" Grid.Column="5" />
+                <Button Content="Youtube" Margin="5" Grid.Column="6" Style="{x:Null}" Click="Button_Click_1" />
+            </Grid>
+
+            <Grid Background="DarkOrange" Margin="5">
+                <cef:ChromiumWebBrowser x:Name="MyBrowser"  Address="https://www.youtube.com/watch?v=Ljhp_GU3BNk"/>
+            </Grid>
+        </DockPanel>
+        
     </Grid>
 </UserControl>
