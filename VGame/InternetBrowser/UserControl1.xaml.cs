@@ -20,9 +20,12 @@ namespace InternetBrowser
     /// </summary>
     public partial class UserControl1 : UserControl
     {
+        public WebBrowserVM WebBrowserVM;
         public UserControl1()
         {
             InitializeComponent();
+            WebBrowserVM = new WebBrowserVM(Browser);
+            Browser.DataContext = WebBrowserVM;
         }
     }
 }
