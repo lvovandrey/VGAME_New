@@ -290,6 +290,7 @@ namespace CardsEditor.ViewModel
             if (browserWindow == null)
             {
                 browserWindow = new BrowserWindow();
+                browserWindow.Owner = mainWindow;
                 browserWindow.Browser.InitBrowser();
                 browserWindow.Browser.ChoiceUrl += Browser_ChoiceUrl;
             }
@@ -376,6 +377,7 @@ namespace CardsEditor.ViewModel
         public void OnWindowClosing()
         {
             Settings.GetInstance().ExportSettingsToXML(ConfigurationTools.SettingsFilename);
+            
         }
         #endregion
 

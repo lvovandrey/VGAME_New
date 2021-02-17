@@ -175,11 +175,6 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Header="Браузер">
-                <Grid>
-                    <browser:Browser/>
-                </Grid>
-            </TabItem>
         </TabControl>
     </Grid>
 </Window>

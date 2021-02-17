@@ -26,8 +26,11 @@ namespace CardsEditor
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            e.Cancel = true;
-            this.Hide();
+            if (sender == this)
+            {
+                e.Cancel = true;
+                this.Hide();
+            }
         }
     }
 }
