@@ -27,13 +27,21 @@ namespace InternetBrowser
 
         public Browser()
         {
-            CefSettings settings = new CefSettings();
-            settings.CachePath = @"C:\CEFcookies";
-            CefSharp.Cef.Initialize(settings);
+
 
             InitializeComponent();
 
 
+        }
+
+        public void InitBrowser()
+        {
+            if (!CefSharp.Cef.IsInitialized) // Check before init
+            {   
+                CefSettings settings = new CefSettings();
+                settings.CachePath = @"C:\CEFcookies";
+                CefSharp.Cef.Initialize(settings);
+            }
 
             WebBrowserVM = new WebBrowserVM(MyBrowser);
             LifespanHandler life = new LifespanHandler();

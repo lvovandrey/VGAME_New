@@ -290,6 +290,7 @@ namespace CardsEditor.ViewModel
             if (browserWindow == null)
             {
                 browserWindow = new BrowserWindow();
+                browserWindow.Browser.InitBrowser();
                 browserWindow.Browser.ChoiceUrl += Browser_ChoiceUrl;
             }
             browserWindow.Show();
