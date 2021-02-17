@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="InternetBrowser.Browser"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:cef="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+             xmlns:local="clr-namespace:InternetBrowser"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <DockPanel>
+            <Grid Name="GridBrowser" DockPanel.Dock="Top">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="50"/>
+
+                </Grid.ColumnDefinitions>
+                <Button Command="{Binding WebBrowser.BackCommand, ElementName=MyBrowser}" Style="{x:Null}" Margin="5" Grid.Column="0">
+                    <Image Source="Images/Arrow-Left.png" Height="25"/>
+                </Button>
+                <Button  Command="{Binding WebBrowser.ForwardCommand, ElementName=MyBrowser}" Style="{x:Null}"  Margin="5" Grid.Column="1" >
+                    <Image Source="Images/Arrow-Right.png" Height="25"/>
+                </Button>
+                <TextBox Name="TextURL"  Grid.Column="2"
+                         Text="{Binding Address, ElementName=MyBrowser, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
+                         Margin="5" FontSize="16" KeyDown="TextURL_KeyDown" />
+                <Button ToolTip="Go" Margin="5" Grid.Column="3" Click="ButtonGo_Click" Style="{x:Null}" >
+                    <Image Source="Images/Search-32.png" Height="25"/>
+                </Button>
+
+
+
+                <Button ToolTip="Выбрать эту картинку" Margin="5" Grid.Column="4" Style="{x:Null}" Click="ButtonChoiceUrl_Click" >
+                    <Image Source="Images/Link-Add.png" Height="25"/>
+                </Button>
+            </Grid>
+
+            <Grid Background="DarkOrange" Margin="5">
+                <cef:ChromiumWebBrowser x:Name="MyBrowser"  Address="https://yandex.ru/images/"/>
+            </Grid>
+        </DockPanel>
+        
+    </Grid>
+</UserControl>
