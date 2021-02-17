@@ -287,9 +287,18 @@ namespace CardsEditor.ViewModel
         private static BrowserWindow browserWindow;
         private void CreateCardsFromInternet(object obj)
         {
-            if (browserWindow == null) browserWindow = new BrowserWindow();
+            if (browserWindow == null)
+            {
+                browserWindow = new BrowserWindow();
+                browserWindow.Browser.ChoiceUrl += Browser_ChoiceUrl;
+            }
             browserWindow.Show();
             browserWindow.Activate();
+        }
+
+        private void Browser_ChoiceUrl(string obj)
+        {
+            if (!(Path.GetExtension(obj) == ".jpg")) System.Windows.MessageBox.Show("Надо выбрать картинку");  
         }
 
         public static bool IsBigVideoFilesCheckOk(string[] Filenames)
@@ -735,6 +744,20 @@ namespace CardsEditor.ViewModel
             }
         }
 
+        private RelayCommand createCardsFromInternetCommand;
+        public RelayCommand CreateCardsFromInternetCommand
+
+        {
+            get
+            {
+                return createCardsFromInternetCommand ?? (createCardsFromInternetCommand = new RelayCommand
+                    (obj =>
+                    {
+                        CreateCardsFromInternet(null);
+                    }, IsDBLoaded));
+            }
+        }
+        
 
         #endregion
 

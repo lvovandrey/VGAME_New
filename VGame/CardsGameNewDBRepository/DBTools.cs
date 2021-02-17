@@ -208,7 +208,7 @@ namespace CardsGameNewDBRepository
                      .SqlQuery<string>(@"SELECT name FROM sqlite_master WHERE type='table' AND name='" + tableName + "';")
                      .SingleOrDefault() != null;
             }
-            catch
+            catch(Exception e)
             {
                 MessageBox.Show("Ошибка обращения к базе данных " + DBFilename, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;

@@ -22,6 +22,9 @@ namespace InternetBrowser
     public partial class Browser : UserControl
     {
         public WebBrowserVM WebBrowserVM;
+
+        public event Action<string> ChoiceUrl;
+
         public Browser()
         {
             CefSettings settings = new CefSettings();
@@ -45,7 +48,7 @@ namespace InternetBrowser
              
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ButtonGo_Click(object sender, RoutedEventArgs e)
         {
             WebBrowserVM.CurURL = TextURL.Text;
         }
@@ -55,9 +58,9 @@ namespace InternetBrowser
             if (e.Key == Key.Enter) WebBrowserVM.CurURL = TextURL.Text;
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void ButtonChoiceUrl_Click(object sender, RoutedEventArgs e)
         {
-            WebBrowserVM.CurURL = "Youtube.com";
+            ChoiceUrl(WebBrowserVM.CurURL);
         }
     }
 }

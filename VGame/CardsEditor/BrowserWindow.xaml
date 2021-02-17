@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:CardsEditor"
         xmlns:internet="clr-namespace:InternetBrowser;assembly=InternetBrowser"
         mc:Ignorable="d"
-        Title="Браузер" Height="450" Width="800">
+        Title="Браузер" Height="450" Width="800" Closing="Window_Closing">
     <Grid>
-        <internet:Browser/>
+        <internet:Browser x:Name="Browser"/>
     </Grid>
 </Window>

@@ -28,13 +28,13 @@
                 <TextBox Name="TextURL"  Grid.Column="2"
                          Text="{Binding Address, ElementName=MyBrowser, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
                          Margin="5" FontSize="16" KeyDown="TextURL_KeyDown" />
-                <Button ToolTip="Go" Margin="5" Grid.Column="3" Click="Button_Click" Style="{x:Null}" >
+                <Button ToolTip="Go" Margin="5" Grid.Column="3" Click="ButtonGo_Click" Style="{x:Null}" >
                     <Image Source="Images/Search-32.png" Height="25"/>
                 </Button>
 
 
 
-                <Button ToolTip="Выбрать эту картинку" Margin="5" Grid.Column="4" Style="{x:Null}" Click="Button_Click_1" >
+                <Button ToolTip="Выбрать эту картинку" Margin="5" Grid.Column="4" Style="{x:Null}" Click="ButtonChoiceUrl_Click" >
                     <Image Source="Images/Link-Add.png" Height="25"/>
                 </Button>
             </Grid>
