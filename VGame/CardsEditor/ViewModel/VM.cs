@@ -307,19 +307,20 @@ namespace CardsEditor.ViewModel
         {
             if (!(Miscellanea.ExstentionCheck(filename, new string[] { ".jpg", ".png", ".gif", ".bmp", ".avi", ".wmv" })))
             {
-                System.Windows.MessageBox.Show(@"Надо выбрать прямой путь к картинке с расширением 
-.jpg, .png, .gif или .bmp либо видеофайлу с расширением .avi или .wmv. 
-Т.е. чтобы в адресной строке браузера адрес заканчивался этим расширением: 
-например так http:\\www.somesite.ru\image.jpg",
-                    "Неверное расширение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                var res = System.Windows.MessageBox.Show(@"Надо выбрать прямой путь к картинке с расширением "+
+".jpg, .png, .gif или .bmp либо видеофайлу с расширением .avi или .wmv. "+ 
+"Т.е. чтобы в адресной строке браузера адрес заканчивался этим расширением: "+ 
+@"например так http:\\www.somesite.ru\image.jpg.",
+                    "Неверное расширение", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if(res == MessageBoxResult.Yes)
                 return;
             }
-    //        if (!File.Exists(filename))
-    //        {
-    //            System.Windows.MessageBox.Show(@"По указанному адресу файл не обнаружен.",
-    //"Файл не найден", MessageBoxButton.OK, MessageBoxImage.Warning);
-    //            return;
-    //        }
+            if (!Miscellanea.UrlExists(filename))
+            {
+                System.Windows.MessageBox.Show(@"По указанному адресу файл не обнаружен.",
+    "Файл не найден", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
             CreateCardsFromArrayOfImgFilenames(new string[] { filename });
         }
 

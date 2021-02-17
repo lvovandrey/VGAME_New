@@ -73,13 +73,14 @@ namespace CardsEditor.ViewModel
             {
                 string filename = ImageAdressURI.LocalPath;
                 string extention = Path.GetExtension(filename);
-                if (File.Exists(filename) && (extention == ".jpg" || extention == ".bmp" || extention == ".png" || extention == ".gif"))
+                if (File.Exists(filename)  && (extention == ".jpg" || extention == ".bmp" || extention == ".png" || extention == ".gif"))
                     using (System.Drawing.Image objImage = System.Drawing.Image.FromFile(filename))
                     {
                         if (objImage.Height <= 40 && objImage.Width <= 40)
                             return Miscellanea.PixelsToPoints(objImage.Height, Miscellanea.LengthDirection.Vertical);
                         else return 500;
                     }
+                else if(Miscellanea.UrlExists(Card.ImageAddress) ) return 500;
                 else return 0;
             }
         }
