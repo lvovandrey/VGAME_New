@@ -284,6 +284,14 @@ namespace CardsEditor.ViewModel
             }
         }
 
+        private static BrowserWindow browserWindow;
+        private void CreateCardsFromInternet(object obj)
+        {
+            if (browserWindow == null) browserWindow = new BrowserWindow();
+            browserWindow.Show();
+            browserWindow.Activate();
+        }
+
         public static bool IsBigVideoFilesCheckOk(string[] Filenames)
         {
 

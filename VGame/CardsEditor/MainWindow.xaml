@@ -63,6 +63,12 @@
                         <Image Source="Images/Folder-Picture.png" />
                     </MenuItem.Icon>
                 </MenuItem>
+                <MenuItem Header="Создать карточки из файлов в Интернете..."
+                          Command="{Binding CreateCardsFromInternetCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="Images/Earth-round-32.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
 
             </MenuItem>
             <MenuItem Header="Звук">
