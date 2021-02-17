@@ -91,7 +91,20 @@ namespace CardsEditor.Tools
             return bitrate;
         }
 
-
+        public static bool ExstentionCheck(string filename, string[] extentions)
+        {
+            bool result = false;
+            string fileExtention = Path.GetExtension(filename);
+            foreach (var extention in extentions)
+            {
+                if (fileExtention == extention)
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
 
     }
 }

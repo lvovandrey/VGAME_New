@@ -270,18 +270,23 @@ namespace CardsEditor.ViewModel
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     Filenames = @openFileDialog.FileNames;
-                    if (Filenames.Length < 1) return;
-                    if (!IsBigImageFilesCheckOk(Filenames) || !IsBigVideoFilesCheckOk(Filenames)) return;
-                    //добавление выбранных файлов
-                    foreach (var filename in Filenames)
-                    {
-                        AddCard(Path.GetFileNameWithoutExtension(filename),
-                            Path.GetFileNameWithoutExtension(filename),
-                            filename, "Нет описания");
-                    }
-                    OnPropertyChanged("CardVMs");
+                    CreateCardsFromArrayOfImgFilenames(Filenames);
                 }
             }
+        }
+
+        private void CreateCardsFromArrayOfImgFilenames(string[] Filenames)
+        {
+            if (Filenames.Length < 1) return;
+            if (!IsBigImageFilesCheckOk(Filenames) || !IsBigVideoFilesCheckOk(Filenames)) return;
+            //добавление выбранных файлов
+            foreach (var filename in Filenames)
+            {
+                AddCard(Path.GetFileNameWithoutExtension(filename),
+                    Path.GetFileNameWithoutExtension(filename),
+                    filename, "Нет описания");
+            }
+            OnPropertyChanged("CardVMs");
         }
 
         private static BrowserWindow browserWindow;
@@ -298,9 +303,24 @@ namespace CardsEditor.ViewModel
             browserWindow.Activate();
         }
 
-        private void Browser_ChoiceUrl(string obj)
+        private void Browser_ChoiceUrl(string filename)
         {
-            if (!(Path.GetExtension(obj) == ".jpg")) System.Windows.MessageBox.Show("Надо выбрать картинку");  
+            if (!(Miscellanea.ExstentionCheck(filename, new string[] { ".jpg", ".png", ".gif", ".bmp", ".avi", ".wmv" })))
+            {
+                System.Windows.MessageBox.Show(@"Надо выбрать прямой путь к картинке с расширением 
+.jpg, .png, .gif или .bmp либо видеофайлу с расширением .avi или .wmv. 
+Т.е. чтобы в адресной строке браузера адрес заканчивался этим расширением: 
+например так http:\\www.somesite.ru\image.jpg",
+                    "Неверное расширение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+    //        if (!File.Exists(filename))
+    //        {
+    //            System.Windows.MessageBox.Show(@"По указанному адресу файл не обнаружен.",
+    //"Файл не найден", MessageBoxButton.OK, MessageBoxImage.Warning);
+    //            return;
+    //        }
+            CreateCardsFromArrayOfImgFilenames(new string[] { filename });
         }
 
         public static bool IsBigVideoFilesCheckOk(string[] Filenames)
@@ -313,7 +333,7 @@ namespace CardsEditor.ViewModel
                 var ext = Path.GetExtension(filename);
                 if (!File.Exists(filename) && (ext != ".avi" || ext != ".wmv")) continue;
                 var Bitrate = Miscellanea.GetVideoBitRate(filename);
-                if (Bitrate > Settings.GetInstance().MaxVideoFileBitrate) BigBitrateFiles.Add(Path.GetFileName(filename), Bitrate/1024);
+                if (Bitrate > Settings.GetInstance().MaxVideoFileBitrate) BigBitrateFiles.Add(Path.GetFileName(filename), Bitrate / 1024);
             }
             if (BigBitrateFiles.Count > 0)
             {
@@ -377,7 +397,7 @@ namespace CardsEditor.ViewModel
         public void OnWindowClosing()
         {
             Settings.GetInstance().ExportSettingsToXML(ConfigurationTools.SettingsFilename);
-            
+
         }
         #endregion
 
@@ -760,7 +780,7 @@ namespace CardsEditor.ViewModel
                     }, IsDBLoaded));
             }
         }
-        
+
 
         #endregion
 
