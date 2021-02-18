@@ -16,7 +16,7 @@ using System.Windows.Forms;
 namespace CardsEditor.ViewModel
 {
     public class VM : INPCBase
-    {
+    { 
         #region Constructors
         public VM(MainWindow _mainWindow)
         {
