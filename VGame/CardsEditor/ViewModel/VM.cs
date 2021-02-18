@@ -296,8 +296,8 @@ namespace CardsEditor.ViewModel
             {
                 browserWindow = new BrowserWindow();
                 browserWindow.Owner = mainWindow;
-                browserWindow.Browser.InitBrowser(Path.Combine(Settings.GetInstance().LocalAppDataDir, "BrowserCacheFolder"));
-                browserWindow.Browser.ChoiceUrl += Browser_ChoiceUrl;
+                browserWindow.INNERBROWSER.InitBrowser(Path.Combine(Settings.GetInstance().LocalAppDataDir, "BrowserCacheFolder"));
+                browserWindow.INNERBROWSER.ChoiceUrl += Browser_ChoiceUrl;
             }
             browserWindow.Show();
             browserWindow.Activate();

@@ -39,7 +39,7 @@ namespace InternetBrowser
             if (!CefSharp.Cef.IsInitialized) // Check before init
             {   
                 CefSettings settings = new CefSettings();
-                settings.CachePath = @"C:\CEFcookies";
+                settings.CachePath = @CachePath;
                 CefSharp.Cef.Initialize(settings);
             }
 
