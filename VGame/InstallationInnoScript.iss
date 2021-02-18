@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "VGame"
-#define MyAppVersion "1.0.0.3"
+#define MyAppVersion "1.0.1.1"
 #define MyAppPublisher "Lvov A.A."
 #define MyAppExeName "VanyaGame.exe"
 
@@ -38,7 +38,7 @@ Source: "I:\VGame\Union\VanyaGame.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "I:\VGame\Union\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "I:\VGame\Resourses\*"; DestDir: "{localappdata}\VGame"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "I:\VGame\InstallationTools\*"; DestDir: "{tmp}"; Flags: ignoreversion recursesubdirs createallsubdirs deleteafterinstall
-Source: "I:\VGame\dotNet4.5.exe"; DestDir: "{tmp}"; Flags: ignoreversion deleteafterinstall; Check: IsRequiredDotNetDetectedSilence
+Source: "I:\VGame\dotNet4.5.2.exe"; DestDir: "{tmp}"; Flags: ignoreversion deleteafterinstall; Check: IsRequiredDotNetDetectedSilence
 Source: "I:\VGame\RHVoice-voice-Russian-Elena-v4.2.9-setup.exe"; DestDir: "{tmp}"; Flags: ignoreversion deleteafterinstall;  Tasks: ttsvoice
 
 [Icons]
@@ -49,7 +49,7 @@ Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\VanyaGame.exe"; Tasks: de
 Name: "{commondesktop}\Редактор БД карточек"; Filename: "{app}\CardsEditor.exe"; Tasks: desktopicon
 
 [Run]
-Filename: "{tmp}\dotNet4.5.exe"; Check: IsRequiredDotNetDetected
+Filename: "{tmp}\dotNet4.5.2.exe"; Check: IsRequiredDotNetDetected
 Filename: "{tmp}\RHVoice-voice-Russian-Elena-v4.2.9-setup.exe"; Tasks: ttsvoice
 Filename: "{tmp}\InstallationTools.exe"; Parameters: """{localappdata}\VGame\VGame.Config.xml"" ""{localappdata}\VGame\CardsEditor.Config.xml"" ""{localappdata}\VGame"" ""{localappdata}\VGame\Data\Fruits.db"""
 
@@ -130,12 +130,12 @@ end;
 function IsRequiredDotNetDetected(): boolean;
 begin
 
-  if not IsDotNetDetected('v4.5', 378389) then
+  if not IsDotNetDetected('v4.5', 379893) then
     begin
-    if MsgBox('{#MyAppName} требует установки Microsoft .NET Framework 4.5'#13#13
+    if MsgBox('{#MyAppName} требует установки Microsoft .NET Framework 4.5.2'#13#13
               'На Вашем компьютере данный пакет не установлен.'#13#13
               'Вы можете установить его с помощью данного инсталлятора сейчас или позже самостоятельно с сайта Microsoft.'#13#13
-              'Установить .NET Framework 4.5 прямо сейчас? ', mbConfirmation, MB_YESNO) = IDYES then
+              'Установить .NET Framework 4.5.2 прямо сейчас? ', mbConfirmation, MB_YESNO) = IDYES then
         begin
             result:= true;
             Exit;
@@ -149,7 +149,7 @@ end;
 //-----------------------------------------------------------------------------
 function IsRequiredDotNetDetectedSilence(): boolean;
 begin
-  result:= not IsDotNetDetected('v4.5', 378389); 
+  result:= not IsDotNetDetected('v4.5', 379893); 
 end;
 
 //-----------------------------------------------------------------------------
