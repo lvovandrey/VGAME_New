@@ -296,7 +296,7 @@ namespace CardsEditor.ViewModel
             {
                 browserWindow = new BrowserWindow();
                 browserWindow.Owner = mainWindow;
-                browserWindow.Browser.InitBrowser();
+                browserWindow.Browser.InitBrowser(Path.Combine(Settings.GetInstance().LocalAppDataDir, "BrowserCacheFolder"));
                 browserWindow.Browser.ChoiceUrl += Browser_ChoiceUrl;
             }
             browserWindow.Show();
@@ -308,10 +308,10 @@ namespace CardsEditor.ViewModel
             if (!(Miscellanea.ExstentionCheck(filename, new string[] { ".jpg", ".png", ".gif", ".bmp", ".avi", ".wmv" })))
             {
                 var res = System.Windows.MessageBox.Show(@"Надо выбрать прямой путь к картинке с расширением "+
-".jpg, .png, .gif или .bmp либо видеофайлу с расширением .avi или .wmv. "+ 
-"Т.е. чтобы в адресной строке браузера адрес заканчивался этим расширением: "+ 
-@"например так http:\\www.somesite.ru\image.jpg.",
-                    "Неверное расширение", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                            ".jpg, .png, .gif или .bmp либо видеофайлу с расширением .avi или .wmv. "+ 
+                            "Т.е. чтобы в адресной строке браузера адрес заканчивался этим расширением: "+ 
+                            @"например так http:\\www.somesite.ru\image.jpg.",
+                            "Неверное расширение", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if(res == MessageBoxResult.Yes)
                 return;
             }

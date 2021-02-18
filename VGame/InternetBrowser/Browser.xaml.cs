@@ -34,7 +34,7 @@ namespace InternetBrowser
 
         }
 
-        public void InitBrowser()
+        public void InitBrowser(string CachePath)
         {
             if (!CefSharp.Cef.IsInitialized) // Check before init
             {   

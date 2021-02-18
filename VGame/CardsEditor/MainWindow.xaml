@@ -131,9 +131,6 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Header="Image">
-                <Image Source="http://900igr.net/up/datas/246534/017.jpg"/>
-            </TabItem>
             <TabItem Header="Заполнение уровней">
                 <Grid>
                     <Grid.ColumnDefinitions>
