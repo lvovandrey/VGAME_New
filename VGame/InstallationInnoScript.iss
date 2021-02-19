@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "VGame"
-#define MyAppVersion "1.0.1.1"
+#define MyAppVersion "1.0.1.2"
 #define MyAppPublisher "Lvov A.A."
 #define MyAppExeName "VanyaGame.exe"
 
@@ -40,6 +40,8 @@ Source: "I:\VGame\Resourses\*"; DestDir: "{localappdata}\VGame"; Flags: ignoreve
 Source: "I:\VGame\InstallationTools\*"; DestDir: "{tmp}"; Flags: ignoreversion recursesubdirs createallsubdirs deleteafterinstall
 Source: "I:\VGame\dotNet4.5.2.exe"; DestDir: "{tmp}"; Flags: ignoreversion deleteafterinstall; Check: IsRequiredDotNetDetectedSilence
 Source: "I:\VGame\RHVoice-voice-Russian-Elena-v4.2.9-setup.exe"; DestDir: "{tmp}"; Flags: ignoreversion deleteafterinstall;  Tasks: ttsvoice
+Source: "I:\VGame\vc_redist.x86.exe"; DestDir: "{tmp}"; Flags: ignoreversion deleteafterinstall;  
+
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\VanyaGame.exe"
@@ -50,6 +52,7 @@ Name: "{commondesktop}\Редактор БД карточек"; Filename: "{app}\CardsEditor.exe";
 
 [Run]
 Filename: "{tmp}\dotNet4.5.2.exe"; Check: IsRequiredDotNetDetected
+Filename: "{tmp}\vc_redist.x86.exe";
 Filename: "{tmp}\RHVoice-voice-Russian-Elena-v4.2.9-setup.exe"; Tasks: ttsvoice
 Filename: "{tmp}\InstallationTools.exe"; Parameters: """{localappdata}\VGame\VGame.Config.xml"" ""{localappdata}\VGame\CardsEditor.Config.xml"" ""{localappdata}\VGame"" ""{localappdata}\VGame\Data\Fruits.db"""
 
