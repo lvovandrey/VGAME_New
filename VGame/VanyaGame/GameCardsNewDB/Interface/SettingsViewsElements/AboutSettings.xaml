@@ -5,7 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:VanyaGame.GameCardsNewDB.Interface.SettingsViewsElements"
              mc:Ignorable="d" 
-             d:DesignHeight="3390" d:DesignWidth="710"  x:Name="TextStackPanel">
+             d:DesignHeight="339" d:DesignWidth="710"  x:Name="TextStackPanel">
+    
+
     <Grid>
         <GroupBox Header="Справка" >
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
@@ -27,33 +29,33 @@
                             <StackPanel Grid.Row="10" Grid.Column="1">
                                 <TextBlock  Margin="10 -5 0 0" Text="Copyright © Львов А.А., 2021. Все права защищены. "/>
                                 <TextBlock Margin="10 20 0 0" TextWrapping="Wrap" TextAlignment="Justify"
-                                           Width="590" HorizontalAlignment="Left" 
+                                           Width="570" HorizontalAlignment="Left" 
                                            Text="VGame - это небольшой проект, предназначенный для создания развивающих игр с карточками для детей младшего возраста. Основная цель проекта - помощь в организации и предъявлении дидактических материалов родителям, воспитателям и учителям детей с РАС. К карточкам PECS данный проект отношения не имеет, но возможно в будущем они могут быть использованы в нем. Возможно VGame также будет полезен в развитии всем детям дошкольного возраста."/>
                                 <TextBlock Margin="10 10 0 0" TextWrapping="Wrap" TextAlignment="Justify"
-                                           Width="590" HorizontalAlignment="Left" 
+                                           HorizontalAlignment="Left" 
                                            Text="Контакты: Львов А.А. "/>
-                                <TextBlock Margin="10 10 0 0" TextWrapping="Wrap" TextAlignment="Justify"
-                                           Width="590" HorizontalAlignment="Left" 
+                                <TextBox   Margin="10 10 0 0" BorderBrush="{x:Null}"  IsReadOnly="True"
+                                           HorizontalAlignment="Left" Background="{x:Null}"
                                            TextDecorations="Underline" Foreground="Blue"
                                            x:Name="TextBlockEmail"
-                                           Text="lvovandrey@mail.ru" ToolTip="Скопировать адрес можно нажав правую клавишу мыши">
-                                    <TextBlock.ContextMenu>
+                                           Text="lvovandrey@mail.ru" ToolTip="Скопировать адрес можно нажав правую клавишу мыши" BorderThickness="0">
+                                    <TextBox.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Header="Копировать" 
-                                                      Icon="/VanyaGame;component/GameCardsNewDB/Images/pictogramm/Page-Copy.png" 
                                                       Command="{Binding CopyTextToClipboard}" 
-                                                      CommandParameter="{Binding }"></MenuItem>
+                                                      CommandParameter="{Binding ElementName=TextBlockEmail, Path=Text}">
+                                            </MenuItem>
                                         </ContextMenu>
-                                    </TextBlock.ContextMenu>
-                                </TextBlock>
+                                    </TextBox.ContextMenu>
+                                </TextBox>
 
 
 
                             </StackPanel>
                         </Grid>
                     </GroupBox>
-
-                    <Button Height="28" Width="200" Margin="20 10 10 0" Command="{Binding ClearRecentlyOpenDBFilenamesCommand}"
+                    <StackPanel Orientation="Horizontal">
+                    <Button Height="28" Width="200" Margin="10 10 5 0" Command="{Binding ClearRecentlyOpenDBFilenamesCommand}"
                             HorizontalAlignment="Left">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/VanyaGame;component/GameCardsNewDB/Images/pictogramm/Question.png"  Margin="-22 0 0 0"/>
@@ -61,13 +63,14 @@
                         </StackPanel>
                     </Button>
 
-                    <Button Height="28" Width="200" Margin="20 10 10 0" Command="{Binding ClearRecentlyOpenDBFilenamesCommand}"
+                    <Button Height="28" Width="200" Margin="5 10 5 0" Command="{Binding ClearRecentlyOpenDBFilenamesCommand}"
                             HorizontalAlignment="Left">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/VanyaGame;component/GameCardsNewDB/Images/pictogramm/License-Management.png"  Margin="-22 0 0 0"/>
                             <TextBlock Text="Лицензия" Margin="10 3 0 0"/>
                         </StackPanel>
                     </Button>
+                    </StackPanel>
 
                 </StackPanel>
 

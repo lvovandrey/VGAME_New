@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVVMRealization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,5 +25,11 @@ namespace VanyaGame.GameCardsNewDB.Interface.SettingsViewsElements
         {
             InitializeComponent();
         }
+
+        
+
     }
+
+
+
 }
