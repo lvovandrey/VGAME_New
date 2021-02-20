@@ -43,7 +43,7 @@
                                         <ContextMenu>
                                             <MenuItem Header="Копировать" 
                                                       Command="{Binding CopyTextToClipboard}" 
-                                                      CommandParameter="{Binding ElementName=TextBlockEmail, Path=Text}">
+                                                      CommandParameter="lvovandrey@mail.ru">
                                             </MenuItem>
                                         </ContextMenu>
                                     </TextBox.ContextMenu>
@@ -55,7 +55,7 @@
                         </Grid>
                     </GroupBox>
                     <StackPanel Orientation="Horizontal">
-                    <Button Height="28" Width="200" Margin="10 10 5 0" Command="{Binding ClearRecentlyOpenDBFilenamesCommand}"
+                    <Button Height="28" Width="200" Margin="10 10 5 0" Command="{Binding OpenManualCommand}"
                             HorizontalAlignment="Left">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/VanyaGame;component/GameCardsNewDB/Images/pictogramm/Question.png"  Margin="-22 0 0 0"/>
@@ -63,7 +63,7 @@
                         </StackPanel>
                     </Button>
 
-                    <Button Height="28" Width="200" Margin="5 10 5 0" Command="{Binding ClearRecentlyOpenDBFilenamesCommand}"
+                        <Button Height="28" Width="200" Margin="5 10 5 0" Command="{Binding OpenLicenseInfoFileCommand}"
                             HorizontalAlignment="Left">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/VanyaGame;component/GameCardsNewDB/Images/pictogramm/License-Management.png"  Margin="-22 0 0 0"/>

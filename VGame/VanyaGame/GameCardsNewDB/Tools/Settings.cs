@@ -692,6 +692,34 @@ namespace VanyaGame.GameCardsNewDB.Tools
             }
         }
 
+        [XmlIgnore]
+        public string ManualFilename
+        {
+            get
+            {
+                return Path.Combine(VanyaGame.Sets.Settings.GetInstance().LocalAppDataDir, "Manual.docx");
+            }           
+        }
+
+        [XmlIgnore]
+        public string LicenseInfoFilename
+        {
+            get
+            {
+                return Path.Combine(VanyaGame.Sets.Settings.GetInstance().LocalAppDataDir, "License.rtf");
+            }
+        }
+        
+        [XmlIgnore]
+        public string LicenseFilename
+        {
+            get
+            {
+                return Path.Combine(VanyaGame.Sets.Settings.GetInstance().LocalAppDataDir, "License GNU GPL v3.rtf");
+            }
+        }
+        
+
         public void ExportSettingsToXML(string filename)
         {
             if (!Directory.Exists(Path.GetDirectoryName(filename)))

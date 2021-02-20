@@ -12,6 +12,7 @@ using System.Windows;
 using System.Windows.Forms;
 using VGameCore.Abstract;
 using VanyaGame.GameCardsNewDB.Tools;
+using System.Diagnostics;
 
 namespace VanyaGame.GameCardsNewDB.Interface
 {
@@ -725,6 +726,32 @@ namespace VanyaGame.GameCardsNewDB.Interface
                   {
                       if (obj is string)
                           System.Windows.Clipboard.SetText(obj as string);
+                  }));
+            }
+        }
+
+        private RelayCommand openManualCommand;
+        public RelayCommand OpenManualCommand
+        {
+            get
+            {
+                return openManualCommand ??
+                  (openManualCommand = new RelayCommand(obj =>
+                  {
+                      Process.Start(Settings.GetInstance().ManualFilename);
+                  }));
+            }
+        }
+
+        private RelayCommand openLicenseInfoFileCommand;
+        public RelayCommand OpenLicenseInfoFileCommand
+        {
+            get
+            {
+                return openLicenseInfoFileCommand ??
+                  (openLicenseInfoFileCommand = new RelayCommand(obj =>
+                  {
+                      Process.Start(Settings.GetInstance().LicenseInfoFilename);
                   }));
             }
         }
