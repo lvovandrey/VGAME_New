@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="VanyaGame.GameCardsNewDB.Interface.SettingsViewsElements.AboutSettings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VanyaGame.GameCardsNewDB.Interface.SettingsViewsElements"
+             mc:Ignorable="d" 
+             d:DesignHeight="3390" d:DesignWidth="710"  x:Name="TextStackPanel">
+    <Grid>
+        <GroupBox Header="Справка" >
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+
+
+                <StackPanel>
+                    <GroupBox Header="О программе" Margin="5">
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Image Source="/VanyaGame;component/Images/book-icon.ico" Height="32" Width="32" />
+                            <TextBlock VerticalAlignment="Center" Margin="10 0 0 0" FontSize="16"  Grid.Column="1" Text="VGame 1.0.1.4"/>
+                            <StackPanel Grid.Row="10" Grid.Column="1">
+                                <TextBlock  Margin="10 -5 0 0" Text="Copyright © Львов А.А., 2021. Все права защищены. "/>
+                                <TextBlock Margin="10 20 0 0" TextWrapping="Wrap" TextAlignment="Justify"
+                                           Width="590" HorizontalAlignment="Left" 
+                                           Text="VGame - это небольшой проект, предназначенный для создания развивающих игр с карточками для детей младшего возраста. Основная цель проекта - помощь в организации и предъявлении дидактических материалов родителям, воспитателям и учителям детей с РАС. К карточкам PECS данный проект отношения не имеет, но возможно в будущем они могут быть использованы в нем. Возможно VGame также будет полезен в развитии всем детям дошкольного возраста."/>
+                                <TextBlock Margin="10 10 0 0" TextWrapping="Wrap" TextAlignment="Justify"
+                                           Width="590" HorizontalAlignment="Left" 
+                                           Text="Контакты: Львов А.А. "/>
+                                <TextBlock Margin="10 10 0 0" TextWrapping="Wrap" TextAlignment="Justify"
+                                           Width="590" HorizontalAlignment="Left" 
+                                           TextDecorations="Underline" Foreground="Blue"
+                                           x:Name="TextBlockEmail"
+                                           Text="lvovandrey@mail.ru" ToolTip="Скопировать адрес можно нажав правую клавишу мыши">
+                                    <TextBlock.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Копировать" 
+                                                      Icon="/VanyaGame;component/GameCardsNewDB/Images/pictogramm/Page-Copy.png" 
+                                                      Command="{Binding CopyTextToClipboard}" 
+                                                      CommandParameter="{Binding }"></MenuItem>
+                                        </ContextMenu>
+                                    </TextBlock.ContextMenu>
+                                </TextBlock>
+
+
+
+                            </StackPanel>
+                        </Grid>
+                    </GroupBox>
+
+                    <Button Height="28" Width="200" Margin="20 10 10 0" Command="{Binding ClearRecentlyOpenDBFilenamesCommand}"
+                            HorizontalAlignment="Left">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/VanyaGame;component/GameCardsNewDB/Images/pictogramm/Question.png"  Margin="-22 0 0 0"/>
+                            <TextBlock Text="Открыть руководство" Margin="10 3 0 0"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button Height="28" Width="200" Margin="20 10 10 0" Command="{Binding ClearRecentlyOpenDBFilenamesCommand}"
+                            HorizontalAlignment="Left">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/VanyaGame;component/GameCardsNewDB/Images/pictogramm/License-Management.png"  Margin="-22 0 0 0"/>
+                            <TextBlock Text="Лицензия" Margin="10 3 0 0"/>
+                        </StackPanel>
+                    </Button>
+
+                </StackPanel>
+
+            </ScrollViewer>
+        </GroupBox>
+    </Grid>
+</UserControl>

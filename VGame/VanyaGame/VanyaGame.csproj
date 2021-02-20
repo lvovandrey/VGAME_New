@@ -192,6 +192,9 @@
       <DependentUpon>PropertyViewer_IntNums_UpDown.xaml</DependentUpon>
     </Compile>
     <Compile Include="GameCardsNewDB\Interface\MainWindowVM.cs" />
+    <Compile Include="GameCardsNewDB\Interface\SettingsViewsElements\AboutSettings.xaml.cs">
+      <DependentUpon>AboutSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GameCardsNewDB\Interface\SettingsViewsElements\DBSettingsView.xaml.cs">
       <DependentUpon>DBSettingsView.xaml</DependentUpon>
     </Compile>
@@ -280,6 +283,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="GameCardsNewDB\Interface\Elements\PropertyViewer_IntNums_UpDown.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GameCardsNewDB\Interface\SettingsViewsElements\AboutSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -394,6 +401,16 @@
     <Resource Include="Images\simpleGif.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="GameCardsNewDB\Images\pictogramm\Information.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GameCardsNewDB\Images\pictogramm\Question.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GameCardsNewDB\Images\pictogramm\License-Management.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="GameCardsNewDB\Images\pictogramm\Page-Copy.png" />
     <Content Include="Video\default.wmv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

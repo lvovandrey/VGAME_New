@@ -31,6 +31,8 @@
                 <ListBoxItem >База данных</ListBoxItem>
                 <ListBoxItem >Музыка</ListBoxItem>
                 <ListBoxItem >Управление настройками</ListBoxItem>
+                <ListBoxItem >Справка</ListBoxItem>
+
             </ListBox>
         </StackPanel>
         <el:HintSettingsView Grid.Row="0" Grid.Column="1" x:Name="HintSettins"/>
@@ -40,6 +42,8 @@
         <el:VoiceSettingsView Grid.Row="0" Grid.Column="1" Visibility="Hidden" x:Name="VoiceSettings"/>
         <el:MusicSettingsView Grid.Row="0" Grid.Column="1" Visibility="Hidden" x:Name="MusicSettings"/>
         <el:ImportExportSettingsView Grid.Row="0" Grid.Column="1" Visibility="Hidden" x:Name="ImportExportSettings" />
+        <el:AboutSettings Grid.Row="0" Grid.Column="1" Visibility="Hidden" x:Name="AboutSettings" />
+
 
         <Button Height="24" 
                 Grid.Row="1" 

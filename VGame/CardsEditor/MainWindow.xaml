@@ -99,6 +99,26 @@
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
+            <MenuItem Header="Справка">
+                <MenuItem Header="Руководство"
+                          Command="{Binding OpenDefaultDBCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="Images/Database-Refresh.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="О программе"
+                          Command="{Binding OpenAppDataFolderCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="Images/Folder-Brick.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Создать карточки из файлов изображений для БД по умолчанию..."
+                          Command="{Binding CreateCardsFromImagesOfDefaultDBCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="Images/Folder-Picture.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
         </Menu>
         <TabControl Grid.Row="1">
             <TabItem Header="Карточки">
