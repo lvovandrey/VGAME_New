@@ -1,0 +1,78 @@
+﻿<Window x:Class="CardsEditor.View.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CardsEditor.View"
+        mc:Ignorable="d"
+        Title="AboutWindow" Height="389" Width="712">
+    <Grid>
+        <GroupBox Header="Справка" >
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+
+
+                <StackPanel>
+                    <GroupBox Header="О программе" Margin="5">
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Image Source="/CardsEditor;component/Images/book-icon-DB.ico" Height="32" Width="32" />
+                            <TextBlock VerticalAlignment="Center" Margin="10 0 0 0" FontSize="16"  Grid.Column="1" Text="CardsEditor для VGame 1.0.1.4"/>
+                            <StackPanel Grid.Row="10" Grid.Column="1">
+                                <TextBlock  Margin="10 -5 0 0" Text="Copyright © Львов А.А., 2021. Все права защищены. "/>
+                                <TextBlock Margin="10 20 0 0" TextWrapping="Wrap" TextAlignment="Justify"
+                                           Width="570" HorizontalAlignment="Left" 
+                                           Text="CardsEditor - это редактор баз данных, предназначенных для использования в обучающей программе VGame. "/>
+                                <TextBlock Margin="10 10 0 0" TextWrapping="Wrap" TextAlignment="Justify"
+                                           HorizontalAlignment="Left" 
+                                           Text="Контакты: Львов А.А. "/>
+                                <TextBox   Margin="10 10 0 0" BorderBrush="{x:Null}"  IsReadOnly="True"
+                                           HorizontalAlignment="Left" Background="{x:Null}"
+                                           TextDecorations="Underline" Foreground="Blue"
+                                           x:Name="TextBlockEmail"
+                                           Text="lvovandrey@mail.ru" ToolTip="Скопировать адрес можно нажав правую клавишу мыши" BorderThickness="0">
+                                    <TextBox.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Копировать" 
+                                                      Command="{Binding CopyTextToClipboard}" 
+                                                      CommandParameter="lvovandrey@mail.ru">
+                                            </MenuItem>
+                                        </ContextMenu>
+                                    </TextBox.ContextMenu>
+                                </TextBox>
+
+
+
+                            </StackPanel>
+                        </Grid>
+                    </GroupBox>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Height="28" Width="200" Margin="10 10 5 0" Command="{Binding OpenManualCommand}"
+                            HorizontalAlignment="Left">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/CardsEditor;component/Images/Question.png"  Margin="-22 0 0 0"/>
+                                <TextBlock Text="Открыть руководство" Margin="10 3 0 0"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Height="28" Width="200" Margin="5 10 5 0" Command="{Binding OpenLicenseInfoFileCommand}"
+                            HorizontalAlignment="Left">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/CardsEditor;component/Images/License-Management.png"  Margin="-22 0 0 0"/>
+                                <TextBlock Text="Лицензия" Margin="10 3 0 0"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+
+                </StackPanel>
+
+            </ScrollViewer>
+        </GroupBox>
+    </Grid>
+</Window>

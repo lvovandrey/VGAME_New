@@ -27,6 +27,11 @@ namespace CardsEditor.ViewModel
             ttsSettingsWindow.Owner = mainWindow;
             ttsSettingsWindow.DataContext = this;
 
+
+            aboutWindow = new AboutWindow();
+            aboutWindow.Owner = mainWindow;
+            aboutWindow.DataContext = this;
+
             Settings.SettingsChanged += Settings_SettingsChanged;
             Settings.GetInstance().SetTTSVoices();
             Settings.GetInstance().ImportSettingsToXML(ConfigurationTools.SettingsFilename);
@@ -70,6 +75,7 @@ namespace CardsEditor.ViewModel
             }
         }
         TTSSettingsWindow ttsSettingsWindow;
+        AboutWindow aboutWindow;
         #endregion
 
         #region Properties
@@ -781,7 +787,45 @@ namespace CardsEditor.ViewModel
                     }, IsDBLoaded));
             }
         }
+        private RelayCommand openManualCommand;
+        public RelayCommand OpenManualCommand
+        {
+            get
+            {
+                return openManualCommand ??
+                  (openManualCommand = new RelayCommand(obj =>
+                  {
+                      Process.Start(Settings.GetInstance().ManualFilename);
+                  }));
+            }
+        }
 
+        private RelayCommand openLicenseInfoFileCommand;
+        public RelayCommand OpenLicenseInfoFileCommand
+        {
+            get
+            {
+                return openLicenseInfoFileCommand ??
+                  (openLicenseInfoFileCommand = new RelayCommand(obj =>
+                  {
+                      Process.Start(Settings.GetInstance().LicenseInfoFilename);
+                  }));
+            }
+        }
+
+        private RelayCommand openAboutWindowCommand;
+        public RelayCommand OpenAboutWindowCommand
+        {
+            get
+            {
+                return openAboutWindowCommand ??
+                  (openAboutWindowCommand = new RelayCommand(obj =>
+                  {
+                      aboutWindow.Show();
+                      aboutWindow.Activate();
+                  }));
+            }
+        }
 
         #endregion
 
