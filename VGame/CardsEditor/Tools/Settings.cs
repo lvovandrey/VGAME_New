@@ -213,6 +213,33 @@ namespace CardsEditor.Tools
         [XmlIgnore]
         public int MaxVideoFileBitrate => 900_000;
 
+        [XmlIgnore]
+        public string ManualFilename
+        {
+            get
+            {
+                return Path.Combine(LocalAppDataDir, "Manual.docx");
+            }
+        }
+
+        [XmlIgnore]
+        public string LicenseInfoFilename
+        {
+            get
+            {
+                return Path.Combine(LocalAppDataDir, "License.rtf");
+            }
+        }
+
+        [XmlIgnore]
+        public string LicenseFilename
+        {
+            get
+            {
+                return Path.Combine(LocalAppDataDir, "License GNU GPL v3.rtf");
+            }
+        }
+
 
         public void ExportSettingsToXML(string filename)
         {

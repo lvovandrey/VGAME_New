@@ -827,6 +827,20 @@ namespace CardsEditor.ViewModel
             }
         }
 
+                private RelayCommand copyTextToClipboard;
+        public RelayCommand CopyTextToClipboard
+        {
+            get
+            {
+                return copyTextToClipboard ??
+                  (copyTextToClipboard = new RelayCommand(obj =>
+                  {
+                      if (obj is string)
+                          System.Windows.Clipboard.SetText(obj as string);
+                  }));
+            }
+        }
+
         #endregion
 
 
