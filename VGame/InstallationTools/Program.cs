@@ -51,16 +51,17 @@ namespace InstallationTools
             }
             try
             {
-                Console.Write(" Настройка конфигурационных файлов...                                          ");
+                Console.Write(" Настройка конфигурационных файлов...                            ");
                 res = res & ConfigurateFiles(AppConfigFilename, ValidAppSettings);
 
-                Console.Write(" Настройка записей о музыкальных файлах...                                     ");
+                Console.Write(" Настройка записей о музыкальных файлах...                       ");
                 res = res & ConfigurateMusicFiles(AppConfigFilename, Path.Combine(AppDataDir, "Music", "Music.mp3"), "MusicFilenames");
 
-                Console.Write(" Настройка тестовой базы данных с примерами карточек...                        ");
+                Console.Write(" Настройка тестовой базы данных с примерами карточек...          ");
                 res = res & DBRewrite(DefaultDbFilename, DBCardsImagesDir, DBCardsImagesDir);
 
-                Console.Write(" Проверка средств Text-to-Speech (преобразования текста в речь) и голосов...   ");
+                Console.Write(" Проверка средств Text-to-Speech (преобразования текста в речь)\n"+
+                              " и голосов...                                                    ");
                 res = res & VoicesCheck();
             }
             catch (Exception e)
