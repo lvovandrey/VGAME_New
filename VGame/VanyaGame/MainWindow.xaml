@@ -101,7 +101,7 @@
                             Grid.Row="0" Grid.Column="0" 
                             HorizontalAlignment="Center" Margin="-40 -5 0 0"
                             VerticalAlignment="Top"
-                            ToolTip="Выход"
+                            ToolTip="Настройки"
                             PreviewMouseUp="SettingsWindowShowButtonClick"
                             Style="{DynamicResource AlmostHidingElement}"/>
 
