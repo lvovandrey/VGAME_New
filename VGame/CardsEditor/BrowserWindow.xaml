@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CardsEditor"
         xmlns:internet="clr-namespace:InternetBrowser;assembly=InternetBrowser"
         mc:Ignorable="d"
-        Title="Браузер" Height="450" Width="800" Closing="Window_Closing">
+        Title="Браузер                              Пожалуйста, не вводите пароли и личные данные." Height="450" Width="800" Closing="Window_Closing">
     <Grid>
         <internet:Browser x:Name="INNERBROWSER"/>
     </Grid>
