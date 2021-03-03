@@ -697,7 +697,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
         {
             get
             {
-                return Path.Combine(VanyaGame.Sets.Settings.GetInstance().LocalAppDataDir, "Manual.docx");
+                return Path.Combine(VanyaGame.Sets.Settings.GetInstance().LocalAppDataDir, "Manual.pdf");
             }           
         }
 
@@ -706,7 +706,7 @@ namespace VanyaGame.GameCardsNewDB.Tools
         {
             get
             {
-                return Path.Combine(VanyaGame.Sets.Settings.GetInstance().LocalAppDataDir, "License.rtf");
+                return Path.Combine(VanyaGame.Sets.Settings.GetInstance().LocalAppDataDir, "License.pdf");
             }
         }
         

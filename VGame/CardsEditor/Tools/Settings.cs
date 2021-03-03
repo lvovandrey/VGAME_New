@@ -218,7 +218,7 @@ namespace CardsEditor.Tools
         {
             get
             {
-                return Path.Combine(LocalAppDataDir, "Manual.docx");
+                return Path.Combine(LocalAppDataDir, "Manual.pdf");
             }
         }
 
@@ -227,7 +227,7 @@ namespace CardsEditor.Tools
         {
             get
             {
-                return Path.Combine(LocalAppDataDir, "License.rtf");
+                return Path.Combine(LocalAppDataDir, "License.pdf");
             }
         }
 

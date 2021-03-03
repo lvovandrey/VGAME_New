@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		InstallationInnoScript.iss = InstallationInnoScript.iss
 		License GNU GPL v3.rtf = License GNU GPL v3.rtf
+		License.pdf = License.pdf
 		License.rtf = License.rtf
 		Manual.docx = Manual.docx
 		Manual.pdf = Manual.pdf
