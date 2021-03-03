@@ -102,15 +102,6 @@
     <Reference Include="DirectShowLib, Version=2.1.0.1599, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\DirectShowLib.1.0.0\lib\DirectShowLib.dll</HintPath>
     </Reference>
-    <Reference Include="Eco.Handles, Version=7.0.0.12776, Culture=neutral, PublicKeyToken=46a833be9e90de8c, processorArchitecture=MSIL">
-      <HintPath>..\packages\EcoCore.7.0.0.12776\lib\net40\Eco.Handles.dll</HintPath>
-    </Reference>
-    <Reference Include="Eco.Interfaces, Version=7.0.0.12776, Culture=neutral, PublicKeyToken=46a833be9e90de8c, processorArchitecture=MSIL">
-      <HintPath>..\packages\EcoCore.7.0.0.12776\lib\net40\Eco.Interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="Eco.LinqExtender, Version=7.0.0.12776, Culture=neutral, PublicKeyToken=46a833be9e90de8c, processorArchitecture=MSIL">
-      <HintPath>..\packages\EcoCore.7.0.0.12776\lib\net40\Eco.LinqExtender.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
